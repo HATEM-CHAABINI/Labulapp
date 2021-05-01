@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="45" viewBox="0 0 60 45">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1963" data-name="Rectangle 1963" width="60" height="45" transform="translate(-6965 -7341.365)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="icon-messages-app-iPhone-60-45" transform="translate(6965 7341.365)" clip-path="url(#clip-path)">
+    <g id="labul-store-72-72" transform="translate(-6965 -7349.587)">
+      <rect id="Rectangle_1962" data-name="Rectangle 1962" width="60" height="60" transform="translate(0 0.222)" fill="#40cdde"/>
+      <g id="Group_1645" data-name="Group 1645" transform="translate(11.004 5.779)">
+        <circle id="Ellipse_33" data-name="Ellipse 33" cx="3.176" cy="3.176" r="3.176" transform="translate(16.201 17.387)" fill="#fff"/>
+        <circle id="Ellipse_34" data-name="Ellipse 34" cx="1.753" cy="1.753" r="1.753" transform="translate(13.077 11.379)" fill="#fff"/>
+        <path id="Path_142" data-name="Path 142" d="M339.129-75.075l-9.893-3.286a11.628,11.628,0,0,1-3.672.745,11.638,11.638,0,0,1-12.079-11.177,11.636,11.636,0,0,1,11.183-12.073,11.637,11.637,0,0,1,12.079,11.177,11.571,11.571,0,0,1-1.675,6.473L345.405-72.99l-4.232-7.61a28.232,28.232,0,0,0,1.4-9.127,17.456,17.456,0,0,0-18.119-16.765,17.454,17.454,0,0,0-16.774,18.11c.565,14.662,18.667,30.971,18.667,30.971S335.686-68.353,339.129-75.075Z" transform="translate(-307.664 106.505)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

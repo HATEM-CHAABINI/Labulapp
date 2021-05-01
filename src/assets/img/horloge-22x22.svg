@@ -1,0 +1,13 @@
+<svg id="horloge-22x22" xmlns="http://www.w3.org/2000/svg" width="184" height="120" viewBox="0 0 184 120">
+  <g id="Time_Circle" data-name="Time Circle" transform="translate(26.943 68.406)">
+    <rect id="Rectangle_1880" data-name="Rectangle 1880" width="120.517" height="51.594" rx="25.797" fill="#fedde4"/>
+    <path id="Fill_1" data-name="Fill 1" d="M40.79,20.317A20.4,20.4,0,1,1,20.4,0a20.355,20.355,0,0,1,20.4,20.317" transform="translate(74.164 5.48)" fill="#f9547b"/>
+    <path id="Fill_4" data-name="Fill 4" d="M12.135,22.985a1.968,1.968,0,0,1-1-.272L.947,16.658A1.947,1.947,0,0,1,0,14.99V1.939a1.947,1.947,0,0,1,3.894,0V13.888l9.241,5.49a1.94,1.94,0,0,1-1,3.607" transform="translate(91.701 12.675)" fill="#fff"/>
+    <text id="Dr._Melvin_send_you" data-name="Dr. Melvin send you" transform="translate(63.875 34.817)" fill="#f9547b" font-size="27" font-family="HelveticaNeue-Medium, Helvetica Neue" font-weight="500"><tspan x="-44.037" y="0">30s</tspan></text>
+  </g>
+  <path id="Fill_1-2" data-name="Fill 1" d="M9.458,4.711A4.729,4.729,0,1,1,4.729,0,4.719,4.719,0,0,1,9.458,4.711" transform="translate(174.542 77.391)" fill="#f9547b"/>
+  <path id="Fill_1-3" data-name="Fill 1" d="M9.458,4.711A4.729,4.729,0,1,1,4.729,0,4.719,4.719,0,0,1,9.458,4.711" transform="translate(17.486)" fill="#f9547b"/>
+  <path id="Fill_1-4" data-name="Fill 1" d="M4.086,2.035A2.043,2.043,0,1,1,2.043,0,2.039,2.039,0,0,1,4.086,2.035" transform="translate(155.316 18.249)" fill="#f9547b"/>
+  <path id="Fill_1-5" data-name="Fill 1" d="M4.086,2.035A2.043,2.043,0,1,1,2.043,0,2.039,2.039,0,0,1,4.086,2.035" transform="translate(104.52 40.078)" fill="#f9547b"/>
+  <path id="Fill_1-6" data-name="Fill 1" d="M4.086,2.035A2.043,2.043,0,1,1,2.043,0,2.039,2.039,0,0,1,4.086,2.035" transform="translate(0 82.742)" fill="#f9547b"/>
+</svg>

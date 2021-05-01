@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Icon-App-40-40" transform="translate(2116 7123.086)">
+    <rect id="Rectangle_1944" data-name="Rectangle 1944" width="40" height="40" transform="translate(-2116 -7123.086)" fill="#40cdde"/>
+    <g id="Group_1645" data-name="Group 1645" transform="translate(-2108.656 -7119.408)">
+      <circle id="Ellipse_33" data-name="Ellipse 33" cx="2.12" cy="2.12" r="2.12" transform="translate(10.813 11.604)" fill="#fff"/>
+      <circle id="Ellipse_34" data-name="Ellipse 34" cx="1.17" cy="1.17" r="1.17" transform="translate(8.728 7.594)" fill="#fff"/>
+      <path id="Path_142" data-name="Path 142" d="M328.664-85.528l-6.6-2.193a7.761,7.761,0,0,1-2.451.5,7.767,7.767,0,0,1-8.062-7.46,7.766,7.766,0,0,1,7.463-8.058,7.767,7.767,0,0,1,8.062,7.46,7.723,7.723,0,0,1-1.118,4.32l6.9,6.825-2.824-5.079a18.839,18.839,0,0,0,.932-6.091A11.65,11.65,0,0,0,318.868-106.5a11.649,11.649,0,0,0-11.2,12.087c.377,9.786,12.458,20.67,12.458,20.67S326.366-81.042,328.664-85.528Z" transform="translate(-307.664 106.505)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

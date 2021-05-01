@@ -1,0 +1,6 @@
+<svg id="meuble-38x38" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+  <rect id="Rectangle_8" data-name="Rectangle 8" width="38" height="38" rx="19" fill="#d6f8f1"/>
+  <g id="meuble-16x18" transform="translate(11 10)">
+    <path id="icons8-wardrobe" d="M4,3V5.4H20V3Zm.762,3.2V17.8h6.857V6.2Zm7.619,0V17.8h6.857V6.2Zm-2.286,4a.391.391,0,0,1,.381.4V13a.381.381,0,1,1-.762,0V10.6A.391.391,0,0,1,10.1,10.2Zm3.81,0a.391.391,0,0,1,.381.4V13a.381.381,0,1,1-.762,0V10.6A.391.391,0,0,1,13.9,10.2ZM4.762,18.6V21H7.429V19.4c0-.576.214-.8.762-.8Zm11.048,0c.548,0,.762.224.762.8V21h2.667V18.6Z" transform="translate(-4 -3)" fill="#34d9b8"/>
+  </g>
+</svg>

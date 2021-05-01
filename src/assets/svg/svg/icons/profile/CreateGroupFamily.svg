@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="43" height="31" viewBox="0 0 43 31">
+  <g id="create-gourpe-42x30" transform="translate(0.5 0.5)">
+    <path id="Fill_1" data-name="Fill 1" d="M12.227,0C5.633,0,0,1.021,0,5.1s5.6,5.138,12.227,5.138c6.595,0,12.227-1.021,12.227-5.1S18.858,0,12.227,0" transform="translate(0 19.763)" fill="#ef88b9" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Fill_3" data-name="Fill 3" d="M8.091,15.875a7.986,7.986,0,0,0,8.091-7.937A7.986,7.986,0,0,0,8.091,0,7.987,7.987,0,0,0,0,7.937a7.987,7.987,0,0,0,8.091,7.937" transform="translate(4.137)" fill="#ef88b9" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1" opacity="0.4"/>
+    <path id="Fill_5" data-name="Fill 5" d="M2.1,6.756A10.626,10.626,0,0,1,.212,12.832a.3.3,0,0,0,.2.458,6.59,6.59,0,0,0,.931.086A6.732,6.732,0,0,0,8.122,8.46,6.739,6.739,0,0,0,1.539,0,6.908,6.908,0,0,0,.178.136.246.246,0,0,0,.02.228.186.186,0,0,0,.051.434,10.7,10.7,0,0,1,2.1,6.756" transform="translate(21.477 1.326)" fill="#ef88b9" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1" opacity="0.4"/>
+    <path id="Fill_7" data-name="Fill 7" d="M10.394,2.981C9.816,1.772,8.421.944,6.3.536A30.484,30.484,0,0,0,.063,0,.071.071,0,0,0,0,.051.09.09,0,0,0,.056.142c1.166.565,5.67,3.025,5.1,8.212a.345.345,0,0,0,.389.386c1.109-.155,3.961-.757,4.845-2.629a3.516,3.516,0,0,0,0-3.13" transform="translate(22.514 17.301)" fill="#ef88b9" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Fill_1-2" data-name="Fill 1" d="M8.57,3.48H6.549V1.519a1.51,1.51,0,1,0-3.021,0V3.48H1.51a1.519,1.519,0,0,0,0,3.039H3.528V8.481a1.51,1.51,0,1,0,3.021,0V6.518H8.57a1.519,1.519,0,0,0,0-3.039" transform="translate(31.92 6.667)" fill="#ef88b9" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>

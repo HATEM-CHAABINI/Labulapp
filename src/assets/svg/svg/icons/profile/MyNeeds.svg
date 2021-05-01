@@ -1,0 +1,7 @@
+<svg id="demandes-particulier" xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+  <rect id="Rectangle_1648" data-name="Rectangle 1648" width="38" height="38" rx="19" fill="#d9f5f9"/>
+  <g id="sticky-notes" transform="translate(8 6)">
+    <path id="Path_2452" data-name="Path 2452" d="M23,17.5v.634a.634.634,0,0,1-.186.448l-4.229,4.229a.634.634,0,0,1-.448.186H17.5V18.134a.639.639,0,0,1,.634-.634Z" transform="translate(-2.997 -1.997)" fill="#40cdde"/>
+    <path id="Path_2453" data-name="Path 2453" d="M17.708,5H4.292A2.3,2.3,0,0,0,2,7.316V18.684A2.3,2.3,0,0,0,4.292,21H13.75V16.158a1.468,1.468,0,0,1,1.458-1.474H20V7.316A2.3,2.3,0,0,0,17.708,5Zm-4.667,8.842H5.958a.632.632,0,0,1,0-1.263h7.083a.632.632,0,0,1,0,1.263Zm3-3.368H5.958a.632.632,0,0,1,0-1.263H16.042a.632.632,0,0,1,0,1.263Z" transform="translate(0 0)" fill="#40cdde"/>
+  </g>
+</svg>

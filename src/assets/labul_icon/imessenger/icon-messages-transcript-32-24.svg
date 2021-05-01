@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="24" viewBox="0 0 32 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1971" data-name="Rectangle 1971" width="32" height="24" transform="translate(-6965 -7342.343)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="icon-messages-transcript-32-24" transform="translate(6965 7342.343)" clip-path="url(#clip-path)">
+    <g id="labul-store-72-72" transform="translate(-6965 -7345.849)">
+      <rect id="Rectangle_1970" data-name="Rectangle 1970" width="32" height="32" fill="#40cdde"/>
+      <g id="Group_1645" data-name="Group 1645" transform="translate(5.893 2.856)">
+        <circle id="Ellipse_33" data-name="Ellipse 33" cx="1.701" cy="1.701" r="1.701" transform="translate(8.677 9.312)" fill="#fff"/>
+        <circle id="Ellipse_34" data-name="Ellipse 34" cx="0.939" cy="0.939" r="0.939" transform="translate(7.004 6.094)" fill="#fff"/>
+        <path id="Path_142" data-name="Path 142" d="M324.516-89.672l-5.3-1.76a6.228,6.228,0,0,1-1.966.4,6.233,6.233,0,0,1-6.469-5.986,6.232,6.232,0,0,1,5.989-6.466A6.233,6.233,0,0,1,323.24-97.5a6.2,6.2,0,0,1-.9,3.467l5.534,5.477-2.266-4.076a15.119,15.119,0,0,0,.748-4.888,9.349,9.349,0,0,0-9.7-8.979,9.348,9.348,0,0,0-8.984,9.7c.3,7.853,10,16.587,10,16.587S322.672-86.072,324.516-89.672Z" transform="translate(-307.664 106.505)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

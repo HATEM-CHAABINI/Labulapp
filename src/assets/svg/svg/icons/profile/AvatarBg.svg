@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="86" viewBox="0 0 86 86">
+  <defs>
+    <clipPath id="clip-path">
+      <circle id="Mask" cx="43" cy="43" r="43" transform="translate(0 0.431)" fill="#eff3fa"/>
+    </clipPath>
+  </defs>
+  <g id="Group_1660" data-name="Group 1660" transform="translate(1629 -4573)">
+    <g id="Group_1660-2" data-name="Group 1660" transform="translate(-1773 4492)">
+      <circle id="Mask-2" data-name="Mask" cx="35" cy="35" r="35" transform="translate(152 89)" fill="#fff"/>
+    </g>
+    <path id="Intersection_2" data-name="Intersection 2" d="M132.932,182.494a34.892,34.892,0,0,1,2.815-13.775L180.1,182.375c-4.616,10.308-11.349,22.318-18.816,34.488A35.009,35.009,0,0,1,132.932,182.494Zm35.371-35A35,35,0,0,1,202.9,180.888Z" transform="translate(-1753.932 4433.506)" fill="#40cdde" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1" opacity="0.2"/>
+  </g>
+</svg>

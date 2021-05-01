@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="48" viewBox="0 0 76 48">
+	<defs>
+    <filter id="Path_2289" x="0" y="0" width="200%" height="200%">
+      <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    </filter>
+  </defs>
+  <path id="Path_2289" data-name="Path 2289" d="M1298.175,1256H1262.7c-10.87,0-20.15,8.408-20.513,19.216a19.946,19.946,0,0,0,19.989,20.579h1a3.15,3.15,0,0,1,2.514,1.251l4.9,6.5a1.135,1.135,0,0,0,1.81,0l4.9-6.5a3.15,3.15,0,0,1,2.514-1.251h17.83c10.869,0,20.15-8.408,20.512-19.216A19.945,19.945,0,0,0,1298.175,1256Z" transform="translate(-1242.175 -1256)" fill="#fff"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="87" height="87" viewBox="0 0 87 87">
+  <g id="Icon-App-87-87" transform="translate(2116 7123)">
+    <rect id="Rectangle_1944" data-name="Rectangle 1944" width="87" height="87" transform="translate(-2116 -7123)" fill="#40cdde"/>
+    <g id="Group_1645" data-name="Group 1645" transform="translate(-2099.978 -7115.243)">
+      <circle id="Ellipse_33" data-name="Ellipse 33" cx="4.625" cy="4.625" r="4.625" transform="translate(23.59 25.317)" fill="#fff"/>
+      <circle id="Ellipse_34" data-name="Ellipse 34" cx="2.552" cy="2.552" r="2.552" transform="translate(19.042 16.568)" fill="#fff"/>
+      <path id="Path_142" data-name="Path 142" d="M353.48-60.74l-14.4-4.785a16.932,16.932,0,0,1-5.346,1.085A16.945,16.945,0,0,1,316.14-80.715a16.943,16.943,0,0,1,16.283-17.58A16.945,16.945,0,0,1,350.011-82.02a16.849,16.849,0,0,1-2.439,9.425L362.619-57.7l-6.162-11.08a41.106,41.106,0,0,0,2.033-13.29,25.417,25.417,0,0,0-26.383-24.412,25.414,25.414,0,0,0-24.424,26.369c.823,21.349,27.181,45.1,27.181,45.1S348.467-50.952,353.48-60.74Z" transform="translate(-307.664 106.505)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

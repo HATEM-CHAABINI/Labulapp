@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <g id="labul-store-512-512" transform="translate(2116 7123)">
+    <rect id="Rectangle_1944" data-name="Rectangle 1944" width="512" height="512" transform="translate(-2116 -7123)" fill="#40cdde"/>
+    <g id="Group_1645" data-name="Group 1645" transform="translate(-2021.708 -7077.349)">
+      <circle id="Ellipse_33" data-name="Ellipse 33" cx="27.216" cy="27.216" r="27.216" transform="translate(138.831 148.989)" fill="#fff"/>
+      <circle id="Ellipse_34" data-name="Ellipse 34" cx="15.02" cy="15.02" r="15.02" transform="translate(112.063 97.506)" fill="#fff"/>
+      <path id="Path_142" data-name="Path 142" d="M577.293,162.825,492.52,134.666a99.722,99.722,0,1,1,50.01-41.61l88.547,87.635-36.262-65.209C603,88.521,607.729,61.867,606.78,37.272a149.612,149.612,0,0,0-299,11.522c4.844,125.641,159.959,265.4,159.959,265.4S547.793,220.426,577.293,162.825Z" transform="translate(-307.664 106.505)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

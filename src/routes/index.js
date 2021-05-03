@@ -226,6 +226,7 @@ class Routes extends Component {
           <Scene key="friendGiveBadge" hideNavBar component={FriendGiveBadgeScreen} />
           <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
           <Scene key="activityDial" hideNavBar component={ActivityDialScreen} />
+          <Scene key="MotdePasseOublie" hideNavBar component={MotdePasseOublie} />
 
           {/* <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
           <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} /> */}

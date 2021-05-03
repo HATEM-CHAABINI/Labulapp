@@ -38,17 +38,17 @@ const FriendListCard = (props) => {
           )}
           <View style={{ marginTop: 10 * hm }}>
             <CommentText text={data.title} color="#1E2D60" style={{ fontFamily: 'Lato-Black' }} />
-            <SmallText style={[styles.userDescText, { marginTop: 15 * hm }]} text={data.slogan} />
+            <SmallText style={[styles.plan, { marginTop: 15 * hm }]} text={data.slogan} />
             <CommentText
               align="left"
               text={data.comment}
               color="#1E2D60"
-              style={{ fontFamily: 'Lato-Bold', marginTop: 5 * hm }}
+              style={{ fontFamily: 'Lato-Black', marginTop: 5 * hm }}
             />
             <View style={{ flexDirection: 'row', marginTop: 17 * hm }}>
-              <CommentText align="left" text={data.price} color="#1E2D60" style={{ fontFamily: 'Lato-Bold' }} />
+              <CommentText align="left" text={data.price} color="#1E2D60" style={{ fontFamily: 'Lato-Medium' }} />
               <CommentText align="left" text={data.discountPrice} color="#6A8596" style={styles.discountPrice} />
-              <CommentText align="left" text={data.discountInfo} color="#6A8596" style={{ marginLeft: 10 * em }} />
+              <CommentText align="left" text={data.discountInfo} color="#6A8596" style={{ marginLeft: 10 * em ,color:"#A0AEB8"}} />
             </View>
           </View>
         </View>
@@ -90,7 +90,7 @@ const FriendListCard = (props) => {
             title={data.user.name}
             titleStyle={styles.userDescText}
             subTitle={data.organName}
-            subTitleStyle={styles.userDescText}
+            subTitleStyle={styles.userDescTexts}
           />
           {data.type === ServiceType.GIVE && (
             <CommonListItem
@@ -137,7 +137,7 @@ const styles = {
   textBox: { flex: 1 },
   dateText: {
     alignSelf: 'flex-start',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff',fontFamily:"lato-Medium" ,
     paddingRight: padding,
     paddingVertical: 5 * hm,
     marginTop: -12.5 * hm,
@@ -145,16 +145,19 @@ const styles = {
   },
   bottomContent: { marginTop: padding, width: '100%' },
   userDesc: { flex: 1, justifyContent: 'space-between' },
-  userDescText: { fontSize: 12 * em, color: '#1E2D60' },
-  organText: { marginLeft: textBoxMargin, marginTop: 15 * hm
-    // , fontFamily: 'Lato-Black'
+  userDescText: { fontSize: 14 * em, color: '#1E2D60',fontFamily:'lato-bold' },
+  plan: { fontSize: 14 * em, color: '#1E2D60',fontFamily:'lato-Medium' },
+  userDescTexts: { fontSize: 12 * em, color: '#1E2D60',fontFamily:"lato-Medium" 
+},
+  organText: { marginLeft: textBoxMargin, marginTop: 15 * hm,fontSize:14*em
+    , fontFamily: 'Lato-Bold'
    },
   priceText: { marginLeft: textBoxMargin, marginTop: 10 * hm,
-    //  fontFamily: 'Lato-Bold' 
+     fontFamily: 'Lato-Medium' 
     },
   locationContainer: { marginLeft: textBoxMargin, marginTop: 8 * hm },
   locationText: { color: '#6A8596', fontSize: 12 * em, marginRight: 75 * em, marginLeft: 10 * em, lineHeight: 14 * em },
-  dateTextCommon: { paddingVertical: 10 * hm, paddingHorizontal: padding },
+  dateTextCommon: { paddingVertical: 10 * hm, paddingHorizontal: padding ,fontFamily:"lato-Medium"},
   discountPrice: { marginLeft: 10 * em, textDecorationLine: 'line-through', textDecorationStyle: 'solid' },
 };
 export default FriendListCard;

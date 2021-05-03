@@ -61,6 +61,7 @@ const ProSettingScreen = () => {
         }
         subTitle="Activez la réception de notifications"
       />
+      <View style={styles.line2} />
     </View>
   );
 };
@@ -76,6 +77,10 @@ const styles = {
   line: {
     height: 10 * hm,
     backgroundColor: '#F0F5F7',
+  },
+  line2: {
+    height: 500 * hm,
+    backgroundColor: '#FFF',
   },
   listItem: {
     marginLeft: 30 * em,
@@ -101,7 +106,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   listTitle: {
-    fontFamily: 'Lato-Black',
+    fontFamily: 'Lato-Bold',
     fontSize: 18 * em,
     lineHeight: 23 * hm,
     textAlign: 'left',
@@ -109,6 +114,7 @@ const styles = {
     color: 'rgba(30, 45, 96, 1)',
   },
   listComment: {
+    fontFamily: 'Lato-Medium',
     lineHeight: 16 * hm,
     textAlign: 'left',
     marginRight: 15 * em,

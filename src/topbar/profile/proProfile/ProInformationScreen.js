@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, ScrollView } from 'react-native';
-import { em } from '../../../constants/consts';
+import { em, hm } from '../../../constants/consts';
 import ProfileInformationListItem from '../../../adapter/ProfileInformationListItem';
 import CommonText from '../../../text/CommonText';
 import ProfileCommonHeader from '../../../Components/header/ProfileCommonHeader';
@@ -24,7 +24,7 @@ const ProInformationScreen = () => {
       />
       <CommonText text="Localisation" style={styles.itemTitle} />
       <ProfileInformationListItem
-        caption={'Mon dresse'}
+        caption={'Mon adresse'}
         value={'ABYMES 97139\nGuadeloupe'}
         style={styles.listItem}
         onPress={() => {
@@ -34,7 +34,7 @@ const ProInformationScreen = () => {
       />
       <CommonText
         text={
-          'Votre adresse postale n’est jamais rendue publique. Nous en avons besoin uniquement pour vous proposer un service géolocalisé'
+          'Votre adresse postale est visible si activé dans vos réglage.'
         }
         style={styles.notice}
       />
@@ -52,9 +52,11 @@ const ProInformationScreen = () => {
 const styles = {
   container: {
     backgroundColor: '#F0F5F7',
-    flex: 1,
+
   },
   itemTitle: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 16 * em,
     height: 18 * em,
     lineHeight: 18 * em,
     marginLeft: 30 * em,
@@ -70,10 +72,11 @@ const styles = {
   },
   notice: {
     marginTop: 10 * em,
-    fontSize: 12 * em,
+    fontSize: 11 * em,
     lineHeight: 17 * em,
     marginLeft: 30 * em,
     marginRight: 30 * em,
+    height: 300 * hm
   },
 };
 

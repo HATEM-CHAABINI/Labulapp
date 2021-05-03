@@ -14,21 +14,21 @@ const ProfileCommonNeedCard = (props) => {
         <View style={[styles.container, props.style]}>
           <Image source={data.coverImage} style={styles.cover} />
           <View style={styles.textView}>
-            <SmallText text={data.slogan} style={{ marginBottom: 5 * em }} color={'#1E2D60'} />
+            <SmallText text={data.slogan} style={{ fontFamily: 'Lato-Medium', marginBottom: 5 * em }} color={'#1E2D60'} />
             <CommentText text={data.comment} style={styles.organName} color={'#1E2D60'} />
             <View style={{ flexDirection: 'row' }}>
-              <CommentText text={data.price} style={{ fontFamily: 'Lato-Bold' }} color={'#1E2D60'} />
+              <CommentText text={data.price} style={{ fontFamily: 'Lato-SemiBold' }} color={'#1E2D60'} />
               <CommentText
                 text={data.discountPrice}
-                style={{ marginLeft: 10 * em, textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}
+                style={{ fontFamily: 'Lato-Medium', marginLeft: 10 * em, textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}
                 color={'#A0AEB8'}
               />
             </View>
             {data.discountInfo && (
-              <SmallText text={data.discountInfo} style={{ marginTop: 15 * em }} color={'#A0AEB8'} />
+              <SmallText text={data.discountInfo} style={{ fontFamily: 'Lato-Medium', marginTop: 15 * em }} color={'#A0AEB8'} />
             )}
             {data.subType === SellServiceType.EVENT && (
-              <SmallText text={'06 Fév · 14H00'} style={{ marginTop: 15 * em }} color={'#A0AEB8'} />
+              <SmallText text={'06 Fév · 14H00'} style={{ fontFamily: 'Lato-Medium', marginTop: 15 * em }} color={'#A0AEB8'} />
             )}
           </View>
         </View>

@@ -63,7 +63,7 @@ const PrivacyPolicyScreen = () => {
       renderForeground={() => <TitleText text={'Politique\nde confidentialité'} style={styles.title} />}
       renderStickyHeader={() => (
         <View key="sticky-header" style={{ marginTop: 40 * em, alignItems: 'center' }}>
-          <CommonText text={'Politique de confidentialité'} color="#1E2D60" />
+          <Text style={styles.common}  >Politique de confidentialité</Text>
         </View>
       )}>
       <View style={styles.line} />
@@ -98,6 +98,11 @@ const styles = {
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   headerText: { width: 260 * em, fontSize: 24 * em, lineHeight: 29 * em, textAlign: 'left', color: '#1E2D60' },
   contentText: { textAlign: 'left', lineHeight: 25 * em, marginBottom: 10 * hm },
+  common: {
+    fontFamily: 'Lato-Bold',
+    fontSize: 24 * em,
+    color: '#1E2D60'
+  }
 };
 
 export default PrivacyPolicyScreen;

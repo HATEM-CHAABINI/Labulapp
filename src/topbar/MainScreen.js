@@ -6,7 +6,7 @@ import FriendsNavigator from './FriendsNavigator';
 import CalendarHomeScreen from '../Components/calendar/CalendarHomeScreen';
 import MyActivityHomeScreen from './activity/MyActivityHomeScreen';
 import ProfileHomeScreen from './profile/ProfileHomeScreen';
-import ProProfileHomeScreen from './ProProfileHomeScreen';
+import ProProfileHomeScreen from './profile/proProfile/ProProfileHomeScreen';
 import { em, hm, WIDTH } from '../constants/consts';
 import { navigationRef } from './RootNavigation';
 import Modal from 'react-native-modal';

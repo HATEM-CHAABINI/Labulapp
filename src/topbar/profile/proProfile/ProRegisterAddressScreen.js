@@ -18,10 +18,10 @@ const ProRegisterAddressScreen = (props) => {
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <AddressBlue width={21 * em} height={25.5 * em} />
-          <TitleText text={'Mon adresse'} style={styles.titleText} />
+          <TitleText text={'Localisation'} style={styles.titleText} />
           <CommonTextInput text={'Saisis ton adresse complète'} isPasswordInput={false} style={styles.commonInput} />
           <View style={styles.viewText}>
-            <CommonText color={'#7398FD'} text={'Me géolocalisers'} />
+            <CommonText color={'#7398FD'} text={'Me géolocaliser'} />
           </View>
         </View>
         <View style={styles.popupBottomView}>
@@ -60,7 +60,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
-  titleText: { marginTop: 15.5 * em, marginBottom: 35 * em },
+  titleText: { fontFamily: 'Lato-Black', marginTop: 15.5 * em, marginBottom: 35 * em },
   btnNext: { backgroundColor: '#7398FD', marginBottom: 30 * em },
   viewText: {
     marginTop: 25 * em,

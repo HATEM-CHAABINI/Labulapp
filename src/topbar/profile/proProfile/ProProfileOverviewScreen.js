@@ -9,7 +9,7 @@ import ProfileCommonAvatar from '../../../Components/view/ProfileCommonAvatar';
 import { Actions } from 'react-native-router-flux';
 import CommentText from '../../../text/CommentText';
 import ProfileCommonSpecView from '../../../Components/view/ProfileCommonSpecView';
-import { Events, Promotion, Tips } from '../../../constants/icons';
+import { Events, Promotion, Tips } from '../../../assets/svg/icons';
 import AccountType from '../../../model/user/AccountType';
 
 const ProProfileOverviewScreen = (props) => {
@@ -76,7 +76,10 @@ const ProProfileOverviewScreen = (props) => {
           <TitleText text={'Mes publications'} style={styles.title} />
           <View style={styles.circlesView}>
             <View style={styles.labelView}>
-              <ProfileCommonLabel icon={Tips(iconSize)} number={userProfile.publications.tips} name={'Bons plans'} />
+              <ProfileCommonLabel
+                icon={Tips(iconSize)}
+                number={userProfile.publications.tips}
+                name={'Bons plans'} />
             </View>
             <View style={styles.labelView}>
               <ProfileCommonLabel
@@ -97,7 +100,7 @@ const ProProfileOverviewScreen = (props) => {
           {servicesView}
         </View>
         <View style={styles.secondPopView}>
-          <TitleText text={'Mes badges'} style={[styles.title, { marginBottom: 0 }]} />
+          <TitleText text={'Mes badges'} style={[styles.title, { marginBottom: 20 * hm }]} />
           {badgesView}
         </View>
       </ScrollView>

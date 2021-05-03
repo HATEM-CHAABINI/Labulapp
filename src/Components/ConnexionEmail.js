@@ -88,9 +88,8 @@ export default class ConnexionEmail extends Component {
               />
               <View style={{ left: em * 200, marginTop: 10*hm }}>
                 <Text
-                  style={{ color: '#1E2D60', fontSize: 12*em,fontFamily:'lato' }}
-                  onPress={this.handleGoLogin}>
-                  {' '}
+                  style={{ color: '#1E2D60', fontSize: 12*em,fontFamily:'lato-medium' }}
+                  onPress={() => Actions.MotdePasseOublie()}>
                   Mot de passe oublié ?
                 </Text>
               </View>
@@ -114,15 +113,14 @@ export default class ConnexionEmail extends Component {
                     color: '#FFFFFF',
                     marginLeft: 10*em,
                     marginTop: 2*hm,
-                    fontFamily:'lato'
+                    fontFamily:'lato-Medium'
                   }}>
                   Suivant
                 </Text>
               </View>
             </TouchableOpacity>
-          </View>
-        </View>
-        <View style={{ marginBottom: 50 * hm }}>
+       
+        <View style={{ marginTop: 140 * hm }}>
           <Text
             style={
               ({
@@ -134,7 +132,7 @@ export default class ConnexionEmail extends Component {
             }>
             Je n’ai pas de compte ?
             <Text
-              style={{ color: '#40CDDE', fontSize: 16 *em,fontFamily:'lato'}}
+              style={{ color: '#40CDDE', fontSize: 16 *em,fontFamily:'lato-semibold'}}
               onPress={() => {
                 Actions.signupMenu();
             }}>
@@ -142,6 +140,8 @@ export default class ConnexionEmail extends Component {
               Je m’inscris
             </Text>
           </Text>
+        </View>
+        </View>
         </View>
       </View>
     );

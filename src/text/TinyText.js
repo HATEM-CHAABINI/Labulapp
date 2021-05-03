@@ -7,11 +7,16 @@ const renderText = (props) => {
   if (props.color) {
     color = props.color;
   }
+  if (props.fontSize){
+    fontSize = props.fontSize
+  }else{
+    fontSize = 10
+  }
   let textAlignProp = 'left';
   if (props.align) {
     textAlignProp = props.align;
   }
-  const textStyle = { fontSize: 10 * em, color: color,  textAlign: textAlignProp };
+  const textStyle = { fontSize: fontSize * em, color: color,  textAlign: textAlignProp };
   return <Text style={[textStyle, props.style]}>{props.text}</Text>;
 };
 

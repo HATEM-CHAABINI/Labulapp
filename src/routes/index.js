@@ -98,6 +98,7 @@ import FriendNeedScreen from '../ServiceScrenns/FriendNeedScreen';
 import FriendGiveBadgeScreen from '../ServiceScrenns/FriendGiveBadgeScreen';
 import ActivityMessageScreen from '../activity/ActivityMessageScreen';
 import ActivityDialScreen from '../activity/ActivityDialScreen';
+import MotdePasseOublie from '../Components/MotdePasseOublie';
 class Routes extends Component {
   render() {
     return (
@@ -226,8 +227,8 @@ class Routes extends Component {
           <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
           <Scene key="activityDial" hideNavBar component={ActivityDialScreen} />
 
-          <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
-          <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} />
+          {/* <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
+          <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} /> */}
         </Scene>
       </Router>
     );

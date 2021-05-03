@@ -6,7 +6,7 @@ import { Button, View, Text,Image,TextInput,
   StatusBar,
   Alert,
 } from 'react-native';
-import { em, HEIGHT, WIDTH } from '../constants';
+import { em, HEIGHT, hm, WIDTH } from '../constants';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PasswordInputText from 'react-native-hide-show-password-input';
@@ -19,6 +19,8 @@ import Googleicon from '../assets/icons/navigation-app/Googleicon';
 import Facebookicon from '../assets/icons/navigation-app/Facebookicon';
 import TitleLabul from '../assets/title/TitleLabul'
 import MyTextInput from './MyTextInput';
+import { BackArrowWhite } from '../assets/svg/icons';
+import { Actions } from 'react-native-router-flux';
   export default class MotdePasseOublie extends Component {
     constructor(props){
         super(props)
@@ -40,11 +42,14 @@ console.log(navigation);
         <View style={{flex:1,backgroundColor:'#40CDDE'}}>
    
    
-<View style={{flex:1 ,paddingTop:50*em,alignItems:'center'}}>
-<TitleLabul width={69 * em} height={20 * hm} 
-            
-            />
-</View>
+   <View style={{ flex: 1, paddingTop: 50 * hm, alignItems: 'center' }}>
+        <TouchableOpacity
+              style={{ position: 'absolute', left: 40,paddingTop: 55 * hm}}
+              onPress={() => Actions.pop()}>
+              <BackArrowWhite width={30 * em} height={30 * hm} />
+            </TouchableOpacity>
+          <TitleLabul width={69 * em} height={20 * hm} />
+        </View>
 
 
 
@@ -57,8 +62,8 @@ console.log(navigation);
                             <View style={{position: 'absolute',top:40}} >
                 <Usercreat width={30*em} height={30*em} /> 
                 </View>
-                <Text style={{color:'#1E2D60',fontSize:28,paddingTop:80,textAlign:'center'}}>Demander un nouveau {"\n"}mot de passe</Text>
-                <Text style={{color:'#1E2D60',fontSize:14,paddingTop:20,textAlign:'center'}}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>
+                <Text style={{color:'#1E2D60',fontSize:28,paddingTop:80,textAlign:'center',fontFamily:"lato-Black"}}>Demander un nouveau {"\n"}mot de passe</Text>
+                <Text style={{color:'#6A8596',fontSize:14,paddingTop:20,textAlign:'center',fontFamily:"lato-Regular"}}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>
                 <View style={styles.contentWrapper}>
               <Text style={styles.descText}>Saisis ton email</Text>
               <MyTextInput style={styles.TextInput} textContentType={"emailAddress"} autoFocus={true} value={this.state.email} handleChange={(text)=>this.setState({email:text})} />
@@ -76,7 +81,7 @@ console.log(navigation);
     width:300*em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
-    marginTop: -50*em}}
+    marginTop: -50*hm}}
  >
   <View
     style={styles.btnContainer}>
@@ -84,7 +89,7 @@ console.log(navigation);
     <Text style={{  fontSize: 16,
         color: '#FFFFFF',
         marginLeft: 10,
-        marginTop: 2}}>Demander</Text>
+        marginTop: 2,fontFamily:"lato-Medium"}}>Demander</Text>
   </View>
               </TouchableOpacity>
 

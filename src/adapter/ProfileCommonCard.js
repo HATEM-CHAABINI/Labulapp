@@ -27,6 +27,7 @@ const styles = {
   caption: {
     marginTop: 5 * em,
     textAlign: 'center',
+    fontFamily: 'Lato-Black'
   },
 };
 export default ProfileCommonCard;

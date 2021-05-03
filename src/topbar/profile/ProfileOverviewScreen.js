@@ -89,7 +89,7 @@ const ProfileOverviewScreen = (props) => {
               <ProfileCommonLabel number={userProfile.needs.events} name={'Évènements'} />
             </View>
           </View>
-          <TitleText text={'Mes badges'} style={[styles.title, { marginBottom: 0 }]} />
+          <TitleText text={'Mes badges'} style={[styles.title]} />
           {badgesView}
         </View>
       </ScrollView>
@@ -100,7 +100,9 @@ const ProfileOverviewScreen = (props) => {
 const styles = {
   container: { flex: 1, backgroundColor: 'transparent' },
   scrollView: { backgroundColor: '#40CDDE', paddingBottom: 16 * hm },
-  header: { marginTop: 27 * hm },
+  header: {
+    marginTop: 27 * hm
+  },
   firstPopView: {
     alignItems: 'center',
     backgroundColor: '#ffffff',
@@ -110,8 +112,17 @@ const styles = {
     paddingBottom: 35 * hm,
   },
   avatar: { marginTop: -57 * hm, width: 114 * em, height: 114 * em },
-  fullNameText: { marginTop: 15 * hm, marginBottom: 10 * hm, fontWeight: 'bold' },
-  title: { marginTop: 35 * hm, marginBottom: 20 * hm, fontSize: 21 * em, fontWeight: 'bold' },
+  fullNameText: {
+    marginTop: 15 * hm,
+    marginBottom: 10 * hm,
+    fontFamily: 'Lato-Black'
+  },
+  title: {
+    marginTop: 35 * hm,
+    marginBottom: 20 * hm,
+    fontSize: 21 * em,
+    fontFamily: 'Lato-Black'
+  },
   circlesView: { flexDirection: 'row', marginLeft: 0.072 * WIDTH, marginRight: 0.072 * WIDTH },
   labelView: { width: WIDTH * 0.285 },
   secondPopView: {
@@ -123,7 +134,7 @@ const styles = {
     paddingBottom: 54 * hm,
   },
   noticeText: { fontFamily: 'Lato-Black', marginBottom: 10 * hm },
-  requestText: { fontSize: 14 * em, marginBottom: 65 * hm },
+  requestText: { fontFamily: 'Lato-Regular', fontSize: 14 * em },
   badgeIcon: {
     width: 60 * em,
     height: 60 * em,

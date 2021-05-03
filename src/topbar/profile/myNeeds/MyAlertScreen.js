@@ -57,7 +57,7 @@ const MyAlertScreen = () => {
             />
           }
           title={data.user.name}
-          titleStyle={{ color: '#1E2D60', marginLeft: 21 * em }}
+          titleStyle={{ color: '#1E2D60', marginLeft: 21 * em, fontFamily: 'Lato-Black', fontSize: 16 * em }}
         />
         <TitleText text={'Alerte Travaux'} style={styles.title} />
         <CommonListItem
@@ -67,7 +67,7 @@ const MyAlertScreen = () => {
             </View>
           }
           title={'77 Boulevard Amedee Clara \n Le Gosier'}
-          titleStyle={{ color: '#6A8596', textAlignVertical: 'top' }}
+          titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
         />
         {data.status === 'canceled' ? <></> : data.relationship ? AskButton : ModifyButton}
         {data.status !== 'canceled' && InviteButton}
@@ -84,7 +84,7 @@ const styles = {
     flex: 1,
     backgroundColor: 'transparent',
   },
-  backBtn: { position: 'absolute', backgroundColor: '#ffffff', left: 15 * em },
+  backBtn: { position: 'absolute', backgroundColor: '#ffffff', left: 15 * em, top: 15 * hm },
   cover: {
     width: '100%',
     height: 312 * hm,
@@ -93,7 +93,6 @@ const styles = {
     justifyContent: 'center',
   },
   body: {
-    marginTop: -60 * hm,
     borderTopRightRadius: 28 * em,
     borderTopLeftRadius: 28 * em,
     backgroundColor: '#ffffff',
@@ -109,7 +108,7 @@ const styles = {
     textAlign: 'left',
     marginTop: 24 * hm,
     marginBottom: 14 * hm,
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Black',
   },
   quizBtn: { marginTop: 25 * hm, backgroundColor: '#FEE0E7' },
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent', color: '#F9547B' },

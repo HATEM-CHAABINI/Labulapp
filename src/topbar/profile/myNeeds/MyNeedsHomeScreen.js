@@ -64,6 +64,7 @@ const styles = {
     marginTop: 39 * em,
   },
   title: {
+    fontFamily: 'Lato-Black',
     fontSize: 34 * em,
     lineHeight: 38 * em,
     height: 40 * em,

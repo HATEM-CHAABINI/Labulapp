@@ -13,12 +13,13 @@ const ProfileInformationListItem = (props) => {
       ))}
     </>
   );
+  //, { textTransform: props.titleUpperCase ? 'uppercase' : null } titleStyle uppercase not needed for now
   return (
     <CommonListItem
       style={[styles.container, props.style]}
       onPress={props.onPress}
       title={props.caption}
-      titleStyle={[styles.textTitle, { textTransform: props.titleUpperCase ? 'uppercase' : null }]}
+      titleStyle={[styles.textTitle]}
       subTitle={props.value}
       subTitleStyle={
         props.placeholder
@@ -46,6 +47,7 @@ const styles = {
     lineHeight: 16 * em,
     textAlignVertical: 'center',
     fontSize: 14 * em,
+    fontFamily: 'Lato-Medium',
     marginBottom: 10 * em,
     color: '#A0AEB8',
   },

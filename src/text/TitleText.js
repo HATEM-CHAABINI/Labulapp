@@ -22,8 +22,9 @@ const TitleText = (props) => {
 };
 
 const styles = {
-  textStyle: { fontSize: 28 * em, 
-    // fontFamily: 'Lato-Black' 
+  textStyle: {
+    fontSize: 28 * em,
+    fontFamily: 'Lato-Black'
   },
 };
 

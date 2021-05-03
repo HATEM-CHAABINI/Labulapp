@@ -48,6 +48,7 @@ const styles = {
     // marginBottom: 25 * hm,
     textAlign: 'left',
     marginTop: 81 * hm,
+    fontFamily: 'Lato-Black'
   },
   rightTxt: { color: '#40CDDE', fontSize: 16 * em, marginRight: 12 * em },
 };

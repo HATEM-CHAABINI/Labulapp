@@ -7,7 +7,7 @@ import CommonListItem from './CommonListItem';
 import { LocationGray } from '../assets/svg/icons';
 const SearchCommonListItem = (props) => {
   var inviteBtn = props.inviteBtn && (
-    <View style={{ justifyContent: 'center',flex:1 }}>
+    <View style={{ justifyContent: 'center', flex: 1 }}>
       <InviteButton invited={props.invited} />
     </View>
   );
@@ -45,7 +45,7 @@ const SearchCommonListItem = (props) => {
       subTitle={props.subText}
       subTitleStyle={styles.subTextTitle}
       icon={icon}
-      rightView={inviteBtn 
+      rightView={inviteBtn
         // || option
       }
       style={props.style}
@@ -57,7 +57,7 @@ const styles = {
   icon: { width: 40 * em, height: 40 * em, resizeMode: 'contain', marginRight: 15 * em },
 
   textTitle: {
-    // fontFamily: 'Lato-Black',
+    fontFamily: 'Lato-Black',
     fontSize: 16 * em,
     textAlignVertical: 'center',
     fontWeight: '200',

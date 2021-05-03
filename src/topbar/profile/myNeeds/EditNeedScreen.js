@@ -25,7 +25,7 @@ const EditNeedScreen = () => {
     <ProfileCommonHeader title="Modifier demande" onCancel={() => Actions.pop()} onFinish={() => Actions.pop()}>
       <View style={styles.listItem}>
         <View style={{ flexDirection: 'row', marginBottom: 15 * em, justifyContent: 'space-between' }}>
-          <CommentText text="PHOTOS" color="#6A8596" />
+          <CommentText text="Photos" color="#6A8596" />
           <CommentText text="3 maximum" color="#A0AEB8" />
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>

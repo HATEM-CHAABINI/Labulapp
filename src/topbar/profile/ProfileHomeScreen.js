@@ -122,7 +122,7 @@ const ProfileHomeScreen = (props) => {
           />
         </View>
         <View style={styles.listBox}>
-          <CommentText text={'Mon compte'} style={styles.caption} />
+          <CommentText text={'Mon compte'} style={styles.caption} color={'#A0AEB8'} />
           <ProfileCommonListItem
             text={'Mes informations'}
             style={styles.listItem}
@@ -143,7 +143,7 @@ const ProfileHomeScreen = (props) => {
         </View>
         {!props.route.params.purchased && <View style={styles.line2} />}
         <View style={styles.listBox}>
-          <CommentText text={'Mon abonnement'} style={styles.caption} />
+          <CommentText text={'Mon abonnement'} style={styles.caption} color={'#A0AEB8'} />
           <ProfileCommonListItem
             text={'Abonnement Premim'}
             subText={'En savoir plus'}
@@ -173,10 +173,10 @@ const ProfileHomeScreen = (props) => {
             </View>
           </View>
         )}
-        <View style={styles.line2} />
+
 
         <View style={styles.listBox}>
-          <CommentText text={'À propos'} style={styles.caption} />
+          <CommentText text={'À propos'} style={styles.caption} color={'#A0AEB8'} />
           <ProfileCommonListItem
             text={'Politique de confidentialité'}
             style={styles.listItem}
@@ -212,8 +212,20 @@ const styles = {
 
   topView: { height: HEIGHT * 0.45, backgroundColor: '#40CDDE', alignItems: 'center' },
   avatar: { marginTop: 89 * hm, height: 70 * hm, width: 70 * hm },
-  txtFullName: { marginTop: 0 * em, fontSize: 20 * em, color: '#FFFFFF', textAlign: 'center' },
-  txtGoToProfile: { marginTop: 5 * hm, fontSize: 14 * em, color: '#FFFFFF', textAlign: 'center' },
+  txtFullName: {
+    marginTop: 15 * em,
+    fontSize: 20 * em,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontFamily: 'Lato-Black'
+  },
+  txtGoToProfile: {
+    marginTop: 5 * hm,
+    fontSize: 14 * em,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontFamily: 'Lato-Regular'
+  },
   scrollView: { width: WIDTH, backgroundColor: '#ffffff', marginTop: 0 * em },
   bottomView: {
     backgroundColor: '#FFFFFF',
@@ -226,7 +238,7 @@ const styles = {
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: -46 * em,
-    marginBottom: 30 * hm,
+    marginBottom: 15 * hm,
   },
   cardStyle: {
     shadowColor: '#254D5612',
@@ -243,8 +255,9 @@ const styles = {
     width: '100%',
     textAlign: 'left',
     marginLeft: 30 * em,
-    fontWeight: '300',
+    //fontWeight: '300',
     marginBottom: 20 * hm,
+    fontFamily: 'Lato-Medium'
   },
   listItem: { marginLeft: 30 * em, marginRight: 30 * em },
   line1: {
@@ -254,7 +267,8 @@ const styles = {
     height: 1 * hm,
     backgroundColor: '#B3C6CF33',
   },
-  line2: { marginBottom: 19 * hm, marginTop: 16 * hm, height: 1 * hm, backgroundColor: '#B3C6CF33' },
+  //marginBottom: 15 * hm,
+  line2: { marginTop: 16 * hm, height: 1 * hm, backgroundColor: '#B3C6CF33' },
   imgBg: {
     height: HEIGHT * 0.21,
     flex: 1,
@@ -264,9 +278,14 @@ const styles = {
     alignItems: 'flex-start',
     flexDirection: 'column',
   },
-  imageTextMain: { marginTop: 25 * hm, fontSize: 20 * em, marginLeft: 18 * em },
+  imageTextMain: {
+    marginTop: 25 * hm,
+    fontSize: 20 * em,
+    marginLeft: 18 * em,
+    fontFamily: 'Lato-Bold'
+  },
   imageTextSub: {
-    fontFamily: 'Lato-Bold',
+    fontFamily: 'Lato-Medium',
     fontSize: 15 * em,
     marginLeft: 18 * em,
     marginRight: -58 * em,

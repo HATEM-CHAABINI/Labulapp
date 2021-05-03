@@ -53,22 +53,23 @@ const styles = {
   container: { flexDirection: 'row' },
   cover: { width: 95 * em, height: 141 * em, borderRadius: 18 * em },
   textView: { marginLeft: 15 * em, paddingTop: 15 * em, alignItems: 'flex-start', width: 205 * em },
-  date: { lineHeight: 14 * em },
-  title: { lineHeight: 16 * em, marginTop: 10 * em, marginBottom: 5 * em, textAlign: 'left' },
+  date: { fontFamily: 'Lato-Medium', fontSize: 12 * em, lineHeight: 14 * em },
+  title: { fontFamily: 'Lato-Medium', fontSize: 12 * em, lineHeight: 16 * em, marginTop: 10 * em, marginBottom: 5 * em, textAlign: 'left' },
   organName: {
+    fontFamily: 'Lato-Black',
+    fontSize: 14 * em,
     lineHeight: 21 * em, textAlign: 'left',
-    //  fontFamily: 'Lato-Black', 
     marginBottom: 15 * em
   },
   status: { marginTop: 15 * em },
   statusView: { borderRadius: 15 * em, paddingVertical: 4 * em, paddingHorizontal: 8 * em },
 };
 const statusStyle = [
-  { id: NeedStatusType.INPROGRESS, title: 'En cours', color: '#40CDDE', backgroundColor: '#D9F6F9' },
-  { id: NeedStatusType.CANCELED, title: 'Annulée', color: '#6A8596', backgroundColor: '#F0F5F7' },
-  { id: NeedStatusType.WAITING, title: 'En attente', color: '#FEBD71', backgroundColor: '#FFF2E2' },
-  { id: NeedStatusType.PARTICPATED, title: 'Je participe', color: '#1BD39A', backgroundColor: '#D1F6EB' },
-  { id: NeedStatusType.REFUSED, title: 'Réfusé', color: '#F9547B', backgroundColor: '#FEDDE4' },
+  { id: NeedStatusType.INPROGRESS, title: 'En cours', color: '#40CDDE', backgroundColor: '#D9F6F9', fontFamily: 'Lato-medium', fontSize: '12*em' },
+  { id: NeedStatusType.CANCELED, title: 'Annulée', color: '#6A8596', backgroundColor: '#F0F5F7', fontFamily: 'Lato-medium', fontSize: '12*em' },
+  { id: NeedStatusType.WAITING, title: 'En attente', color: '#FEBD71', backgroundColor: '#FFF2E2', fontFamily: 'Lato-medium', fontSize: '12*em' },
+  { id: NeedStatusType.PARTICPATED, title: 'Je participe', color: '#1BD39A', backgroundColor: '#D1F6EB', fontFamily: 'Lato-medium', fontSize: '12*em' },
+  { id: NeedStatusType.REFUSED, title: 'Réfusé', color: '#F9547B', backgroundColor: '#FEDDE4', fontFamily: 'Lato-medium', fontSize: '12*em' },
 ];
 export default ProfileCommonNeedCard;
 const StatusView = (props) => {

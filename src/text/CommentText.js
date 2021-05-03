@@ -16,7 +16,7 @@ const CommentText = (props) => {
       <TouchableOpacity onPress={props.onPress}>
         <Text
           style={[
-            {  fontSize: 14 * em, color: color, textAlign: textAlignProp },
+            { fontSize: 14 * em, color: color, textAlign: textAlignProp },
             props.style,
           ]}>
           {props.text}
@@ -26,7 +26,7 @@ const CommentText = (props) => {
   }
   return (
     <Text
-      style={[{  fontSize: 14 * em, color: color, textAlign: textAlignProp }, props.style]}>
+      style={[{ fontFamily: 'Lato-Medium', fontSize: 14 * em, color: color, textAlign: textAlignProp }, props.style]}>
       {props.text}
     </Text>
   );

@@ -23,7 +23,7 @@ const styles = {
     alignItems: 'center',
     flexDirection: 'row',
   },
-  textStyle: { textAlign: 'center', color: '#FFFFFF', fontFamily: 'Lato-Bold', lineHeight: 19 * em },
+  textStyle: { textAlign: 'center', color: '#FFFFFF', fontFamily: 'Semi-Bold', textSize: 16 * em, lineHeight: 19 * em, fontWeight: 'bold' },
 };
 
 export default CommonButton;

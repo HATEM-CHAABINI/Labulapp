@@ -61,7 +61,12 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-  textTitle: { fontFamily: 'Lato-Bold', textAlignVertical: 'center', lineHeight: 19 * em, color: '#1E2D60' },
+  textTitle: {
+    fontFamily: 'Lato-Black',
+    textAlignVertical: 'center',
+    lineHeight: 19 * em,
+    color: '#1E2D60'
+  },
   arrowIcon: {
     backgroundColor: 'white',
     width: 11 * em,

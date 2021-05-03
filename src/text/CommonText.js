@@ -12,7 +12,7 @@ const CommonText = (props) => {
       <TouchableOpacity onPress={props.onPress}>
         <Text
           style={[
-            {  fontSize: 16 * em, color: color, textAlign: props.textAlign },
+            { fontFamily: 'Lato-Medium', fontSize: 16 * em, color: color, textAlign: props.textAlign },
             props.style,
           ]}>
           {props.text}
@@ -23,7 +23,7 @@ const CommonText = (props) => {
   return (
     <Text
       style={[
-        {  fontSize: 16 * em, color: color, textAlign: props.textAlign },
+        { fontSize: 16 * em, color: color, textAlign: props.textAlign },
         props.style,
       ]}>
       {props.text}

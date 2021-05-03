@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { em } from '../../constants/consts';
+import { em, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 import SmallText from '../../text/SmallText';
 import TinyText from '../../text/TinyText';
@@ -11,19 +11,19 @@ const renderService = (data, onPressSee) => {
   }
   return (
     <View style={styles.serviceContainer}>
-      <Image source={data.service.user.photo} style={{ width: 32 * em, height: 32 * em }} />
+      <Image source={data.service.user.photo} style={{ width: 32 * em, height: 32 * em ,marginTop:30*hm}} />
       <View style={styles.serviceSubContainer}>
-        <TinyText text={data.service.date} style={styles.largeTopPadding} />
-        <SmallText text={data.service.user.name} />
+        <TinyText fontSize={12} text={data.service.date} style={styles.largeTopPadding} />
+        <SmallText text={data.service.user.name} style={{color:"#1E2D60", fontSize:14*em,fontFamily:"lato-Bold"}}/>
 
         <View style={styles.serviceInfoContainer}>
           <View>
 
             <SmallText text={data.service.organName} style={styles.smallTopPadding} />
-            <TinyText text={data.service.title} style={styles.smallTopPadding} />
+            <TinyText text={data.service.title} fontSize={14} style={styles.smallTopPaddings} />
           </View>
           <TouchableOpacity onPress={onPressSee} style={styles.colReverse}>
-            <TinyText text="Voir>" color="#40CDDE" style={styles.largeTopPadding} />
+            <TinyText text="Voir>" fontSize={14} color="#40CDDE" style={styles.largeTopPaddings} />
           </TouchableOpacity>
         </View>
       </View>
@@ -46,31 +46,34 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     width: '100%',
-    marginVertical: 20 * em,
+    marginVertical: 20 * hm,
     paddingHorizontal: 20 * em,
   },
   serviceContainer: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
-    padding: 12 * em,
+    padding: 12 * hm,
     borderRadius: 16 * em,
     marginLeft: 10 * em,
     elevation: 3,
     shadowColor: '#254D5612',
     shadowOffset: {
       width: 0,
-      height: 12 * em,
+      height: 12 * hm,
     }, shadowOpacity: 1,
     shadowRadius: 25 * em,
   },
   serviceInfoContainer: { flex: 1, flexDirection: 'row', justifyContent: 'space-between' },
   colReverse: { flexDirection: 'column-reverse', marginRight: 9 * em },
-  smallTopPadding: { marginTop: 4 * em },
-  largeTopPadding: { marginTop: 24 * em, fontFamily: 'Lato-Bold' },
+  smallTopPadding: {fontSize:12, marginTop: 4 * hm,color:"#6A8596" , fontFamily: 'Lato-Regular'},
+  smallTopPaddings: { marginTop: 13 * hm ,color:"#1E2D60", fontFamily: 'Lato-Bold' },
+  largeTopPaddings: { marginTop: 13 * hm, fontFamily: 'Lato-Semibold' },
+
+  largeTopPadding: { marginTop: 2 * hm, fontFamily: 'Lato-Regular' ,marginBottom:20*hm},
   serviceSubContainer: { flex: 1, paddingLeft: 10 * em },
   itemMargin: { marginLeft: 10 * em },
-  separator: { flex: 1, height: em, backgroundColor: '#A0A4B7', alignSelf: 'center', marginLeft: 10 * em },
+  separator: { flex: 1, height: hm, backgroundColor: '#A0A4B7', alignSelf: 'center', marginLeft: 10 * em },
 };
 
 export default ScheduleCard;

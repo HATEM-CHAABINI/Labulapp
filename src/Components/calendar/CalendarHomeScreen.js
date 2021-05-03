@@ -171,12 +171,12 @@ const CalendarHomeScreen = () => {
             }}
             leftSelector={
               <View style={styles.calendarIconStyle}>
-                <PrevIcon width={10 * em} height={10 * em} />
+                <PrevIcon width={10 * em} height={10 * hm} />
               </View>
             }
             rightSelector={
               <View style={styles.calendarIconStyle}>
-                <NextIcon width={10 * em} height={10 * em} />
+                <NextIcon width={10 * em} height={10 * hm} />
               </View>
             }
             upperCaseDays={false}
@@ -219,7 +219,7 @@ const styles = {
   container: {
     flex: 1,
   },
-  titleContainer: { paddingLeft: 30 * em, paddingTop: 30 * em, paddingBottom: 36 * em, backgroundColor: '#fff' },
+  titleContainer: { paddingLeft: 30 * em, paddingTop: 30 * hm, paddingBottom: 36 * hm, backgroundColor: '#fff' },
   titleText: { marginTop: 40 * hm },
   calendarContainer: {
     alignItems: 'center',
@@ -230,37 +230,37 @@ const styles = {
     shadowColor: '#84848442',
     shadowOffset: {
       width: 0,
-      height: 12 * em,
+      height: 12 * hm,
     },
     shadowRadius: 25 * em,
   },
-  calendarStripStyle: { width: WIDTH - 32 * em, height: 140 * em },
+  calendarStripStyle: { width: WIDTH - 32 * em, height: 140 *hm },
   calendarHeaderStyle: { color: '#1E2D60', fontSize: 20 * em, fontFamily: 'Lato-Regular' },
   calendarIconStyle: {
     width: 20 * em,
-    height: 20 * em,
+    height: 20 * hm,
     backgroundColor: '#A0AEB8',
     borderRadius: 10 * em,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  calendarHeaderContainerStyle: { marginBottom: 8 * em },
+  calendarHeaderContainerStyle: { marginBottom: 8 * hm },
   dayContainerStyle: {
     width: 40 * em,
-    height: 74 * em,
+    height: 74 * hm,
     backgroundColor: '#40CDDE',
     elevation: 3,
     shadowColor: '#84848442',
     shadowOffset: {
       width: 0,
-      height: 9 * em,
+      height: 9 * hm,
     }, shadowOpacity: 1,
     shadowRadius: 16 * em,
   },
   highlightDateNumberContainerStyle: {
     backgroundColor: '#fff',
     width: 30 * em,
-    height: 30 * em,
+    height: 30 * hm,
     borderRadius: 15 * em,
     paddingTop: 2 * em,
     marginTop: -2 * em,
@@ -268,7 +268,7 @@ const styles = {
   dateNumberStyle: { color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Regular' },
   dateNameStyle: {
     color: '#BFCDDB',
-    marginBottom: 16 * em,
+    marginBottom: 16 * hm,
     fontSize: 14 * em,
     fontFamily: 'Lato-Bold',
   },
@@ -287,9 +287,9 @@ const styles = {
     paddingTop: 6 * em,
   },
   knob: {
-    marginBottom: 20 * em,
+    marginBottom: 20 * hm,
     width: 55 * em,
-    height: 5 * em,
+    height: 5 * hm,
     borderRadius: 2.5 * em,
     backgroundColor: '#BFCDDB24',
     alignSelf: 'center',

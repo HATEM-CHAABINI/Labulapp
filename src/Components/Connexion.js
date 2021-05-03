@@ -52,10 +52,10 @@ export default class Connexion extends Component {
               <Usercreat width={30 * em} height={30 * em} />
             </View>
 
-            <Text style={{ color: '#1E2D60', fontSize: 28*em, paddingTop: 80 *hm}}>
+            <Text style={{ color: '#1E2D60', fontSize: 28*em, paddingTop: 80 *hm,fontFamily:"lato-Black"}}>
               Je me connecte
             </Text>
-            <Text style={{ color: '#6A8596', fontSize: 16*em, paddingTop: 10*hm }}>
+            <Text style={{ color: '#6A8596', fontSize: 16*em, paddingTop: 10*hm ,fontFamily:"lato-Medium"}}>
               Ravis de te revoir :){' '}
             </Text>
             <TouchableOpacity
@@ -110,6 +110,7 @@ export default class Connexion extends Component {
                     color: '#FFFFFF',
                     marginLeft: 10*em,
                     marginTop: 2*hm,
+                    fontFamily:"lato-Medium"
                   }}>
                   Je me connecte avec mon email
                 </Text>

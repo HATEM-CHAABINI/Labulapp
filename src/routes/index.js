@@ -165,12 +165,12 @@ class Routes extends Component {
 
           <Scene key="editProfile" hideNavBar component={EditProfileScreen} />
 
-          {/*
+
           <Scene key="createAccountMenu" hideNavBar component={CreateAccountMenuScreen} />
           <Scene key="createProfessionalAccount" hideNavBar component={CreateProfessionalAccountScreen} />
           <Scene key="createAssociationAccount" hideNavBar component={CreateAssociationAccountScreen} />
           <Scene key="createCommunityAccount" hideNavBar component={CreateCommunityAccountScreen} />
-          <Scene key="proRegisterMobile" hideNavBar component={ProRegisterMobilScreen} />
+          {/*<Scene key="proRegisterMobile" hideNavBar component={ProRegisterMobilScreen} />
           <Scene key="proRegisterAddress" hideNavBar component={ProRegisterAddressScreen} />
           <Scene key="proRegisterEmail" hideNavBar component={ProRegisterEmailScreen} /> */}
           <Scene key="proProfileHome" hideNavBar component={ProProfileHomeScreen} />
@@ -226,8 +226,8 @@ class Routes extends Component {
           <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
           <Scene key="activityDial" hideNavBar component={ActivityDialScreen} />
 
-          {/* <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
-          <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} /> */}
+          <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
+          <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} />
         </Scene>
       </Router>
     );

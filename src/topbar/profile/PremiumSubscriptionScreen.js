@@ -11,6 +11,7 @@ import PurchaseMenuCard from '../../adapter/PurchaseMenuCard';
 import Modal from 'react-native-modal';
 import { Actions } from 'react-native-router-flux';
 import { RightArrowBlue } from '../../assets/svg/icons';
+import CommentText from '../../text/CommentText';
 const PremiumSubscriptionScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -36,7 +37,7 @@ const PremiumSubscriptionScreen = (props) => {
               selected={props.profileType === 'my'}
               name="Light"
               price="0,90€"
-              commentRadius="Rayon de 500m."
+              commentRadius="Rayon de 1Km autour."
               comment="Idéal pour vendre juste autour de soi"
             />
             <PurchaseMenuCard
@@ -48,12 +49,11 @@ const PremiumSubscriptionScreen = (props) => {
               comment="Idéal pour un professionnel qui veut faire grimper son chiffre d’affaire"
             />
           </View>
-          <TinyText color="#6A8596" style={styles.comment} text="Annule à tout moment. Paiement sécurisé" />
+          <Text style={styles.comment}>Abonnement <Text style={styles.commentBold}>sans engagement</Text> et <Text style={styles.commentBold}>résiliable</Text> depuis le store.</Text>
           <Text style={styles.guideline}>
-            {
-              'Avantages\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.'
-            }
+            Inclus dans l'abonnement Light
           </Text>
+          <CommentText text="Et si votre chiffre d'affaire augmentait considérablement pour le prix d'un café par mois." color="#1E2D60" style={styles.guideline2}></CommentText>
         </View>
       </ScrollView>
       <CommonBackButton onPress={() => Actions.pop()} dark={true} style={styles.backBtn} />
@@ -127,7 +127,7 @@ const PremiumSubscriptionScreen = (props) => {
 
 const styles = {
   container: { flex: 1, backgroundColor: 'transparent' },
-  scrollView: { backgroundColor: '#F0F5F7' },
+  scrollView: { backgroundColor: '#FFF' },
   purchaseBtn: { position: 'absolute', alignSelf: 'center', bottom: 25 * hm },
   backBtn: { position: 'absolute', left: 15 * em, top: 27 * hm },
 
@@ -139,10 +139,17 @@ const styles = {
     alignSelf: 'center',
     marginBottom: 15 * hm,
   },
-  title: { fontSize: 27 * em, lineHeight: 30 * em },
+  title: { fontFamily: 'CoconRegularTR', fontSize: 27 * em, lineHeight: 30 * em },
   containerTitle: { marginBottom: 0, flexDirection: 'row', justifyContent: 'center' },
-  subTitle: { fontSize: 13 * em, fontWeight: '500', lineHeight: 17 * em, marginBottom: 25 * hm },
+  subTitle: {
+    fontFamily: 'Lato-SemiBold',
+    fontSize: 13 * em,
+    fontWeight: '500',
+    lineHeight: 17 * em,
+    marginBottom: 25 * hm
+  },
   popView: {
+
     flex: 1,
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 28 * em,
@@ -152,13 +159,16 @@ const styles = {
   cardContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 40 * hm,
+    marginTop: 5 * hm,
     marginLeft: 22.5 * em,
     marginRight: 22.5 * em,
   },
-  card: { width: 150 * em, height: 207 * em, marginLeft: 7.5 * em, marginRight: 7.5 * em },
-  comment: { lineHeight: 12 * em, marginTop: 10 * hm, marginBottom: 24 * hm, textAlign: 'center' },
-  guideline: { marginLeft: 30 * em, marginRight: 30 * em, fontSize: 14 * em, color: '#A0AEB8', lineHeight: 18 * em },
+  card: { width: 160 * em, height: 207 * em, marginLeft: 7.5 * em, marginRight: 7.5 * em },
+  comment: { color: '#1E2D60', fontFamily: 'Lato-Medium', fontSize: 10 * em, lineHeight: 12 * em, marginTop: 10 * hm, marginBottom: 24 * hm, textAlign: 'center' },
+  commentBold: { color: '#1E2D60', fontFamily: 'Lato-Black', fontSize: 10 * em },
+  guideline: { fontFamily: 'Lato-Black', marginLeft: 30 * em, marginRight: 30 * em, fontSize: 21 * em, color: '#1E2D60', lineHeight: 18 * em },
+  guideline2: { marginLeft: 30 * em, marginRight: 30 * em, textAlign: 'left' },
+
   modal: {
     backgroundColor: '#F9F9F9C7',
     marginTop: 192 * hm,

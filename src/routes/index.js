@@ -115,7 +115,7 @@ class Routes extends Component {
 
           <Scene key="editNeed" hideNavBar component={EditNeedScreen} />
 
-         
+
           {/* <Scene key="loginMenu" hideNavBar component={LoginMenuScreen} /> */}
           <Scene key="loginMenu" hideNavBar component={Connexion} />
 
@@ -212,10 +212,10 @@ class Routes extends Component {
           <Scene key="InscriptionAdresse" hideNavBar component={InscriptionAdresse} />
           <Scene key="ActiverLocalisation" hideNavBar component={ActiverLocalisation} />
           <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
- <Scene key="friendSell" hideNavBar component={FriendSellScreen} />
+          <Scene key="friendSell" hideNavBar component={FriendSellScreen} />
           <Scene key="friendNeed" hideNavBar component={FriendNeedScreen} />
-           <Scene key="friendGiveBadge" hideNavBar component={FriendGiveBadgeScreen} />
-           <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
+          <Scene key="friendGiveBadge" hideNavBar component={FriendGiveBadgeScreen} />
+          <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
           <Scene key="activityDial" hideNavBar component={ActivityDialScreen} />
 
           {/* <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />

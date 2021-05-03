@@ -85,7 +85,7 @@ const FriendNeedScreen = (props) => {
 };
 
 const styles = {
-  container: { flex: 1, backgroundColor: 'transparent' },
+  container: { flex: 1, backgroundColor: 'white' },
   btnBox: {
     // paddingLeft: 26 * em,
     // paddingRight: 26 * em,

@@ -49,7 +49,7 @@ const FriendSellScreen = () => {
 
           <CommonButton
             style={styles.inviteBtn}
-            text="Pparticiper"
+            text="Participer"
             textStyle={{ color: '#41D0E2' }}
             onPress={() => setInvitePopupVisible(true)}
           />

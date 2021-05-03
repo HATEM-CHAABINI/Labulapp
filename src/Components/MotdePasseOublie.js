@@ -21,6 +21,7 @@ import TitleLabul from '../assets/title/TitleLabul'
 import MyTextInput from './MyTextInput';
 import { BackArrowWhite } from '../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
+import Motpass from '../assets/icons/navigation-app/Motpass';
   export default class MotdePasseOublie extends Component {
     constructor(props){
         super(props)
@@ -60,7 +61,7 @@ console.log(navigation);
                 
                             </TouchableOpacity>
                             <View style={{position: 'absolute',top:40}} >
-                <Usercreat width={30*em} height={30*em} /> 
+                <Motpass width={30*em} height={30*hm} /> 
                 </View>
                 <Text style={{color:'#1E2D60',fontSize:28,paddingTop:80,textAlign:'center',fontFamily:"lato-Black"}}>Demander un nouveau {"\n"}mot de passe</Text>
                 <Text style={{color:'#6A8596',fontSize:14,paddingTop:20,textAlign:'center',fontFamily:"lato-Regular"}}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>

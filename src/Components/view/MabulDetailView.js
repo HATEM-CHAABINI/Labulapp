@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, ScrollView } from 'react-native';
+import { View, Image, ScrollView ,Text} from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hexToRGB, hm } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
@@ -14,6 +14,7 @@ import { getUserBadge } from '../../constants/icons';
 import CommonListItem from '../../adapter/CommonListItem';
 import NeedStatusType from '../../model/service/NeedStatusType';
 import Message from '../../model/message/Message';
+import ReadMore from 'react-native-read-more-text';
 
 const MabulDetailView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
@@ -77,15 +78,21 @@ const MabulDetailView = (props) => {
           />
           <CommentText style={styles.comment} text={data.organName} color={'#1E2D60'} />
           <TitleText text={data.title} style={styles.title} />
-          <SeeMore
-            numberOfLines={4}
-            seeLessText="Voir moins"
-            seeMoreText="Continuer à lire"
-            style={styles.content}
-            linkColor="#40CDDE">
+          <ReadMore
+          
+              
+              numberOfLines={3}
+              renderTruncatedFooter={this._renderTruncatedFooter}
+              renderRevealedFooter={this._renderRevealedFooter}
+              // onReady={this._handleTextReady}
+              >
+          
+          
+          <Text style={styles.content}>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
             dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef
-          </SeeMore>
+        </Text>
+            </ReadMore>
           {data.status === NeedStatusType.CANCELED ? <></> : data.relationship ? AskButton : ModifyButton}
           {data.status !== NeedStatusType.CANCELED && InviteButton}
         </View>
@@ -95,7 +102,20 @@ const MabulDetailView = (props) => {
     </>
   );
 };
+_renderTruncatedFooter = (handlePress) => {
+  return (
+    <Text style={{color: '#40CDDE',fontSize:14*em}} onPress={handlePress}>
+Continuer à lire    </Text>
+  );
+}
 
+_renderRevealedFooter = (handlePress) => {
+  return (
+    <Text style={{color: '#40CDDE',fontSize:14*em}} onPress={handlePress}>
+      Voir moins
+    </Text>
+  );
+}
 const styles = {
   backBtnView: {
     shadowColor: '#B3C6CF33',

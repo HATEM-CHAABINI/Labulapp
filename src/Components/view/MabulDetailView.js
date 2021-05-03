@@ -53,11 +53,11 @@ const MabulDetailView = (props) => {
         />
         <View style={styles.body}>
           <View style={styles.ViewtimeTxt}>
-          <CommonText
-            text={data.status === NeedStatusType.CANCELED ? 'Terminé' : '04 Fév · 08h00'}
-            style={styles.timeTxt}
-            color="#6A8596"
-          />
+            <CommonText
+              text={data.status === NeedStatusType.CANCELED ? 'Terminé' : '04 Fév · 08h00'}
+              style={styles.timeTxt}
+              color="#6A8596"
+            />
           </View>
           <CommonListItem
             style={styles.userInfo}
@@ -113,20 +113,19 @@ const styles = {
   },
   cover: {
     width: '100%',
-    height: 312 * em,
+    height: 312 * hm,
   },
   body: {
     paddingHorizontal: 30 * em,
-    marginTop: -41 * em,
+    //marginTop: -41 * em,
     borderTopRightRadius: 28 * em,
     borderTopLeftRadius: 28 * em,
     backgroundColor: '#ffffff',
     width: '100%',
-    paddingBottom: '100%',
+    //paddingBottom: '100%',
   },
-  ViewtimeTxt:{
-   
-    
+  ViewtimeTxt: {
+
     lineHeight: 19 * hm,
     paddingHorizontal: 30 * em,
     marginLeft: -30 * em,
@@ -140,7 +139,7 @@ const styles = {
 
   },
   timeTxt: {
-    fontFamily: 'Lato-Bold',
+    fontFamily: 'Lato-Medium',
     lineHeight: 19 * hm,
     paddingHorizontal: 30 * em,
     marginLeft: -30 * em,
@@ -148,19 +147,21 @@ const styles = {
     paddingBottom: 11 * em,
     marginTop: -17 * hm,
     alignSelf: 'baseline',
- 
+
   },
   userInfo: {
+    fontFamily: 'Lato-Medium',
     marginTop: 14 * em,
     height: 39 * em,
   },
-  userName: { fontFamily: 'Lato-Bold', textAlign: 'left', textAlignVertical: 'center', color: '#1E2D60' },
+  userName: { fontFamily: 'Lato-Medium', fontFamily: 'Lato-Black', fontSize: 16 * em, textAlign: 'left', textAlignVertical: 'center', color: '#1E2D60' },
   comment: { lineHeight: 15 * em, fontSize: 13 * em, textAlign: 'left', marginTop: 21 * hm },
   title: {
     lineHeight: 30 * em,
     fontSize: 24 * em,
     textAlign: 'left',
     marginTop: 5 * hm,
+    marginBottom: 15 * hm,
     fontFamily: 'Lato-Black',
   },
   contentBox: {
@@ -168,13 +169,13 @@ const styles = {
     justifyContent: 'flex-start',
   },
   content: {
-    fontSize: 16 * em,
+    fontSize: 14 * em,
     // backgroundColor: 'red',
     color: '#6A8596',
     lineHeight: 25 * em,
     textAlign: 'left',
     marginTop: 3 * hm,
-    fontFamily: 'Lato-Regular',
+    fontFamily: 'Lato-Medium',
   },
   quizBtn: { marginTop: 25 * hm, backgroundColor: hexToRGB('#41D0E2', 0.2) },
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent' },

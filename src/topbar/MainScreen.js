@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FriendsNavigator from './FriendsNavigator';
 import CalendarHomeScreen from '../Components/calendar/CalendarHomeScreen';
-import MyActivityHomeScreen from './MyActivityHomeScreen';
+import MyActivityHomeScreen from './activity/MyActivityHomeScreen';
 import ProfileHomeScreen from './profile/ProfileHomeScreen';
 import ProProfileHomeScreen from './ProProfileHomeScreen';
 import { em, hm, WIDTH } from '../constants/consts';
@@ -77,7 +77,7 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
   }
 
   return (
-    
+
     <ImageBackground style={styles.VirtualTabButtons} source={require('../assets/images/Trace.png')}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -155,7 +155,7 @@ export default function MainScreen(props) {
           <Tab.Screen name="Mabul" component={MabulHomeScreen} />
           <Tab.Screen
             name="Activity"
-            component={CalendarHomeScreen}
+            component={MyActivityHomeScreen}
             initialParams={{ activityType: props.activityType || 'needs', noEmpty: props.noEmpty }}
           />
           <Tab.Screen name="Profile" component={ProfileHomeScreen} initialParams={{ purchased: props.purchased }} />
@@ -181,10 +181,10 @@ const styles = {
   modalStyle: { margin: 0 },
   VirtualTabButtons: {
     flex: 1,
-    width: WIDTH*1.18,
+    width: WIDTH * 1.18,
     height: 110 * hm,
     position: 'absolute',
-     left: -30*em,
+    left: -30 * em,
     //  right:100*em,
     bottom: -em * 35,
     flexDirection: 'row',
@@ -192,12 +192,12 @@ const styles = {
     paddingBottom: 50 * hm,
     justifyContent: 'space-evenly',
   },
-  
+
   AddImage: {
     width: 50 * em,
     height: 50 * hm,
   },
-  
+
   TapImage: { width: 22 * em, height: 22 * hm },
   photoWrapper: {
     width: 24 * em,

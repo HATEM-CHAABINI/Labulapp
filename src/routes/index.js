@@ -186,9 +186,10 @@ class Routes extends Component {
           <Scene key="mabulCommonShare" hideNavBar component={MabulCommonShareScreen} />
 
           <Scene key="mySetting" hideNavBar component={MySettingScreen} />
-          {/*
+
           <Scene key="premiumSubscription" hideNavBar component={PremiumSubscriptionScreen} />
           <Scene key="premiumPurchased" hideNavBar component={PremiumPurchasedScreen} />
+          {/*
           <Scene key="mabulHome" hideNavBar component={MabulHomeScreen} /> */}
           <Scene key="myNeedsHome" hideNavBar component={MyNeedsHomeScreen} />
 

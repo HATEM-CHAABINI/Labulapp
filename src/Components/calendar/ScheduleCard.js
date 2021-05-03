@@ -13,12 +13,14 @@ const renderService = (data, onPressSee) => {
     <View style={styles.serviceContainer}>
       <Image source={data.service.user.photo} style={{ width: 32 * em, height: 32 * em }} />
       <View style={styles.serviceSubContainer}>
+        <TinyText text={data.service.date} style={styles.largeTopPadding} />
         <SmallText text={data.service.user.name} />
-        <TinyText text={data.service.title} style={styles.smallTopPadding} />
+
         <View style={styles.serviceInfoContainer}>
           <View>
-            <TinyText text={data.service.date} style={styles.largeTopPadding} />
+
             <SmallText text={data.service.organName} style={styles.smallTopPadding} />
+            <TinyText text={data.service.title} style={styles.smallTopPadding} />
           </View>
           <TouchableOpacity onPress={onPressSee} style={styles.colReverse}>
             <TinyText text="Voir>" color="#40CDDE" style={styles.largeTopPadding} />
@@ -59,7 +61,7 @@ const styles = {
     shadowOffset: {
       width: 0,
       height: 12 * em,
-    },shadowOpacity:1,
+    }, shadowOpacity: 1,
     shadowRadius: 25 * em,
   },
   serviceInfoContainer: { flex: 1, flexDirection: 'row', justifyContent: 'space-between' },

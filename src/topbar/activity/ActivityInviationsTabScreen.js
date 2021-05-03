@@ -110,8 +110,10 @@ const styles = {
     alignSelf: 'center',
     borderRadius: 19.5 * em,
   },
-  msgTxt: { fontFamily: 'Lato-Black', marginTop: 15 * hm, textAlign: 'center', lineHeight: 23 * em },
+  msgTxt: { fontFamily: 'Lato-Black', fontSize: 16 * em, marginTop: 15 * hm, textAlign: 'center', lineHeight: 23 * em },
   explainTxt: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 14 * em,
     marginTop: 10 * hm,
     lineHeight: 23 * em,
     width: 289 * em,

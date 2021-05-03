@@ -110,12 +110,15 @@ const styles = {
   msgIcon: { marginTop: 13.15 * em, alignSelf: 'center' },
   msgTxt: {
     fontFamily: 'Lato-Black',
+    fontSize: 16 * em,
     marginTop: 15 * em,
     textAlign: 'center',
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     lineHeight: 23 * em,
   },
   explainTxt: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 14 * em,
     marginTop: 10 * hm,
     lineHeight: 23 * em,
     width: 289 * em,

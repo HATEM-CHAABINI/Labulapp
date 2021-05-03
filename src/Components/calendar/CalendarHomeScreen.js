@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import TitleText from '../../text/TitleText';
-import { em, WIDTH } from '../../constants/consts';
+import { em, WIDTH, hm } from '../../constants/consts';
 import CalendarStrip from './CalendarStrip';
 import { NextIcon, PrevIcon } from '../../assets/svg/icons';
 import NeedService from '../../model/service/NeedService';
@@ -220,7 +220,7 @@ const styles = {
     flex: 1,
   },
   titleContainer: { paddingLeft: 30 * em, paddingTop: 30 * em, paddingBottom: 36 * em, backgroundColor: '#fff' },
-  titleText: { marginTop: 16 * em },
+  titleText: { marginTop: 40 * hm },
   calendarContainer: {
     alignItems: 'center',
     backgroundColor: '#ffffff',
@@ -254,7 +254,7 @@ const styles = {
     shadowOffset: {
       width: 0,
       height: 9 * em,
-    },shadowOpacity:1,
+    }, shadowOpacity: 1,
     shadowRadius: 16 * em,
   },
   highlightDateNumberContainerStyle: {

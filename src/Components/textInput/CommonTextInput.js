@@ -62,6 +62,7 @@ const styles = {
   container: { flexDirection: 'row' },
   textBox: { justifyContent: 'flex-end', flex: 1 },
   textInput: {
+    fontFamily: 'Lato-Regular',
     color: '#1E2D60',
     fontSize: 18 * em,
     lineHeight: 20 * em,

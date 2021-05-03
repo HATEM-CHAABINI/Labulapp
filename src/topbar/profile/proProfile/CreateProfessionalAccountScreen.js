@@ -12,10 +12,12 @@ import { EnterpriseInner } from '../../../assets/svg/icons';
 const CreateProfessionalAccountScreen = (props) => {
   return (
     <View style={styles.container}>
+
       <AccountCommonHeader style={styles.header} rightTxt="Annuler" />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <EnterpriseInner width={33 * em} height={30 * em} />
+          <TitleText text={'Identité'} style={styles.titleText} />
           <CommonTextInput
             text={'Quel est le nom de ton activité ?'}
             isPasswordInput={false}
@@ -41,7 +43,7 @@ const styles = {
     alignItems: 'center',
   },
   header: {
-    height: '12%',
+    height: '10%',
   },
   popupView: {
     flex: 1,
@@ -54,7 +56,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
-  titleText: { marginTop: 11 * em, marginBottom: 35 * em },
+  titleText: { fontFamily: 'Lato-Black', marginTop: 11 * em, marginBottom: 35 * em },
   btnNext: { backgroundColor: '#7398FD', marginBottom: 30 * em },
   commonInput: {
     width: '100%',

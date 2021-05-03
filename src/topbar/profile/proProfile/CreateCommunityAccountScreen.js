@@ -16,7 +16,7 @@ const CreateCommunityAccountScreen = (props) => {
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <InstitutionInner width={35 * em} height={30 * em} />
-          <TitleText text={'Identité'} style={styles.titleText} />
+          {/* <TitleText text={'Identité'} style={styles.titleText} /> */}
           <CommonTextInput
             text={'Quel est le nom de ton collectivité/ institution ?'}
             isPasswordInput={false}
@@ -51,7 +51,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
-  titleText: { marginTop: 11 * em, marginBottom: 35 * em },
+  titleText: { fontFamily: 'Lato-Black', marginTop: 11 * em, marginBottom: 35 * em },
   btnNext: {
     marginBottom: 30 * em,
     backgroundColor: '#7398FC',
@@ -59,6 +59,7 @@ const styles = {
   commonInput: {
     width: '100%',
     height: 52 * em,
+    marginTop: 35 * em
   },
 };
 

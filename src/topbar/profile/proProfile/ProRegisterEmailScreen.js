@@ -1,12 +1,12 @@
 import React from 'react';
-import { em } from 'view/common/const';
+import { em } from '../../../constants/consts';
 import { View, Image } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import CommonTextInput from 'view/components/textInput/CommonTextInput';
-import CommonButton from 'view/components/button/CommonButton';
+import TitleText from '../../../text/TitleText';
+import CommonTextInput from '../../../Components/textInput/CommonTextInput';
+import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
-import AccountCommonHeader from 'view/components/header/AccountCommonHeader';
-import { EmailBlue } from 'assets/svg/icons';
+import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
+import { EmailBlue } from '../../../assets/svg/icons';
 const ProRegisterEmailScreen = (props) => {
   console.log(props.accountType);
 

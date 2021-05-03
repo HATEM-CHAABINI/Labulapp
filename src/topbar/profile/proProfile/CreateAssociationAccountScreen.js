@@ -1,13 +1,13 @@
 import React from 'react';
-import { em } from 'view/common/const';
+import { em } from '../../../constants/consts';
 import { View } from 'react-native';
-import PopupHeader from 'view/components/header/PopupHeader';
-import TitleText from 'view/components/text/TitleText';
-import CommonTextInput from 'view/components/textInput/CommonTextInput';
-import CommonButton from 'view/components/button/CommonButton';
+import PopupHeader from '../../../Components/header/PopupHeader';
+import TitleText from '../../../text/TitleText';
+import CommonTextInput from '../../../Components/textInput/CommonTextInput';
+import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
-import AccountCommonHeader from 'view/components/header/AccountCommonHeader';
-import { AssociationInner } from 'assets/svg/icons';
+import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
+import { AssociationInner } from '../../../assets/svg/icons';
 const CreateAssociationAccountScreen = (props) => {
   return (
     <View style={styles.container}>
@@ -26,7 +26,7 @@ const CreateAssociationAccountScreen = (props) => {
           <CommonButton
             color="#7398FC"
             text={'Suivant'}
-            onPress={() => Actions.proRegisterMobile({accountType:props.accountType})}
+            onPress={() => Actions.proRegisterMobile({ accountType: props.accountType })}
             style={styles.btnNext}
           />
         </View>

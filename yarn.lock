@@ -6526,6 +6526,11 @@
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
 
+"react-native-collapsible@^1.6.0":
+  "integrity" "sha512-beZjdgbT9Y/Pg591Xy5XkKG20HffJiVad4n9bfcUF/f783A+tvOVXnqvbS58Lkaym93mi4jcDPMuW9Vc1t6rqg=="
+  "resolved" "https://registry.npmjs.org/react-native-collapsible/-/react-native-collapsible-1.6.0.tgz"
+  "version" "1.6.0"
+
 "react-native-elements@^3.3.2":
   "integrity" "sha512-bDWQt0WEuJEOrwzSYx0mVBV3aoRtJAsK0Kc2sioMsshSEhPOZK17Ccx+EvLBSpZ9uWxPyx42Z7hUH/8dQNu67g=="
   "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.3.2.tgz"

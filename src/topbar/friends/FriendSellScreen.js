@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Image, TouchableOpacity, ScrollView } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, hm } from 'view/common/const';
-import CommentText from 'view/components/text/CommentText';
-import CommonButton from 'view/components/button/CommonButton';
-import CommonBackButton from 'view/components/button/CommonBackButton';
-import FriendInvitePopupScreen from 'view/screens/main/friends/popup/FriendInvitePopupScreen';
+import TitleText from '../../text/TitleText';
+import { em, hm } from '../../constants/consts';
+import CommentText from '../../text/CommentText';
+import CommonButton from '../../Components/button/CommonButton';
+import CommonBackButton from '../../Components/button/CommonBackButton';
+import FriendInvitePopupScreen from './popup/FriendInvitePopupScreen';
 import { Actions } from 'react-native-router-flux';
-import NeedStatusType from '../../../../model/service/NeedStatusType';
+import NeedStatusType from '../../model/service/NeedStatusType';
 import SeeMore from 'react-native-see-more-inline';
 
 const FriendSellScreen = () => {
@@ -16,10 +16,10 @@ const FriendSellScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <Image source={require('assets/images/sample_cover_2_big.png')} style={styles.cover} />
+        <Image source={require('../../assets/images/sample_cover_2_big.png')} style={styles.cover} />
 
         <View style={styles.body}>
-          <Image source={require('assets/images/sample_ic_plant.png')} style={styles.icon} />
+          <Image source={require('../../assets/images/sample_ic_plant.png')} style={styles.icon} />
           <CommentText style={styles.itemName} text="Arbre de vie" color={'#1E2D60'} />
           <CommentText style={styles.comment} text="Je vends Objet Entretien de la maison" color={'#1E2D60'} />
           <TitleText text={'Spray cuisine 100% Bio'} style={styles.title} />

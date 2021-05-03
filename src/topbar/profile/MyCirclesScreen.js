@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em } from 'view/common/const';
-import CommonTabBar from 'view/components/other/CommonTabBar';
+import TitleText from '../../text/TitleText';
+import { em } from '../../constants/consts';
+import CommonTabBar from '../../Components/other/CommonTabBar';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MyCirclesTabScreen from './MyCirclesTabScreen';

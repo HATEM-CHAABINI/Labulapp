@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, FlatList, Image, StatusBar } from 'react-native';
-import { em, hm } from 'view/common/const';
-import CommonText from 'view/components/text/CommonText';
-import TitleText from 'view/components/text/TitleText';
-import CommonButton from 'view/components/button/CommonButton';
+import { em, hm } from '../../../constants/consts';
+import CommonText from '../../../text/CommonText';
+import TitleText from '../../../text/TitleText';
+import CommonButton from '../../../Components/button/CommonButton';
 
 import Modal from 'react-native-modal';
-import CommonCheckBox from '../../../../components/checkbox/CommonCheckBox';
+import CommonCheckBox from '../../../Components/checkbox/CommonCheckBox';
 const FriendParticipatePopupScreen = (props) => {
   const [checked, setChecked] = useState();
   return (
@@ -33,7 +33,7 @@ const FriendParticipatePopupScreen = (props) => {
         opacity={0.5}
       />
       <View style={styles.body}>
-        <Image source={require('assets/images/sample_cover_1.png')} style={styles.titleImg} />
+        <Image source={require('../../../assets/images/sample_cover_1.png')} style={styles.titleImg} />
         <TitleText text="À prévoir" style={styles.title} />
         <CommonText text="Dans cette demande Antoine a pévu une liste des choses à apporter" style={styles.comment} />
         <CommonCheckBox
@@ -53,7 +53,7 @@ const FriendParticipatePopupScreen = (props) => {
         <CommonCheckBox
           style={styles.listItem}
           oval
-          text="Objectif 105mm f / 2.8 EX DG Macro OS HSM"W
+          text="Objectif 105mm f / 2.8 EX DG Macro OS HSM" W
           color="#1E2D60"
           textStyle={styles.itemText}
         />

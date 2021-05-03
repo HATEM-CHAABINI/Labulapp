@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { em,hm } from 'view/common/const';
-import CommonButton from 'view/components/button/CommonButton';
+import { em, hm } from '../../constants/consts';
+import CommonButton from '../../Components/button/CommonButton';
 import FriendParticipatePopupScreen from './popup/FriendParticipatePopupScreen';
 import FriendInvitePopupScreen from './popup/FriendInvitePopupScreen';
-import OrganizeServiceType from 'model/service/OrganizeServiceType';
-import OrganizeService from 'model/service/OrganizeService';
-import User from 'model/user/User';
-import MabulDetailView from 'view/components/view/MabulDetailView';
+import OrganizeServiceType from '../../model/service/OrganizeServiceType';
+import OrganizeService from '../../model/service/OrganizeService';
+import User from '../../model/user/User';
+import MabulDetailView from '../../Components/view/MabulDetailView';
 
 const organizeData = Object.assign(
   new OrganizeService(
-    new User('Philippe Durand', require('assets/images/sample_user_2.png'), 'anton@gmail.com'),
+    new User('Philippe Durand', require('../../assets/images/sample_user_2.png'), 'anton@gmail.com'),
     'J’organise Atelier',
     'Photographie vintage',
     new Date(),
-    require('assets/images/sample_cover_1.png'),
+    require('../../assets/images/sample_cover_1.png'),
     1,
     OrganizeServiceType.WORKSHOP
   ),

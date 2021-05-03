@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, hm } from 'view/common/const';
-import TinyText from 'view/components/text/TinyText';
-import SmallText from 'view/components/text/SmallText';
+import TitleText from '../../text/TitleText';
+import { em, hm } from '../../constants/consts';
+import TinyText from '../../text/TinyText';
+import SmallText from '../../text/SmallText';
 
-import CommonButton from 'view/components/button/CommonButton';
-import CommonBackButton from 'view/components/button/CommonBackButton';
-import PurchaseMenuCard from 'view/components/adapter/PurchaseMenuCard';
+import CommonButton from '../../Components/button/CommonButton';
+import CommonBackButton from '../../Components/button/CommonBackButton';
+import PurchaseMenuCard from '../../adapter/PurchaseMenuCard';
 import Modal from 'react-native-modal';
 import { Actions } from 'react-native-router-flux';
-import { RightArrowBlue } from 'assets/svg/icons';
+import { RightArrowBlue } from '../../assets/svg/icons';
 const PremiumSubscriptionScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -20,8 +20,8 @@ const PremiumSubscriptionScreen = (props) => {
           style={styles.logo}
           source={
             props.profileType === 'my'
-              ? require('assets/images/img_logo_subscription.png')
-              : require('assets/images/img_logo_subscription_blue.png')
+              ? require('../../assets/images/img_logo_subscription.png')
+              : require('../../assets/images/img_logo_subscription_blue.png')
           }
         />
         <View style={styles.containerTitle}>

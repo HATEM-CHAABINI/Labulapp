@@ -21,31 +21,31 @@ import ConnexionEmail from '../Components/ConnexionEmail'
 import MabulOrganizeScreen from '../Mabul/organize/MabulOrganizeScreen';
 
 //import MabulSearchScreen from 'view/screens/main/mabul/search/MabulSearchScreen';
-/*import ProfileOverviewScreen from 'view/screens/main/profile/ProfileOverviewScreen';
-import FriendsFilterScreen from 'view/screens/main/friends/FriendsFilterScreen';
-import MyInformationScreen from 'view/screens/main/profile/MyInformationScreen';
-import MySettingScreen from 'view/screens/main/profile/MySettingScreen';
-import PremiumSubscriptionScreen from 'view/screens/main/profile/PremiumSubscriptionScreen';
-import PremiumPurchasedScreen from 'view/screens/main/profile/PremiumPurchasedScreen';
-import CreateAccountMenuScreen from 'view/screens/main/profile/proProfile/CreateAccountMenuScreen';
-import CreateProfessionalAccountScreen from 'view/screens/main/profile/proProfile/CreateProfessionalAccountScreen';
-import CreateCommunityAccountScreen from 'view/screens/main/profile/proProfile/CreateCommunityAccountScreen';
-import CreateAssociationAccountScreen from 'view/screens/main/profile/proProfile/CreateAssociationAccountScreen';
-import FriendSellScreen from 'view/screens/main/friends/FriendSellScreen';
+import ProfileOverviewScreen from '../topbar/profile/ProfileOverviewScreen';
+import FriendsFilterScreen from '../topbar/friends/FriendsFilterScreen';
+import MyInformationScreen from '../topbar/profile/MyInformationScreen';
+import MySettingScreen from '../topbar/profile/MySettingScreen';
+import PremiumSubscriptionScreen from '../topbar/profile/PremiumSubscriptionScreen';
+import PremiumPurchasedScreen from '../topbar/profile/PremiumPurchasedScreen';
+import CreateAccountMenuScreen from '../topbar/profile/proProfile/CreateAccountMenuScreen';
+import CreateProfessionalAccountScreen from '../topbar/profile/proProfile/CreateProfessionalAccountScreen';
+import CreateCommunityAccountScreen from '../topbar/profile/proProfile/CreateCommunityAccountScreen';
+import CreateAssociationAccountScreen from '../topbar/profile/proProfile/CreateAssociationAccountScreen';
+//import FriendSellScreen from '../topbar/friends/FriendSellScreen';
 
-import InputLocationScreen from 'view/screens/main/friends/InputLocationScreen';
-import PrivacyPolicyScreen from 'view/screens/main/profile/PrivacyPolicyScreen';
-import TermsOfServiceScreen from 'view/screens/main/profile/TermsOfServiceScreen';
-import ProRegisterMobilScreen from 'view/screens/main/profile/proProfile/ProRegisterMobilScreen';
-import ProRegisterAddressScreen from 'view/screens/main/profile/proProfile/ProRegisterAddressScreen';
-import ProRegisterEmailScreen from 'view/screens/main/profile/proProfile/ProRegisterEmailScreen';
-import UserProfileScreen from 'view/screens/main/friends/UserProfileScreen';
-import FriendNeedScreen from 'view/screens/main/friends/FriendNeedScreen';
-import AlertCircleSelectionScreen from 'view/screens/main/alert/AlertCircleSelectionScreen';
-import AlertClassOptionScreen from 'view/screens/main/alert/AlertClassOptionScreen';
-import AlertAddressScreen from 'view/screens/main/alert/AlertAddressScreen';
-import AlertAddNoteScreen from 'view/screens/main/alert/AlertAddNoteScreen';
-import AlertShareScreen from 'view/screens/main/alert/AlertShareScreen';*/
+import InputLocationScreen from '../topbar/friends/InputLocationScreen';
+import PrivacyPolicyScreen from '../topbar/profile/PrivacyPolicyScreen';
+import TermsOfServiceScreen from '../topbar/profile/TermsOfServiceScreen';
+import ProRegisterMobilScreen from '../topbar/profile/proProfile/ProRegisterMobilScreen';
+import ProRegisterAddressScreen from '../topbar/profile/proProfile/ProRegisterAddressScreen';
+import ProRegisterEmailScreen from '../topbar/profile/proProfile/ProRegisterEmailScreen';
+import UserProfileScreen from '../topbar/friends/UserProfileScreen';
+//import FriendNeedScreen from 'view/screens/main/friends/FriendNeedScreen';
+// import AlertCircleSelectionScreen from 'view/screens/main/alert/AlertCircleSelectionScreen';
+// import AlertClassOptionScreen from 'view/screens/main/alert/AlertClassOptionScreen';
+// import AlertAddressScreen from 'view/screens/main/alert/AlertAddressScreen';
+// import AlertAddNoteScreen from 'view/screens/main/alert/AlertAddNoteScreen';
+// import AlertShareScreen from 'view/screens/main/alert/AlertShareScreen';
 import EditProfileScreen from '../topbar/profile/EditProfileScreen';
 import EditProProfileScreen from '../topbar/profile/proProfile/EditProProfileScreen';
 import ProProfileOverviewScreen from '../topbar/profile/proProfile/ProProfileOverviewScreen';
@@ -138,12 +138,15 @@ class Routes extends Component {
           <Scene key="activateNotification" hideNavBar component={ActivateNotificationScreen} />
 
           <Scene key="friendsSearch" hideNavBar component={FriendsSearchScreen} />
+          */}
           <Scene key="friendsFilter" hideNavBar component={FriendsFilterScreen} />
-          <Scene key="userProfile" hideNavBar component={UserProfileScreen} />
           <Scene key="inputLocation" hideNavBar component={InputLocationScreen} />
 
-          
+          <Scene key="userProfile" hideNavBar component={UserProfileScreen} />
 
+
+
+          {/*
           <Scene key="alertCircles" hideNavBar component={AlertCircleSelectionScreen} />
           <Scene key="alertClass" hideNavBar component={AlertClassOptionScreen} />
           <Scene key="alertAddress" hideNavBar component={AlertAddressScreen} />
@@ -155,11 +158,14 @@ class Routes extends Component {
           
           <Scene key="mabulSearch" hideNavBar component={MabulSearchScreen} />
 
-
+          */}
           <Scene key="profileOverview" hideNavBar component={ProfileOverviewScreen} />
+
           <Scene key="myInformation" hideNavBar component={MyInformationScreen} />
+
           <Scene key="editProfile" hideNavBar component={EditProfileScreen} />
 
+          {/*
           <Scene key="createAccountMenu" hideNavBar component={CreateAccountMenuScreen} />
           <Scene key="createProfessionalAccount" hideNavBar component={CreateProfessionalAccountScreen} />
           <Scene key="createAssociationAccount" hideNavBar component={CreateAssociationAccountScreen} />
@@ -179,7 +185,8 @@ class Routes extends Component {
           <Scene key="proProfileOverview" hideNavBar component={ProProfileOverviewScreen} />
           <Scene key="mabulCommonShare" hideNavBar component={MabulCommonShareScreen} />
 
-          {/* <Scene key="mySetting" hideNavBar component={MySettingScreen} />
+          <Scene key="mySetting" hideNavBar component={MySettingScreen} />
+          {/*
           <Scene key="premiumSubscription" hideNavBar component={PremiumSubscriptionScreen} />
           <Scene key="premiumPurchased" hideNavBar component={PremiumPurchasedScreen} />
           <Scene key="mabulHome" hideNavBar component={MabulHomeScreen} /> */}

@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, hexToRGB } from 'view/common/const';
-import ProfileCommonListItem from 'view/components/adapter/ProfileCommonListItem';
+import TitleText from '../../../text/TitleText';
+import { em, hexToRGB } from '../../../constants/consts';
+import ProfileCommonListItem from '../../../adapter/ProfileCommonListItem';
 import { Actions } from 'react-native-router-flux';
-import CommonText from 'view/components/text/CommonText';
-import { Enterprise, Association, Institution } from 'assets/svg/icons';
+import CommonText from '../../../text/CommonText';
+import { Enterprise, Association, Institution } from '../../../assets/svg/icons';
 const iconSize = { width: 30 * em, height: 30 * em };
 const CreateAccountMenuScreen = () => {
   return (

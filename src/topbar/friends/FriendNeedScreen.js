@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { em, hm } from 'view/common/const';
-import CommonButton from 'view/components/button/CommonButton';
+import { em, hm } from '../../constants/consts';
+import CommonButton from '../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
-import NeedService from 'model/service/NeedService';
-import NeedServiceType from 'model/service/NeedServiceType';
-import User from 'model/user/User';
-import MabulDetailView from 'view/components/view/MabulDetailView';
-import { Send, Option } from 'assets/svg/icons';
+import NeedService from '../../model/service/NeedService';
+import NeedServiceType from '../../model/service/NeedServiceType';
+import User from '../../model/user/User';
+import MabulDetailView from '../../Components/view/MabulDetailView';
+import { Send, Option } from '../../assets/svg/icons';
 import FriendCancelParticipatePopupScreen from './popup/FriendCancelParticipatePopupScreen';
-import NeedStatusType from '../../../../model/service/NeedStatusType';
+import NeedStatusType from '../../model/service/NeedStatusType';
 const needData = Object.assign(
   new NeedService(
-    new User('Amandine Bernard', require('assets/images/sample_user_1.png'), 'anton@gmail.com'),
+    new User('Amandine Bernard', require('../../assets/images/sample_user_1.png'), 'anton@gmail.com'),
     'J’ai besoin coup de main bricolage',
     'Réparer une chaise',
     new Date(),
-    require('assets/images/sample_cover_2.png'),
+    require('../../assets/images/sample_cover_2.png'),
     3,
     NeedServiceType.REPAIR
   ),
@@ -45,7 +45,7 @@ const FriendNeedScreen = (props) => {
   );
   const WaitingButton = (
     <CommonButton
-      onPress={() => {}}
+      onPress={() => { }}
       leftIcon={Send({ width: 13 * em, height: 13 * em })}
       iconStyle={{ marginRight: 10 * hm }}
       text={'Demande de participation envoyée'}

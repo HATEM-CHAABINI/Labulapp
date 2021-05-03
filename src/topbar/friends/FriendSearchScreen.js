@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { em, hm } from 'view/common/const';
-import SearchBox from 'view/components/other/SearchBox';
+import { em, hm } from '../../constants/consts';
+import SearchBox from '../../Components/other/SearchBox';
 import { FlatList } from 'react-native-gesture-handler';
-import SearchCommonListItem from 'view/components/adapter/SearchCommonListItem';
-import FriendCommonHeader from 'view/components/header/FriendCommonHeader';
-import User from 'model/user/User';
-import RelationshipType from 'model/user/RelationshipType';
+import SearchCommonListItem from '../../adapter/SearchCommonListItem';
+import FriendCommonHeader from '../../Components/header/FriendCommonHeader';
+import User from '../../model/user/User';
+import RelationshipType from '../../model/user/RelationshipType';
 
 const users = [
   new User(
     'Amandine Bernard',
-    require('assets/images/avatar.png'),
+    require('../../assets/images/avatar.png'),
     [RelationshipType.FRIEND, RelationshipType.NEIGHBOR],
     'user@labul.com'
   ),
-  new User('Amélie Petit', require('assets/images/avatar.png'), [RelationshipType.NEIGHBOR], 'user@labul.com'),
-  new User('Antoine Durand', require('assets/images/avatar.png'), [RelationshipType.NEIGHBOR], 'user@labul.com'),
-  new User('Robert Dupont', require('assets/images/avatar.png'), '', 'user@labul.com'),
-  new User('Julien Girar', require('assets/images/avatar.png'), '', 'user@labul.com'),
+  new User('Amélie Petit', require('../../assets/images/avatar.png'), [RelationshipType.NEIGHBOR], 'user@labul.com'),
+  new User('Antoine Durand', require('../../assets/images/avatar.png'), [RelationshipType.NEIGHBOR], 'user@labul.com'),
+  new User('Robert Dupont', require('../../assets/images/avatar.png'), '', 'user@labul.com'),
+  new User('Julien Girar', require('../../assets/images/avatar.png'), '', 'user@labul.com'),
 ];
 
 const FriendsSearchScreen = () => {

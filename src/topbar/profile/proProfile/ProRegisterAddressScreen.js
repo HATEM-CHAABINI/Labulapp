@@ -1,15 +1,16 @@
 import React from 'react';
-import { em } from 'view/common/const';
+import { em } from '../../../constants/consts';
 import { View, Image } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import CommonTextInput from 'view/components/textInput/CommonTextInput';
-import CommonButton from 'view/components/button/CommonButton';
+import TitleText from '../../../text/TitleText';
+import CommonTextInput from '../../../Components/textInput/CommonTextInput';
+import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
-import CommonText from 'view/components/text/CommonText';
-import AccountCommonHeader from 'view/components/header/AccountCommonHeader';
-import { AddressBlue } from 'assets/svg/icons';
+import CommonText from '../../../text/CommonText';
+import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
+import { AddressBlue } from '../../../assets/svg/icons';
 
-const ProRegisterAddressScreen = (props) => {  console.log(props.accountType)
+const ProRegisterAddressScreen = (props) => {
+  console.log(props.accountType)
 
   return (
     <View style={styles.container}>

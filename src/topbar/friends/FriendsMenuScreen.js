@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, ImageBackground, DeviceEventEmitter, Image, TouchableOpacity } from 'react-native';
-import { em, hm } from 'view/common/const';
+import { em, hm } from '../../constants/consts';
 import { Actions } from 'react-native-router-flux';
-import { Animals, Bricolage, HomeCare, Interview, Workshop, Path, Return2Point, Alert } from 'assets/svg/icons';
+import { Animals, Bricolage, HomeCare, Interview, Workshop, Path, Return2Point, Alert } from '../../assets/svg/icons';
 const servicIconSize = { width: 18 * em, height: 18 * em };
 const locationList = [
   {
     id: '0',
     top: 205 * hm,
     left: 36 * em,
-    avatar: require('assets/images/sample_user_2.png'),
+    avatar: require('../../assets/images/sample_user_2.png'),
     serviceIcon: Animals(servicIconSize),
     bgColor: 'rgba(56, 194, 255, 0.2)',
   },
@@ -17,7 +17,7 @@ const locationList = [
     id: '1',
     top: 164 * hm,
     left: 181 * em,
-    avatar: require('assets/images/sample_ic_plant.png'),
+    avatar: require('../../assets/images/sample_ic_plant.png'),
     serviceIcon: Interview(servicIconSize),
     bgColor: 'rgba(170, 135, 229, 0.2)',
   },
@@ -25,7 +25,7 @@ const locationList = [
     id: '2',
     top: 273 * hm,
     left: 211 * em,
-    avatar: require('assets/images/sample_user_2.png'),
+    avatar: require('../../assets/images/sample_user_2.png'),
     serviceIcon: Bricolage(servicIconSize),
     bgColor: 'rgba(56, 194, 255, 0.2)',
   },
@@ -33,7 +33,7 @@ const locationList = [
     id: '3',
     top: 321 * hm,
     left: 149 * em,
-    avatar: require('assets/images/avatar.png'),
+    avatar: require('../../assets/images/avatar.png'),
     serviceIcon: Bricolage(servicIconSize),
     bgColor: 'rgba(56, 194, 255, 0.2)',
   },
@@ -41,7 +41,7 @@ const locationList = [
     id: '4',
     top: 396 * hm,
     left: 72 * em,
-    avatar: require('assets/images/sample_ic_hair.png'),
+    avatar: require('../../assets/images/sample_ic_hair.png'),
     serviceIcon: HomeCare(servicIconSize),
     bgColor: 'rgba(170, 135, 229, 0.2)',
   },
@@ -49,7 +49,7 @@ const locationList = [
     id: '5',
     top: 490 * hm,
     left: 170 * em,
-    avatar: require('assets/images/sample_user_2.png'),
+    avatar: require('../../assets/images/sample_user_2.png'),
     serviceIcon: Animals(servicIconSize),
     bgColor: 'rgba(253, 198, 65, 0.2)',
   },
@@ -58,7 +58,7 @@ const locationList = [
 const FriendsMenuScreen = () => {
   return (
     <View style={styles.container}>
-      <Image style={styles.TabControlContainer} source={require('assets/images/bg_map.png')} />
+      <Image style={styles.TabControlContainer} source={require('../../assets/images/bg_map.png')} />
 
       <View style={{ position: 'absolute', top: 203 * hm, left: 34 * em }}>
         <Path width={76 * em} height={48 * em} />
@@ -78,7 +78,7 @@ const FriendsMenuScreen = () => {
           },
           shadowRadius: 9 * em,
         }}>
-        <Image source={require('assets/images/img_alert.png')} />
+        <Image source={require('../../assets/images/img_alert.png')} />
       </View>
       {locationList.map((location) => PositionView(location))}
       <View
@@ -100,7 +100,7 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * hm,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Interview(servicIconSize)}
@@ -124,7 +124,7 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * hm,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Return2Point(servicIconSize)}
@@ -149,13 +149,13 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * em,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Alert({ width: 26.45 * em, height: 22.31 * em })}
       </TouchableOpacity>
       <Image
-        source={require('assets/images/img_navigator.png')}
+        source={require('../../assets/images/img_navigator.png')}
         style={{ position: 'absolute', top: 316 * hm, zIndex: 0, opacity: 0.8 }}
       />
       <View
@@ -177,7 +177,7 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * hm,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Workshop(servicIconSize)}
@@ -196,8 +196,9 @@ const PositionView = ({ top, left, avatar, serviceIcon, bgColor, id }) => (
           height: 10 * hm,
         },
         shadowRadius: 12 * em,
-shadowOpacity:1,
-         position: 'absolute', top: top - 2 * hm, left: left - 2 * em, zIndex: 1 }}
+        shadowOpacity: 1,
+        position: 'absolute', top: top - 2 * hm, left: left - 2 * em, zIndex: 1
+      }}
       key={(Date.now() + parseInt(Math.random() * 100000000)).toString()}>
       <Path width={76 * em} height={48 * em} />
     </View>
@@ -208,7 +209,7 @@ shadowOpacity:1,
   </>
 );
 const styles = {
-  container: { flex: 1, alignItems: 'center'},
+  container: { flex: 1, alignItems: 'center' },
   tagInView: {
     zIndex: 1,
     position: 'absolute',

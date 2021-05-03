@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Image, StatusBar } from 'react-native';
-import { em, hm } from 'view/common/const';
-import CommonText from 'view/components/text/CommonText';
+import { em, hm } from '../../../constants/consts';
+import CommonText from '../../../text/CommonText';
 import Modal from 'react-native-modal';
-import CommonListItem from 'view/components/adapter/CommonListItem';
-import CommonButton from 'view/components/button/CommonButton';
-import { Delete, ReportProblem } from 'assets/svg/icons';
-import NeedStatusType from 'model/service/NeedStatusType';
+import CommonListItem from '../../../adapter/CommonListItem';
+import CommonButton from '../../../Components/button/CommonButton';
+import { Delete, ReportProblem } from '../../../assets/svg/icons';
+import NeedStatusType from '../../../model/service/NeedStatusType';
 
 const FriendCancelParticipatePopupScreen = (props) => {
   return (
@@ -19,7 +19,7 @@ const FriendCancelParticipatePopupScreen = (props) => {
       onBackButtonPress={() => props.onPress()}>
       <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
       <View style={styles.body}>
-        <Image source={require('assets/images/avatar.png')} style={styles.avatar} />
+        <Image source={require('../../../assets/images/avatar.png')} style={styles.avatar} />
         <CommonText text="Mathieu Torin" style={styles.userName} />
         <CommonListItem
           style={styles.listItem}

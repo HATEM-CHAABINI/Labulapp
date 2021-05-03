@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { em, hm } from 'view/common/const';
-import FriendsFilterListItem from 'view/components/adapter/FriendsFilterListItem';
-import CommonListItem from 'view/components/adapter/CommonListItem';
-import CommonText from 'view/components/text/CommonText';
-import Switch from 'view/components/other/Switch';
+import { em, hm } from '../../constants/consts';
+import FriendsFilterListItem from '../../adapter/FriendsFilterListItem';
+import CommonListItem from '../../adapter/CommonListItem';
+import CommonText from '../../text/CommonText';
+import Switch from '../../Components/other/Switch';
 import { Actions } from 'react-native-router-flux';
 import FriendsFilterRequestModalScreen from './popup/FriendsFilterRequestModalScreen';
 import FriendsFilterDateModalScreen from './popup/FriendsFilterDateModalScreen';
-import FriendCommonHeader from 'view/components/header/FriendCommonHeader';
-import { Calendar, TypeRequest, Address } from 'assets/svg/icons';
+import FriendCommonHeader from '../../Components/header/FriendCommonHeader';
+import { Calendar, TypeRequest, Address } from '../../assets/svg/icons';
 const FriendsFilterScreen = () => {
   const [filterRequestModalVisible, setfilterRequestModalVisible] = useState(false);
   const [filterDateModalVisible, setfilterDateModalVisible] = useState(false);

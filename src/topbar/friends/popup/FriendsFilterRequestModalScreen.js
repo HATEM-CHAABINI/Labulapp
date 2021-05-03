@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { View, StatusBar } from 'react-native';
-import { em, WIDTH, hm } from 'view/common/const';
-import CommonBackButton from 'view/components/button/CommonBackButton';
-import CommentText from 'view/components/text/CommentText';
+import { em, WIDTH, hm } from '../../../constants/consts';
+import CommonBackButton from '../../../Components/button/CommonBackButton';
+import CommentText from '../../../text/CommentText';
 import { FlatList } from 'react-native-gesture-handler';
-import CommonButton from 'view/components/button/CommonButton';
-import CommonCheckBox from 'view/components/checkbox/CommonCheckBox';
+import CommonButton from '../../../Components/button/CommonButton';
+import CommonCheckBox from '../../../Components/checkbox/CommonCheckBox';
 
 import Modal from 'react-native-modal';
-import CommonText from 'view/components/text/CommonText';
+import CommonText from '../../../text/CommonText';
 import { Actions } from 'react-native-router-flux';
 
 const options = [

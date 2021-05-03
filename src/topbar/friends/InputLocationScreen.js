@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
-import { em, hm } from 'view/common/const';
-import SearchBox from 'view/components/other/SearchBox';
-import CommentText from 'view/components/text/CommentText';
-import SearchCommonListItem from 'view/components/adapter/SearchCommonListItem';
-import FriendCommonHeader from 'view/components/header/FriendCommonHeader';
+import { em, hm } from '../../constants/consts';
+import SearchBox from '../../Components/other/SearchBox';
+import CommentText from '../../text/CommentText';
+import SearchCommonListItem from '../../adapter/SearchCommonListItem';
+import FriendCommonHeader from '../../Components/header/FriendCommonHeader';
 const InputLocationScreen = () => {
   const [searchedUsers, getSearchResult] = useState('');
   const [locationViewVisible, setlocationViewVisible] = useState('flex');

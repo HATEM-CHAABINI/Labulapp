@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, WIDTH, hm } from 'view/common/const';
-import CommonBackButton from 'view/components/button/CommonBackButton';
+import TitleText from '../../../text/TitleText';
+import { em, WIDTH, hm } from '../../../constants/consts';
+import CommonBackButton from '../../../Components/button/CommonBackButton';
 import { FlatList } from 'react-native-gesture-handler';
-import CommonButton from 'view/components/button/CommonButton';
-import CommonCheckBox from 'view/components/checkbox/CommonCheckBox';
+import CommonButton from '../../../Components/button/CommonButton';
+import CommonCheckBox from '../../../Components/checkbox/CommonCheckBox';
 
 import Modal from 'react-native-modal';
 import { Actions } from 'react-native-router-flux';

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, hm } from 'view/common/const';
+import TitleText from '../../text/TitleText';
+import { em, hm } from '../../constants/consts';
 import Accordion from 'react-native-collapsible/Accordion';
-import CommentText from 'view/components/text/CommentText';
-import CommonHeader from 'view/components/header/CommonHeader';
-import CommonText from 'view/components/text/CommonText';
+import CommentText from '../../text/CommentText';
+import CommonHeader from '../../Components/header/CommonHeader';
+import CommonText from '../../text/CommonText';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import { RightArrow, LeftArrow } from 'assets/svg/icons';
+import { RightArrow, LeftArrow } from '../../assets/svg/icons';
 const sections = [
   { title: 'Politique\nde confidentialité', content: '' },
   {
@@ -62,7 +62,7 @@ const PrivacyPolicyScreen = () => {
       renderFixedHeader={() => <CommonHeader dark style={{ position: 'absolute', top: 27 * hm }} />}
       renderForeground={() => <TitleText text={'Politique\nde confidentialité'} style={styles.title} />}
       renderStickyHeader={() => (
-        <View key="sticky-header" style={{ marginTop: 40 * em,  alignItems: 'center' }}>
+        <View key="sticky-header" style={{ marginTop: 40 * em, alignItems: 'center' }}>
           <CommonText text={'Politique de confidentialité'} color="#1E2D60" />
         </View>
       )}>

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { em, hm } from 'view/common/const';
+import { em, hm } from '../../constants/consts';
 import FriendsListScreen from './FriendsListScreen';
 import FriendsMenuScreen from './FriendsMenuScreen';
-import CommonBlueHeader from 'view/components/header/CommonBlueHeader';
-import SwitchButton from 'view/components/button/SwitchButton';
+import CommonBlueHeader from '../../Components/header/CommonBlueHeader';
+import SwitchButton from '../../Components/button/SwitchButton';
 import { Actions } from 'react-native-router-flux';
-import { MagnifierBlue, Filter } from 'assets/svg/icons';
+import { MagnifierBlue, Filter } from '../../assets/svg/icons';
 const Tab = createMaterialTopTabNavigator();
 
 export default function FriendsNavigator(props) {
@@ -26,9 +26,9 @@ export default function FriendsNavigator(props) {
         <View style={styles.TabButtonContainer}>
           <TouchableOpacity
             style={styles.functionBtn}
-            shadowOffset={{height: 10}}
-  shadowColor='black'
-  shadowOpacity={0.5}
+            shadowOffset={{ height: 10 }}
+            shadowColor='black'
+            shadowOpacity={0.5}
             onPress={() => {
               Actions.friendsSearch();
             }}>
@@ -80,10 +80,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
-        elevation: 5,
+    elevation: 5,
     shadowColor: '#254D56',
-    shadowOffset: {      width: 0,      height: 16 * hm,
-    },shadowOpacity:0.45,
+    shadowOffset: {
+      width: 0, height: 16 * hm,
+    }, shadowOpacity: 0.45,
     shadowRadius: 24 * em,
   },
   TabControlContainer: { position: 'absolute', flex: 1, width: '100%' },
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 12 * hm,
     },
-    shadowOpacity:0.2,
+    shadowOpacity: 0.2,
 
     shadowRadius: 25 * em,
   },

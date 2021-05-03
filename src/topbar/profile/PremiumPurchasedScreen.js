@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Image, Text } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, hm } from 'view/common/const';
-import CommonBackButton from 'view/components/button/CommonBackButton';
-import PurchaseMenuCard from 'view/components/adapter/PurchaseMenuCard';
+import TitleText from '../../text/TitleText';
+import { em, hm } from '../../constants/consts';
+import CommonBackButton from '../../Components/button/CommonBackButton';
+import PurchaseMenuCard from '../../adapter/PurchaseMenuCard';
 import { Actions } from 'react-native-router-flux';
-import SmallText from 'view/components/text/SmallText';
-import { Premium } from 'assets/svg/icons';
-import { feedbackIcons } from 'view/common/icons';
-import User from 'model/user/User';
-import AccountType from 'model/user/AccountType';
+import SmallText from '../../text/SmallText';
+import { Premium } from '../../assets/svg/icons';
+import { feedbackIcons } from '../../constants/icons';
+import User from '../../model/user/User';
+import AccountType from '../../model/user/AccountType';
 
 const PremiumPurchasedScreen = (props) => {
   return (
@@ -20,7 +20,7 @@ const PremiumPurchasedScreen = (props) => {
         onPress={() =>
           Actions.main({
             tabNav: props.profileType === 'my' ? 'Profile' : 'ProProfile',
-            purchased: props.profileType === 'my' ? AccountType.LIGHT:AccountType.PRO,
+            purchased: props.profileType === 'my' ? AccountType.LIGHT : AccountType.PRO,
           })
         }
       />

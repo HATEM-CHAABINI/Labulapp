@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, ScrollView } from 'react-native';
-import { em, hm } from 'view/common/const';
-import ProfileInformationListItem from 'view/components/adapter/ProfileInformationListItem';
-import CommonText from 'view/components/text/CommonText';
-import ProfileCommonHeader from 'view/components/header/ProfileCommonHeader';
-import ProfileCommonModal from 'view/components/other/ProfileCommonModal';
+import { em, hm } from '../../constants/consts';
+import ProfileInformationListItem from '../../adapter/ProfileInformationListItem';
+import CommonText from '../../text/CommonText';
+import ProfileCommonHeader from '../../Components/header/ProfileCommonHeader';
+import ProfileCommonModal from '../../Components/other/ProfileCommonModal';
 import { Actions } from 'react-native-router-flux';
 
 const MyInformationScreen = (props) => {
@@ -65,7 +65,7 @@ const MyInformationScreen = (props) => {
         onPress={() => {
           setModalVisible(false);
         }}
-        onChange={(profile) => {}}
+        onChange={(profile) => { }}
       />
     </ProfileCommonHeader>
   );

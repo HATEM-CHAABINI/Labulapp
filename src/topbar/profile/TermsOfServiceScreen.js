@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, hm } from 'view/common/const';
+import TitleText from '../../text/TitleText';
+import { em, hm } from '../../constants/consts';
 import Accordion from 'react-native-collapsible/Accordion';
-import CommentText from 'view/components/text/CommentText';
-import CommonHeader from 'view/components/header/CommonHeader';
-import { RightArrow, LeftArrow } from 'assets/svg/icons';
-import CommonText from 'view/components/text/CommonText';
+import CommentText from '../../text/CommentText';
+import CommonHeader from '../../Components/header/CommonHeader';
+import { RightArrow, LeftArrow } from '../../assets/svg/icons';
+import CommonText from '../../text/CommonText';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 const sections = [
   { title: 'Conditions générales d’utilisation', content: '' },

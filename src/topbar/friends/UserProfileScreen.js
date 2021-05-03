@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { View, ScrollView } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em, hm, WIDTH } from 'view/common/const';
-import ProfileCommonLabel from 'view/components/other/ProfileCommonLabel';
-import CommonBackButton from 'view/components/button/CommonBackButton';
-import ProfileCommonSpecView from 'view/components/view/ProfileCommonSpecView';
+import TitleText from '../../text/TitleText';
+import { em, hm, WIDTH } from '../../constants/consts';
+import ProfileCommonLabel from '../../Components/other/ProfileCommonLabel';
+import CommonBackButton from '../../Components/button/CommonBackButton';
+import ProfileCommonSpecView from '../../Components/view/ProfileCommonSpecView';
 
-import ProfileCommonAvatar from 'view/components/view/ProfileCommonAvatar';
-import CommentText from 'view/components/text/CommentText';
-import CommonButton from 'view/components/button/CommonButton';
-import { Family, Friend, Neighbor } from 'assets/svg/icons';
-import { feedbackIcons } from 'view/common/icons';
+import ProfileCommonAvatar from '../../Components/view/ProfileCommonAvatar';
+import CommentText from '../../text/CommentText';
+import CommonButton from '../../Components/button/CommonButton';
+import { Family, Friend, Neighbor } from '../../assets/svg/icons';
+import { feedbackIcons } from '../../constants/icons';
 
 const sampleProfile = {
-  avatar: require('assets/images/tab_profile_off.png'),
+  avatar: require('../../assets/images/tab_profile_off.png'),
   fullName: 'Amandine Bernard',
   availability: 'Je suis disponible le soir et le week-end',
   presentation:
@@ -26,7 +26,7 @@ const sampleProfile = {
 const UserProfileScreen = (props) => {
   const [userProfile] = useState(props.userProfile || sampleProfile);
   const badgeView = userProfile.badges && (
-    <ScrollView horizontal={true} style={{paddingTop:20*hm, paddingLeft: 30 * em, height: 80 * hm }}>
+    <ScrollView horizontal={true} style={{ paddingTop: 20 * hm, paddingLeft: 30 * em, height: 80 * hm }}>
       {userProfile.badges.map((badge, index) => (
         <View style={styles.badgeIcon}>{badge.icon}</View>
       ))}
@@ -39,7 +39,7 @@ const UserProfileScreen = (props) => {
         <View style={styles.firstPopView}>
           <ProfileCommonAvatar
             borderWidth={0}
-            icon={require('assets/images/avatar.png')}
+            icon={require('../../assets/images/avatar.png')}
             style={styles.avatar}
             logoVisible={false}
           />
@@ -108,7 +108,7 @@ const UserProfileScreen = (props) => {
               <ProfileCommonLabel number={userProfile.needs.events} name={'Évènements'} />
             </View>
           </View>
-          <TitleText text={'Mes badges'} style={[styles.title,{marginBottom:0}]} />
+          <TitleText text={'Mes badges'} style={[styles.title, { marginBottom: 0 }]} />
           {badgeView}
         </View>
       </ScrollView>
@@ -177,7 +177,7 @@ const styles = {
     borderRadius: 12 * em,
   },
   badgeIcon: {
-    shadowColor: '#A7A7A733',shadowOpacity:1,
+    shadowColor: '#A7A7A733', shadowOpacity: 1,
     shadowOffset: {
       width: 0,
       height: 8 * em,
@@ -189,7 +189,7 @@ const styles = {
     elevation: 3,
     marginRight: 18 * em,
     alignItems: 'center',
-    justifyContent: 'center',backgroundColor:'#fff',
+    justifyContent: 'center', backgroundColor: '#fff',
   },
 };
 

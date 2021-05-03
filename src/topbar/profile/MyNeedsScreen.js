@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
-import TitleText from 'view/components/text/TitleText';
-import { em } from 'view/common/const';
-import SwitchButton from 'view/components/button/SwitchButton';
+import TitleText from '../../text/TitleText';
+import { em } from '../../constants/consts';
+import SwitchButton from '../../Components/button/SwitchButton';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { navigationRef } from 'view/screens/main/RootNavigation';
 
@@ -16,7 +16,7 @@ const MyNeedsScreen = (props) => {
       <View style={styles.header}>
         <View style={styles.containerTxtBtn}>
           <TouchableOpacity onPress={() => navigationRef.current.navigate('MyNotifictions')}>
-            <Image source={require('assets/images/ic_notification.png')} style={styles.notificationBtn} />
+            <Image source={require('../../assets/images/ic_notification.png')} style={styles.notificationBtn} />
           </TouchableOpacity>
         </View>
         <TitleText text={'Mon activité'} style={styles.title} />

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { em, hm } from 'view/common/const';
-import CommonHeader from 'view/components/header/CommonHeader';
-import Switch from 'view/components/other/Switch';
-import CommonListItem from 'view/components/adapter/CommonListItem';
-import { Address, NotificationYellow } from 'assets/svg/icons';
+import { em, hm } from '../../constants/consts';
+import CommonHeader from '../../Components/header/CommonHeader';
+import Switch from '../../Components/other/Switch';
+import CommonListItem from '../../adapter/CommonListItem';
+import { Address, NotificationYellow } from '../../assets/svg/icons';
 const MySettingScreen = () => {
   return (
     <View style={styles.container}>
@@ -22,7 +22,7 @@ const MySettingScreen = () => {
         subTitleStyle={styles.listComment}
         rightView={
           <Switch
-          value={1}
+            value={1}
             switchWidth={49 * em}
             switchHeight={27 * em}
             switchdirection="ltr"

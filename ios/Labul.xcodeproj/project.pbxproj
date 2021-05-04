@@ -18,7 +18,6 @@
 		569B6F82D4AA48D0907612D1 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A7F4EBE63B545149203AA75 /* Lato-BoldItalic.ttf */; };
 		80F74C0223274DBEA6B4380D /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB5320A0CA914B18BE22236A /* Lato-ThinItalic.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		847A0A8C78884B3CB8FF0A9A /* Cocon-RegularTR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB75BF7005184DA0AF951FF9 /* Cocon-RegularTR.ttf */; };
 		8E80AC51020117C836DAF888 /* libPods-Labul.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D1691FF7D402CC90842EFB /* libPods-Labul.a */; };
 		A1E4C0B8813A4FC39FBB414C /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A2E79FA96A14E758C2A0270 /* Lato-Italic.ttf */; };
 		A2668F156C51454384EAA974 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA418531FC1745D78577279D /* Lato-BlackItalic.ttf */; };
@@ -366,7 +365,6 @@
 				80F74C0223274DBEA6B4380D /* Lato-ThinItalic.ttf in Resources */,
 				A5680D8A7B63425D99FADAD7 /* Lato-Medium.ttf in Resources */,
 				D01275A555EF42888CCBA2BF /* Lato-SemiBold.ttf in Resources */,
-				847A0A8C78884B3CB8FF0A9A /* Cocon-RegularTR.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

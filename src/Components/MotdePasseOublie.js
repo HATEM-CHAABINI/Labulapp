@@ -40,12 +40,10 @@ import Motpass from '../assets/icons/navigation-app/Motpass';
 console.log(navigation);
     return (
     
-        <View style={{flex:1,backgroundColor:'#40CDDE'}}>
-   
-   
-   <View style={{ flex: 1, paddingTop: 50 * hm, alignItems: 'center' }}>
+      <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
+        <View style={{  paddingTop: 40 * hm ,paddingLeft:159*em}}>
         <TouchableOpacity
-              style={{ position: 'absolute', left: 40,paddingTop: 55 * hm}}
+              style={{ position: 'absolute', paddingTop: 40 * hm,paddingLeft:27*em}}
               onPress={() => Actions.pop()}>
               <BackArrowWhite width={30 * em} height={30 * hm} />
             </TouchableOpacity>
@@ -54,47 +52,43 @@ console.log(navigation);
 
 
 
-<View style={{flex:2,marginBottom:400}}>
+
+<View style={{ flex: 2 ,paddingTop:25*hm}}>
                 <View style={styles.ActionWrapper}>
                 
-                <TouchableOpacity style={{position: 'absolute', left: 40,top:40}} onPress={this.handleContinueClick}>
+                <TouchableOpacity style={{position: 'absolute'}} onPress={this.handleContinueClick}>
                 
                             </TouchableOpacity>
-                            <View style={{position: 'absolute',top:40}} >
+                            <View style={{position: 'absolute',paddingTop:40*hm}} >
                 <Motpass width={30*em} height={30*hm} /> 
                 </View>
-                <Text style={{color:'#1E2D60',fontSize:28,paddingTop:80,textAlign:'center',fontFamily:"lato-Black"}}>Demander un nouveau {"\n"}mot de passe</Text>
-                <Text style={{color:'#6A8596',fontSize:14,paddingTop:20,textAlign:'center',fontFamily:"lato-Regular"}}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>
+                <Text style={{color:'#1E2D60',fontSize:28*em,paddingTop:80*hm,textAlign:'center',fontFamily:"lato-Black"}}>Demander un nouveau {"\n"}mot de passe</Text>
+                <Text style={{color:'#6A8596',fontSize:14*em,paddingTop:10*hm,textAlign:'center',fontFamily:"lato-Regular"}}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>
                 <View style={styles.contentWrapper}>
               <Text style={styles.descText}>Saisis ton email</Text>
               <MyTextInput style={styles.TextInput} textContentType={"emailAddress"} autoFocus={true} value={this.state.email} handleChange={(text)=>this.setState({email:text})} />
               <MyTextInput />
-              
-       
-
-          
-
+     
 </View>
-
+<View style={{flex:1,bottom:5*hm}}>
               <TouchableOpacity  onPress={() => navigation.navigate('Home')} style={{ overflow: 'hidden',
     borderRadius: 18*em,
-    height: 50*em,
-    width:300*em,
+    height: 59*hm,
+    width:315*em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
-    marginTop: -50*hm}}
+  }}
  >
   <View
     style={styles.btnContainer}>
     
     <Text style={{  fontSize: 16,
         color: '#FFFFFF',
-        marginLeft: 10,
-        marginTop: 2,fontFamily:"lato-Medium"}}>Demander</Text>
+      fontFamily:"lato-Medium"}}>Demander</Text>
   </View>
               </TouchableOpacity>
 
-        
+              </View>
                 </View>
               </View>
 
@@ -107,16 +101,17 @@ const styles = StyleSheet.create({
         height: 45*em,
         fontSize: 16*em,
        // width:250*em,
-        color:"#1E2D60",
-        borderBottomWidth:1*em,
+        color:"#28c7ee",
+        borderBottomWidth:1*hm,
         borderBottomColor:"#28c7ee",
-        marginBottom: 60*em,
+        fontFamily:'lato-bold'
+        // marginBottom: 60*em,
       },
       contentWrapper:{
         width:WIDTH,
         paddingLeft: 20*em,
         paddingRight: 20*em,
-        paddingTop: 15*em
+        paddingTop: 23*hm,
       },
     descText:{
         fontSize: 12*em,
@@ -128,7 +123,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom:em*400,
         width: em*375,
-        height: em*435,
+        height: em*492,
         borderTopStartRadius: 28,
         borderTopEndRadius: 28,
         borderBottomEndRadius: 28,
@@ -255,6 +250,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#1E2D60',
         marginLeft: 10,
-        marginTop: 2,
+         marginTop: 2,
       }
   });

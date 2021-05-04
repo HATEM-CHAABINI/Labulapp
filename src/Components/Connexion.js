@@ -26,15 +26,14 @@ export default class Connexion extends Component {
     const { navigation } = this.props;
     console.log(navigation);
     return (
-      <View style={{ flex: 1}}>
+      <View style={{ flex: 1,alignContent:'center'}}>
         <Image
-          source={require('../assets/img/hedaer.png')}
-          style={{ width: em * 580, height: 300 * hm, right: 20 * em}}
-          resizeMode={'center'}
+          source={require('../assets/images/onbording-1296x814.png')}
+          style={{ width: em *500, height: 339 * hm}}
         />
 
         <View style={{   height: 420 * hm,
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#ffffff',
     borderTopStartRadius: 28 * em,
     borderTopEndRadius: 28 * em,
@@ -66,13 +65,13 @@ export default class Connexion extends Component {
                 borderRadius: 18 * em,
                 height: 59 * hm,
                 width: 315 * em,
-                alignItems: 'center',
                 backgroundColor: '#F0F5F7',
                 marginTop: 58 * hm,
               }}>
               <View style={styles.btnContainer}>
-                <Googleicon width={30 * em} height={30 * hm} />
-                <Text style={styles.btnText}>Je me connecte avec Google</Text>
+                <Googleicon width={18 * em} height={18 * hm} />
+                <Text style={[styles.btnText,{     marginLeft: 25*em,
+}]}>Je me connecte avec Google</Text>
               </View>
             </TouchableOpacity>
 
@@ -83,13 +82,14 @@ export default class Connexion extends Component {
                 borderRadius: 18 * em,
                 height: 59 * hm,
                 width: 315 * em,
-                alignItems: 'center',
+                // alignItems: 'center',
                 backgroundColor: '#F0F5F7',
                 marginTop: 8 *hm,
               }}>
               <View style={styles.btnContainer}>
-                <Facebookicon width={30 * em} height={30 * hm} />
-                <Text style={styles.btnText}>Je me connecte avec Facebook</Text>
+                <Facebookicon width={18 * em} height={18 * hm} />
+                <Text style={[styles.btnText,{     marginLeft: 16*em,
+}]}>Je me connecte avec Facebook</Text>
               </View>
             </TouchableOpacity>
 
@@ -100,18 +100,23 @@ export default class Connexion extends Component {
                 borderRadius: 18 * em,
                 height: 59 * hm,
                 width: 315 * em,
-                alignItems: 'center',
+                // alignItems: 'center',
                 backgroundColor: '#40CDDE',
                 marginTop:10 * hm,
                 marginBottom:30*hm
               }}>
-              <View style={styles.btnContainer}>
+              <View style={{flex: 1,
+    flexDirection: 'row',
+    paddingTop:20*hm,
+      paddingLeft:47*em,
+   
+    borderRadius: 10*em,}}>
                 <Text
                   style={{
                     fontSize: 16*em,
                     color: '#FFFFFF',
-                    marginLeft: 10*em,
-                    marginTop: 2*hm,
+                    // marginLeft: 10*em,
+                    // marginTop: 2*hm,
                     fontFamily:"lato-Medium"
                   }}>
                   Je me connecte avec mon email
@@ -166,9 +171,11 @@ const styles = StyleSheet.create({
   btnContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
+    paddingTop:20*hm,
+     paddingLeft:15*em,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // alignSelf: 'center',
     borderRadius: 10*em,
   },
 
@@ -176,7 +183,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato-Bold',
     fontSize: 16 * em,
     color: '#1E2D60',
-    marginLeft: 10*em,
-    marginTop: 2*hm,
+    // marginTop: 2*hm,
   },
 });

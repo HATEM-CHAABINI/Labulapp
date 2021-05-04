@@ -22,18 +22,20 @@ import { Actions } from 'react-native-router-flux';
 console.log(navigation);
     return (
     
-        <View style={{flex:1,bottom:40*hm,backgroundColor:"#F0F5F7"}}>
+        <View style={{flex:1,backgroundColor:"#F0F5F7"}}>
    
   
 
         <Image style={{flex:0.3}}
             
-             source={require('../assets/img/notifications.png')}
+             source={require('../assets/images/notifications-personnes-1106x814.png')}
              style={{
-               width: em*350 ,
-              height:340*hm,
-             left:em*15,
-             marginTop:40*em,
+               width: em*310.58 ,
+              height:228.22*hm,
+              marginLeft:24.56*em,
+              marginRight:39.86*em,
+             marginTop:59.51*hm,
+             marginBottom:32.27*hm,
               }} resizeMode={'contain'} />
 
 

@@ -131,6 +131,7 @@ export default class SwitchButton extends Component {
                       ? { color: this.props.activeFontColor || '#fff' }
                       : { color: this.props.fontColor || '#b1b1b1' },
                     switchStyles.tabFont,
+                    {fontFamily:'lato-medium',fontSize:13*em,textAlign:'center'}
                   ]}>
                   {this.props.text1 || 'ON'}
                 </Text>
@@ -152,6 +153,7 @@ export default class SwitchButton extends Component {
                       ? { color: this.props.activeFontColor || '#fff' }
                       : { color: this.props.fontColor || '#b1b1b1' },
                     switchStyles.tabFont,
+                    {fontFamily:'lato-medium',fontSize:13*em,textAlign:'center'}
                   ]}>
                   {this.props.text2 || 'OFF'}
                 </Text>

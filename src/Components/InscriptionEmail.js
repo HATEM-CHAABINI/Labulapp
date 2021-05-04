@@ -5,6 +5,7 @@ import { Button, View, Text,Image,TextInput,
   StyleSheet ,
   StatusBar,
   Alert,
+  KeyboardAvoidingView
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import * as Animatable from 'react-native-animatable';
@@ -22,6 +23,7 @@ import MyTextInput from './MyTextInput';
 import { Actions } from 'react-native-router-flux';
 import Email from '../assets/svg/icons/navigation/Email'
 import BackArrowWhite from '../assets/svg/icons/navigation/BackArrowWhite';
+import Reinput from "reinput"
 
   export default class InscriptionEmail extends Component {
     constructor(props){
@@ -43,37 +45,46 @@ console.log(navigation);
     
         <View style={{flex:1,backgroundColor:'#40CDDE'}}>
    
-   
-<View style={{flex:1 ,paddingTop:50*hm,alignItems:'center',alignContent:'stretch'}}>
-<TouchableOpacity
-              style={{ position: 'absolute', left: 40*em,paddingTop: 55 * hm}}
+   <View style={{  paddingTop: 40 * hm ,paddingLeft:159*em}}>
+        <TouchableOpacity
+              style={{ position: 'absolute', paddingTop: 40 * hm,paddingLeft:27*em}}
               onPress={() => Actions.pop()}>
               <BackArrowWhite width={30 * em} height={30 * hm} />
             </TouchableOpacity>
-<TitleLabul width={69*em} height={20*hm}  
-            
-            />
-</View>
+          <TitleLabul width={69 * em} height={20 * hm} />
+        </View>
 
 
 
-<View style={{flex:10}}>
+<View style={{flex:2,paddingTop:25*hm}}>
                 <View style={styles.ActionWrapper}>
                 
-                <TouchableOpacity style={{position: 'absolute', left: 40*em,top:40*hm}} onPress={this.handleContinueClick}>
-                
-                            </TouchableOpacity>
-                            <View style={{position: 'absolute',top:40*hm}} >
+              
+                            <View style={{position: 'absolute',paddingTop:40*hm}} >
 
                 <Email width={30*em} height={30*hm} /> 
                 </View>
 
-                <Text style={{color:'#1E2D60',fontSize:28*em,paddingTop:79*hm,fontFamily:'lato-Black'}}>Mon Email</Text>
+                <Text style={{color:'#1E2D60',fontSize:28*em,paddingTop:60*hm,fontFamily:'lato-Black'}}>Mon Email</Text>
    
                 <View style={styles.contentWrapper}>
-              <Text style={styles.descText}>Saisis ton email</Text>
-              <MyTextInput style={styles.TextInput} textContentType={"emailAddress"} autoFocus={true} value={this.state.email} handleChange={(text)=>this.setState({email:text})} />
-              <MyTextInput />
+             
+<Reinput 
+label='Saisie ton email'
+underlineColor="#BFCDDB"
+underlineActiveColor="#41D0E2"
+labelActiveColor="#BFCDDB"
+labelColor="#BFCDDB"
+paddingBottom={12*hm}
+clearButtonMode="while-editing"
+color='#1E2D60'
+fontFamily='lato-bold'
+fontSize={16*em}
+keyboardType="email-address"
+selectionColor={'#41D0E2'}
+
+// onChangeText={}
+ />
               
       
 
@@ -81,14 +92,24 @@ console.log(navigation);
 
 </View>
 
-              <TouchableOpacity  onPress={() => Actions.jump('InscriptionPrenom')} style={{ overflow: 'hidden',
+
+                </View>
+              </View>
+              <KeyboardAvoidingView
+                    behavior='padding'
+                    style={{alignItems:'center'}}
+                >
+                  
+                    <TouchableOpacity  onPress={() => Actions.jump('InscriptionPrenom')} style={{ 
+                overflow: 'hidden',
     borderRadius: 18*em,
     height: 59 * hm,
+
     width: 315 * em,
-    alignItems: 'center',
     backgroundColor: '#40CDDE',
     "opacity": 0.5,
-    top:200*hm
+    bottom:30*hm
+  // top:240*hm
    }}
  >
   <View
@@ -97,14 +118,11 @@ console.log(navigation);
     <Text style={{  fontSize: 16*em,
         color: '#FFFFFF',
         marginLeft: 10*em,
-        marginTop: 2*hm}}>Suivant</Text>
+        marginTop: 2*hm
+        }}>Suivant</Text>
   </View>
-              </TouchableOpacity>
-
-        
-                </View>
-              </View>
- 
+              </TouchableOpacity> 
+                </KeyboardAvoidingView>
           </View>
     )
   }
@@ -122,7 +140,7 @@ const styles = StyleSheet.create({
         width:WIDTH,
         paddingLeft: 20*em,
         paddingRight: 20*em,
-        paddingTop: 34*hm
+        paddingTop: 30*hm
       },
     descText:{
         fontSize: 12*em,

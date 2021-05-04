@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import PasswordInputText from 'react-native-hide-show-password-input';
+import PasswordInputText from '../Components/textInput/PasswordTextInput';
 
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
@@ -47,19 +47,19 @@ export default class ConnexionEmail extends Component {
     console.log(navigation);
     return (
       <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
-        <View style={{ flex: 1, paddingTop: 50 * hm, alignItems: 'center' }}>
+        <View style={{  paddingTop: 40 * hm ,paddingLeft:159*em}}>
         <TouchableOpacity
-              style={{ position: 'absolute', left: 40,paddingTop: 55 * hm}}
+              style={{ position: 'absolute', paddingTop: 40 * hm,paddingLeft:27*em}}
               onPress={() => Actions.pop()}>
               <BackArrowWhite width={30 * em} height={30 * hm} />
             </TouchableOpacity>
           <TitleLabul width={69 * em} height={20 * hm} />
         </View>
 
-        <View style={{ flex: 10 }}>
+        <View style={{ flex: 2 ,paddingTop:25*hm}}>
           <View style={styles.ActionWrapper}>
             <TouchableOpacity
-              style={{ position: 'absolute', left: 40*em, top: 40*hm }}
+              style={{ position: 'absolute'}}
               onPress={this.handleContinueClick}></TouchableOpacity>
             <View style={{ position: 'absolute', top: 40*hm }}>
               <Usercreat width={30 * em} height={30 * hm} />
@@ -78,12 +78,15 @@ export default class ConnexionEmail extends Component {
                 value={this.state.email}
                 handleChange={text => this.setState({ email: text })}
               />
+                            <Text style={styles.descText}>Saisis ton email</Text>
+
                 <PasswordInputText
                 secureTextEntry={true}
                 textContentType={'Mot de passe'}
                 // autoFocus={true}
                 placeholder={''}
                 value={this.state.password}
+              
                 onChangeText={password => this.setState({ password })}
               />
               <View style={{ left: em * 200, marginTop: 10*hm }}>
@@ -149,8 +152,9 @@ export default class ConnexionEmail extends Component {
 }
 const styles = StyleSheet.create({
   TextInput: {
-    height: 30 * hm,
+    height: 53 * hm,
     fontSize: 13 * em,
+    fontFamily:"lato-bold",
     // width:250*em,
     color: '#28c7ee',
     borderBottomWidth: 1 * em,
@@ -172,7 +176,7 @@ const styles = StyleSheet.create({
   ActionWrapper: {
     alignItems: 'center',
     // paddingStart: 15*hm,
-    paddingTop: 20*hm,
+    paddingTop: 25*hm,
     width: em * 375,
     height: Dimensions.get('window').height,
     borderTopStartRadius: 28*em,

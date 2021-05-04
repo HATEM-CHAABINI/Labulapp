@@ -30,7 +30,7 @@ const HomeScreen = () => {
             <CommonText text="ma famille" textAlign="center" />
             <CommonText text="Je vis avec mon voisinage, mes amis," textAlign="center" style={{color:'#6A8596',fontFamily:'lato-Regular',fontSize:16*em}}/>
             <TitleText text="Bienvenue" style={styles.narrowMargin} />
-            <Image style={styles.topImage} source={require('../assets/images/img_sample_profiles.png')} />
+            <Image style={styles.topImage} source={require('../assets/images/onbording-1296x814.png')} />
         </View>
     );
 };
@@ -46,7 +46,7 @@ const styles = {
     registerWrapper: { flexDirection: 'row', alignItems: 'center', paddingVertical: 36 * hm },
     wideMargin: { marginTop: 24 * hm,color:'#FFFFFF',fontFamily:'lato-Medium',fontSize:16*em },
     narrowMargin: { marginBottom: 6 * hm ,color:'#1E2D60',fontFamily:'lato-black',fontSize:28*em},
-    topImage: { flex: 1, marginBottom: 18 * hm },
+    topImage: { flex: 1, marginBottom: 18 * hm ,width:375*em,heigth:387*hm},
 };
 
 export default HomeScreen;

@@ -10,7 +10,7 @@ import ProProfileHomeScreen from './profile/proProfile/ProProfileHomeScreen';
 import { em, hm, WIDTH } from '../constants/consts';
 import { navigationRef } from './RootNavigation';
 import Modal from 'react-native-modal';
-import MyNotificationsScreen from './MyNotificationsScreen';
+import MyNotificationsScreen from './activity/MyNotificationsScreen';
 import {
   TabPlus,
   TabCalendarOff,

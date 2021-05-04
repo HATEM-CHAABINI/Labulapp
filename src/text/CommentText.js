@@ -26,7 +26,7 @@ const CommentText = (props) => {
   }
   return (
     <Text
-      style={[{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: color, textAlign: textAlignProp }, props.style]}>
+      style={[{ fontSize: 14 * em, color: color, textAlign: textAlignProp }, props.style]}>
       {props.text}
     </Text>
   );

@@ -22,7 +22,7 @@ const notificationUsers = [
   },
   {
     id: 1,
-    avatar: require('assets/images/avatar.png'),
+    avatar: require('../../assets/images/avatar.png'),
     userName: 'Amandine Bernard',
     date: '21:59',
     comment: 'A besoin un coup de main :',

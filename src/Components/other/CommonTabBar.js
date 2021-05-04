@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet, Animated, ScrollView } from 'react-
 import PropTypes from 'prop-types';
 import { em, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
+import TabText from '../../text/TabText';
 
 export default class CommonTabBar extends Component {
   static propTypes = {
@@ -50,7 +51,7 @@ export default class CommonTabBar extends Component {
       top: 0,
       left: 0,
       position: 'absolute',
-      elevation: 3,
+      elevation: 20,
       shadowColor: '#254D5612',
       shadowOffset: {
         width: 0,
@@ -122,10 +123,10 @@ export default class CommonTabBar extends Component {
                     },
                   ]}
                   key={route.key}>
-                  <CommentText
+                  <TabText
                     color={!isFocused ? '#6A8596' : '#FFFFFF'}
                     text={label}
-                    style={{ fontFamiy: 'Lato-Bold', lineHeight: 17 * em }}
+                    style={{ lineHeight: 17 * em }}
                   />
                 </TouchableOpacity>
               );

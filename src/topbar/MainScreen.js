@@ -186,10 +186,10 @@ const styles = {
     position: 'absolute',
     left: -30 * em,
     //  right:100*em,
-    bottom: -em * 35,
+    bottom: -hm * 25,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    paddingBottom: 50 * hm,
+    paddingBottom: 52 * hm,
     justifyContent: 'space-evenly',
   },
 

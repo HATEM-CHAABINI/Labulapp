@@ -97,7 +97,7 @@ const schedules = [
     time: 9,
     service: new NeedService(
       new User('Amandine Bernard', require('../../assets/images/sample_user_1.png'), 'anton@gmail.com'),
-      'J’ai besoin Service Bricolage',
+      'J’ai besoin Coup de main Bricolage',
       'Réparer une chaise',
       '06 Fév · 14h00',
       require('../../assets/images/sample_cover_2.png'),
@@ -112,7 +112,7 @@ const schedules = [
     time: 12,
     service: new NeedService(
       new User('Amandine Bernard', require('../../assets/images/sample_user_1.png'), 'anton@gmail.com'),
-      'J’ai besoin Service Bricolage',
+      'J’ai besoin Coup de main Bricolage',
       'Réparer une chaise',
       '06 Fév · 14h00',
       require('../../assets/images/sample_cover_2.png'),

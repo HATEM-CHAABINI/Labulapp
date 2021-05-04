@@ -29,14 +29,14 @@ const FriendListCard = (props) => {
               style={{ position: 'absolute', width: 64 * em, height: 64 * em, bottom: -32 * em }}
             />
           </View>
-          {data.date && (
+          {/* {data.date && (
             <SmallText
               style={styles.dateTextCommon}
               text={data.type === ServiceType.ORGANIZE ? '01 Mar · 13h00' : '04 Fév · 08h00'}
               color="#6A8596"
             />
-          )}
-          <View style={{ marginTop: 10 * hm }}>
+          )} */}
+          <View style={{ marginTop: 30 * hm }}>
             <CommentText text={data.title} color="#1E2D60" style={{ fontFamily: 'Lato-Black' }} />
             <SmallText style={[styles.plan, { marginTop: 15 * hm }]} text={data.slogan} />
             <CommentText
@@ -126,7 +126,7 @@ const styles = {
     paddingTop: 15 * hm,
     paddingBottom: 35 * hm,
   },
-  containerIcon: { flexDirection: 'row-reverse' },
+  containerIcon: { flexDirection: 'row-reverse',marginTop:15*em,marginLeft:4*em },
   coverImage: {
     alignSelf: 'center',
     marginTop: 15 * hm,

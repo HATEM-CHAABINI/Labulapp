@@ -72,7 +72,7 @@ console.log(navigation);
               <MyTextInput style={styles.TextInput} textContentType={"familyName"} autoFocus={true} value={this.state.nom} handleChange={(text)=>this.setState({nom:text})} />
               <MyTextInput />
               
-              <View style={{paddingTop: 5*em,alignItems:'center'}}>
+              <View style={{paddingTop: 3*em,alignItems:'center'}}>
             
                 <Text style={{color:'#40CDDE',fontSize: 14*em,fontFamily:'lato'}} onPress={this.handleGoLogin}>Me géolocaliser</Text>
               
@@ -84,8 +84,8 @@ console.log(navigation);
 
               <TouchableOpacity  onPress={() => navigation.navigate('ActiverLocalisation')} style={{ overflow: 'hidden',
    borderRadius: 18*em,
-   height: 50*hm,
-   width:300*em,
+   height: 59 * hm,
+   width: 315 * em,
    alignItems: 'center',
    backgroundColor: '#40CDDE',
    "opacity": 0.5,
@@ -131,7 +131,7 @@ descText:{
 ActionWrapper:{
 
   alignItems: "center",
-  paddingStart: 15*hm,
+  // paddingStart: 15*hm,
   paddingTop: 20*hm,
   width: em*375,
   height: Dimensions.get('window').height,

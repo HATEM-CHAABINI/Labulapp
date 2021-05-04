@@ -100,8 +100,8 @@ export default class ConnexionEmail extends Component {
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
-                height: 50 * hm,
-                width: 300 * em,
+                height: 59 * hm,
+                width: 315 * em,
                 alignItems: 'center',
                 backgroundColor: '#40CDDE',
                 marginTop: 30 * hm,
@@ -120,7 +120,7 @@ export default class ConnexionEmail extends Component {
               </View>
             </TouchableOpacity>
        
-        <View style={{ marginTop: 140 * hm }}>
+        <View style={{ marginBottom: 50 * hm ,marginTop:100*hm}}>
           <Text
             style={
               ({
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   ActionWrapper: {
     alignItems: 'center',
-    paddingStart: 15*hm,
+    // paddingStart: 15*hm,
     paddingTop: 20*hm,
     width: em * 375,
     height: Dimensions.get('window').height,

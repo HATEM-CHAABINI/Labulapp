@@ -82,8 +82,8 @@ console.log(navigation);
 
               <TouchableOpacity  onPress={() => Actions.jump('InscriptionAdresse')} style={{ overflow: 'hidden',
     borderRadius: 18*em,
-    height: 50*hm,
-    width:300*em,
+    height: 59 * hm,
+    width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
     "opacity": 0.5,
@@ -130,7 +130,7 @@ descText:{
 ActionWrapper:{
 
     alignItems: "center",
-    paddingStart: 15*hm,
+    // paddingStart: 15*hm,
     paddingTop: 20*hm,
     width: em*375,
     height: Dimensions.get('window').height,

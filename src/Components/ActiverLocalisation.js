@@ -48,8 +48,8 @@ console.log(navigation);
               
               <TouchableOpacity  onPress={() => navigation.navigate('ActiverLaNotif')} style={{ overflow: 'hidden',
     borderRadius: 18*em,
-    height: 60*hm,
-    width:300*em,
+    height: 59 * hm,
+    width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
     marginTop: 62*hm}}
@@ -65,7 +65,7 @@ console.log(navigation);
               </TouchableOpacity>
 
 
-              <View style={{ marginTop: 50*hm}}>
+              <View style={{ marginTop: 35*hm}}>
               
                 <Text style={{color:'#6A8596',fontSize: 16*em}} onPress={this.handleGoLogin}>Activer plus tard</Text>
               </View>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     ActionWrapper:{
 
         alignItems: "center",
-        paddingStart: 15*hm,
+        // paddingStart: 15*hm,
         width: em*375,
         height: hm*520,
         borderTopStartRadius: 28*em,

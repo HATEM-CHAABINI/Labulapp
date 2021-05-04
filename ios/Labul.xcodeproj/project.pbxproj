@@ -15,16 +15,6 @@
 		4113CA09EA98415BACD73D5D /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8996CBA184CD4211BACFA0AF /* Lato-Regular.ttf */; };
 		47A7BD1F6D3D481787233F91 /* libPods-Labul-LabulTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5C96F051B63B713135A56F /* libPods-Labul-LabulTests.a */; };
 		4852CDA590294345A2F1E995 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24B8D69994D54B53A5D360D1 /* Lato-Bold.ttf */; };
-		4A1DDF632639A68F00930FDF /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF582639A68500930FDF /* Lato-Italic.ttf */; };
-		4A1DDF642639A68F00930FDF /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF592639A68500930FDF /* Lato-LightItalic.ttf */; };
-		4A1DDF652639A68F00930FDF /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF5A2639A68500930FDF /* Lato-Thin.ttf */; };
-		4A1DDF662639A68F00930FDF /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF5B2639A68500930FDF /* Lato-Bold.ttf */; };
-		4A1DDF672639A68F00930FDF /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF5C2639A68500930FDF /* Lato-Black.ttf */; };
-		4A1DDF682639A68F00930FDF /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF5D2639A68500930FDF /* Lato-Regular.ttf */; };
-		4A1DDF692639A68F00930FDF /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF5E2639A68500930FDF /* Lato-BlackItalic.ttf */; };
-		4A1DDF6A2639A68F00930FDF /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF602639A68500930FDF /* Lato-BoldItalic.ttf */; };
-		4A1DDF6B2639A68F00930FDF /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF612639A68500930FDF /* Lato-Light.ttf */; };
-		4A1DDF6C2639A68F00930FDF /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1DDF622639A68500930FDF /* Lato-ThinItalic.ttf */; };
 		569B6F82D4AA48D0907612D1 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A7F4EBE63B545149203AA75 /* Lato-BoldItalic.ttf */; };
 		80F74C0223274DBEA6B4380D /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB5320A0CA914B18BE22236A /* Lato-ThinItalic.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -281,7 +271,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				29E5B91D6CCB996764CBE582 /* [CP] Embed Pods Frameworks */,
 				FEAB1FED2E96CE328A246F5C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -304,7 +293,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				17167158AF890F605C19BC6C /* [CP] Embed Pods Frameworks */,
 				B262BE639534BBC117949DC3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -364,16 +352,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A1DDF632639A68F00930FDF /* Lato-Italic.ttf in Resources */,
-				4A1DDF642639A68F00930FDF /* Lato-LightItalic.ttf in Resources */,
-				4A1DDF652639A68F00930FDF /* Lato-Thin.ttf in Resources */,
-				4A1DDF662639A68F00930FDF /* Lato-Bold.ttf in Resources */,
-				4A1DDF672639A68F00930FDF /* Lato-Black.ttf in Resources */,
-				4A1DDF682639A68F00930FDF /* Lato-Regular.ttf in Resources */,
-				4A1DDF692639A68F00930FDF /* Lato-BlackItalic.ttf in Resources */,
-				4A1DDF6A2639A68F00930FDF /* Lato-BoldItalic.ttf in Resources */,
-				4A1DDF6B2639A68F00930FDF /* Lato-Light.ttf in Resources */,
-				4A1DDF6C2639A68F00930FDF /* Lato-ThinItalic.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				27D784FEC8E1492F90791EF5 /* Lato-Black.ttf in Resources */,
@@ -429,40 +407,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		17167158AF890F605C19BC6C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Labul/Pods-Labul-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Labul/Pods-Labul-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Labul/Pods-Labul-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		29E5B91D6CCB996764CBE582 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Labul-LabulTests/Pods-Labul-LabulTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Labul-LabulTests/Pods-Labul-LabulTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Labul-LabulTests/Pods-Labul-LabulTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B262BE639534BBC117949DC3 /* [CP] Copy Pods Resources */ = {
@@ -628,7 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.11;
+				CURRENT_PROJECT_VERSION = 1.0.13;
 				DEVELOPMENT_TEAM = ZSVQXPQ3L5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Labul/Info.plist;
@@ -655,7 +599,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1.0.11;
+				CURRENT_PROJECT_VERSION = 1.0.13;
 				DEVELOPMENT_TEAM = ZSVQXPQ3L5;
 				INFOPLIST_FILE = Labul/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -723,7 +667,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -781,7 +725,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

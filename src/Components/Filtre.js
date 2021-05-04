@@ -274,8 +274,8 @@ class Filtre extends Component {
       <TouchableOpacity  onPress={() => navigation.navigate('InscriptionPrenom')} style={{ 
           overflow: 'hidden',
     borderRadius: 18*em,
-    height: 50*hm,
-    width:300*em,
+    height: 59 * hm,
+    width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
     "opacity": 1,
@@ -349,8 +349,8 @@ class Filtre extends Component {
       <TouchableOpacity  onPress={() => navigation.navigate('InscriptionPrenom')} style={{ 
           overflow: 'hidden',
     borderRadius: 18*em,
-    height: 50*hm,
-    width:300*em,
+    height: 59 * hm,
+    width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
     "opacity": 1,

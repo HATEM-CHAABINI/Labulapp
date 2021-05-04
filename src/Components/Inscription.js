@@ -27,7 +27,7 @@ console.log(navigation);
    
   
 
-        <Image style={{flex:0.3}}
+        <Image style={{flex:1}}
             
              source={require('../assets/img/hedaer.png')}
              style={{width: em*580 ,

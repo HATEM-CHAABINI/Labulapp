@@ -50,8 +50,8 @@ console.log(navigation);
               
               <TouchableOpacity  onPress={() => Actions.jump('main')} style={{ overflow: 'hidden',
     borderRadius: 18*em,
-    height: 58*hm,
-    width:315*em,
+    height: 59 * hm,
+    width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
     marginTop: 28*hm}}
@@ -61,7 +61,7 @@ console.log(navigation);
     
     <Text style={{  fontSize: 16*em,
         color: '#FFFFFF',
-        marginLeft: 10*em,
+        // marginLeft: 10*em,
         marginTop: 2*hm}}>Activer</Text>
   </View>
               </TouchableOpacity>

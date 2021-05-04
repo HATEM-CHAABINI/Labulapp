@@ -58,13 +58,14 @@ export default class Connexion extends Component {
             <Text style={{ color: '#6A8596', fontSize: 16*em, paddingTop: 10*hm ,fontFamily:"lato-Medium"}}>
               Ravis de te revoir :){' '}
             </Text>
-            <TouchableOpacity
+            <View style={{}} >
+                          <TouchableOpacity
               onPress={this.onBooking}
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
-                height: 50 * hm,
-                width: 300 * em,
+                height: 59 * hm,
+                width: 315 * em,
                 alignItems: 'center',
                 backgroundColor: '#F0F5F7',
                 marginTop: 58 * hm,
@@ -80,8 +81,8 @@ export default class Connexion extends Component {
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
-                height: 50 * hm,
-                width: 300 * em,
+                height: 59 * hm,
+                width: 315 * em,
                 alignItems: 'center',
                 backgroundColor: '#F0F5F7',
                 marginTop: 8 *hm,
@@ -97,11 +98,12 @@ export default class Connexion extends Component {
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
-                height: 50 *hm,
-                width: 300 * em,
+                height: 59 * hm,
+                width: 315 * em,
                 alignItems: 'center',
                 backgroundColor: '#40CDDE',
-                marginTop: 30 * hm,
+                marginTop:10 * hm,
+                marginBottom:30*hm
               }}>
               <View style={styles.btnContainer}>
                 <Text
@@ -116,6 +118,8 @@ export default class Connexion extends Component {
                 </Text>
               </View>
             </TouchableOpacity>
+            </View>
+
           </View>
         </View>
       </View>
@@ -125,7 +129,6 @@ export default class Connexion extends Component {
 const styles = StyleSheet.create({
   ActionWrapper: {
     alignItems: 'center',
-    paddingStart: hm*15,
     // paddingTop: 20,
     width: em * 375,
     height: hm * 420,

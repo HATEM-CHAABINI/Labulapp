@@ -50,8 +50,8 @@ console.log(navigation);
                 <Text style={{color:'#6A8596',fontFamily:'lato',fontSize:16*em,paddingTop:10*hm}}>Rentre dans Labul </Text>
                 <TouchableOpacity  onPress={this.onBooking} style={{ overflow: 'hidden',
     borderRadius: 18*em,
-    height: 50*hm,
-    width:300*em,
+    height: 59 * hm,
+    width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#F0F5F7',
     marginTop: 58*hm}}
@@ -66,8 +66,8 @@ console.log(navigation);
 
               <TouchableOpacity  onPress={this.onBooking} style={{ overflow: 'hidden',
     borderRadius: 18*em,
-    height: 50*hm,
-    width:300*em,
+    height: 59 * hm,
+    width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#F0F5F7',
     marginTop: 8*hm}}
@@ -81,11 +81,11 @@ console.log(navigation);
               
               <TouchableOpacity  onPress={() => Actions.jump('InscriptionEmail')} style={{ overflow: 'hidden',
     borderRadius: 18*em,
-    height: 50*hm,
-    width:300*em,
+    height: 59 * hm,
+                width: 315 * em,
     alignItems: 'center',
     backgroundColor: '#40CDDE',
-    marginTop: 30*hm}}
+    marginTop:10*hm}}
  >
   <View
     style={styles.btnContainer}>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     ActionWrapper:{
 
         alignItems: "center",
-        paddingStart: 15*hm,
+        // paddingStart: 15*hm,
         paddingTop: 20*hm,
         width: em*375,
         height: hm*520,

@@ -41,11 +41,11 @@ import ProRegisterAddressScreen from '../topbar/profile/proProfile/ProRegisterAd
 import ProRegisterEmailScreen from '../topbar/profile/proProfile/ProRegisterEmailScreen';
 import UserProfileScreen from '../topbar/friends/UserProfileScreen';
 //import FriendNeedScreen from 'view/screens/main/friends/FriendNeedScreen';
-// import AlertCircleSelectionScreen from 'view/screens/main/alert/AlertCircleSelectionScreen';
-// import AlertClassOptionScreen from 'view/screens/main/alert/AlertClassOptionScreen';
-// import AlertAddressScreen from 'view/screens/main/alert/AlertAddressScreen';
-// import AlertAddNoteScreen from 'view/screens/main/alert/AlertAddNoteScreen';
-// import AlertShareScreen from 'view/screens/main/alert/AlertShareScreen';
+import AlertCircleSelectionScreen from '../topbar/alert/AlertCircleSelectionScreen';
+import AlertClassOptionScreen from '../topbar/alert/AlertClassOptionScreen';
+import AlertAddressScreen from '../topbar/alert/AlertAddressScreen';
+import AlertAddNoteScreen from '../topbar/alert/AlertAddNoteScreen';
+import AlertShareScreen from '../topbar/alert/AlertShareScreen';
 import EditProfileScreen from '../topbar/profile/EditProfileScreen';
 import EditProProfileScreen from '../topbar/profile/proProfile/EditProProfileScreen';
 import ProProfileOverviewScreen from '../topbar/profile/proProfile/ProProfileOverviewScreen';
@@ -147,7 +147,7 @@ class Routes extends Component {
 
 
 
-          {/*
+
           <Scene key="alertCircles" hideNavBar component={AlertCircleSelectionScreen} />
           <Scene key="alertClass" hideNavBar component={AlertClassOptionScreen} />
           <Scene key="alertAddress" hideNavBar component={AlertAddressScreen} />
@@ -156,7 +156,7 @@ class Routes extends Component {
 
 
 
-          
+          {/*
           <Scene key="mabulSearch" hideNavBar component={MabulSearchScreen} />
 
           */}

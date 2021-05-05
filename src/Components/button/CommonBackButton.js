@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
-import { em } from '../../constants/consts';
+import { em, hm } from '../../constants/consts';
 import { Actions } from 'react-native-router-flux';
 import { BackArrowBlack, BackArrowWhite } from '../../assets/svg/icons';
 const CommonBackButton = (props) => {
@@ -23,7 +23,7 @@ const CommonBackButton = (props) => {
 
 const styles = {
   backBtnWrapper: {
-    marginTop:13*em,
+    marginTop: 13 * em,
     width: 44 * em,
     height: 44 * em,
     borderRadius: 14 * em,
@@ -39,8 +39,8 @@ const styles = {
     shadowRadius: 40 * em,
   },
   backButton: {
-    width: 20 * em,
-    height: 18 * em,
+    width: 18 * em,
+    height: 20 * hm,
   },
 };
 

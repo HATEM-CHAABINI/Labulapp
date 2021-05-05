@@ -22,7 +22,7 @@ const AlertCircleSelectionScreen = () => {
               <Neighbor width={48 * em} height={48 * em} />
               <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * hm }} />
             </View>
-            <View style={styles.iconView}>
+            <View style={styles.iconViewChecked}>
               <Friend width={48 * em} height={48 * em} />
               <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * hm }} />
             </View>
@@ -56,7 +56,7 @@ const styles = {
   title: {
     width: 315 * em,
     textAlign: 'left',
-    marginTop: 35 * hm,
+    marginTop: 34 * hm,
     marginBottom: 35 * hm,
     lineHeight: 38 * em,
   },
@@ -65,6 +65,15 @@ const styles = {
     justifyContent: 'center',
     paddingHorizontal: 32 * hm,
     paddingVertical: 47 * hm,
+  },
+  iconViewChecked: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 32 * hm,
+    paddingVertical: 47 * hm,
+    borderRadius: 20 * em,
+    backgroundColor: '#ffffff',
+    elevation: 5
   },
 
   btn: { postion: 'absolute', alignSelf: 'flex-end', right: 30 * em, bottom: 30 * hm, backgroundColor: '#38C2FF' },

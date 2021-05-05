@@ -69,14 +69,19 @@ const styles = {
   header: {
     height: '10.3%',
   },
-  body: { flex: 1, paddingHorizontal: 20 * em },
+  body: { flex: 1, paddingHorizontal: 30 * em },
   title: {
     width: 315 * em,
     textAlign: 'left',
     marginTop: 35 * em,
     lineHeight: 38 * em,
   },
-  circleSortView: { flexDirection: 'row', alignItems: 'center', marginTop: 10 * em, marginBottom: 19 * em },
+  circleSortView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10 * em,
+    marginBottom: 19 * em
+  },
 
   btn: { position: 'absolute', alignSelf: 'flex-end', bottom: 30 * hm, right: 30 * em, backgroundColor: '#38C2FF' },
   optionBox: {

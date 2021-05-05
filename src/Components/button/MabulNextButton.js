@@ -2,11 +2,11 @@ import React from 'react';
 import { Text, Image } from 'react-native';
 import { em } from '../../constants/consts';
 import { TouchableOpacity } from 'react-native';
-import CommonButton from './CommonButton';
+import CommonMediumButton from './CommonButton';
 import { ArrowRightWhite } from '../../assets/svg/icons';
 const MabulNextButton = (props) => {
   return (
-    <CommonButton
+    <CommonMediumButton
       rightIcon={<ArrowRightWhite width={10 * em} height={17 * em} />}
       textStyle={styles.txt}
       text="Suivant"

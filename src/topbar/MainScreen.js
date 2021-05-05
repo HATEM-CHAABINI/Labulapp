@@ -20,7 +20,6 @@ import {
   TabMessageOff,
   TabMessageOn,
 } from '../assets/svg/icons';
-import AgendaScreen from '../Components/agenda';
 import MabulHomeScreen from '../Mabul/MabulHomeScreen';
 
 const Tab = createBottomTabNavigator();
@@ -49,6 +48,7 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
             shadowOpacity: 1,
 
             shadowRadius: 24 * em,
+            elevation: 10,
           }}>
           {TabPlus(styles.AddImage)}
         </View>
@@ -64,6 +64,7 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
             shadowOpacity: 1,
 
             shadowRadius: 24 * em,
+            elevation: 10,
           }}>
           {TabPlus(styles.AddImage)}
         </View>

@@ -45,7 +45,12 @@ const MabulCommonHeader = (props) => {
 
 const styles = {
   container: { flexDirection: 'column', justifyContent: 'flex-end', width: '100%' },
-  rightTxt: { color: 'rgba(106, 133, 150, 1)', fontSize: 14 * em, marginRight: 15 * em, fontFamily: 'Lato-Bold' },
+  rightTxt: {
+    color: 'rgba(106, 133, 150, 1)',
+    fontSize: 14 * em,
+    marginRight: 17 * em,
+    fontFamily: 'Lato-SemiBold'
+  },
   topViewHeader: {
     height: 44 * em,
     flexDirection: 'row',

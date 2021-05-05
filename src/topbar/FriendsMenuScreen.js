@@ -82,7 +82,7 @@ const FriendsMenuScreen = () => {
       </View>
       {locationList.map((location) => PositionView(location))}
       <View
-      
+
         style={{
           position: 'absolute',
           top: 335 * hm,
@@ -101,7 +101,7 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * hm,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Interview}
@@ -125,7 +125,7 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * hm,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Return2Point}
@@ -150,7 +150,7 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * em,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Alert}
@@ -178,7 +178,7 @@ const FriendsMenuScreen = () => {
           shadowOffset: {
             width: 0,
             height: 10 * hm,
-          },shadowOpacity:1,
+          }, shadowOpacity: 1,
           shadowRadius: 12 * em,
         }}>
         {Workshop}
@@ -188,11 +188,10 @@ const FriendsMenuScreen = () => {
 };
 
 const PositionView = ({ top, left, avatar, serviceIcon, bgColor, id }) => (
-<>
-  
-    <View 
-  
-    key={(Date.now() + parseInt(Math.random() * 100000000)).toString()}
+  <>
+    <View
+
+      key={(Date.now() + parseInt(Math.random() * 100000000)).toString()}
       style={{
         shadowColor: '#254D5621',
         shadowOffset: {
@@ -200,9 +199,10 @@ const PositionView = ({ top, left, avatar, serviceIcon, bgColor, id }) => (
           height: 10 * hm,
         },
         shadowRadius: 12 * em,
-shadowOpacity:1,
-         position: 'absolute', top: top - 2 * hm, left: left - 2 * em, zIndex: 1 }}
-      >
+        shadowOpacity: 1,
+        position: 'absolute', top: top - 2 * hm, left: left - 2 * em, zIndex: 1
+      }}
+    >
       <Path width={76 * em} height={48 * em} />
     </View>
     <View key={id + 'also'} style={[styles.tagInView, { top: top, left: left, backgroundColor: bgColor }]}>
@@ -212,7 +212,7 @@ shadowOpacity:1,
   </>
 );
 const styles = {
-  container: { flex: 1, alignItems: 'center'},
+  container: { flex: 1, alignItems: 'center' },
   tagInView: {
     zIndex: 1,
     position: 'absolute',
@@ -228,7 +228,6 @@ const styles = {
     width: 46 * em,
     height: 46 * em,
     position: 'absolute',
-    resizeMode: 'contain',
     top: 463 * hm,
     left: 309 * em,
   },

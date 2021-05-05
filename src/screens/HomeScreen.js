@@ -57,7 +57,7 @@ const styles = {
     narrowMargin: { marginBottom: 6 * hm, color: '#1E2D60' },
     topImage: {
         flex: 1,
-        marginBottom: 18 * hm,
+        marginBottom: 29 * hm,
         width: 375 * em,
         // heigth: 387 * hm
     },

@@ -26,18 +26,18 @@ export default function FriendsNavigator(props) {
         <View style={styles.TabButtonContainer}>
           <TouchableOpacity
             style={styles.functionBtn}
-            shadowOffset={{height: 10}}
-  shadowColor='black'
-  shadowOpacity={0.5}
+            shadowOffset={{ height: 10 }}
+            shadowColor='black'
+            shadowOpacity={0.5}
             onPress={() => {
-          
+
               // props.navigation.navigate('FriendsSearchScreen')    
-          
-               Actions.friendsSearch();
-          
-          
-          
-          }}>
+
+              Actions.friendsSearch();
+
+
+
+            }}>
             <MagnifierBlue width={20 * em} height={20 * em} />
           </TouchableOpacity>
 
@@ -67,7 +67,8 @@ export default function FriendsNavigator(props) {
           <TouchableOpacity
             style={styles.functionBtn}
             onPress={() => {
-              Actions.jump('Filtre')           }}>
+              Actions.jump('Filtre')
+            }}>
             <Filter width={20 * em} height={16 * em} />
           </TouchableOpacity>
         </View>
@@ -85,13 +86,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
-        elevation: 5,
+    elevation: 10,
     shadowColor: '#254D56',
-    shadowOffset: {      width: 0,      height: 16 * hm,
-    },shadowOpacity:0.45,
+    shadowOffset: {
+      width: 0, height: 16 * hm,
+    }, shadowOpacity: 0.45,
     shadowRadius: 24 * em,
   },
-  TabControlContainer: { position: 'absolute', flex: 1, width: '100%',top:em*20 },
+  TabControlContainer: { position: 'absolute', flex: 1, width: '100%', top: em * 20 },
   TabButtonContainer: {
     alignItems: 'center',
     paddingHorizontal: 20 * em,
@@ -101,13 +103,13 @@ const styles = StyleSheet.create({
     marginTop: 15 * hm,
   },
   switch: {
-    elevation: 5,
+    elevation: 10,
     shadowColor: '#254D56',
     shadowOffset: {
       width: 0,
       height: 12 * hm,
     },
-    shadowOpacity:0.2,
+    shadowOpacity: 0.2,
 
     shadowRadius: 25 * em,
   },

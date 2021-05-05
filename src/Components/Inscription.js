@@ -48,52 +48,68 @@ console.log(navigation);
 
                 <Text style={{color:'#1E2D60',fontFamily:'lato-Black',fontSize:28*em ,paddingTop:60*hm}}>Je m’inscris</Text>
                 <Text style={{color:'#6A8596',fontFamily:'lato',fontSize:16*em,paddingTop:10*hm}}>Rentre dans Labul </Text>
-                <TouchableOpacity  onPress={this.onBooking} style={{ overflow: 'hidden',
-    borderRadius: 18*em,
-    height: 59 * hm,
-    width: 315 * em,
-    alignItems: 'center',
-    backgroundColor: '#F0F5F7',
-    marginTop: 58*hm}}
- >
-  <View
-    style={styles.btnContainer}>
-    <Googleicon width={30*em} height={30*hm} />
-    <Text style={styles.btnText}>Je me connecte avec Google</Text>
-  </View>
+                <TouchableOpacity
+                onPress={() => Actions.main()}
+                style={{
+                  overflow: 'hidden',
+                  borderRadius: 18 * em,
+                  height: 59 * hm,
+                  width: 315 * em,
+                  backgroundColor: '#F0F5F7',
+                  marginTop: 58 * hm,
+                }}>
+                <View style={styles.btnContainer}>
+                  <Googleicon width={18 * em} height={18 * hm} />
+                  <Text style={[styles.btnText, {
+                    marginLeft: 25 * em,
+                  }]}>Je me connecte avec Google</Text>
+                </View>
               </TouchableOpacity>
-              
 
-              <TouchableOpacity  onPress={this.onBooking} style={{ overflow: 'hidden',
-    borderRadius: 18*em,
-    height: 59 * hm,
-    width: 315 * em,
-    alignItems: 'center',
-    backgroundColor: '#F0F5F7',
-    marginTop: 8*hm}}
- >
-  <View
-    style={styles.btnContainer}>
-    <Facebookicon width={30*em} height={30*hm} />
-    <Text style={styles.btnText}>Je me connecte avec Facebook</Text>
-  </View>
+              <TouchableOpacity
+                onPress={() => Actions.main()}
+                style={{
+                  overflow: 'hidden',
+                  borderRadius: 18 * em,
+                  height: 59 * hm,
+                  width: 315 * em,
+                  // alignItems: 'center',
+                  backgroundColor: '#F0F5F7',
+                  marginTop: 8 * hm,
+                }}>
+                <View style={styles.btnContainer}>
+                  <Facebookicon width={18 * em} height={18 * hm} />
+                  <Text style={[styles.btnText, {
+                    marginLeft: 16 * em,
+                  }]}>Je me connecte avec Facebook</Text>
+                </View>
               </TouchableOpacity>
               
-              <TouchableOpacity  onPress={() => Actions.jump('InscriptionEmail')} style={{ overflow: 'hidden',
-    borderRadius: 18*em,
-    height: 59 * hm,
-                width: 315 * em,
-    alignItems: 'center',
-    backgroundColor: '#40CDDE',
-    marginTop:10*hm}}
- >
-  <View
-    style={styles.btnContainer}>
-    
-    <Text style={{  fontSize: 16*em,fontFamily:'lato',
-        color: '#FFFFFF',
-        marginLeft: 10*em,
-        marginTop: 2*hm}}>Je m’inscris avec mon email</Text>
+              <TouchableOpacity  onPress={() => Actions.jump('InscriptionEmail')} style={{
+                  overflow: 'hidden',
+                  borderRadius: 18 * em,
+                  height: 59 * hm,
+                  width: 315 * em,
+                  // alignItems: 'center',
+                  backgroundColor: '#40CDDE',
+                  marginTop: 10 * hm,
+                  marginBottom: 30 * hm
+                }}>
+                <View style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  paddingVertical: 20 * hm,
+                  //paddingLeft: 47 * em,
+                  justifyContent: 'center',
+                  borderRadius: 10 * em,
+                }}>
+                  <Text
+                    style={{
+                      fontSize: 16 * em,
+                      color: '#FFFFFF',
+                      // marginLeft: 10*em,
+                      // marginTop: 2*hm,
+                      fontFamily: "lato-Medium"}}>Je m’inscris avec mon email</Text>
   </View>
               </TouchableOpacity>
 
@@ -138,20 +154,21 @@ const styles = StyleSheet.create({
         fontSize: 14*em,      },
     
  
-      btnContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center',
-        borderRadius: 10*em,
-      },
-   
-      btnText: {
-        fontSize: 16*em,
-        color: '#1E2D60',
-        marginLeft: 10*em,
-        marginTop: 2*hm,
-        fontFamily:'lato-Bold'
-      }
+        btnContainer: {
+          flex: 1,
+          flexDirection: 'row',
+          paddingVertical: 20 * hm,
+          paddingLeft: 15 * em,
+          //justifyContent: 'center',
+          // alignItems: 'center',
+          // alignSelf: 'center',
+          borderRadius: 10 * em,
+        },
+      
+        btnText: {
+          fontFamily: 'Lato-Bold',
+          fontSize: 16 * em,
+          color: '#1E2D60',
+          // marginTop: 2*hm,
+        },
   });

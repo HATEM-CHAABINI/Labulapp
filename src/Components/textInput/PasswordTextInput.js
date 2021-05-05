@@ -4,6 +4,9 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import PropTypes from "prop-types";
 import { TextField } from "react-native-material-textfield";
 import MyTextInput from "../MyTextInput";
+import Reinput from "reinput"
+import { em, hm } from "../../constants";
+
 const PasswordTextInput = ({
   iconSize,
   iconColor,
@@ -26,26 +29,38 @@ const PasswordTextInput = ({
 
   return (
     <View style={style}>
-      <MyTextInput
+      <Reinput
         //  {...rest}
 
         ref={passReference}
         secureTextEntry={isPassword}
         label={label}
-        style={{ height: 53 ,
-          fontSize: 13 ,
+        paddingBottom={12*hm}
+        
+        color='#1E2D60'
+        underlineColor="#BFCDDB"
+        underlineActiveColor="#41D0E2"
+        labelActiveColor="#BFCDDB"
+        labelColor="#BFCDDB"
+        keyboardType="email-address"
+        selectionColor={'#41D0E2'}
+
+        style={{
+
+          fontSize: 13*em ,
           fontFamily:"lato-bold",
           // width:250*em,
           color: '#28c7ee',
-          borderBottomWidth: 1 ,
-          borderBottomColor: '#28c7ee',
-          marginBottom: 23 ,}}
+        //   borderBottomWidth: 1 ,
+        //   borderBottomColor: '#28c7ee',
+        //   marginBottom: 23 ,
+        }}
       />
       <Icon
         style={styles.icon}
         name={eyeIcon}
         size={iconSize}
-        color={iconColor}
+        color={"#A0AEB8"}
         onPress={changePwdType}
       />
     </View>

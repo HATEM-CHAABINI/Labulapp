@@ -10,7 +10,7 @@ import {
   Platform,
   StyleSheet,
   StatusBar,
-  Alert,
+  Alert,KeyboardAvoidingView
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,6 +27,7 @@ import TitleLabul from '../assets/title/TitleLabul';
 import MyTextInput from './MyTextInput';
 import { LogBox } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Reinput from "reinput"
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -56,31 +57,51 @@ export default class ConnexionEmail extends Component {
           <TitleLabul width={69 * em} height={20 * hm} />
         </View>
 
-        <View style={{ flex: 2 ,paddingTop:25*hm}}>
+        <View style={{ flex: 2 ,paddingTop:25*hm,paddingBottom:90*hm}}>
           <View style={styles.ActionWrapper}>
             <TouchableOpacity
               style={{ position: 'absolute'}}
               onPress={this.handleContinueClick}></TouchableOpacity>
             <View style={{ position: 'absolute', top: 40*hm }}>
-              <Usercreat width={30 * em} height={30 * hm} />
+              <Usercreat width={20 * em} height={25 * hm} />
             </View>
 
-            <Text style={{ color: '#1E2D60', fontSize: 28*em, paddingTop: 70*hm,fontFamily:'lato-black' }}>
+            <Text style={{ color: '#1E2D60', fontSize: 28*em, paddingTop:45*hm,fontFamily:'lato-black' }}>
               Je me connecte
             </Text>
 
             <View style={styles.contentWrapper}>
-              <Text style={styles.descText}>Saisis ton email</Text>
+              {/* <Text style={styles.descText}>Saisis ton email</Text> */}
+                      
+<Reinput 
+label='Saisie ton email'
+underlineColor="#BFCDDB"
+underlineActiveColor="#41D0E2"
+labelActiveColor="#BFCDDB"
+labelColor="#BFCDDB"
+paddingBottom={12*hm}
+clearButtonMode="while-editing"
+
+color='#1E2D60'
+fontFamily='lato-bold'
+fontSize={16*em}
+keyboardType="email-address"
+selectionColor={'#41D0E2'}
+autoFocus={true}
+                value={this.state.email}
+                // handleChange={}
+ onChangeText={text => this.setState({ email: text })}
+ />
+              
+{/*       
               <MyTextInput
                 style={styles.TextInput}
                 textContentType={'emailAddress'}
-                autoFocus={true}
-                value={this.state.email}
-                handleChange={text => this.setState({ email: text })}
-              />
-                            <Text style={styles.descText}>Saisis ton email</Text>
-
+                
+              /> */}
+<View style={{bottom:20*hm}}> 
                 <PasswordInputText
+                
                 secureTextEntry={true}
                 textContentType={'Mot de passe'}
                 // autoFocus={true}
@@ -89,25 +110,26 @@ export default class ConnexionEmail extends Component {
               
                 onChangeText={password => this.setState({ password })}
               />
-              <View style={{ left: em * 200, marginTop: 10*hm }}>
+             </View>
+            </View>
+            <View style={{ marginLeft:220*em,bottom:50*em}}>
                 <Text
                   style={{ color: '#1E2D60', fontSize: 12*em,fontFamily:'lato-medium' }}
                   onPress={() => Actions.MotdePasseOublie()}>
                   Mot de passe oublié ?
                 </Text>
               </View>
-            </View>
-
-            <TouchableOpacity
+              
+              <TouchableOpacity
               onPress={() => Actions.main()}
               style={{
                 overflow: 'hidden',
-                borderRadius: 18 * em,
+                borderRadius: 18*em,
                 height: 59 * hm,
+            
                 width: 315 * em,
-                alignItems: 'center',
                 backgroundColor: '#40CDDE',
-                marginTop: 30 * hm,
+                 bottom:36*hm
               }}>
               <View style={styles.btnContainer}>
                 <Text
@@ -122,16 +144,27 @@ export default class ConnexionEmail extends Component {
                 </Text>
               </View>
             </TouchableOpacity>
-       
-        <View style={{ marginBottom: 50 * hm ,marginTop:100*hm}}>
+              </View>
+        </View>
+        
+              {/* <KeyboardAvoidingView
+                    // behavior='padding'
+                    style={{alignItems:'center'}}
+                > */}
+                {/* <View style ={{alignItems:'center'}}>
+            
+            </View> */}
+                       {/* </KeyboardAvoidingView> */}
+
+        <View style={{ marginBottom: 60 * hm ,marginTop:80*hm}}>
           <Text
             style={
               ({
                 fontSize: 16*em,
                 fontFamily:'lato-Regular',
-                color: '#6A8596',
+                
               },
-                StyleSheet.flatten([{ alignSelf: 'center' }]))
+                StyleSheet.flatten([{ alignSelf: 'center',color: '#6A8596' }]))
             }>
             Je n’ai pas de compte ?
             <Text
@@ -143,16 +176,14 @@ export default class ConnexionEmail extends Component {
               Je m’inscris
             </Text>
           </Text>
-        </View>
-        </View>
-        </View>
+       </View>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   TextInput: {
-    height: 53 * hm,
+    height: 40 * hm,
     fontSize: 13 * em,
     fontFamily:"lato-bold",
     // width:250*em,
@@ -165,7 +196,8 @@ const styles = StyleSheet.create({
     width: WIDTH,
     paddingLeft: 20 * em,
     paddingRight: 20 * em,
-    paddingTop: 15 * hm,
+    paddingTop: 14 * hm,
+    
   },
   descText: {
     fontSize: 12 * em,

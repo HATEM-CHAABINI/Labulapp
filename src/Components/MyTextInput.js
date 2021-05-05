@@ -35,7 +35,10 @@ export default class MyTextInput extends React.Component{
       autoFocus={this.props.autoFocus}
       secureTextEntry={this.props.secureTextEntry}
       textContentType={this.props.textContentType}
-      placeholder={this.props.placeholder}  />
+      placeholder={this.props.placeholder}
+      keyboardType="email-address"
+      autoCorrect={false}
+  />
       
       
     )

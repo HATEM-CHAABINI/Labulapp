@@ -126,7 +126,7 @@ const styles = {
     paddingTop: 15 * hm,
     paddingBottom: 35 * hm,
   },
-  containerIcon: { flexDirection: 'row-reverse',marginTop:15*em,marginLeft:4*em },
+  containerIcon: { flexDirection: 'row-reverse',marginTop:4*em,marginLeft:4*em },
   coverImage: {
     alignSelf: 'center',
     marginTop: 15 * hm,

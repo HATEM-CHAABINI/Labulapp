@@ -6,7 +6,9 @@ import Switch from '../../Components/other/Switch';
 import CommonListItem from '../../adapter/CommonListItem';
 import { Address, NotificationYellow } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
+
 const MySettingScreen = () => {
+
   return (
     <View style={styles.container}>
       <CommonHeader dark={true} style={styles.header} />
@@ -66,6 +68,7 @@ const MySettingScreen = () => {
       <View style={styles.rectangle} />
       <TouchableOpacity
         onPress={() => {
+          userDetails = '';
           Actions.home();
         }}
         style={{

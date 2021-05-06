@@ -15,12 +15,27 @@ import Googleicon from '../assets/icons/navigation-app/Googleicon';
 import Facebookicon from '../assets/icons/navigation-app/Facebookicon';
 import { Actions } from 'react-native-router-flux';
 import Inscrire from '../assets/icons/navigation-app/Inscrire';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { useDispatch } from 'react-redux';
+import { addLogin } from '../redux/actions/login';
+GoogleSignin.configure({
+  webClientId: "555389901225-u0ooiaamgap21lj4i8f34aq0heiemd5n.apps.googleusercontent.com",
+});
 
+export default ({ navigation }) => {
 
-  export default class Inscription extends Component {
-  render() {
-    const { navigation } = this.props;
-console.log(navigation);
+  const dispatch = useDispatch();
+  async function onGoogleButtonPress() {
+
+    const { idToken } = await GoogleSignin.signIn();
+
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    // const user = auth().currentUser;
+
+    return auth().signInWithCredential(googleCredential);
+
+  }
     return (
     
         <View style={{flex:1,bottom:80*hm}}>
@@ -49,7 +64,11 @@ console.log(navigation);
                 <Text style={{color:'#1E2D60',fontFamily:'lato-Black',fontSize:28*em ,paddingTop:60*hm}}>Je m’inscris</Text>
                 <Text style={{color:'#6A8596',fontFamily:'lato',fontSize:16*em,paddingTop:10*hm}}>Rentre dans Labul </Text>
                 <TouchableOpacity
-                onPress={() => {console.log("google")}}
+                onPress={() => onGoogleButtonPress().then((res) => { 
+                
+                  Object.assign(res.user, { login: true, NotificationActive: false });
+  
+                dispatch(addLogin(res.user));}).catch(e => { alert(e) })}
                 style={{
                   overflow: 'hidden',
                   borderRadius: 18 * em,
@@ -119,7 +138,7 @@ console.log(navigation);
 
           </View>
     )
-  }
+  
 }
 const styles = StyleSheet.create({
     ActionWrapper:{

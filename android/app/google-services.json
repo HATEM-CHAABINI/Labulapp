@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "555389901225-0banh2cv8288kp7sseclcm6gt3q5q2qn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.labul",
+            "certificate_hash": "91ec42d66637efe92965e4b30de41fb89a48c9ca"
+          }
+        },
+        {
           "client_id": "555389901225-u0ooiaamgap21lj4i8f34aq0heiemd5n.apps.googleusercontent.com",
           "client_type": 3
         }

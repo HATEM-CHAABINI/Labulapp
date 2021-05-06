@@ -5,7 +5,10 @@ import CommonMediumButton from '../Components/button/CommonMediumButton';
 import CommonText from '../text/CommonText';
 import TitleText from '../text/TitleText';
 import { Actions } from 'react-native-router-flux';
-
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+GoogleSignin.configure({
+    webClientId:"555389901225-u0ooiaamgap21lj4i8f34aq0heiemd5n.apps.googleusercontent.com",
+  });
 const HomeScreen = () => {
     return (
         <View style={styles.container}>

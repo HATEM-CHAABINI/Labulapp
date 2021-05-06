@@ -94,7 +94,14 @@ export default ({ navigation }) => {
 
           <View style={styles.contentWrapper}>
             {/* <Text style={styles.descText}>Saisis ton email</Text> */}
-
+            <Reinput 
+label='Saisie ton email'
+underlineColor="#BFCDDB"
+underlineActiveColor="#41D0E2"
+labelActiveColor="#BFCDDB"
+labelColor="#BFCDDB"
+paddingBottom={12*hm}
+clearButtonMode="while-editing"
 color='#1E2D60'
 fontFamily='lato-bold'
 fontSize={16 * em}

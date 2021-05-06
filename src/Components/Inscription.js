@@ -49,7 +49,7 @@ console.log(navigation);
                 <Text style={{color:'#1E2D60',fontFamily:'lato-Black',fontSize:28*em ,paddingTop:60*hm}}>Je m’inscris</Text>
                 <Text style={{color:'#6A8596',fontFamily:'lato',fontSize:16*em,paddingTop:10*hm}}>Rentre dans Labul </Text>
                 <TouchableOpacity
-                onPress={() => Actions.main()}
+                onPress={() => {console.log("google")}}
                 style={{
                   overflow: 'hidden',
                   borderRadius: 18 * em,
@@ -67,7 +67,7 @@ console.log(navigation);
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => Actions.main()}
+                onPress={() => {console.log("facebook")}}
                 style={{
                   overflow: 'hidden',
                   borderRadius: 18 * em,

@@ -38,7 +38,7 @@ export default ({navigation}) => {
   };
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email('Ooops! Invalid email address.')
+      .email('Oops! Adresse e-mail invalide.')
       .trim()
       .required(),
     

@@ -22,22 +22,36 @@ import MyTextInput from './MyTextInput';
 import { BackArrowWhite } from '../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 import Motpass from '../assets/icons/navigation-app/Motpass';
-  export default class MotdePasseOublie extends Component {
-    constructor(props){
-        super(props)
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
+
+import {useDispatch} from 'react-redux';
+import {SignupData} from '../redux/actions/signup';
+export default ({navigation}) => {
+
+
+  const dispatch = useDispatch();
+  const initialValues = {
+    email: '',
+  };
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email('Oops! Adresse e-mail invalide.')
+      .trim()
+      .required(),
     
-        this.state = {
-          email: "",
-        }
-      }
-    //   componentDidMount() {
-    //     PasswordInputText.ignoreLogs(['Animated: `useNativeDriver`']);
-    // }
-  render() {
+  });
+  const onSubmit = values => {
    
-    const icon = false ? 'eye-slash' : 'eye';
-    const { navigation } = this.props;
-console.log(navigation);
+    Alert.alert("Réinitialisez l'e-mail envoyé à votre identifiant de messagerie.")
+    
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+ 
     return (
     
       <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
@@ -56,7 +70,7 @@ console.log(navigation);
 <View style={{ flex: 2 ,paddingTop:25*hm}}>
                 <View style={styles.ActionWrapper}>
                 
-                <TouchableOpacity style={{position: 'absolute'}} onPress={this.handleContinueClick}>
+                <TouchableOpacity style={{position: 'absolute'}} onPress={()=>{'click'}}>
                 
                             </TouchableOpacity>
                             <View style={{position: 'absolute',paddingTop:40*hm}} >
@@ -66,12 +80,16 @@ console.log(navigation);
                 <Text style={{color:'#6A8596',fontSize:14*em,paddingTop:10*hm,textAlign:'center',fontFamily:"lato-Regular"}}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>
                 <View style={styles.contentWrapper}>
               <Text style={styles.descText}>Saisis ton email</Text>
-              <MyTextInput style={styles.TextInput} textContentType={"emailAddress"} autoFocus={true} value={this.state.email} handleChange={(text)=>this.setState({email:text})} />
+              <MyTextInput style={styles.TextInput} textContentType={"emailAddress"} autoFocus={true} value={formik.values.email} 
+           
+           onBlur={formik.handleBlur('email')}
+           handleChange={formik.handleChange('email')} />
+          {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}
               <MyTextInput />
      
 </View>
 <View style={{flex:1,bottom:5*hm}}>
-              <TouchableOpacity  onPress={() => navigation.navigate('Home')} style={{ overflow: 'hidden',
+              <TouchableOpacity  onPress={formik.handleSubmit} style={{ overflow: 'hidden',
     borderRadius: 18*em,
     height: 59*hm,
     width:315*em,
@@ -94,7 +112,7 @@ console.log(navigation);
 
           </View>
     )
-  }
+  
 }
 const styles = StyleSheet.create({
     TextInput:{
@@ -106,6 +124,11 @@ const styles = StyleSheet.create({
         borderBottomColor:"#28c7ee",
         fontFamily:'lato-bold'
         // marginBottom: 60*em,
+      },
+      descerrorText: {
+        fontSize: 12 * em,
+        marginTop: 10 * hm,
+        color: "red",
       },
       contentWrapper:{
         width:WIDTH,

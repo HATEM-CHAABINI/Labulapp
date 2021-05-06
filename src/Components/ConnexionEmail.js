@@ -28,24 +28,46 @@ import MyTextInput from './MyTextInput';
 import { LogBox } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Reinput from "reinput"
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
+import {useDispatch} from 'react-redux';
+import { addLogin } from '../redux/actions/login';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
-export default class ConnexionEmail extends Component {
-  constructor(props) {
-    super(props);
+export default ({navigation}) => {
 
-    this.state = {
-      email: '',
-      password: '',
-    };
-  }
 
-  render() {
-    const icon = false ? 'eye-slash' : 'eye';
-    const { navigation } = this.props;
-    console.log(navigation);
+  const dispatch = useDispatch();
+  const initialValues = {
+    email: '',
+    password:''
+  };
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email('Oops! Adresse e-mail invalide.')
+      .trim()
+      .required(),
+      password:Yup.string().required(),
+    
+  });
+  const onSubmit = values => {
+   
+    dispatch(addLogin({
+      email: values.email,
+      login: true, 
+      NotificationActive: false 
+    }));
+   
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+ 
+
     return (
       <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
         <View style={{  paddingTop: 40 * hm ,paddingLeft:159*em}}>
@@ -61,7 +83,7 @@ export default class ConnexionEmail extends Component {
           <View style={styles.ActionWrapper}>
             <TouchableOpacity
               style={{ position: 'absolute'}}
-              onPress={this.handleContinueClick}></TouchableOpacity>
+              onPress={()=>{console.log("Click")}}></TouchableOpacity>
             <View style={{ position: 'absolute', top: 40*hm }}>
               <Usercreat width={20 * em} height={25 * hm} />
             </View>
@@ -88,11 +110,11 @@ fontSize={16*em}
 keyboardType="email-address"
 selectionColor={'#41D0E2'}
 autoFocus={true}
-                value={this.state.email}
-                // handleChange={}
- onChangeText={text => this.setState({ email: text })}
+value={formik.values.email} 
+onBlur={formik.handleBlur('email')}
+onChangeText={formik.handleChange('email')} 
  />
-              
+ {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}              
 {/*       
               <MyTextInput
                 style={styles.TextInput}
@@ -102,14 +124,15 @@ autoFocus={true}
 <View style={{bottom:20*hm}}> 
                 <PasswordInputText
                 
-                secureTextEntry={true}
+                // secureTextEntry={true}
                 textContentType={'Mot de passe'}
                 // autoFocus={true}
                 placeholder={''}
-                value={this.state.password}
-              
-                onChangeText={password => this.setState({ password })}
+                value={formik.values.password} 
+onBlur={formik.handleBlur('password')}
+onChangeText={formik.handleChange('password')} 
               />
+              {formik.errors.password && formik.touched.password && <Text style={styles.descerrorText}>Le mot de passe ne peut pas être vide</Text>} 
              </View>
             </View>
             <View style={{ marginLeft:220*em,bottom:50*em}}>
@@ -121,7 +144,7 @@ autoFocus={true}
               </View>
               
               <TouchableOpacity
-              onPress={() => Actions.main()}
+              onPress={formik.handleSubmit}
               style={{
                 overflow: 'hidden',
                 borderRadius: 18*em,
@@ -179,7 +202,7 @@ autoFocus={true}
        </View>
       </View>
     );
-  }
+  
 }
 const styles = StyleSheet.create({
   TextInput: {
@@ -191,6 +214,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1 * em,
     borderBottomColor: '#28c7ee',
     marginBottom: 23 * hm,
+  },
+  descerrorText: {
+    fontSize: 12 * em,
+  marginBottom:10*em,
+    color: "red",
   },
   contentWrapper: {
     width: WIDTH,

@@ -41,6 +41,9 @@ import { RootSiblingParent } from 'react-native-root-siblings';
 import RootRoutes from './src/routes';
 import SplashScreen from 'react-native-splash-screen';
 
+import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { persistor, store } from './src/redux/store';
 
 const App = () => {
 
@@ -58,7 +61,11 @@ const App = () => {
     <RootSiblingParent>
       <SafeAreaView style={styles.safeArea} />
       <View style={styles.container}>
+      <Provider store={store}>
+    <PersistGate  persistor={persistor}>
         <RootRoutes />
+        </PersistGate>
+  </Provider>
       </View>
 
       {/* <NavigationContainer>

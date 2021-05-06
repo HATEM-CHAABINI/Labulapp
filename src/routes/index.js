@@ -99,15 +99,41 @@ import FriendGiveBadgeScreen from '../ServiceScrenns/FriendGiveBadgeScreen';
 import ActivityMessageScreen from '../activity/ActivityMessageScreen';
 import ActivityDialScreen from '../activity/ActivityDialScreen';
 import MotdePasseOublie from '../Components/MotdePasseOublie';
-class Routes extends Component {
-  render() {
+
+export default () => {
+  
+
     return (
       <Router>
         <Scene key="root">
           {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
-          <Scene key="home" hideNavBar component={HomeScreen} />
+          <Scene key="home" hideNavBar component={HomeScreen} /> 
+        {/* landing page */}
+        <Scene key="loginMenu" hideNavBar component={Connexion} />
+        {/* Login start page  google , facebook , button for login*/}
+        <Scene key="registerEmail" hideNavBar component={ConnexionEmail} />
+        {/* Login with email and password  */}
+        <Scene key="MotdePasseOublie" hideNavBar component={MotdePasseOublie} />
+        {/* forget password  */}
+        <Scene key="signupMenu" hideNavBar component={Inscription} />
+        {/* signup start page  google , facebook , button for login*/}
+        <Scene key="InscriptionEmail" hideNavBar component={InscriptionEmail} />
+        {/* Enter Email first  */}
+        <Scene key="InscriptionPrenom" hideNavBar component={InscriptionPrenom} />
+        {/* Enter First name  */}
+        <Scene key="InscriptionNom" hideNavBar component={InscriptionNom} />
+        {/* Enter family name  */}
+        <Scene key="InscriptionMobile" hideNavBar component={InscriptionMobile} />
+        {/* Enter mobile */}
+        <Scene key="InscriptionAdresse" hideNavBar component={InscriptionAdresse} />
+        {/* Enter address  */}
+        <Scene key="ActiverLocalisation" hideNavBar component={ActiverLocalisation} />
+        {/* active notification and localisation view */}
+        <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
+        {/*Activ notification or not */}
 
           <Scene key="myNeed" hideNavBar component={MyNeedScreen} />
+
           <Scene key="myAlert" hideNavBar component={MyAlertScreen} />
           <Scene key="proSell" hideNavBar component={ProSellScreen} />
           <Scene key="groupDetail" hideNavBar component={GroupDetailScreen} />
@@ -118,17 +144,17 @@ class Routes extends Component {
 
 
           {/* <Scene key="loginMenu" hideNavBar component={LoginMenuScreen} /> */}
-          <Scene key="loginMenu" hideNavBar component={Connexion} />
+          
 
           {/* <Scene key="signupMenu" hideNavBar component={SignupMenuScreen} /> */}
-          <Scene key="signupMenu" hideNavBar component={Inscription} />
+          
 
           <Scene key="main" hideNavBar component={MainScreen} />
           {/* <Scene key="login" hideNavBar component={LoginScreen} /> */}
           {/* <Scene key="forgotPassword" hideNavBar component={ForgotPasswordScreen} /> */}
 
           {/* <Scene key="registerEmail" hideNavBar component={RegisterEmailScreen} /> */}
-          <Scene key="registerEmail" hideNavBar component={ConnexionEmail} />
+          
           <Scene key="mabulOrganize" hideNavBar component={MabulOrganizeScreen} />
           <Scene key="mabulCommonRequestDetail" hideNavBar component={MabulCommonRequestDetailScreen} />
           {/* <Scene key="registerName" hideNavBar component={RegisterNameScreen} />
@@ -214,26 +240,23 @@ class Routes extends Component {
           <Scene key="mabulNeedSort" hideNavBar component={MabulNeedSortScreen} />
           <Scene key="mabulFamilyNeed" hideNavBar component={MabulFamilyNeedScreen} />
           <Scene key="mabulCommonParticipate" hideNavBar component={MabulCommonParticipateScreen} />
-          <Scene key="InscriptionEmail" hideNavBar component={InscriptionEmail} />
-          <Scene key="InscriptionPrenom" hideNavBar component={InscriptionPrenom} />
-          <Scene key="InscriptionNom" hideNavBar component={InscriptionNom} />
-          <Scene key="InscriptionMobile" hideNavBar component={InscriptionMobile} />
-          <Scene key="InscriptionAdresse" hideNavBar component={InscriptionAdresse} />
-          <Scene key="ActiverLocalisation" hideNavBar component={ActiverLocalisation} />
-          <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
+
+         
+
+          
           <Scene key="friendSell" hideNavBar component={FriendSellScreen} />
           <Scene key="friendNeed" hideNavBar component={FriendNeedScreen} />
           <Scene key="friendGiveBadge" hideNavBar component={FriendGiveBadgeScreen} />
           <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
           <Scene key="activityDial" hideNavBar component={ActivityDialScreen} />
-          <Scene key="MotdePasseOublie" hideNavBar component={MotdePasseOublie} />
+          
 
           <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
           <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} />
         </Scene>
       </Router>
     );
-  }
+  
 }
 
-export default Routes;
+

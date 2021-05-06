@@ -104,12 +104,13 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
           });
         };
         if (route.name === 'MyNotifictions') {
-          return <></>;
+          return <View  key={route.key}></View>   ;
         }
         if (route.name === 'ProProfile') {
-          return <></>;
+          return           <View  key={route.key}></View>          ;
         }
         return (
+          <View key={route.key}>
           <TouchableOpacity
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
@@ -117,7 +118,7 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ marginBottom: index === 2 ? -8 * hm : 0 }}>
+            style={{ marginBottom: index === 2 ? -8 * hm : 4,marginLeft: index === 2 ? 40 * em : 30 }}>
             {tabIcon}
             {index === 4 && (
               <View
@@ -126,6 +127,8 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
               </View>
             )}
           </TouchableOpacity>
+          </View>
+
         );
       })}
       <Modal backdropColor={'transparent'} style={styles.modalStyle} isVisible={mabulVisible}>

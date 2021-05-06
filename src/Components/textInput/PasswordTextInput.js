@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import PropTypes from "prop-types";
-import { TextField } from "react-native-material-textfield";
 import MyTextInput from "../MyTextInput";
 import Reinput from "reinput"
 import { em, hm } from "../../constants";

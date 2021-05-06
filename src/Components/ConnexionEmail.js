@@ -10,7 +10,7 @@ import {
   Platform,
   StyleSheet,
   StatusBar,
-  Alert, KeyboardAvoidingView
+  Alert
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import Icon from 'react-native-vector-icons/FontAwesome';

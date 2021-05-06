@@ -52,13 +52,7 @@ export default ({navigation}) => {
       mobile:signupData.mobile,
       adresse:values.adresse
     }));
-    console.log({
-      email: signupData.email,
-      prenom:signupData.prenom,
-      nom:signupData.nom,
-      mobile:signupData.mobile,
-      adresse:values.adresse
-    })
+   
     navigation.navigate('ActiverLocalisation')
   };
   const formik = useFormik({

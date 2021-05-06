@@ -13,12 +13,20 @@ import Fleche from './Fleche';
 import Usercreat from './Usercreat'
 import Googleicon from '../assets/icons/navigation-app/Googleicon';
 import Facebookicon from '../assets/icons/navigation-app/Facebookicon';
+import { useSelector } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {addLogin} from '../redux/actions/login';
+export default ({navigation}) => {
 
+  const { signupData } = useSelector((state) => state.signupReducer);
+  const dispatch = useDispatch();
 
-  export default class ActiverLocalisation extends Component {
-  render() {
-    const { navigation } = this.props;
-console.log(navigation);
+  const login =()=>{
+    
+    Object.assign(signupData, {login:true,NotificationActive:false});
+    
+    dispatch(addLogin(signupData));
+  }
     return (
     
         <View style={{flex:1,bottom:40*hm,backgroundColor:"#F0F5F7"}}>
@@ -67,7 +75,7 @@ console.log(navigation);
 
               <View style={{ marginTop: 35*hm}}>
               
-                <Text style={{color:'#6A8596',fontSize: 16*em}} onPress={this.handleGoLogin}>Activer plus tard</Text>
+                <Text style={{color:'#6A8596',fontSize: 16*em}} onPress={login}>Activer plus tard</Text>
               </View>
         
                 </View>
@@ -75,7 +83,7 @@ console.log(navigation);
 
           </View>
     )
-  }
+  
 }
 const styles = StyleSheet.create({
     ActionWrapper:{

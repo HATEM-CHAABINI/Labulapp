@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -99,13 +99,13 @@ import FriendGiveBadgeScreen from '../ServiceScrenns/FriendGiveBadgeScreen';
 import ActivityMessageScreen from '../activity/ActivityMessageScreen';
 import ActivityDialScreen from '../activity/ActivityDialScreen';
 import MotdePasseOublie from '../Components/MotdePasseOublie';
-
+import { useSelector } from 'react-redux';
 export default () => {
-  
+  const { userDetails } = useSelector((state) => state.loginReducers);
 
     return (
       <Router>
-        <Scene key="root">
+        {userDetails === ''  ?<Scene key="root">
           {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
           <Scene key="home" hideNavBar component={HomeScreen} /> 
         {/* landing page */}
@@ -131,7 +131,9 @@ export default () => {
         {/* active notification and localisation view */}
         <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
         {/*Activ notification or not */}
-
+</Scene>:
+<Scene key="root">
+<Scene key="main" hideNavBar component={MainScreen} />
           <Scene key="myNeed" hideNavBar component={MyNeedScreen} />
 
           <Scene key="myAlert" hideNavBar component={MyAlertScreen} />
@@ -149,7 +151,7 @@ export default () => {
           {/* <Scene key="signupMenu" hideNavBar component={SignupMenuScreen} /> */}
           
 
-          <Scene key="main" hideNavBar component={MainScreen} />
+         
           {/* <Scene key="login" hideNavBar component={LoginScreen} /> */}
           {/* <Scene key="forgotPassword" hideNavBar component={ForgotPasswordScreen} /> */}
 
@@ -253,7 +255,7 @@ export default () => {
 
           <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
           <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} />
-        </Scene>
+        </Scene>}
       </Router>
     );
   

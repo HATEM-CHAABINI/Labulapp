@@ -14,12 +14,24 @@ import Usercreat from './Usercreat'
 import Googleicon from '../assets/icons/navigation-app/Googleicon';
 import Facebookicon from '../assets/icons/navigation-app/Facebookicon';
 import { Actions } from 'react-native-router-flux';
+import { useSelector } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {addLogin} from '../redux/actions/login';
+export default ({navigation}) => {
 
+  const { signupData } = useSelector((state) => state.signupReducer);
+  const dispatch = useDispatch();
 
-  export default class ActiverLaNotif extends Component {
-  render() {
-    const { navigation } = this.props;
-console.log(navigation);
+  const login =()=>{
+    Object.assign(signupData, {login:true,NotificationActive:false});
+    
+    dispatch(addLogin(signupData));
+  }
+  const loginWithActiveNotification =()=>{
+    Object.assign(signupData, {login:true,NotificationActive:true});
+    
+    dispatch(addLogin(signupData));
+  }
     return (
     
         <View style={{flex:1,backgroundColor:"#F0F5F7"}}>
@@ -50,7 +62,7 @@ console.log(navigation);
                 
 
               
-              <TouchableOpacity  onPress={() => Actions.jump('main')} style={{ overflow: 'hidden',
+              <TouchableOpacity  onPress={loginWithActiveNotification} style={{ overflow: 'hidden',
     borderRadius: 18*em,
     height: 59 * hm,
     width: 315 * em,
@@ -71,7 +83,7 @@ console.log(navigation);
 
               <View style={{ marginTop: 35*hm}}>
               
-                <Text style={{color:'#6A8596',fontSize: 16*em}} onPress={this.handleGoLogin}>Activer plus tard</Text>
+                <Text style={{color:'#6A8596',fontSize: 16*em}} onPress={login}>Activer plus tard</Text>
               </View>
         
                 </View>
@@ -79,7 +91,7 @@ console.log(navigation);
 
           </View>
     )
-  }
+  
 }
 const styles = StyleSheet.create({
     ActionWrapper:{

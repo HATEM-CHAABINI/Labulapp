@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "555389901225",
+    "project_id": "labul-b362c",
+    "storage_bucket": "labul-b362c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555389901225:android:a9fc8f5b9756b159710cb8",
+        "android_client_info": {
+          "package_name": "com.labul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555389901225-u0ooiaamgap21lj4i8f34aq0heiemd5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVWCWTchM3SINqVxDLvazU4gyd1r6NHjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555389901225-u0ooiaamgap21lj4i8f34aq0heiemd5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

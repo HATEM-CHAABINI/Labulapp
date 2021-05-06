@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { em } from '../constants/consts';
+import { em, hm } from '../constants/consts';
 
 const CommonBlueHeader = (props) => {
   let logoIcon = require('../assets/images/txt_logo.png');
@@ -14,15 +14,15 @@ const CommonBlueHeader = (props) => {
 
 const styles = {
   container: {
-    marginTop: 18 * em,
+    marginTop: 18 * hm,
     width: '100%',
     alignItems: 'center',
   },
   icon: {
-    width: 56 * em,
-    height: 19 * em,
+    width: 69 * em,
+    height: 20 * hm,
     resizeMode: 'contain',
-    marginTop: 10 * em,
+    //marginTop: 10 * em,
   },
 };
 

@@ -35,8 +35,8 @@ const PasswordTextInput = ({
         ref={passReference}
         secureTextEntry={isPassword}
         label={label}
-        paddingBottom={12*hm}
-        
+        paddingBottom={12 * hm}
+
         color='#1E2D60'
         underlineColor="#BFCDDB"
         underlineActiveColor="#41D0E2"
@@ -47,13 +47,13 @@ const PasswordTextInput = ({
 
         style={{
 
-          fontSize: 13*em ,
-          fontFamily:"lato-bold",
+          fontSize: 13 * em,
+          fontFamily: "lato-bold",
           // width:250*em,
           color: '#28c7ee',
-        //   borderBottomWidth: 1 ,
-        //   borderBottomColor: '#28c7ee',
-        //   marginBottom: 23 ,
+          //   borderBottomWidth: 1 ,
+          //   borderBottomColor: '#28c7ee',
+          //   marginBottom: 23 ,
         }}
       />
       <Icon
@@ -70,7 +70,7 @@ const PasswordTextInput = ({
 const styles = StyleSheet.create({
   icon: {
     position: "absolute",
-    paddingTop:13,
+    paddingTop: 13,
     right: 0,
   },
 });
@@ -79,13 +79,14 @@ PasswordTextInput.defaultProps = {
   iconSize: 25,
   label: "Saisis ton mot de passe",
   iconColor: "#222222",
+
 };
 
 PasswordTextInput.propTypes = {
   iconSize: PropTypes.number,
   label: PropTypes.string,
   iconColor: PropTypes.string,
-  height: 53 ,
+
 
 };
 

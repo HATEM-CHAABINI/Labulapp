@@ -93,11 +93,12 @@ export default class SwitchButton extends Component {
             <View
               style={[{ flexDirection: this._switchDirection(this.props.switchdirection || this.state.direction) }]}>
               <Animated.View style={{
-                shadowOffset:{width:0,height:9*em},
-                shadowColor:'#242F5742',
-                shadowOpacity:1,
-                shadowRadius:16*em,
-                 transform: [{ translateX: this.state.offsetX }] }}>
+                shadowOffset: { width: 0, height: 9 * em },
+                shadowColor: '#242F5742',
+                shadowOpacity: 1,
+                shadowRadius: 16 * em,
+                transform: [{ translateX: this.state.offsetX }]
+              }}>
                 <View
                   style={[
                     switchStyles.wayBtnActive,
@@ -131,7 +132,7 @@ export default class SwitchButton extends Component {
                       ? { color: this.props.activeFontColor || '#fff' }
                       : { color: this.props.fontColor || '#b1b1b1' },
                     switchStyles.tabFont,
-                    {fontFamily:'lato-medium',fontSize:13*em,textAlign:'center'}
+                    { fontFamily: 'lato-medium', fontSize: 13 * em, textAlign: 'center' }
                   ]}>
                   {this.props.text1 || 'ON'}
                 </Text>
@@ -153,7 +154,7 @@ export default class SwitchButton extends Component {
                       ? { color: this.props.activeFontColor || '#fff' }
                       : { color: this.props.fontColor || '#b1b1b1' },
                     switchStyles.tabFont,
-                    {fontFamily:'lato-medium',fontSize:13*em,textAlign:'center'}
+                    { fontFamily: 'lato-medium', fontSize: 13 * em, textAlign: 'center' }
                   ]}>
                   {this.props.text2 || 'OFF'}
                 </Text>
@@ -173,7 +174,7 @@ const switchStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tabFont: { fontSize: 14 * em  },
+  tabFont: { fontSize: 14 * em },
   rtl: {
     flexDirection: 'row-reverse',
   },
@@ -184,5 +185,6 @@ const switchStyles = StyleSheet.create({
     marginTop: 5 * em,
     marginLeft: 6 * em,
     marginRight: 6 * em,
+    elevation: 10
   },
 });

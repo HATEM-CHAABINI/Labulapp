@@ -78,7 +78,10 @@ export default function FriendsNavigator(props) {
 }
 
 const styles = StyleSheet.create({
-  TabBarMainContainer: { backgroundColor: '#F0F5F7', flex: 1 },
+  TabBarMainContainer: {
+    backgroundColor: '#F0F5F7',
+    flex: 1
+  },
   functionBtn: {
     width: 46 * em,
     height: 46 * em,
@@ -93,10 +96,15 @@ const styles = StyleSheet.create({
     }, shadowOpacity: 0.45,
     shadowRadius: 24 * em,
   },
-  TabControlContainer: { position: 'absolute', flex: 1, width: '100%', top: em * 20 },
+  TabControlContainer: {
+    position: 'absolute',
+    flex: 1,
+    width: '100%',
+    top: em * 20
+  },
   TabButtonContainer: {
     alignItems: 'center',
-    paddingHorizontal: 20 * em,
+    paddingHorizontal: 22 * em,
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',

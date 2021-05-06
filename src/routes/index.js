@@ -103,11 +103,11 @@ import { useSelector } from 'react-redux';
 export default () => {
   const { userDetails } = useSelector((state) => state.loginReducers);
 
-    return (
-      <Router>
-        {userDetails === ''  ?<Scene key="root">
-          {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
-          <Scene key="home" hideNavBar component={HomeScreen} /> 
+  return (
+    <Router>
+      {userDetails === '' ? <Scene key="root">
+        {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
+        <Scene key="home" hideNavBar component={HomeScreen} />
         {/* landing page */}
         <Scene key="loginMenu" hideNavBar component={Connexion} />
         {/* Login start page  google , facebook , button for login*/}
@@ -131,9 +131,9 @@ export default () => {
         {/* active notification and localisation view */}
         <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
         {/*Activ notification or not */}
-</Scene>:
-<Scene key="root">
-<Scene key="main" hideNavBar component={MainScreen} />
+      </Scene> :
+        <Scene key="root">
+          <Scene key="main" hideNavBar component={MainScreen} />
           <Scene key="myNeed" hideNavBar component={MyNeedScreen} />
 
           <Scene key="myAlert" hideNavBar component={MyAlertScreen} />
@@ -146,17 +146,17 @@ export default () => {
 
 
           {/* <Scene key="loginMenu" hideNavBar component={LoginMenuScreen} /> */}
-          
+
 
           {/* <Scene key="signupMenu" hideNavBar component={SignupMenuScreen} /> */}
-          
 
-         
+
+
           {/* <Scene key="login" hideNavBar component={LoginScreen} /> */}
           {/* <Scene key="forgotPassword" hideNavBar component={ForgotPasswordScreen} /> */}
 
           {/* <Scene key="registerEmail" hideNavBar component={RegisterEmailScreen} /> */}
-          
+
           <Scene key="mabulOrganize" hideNavBar component={MabulOrganizeScreen} />
           <Scene key="mabulCommonRequestDetail" hideNavBar component={MabulCommonRequestDetailScreen} />
           {/* <Scene key="registerName" hideNavBar component={RegisterNameScreen} />
@@ -243,22 +243,22 @@ export default () => {
           <Scene key="mabulFamilyNeed" hideNavBar component={MabulFamilyNeedScreen} />
           <Scene key="mabulCommonParticipate" hideNavBar component={MabulCommonParticipateScreen} />
 
-         
 
-          
+
+
           <Scene key="friendSell" hideNavBar component={FriendSellScreen} />
           <Scene key="friendNeed" hideNavBar component={FriendNeedScreen} />
           <Scene key="friendGiveBadge" hideNavBar component={FriendGiveBadgeScreen} />
           <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
           <Scene key="activityDial" hideNavBar component={ActivityDialScreen} />
-          
+
 
           <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
           <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} />
         </Scene>}
-      </Router>
-    );
-  
+    </Router>
+  );
+
 }
 
 

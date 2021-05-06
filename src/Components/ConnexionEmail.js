@@ -94,25 +94,25 @@ export default ({ navigation }) => {
 
           <View style={styles.contentWrapper}>
             {/* <Text style={styles.descText}>Saisis ton email</Text> */}
-            <Reinput 
-label='Saisie ton email'
-underlineColor="#BFCDDB"
-underlineActiveColor="#41D0E2"
-labelActiveColor="#BFCDDB"
-labelColor="#BFCDDB"
-paddingBottom={12*hm}
-clearButtonMode="while-editing"
-color='#1E2D60'
-fontFamily='lato-bold'
-fontSize={16 * em}
-keyboardType="email-address"
-selectionColor={'#41D0E2'}
-autoFocus={true}
-value={formik.values.email}
-onBlur={formik.handleBlur('email')}
-onChangeText={formik.handleChange('email')}
- />
- {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}
+            <Reinput
+              label='Saisie ton email'
+              underlineColor="#BFCDDB"
+              underlineActiveColor="#41D0E2"
+              labelActiveColor="#BFCDDB"
+              labelColor="#BFCDDB"
+              paddingBottom={12 * hm}
+              clearButtonMode="while-editing"
+              color='#1E2D60'
+              fontFamily='lato-bold'
+              fontSize={16 * em}
+              keyboardType="email-address"
+              selectionColor={'#41D0E2'}
+              autoFocus={true}
+              value={formik.values.email}
+              onBlur={formik.handleBlur('email')}
+              onChangeText={formik.handleChange('email')}
+            />
+            {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}
             {/*       
               <MyTextInput
                 style={styles.TextInput}

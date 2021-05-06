@@ -1,10 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import CommonHeader from '../../Components/header/CommonHeader';
 import Switch from '../../Components/other/Switch';
 import CommonListItem from '../../adapter/CommonListItem';
 import { Address, NotificationYellow } from '../../assets/svg/icons';
+import { Actions } from 'react-native-router-flux';
 const MySettingScreen = () => {
   return (
     <View style={styles.container}>
@@ -62,7 +63,27 @@ const MySettingScreen = () => {
         }
         subTitle="Activez la réception de notifications"
       />
-    </View>
+      <View style={styles.rectangle} />
+      <TouchableOpacity
+        onPress={() => {
+          Actions.home();
+        }}
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          width: '100%',
+          height: 59 * hm,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#ffffff',
+          borderColor: '#ffffff',
+          borderWidth: 2 * em,
+        }}>
+        <Text>Me déconnecter</Text>
+
+      </TouchableOpacity>
+    </View >
   );
 };
 
@@ -76,6 +97,10 @@ const styles = {
   },
   line: {
     height: 10 * hm,
+    backgroundColor: '#F0F5F7',
+  },
+  rectangle: {
+    height: 200 * hm,
     backgroundColor: '#F0F5F7',
   },
   listItem: {

@@ -158,7 +158,8 @@ const FriendsMenuScreen = () => {
         source={require('../assets/images/img_navigator.png')}
         style={{ position: 'absolute', top: 316 * hm, zIndex: 0, opacity: 0.8 }}
       />
-      <View
+      <TouchableOpacity
+        onPress={() => Actions.alertCircles()}
         style={{
           position: 'absolute',
           top: 463 * hm,
@@ -181,7 +182,7 @@ const FriendsMenuScreen = () => {
           shadowRadius: 12 * em,
         }}>
         {Workshop(servicIconSize)}
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

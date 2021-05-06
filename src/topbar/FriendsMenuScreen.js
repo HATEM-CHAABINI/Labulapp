@@ -188,7 +188,7 @@ const FriendsMenuScreen = () => {
 };
 
 const PositionView = ({ top, left, avatar, serviceIcon, bgColor, id }) => (
-  <>
+  <View key={id} style={{ width: 370 * em }}>
     <View
       key={(Date.now() + parseInt(Math.random() * 100000000)).toString()}
       style={{
@@ -208,7 +208,7 @@ const PositionView = ({ top, left, avatar, serviceIcon, bgColor, id }) => (
       <Image source={avatar} style={{ width: 36 * em, height: 36 * em }} />
       <View style={{ marginRight: 8.83 * em }}>{serviceIcon}</View>
     </View>
-  </>
+  </View>
 );
 const styles = {
   container: { flex: 1, alignItems: 'center' },

@@ -22,23 +22,42 @@ import MyTextInput from './MyTextInput';
 import { Actions } from 'react-native-router-flux';
 import BackArrowWhite from '../assets/svg/icons/navigation/BackArrowWhite';
 import Reinput from "reinput"
+import { useSelector } from 'react-redux';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
-  export default class InscriptionNom extends Component {
-    constructor(props){
-        super(props)
+import {useDispatch} from 'react-redux';
+import {SignupData} from '../redux/actions/signup';
+
+
+export default ({navigation}) => {
+  const { signupData } = useSelector((state) => state.signupReducer);
+
+  const dispatch = useDispatch();
+  const initialValues = {
+    nom: '',
+  };
+  const validationSchema = Yup.object({
+    nom: Yup.string()
+      .trim()
+      .required(),
     
-        this.state = {
-          nom: "",
-        }
-      }
-    //   componentDidMount() {
-    //     PasswordInputText.ignoreLogs(['Animated: `useNativeDriver`']);
-    // }
-  render() {
+  });
+
+  const onSubmit = values => {
    
-    const icon = false ? 'eye-slash' : 'eye';
-    const { navigation } = this.props;
-console.log(navigation);
+    dispatch(SignupData({
+      email: signupData.email,
+      prenom:signupData.prenom,
+      nom:values.nom
+    }));
+    Actions.jump('InscriptionMobile')
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
     return (
     
         <View style={{flex:1,backgroundColor:'#40CDDE'}}>
@@ -78,10 +97,13 @@ fontFamily='lato-bold'
 fontSize={16*em}
 keyboardType="email-address"
 selectionColor={'#41D0E2'}
-
+value={formik.values.nom} 
+           
+           onBlur={formik.handleBlur('nom')}
+           onChangeText={formik.handleChange('nom')} 
 // onChangeText={}
  />
-              
+      {formik.errors.nom && formik.touched.nom && <Text style={styles.descerrorText}>Le nom de famille est obligatoire</Text>}         
       
 
           
@@ -96,20 +118,20 @@ selectionColor={'#41D0E2'}
                     style={{alignItems:'center'}}
                 >
                   
-                    <TouchableOpacity  onPress={() => Actions.jump('InscriptionMobile')} style={{ 
+                    <TouchableOpacity onPress={formik.handleSubmit} disabled={formik.values.nom === ''?true:false}  style={{ 
                 overflow: 'hidden',
     borderRadius: 18*em,
     height: 59 * hm,
 
     width: 315 * em,
-    backgroundColor: '#40CDDE',
-    "opacity": 0.5,
+   
     bottom:30*hm
   // top:240*hm
    }}
  >
-  <View
-    style={styles.btnContainer}>
+<View
+              style={[styles.btnContainer,{backgroundColor: '#40CDDE',height: 59 * hm,
+              width: 315 * em,opacity:formik.values.nom === '' ? 0.5:1}]}>
     
     <Text style={{  fontSize: 16*em,
         color: '#FFFFFF',
@@ -121,7 +143,7 @@ selectionColor={'#41D0E2'}
                 </KeyboardAvoidingView>
           </View>
     )
-  }
+  
 }
 const styles = StyleSheet.create({
   TextInput:{
@@ -132,6 +154,11 @@ const styles = StyleSheet.create({
       borderBottomWidth:1*em,
       borderBottomColor:"#28c7ee",
     },
+    descerrorText: {
+      fontSize: 12 * em,
+      marginTop: 10 * hm,
+      color: "red",
+    },  
     contentWrapper:{
       width:WIDTH,
       paddingLeft: 20*em,

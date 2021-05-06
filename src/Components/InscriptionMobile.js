@@ -23,23 +23,41 @@ import { Actions } from 'react-native-router-flux';
 import Mobile from '../assets/svg/icons/navigation/Mobile'
 import BackArrowWhite from '../assets/svg/icons/navigation/BackArrowWhite';
 import Reinput from "reinput"
+import { useSelector } from 'react-redux';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
-  export default class InscriptionMobile extends Component {
-    constructor(props){
-        super(props)
+import {useDispatch} from 'react-redux';
+import {SignupData} from '../redux/actions/signup';
+
+export default ({navigation}) => {
+  const { signupData } = useSelector((state) => state.signupReducer);
+
+  const dispatch = useDispatch();
+  const initialValues = {
+    mobile: '',
+  };
+  const validationSchema = Yup.object({
+    mobile: Yup.number()
+      .required(),
     
-        this.state = {
-          mobile: "",
-        }
-      }
-    //   componentDidMount() {
-    //     PasswordInputText.ignoreLogs(['Animated: `useNativeDriver`']);
-    // }
-  render() {
-   
-    const icon = false ? 'eye-slash' : 'eye';
-    const { navigation } = this.props;
-console.log(navigation);
+  });
+
+  const onSubmit = values => {
+  
+    dispatch(SignupData({
+      email: signupData.email,
+      prenom:signupData.prenom,
+      nom:signupData.nom,
+      mobile:values.mobile
+    }));
+    Actions.jump('InscriptionAdresse')
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
     return (
     
         <View style={{flex:1,backgroundColor:'#40CDDE'}}>
@@ -81,7 +99,11 @@ keyboardType="number-pad"
 selectionColor={'#41D0E2'}
 
 // onChangeText={}
- />
+value={formik.values.mobile} 
+           
+onBlur={formik.handleBlur('mobile')}
+onChangeText={formik.handleChange('mobile')}   />
+{formik.errors.mobile && formik.touched.mobile && <Text style={styles.descerrorText}>Le numéro de portable est requis</Text>}
               
       
 
@@ -97,20 +119,20 @@ selectionColor={'#41D0E2'}
                     style={{alignItems:'center'}}
                 >
                   
-                    <TouchableOpacity  onPress={() => Actions.jump('InscriptionAdresse')} style={{ 
+                    <TouchableOpacity  onPress={formik.handleSubmit} disabled={formik.values.mobile === ''?true:false} style={{ 
                 overflow: 'hidden',
     borderRadius: 18*em,
     height: 59 * hm,
 
     width: 315 * em,
-    backgroundColor: '#40CDDE',
-    "opacity": 0.5,
+   
     bottom:30*hm
   // top:240*hm
    }}
  >
-  <View
-    style={styles.btnContainer}>
+ <View
+              style={[styles.btnContainer,{backgroundColor: '#40CDDE',height: 59 * hm,
+              width: 315 * em,opacity:formik.values.mobile === '' ? 0.5:1}]}>
     
     <Text style={{  fontSize: 16*em,
         color: '#FFFFFF',
@@ -123,7 +145,7 @@ selectionColor={'#41D0E2'}
           </View>
     )
   }
-}const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   TextInput:{
       height: 45*hm,
       fontSize: 13*em,
@@ -143,6 +165,11 @@ selectionColor={'#41D0E2'}
       marginTop: 10*hm,
       color:"#928da6",
     },
+    descerrorText: {
+      fontSize: 12 * em,
+      marginTop: 10 * hm,
+      color: "red",
+    }, 
   ActionWrapper:{
 
       alignItems: "center",

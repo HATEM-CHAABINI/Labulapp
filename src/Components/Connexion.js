@@ -53,7 +53,7 @@ export default class Connexion extends Component {
             <CommonText text="Ravis de te revoir :)" style={{ color: '#6A8596', marginTop: 7 * hm }} />
             <View style={{}} >
               <TouchableOpacity
-                onPress={() => Actions.main()}
+                onPress={() => {console.log("Google")}}
                 style={{
                   overflow: 'hidden',
                   borderRadius: 18 * em,
@@ -71,7 +71,7 @@ export default class Connexion extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => Actions.main()}
+                onPress={() => {console.log("facebook")}}
                 style={{
                   overflow: 'hidden',
                   borderRadius: 18 * em,

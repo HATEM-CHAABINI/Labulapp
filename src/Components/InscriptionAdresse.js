@@ -23,23 +23,45 @@ import Address from '../assets/svg/icons/navigation/Address'
 import BackArrowWhite from '../assets/svg/icons/navigation/BackArrowWhite';
 import { Actions } from 'react-native-router-flux';
 import Reinput from "reinput"
+import { useSelector } from 'react-redux';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
-  export default class InscriptionAdresse extends Component {
-    constructor(props){
-        super(props)
+import {useDispatch} from 'react-redux';
+import {SignupData} from '../redux/actions/signup';
+export default ({navigation}) => {
+ 
+  const { signupData } = useSelector((state) => state.signupReducer);
+
+  const dispatch = useDispatch();
+  const initialValues = {
+    adresse: '',
+  };
+  const validationSchema = Yup.object({
+    adresse: Yup.string().trim()
+      .required(),
     
-        this.state = {
-          adresse: "",
-        }
-      }
-    //   componentDidMount() {
-    //     PasswordInputText.ignoreLogs(['Animated: `useNativeDriver`']);
-    // }
-  render() {
+  });
+
+  const onSubmit = values => {
+  
+    dispatch(SignupData({
+      email: signupData.email,
+      prenom:signupData.prenom,
+      nom:signupData.nom,
+      mobile:signupData.mobile,
+      adresse:values.adresse
+    }));
    
-    const icon = false ? 'eye-slash' : 'eye';
-    const { navigation } = this.props;
-console.log(navigation);
+    navigation.navigate('ActiverLocalisation')
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+
+
     return (
     
         <View style={{flex:1,backgroundColor:'#40CDDE'}}>
@@ -79,12 +101,17 @@ keyboardType="email-address"
 selectionColor={'#41D0E2'}
 
 // onChangeText={}
- />
+value={formik.values.adresse} 
+           
+           onBlur={formik.handleBlur('adresse')}
+           onChangeText={formik.handleChange('adresse')}   />
+           {formik.errors.adresse && formik.touched.adresse && <Text style={styles.descerrorText}>l'adresse ne peut pas être vide</Text>}
+          <MyTextInput />
             
               
               <View style={{bottom:19*hm,alignItems:'center'}}>
             
-                <Text style={{color:'#40CDDE',fontSize: 14*em,fontFamily:'lato'}} onPress={this.handleGoLogin}>Me géolocaliser</Text>
+                <Text style={{color:'#40CDDE',fontSize: 14*em,fontFamily:'lato'}} onPress={()=>{console.log("geolocation")}}>Me géolocaliser</Text>
               
               </View>
 
@@ -99,20 +126,20 @@ selectionColor={'#41D0E2'}
       style={{alignItems:'center'}}
   >
     
-      <TouchableOpacity  onPress={() => Actions.jump('ActiverLaNotif')} style={{ 
+      <TouchableOpacity  onPress={formik.handleSubmit} disabled={formik.values.adresse === ''?true:false}  style={{ 
   overflow: 'hidden',
 borderRadius: 18*em,
 height: 59 * hm,
 
 width: 315 * em,
-backgroundColor: '#40CDDE',
-"opacity": 0.5,
+
 bottom:30*hm
 // top:240*hm
 }}
 >
 <View
-style={styles.btnContainer}>
+              style={[styles.btnContainer,{backgroundColor: '#40CDDE',height: 59 * hm,
+              width: 315 * em,opacity:formik.values.adresse === '' ? 0.5:1}]}>
 
 <Text style={{  fontSize: 16*em,
 color: '#FFFFFF',
@@ -128,7 +155,7 @@ marginTop: 2*hm
           </View>
     )
   }
-}
+
 const styles = StyleSheet.create({
   TextInput:{
       height: 45*hm,
@@ -162,7 +189,12 @@ const styles = StyleSheet.create({
       borderBottomStartRadius: 0*em,
       backgroundColor: "rgba(255, 255, 255, 255)"
       
-    },     
+    },    
+    descerrorText: {
+      fontSize: 12 * em,
+      marginTop: 10 * hm,
+      color: "red",
+    }, 
     btnContainer: {
       flex: 1,
       flexDirection: 'row',

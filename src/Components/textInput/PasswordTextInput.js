@@ -13,6 +13,9 @@ const PasswordTextInput = ({
   label,
   style,
   getRef,
+  value,
+  onBlur,
+  onChangeText,
   ...rest
 }) => {
   const [eyeIcon, setEyeIcon] = useState("visibility-off");
@@ -31,12 +34,10 @@ const PasswordTextInput = ({
     <View style={style}>
       <Reinput
         //  {...rest}
-
         ref={passReference}
         secureTextEntry={isPassword}
         label={label}
         paddingBottom={12 * hm}
-
         color='#1E2D60'
         underlineColor="#BFCDDB"
         underlineActiveColor="#41D0E2"
@@ -44,7 +45,9 @@ const PasswordTextInput = ({
         labelColor="#BFCDDB"
         keyboardType="email-address"
         selectionColor={'#41D0E2'}
-
+        value={value}
+        onBlur={onBlur}
+        onChangeText={onChangeText}
         style={{
 
           fontSize: 13 * em,

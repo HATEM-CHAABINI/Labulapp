@@ -70,7 +70,8 @@ const FriendsMenuScreen = () => {
           left: 309 * em,
           alignItems: 'center',
           justifyContent: 'center',
-          elevation: 3,
+          //backgroundColor: '#FFF',
+          elevation: 10,
           shadowColor: '#254D5621',
           shadowOffset: {
             width: 0,
@@ -95,7 +96,7 @@ const FriendsMenuScreen = () => {
           backgroundColor: 'rgba(238, 231, 250, 1)',
           borderColor: '#ffffff',
           borderWidth: 2 * em,
-          elevation: 3,
+          elevation: 10,
           shadowColor: '#254D5621',
           shadowOffset: {
             width: 0,
@@ -119,18 +120,21 @@ const FriendsMenuScreen = () => {
           backgroundColor: '#ffffff',
           borderColor: '#ffffff',
           borderWidth: 2 * em,
-          elevation: 3,
-          shadowColor: '#254D5621',
-          shadowOffset: {
-            width: 0,
-            height: 10 * hm,
-          }, shadowOpacity: 1,
-          shadowRadius: 12 * em,
+          elevation: 5,
         }}>
-        {Return2Point(servicIconSize)}
+        <View
+          style={{
+            shadowColor: '#254D5621',
+            shadowOffset: {
+              width: 0,
+              height: 10 * hm,
+            }, shadowOpacity: 1,
+            shadowRadius: 12 * em,
+          }}>
+          {Return2Point(servicIconSize)}
+        </View>
       </View>
-      <TouchableOpacity
-        onPress={() => Actions.alertCircles()}
+      <View
         style={{
           position: 'absolute',
           top: 463 * hm,
@@ -141,25 +145,30 @@ const FriendsMenuScreen = () => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#ffffff',
           borderColor: '#ffffff',
           borderWidth: 2 * em,
-          elevation: 3,
-          shadowColor: '#254D5621',
-          shadowOffset: {
-            width: 0,
-            height: 10 * em,
-          }, shadowOpacity: 1,
-          shadowRadius: 12 * em,
-        }}>
-        {Alert({ width: 26.45 * em, height: 22.31 * em })}
-      </TouchableOpacity>
+          backgroundColor: '#FFF',
+          elevation: 5
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => Actions.alertCircles()}
+          style={{
+            shadowColor: '#254D5621',
+            shadowOffset: {
+              width: 0,
+              height: 10 * em,
+            }, shadowOpacity: 1,
+            shadowRadius: 12 * em,
+          }}>
+          {Alert({ width: 26.45 * em, height: 22.31 * em })}
+        </TouchableOpacity>
+      </View>
       <Image
         source={require('../assets/images/img_navigator.png')}
         style={{ position: 'absolute', top: 316 * hm, zIndex: 0, opacity: 0.8 }}
       />
-      <TouchableOpacity
-        onPress={() => Actions.alertCircles()}
+      <View
         style={{
           position: 'absolute',
           top: 463 * hm,
@@ -173,17 +182,23 @@ const FriendsMenuScreen = () => {
           backgroundColor: 'rgba(255, 244, 217, 1)',
           borderColor: '#ffffff',
           borderWidth: 2 * em,
-          elevation: 10,
-          shadowColor: '#254D5612',
-          shadowOffset: {
-            width: 0,
-            height: 10 * hm,
-          }, shadowOpacity: 1,
-          shadowRadius: 12 * em,
-        }}>
-        {Workshop(servicIconSize)}
-      </TouchableOpacity>
-    </View>
+          elevation: 5,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => Actions.friendOrganize()}
+          style={{
+            shadowColor: '#254D5612',
+            shadowOffset: {
+              width: 0,
+              height: 10 * hm,
+            }, shadowOpacity: 1,
+            shadowRadius: 12 * em,
+          }}>
+          {Workshop(servicIconSize)}
+        </TouchableOpacity>
+      </View>
+    </View >
   );
 };
 

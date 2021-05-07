@@ -1,9 +1,10 @@
-import React, { Component,useEffect } from 'react';
+import React, { Component,useEffect,useState } from 'react';
 import { Button, View, Text,Image,TextInput,   
   TouchableOpacity, Dimensions,
   Platform,
   StyleSheet ,
   StatusBar,
+  ActivityIndicator,
   Alert,KeyboardAvoidingView
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
@@ -29,8 +30,14 @@ import * as Yup from 'yup';
 
 import {useDispatch} from 'react-redux';
 import {SignupData} from '../redux/actions/signup';
+import Geocoder from 'react-native-geocoding';
+import Geolocation from 'react-native-geolocation-service';
+
+/////////                 HERE GOES API KEY
+Geocoder.init("############################");      
+//////////
 export default ({navigation}) => {
- 
+  const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
 
   const dispatch = useDispatch();
@@ -61,7 +68,29 @@ export default ({navigation}) => {
     validationSchema,
   });
 
+  const getlocation = () =>{
+    setloading(()=>true)
+    Geolocation.getCurrentPosition(
+      (position) => {
+        
 
+        Geocoder.from(position.coords.latitude, position.coords.longitude)
+          .then(json => {
+            var addressComponent = json.results[0].formatted_address;
+            
+           formik.setFieldValue('adresse',addressComponent)
+           setloading(()=>false)
+          })
+          .catch(error => {console.warn(error) ,setloading(()=>false),alert(error.origin.error_message)});
+      },
+      (error) => {
+        setloading(()=>false)
+        console.log(error.code, error.message);
+        
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+  }
     return (
     
         <View style={{flex:1,backgroundColor:'#40CDDE'}}>
@@ -106,12 +135,12 @@ value={formik.values.adresse}
            onBlur={formik.handleBlur('adresse')}
            onChangeText={formik.handleChange('adresse')}   />
            {formik.errors.adresse && formik.touched.adresse && <Text style={styles.descerrorText}>l'adresse ne peut pas être vide</Text>}
-          <MyTextInput />
+         
             
               
               <View style={{bottom:19*hm,alignItems:'center'}}>
             
-                <Text style={{color:'#40CDDE',fontSize: 14*em,fontFamily:'lato'}} onPress={()=>{console.log("geolocation")}}>Me géolocaliser</Text>
+              {loading ? <ActivityIndicator size='small' color='#40CDDE'  />:<Text style={{color:'#40CDDE',fontSize: 14*em,fontFamily:'lato'}} onPress={()=>{getlocation()}}>Me géolocaliser</Text>}
               
               </View>
 

@@ -98,7 +98,7 @@ export default ({ navigation }) => {
 
                   dispatch(addLogin(res.user));
                   setloadinggoogle(() => false)
-                }).catch(e => { alert(e) })
+                }).catch(e => { alert(e),setloadinggoogle(() => false) })
               }}
               style={{
                 overflow: 'hidden',
@@ -125,7 +125,7 @@ onPress={() => {
 
     dispatch(addLogin(res.user));
     setloadingfacebook(() => false)
-  }).catch(e => { console.log(e) })
+  }).catch(e => { console.log(e),  setloadingfacebook(() => false) })
 }}
 style={{
   overflow: 'hidden',

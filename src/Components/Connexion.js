@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   Image,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator
 } from 'react-native';
 import { em, hm, WIDTH } from '../constants';
 import * as Animatable from 'react-native-animatable';
@@ -21,6 +22,7 @@ import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
+import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
 GoogleSignin.configure({
   webClientId: "555389901225-u0ooiaamgap21lj4i8f34aq0heiemd5n.apps.googleusercontent.com",
 });
@@ -29,6 +31,29 @@ GoogleSignin.configure({
 export default ({ navigation }) => {
 
   const dispatch = useDispatch();
+  const [loadinggoogle, setloadinggoogle] = useState(false)
+  const [loadingfacebook, setloadingfacebook] = useState(false)
+  async function onFacebookButtonPress() {
+
+    const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+    if (result.isCancelled) {
+      throw 'User cancelled the login process';
+    }
+
+
+    const data = await AccessToken.getCurrentAccessToken();
+
+    if (!data) {
+      throw 'Something went wrong obtaining access token';
+    }
+
+
+    const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+
+    return auth().signInWithCredential(facebookCredential);
+  }
   async function onGoogleButtonPress() {
 
     const { idToken } = await GoogleSignin.signIn();
@@ -70,11 +95,15 @@ export default ({ navigation }) => {
           <CommonText text="Ravis de te revoir :)" style={{ color: '#6A8596', marginTop: 7 * hm }} />
           <View style={{}} >
             <TouchableOpacity
-              onPress={() => onGoogleButtonPress().then((res) => { 
-                
-                Object.assign(res.user, { login: true, NotificationActive: false });
+              onPress={() => {
+                setloadinggoogle(() => true), onGoogleButtonPress().then((res) => {
 
-              dispatch(addLogin(res.user));}).catch(e => { alert(e) })}
+                  Object.assign(res.user, { login: true, NotificationActive: false });
+
+                  dispatch(addLogin(res.user));
+                  setloadinggoogle(() => false)
+                }).catch(e => { alert(e) })
+              }}
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
@@ -85,14 +114,23 @@ export default ({ navigation }) => {
               }}>
               <View style={styles.btnContainer}>
                 <Googleicon width={18 * em} height={18 * hm} />
-                <Text style={[styles.btnText, {
+                {loadinggoogle ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 25 * em, }} /> : <Text style={[styles.btnText, {
                   marginLeft: 25 * em,
-                }]}>Je me connecte avec Google</Text>
+                }]}>Je me connecte avec Google</Text>}
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => { console.log("facebook") }}
+
+              onPress={() => {
+                setloadingfacebook(() => true), onFacebookButtonPress().then((res) => {
+
+                  Object.assign(res.user, { login: true, NotificationActive: false });
+
+                  dispatch(addLogin(res.user));
+                  setloadingfacebook(() => false)
+                }).catch(e => { console.log(e) })
+              }}
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
@@ -104,9 +142,9 @@ export default ({ navigation }) => {
               }}>
               <View style={styles.btnContainer}>
                 <Facebookicon width={18 * em} height={18 * hm} />
-                <Text style={[styles.btnText, {
+                {loadingfacebook ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 25 * em, }} /> : <Text style={[styles.btnText, {
                   marginLeft: 16 * em,
-                }]}>Je me connecte avec Facebook</Text>
+                }]}>Je me connecte avec Facebook</Text>}
               </View>
             </TouchableOpacity>
 

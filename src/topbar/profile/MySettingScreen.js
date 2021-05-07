@@ -1,14 +1,24 @@
-import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import React,{useEffect} from 'react';
+import { View, TouchableOpacity, Text,Alert } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import CommonHeader from '../../Components/header/CommonHeader';
 import Switch from '../../Components/other/Switch';
 import CommonListItem from '../../adapter/CommonListItem';
 import { Address, NotificationYellow } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
+import auth from '@react-native-firebase/auth';
 
+import { useDispatch } from 'react-redux';
+import { addLogin } from '../../redux/actions/login';
 const MySettingScreen = () => {
+  
+  const dispatch = useDispatch();
 
+  const logout = () => {
+    auth()
+    .signOut()
+    .then(() => {console.log('User signed out!'),dispatch(addLogin(''))}).catch((e=>{console.log(e),dispatch(addLogin(''))}));
+  }
   return (
     <View style={styles.container}>
       <CommonHeader dark={true} style={styles.header} />
@@ -67,10 +77,12 @@ const MySettingScreen = () => {
       />
       <View style={styles.rectangle} />
       <TouchableOpacity
-        onPress={() => {
-          userDetails = '';
-          Actions.home();
-        }}
+         onPress={() =>
+          Alert.alert('Me déconnecter', 'Voulez-vous vous déconnecter?', [
+            { text: 'Oui', onPress: () => { logout() } },
+            { text: 'Annuler', style: 'cancel' },
+          ])
+        }
         style={{
           position: 'absolute',
           bottom: 0,

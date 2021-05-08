@@ -100,6 +100,7 @@ import ActivityMessageScreen from '../activity/ActivityMessageScreen';
 import ActivityDialScreen from '../activity/ActivityDialScreen';
 import MotdePasseOublie from '../Components/MotdePasseOublie';
 import { useSelector } from 'react-redux';
+import InscriptionMdp from '../Components/InscriptionMdp';
 export default () => {
   const { userDetails } = useSelector((state) => state.loginReducers);
 
@@ -120,6 +121,8 @@ export default () => {
         <Scene key="InscriptionEmail" hideNavBar component={InscriptionEmail} />
         {/* Enter Email first  */}
         <Scene key="InscriptionPrenom" hideNavBar component={InscriptionPrenom} />
+        {/* Enter password  */}
+        <Scene key="InscriptionMdp" hideNavBar component={InscriptionMdp} />
         {/* Enter First name  */}
         <Scene key="InscriptionNom" hideNavBar component={InscriptionNom} />
         {/* Enter family name  */}

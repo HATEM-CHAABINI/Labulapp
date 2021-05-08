@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   View,
@@ -10,7 +10,8 @@ import {
   Platform,
   StyleSheet,
   StatusBar,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -30,7 +31,7 @@ import { Actions } from 'react-native-router-flux';
 import Reinput from "reinput"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
+import auth, { firebase } from "@react-native-firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -38,7 +39,7 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 export default ({ navigation }) => {
 
-
+const [loading, setloading] = useState(false)
   const dispatch = useDispatch();
   const initialValues = {
     email: '',
@@ -52,14 +53,23 @@ export default ({ navigation }) => {
     password: Yup.string().required(),
 
   });
-  const onSubmit = values => {
-
-    dispatch(addLogin({
-      email: values.email,
-      login: true,
-      NotificationActive: false
-    }));
-
+  const onSubmit = async values => {
+    setloading(()=>true)
+      try {
+      let response = await auth().signInWithEmailAndPassword(values.email, values.password)
+      if (response && response.user) {
+        // Alert.alert("Success ", "Authenticated successfully")
+         dispatch(addLogin(response.user));
+      }
+    } catch (e) {
+      console.error(e.message)
+    }
+    // dispatch(addLogin({
+    //   email: values.email,
+    //   login: true,
+    //   NotificationActive: false
+    // }));
+    setloading(()=>false)
   };
   const formik = useFormik({
     initialValues,
@@ -153,7 +163,8 @@ export default ({ navigation }) => {
               bottom: 36 * hm
             }}>
             <View style={styles.btnContainer}>
-              <Text
+            {loading ? <ActivityIndicator size='small' color='#FFFFFF' style={{ marginLeft: 10 * em,
+                  marginTop: 2 * hm,}} /> : <Text
                 style={{
                   fontSize: 16 * em,
                   color: '#FFFFFF',
@@ -162,7 +173,7 @@ export default ({ navigation }) => {
                   fontFamily: 'lato-Medium'
                 }}>
                 Suivant
-                </Text>
+                </Text>}
             </View>
           </TouchableOpacity>
 

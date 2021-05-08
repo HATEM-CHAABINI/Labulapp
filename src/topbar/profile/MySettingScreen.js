@@ -6,7 +6,7 @@ import Switch from '../../Components/other/Switch';
 import CommonListItem from '../../adapter/CommonListItem';
 import { Address, NotificationYellow } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from "@react-native-firebase/auth";
 
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../../redux/actions/login';
@@ -15,6 +15,7 @@ const MySettingScreen = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
+      
     auth()
     .signOut()
     .then(() => {console.log('User signed out!'),dispatch(addLogin(''))}).catch((e=>{console.log(e),dispatch(addLogin(''))}));

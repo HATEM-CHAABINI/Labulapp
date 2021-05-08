@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -101,12 +101,37 @@ import ActivityDialScreen from '../activity/ActivityDialScreen';
 import MotdePasseOublie from '../Components/MotdePasseOublie';
 import { useSelector } from 'react-redux';
 import InscriptionMdp from '../Components/InscriptionMdp';
+import auth, { firebase } from "@react-native-firebase/auth";
+import {firebaseConfig} from '../setup'
+import * as Firebase from 'firebase'
+if (!Firebase.apps.length) {
+  Firebase.initializeApp(firebaseConfig.data);
+}else {
+  Firebase.app();
+}
 export default () => {
   const { userDetails } = useSelector((state) => state.loginReducers);
+  const [state, setstate] = useState({
+    isLogin: false,
+    authenticated: false
+  })
+  useEffect(() => {
+    __isTheUserAuthenticated()
+    
+  }, [firebase.auth().currentUser])
+  __isTheUserAuthenticated = () => {
+    let user = firebase.auth().currentUser;
+    if (user) {
+      // console.log(tag, user);
 
+      setstate({ authenticated: true });
+    } else {
+      setstate({ authenticated: false });
+    }
+  };
   return (
     <Router>
-      {userDetails === '' ? <Scene key="root">
+      {!state.authenticated ? <Scene key="root">
         {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
         <Scene key="home" hideNavBar component={HomeScreen} />
         {/* landing page */}

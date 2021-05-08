@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   Button, View, Text, Image, TextInput,
   TouchableOpacity,
   Platform,
   StyleSheet,
   StatusBar,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { em, WIDTH, hm } from '../constants';
 import * as Animatable from 'react-native-animatable';
@@ -18,16 +19,41 @@ import Facebookicon from '../assets/icons/navigation-app/Facebookicon';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
-export default ({ navigation }) => {
+import {firebaseConfig} from '../setup'
+import * as Firebase from 'firebase'
+import app from 'firebase/app'
+const fireStore = app.firestore()
 
+export default ({ navigation }) => {
+const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
   const dispatch = useDispatch();
 
   const login = () => {
-
-    Object.assign(signupData, { login: true, NotificationActive: false });
-
-    dispatch(addLogin(signupData));
+    setloading(true)
+Firebase.default.auth().createUserWithEmailAndPassword(signupData.email,signupData.password).then((userCredential) => {
+      var user = userCredential.user;
+      if(user){
+        user.updateProfile({
+           displayName: signupData.nom,
+           phoneNumber:  signupData.mobile,
+           nom: signupData.nom,// some displayName,
+           prenom:signupData.prenom,
+           adresse:  signupData.adresse,
+        }).then(
+          (s)=>{
+            Object.assign(user, { login: true, NotificationActive: false });
+       
+            dispatch(addLogin(user));
+          } // perform any other operation
+        )
+      }
+    })
+    .catch((error) => {
+      console.log(error.code,error.message)
+    });
+    setloading(false)
+   
   }
   return (
 
@@ -82,7 +108,7 @@ export default ({ navigation }) => {
 
           <View style={{ marginTop: 35 * hm }}>
 
-            <Text style={{ color: '#6A8596', fontSize: 16 * em }} onPress={login}>Activer plus tard</Text>
+          {loading ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 25 * em, }} /> :<Text style={{ color: '#6A8596', fontSize: 16 * em }} onPress={()=>login()}>Activer plus tard</Text>}
           </View>
 
         </View>

@@ -27,27 +27,29 @@ import BackArrowWhite from '../assets/svg/icons/navigation/BackArrowWhite';
 import Reinput from "reinput"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { SignupData } from '../redux/actions/signup';
-export default ({ navigation }) => {
 
+export default ({ navigation }) => {
+    const { signupData } = useSelector((state) => state.signupReducer);
 
     const dispatch = useDispatch();
     const initialValues = {
-        email: '',
+        password: '',
     };
     const validationSchema = Yup.object({
-        email: Yup.string()
-            .email('Oops! Mot de passe invalide.')
-            .trim()
-            .required(),
+        password: Yup.string()
+        .required('Aucun mot de passe fourni.') 
+        .min(8, 'Le mot de passe est trop court - doit contenir au moins 8 caractères.')
+        
 
     });
     const onSubmit = values => {
 
         dispatch(SignupData({
-            email: values.email,
+            email: signupData.email,
+            password: values.password,
         }));
 
         Actions.jump('InscriptionPrenom')
@@ -100,11 +102,11 @@ export default ({ navigation }) => {
                             fontSize={16 * em}
                             keyboardType="visible-password"
                             selectionColor={'#41D0E2'}
-                            value={formik.values.email}
-                            onBlur={formik.handleBlur('email')}
-                            onChangeText={formik.handleChange('email')}
+                            value={formik.values.password}
+                            onBlur={formik.handleBlur('password')}
+                            onChangeText={formik.handleChange('password')}
                         />
-                        {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez un mot de passe valide</Text>}
+                        {formik.errors.password && formik.touched.password && <Text style={styles.descerrorText}>{formik.errors.password}</Text>}
 
 
 
@@ -119,7 +121,7 @@ export default ({ navigation }) => {
                 style={{ alignItems: 'center' }}
             >
 
-                <TouchableOpacity disabled={formik.values.email === '' ? true : false} onPress={formik.handleSubmit} style={{
+                <TouchableOpacity disabled={formik.values.password === '' ? true : false} onPress={formik.handleSubmit} style={{
                     overflow: 'hidden',
                     borderRadius: 18 * em,
                     height: 59 * hm,
@@ -133,7 +135,7 @@ export default ({ navigation }) => {
                     <View
                         style={[styles.btnContainer, {
                             backgroundColor: '#40CDDE', height: 59 * hm,
-                            width: 315 * em, opacity: formik.values.email === '' ? 0.5 : 1
+                            width: 315 * em, opacity: formik.values.password === '' ? 0.5 : 1
                         }]}>
 
                         <Text style={{

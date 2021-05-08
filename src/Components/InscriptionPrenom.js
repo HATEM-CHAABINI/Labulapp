@@ -47,6 +47,7 @@ export default ({navigation}) => {
  
     dispatch(SignupData({
       email: signupData.email,
+      password:signupData.password,
       prenom:values.prenom
     }));
     Actions.jump('InscriptionNom')

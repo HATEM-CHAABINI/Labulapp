@@ -48,6 +48,7 @@ export default ({navigation}) => {
    
     dispatch(SignupData({
       email: signupData.email,
+      password:signupData.password,
       prenom:signupData.prenom,
       nom:values.nom
     }));

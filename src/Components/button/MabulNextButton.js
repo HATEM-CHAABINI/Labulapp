@@ -28,6 +28,7 @@ const styles = {
   },
   txt: {
     fontSize: 16 * em,
+    fontFamily: 'Lato-Medium',
     lineHeight: 19 * em,
     color: '#FFFFFF',
     textAlign: 'center',

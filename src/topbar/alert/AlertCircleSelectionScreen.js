@@ -76,7 +76,13 @@ const styles = {
     elevation: 5
   },
 
-  btn: { postion: 'absolute', alignSelf: 'flex-end', right: 30 * em, bottom: 30 * hm, backgroundColor: '#38C2FF' },
+  btn: {
+    postion: 'absolute',
+    alignSelf: 'flex-end',
+    right: 30 * em,
+    bottom: 30 * hm,
+    backgroundColor: '#38C2FF'
+  },
 };
 
 export default AlertCircleSelectionScreen;

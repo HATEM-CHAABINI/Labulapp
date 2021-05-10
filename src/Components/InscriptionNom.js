@@ -86,6 +86,8 @@ export default ({navigation}) => {
                 
 <Reinput 
 label='Quel est ton nom de famille ?'
+autoCorrect={false}
+
 underlineColor="#BFCDDB"
 underlineActiveColor="#41D0E2"
 labelActiveColor="#BFCDDB"

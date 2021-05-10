@@ -88,6 +88,7 @@ export default ({ navigation }) => {
 
             <Reinput
               label='Saisie ton email'
+              autoCorrect={false}
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"
               labelActiveColor="#BFCDDB"
@@ -125,7 +126,7 @@ export default ({ navigation }) => {
 
           width: 315 * em,
 
-          bottom: 30 * hm
+          bottom: 30 
           // top:240*hm
         }}
         >

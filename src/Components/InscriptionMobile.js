@@ -86,6 +86,8 @@ export default ({navigation}) => {
                         
 <Reinput 
 label='Quel est ton numéro de téléphone ?'
+autoCorrect={false}
+
 underlineColor="#BFCDDB"
 underlineActiveColor="#41D0E2"
 labelActiveColor="#BFCDDB"

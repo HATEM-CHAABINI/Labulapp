@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react';
-import { Router, Scene } from 'react-native-router-flux';
+import React, {useState, useEffect} from 'react';
+import {Router, Scene} from 'react-native-router-flux';
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
 // import LoginMenuScreen from 'view/screens/account/LoginMenuScreen';
@@ -10,7 +10,7 @@ import MainScreen from '../topbar/MainScreen';
 import Inscription from '../Components/Inscription';
 //import ForgotPasswordScreen from 'view/screens/account/ForgotPasswordScreen';
 //import RegisterEmailScreen from 'view/screens/account/RegisterEmailScreen';
-import ConnexionEmail from '../Components/ConnexionEmail'
+import ConnexionEmail from '../Components/ConnexionEmail';
 //import RegisterNameScreen from 'view/screens/account/RegisterNameScreen';
 //import RegisterFamilyNameScreen from 'view/screens/account/RegisterFamilyNameScreen';
 //import RegisterMobileScreen from 'view/screens/account/RegisterMobileScreen';
@@ -99,67 +99,89 @@ import FriendGiveBadgeScreen from '../ServiceScrenns/FriendGiveBadgeScreen';
 import ActivityMessageScreen from '../activity/ActivityMessageScreen';
 import ActivityDialScreen from '../activity/ActivityDialScreen';
 import MotdePasseOublie from '../Components/MotdePasseOublie';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import InscriptionMdp from '../Components/InscriptionMdp';
-import auth, { firebase } from "@react-native-firebase/auth";
-import {firebaseConfig} from '../setup'
-import * as Firebase from 'firebase'
-if (!Firebase.apps.length) {
-  Firebase.initializeApp(firebaseConfig.data);
-}else {
-  Firebase.app();
-}
+import auth, {firebase as fire} from '@react-native-firebase/auth';
+import {firebase} from '../setup';
+// import * as Firebase from 'firebase';
+
 export default () => {
-  const { userDetails } = useSelector((state) => state.loginReducers);
+  const {userDetails} = useSelector(state => state.loginReducers);
   const [state, setstate] = useState({
     isLogin: false,
-    authenticated: false
-  })
+    authenticated: false,
+  });
+
   useEffect(() => {
-    __isTheUserAuthenticated()
-    
-  }, [firebase.auth().currentUser])
+    __isTheUserAuthenticated();
+  }, [fire.auth().currentUser]);
   __isTheUserAuthenticated = () => {
-    let user = firebase.auth().currentUser;
+    let user = fire.auth().currentUser;
     if (user) {
       // console.log(tag, user);
 
-      setstate({ authenticated: true });
+      setstate({authenticated: true});
     } else {
-      setstate({ authenticated: false });
+      setstate({authenticated: false});
     }
   };
   return (
     <Router>
-      {!state.authenticated ? <Scene key="root">
-        {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
-        <Scene key="home" hideNavBar component={HomeScreen} />
-        {/* landing page */}
-        <Scene key="loginMenu" hideNavBar component={Connexion} />
-        {/* Login start page  google , facebook , button for login*/}
-        <Scene key="registerEmail" hideNavBar component={ConnexionEmail} />
-        {/* Login with email and password  */}
-        <Scene key="MotdePasseOublie" hideNavBar component={MotdePasseOublie} />
-        {/* forget password  */}
-        <Scene key="signupMenu" hideNavBar component={Inscription} />
-        {/* signup start page  google , facebook , button for login*/}
-        <Scene key="InscriptionEmail" hideNavBar component={InscriptionEmail} />
-        {/* Enter Email first  */}
-        <Scene key="InscriptionPrenom" hideNavBar component={InscriptionPrenom} />
-        {/* Enter password  */}
-        <Scene key="InscriptionMdp" hideNavBar component={InscriptionMdp} />
-        {/* Enter First name  */}
-        <Scene key="InscriptionNom" hideNavBar component={InscriptionNom} />
-        {/* Enter family name  */}
-        <Scene key="InscriptionMobile" hideNavBar component={InscriptionMobile} />
-        {/* Enter mobile */}
-        <Scene key="InscriptionAdresse" hideNavBar component={InscriptionAdresse} />
-        {/* Enter address  */}
-        <Scene key="ActiverLocalisation" hideNavBar component={ActiverLocalisation} />
-        {/* active notification and localisation view */}
-        <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
-        {/*Activ notification or not */}
-      </Scene> :
+      {!state.authenticated ? (
+        <Scene key="root">
+          {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
+          <Scene key="home" hideNavBar component={HomeScreen} />
+          {/* landing page */}
+          <Scene key="loginMenu" hideNavBar component={Connexion} />
+          {/* Login start page  google , facebook , button for login*/}
+          <Scene key="registerEmail" hideNavBar component={ConnexionEmail} />
+          {/* Login with email and password  */}
+          <Scene
+            key="MotdePasseOublie"
+            hideNavBar
+            component={MotdePasseOublie}
+          />
+          {/* forget password  */}
+          <Scene key="signupMenu" hideNavBar component={Inscription} />
+          {/* signup start page  google , facebook , button for login*/}
+          <Scene
+            key="InscriptionEmail"
+            hideNavBar
+            component={InscriptionEmail}
+          />
+          {/* Enter Email first  */}
+          <Scene
+            key="InscriptionPrenom"
+            hideNavBar
+            component={InscriptionPrenom}
+          />
+          {/* Enter password  */}
+          <Scene key="InscriptionMdp" hideNavBar component={InscriptionMdp} />
+          {/* Enter First name  */}
+          <Scene key="InscriptionNom" hideNavBar component={InscriptionNom} />
+          {/* Enter family name  */}
+          <Scene
+            key="InscriptionMobile"
+            hideNavBar
+            component={InscriptionMobile}
+          />
+          {/* Enter mobile */}
+          <Scene
+            key="InscriptionAdresse"
+            hideNavBar
+            component={InscriptionAdresse}
+          />
+          {/* Enter address  */}
+          <Scene
+            key="ActiverLocalisation"
+            hideNavBar
+            component={ActiverLocalisation}
+          />
+          {/* active notification and localisation view */}
+          <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
+          {/*Activ notification or not */}
+        </Scene>
+      ) : (
         <Scene key="root">
           <Scene key="main" hideNavBar component={MainScreen} />
           <Scene key="myNeed" hideNavBar component={MyNeedScreen} />
@@ -172,21 +194,25 @@ export default () => {
 
           <Scene key="editNeed" hideNavBar component={EditNeedScreen} />
 
-
           {/* <Scene key="loginMenu" hideNavBar component={LoginMenuScreen} /> */}
 
-
           {/* <Scene key="signupMenu" hideNavBar component={SignupMenuScreen} /> */}
-
-
 
           {/* <Scene key="login" hideNavBar component={LoginScreen} /> */}
           {/* <Scene key="forgotPassword" hideNavBar component={ForgotPasswordScreen} /> */}
 
           {/* <Scene key="registerEmail" hideNavBar component={RegisterEmailScreen} /> */}
 
-          <Scene key="mabulOrganize" hideNavBar component={MabulOrganizeScreen} />
-          <Scene key="mabulCommonRequestDetail" hideNavBar component={MabulCommonRequestDetailScreen} />
+          <Scene
+            key="mabulOrganize"
+            hideNavBar
+            component={MabulOrganizeScreen}
+          />
+          <Scene
+            key="mabulCommonRequestDetail"
+            hideNavBar
+            component={MabulCommonRequestDetailScreen}
+          />
           {/* <Scene key="registerName" hideNavBar component={RegisterNameScreen} />
           <Scene key="registerFamilyName" hideNavBar component={RegisterFamilyNameScreen} />
           <Scene key="registerMobile" hideNavBar component={RegisterMobileScreen} />
@@ -196,97 +222,237 @@ export default () => {
 
           <Scene key="friendsSearch" hideNavBar component={FriendsSearchScreen} />
           */}
-          <Scene key="friendsFilter" hideNavBar component={FriendsFilterScreen} />
-          <Scene key="inputLocation" hideNavBar component={InputLocationScreen} />
+          <Scene
+            key="friendsFilter"
+            hideNavBar
+            component={FriendsFilterScreen}
+          />
+          <Scene
+            key="inputLocation"
+            hideNavBar
+            component={InputLocationScreen}
+          />
 
           <Scene key="userProfile" hideNavBar component={UserProfileScreen} />
 
-
-
-
-          <Scene key="alertCircles" hideNavBar component={AlertCircleSelectionScreen} />
-          <Scene key="alertClass" hideNavBar component={AlertClassOptionScreen} />
+          <Scene
+            key="alertCircles"
+            hideNavBar
+            component={AlertCircleSelectionScreen}
+          />
+          <Scene
+            key="alertClass"
+            hideNavBar
+            component={AlertClassOptionScreen}
+          />
           <Scene key="alertAddress" hideNavBar component={AlertAddressScreen} />
           <Scene key="alertAddNote" hideNavBar component={AlertAddNoteScreen} />
           <Scene key="alertShare" hideNavBar component={AlertShareScreen} />
-
-
 
           {/*
           <Scene key="mabulSearch" hideNavBar component={MabulSearchScreen} />
 
           */}
-          <Scene key="profileOverview" hideNavBar component={ProfileOverviewScreen} />
+          <Scene
+            key="profileOverview"
+            hideNavBar
+            component={ProfileOverviewScreen}
+          />
 
-          <Scene key="myInformation" hideNavBar component={MyInformationScreen} />
+          <Scene
+            key="myInformation"
+            hideNavBar
+            component={MyInformationScreen}
+          />
 
           <Scene key="editProfile" hideNavBar component={EditProfileScreen} />
 
-
-          <Scene key="createAccountMenu" hideNavBar component={CreateAccountMenuScreen} />
-          <Scene key="createProfessionalAccount" hideNavBar component={CreateProfessionalAccountScreen} />
-          <Scene key="createAssociationAccount" hideNavBar component={CreateAssociationAccountScreen} />
-          <Scene key="createCommunityAccount" hideNavBar component={CreateCommunityAccountScreen} />
-          <Scene key="proRegisterMobile" hideNavBar component={ProRegisterMobilScreen} />
-          <Scene key="proRegisterAddress" hideNavBar component={ProRegisterAddressScreen} />
-          <Scene key="proRegisterEmail" hideNavBar component={ProRegisterEmailScreen} />
-          <Scene key="proProfileHome" hideNavBar component={ProProfileHomeScreen} />
+          <Scene
+            key="createAccountMenu"
+            hideNavBar
+            component={CreateAccountMenuScreen}
+          />
+          <Scene
+            key="createProfessionalAccount"
+            hideNavBar
+            component={CreateProfessionalAccountScreen}
+          />
+          <Scene
+            key="createAssociationAccount"
+            hideNavBar
+            component={CreateAssociationAccountScreen}
+          />
+          <Scene
+            key="createCommunityAccount"
+            hideNavBar
+            component={CreateCommunityAccountScreen}
+          />
+          <Scene
+            key="proRegisterMobile"
+            hideNavBar
+            component={ProRegisterMobilScreen}
+          />
+          <Scene
+            key="proRegisterAddress"
+            hideNavBar
+            component={ProRegisterAddressScreen}
+          />
+          <Scene
+            key="proRegisterEmail"
+            hideNavBar
+            component={ProRegisterEmailScreen}
+          />
+          <Scene
+            key="proProfileHome"
+            hideNavBar
+            component={ProProfileHomeScreen}
+          />
           <Scene key="profileHome" hideNavBar component={ProfileHomeScreen} />
           <Scene key="proNeedsHome" hideNavBar component={ProNeedsHomeScreen} />
           <Scene key="editProNeed" hideNavBar component={EditProNeedScreen} />
 
-          <Scene key="proInformation" hideNavBar component={ProInformationScreen} />
+          <Scene
+            key="proInformation"
+            hideNavBar
+            component={ProInformationScreen}
+          />
           <Scene key="proSetting" hideNavBar component={ProSettingScreen} />
 
-          <Scene key="editProProfile" hideNavBar component={EditProProfileScreen} />
-          <Scene key="proProfileOverview" hideNavBar component={ProProfileOverviewScreen} />
-          <Scene key="mabulCommonShare" hideNavBar component={MabulCommonShareScreen} />
+          <Scene
+            key="editProProfile"
+            hideNavBar
+            component={EditProProfileScreen}
+          />
+          <Scene
+            key="proProfileOverview"
+            hideNavBar
+            component={ProProfileOverviewScreen}
+          />
+          <Scene
+            key="mabulCommonShare"
+            hideNavBar
+            component={MabulCommonShareScreen}
+          />
 
           <Scene key="mySetting" hideNavBar component={MySettingScreen} />
 
-          <Scene key="premiumSubscription" hideNavBar component={PremiumSubscriptionScreen} />
-          <Scene key="premiumPurchased" hideNavBar component={PremiumPurchasedScreen} />
+          <Scene
+            key="premiumSubscription"
+            hideNavBar
+            component={PremiumSubscriptionScreen}
+          />
+          <Scene
+            key="premiumPurchased"
+            hideNavBar
+            component={PremiumPurchasedScreen}
+          />
           {/*
           <Scene key="mabulHome" hideNavBar component={MabulHomeScreen} /> */}
           <Scene key="myNeedsHome" hideNavBar component={MyNeedsHomeScreen} />
 
-          <Scene key="myCirclesHome" hideNavBar component={MyCirclesHomeScreen} />
+          <Scene
+            key="myCirclesHome"
+            hideNavBar
+            component={MyCirclesHomeScreen}
+          />
           <Scene key="createGroup" hideNavBar component={CreateGroupScreen} />
           <Scene key="nameGroup" hideNavBar component={NameGroupScreen} />
           <Scene key="Filtre" hideNavBar component={Filtre} />
-          <Scene key="friendsSearch" hideNavBar component={FriendsSearchScreen} />
-          <Scene key="friendOrganize" hideNavBar component={FriendOrganizeScreen} />
-          <Scene key="mabulCommonAddPhoto" hideNavBar component={MabulCommonAddPhotoScreen} />
-          <Scene key="mabulCommonDateSetting" hideNavBar component={MabulCommonDateSettingScreen} />
-          <Scene key="mabulOrganizeParticipation" hideNavBar component={MabulOrganizeParticipationScreen} />
+          <Scene
+            key="friendsSearch"
+            hideNavBar
+            component={FriendsSearchScreen}
+          />
+          <Scene
+            key="friendOrganize"
+            hideNavBar
+            component={FriendOrganizeScreen}
+          />
+          <Scene
+            key="mabulCommonAddPhoto"
+            hideNavBar
+            component={MabulCommonAddPhotoScreen}
+          />
+          <Scene
+            key="mabulCommonDateSetting"
+            hideNavBar
+            component={MabulCommonDateSettingScreen}
+          />
+          <Scene
+            key="mabulOrganizeParticipation"
+            hideNavBar
+            component={MabulOrganizeParticipationScreen}
+          />
           <Scene key="mabulGive" hideNavBar component={MabulGiveScreen} />
           <Scene key="mabulSell" hideNavBar component={MabulSellScreen} />
-          <Scene key="mabulSellService" hideNavBar component={MabulSellServiceScreen} />
-          <Scene key="mabulSellObject" hideNavBar component={MabulSellObjectScreen} />
-          <Scene key="mabulSellEnvironment" hideNavBar component={MabulSellEnvironmentScreen} />
-          <Scene key="mabulSellPrice" hideNavBar component={MabulSellPriceScreen} />
+          <Scene
+            key="mabulSellService"
+            hideNavBar
+            component={MabulSellServiceScreen}
+          />
+          <Scene
+            key="mabulSellObject"
+            hideNavBar
+            component={MabulSellObjectScreen}
+          />
+          <Scene
+            key="mabulSellEnvironment"
+            hideNavBar
+            component={MabulSellEnvironmentScreen}
+          />
+          <Scene
+            key="mabulSellPrice"
+            hideNavBar
+            component={MabulSellPriceScreen}
+          />
           <Scene key="mabulNeed" hideNavBar component={MabulNeedScreen} />
-          <Scene key="mabulDailyNeed" hideNavBar component={MabulDailyNeedScreen} />
-          <Scene key="mabulNeedSort" hideNavBar component={MabulNeedSortScreen} />
-          <Scene key="mabulFamilyNeed" hideNavBar component={MabulFamilyNeedScreen} />
-          <Scene key="mabulCommonParticipate" hideNavBar component={MabulCommonParticipateScreen} />
-
-
-
+          <Scene
+            key="mabulDailyNeed"
+            hideNavBar
+            component={MabulDailyNeedScreen}
+          />
+          <Scene
+            key="mabulNeedSort"
+            hideNavBar
+            component={MabulNeedSortScreen}
+          />
+          <Scene
+            key="mabulFamilyNeed"
+            hideNavBar
+            component={MabulFamilyNeedScreen}
+          />
+          <Scene
+            key="mabulCommonParticipate"
+            hideNavBar
+            component={MabulCommonParticipateScreen}
+          />
 
           <Scene key="friendSell" hideNavBar component={FriendSellScreen} />
           <Scene key="friendNeed" hideNavBar component={FriendNeedScreen} />
-          <Scene key="friendGiveBadge" hideNavBar component={FriendGiveBadgeScreen} />
-          <Scene key="activityMessage" hideNavBar component={ActivityMessageScreen} />
+          <Scene
+            key="friendGiveBadge"
+            hideNavBar
+            component={FriendGiveBadgeScreen}
+          />
+          <Scene
+            key="activityMessage"
+            hideNavBar
+            component={ActivityMessageScreen}
+          />
           <Scene key="activityDial" hideNavBar component={ActivityDialScreen} />
 
-
-          <Scene key="privacyPolicy" hideNavBar component={PrivacyPolicyScreen} />
-          <Scene key="termsOfService" hideNavBar component={TermsOfServiceScreen} />
-        </Scene>}
+          <Scene
+            key="privacyPolicy"
+            hideNavBar
+            component={PrivacyPolicyScreen}
+          />
+          <Scene
+            key="termsOfService"
+            hideNavBar
+            component={TermsOfServiceScreen}
+          />
+        </Scene>
+      )}
     </Router>
   );
-
-}
-
-
+};

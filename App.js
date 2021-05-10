@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import Connexion from './src/Components/Connexion';
 import ConnexionEmail from './src/Components/ConnexionEmail';
 import Inscription from './src/Components/Inscription';
@@ -19,12 +19,22 @@ import InscriptionMobile from './src/Components/InscriptionMobile';
 import InscriptionAdresse from './src/Components/InscriptionAdresse';
 import ActiverLocalisation from './src/Components/ActiverLocalisation';
 import ActiverLaNotif from './src/Components/ActiverLaNotif';
-import HomePage from './src/Components/HomePage'
+import HomePage from './src/Components/HomePage';
 import MainScreen from './src/topbar/MainScreen';
-import React, { useEffect } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, Platform, View, Image, TouchableOpacity } from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  Platform,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 
-import { em, WIDTH } from './src/constants';
+import {em, WIDTH} from './src/constants';
 import CarteComponents from './src/Components/CarteComponents';
 import Recherche from './src/Components/Recherche';
 import AgendaScreen from './src/Components/agenda';
@@ -37,16 +47,15 @@ import MabulHomeScreen from './src/Mabul/MabulHomeScreen';
 import MabulOrganizeScreen from './src/Mabul/organize/MabulOrganizeScreen';
 import FriendsSearchScreen from './src/Components/FriendSearchScreen';
 
-import { RootSiblingParent } from 'react-native-root-siblings';
+import {RootSiblingParent} from 'react-native-root-siblings';
 import RootRoutes from './src/routes';
 import SplashScreen from 'react-native-splash-screen';
 
-import { Provider } from "react-redux";
-import { PersistGate } from 'redux-persist/lib/integration/react';
-import { persistor, store } from './src/redux/store';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import {persistor, store} from './src/redux/store';
 
 const App = () => {
-
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
@@ -61,11 +70,11 @@ const App = () => {
     <RootSiblingParent>
       <SafeAreaView style={styles.safeArea} />
       <View style={styles.container}>
-      <Provider store={store}>
-    <PersistGate  persistor={persistor}>
-        <RootRoutes />
-        </PersistGate>
-  </Provider>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <RootRoutes />
+          </PersistGate>
+        </Provider>
       </View>
 
       {/* <NavigationContainer>
@@ -115,7 +124,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-
-
-

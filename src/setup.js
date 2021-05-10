@@ -1,14 +1,28 @@
-export const firebaseConfig = {data:{ apiKey: "AIzaSyA-FKUgTuOhGiZ86WIN-wZ4a6_RK24nsUQ",
-authDomain: "labul-b362c.firebaseapp.com",
-projectId: "labul-b362c",
-storageBucket: "labul-b362c.appspot.com",
-messagingSenderId: "555389901225",
-appId: "1:555389901225:web:b59820563fe5a3dd710cb8",
-measurementId: "G-Z21P0XG9FY"}
-   
-  };
+export const firebaseConfig = {
+  data: {
+    apiKey: 'AIzaSyA-FKUgTuOhGiZ86WIN-wZ4a6_RK24nsUQ',
+    authDomain: 'labul-b362c.firebaseapp.com',
+    projectId: 'labul-b362c',
+    storageBucket: 'labul-b362c.appspot.com',
+    messagingSenderId: '555389901225',
+    appId: '1:555389901225:web:b59820563fe5a3dd710cb8',
+    measurementId: 'G-Z21P0XG9FY',
+  },
+};
+import fb from 'firebase/app';
+export const firebase = !fb.apps.length
+  ? fb.initializeApp({
+      apiKey: 'AIzaSyA-FKUgTuOhGiZ86WIN-wZ4a6_RK24nsUQ',
+      authDomain: 'labul-b362c.firebaseapp.com',
+      projectId: 'labul-b362c',
+      storageBucket: 'labul-b362c.appspot.com',
+      messagingSenderId: '555389901225',
+      appId: '1:555389901225:web:b59820563fe5a3dd710cb8',
+      measurementId: 'G-Z21P0XG9FY',
+    })
+  : fb.app();
 
-  // Initialize Firebase
+// Initialize Firebase
 //   firebase.initializeApp(firebaseConfig);
 //   firebase.analytics();
 // <!-- The core Firebase JS SDK is always required and must be listed first -->

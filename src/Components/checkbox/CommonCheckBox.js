@@ -6,7 +6,7 @@ import { hm } from '../../constants/consts';
 import CheckBox from './CheckBox';
 
 const CommonCheckBox = (props) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(props.isChecked);
   // console.log(props)
   return (
     <View style={[styles.container, props.style]}>

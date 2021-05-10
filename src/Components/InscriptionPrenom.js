@@ -88,6 +88,8 @@ export default ({navigation}) => {
                    
 <Reinput 
 label='Quel est ton prénom ?'
+autoCorrect={false}
+
 underlineColor="#BFCDDB"
 underlineActiveColor="#41D0E2"
 labelActiveColor="#BFCDDB"

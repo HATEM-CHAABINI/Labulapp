@@ -117,6 +117,8 @@ export default ({navigation}) => {
                 <View style={styles.contentWrapper}>
               <Reinput 
 label='Saisis ton adresse complète'
+autoCorrect={false}
+
 underlineColor="#BFCDDB"
 underlineActiveColor="#41D0E2"
 labelActiveColor="#BFCDDB"
@@ -138,7 +140,7 @@ value={formik.values.adresse}
          
             
               
-              <View style={{bottom:19*hm,alignItems:'center'}}>
+              <View style={{bottom:30*hm,alignItems:'center'}}>
             
               {loading ? <ActivityIndicator size='small' color='#40CDDE'  />:<Text style={{color:'#40CDDE',fontSize: 14*em,fontFamily:'lato'}} onPress={()=>{getlocation()}}>Me géolocaliser</Text>}
               

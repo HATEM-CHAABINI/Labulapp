@@ -57,7 +57,7 @@ import {persistor, store} from './src/redux/store';
 
 const App = () => {
   useEffect(() => {
-    setTimeout(() => {
+     setTimeout(() => {
       SplashScreen.hide();
     }, 2500);
   }, []);

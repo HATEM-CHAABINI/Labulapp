@@ -100,6 +100,7 @@ export default ({navigation}) => {
           <View style={styles.contentWrapper}>
             <Reinput
               label="Saisie ton mot de passe"
+              autoCorrect={false}
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"
               labelActiveColor="#BFCDDB"

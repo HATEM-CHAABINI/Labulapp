@@ -70,7 +70,7 @@ export default ({navigation}) => {
     <View style={{flex: 1, alignContent: 'center'}}>
       <Image
         source={require('../assets/images/onbording-1296x814.png')}
-        style={{width: em * 500, height: 339 * hm}}
+        style={{width: em * 500, height: 339 * hm,bottom:10*hm,}}
       />
 
       <View

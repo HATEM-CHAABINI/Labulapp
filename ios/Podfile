@@ -6,10 +6,7 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'GoogleSignIn', '~> 5.0.2'
-pod 'FacebookCore'
-pod 'FacebookLogin'
 
-pod 'FacebookShare'
 target 'Labul' do
   config = use_native_modules!
 

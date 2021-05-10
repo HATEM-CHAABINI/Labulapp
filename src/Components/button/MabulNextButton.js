@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Image } from 'react-native';
 import { em } from '../../constants/consts';
 import { TouchableOpacity } from 'react-native';
-import CommonMediumButton from './CommonButton';
+import CommonMediumButton from './CommonMediumButton';
 import { ArrowRightWhite } from '../../assets/svg/icons';
 const MabulNextButton = (props) => {
   return (
@@ -28,7 +28,7 @@ const styles = {
   },
   txt: {
     fontSize: 16 * em,
-    fontFamily: 'Lato-Medium',
+
     lineHeight: 19 * em,
     color: '#FFFFFF',
     textAlign: 'center',

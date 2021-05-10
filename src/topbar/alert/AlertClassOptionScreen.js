@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Platform, FlatList, TouchableOpacity } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
@@ -103,13 +103,19 @@ const styles = {
     marginTop: 10 * em,
     borderRadius: 20 * em,
     paddingHorizontal: 15 * em, backgroundColor: '#fff',
-    elevation: 1,
-    shadowColor: '#254D5612',
-    shadowOffset: {
-      width: 0,
-      height: 8 * hm,
-    },
-    shadowRadius: 20 * em, shadowOpacity: 1,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#254D5612',
+        shadowOffset: {
+          width: 0,
+          height: 8 * hm,
+        },
+        shadowRadius: 20 * em, shadowOpacity: 1,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
   },
   optionCaption: {
     fontSize: 18 * em,

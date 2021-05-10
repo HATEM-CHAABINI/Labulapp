@@ -27,7 +27,7 @@ export default ({ navigation }) => {
 const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
   const dispatch = useDispatch();
-
+console.log(signupData.adresse);
   const login = () => {
     setloading(true)
 Firebase.default.auth().createUserWithEmailAndPassword(signupData.email,signupData.password).then((userCredential) => {

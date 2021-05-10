@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, DeviceEventEmitter, Image, TouchableOpacity } from 'react-native';
+import { View, ImageBackground, Platform, Image, TouchableOpacity } from 'react-native';
 import { em, hm } from '../constants/consts';
 import { Actions } from 'react-native-router-flux';
 import { Animals, Bricolage, HomeCare, Interview, Workshop, Path, Return2Point, Alert } from '../assets/svg/icons';
@@ -106,6 +106,7 @@ const FriendsMenuScreen = () => {
         }}>
         {Interview(servicIconSize)}
       </View>
+
       <View
         style={{
           position: 'absolute',
@@ -120,20 +121,24 @@ const FriendsMenuScreen = () => {
           backgroundColor: '#ffffff',
           borderColor: '#ffffff',
           borderWidth: 2 * em,
-          elevation: 5,
+          ...Platform.select({
+            ios: {
+              shadowColor: '#254D5621',
+              shadowOffset: {
+                width: 0,
+                height: 10 * hm,
+              }, shadowOpacity: 1,
+              shadowRadius: 12 * em,
+            },
+            android: {
+              elevation: 5,
+            },
+          }),
+
         }}>
-        <View
-          style={{
-            shadowColor: '#254D5621',
-            shadowOffset: {
-              width: 0,
-              height: 10 * hm,
-            }, shadowOpacity: 1,
-            shadowRadius: 12 * em,
-          }}>
-          {Return2Point(servicIconSize)}
-        </View>
+        {Return2Point(servicIconSize)}
       </View>
+
       <View
         style={{
           position: 'absolute',
@@ -148,19 +153,24 @@ const FriendsMenuScreen = () => {
           borderColor: '#ffffff',
           borderWidth: 2 * em,
           backgroundColor: '#FFF',
-          elevation: 5
+          ...Platform.select({
+            ios: {
+              shadowColor: '#254D5621',
+              shadowOffset: {
+                width: 0,
+                height: 10 * hm,
+              }, shadowOpacity: 1,
+              shadowRadius: 12 * em,
+            },
+            android: {
+              elevation: 5,
+            },
+          }),
         }}
       >
         <TouchableOpacity
           onPress={() => Actions.alertCircles()}
-          style={{
-            shadowColor: '#254D5621',
-            shadowOffset: {
-              width: 0,
-              height: 10 * em,
-            }, shadowOpacity: 1,
-            shadowRadius: 12 * em,
-          }}>
+        >
           {Alert({ width: 26.45 * em, height: 22.31 * em })}
         </TouchableOpacity>
       </View>
@@ -182,19 +192,24 @@ const FriendsMenuScreen = () => {
           backgroundColor: 'rgba(255, 244, 217, 1)',
           borderColor: '#ffffff',
           borderWidth: 2 * em,
-          elevation: 5,
+          ...Platform.select({
+            ios: {
+              shadowColor: '#254D5621',
+              shadowOffset: {
+                width: 0,
+                height: 10 * hm,
+              }, shadowOpacity: 1,
+              shadowRadius: 12 * em,
+            },
+            android: {
+              elevation: 5,
+            },
+          }),
         }}
       >
         <TouchableOpacity
           onPress={() => Actions.friendOrganize()}
-          style={{
-            shadowColor: '#254D5612',
-            shadowOffset: {
-              width: 0,
-              height: 10 * hm,
-            }, shadowOpacity: 1,
-            shadowRadius: 12 * em,
-          }}>
+        >
           {Workshop(servicIconSize)}
         </TouchableOpacity>
       </View>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { em, WIDTH } from '../../constants/consts';
+import { em, hm, WIDTH } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 import CommonBackButton from '../button/CommonBackButton';
 import CommonHeader from './CommonHeader';
@@ -49,6 +49,7 @@ const styles = {
     color: 'rgba(106, 133, 150, 1)',
     fontSize: 14 * em,
     marginRight: 17 * em,
+    marginBottom: -11 * hm,
     fontFamily: 'Lato-SemiBold'
   },
   topViewHeader: {

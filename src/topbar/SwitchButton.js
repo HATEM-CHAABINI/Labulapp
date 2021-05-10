@@ -66,7 +66,7 @@ export default class SwitchButton extends Component {
   }
 
   render() {
-    const topPadding = 10 * em;
+    const topPadding = 15 * em;
     const dirsign = this.props.switchdirection || this.state.direction;
     const transX = ((this.props.switchWidth || this.state.sbWidth) / 2 - 14 * em) * dirsign - this.state.offsetX;
     return (
@@ -103,7 +103,7 @@ export default class SwitchButton extends Component {
                   style={[
                     switchStyles.wayBtnActive,
                     {
-                      width: this.props.switchWidth / 2 || this.state.sbWidth / 2,
+                      width: this.props.switchWidth / 2.4 || this.state.sbWidth / 2,
                       height: this.props.switchHeight - topPadding || this.state.sbHeight - topPadding,
                       borderRadius:
                         this.props.switchBorderRadius !== undefined
@@ -123,7 +123,7 @@ export default class SwitchButton extends Component {
                     width: this.props.switchWidth / 2 || this.state.sbWidth / 2,
                     height: this.props.switchHeight - topPadding || this.state.sbHeight - topPadding,
                     left: 5 * em,
-                    top: 5 * em,
+                    top: 7.5 * em,
                   },
                 ]}>
                 <Text
@@ -144,7 +144,7 @@ export default class SwitchButton extends Component {
                   {
                     width: this.props.switchWidth / 2 || this.state.sbWidth / 2,
                     height: this.props.switchHeight - topPadding || this.state.sbHeight - topPadding,
-                    top: 5 * em,
+                    top:7.5 * em,
                     right: 5 * em,
                   },
                 ]}>
@@ -182,8 +182,8 @@ const switchStyles = StyleSheet.create({
     flexDirection: 'row',
   },
   wayBtnActive: {
-    marginTop: 5 * em,
-    marginLeft: 6 * em,
+    marginTop: 7.5 * em,
+    marginLeft: 11 * em,
     marginRight: 6 * em,
     elevation: 10
   },

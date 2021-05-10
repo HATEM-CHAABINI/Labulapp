@@ -14,7 +14,7 @@ const HomeScreen = () => {
         <View style={styles.container}>
             <View style={styles.registerWrapper}>
                 <Text style={{ color: '#6A8596', fontFamily: 'lato-Regular', fontSize: 16 * em }} >
-                    Je n'ai pas de compte?
+                    Je n'ai pas de compte ? 
                 </Text>
                 <Text
                     onPress={() => {
@@ -22,7 +22,7 @@ const HomeScreen = () => {
                     }}
                     style={{ fontFamily: 'Lato-Semibold', color: '#40CDDE', fontSize: 16 * em }}
                 >
-                    Je m'inscris
+                {" "}Je m'inscris
                 </Text>
             </View>
             <CommonMediumButton

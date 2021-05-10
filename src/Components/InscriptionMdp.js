@@ -16,7 +16,6 @@ import {
 import {em, HEIGHT, hm, WIDTH} from '../constants';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import PasswordInputText from 'react-native-hide-show-password-input';
 
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';

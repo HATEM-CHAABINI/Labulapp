@@ -129,7 +129,7 @@ export default () => {
     <Router>
       {!state.authenticated ? (
         <Scene key="root">
-          {/* <Scene key="loading" hideNavBar component={LoadingScreen} /> */}
+          <Scene key="loading" authenticated={state.authenticated} hideNavBar component={LoadingScreen} />
           <Scene key="home" hideNavBar component={HomeScreen} />
           {/* landing page */}
           <Scene key="loginMenu" hideNavBar component={Connexion} />
@@ -183,6 +183,7 @@ export default () => {
         </Scene>
       ) : (
         <Scene key="root">
+          <Scene key="loading" authenticated={state.authenticated} hideNavBar component={LoadingScreen} />
           <Scene key="main" hideNavBar component={MainScreen} />
           <Scene key="myNeed" hideNavBar component={MyNeedScreen} />
 

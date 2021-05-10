@@ -6,13 +6,16 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const LoadingScreen = (props) => {
     const [percent, setPercent] = useState(0);
-
     useEffect(() => {
+        if (props.authenticated){
+            Actions.reset('main');
+        }else{
         if (percent < 100) {
             increasePercent();
         } else {
             Actions.reset('home');
         }
+    }
     }, [percent]);
 
     function increasePercent() {

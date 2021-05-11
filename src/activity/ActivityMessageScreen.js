@@ -15,6 +15,8 @@ import { CheckedBlue, } from '../assets/svg/icons';
 import CommonHeader from '../Components/header/CommonHeader';
 import CommonListItem from '../adapter/CommonListItem';
 import FlecheM1 from '../assets/icons/message/FlecheM1';
+import Up from '../assets/icons/message/Up';
+import Down from '../assets/icons/message/Down';
 
 const OTHERSIDE = 1;
 const OURSIDE = 2;
@@ -74,8 +76,8 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   ) : (
     <CommonButton
       style={styles.optionBtn}
-      //leftIcon={<Like width={14 * em} height={13 * em} />}
-      text="Accepter"
+      leftIcon={<Up width={14 * em} height={13 * em} />}
+      text="   Accepter"
       textStyle={{ fontSize: 14 * em }}
       onPress={() => {
         activityType === 'invitation' ? setAccepted(true) : setMessageCounterVisible(true);
@@ -92,8 +94,8 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   ) : (
     <CommonButton
       style={[styles.optionBtn, { backgroundColor: '#F9547B' }]}
-      //leftIcon={<CheckedBlue width={12 * em} height={8.79 * em} />}
-      text="Refuser"
+      leftIcon={<Down width={14 * em} height={13 * em} />}
+      text="   Refuser"
       textStyle={{ fontSize: 14 * em }}
       onPress={() => {
         setRefused(true);
@@ -147,6 +149,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             <TelephoneWhite width={20 * em} height={20 * em} />
           </TouchableOpacity>
         }
+        
         centerView={
           <CommonListItem
             onPress={() => setMessageProfileVisible(!messageProfileVisible)}

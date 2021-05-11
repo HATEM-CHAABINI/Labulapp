@@ -1,5 +1,5 @@
-import React,{useEffect} from 'react';
-import { View, TouchableOpacity, Text,Alert } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import CommonHeader from '../../Components/header/CommonHeader';
 import Switch from '../../Components/other/Switch';
@@ -11,14 +11,14 @@ import auth, { firebase } from "@react-native-firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../../redux/actions/login';
 const MySettingScreen = () => {
-  
+
   const dispatch = useDispatch();
 
   const logout = () => {
-      
+
     auth()
-    .signOut()
-    .then(() => {console.log('User signed out!'),dispatch(addLogin(''))}).catch((e=>{console.log(e),dispatch(addLogin(''))}));
+      .signOut()
+      .then(() => { console.log('User signed out!'), dispatch(addLogin('')) }).catch((e => { console.log(e), dispatch(addLogin('')) }));
   }
   return (
     <View style={styles.container}>
@@ -78,7 +78,7 @@ const MySettingScreen = () => {
       />
       <View style={styles.rectangle} />
       <TouchableOpacity
-         onPress={() =>
+        onPress={() =>
           Alert.alert('Me déconnecter', 'Voulez-vous vous déconnecter?', [
             { text: 'Oui', onPress: () => { logout() } },
             { text: 'Annuler', style: 'cancel' },
@@ -96,7 +96,7 @@ const MySettingScreen = () => {
           borderColor: '#ffffff',
           borderWidth: 2 * em,
         }}>
-        <Text style={{color:"#1E2D60",fontFamily:'lato-bold',fontSize:16*em}}>Me déconnecter</Text>
+        <Text style={{ color: "#1E2D60", fontFamily: 'Lato-Bold', fontSize: 16 * em }}>Me déconnecter</Text>
 
       </TouchableOpacity>
     </View >
@@ -106,7 +106,7 @@ const MySettingScreen = () => {
 const styles = {
   container: {
     backgroundColor: '#FFFFFF',
-    flex:1
+    flex: 1
   },
   header: {
     marginTop: 27 * hm,

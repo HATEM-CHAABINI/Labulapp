@@ -17,6 +17,7 @@ import CommonListItem from '../adapter/CommonListItem';
 import FlecheM1 from '../assets/icons/message/FlecheM1';
 import Up from '../assets/icons/message/Up';
 import Down from '../assets/icons/message/Down';
+import Time_circle from '../assets/svg/icons';
 
 const OTHERSIDE = 1;
 const OURSIDE = 2;
@@ -63,7 +64,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       icon={<Image source={message.service.coverImage} style={styles.titleIcon} />}
       title={message.service.title}
       titleStyle={{ fontFamily: 'Lato-Bold', color: '#1E2D60', fontSize: 14 * em }}
-      rightView={isAccepted && <View style={{ width: 20 * em, height: 30 * em, backgroundColor: 'blue' }} />}
+      rightView={isAccepted && <Time_circle />}
     />
   );
   const AcceptButton = accepted ? (
@@ -145,26 +146,26 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         rightView={
           <TouchableOpacity style={styles.dialIcon}
           //  onPress={() => Actions.activityDial()}
-           >
+          >
             <TelephoneWhite width={20 * em} height={20 * em} />
           </TouchableOpacity>
         }
-        
+
         leftView={
-          <TouchableOpacity style={{ alignSelf: 'center',marginLeft:27*em,marginRight:12*em,top:3*hm}}
+          <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 27 * em, marginRight: 12 * em, top: 3 * hm }}
           //  onPress={() => Actions.activityDial()}
-           >
+          >
             <BackArrowWhite width={30 * em} height={30 * hm} />
           </TouchableOpacity>
         }
-        
+
         centerView={
           <CommonListItem
             onPress={() => setMessageProfileVisible(!messageProfileVisible)}
             style={{ flex: 1 }}
             icon={<Image source={message.user.photo} style={styles.avatarIcon} />}
             title={message.user.name}
-            titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff' ,fontSize:16*em}}
+            titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff', fontSize: 16 * em }}
           />
         }
       />
@@ -194,11 +195,11 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             <View style={styles.inputView}>
               <TextInput placeholder="Écrit ici ton message …" style={styles.inputText} />
             </View>
-       <TouchableOpacity
-              style={{right:15*em,position:'absolute'}}
-            onPress={() => console.log("ddjdjdjdjdjdj")}>
-             <FlecheM1 width={20*em} height={20*hm} />
-          </TouchableOpacity>            
+            <TouchableOpacity
+              style={{ right: 15 * em, position: 'absolute' }}
+              onPress={() => console.log("ddjdjdjdjdjdj")}>
+              <FlecheM1 width={20 * em} height={20 * hm} />
+            </TouchableOpacity>
           </View>
           {!isAccepted && optionView}
           <View style={{ flex: 1 }}>
@@ -228,7 +229,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 
 const styles = {
   container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#40CDDE' },
-  header: { marginBottom: 10 * hm, marginTop: 40 * hm ,alignSelf:'center'},
+  header: { marginBottom: 10 * hm, marginTop: 40 * hm, alignSelf: 'center' },
   toast: {
     alignItems: 'center',
     marginLeft: -30 * em,
@@ -258,7 +259,7 @@ const styles = {
     paddingHorizontal: 29 * em,
     justifyContent: 'space-between',
     flexDirection: 'column',
-    
+
   },
   popupHeader: { paddingVertical: 15 * hm },
   titleView: { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' },

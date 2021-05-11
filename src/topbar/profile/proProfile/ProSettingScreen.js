@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { em, hm } from '../../../constants/consts';
 import CommonHeader from '../../../Components/header/CommonHeader';
 import Switch from '../../../Components/other/Switch';
@@ -62,7 +62,31 @@ const ProSettingScreen = () => {
         subTitle="Activez la réception de notifications"
       />
       <View style={styles.line2} />
+      {/* <View style={styles.rectangle} /> */}
+      <TouchableOpacity
+        onPress={() =>
+          Alert.alert('Me déconnecter', 'Voulez-vous vous déconnecter?', [
+            { text: 'Oui', onPress: () => { logout() } },
+            { text: 'Annuler', style: 'cancel' },
+          ])
+        }
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          width: '100%',
+          height: 59 * hm,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#F0F5F7',
+          borderColor: '#ffffff',
+          borderWidth: 2 * em,
+        }}>
+        <Text style={{ color: "#1E2D60", fontFamily: 'Lato-Bold', fontSize: 16 * em }}>Me déconnecter</Text>
+
+      </TouchableOpacity>
     </View>
+
   );
 };
 
@@ -74,12 +98,16 @@ const styles = {
     marginTop: 27 * hm,
     marginBottom: 10 * hm,
   },
+  rectangle: {
+    height: 200 * hm,
+    backgroundColor: 'white',
+  },
   line: {
     height: 10 * hm,
     backgroundColor: '#F0F5F7',
   },
   line2: {
-    height: 500 * hm,
+    height: 370 * hm,
     backgroundColor: '#FFF',
   },
   listItem: {

@@ -28,7 +28,7 @@ const SearchBox = (props) => {
             <Magnifier width={20 * em} height={20 * em} />
           </View>
         )}
-        {onFocus && <SmallText text="Saisissez votre email" color="rgba(160, 174, 184, 1)" />}
+        {onFocus && <SmallText text={props.smallText || 'Rechercher un contact'} color="rgba(160, 174, 184, 1)" />}
         <TextInput
           value={value}
           onChangeText={_handleText}
@@ -47,7 +47,7 @@ const SearchBox = (props) => {
         />
       </View>
       {onFocus && (
-        <TouchableOpacity onPress={() => _delete()}>
+        <TouchableOpacity style={styles.cross} onPress={() => _delete()}>
           <CrossCircle width={17 * em} height={17 * em} />
         </TouchableOpacity>
       )}
@@ -68,4 +68,5 @@ const styles = {
   },
 
   imgBtnSearch: { marginRight: 15 * em },
+  cross: { marginBottom: 17 * em },
 };

@@ -28,14 +28,14 @@ const AlertAddNoteScreen = (props) => {
         <View>
           <TitleText text="Ajoute une note" style={styles.title} />
           <CommentText
-            text="Si besoin ajoute des détails de cette alerte"
+            text="Si besoin, ajoute des détails de cette alerte"
             style={styles.comment}
             titleStyle={styles.listCaption}
           />
           <CommonListItem
             icon={iconEdit}
             style={[styles.listItem, { height: 62 * em }]}
-            title="Détail ta demande ici"
+            title="Détaille l'alerte ici"
             subTitle="(Soit concis pour être plus efficace)"
             titleStyle={styles.listCaption}
             subTitleStyle={styles.listComment}
@@ -73,14 +73,21 @@ const styles = {
     fontSize: 28 * em,
     fontWeight: 'bold',
   },
-  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * em },
+  comment: {
+    fontFamily: 'Lato-Regular',
+    textAlign: 'left',
+    lineHeight: 20 * em,
+    height: 17 * hm,
+    textAlignVertical: 'center',
+    marginTop: 10 * em
+  },
   listItem: {
     height: 43 * em,
     marginTop: 25 * hm,
   },
   icon: { width: 19 * em, height: 22 * em, marginRight: 20 * em },
-  listCaption: { color: '#6A8596' },
-  listComment: { fontSize: 13 * em, lineHeight: 17 * em, color: '#6A8596' },
+  listCaption: { fontFamily: 'Lato-Medium', fontSize: 16 * em, color: '#6A8596' },
+  listComment: { fontFamily: 'Lato-Medium', fontSize: 13 * em, lineHeight: 17 * em, color: '#6A8596' },
   nextBtn: {
     alignSelf: 'flex-end',
     marginBottom: 30 * hm,

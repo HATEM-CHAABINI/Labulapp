@@ -52,12 +52,12 @@ const AlertShareScreen = (props) => {
       <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} />
       <View style={styles.body}>
         <TitleText text={'Partager avec'} style={styles.title} />
-        <SearchBox style={styles.searchBox} comment="Rechercher par ville" />
+        <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" />
         <FlatList
           data={usersList}
           renderItem={renderFlatList}
           keyExtractor={(i) => i.id}
-          style={{ marginTop: 25 * em }}
+          style={{ marginTop: 29 * hm }}
         />
         <CommonButton
           style={[styles.btn, { backgroundColor: conceptColor }]}
@@ -92,7 +92,7 @@ const styles = {
     marginTop: 35 * hm,
     lineHeight: 38 * em,
   },
-  searchBox: { marginTop: 35 * hm, height: 52 * hm },
+  searchBox: { marginBottom: -35 * hm, marginTop: 15 * hm, height: 52 * hm },
   location: {
     alignSelf: 'center',
     marginTop: 15 * hm,

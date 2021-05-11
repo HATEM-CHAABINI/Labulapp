@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { View, Image, FlatList } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
-import SearchBox from '../../Components/other/SearchBox';
+import SearchBox from '../../Components/other/SearchBoxAlert';
 import CommentText from '../../text/CommentText';
 import SearchCommonListItem from '../../adapter/SearchCommonListItem';
 import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 import { Actions } from 'react-native-router-flux';
 import { LocationRed } from '../../assets/svg/icons';
+import { KeyboardAvoidingView } from 'react-native';
+import { Platform } from 'react-native';
 
 const AlertAddressScreen = (props) => {
   const conceptColor = '#F9547B';
@@ -20,13 +22,17 @@ const AlertAddressScreen = (props) => {
   );
   return (
     <View style={styles.container}>
+
       <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} />
+
+
       <View style={styles.body}>
+
         <TitleText text={'Où ?'} style={styles.title} />
 
         <SearchBox
           style={styles.searchBox}
-          comment="Rechercher par ville"
+          comment="Rechercher une addresse"
           onChangeText={() => {
             getSearchResult([
               {
@@ -50,7 +56,7 @@ const AlertAddressScreen = (props) => {
           }}
         />
         <View style={[styles.location, { display: locationViewVisible }]}>
-          <LocationRed width={16 * em} height={19 * em} />
+          {/* <LocationRed width={16 * em} height={19 * em} /> */}
           <CommentText text={'Utiliser ma position'} color="#F9547B" style={{ marginLeft: 10 * em }} />
         </View>
         {/*
@@ -60,24 +66,28 @@ const AlertAddressScreen = (props) => {
           keyExtractor={(i) => i.id}
           style={{ marginTop: 25 * hm }}
         /> */}
+        {/* </View> */}
+
+        <MabulNextButton
+          color={conceptColor}
+          style={[styles.btn, { backgroundColor: conceptColor }]}
+          text="Suivant"
+          onPress={() => Actions.alertAddNote({ process: 60 })}
+        />
+
       </View>
-      <MabulNextButton
-        color={conceptColor}
-        style={[styles.btn, { backgroundColor: conceptColor }]}
-        text="Suivant"
-        onPress={() => Actions.alertAddNote({ process: 60 })}
-      />
+
     </View>
   );
 };
 
 const styles = {
   container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#ffffff' },
-  header: { height: '10.3%' },
-  body: { flex: 1, width: '100%', paddingHorizontal: 30 * em, justifyContent: 'flex-start' },
+  header: { height: '10.3%', alignItems: 'flex-start', },
+  body: { flex: 1, width: '100%', paddingHorizontal: 30 * em, justifyContent: 'flex-start', alignItems: 'flex-start', },
   commonHeader: { marginTop: 27 * hm },
   title: { textAlign: 'left', marginTop: 35 * hm, lineHeight: 38 * em },
-  searchBox: { marginTop: 35 * hm, height: 44 * em },
+  searchBox: { marginTop: 16 * hm, height: 53 * em },
   location: { alignSelf: 'center', marginTop: 15 * hm, alignItems: 'center', flexDirection: 'row' },
   listItem: { height: 38 * hm, marginTop: 35 * hm },
   btn: {

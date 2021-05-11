@@ -6,7 +6,7 @@ import CommonText from '../../text/CommonText';
 import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 import { Actions } from 'react-native-router-flux';
-import { Family, Friend, Neighbor, All } from '../../assets/svg/icons';
+import { Family, Friend, Neighbor, CheckBlue, All } from '../../assets/svg/icons';
 
 const AlertCircleSelectionScreen = () => {
   const conceptColor = '#F9547B';
@@ -23,7 +23,7 @@ const AlertCircleSelectionScreen = () => {
               <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * hm }} />
             </View>
             <View style={styles.iconViewChecked}>
-              <Friend width={48 * em} height={48 * em} />
+              <CheckBlue width={48 * em} height={48 * em} />
               <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * hm }} />
             </View>
           </View>

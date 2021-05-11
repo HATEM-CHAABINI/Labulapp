@@ -47,7 +47,7 @@ const CalendarListView = (props) => {
 const styles = {
   container: {
     width: '100%',
-    height: HEIGHT - 230 * em,
+    height: HEIGHT - 180 * em,
     borderBottomStartRadius: 24 * em,
     borderBottomEndRadius: 24 * em,
     paddingBottom: 24 * em,

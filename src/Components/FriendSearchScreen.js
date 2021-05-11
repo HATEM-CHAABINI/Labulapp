@@ -7,6 +7,8 @@ import SearchCommonListItem from '../adapter/SearchCommonListItem';
 import FriendCommonHeader from '../topbar/FriendCommonHeader';
 import User from '../model/user/User';
 import RelationshipType from '../model/user/RelationshipType';
+import { TouchableOpacity ,Text} from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 const users = [
   new User(
@@ -34,7 +36,17 @@ const FriendsSearchScreen = () => {
 
   return (
     <View style={styles.container}>
-      <FriendCommonHeader title="Rechercher" />
+      {/* <FriendCommonHeader title="Rechercher" /> */}
+      <View style={{backgroundColor:'white'}}>
+            <View style={{paddingTop:hm*40,paddingLeft:em*30}}>
+            <TouchableOpacity
+              onPress={() => Actions.pop()}>
+              <Fleche />
+            </TouchableOpacity>
+            </View>
+            <Text style={{paddingTop:hm*22,paddingLeft:em*30,color:'#1E2D60',fontSize:34*em,fontFamily:'lato-black'}}>Rechercher</Text>
+        
+            </View>
       <SearchBox
         style={styles.searchbox}
         onChangeText={(text) => {

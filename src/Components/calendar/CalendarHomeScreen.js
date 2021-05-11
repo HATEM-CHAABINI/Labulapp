@@ -148,10 +148,11 @@ const CalendarHomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <TitleText text="Mon calendrier" textAlign="left" style={styles.titleText} />
       </View>
       <View style={styles.calendarContainer}>
         {showCalendarStrip && (
+          <View>
+            <TitleText text="Mon calendrier" textAlign="left" style={styles.titleText} /> 
           <CalendarStrip
             style={styles.calendarStripStyle}
             locale={locale}
@@ -183,6 +184,7 @@ const CalendarHomeScreen = () => {
             highlightDateNumberStyle={styles.highlightDateNumberStyle}
             highlightDateNameStyle={styles.highlightDateNameStyle}
           />
+          </View>
         )}
         {showCalendarStrip && (
           <TouchableOpacity
@@ -204,7 +206,7 @@ const CalendarHomeScreen = () => {
         )}
       </View>
       {showCalendarStrip && (
-        <FlatList
+        <FlatList 
           data={selectedSchedules}
           renderItem={renderFlatList}
           keyExtractor={(i) => i.id}
@@ -218,9 +220,10 @@ const CalendarHomeScreen = () => {
 const styles = {
   container: {
     flex: 1,
+    backgroundColor:'#F0F5F7'
   },
   titleContainer: { paddingLeft: 30 * em, paddingTop: 30 * hm, paddingBottom: 36 * hm, backgroundColor: '#fff' },
-  titleText: { marginTop: 40 * hm },
+  titleText: { marginTop: 12 * hm,marginLeft:15*em,marginBottom:25*hm,fontFamily:'lato-black',fontSize:34*em },
   calendarContainer: {
     alignItems: 'center',
     backgroundColor: '#ffffff',

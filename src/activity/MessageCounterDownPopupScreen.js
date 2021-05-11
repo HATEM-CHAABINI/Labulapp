@@ -57,7 +57,7 @@ const MessageCounterDownPopupScreen = (props) => {
             }}
           />
           <CommonButton
-            text={'Répondre plus tard'}
+            text={'Ne plus voir ce message'}
             style={styles.laterBtn}
             onPress={() => {
               props.onPress();

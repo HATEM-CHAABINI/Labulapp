@@ -152,38 +152,38 @@ const CalendarHomeScreen = () => {
       <View style={styles.calendarContainer}>
         {showCalendarStrip && (
           <View>
-            <TitleText text="Mon calendrier" textAlign="left" style={styles.titleText} /> 
-          <CalendarStrip
-            style={styles.calendarStripStyle}
-            locale={locale}
-            calendarHeaderStyle={styles.calendarHeaderStyle}
-            calendarHeaderContainerStyle={styles.calendarHeaderContainerStyle}
-            dayContainerStyle={styles.dayContainerStyle}
-            highlightDateNumberContainerStyle={styles.highlightDateNumberContainerStyle}
-            dateNumberStyle={styles.dateNumberStyle}
-            dateNameStyle={styles.dateNameStyle}
-            selectedDate={selectedDate}
-            onDateSelected={(date) => {
-              if (moment().isSame(date, 'day')) {
-                setSelectedSchedules(schedules);
-                return;
+            <TitleText text="Mon calendrier" textAlign="left" style={styles.titleText} />
+            <CalendarStrip
+              style={styles.calendarStripStyle}
+              locale={locale}
+              calendarHeaderStyle={styles.calendarHeaderStyle}
+              calendarHeaderContainerStyle={styles.calendarHeaderContainerStyle}
+              dayContainerStyle={styles.dayContainerStyle}
+              highlightDateNumberContainerStyle={styles.highlightDateNumberContainerStyle}
+              dateNumberStyle={styles.dateNumberStyle}
+              dateNameStyle={styles.dateNameStyle}
+              selectedDate={selectedDate}
+              onDateSelected={(date) => {
+                if (moment().isSame(date, 'day')) {
+                  setSelectedSchedules(schedules);
+                  return;
+                }
+                setSelectedSchedules(blankSchedules);
+              }}
+              leftSelector={
+                <View style={styles.calendarIconStyle}>
+                  <PrevIcon width={10 * em} height={10 * hm} />
+                </View>
               }
-              setSelectedSchedules(blankSchedules);
-            }}
-            leftSelector={
-              <View style={styles.calendarIconStyle}>
-                <PrevIcon width={10 * em} height={10 * hm} />
-              </View>
-            }
-            rightSelector={
-              <View style={styles.calendarIconStyle}>
-                <NextIcon width={10 * em} height={10 * hm} />
-              </View>
-            }
-            upperCaseDays={false}
-            highlightDateNumberStyle={styles.highlightDateNumberStyle}
-            highlightDateNameStyle={styles.highlightDateNameStyle}
-          />
+              rightSelector={
+                <View style={styles.calendarIconStyle}>
+                  <NextIcon width={10 * em} height={10 * hm} />
+                </View>
+              }
+              upperCaseDays={false}
+              highlightDateNumberStyle={styles.highlightDateNumberStyle}
+              highlightDateNameStyle={styles.highlightDateNameStyle}
+            />
           </View>
         )}
         {showCalendarStrip && (
@@ -206,7 +206,7 @@ const CalendarHomeScreen = () => {
         )}
       </View>
       {showCalendarStrip && (
-        <FlatList 
+        <FlatList
           data={selectedSchedules}
           renderItem={renderFlatList}
           keyExtractor={(i) => i.id}
@@ -220,10 +220,10 @@ const CalendarHomeScreen = () => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor:'#F0F5F7'
+    backgroundColor: '#F0F5F7'
   },
   titleContainer: { paddingLeft: 30 * em, paddingTop: 30 * hm, paddingBottom: 36 * hm, backgroundColor: '#fff' },
-  titleText: { marginTop: 12 * hm,marginLeft:15*em,marginBottom:25*hm,fontFamily:'lato-black',fontSize:34*em },
+  titleText: { marginTop: 12 * hm, marginLeft: 15 * em, marginBottom: 25 * hm, fontFamily: 'Lato-Black', fontSize: 34 * em },
   calendarContainer: {
     alignItems: 'center',
     backgroundColor: '#ffffff',
@@ -237,7 +237,7 @@ const styles = {
     },
     shadowRadius: 25 * em,
   },
-  calendarStripStyle: { width: WIDTH - 32 * em, height: 140 *hm },
+  calendarStripStyle: { width: WIDTH - 32 * em, height: 140 * hm },
   calendarHeaderStyle: { color: '#1E2D60', fontSize: 20 * em, fontFamily: 'Lato-Regular' },
   calendarIconStyle: {
     width: 20 * em,

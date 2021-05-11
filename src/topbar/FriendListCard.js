@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
-import { em, hm,WIDTH } from '../constants/consts';
+import { em, hm, WIDTH } from '../constants/consts';
 import CommentText from '../text/CommentText';
 import SmallText from '../text/SmallText';
 import ServiceType from '../model/service/ServiceType';
@@ -48,7 +48,7 @@ const FriendListCard = (props) => {
             <View style={{ flexDirection: 'row', marginTop: 17 * hm }}>
               <CommentText align="left" text={data.price} color="#1E2D60" style={{ fontFamily: 'Lato-Medium' }} />
               <CommentText align="left" text={data.discountPrice} color="#6A8596" style={styles.discountPrice} />
-              <CommentText align="left" text={data.discountInfo} color="#6A8596" style={{ marginLeft: 10 * em ,color:"#A0AEB8"}} />
+              <CommentText align="left" text={data.discountInfo} color="#6A8596" style={{ marginLeft: 10 * em, color: "#A0AEB8" }} />
             </View>
           </View>
         </View>
@@ -69,11 +69,11 @@ const FriendListCard = (props) => {
         <View style={styles.textBox}>
           {data.date && (
             <View style={styles.dateText}>
-            <SmallText
-              
-              text={data.type === ServiceType.ORGANIZE ? '01 Mar · 13h00' : '04 Fév · 08h00'}
-              color="#6A8596"
-            /></View>
+              <SmallText
+
+                text={data.type === ServiceType.ORGANIZE ? '01 Mar · 13h00' : '04 Fév · 08h00'}
+                color="#6A8596"
+              /></View>
           )}
           <CommonListItem
             style={styles.bottomContent}
@@ -126,7 +126,7 @@ const styles = {
     paddingTop: 15 * hm,
     paddingBottom: 35 * hm,
   },
-  containerIcon: { flexDirection: 'row-reverse',marginTop:4*em,marginLeft:4*em },
+  containerIcon: { flexDirection: 'row-reverse', marginTop: 4 * em, marginLeft: 4 * em },
   coverImage: {
     alignSelf: 'center',
     marginTop: 15 * hm,
@@ -137,7 +137,8 @@ const styles = {
   textBox: { flex: 1 },
   dateText: {
     alignSelf: 'flex-start',
-    backgroundColor: '#ffffff',fontFamily:"lato-Medium" ,
+    backgroundColor: '#ffffff',
+    fontFamily: "Lato-Medium",
     paddingRight: padding,
     paddingVertical: 5 * hm,
     marginTop: -12.5 * hm,
@@ -145,19 +146,22 @@ const styles = {
   },
   bottomContent: { marginTop: padding, width: '100%' },
   userDesc: { flex: 1, justifyContent: 'space-between' },
-  userDescText: { fontSize: 14 * em, color: '#1E2D60',fontFamily:'lato-bold' },
-  plan: { fontSize: 14 * em, color: '#1E2D60',fontFamily:'lato-Medium' },
-  userDescTexts: { fontSize: 12 * em, color: '#1E2D60',fontFamily:"lato-Medium" 
-},
-  organText: { marginLeft: textBoxMargin, marginTop: 15 * hm,fontSize:14*em
+  userDescText: { fontSize: 14 * em, color: '#1E2D60', fontFamily: 'Lato-Bold' },
+  plan: { fontSize: 14 * em, color: '#1E2D60', fontFamily: 'lato-Medium' },
+  userDescTexts: {
+    fontSize: 12 * em, color: '#1E2D60', fontFamily: "Lato-Medium"
+  },
+  organText: {
+    marginLeft: textBoxMargin, marginTop: 15 * hm, fontSize: 14 * em
     , fontFamily: 'Lato-Bold'
-   },
-  priceText: { marginLeft: textBoxMargin, marginTop: 10 * hm,
-     fontFamily: 'Lato-Medium' 
-    },
+  },
+  priceText: {
+    marginLeft: textBoxMargin, marginTop: 10 * hm,
+    fontFamily: 'Lato-Medium'
+  },
   locationContainer: { marginLeft: textBoxMargin, marginTop: 8 * hm },
   locationText: { color: '#6A8596', fontSize: 12 * em, marginRight: 75 * em, marginLeft: 10 * em, lineHeight: 14 * em },
-  dateTextCommon: { paddingVertical: 10 * hm, paddingHorizontal: padding ,fontFamily:"lato-Medium"},
+  dateTextCommon: { paddingVertical: 10 * hm, paddingHorizontal: padding, fontFamily: "lato-Medium" },
   discountPrice: { marginLeft: 10 * em, textDecorationLine: 'line-through', textDecorationStyle: 'solid' },
 };
 export default FriendListCard;

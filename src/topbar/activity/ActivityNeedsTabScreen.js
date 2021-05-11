@@ -16,7 +16,7 @@ const needMessages = [
     new User('Amandine Bernard', require('../../assets/images/avatar.png')),
     'Récolter des figues',
     require('../../assets/images/sample_cover_9.png'),
-    'Bonjour Mathieu, je voudrai savoir si c…',
+    'Bonjour Mathieu, je souhaite participer...',
     false,
     '21:59'
   ),

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
@@ -8,6 +8,8 @@ import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
 import CommonButton from '../../Components/button/CommonButton';
 import { AlertWhite } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
+import { TouchableOpacity } from 'react-native';
+import CheckBox from '../../Components/checkbox/CheckBox';
 
 const usersList = [
   { id: 0.1, userName: 'Tous' },
@@ -42,8 +44,38 @@ const usersList = [
     invited: true,
   },
 ];
+
+
+
 const AlertShareScreen = (props) => {
   const conceptColor = '#F9547B';
+
+  const [optionCheck, setOptionCheck] = useState();
+  const [checked, setChecked] = useState();
+
+  const renderOptions = ({ item, index }) => {
+
+    return (
+      <TouchableOpacity
+        activeOpacity={1}
+        style={[
+          checked === index ? styles.optionBoxClicked : styles.optionBox,
+          { marginBottom: index === 2 ? 40 * em : 0 },
+        ]}
+        onPress={() => setChecked(index)}>
+        {/* <TitleText style={styles.optionCaption} text={item.userName} /> */}
+        <SearchCommonListItem text={item.userName} icon={item.avatar} style={styles.listItem} option />
+        <CheckBox
+          oval
+          red
+          single
+          isChecked={checked === index}
+          singleSelection={true}
+          onClick={() => setChecked(index)}
+        />
+      </TouchableOpacity>
+    );
+  };
   const renderFlatList = ({ item }) => (
     <SearchCommonListItem text={item.userName} icon={item.avatar} style={styles.listItem} option />
   );
@@ -53,12 +85,13 @@ const AlertShareScreen = (props) => {
       <View style={styles.body}>
         <TitleText text={'Partager avec'} style={styles.title} />
         <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" />
-        <FlatList
+        <FlatList data={usersList} renderItem={renderOptions} keyExtractor={(i) => i.id} style={{ marginTop: 29 * hm }} />
+        {/* <FlatList
           data={usersList}
           renderItem={renderFlatList}
           keyExtractor={(i) => i.id}
           style={{ marginTop: 29 * hm }}
-        />
+        /> */}
         <CommonButton
           style={[styles.btn, { backgroundColor: conceptColor }]}
           text="J’alerte"
@@ -100,11 +133,27 @@ const styles = {
     flexDirection: 'row',
   },
 
-  listItem: { marginTop: 35 * hm },
+  listItem: { marginBottom: 35 * hm },
   btn: {
     width: 315 * em,
     alignSelf: 'center',
     marginBottom: 30 * hm,
+  },
+  optionBox: {
+
+
+
+  },
+  optionBoxClicked: {
+
+
+
+
+  },
+  optionCaption: {
+    fontSize: 18 * em,
+    lineHeight: 23 * em,
+    color: '#1E2D60',
   },
 };
 

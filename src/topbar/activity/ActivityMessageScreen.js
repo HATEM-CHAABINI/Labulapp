@@ -132,7 +132,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         id: 0,
         date: '21:59',
         side: OTHERSIDE,
-        messages: ['Bonjour Mathieu, je souhaite t’inviter pour Nettoyage de ma voiture'],
+        messages: ['Bonjour Mathieu, je souhaite participer pour Récolter des figues.'],
       },
     ];
   }
@@ -253,7 +253,7 @@ const styles = {
     paddingVertical: 17 * em,
     paddingHorizontal: 17 * em,
   },
-  inputText: { fontSize: 14 * em, lineHeight: 16 * em, color: '#9093A3', padding: 0 },
+  inputText: { fontFamily: 'Lato-Medium', fontSize: 14 * em, lineHeight: 16 * em, color: '#9093A3', padding: 0 },
   imageIcon: { width: 40 * em, height: 40 * em, marginRight: 15 * em },
   optionBtn: {
     paddingVertical: 14 * em,

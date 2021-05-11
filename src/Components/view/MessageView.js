@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { em,hm } from '../../constants/consts';
+import { em, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
+import CommonText from '../../text/CommonText';
 import SmallText from '../../text/SmallText';
 
 const OTHERSIDE = 1;
@@ -31,7 +32,7 @@ const MessageView = ({ date, messages, side }) => {
 
         return (
           <View style={[msgView, addBorderRadius]}>
-            <CommentText
+            <CommonText
               text={message}
               color={side === OURSIDE ? '#ffffff' : '#1E2D60'}
               align={side === OURSIDE ? 'right' : 'left'}
@@ -49,7 +50,7 @@ const styles = {
     borderRadius: 23 * em,
     backgroundColor: '#F0F5F7',
     alignSelf: 'baseline',
-    marginRight: 40 * em,
+    marginRight: 30 * em,
     marginBottom: 2 * em,
   },
   msgRightView: {
@@ -61,6 +62,6 @@ const styles = {
     marginLeft: 40 * em,
     marginBottom: 2 * hm,
   },
-  dateTxt: { marginTop: 3 * hm,},
+  dateTxt: { marginTop: 3 * hm, },
 };
 export default MessageView;

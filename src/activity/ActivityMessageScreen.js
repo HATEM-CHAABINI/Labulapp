@@ -11,7 +11,7 @@ import MessageCounterDownPopupScreen from './MessageCounterDownPopupScreen';
 import MessageProfilePopupScreen from './MessageProfilePopupScreen';
 import { TelephoneWhite } from '../assets/svg/icons';
 import MessageView from '../Components/view/MessageView';
-import { CheckedBlue } from '../assets/svg/icons';
+import { CheckedBlue, } from '../assets/svg/icons';
 import CommonHeader from '../Components/header/CommonHeader';
 import CommonListItem from '../adapter/CommonListItem';
 
@@ -66,14 +66,14 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   const AcceptButton = accepted ? (
     <CommonButton
       style={styles.optionBtnClicked}
-      leftIcon={<CheckedBlue width={12 * em} height={8.79 * em} />}
+      //leftIcon={<Like width={12 * em} height={8.79 * em} />}
       text="Accepter"
       textStyle={{ fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em }}
     />
   ) : (
     <CommonButton
       style={styles.optionBtn}
-      // rightIcon={}
+      //leftIcon={<Like width={14 * em} height={13 * em} />}
       text="Accepter"
       textStyle={{ fontSize: 14 * em }}
       onPress={() => {
@@ -91,7 +91,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   ) : (
     <CommonButton
       style={[styles.optionBtn, { backgroundColor: '#F9547B' }]}
-      // rightIcon={}
+      //leftIcon={<CheckedBlue width={12 * em} height={8.79 * em} />}
       text="Refuser"
       textStyle={{ fontSize: 14 * em }}
       onPress={() => {
@@ -131,7 +131,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         id: 0,
         date: '21:59',
         side: OTHERSIDE,
-        messages: ['Bonjour Mathieu, je souhaite t’inviter pour Nettoyage de ma voiture'],
+        messages: ['Bonjour Mathieu, je souhaite participer pour Récolter des figues.'],
       },
     ];
   }
@@ -255,20 +255,15 @@ const styles = {
   inputText: { fontSize: 14 * em, lineHeight: 16 * em, color: '#9093A3', padding: 0 },
   imageIcon: { width: 40 * em, height: 40 * em, marginRight: 15 * em },
   optionBtn: {
-    paddingVertical: 14 * em,
+
+    paddingVertical: 12 * em,
     paddingHorizontal: 22 * em,
     backgroundColor: '#40CDDE',
     borderRadius: 21 * em,
     alignSelf: 'baseline',
     width: 125 * em,
-    elevation: 2,
-    shadowColor: '#0000001A',
-    shadowOffset: {
-      width: -3 * em,
-      height: 6 * hm,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 10 * em,
+    height: 41 * hm
+
   },
   optionBtnClicked: {
     paddingVertical: 9 * em,
@@ -276,6 +271,7 @@ const styles = {
     backgroundColor: 'rgba(64, 205, 222, 0.2) ',
     borderRadius: 21 * em,
     width: 125 * em,
+    height: 41 * hm
   },
   optionView: {
     alignItems: 'center',

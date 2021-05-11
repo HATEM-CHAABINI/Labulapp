@@ -260,7 +260,6 @@ const styles = {
     paddingHorizontal: 22 * em,
     backgroundColor: '#40CDDE',
     borderRadius: 21 * em,
-    alignSelf: 'baseline',
     width: 125 * em,
     height: 41 * hm
 

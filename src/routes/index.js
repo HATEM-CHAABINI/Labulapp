@@ -130,7 +130,7 @@ export default () => {
       {!state.authenticated ? (
         <Scene key="root">
          
-          {/* <Scene key="loading" authenticated={state.authenticated} hideNavBar component={LoadingScreen} /> */}
+          <Scene key="loading" authenticated={state.authenticated} hideNavBar component={LoadingScreen} />
           <Scene key="home" hideNavBar component={HomeScreen} />
           {/* landing page */}
           <Scene key="loginMenu" hideNavBar component={Connexion} />

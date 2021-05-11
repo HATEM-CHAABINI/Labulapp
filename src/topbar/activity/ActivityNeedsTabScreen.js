@@ -91,7 +91,8 @@ const ActivityNeedsTabScreen = (props) => {
       onPress={() => Actions.activityMessage({ activityType: 'needs', message: item })}
     />
   );
-  const listView = <FlatList data={needMessages} renderItem={renderFlatList} keyExtractor={(i) => i.id} />;
+  const listView =
+   <FlatList key={(i) => i.id} data={needMessages} renderItem={renderFlatList} keyExtractor={(i) => i.id} />;
   return (
     <View style={styles.container}>
       <View style={styles.view}>{isEmpty ? emptyView : listView}</View>

@@ -23,7 +23,7 @@ const MySettingScreen = () => {
   return (
     <View style={styles.container}>
       <CommonHeader dark={true} style={styles.header} />
-      <View style={styles.line} />
+      {/* <View style={styles.line} />
       <CommonListItem
         style={styles.listItem}
         icon={
@@ -49,7 +49,7 @@ const MySettingScreen = () => {
           />
         }
         subTitle="Ma localisation est activé"
-      />
+      /> */}
       <View style={styles.line} />
       <CommonListItem
         style={styles.listItem}
@@ -92,11 +92,11 @@ const MySettingScreen = () => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#ffffff',
+          backgroundColor: '#F0F5F7',
           borderColor: '#ffffff',
           borderWidth: 2 * em,
         }}>
-        <Text>Me déconnecter</Text>
+        <Text style={{color:"#1E2D60",fontFamily:'lato-bold',fontSize:16*em}}>Me déconnecter</Text>
 
       </TouchableOpacity>
     </View >
@@ -106,6 +106,7 @@ const MySettingScreen = () => {
 const styles = {
   container: {
     backgroundColor: '#FFFFFF',
+    flex:1
   },
   header: {
     marginTop: 27 * hm,
@@ -117,7 +118,7 @@ const styles = {
   },
   rectangle: {
     height: 200 * hm,
-    backgroundColor: '#F0F5F7',
+    backgroundColor: 'white',
   },
   listItem: {
     marginLeft: 30 * em,
@@ -143,15 +144,16 @@ const styles = {
     justifyContent: 'space-between',
   },
   listTitle: {
-    fontFamily: 'Lato-Black',
+    fontFamily: 'Lato-bold',
     fontSize: 18 * em,
     lineHeight: 23 * hm,
     textAlign: 'left',
     marginBottom: 7 * em,
-    color: 'rgba(30, 45, 96, 1)',
+    color: '#1E2D60',
   },
   listComment: {
-    lineHeight: 16 * hm,
+    fontFamily: 'Lato-Medium',
+    lineHeight: 14 * em,
     textAlign: 'left',
     width: 170 * em,
   },

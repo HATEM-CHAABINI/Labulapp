@@ -90,7 +90,7 @@ const App = () => {
       <SafeAreaView style={styles.safeArea} />
       <View style={styles.container}>
         <Provider  store={store}>
-          <PersistGate persistor={persistor}>
+          <PersistGate loading={<LoadingScreen />} persistor={persistor}>
             <RootRoutes />
           </PersistGate>
         </Provider>

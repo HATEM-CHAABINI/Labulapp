@@ -14,6 +14,7 @@ import MessageView from '../Components/view/MessageView';
 import { CheckedBlue, } from '../assets/svg/icons';
 import CommonHeader from '../Components/header/CommonHeader';
 import CommonListItem from '../adapter/CommonListItem';
+import FlecheM1 from '../assets/icons/message/FlecheM1';
 
 const OTHERSIDE = 1;
 const OURSIDE = 2;
@@ -140,7 +141,9 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       <CommonHeader
         style={styles.header}
         rightView={
-          <TouchableOpacity style={styles.dialIcon} onPress={() => Actions.activityDial()}>
+          <TouchableOpacity style={styles.dialIcon}
+          //  onPress={() => Actions.activityDial()}
+           >
             <TelephoneWhite width={20 * em} height={20 * em} />
           </TouchableOpacity>
         }
@@ -180,6 +183,11 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             <View style={styles.inputView}>
               <TextInput placeholder="Écrit ici ton message …" style={styles.inputText} />
             </View>
+       <TouchableOpacity
+              style={{right:15*em,position:'absolute'}}
+            onPress={() => console.log("ddjdjdjdjdjdj")}>
+             <FlecheM1 width={20*em} height={20*hm} />
+          </TouchableOpacity>            
           </View>
           {!isAccepted && optionView}
           <View style={{ flex: 1 }}>

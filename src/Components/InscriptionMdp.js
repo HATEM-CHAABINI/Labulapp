@@ -47,7 +47,7 @@ export default ({navigation}) => {
       .required('Aucun mot de passe fourni.')
       .min(
         8,
-        'Le mot de passe est trop court - doit contenir au moins 8 caractères.',
+        'Le mot de passe est trop court minimum 8 caractères.',
       ),
   });
   const onSubmit = values => {
@@ -178,8 +178,9 @@ const styles = StyleSheet.create({
   },
   descerrorText: {
     fontSize: 12 * em,
-    marginTop: 10 * hm,
-    color: 'red',
+    bottom:30*hm,
+    // marginBottom: 4 * hm,
+    color: "red",
   },
   descText: {
     fontSize: 12 * em,

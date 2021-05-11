@@ -166,7 +166,8 @@ const styles = StyleSheet.create({
   },
   descerrorText: {
     fontSize: 12 * em,
-    marginTop: 10 * hm,
+    bottom:35*hm,
+    // marginBottom: 4 * hm,
     color: "red",
   },
   descText: {

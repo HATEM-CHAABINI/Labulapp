@@ -35,6 +35,8 @@ import auth, { firebase } from "@react-native-firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 import firestore from '@react-native-firebase/firestore';
+import Toast from 'react-native-simple-toast';
+
 let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -242,7 +244,8 @@ const styles = StyleSheet.create({
   },
   descerrorText: {
     fontSize: 12 * em,
-    marginBottom: 10 * em,
+    bottom:30*hm,
+    // marginBottom: 4 * hm,
     color: "red",
   },
   contentWrapper: {

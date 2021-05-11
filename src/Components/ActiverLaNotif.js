@@ -22,8 +22,13 @@ import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 import * as Firebase from 'firebase'
 import firestore from '@react-native-firebase/firestore';
+import auth, { firebase } from "@react-native-firebase/auth";
+import { LogBox } from 'react-native';
 
 
+let fireKey = firestore().collection("users");
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 export default ({ navigation }) => {
 const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
@@ -68,7 +73,7 @@ const login = () => {
       console.log(error.code, error.message);
     });
 };
-  const loginWithActiveNotification = () => {
+  const loginWithActiveNotification = async () => {
     setloading(true);
     Firebase.default
       .auth()
@@ -89,9 +94,28 @@ const login = () => {
               email,
               activeNotification,
             })
-            .then(() => {
-             
+            .then(async() => {
+              try {
+                let response = await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
+                if (response && response.user) {
+                  // Alert.alert("Success ", "Authenticated successfully")
+                  fireKey.doc(response.user.uid).get().then((res )=>{
+                   
+                  
+          Object.assign(res._data,response.user)
+          console.log(res._data)
+                     dispatch(addLogin(res._data));
+                   }).catch((e)=>{
+                     console.log(e)
+                   })
+                  
+                }
+              } catch (e) {
+                alert(e.message)
+                console.error(e.message)
+              }
               setloading(false);
+              // Actions.reset('main');
             })
             .catch(e => {
               console.log(e);

@@ -1,7 +1,7 @@
 
 import { View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import { em } from '../constants/consts';
+import { em, hm } from '../constants/consts';
 import CommonListItem from './CommonListItem';
 import UserType from '../model/user/UserType';
 import { Friend, Family, Neighbor, OptionGray } from '../assets/svg/icons';
@@ -80,10 +80,13 @@ const styles = {
     marginRight: 15 * em,
   },
   userNameStyle: {
-    // fontFamily: 'Lato-Black',
-    color: '#1E2D60', textAlign: 'left'
+    fontFamily: 'Lato-Black',
+    color: '#1E2D60',
+    textAlign: 'left',
+    marginBottom: 4 * hm
   },
   relationshipStyle: {
+    fontFamily: 'Lato-Regular',
     fontSize: 16 * em,
     color: '#A0AEB8',
     textAlign: 'left',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import ProfileInformationListItem from '../../adapter/ProfileInformationListItem';
 import CommonText from '../../text/CommonText';
@@ -14,7 +14,7 @@ const MyInformationScreen = (props) => {
   return (
     <ProfileCommonHeader title="Mes informations" onCancel={() => Actions.pop()} onFinish={() => Actions.pop()} >
       {/* <ProfileCommonHeader title="Mes informations" onCancel={() => Actions.pop()} onFinish={() => Actions.pop()} /> */}
-      <CommonText text="Connexion et sécurité" style={styles.itemTitle} />
+      <Text style={styles.itemTitle} >Connexion et sécurité</Text>
       <ProfileInformationListItem
         caption={'Mon email'}
         value={userProfile.email}
@@ -33,7 +33,7 @@ const MyInformationScreen = (props) => {
           setModalVisible(!modalVisible);
         }}
       />
-      <CommonText text="Contact" style={styles.itemTitle} />
+      <Text style={styles.itemTitle} >Contact</Text>
       <ProfileInformationListItem
         caption={'Mon mobile'}
         value={'+590 6 90 874 258'}
@@ -43,9 +43,9 @@ const MyInformationScreen = (props) => {
           setModalVisible(!modalVisible);
         }}
       />
-      <CommonText text="Localisation" style={styles.itemTitle} />
+      <Text style={styles.itemTitle} >Localisation</Text>
       <ProfileInformationListItem
-        caption={'Mon dresse'}
+        caption={'Mon adresse'}
         value={'ABYMES 97139\nGuadeloupe'}
         style={styles.listItem}
         onPress={() => {
@@ -76,8 +76,11 @@ const styles = {
     backgroundColor: '#F0F5F7',
   },
   itemTitle: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 16 * em,
+    color: '#6A8596',
     height: 18 * em,
-    lineHeight: 18 * em,
+    lineHeight: 19 * em,
     marginLeft: 25 * em,
     marginTop: 25 * hm,
   },

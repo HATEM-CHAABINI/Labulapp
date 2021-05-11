@@ -33,10 +33,10 @@ const PremiumSubscriptionScreen = (props) => {
           }
         />
         <View style={styles.containerTitle}>
-          <TitleText text="Labul" style={styles.title} />
-          <TitleText text=" Premium" style={styles.title} color={'#40CDDE'} />
+          <Text style={styles.title} >Labul </Text>
+          <Text style={styles.titleBleu} >Premium</Text>
         </View>
-        <TitleText text="Commence à vendre" style={styles.subTitle} />
+        <Text style={styles.subTitle} >Commence à vendre</Text>
         <View style={styles.popView}>
           <View style={styles.cardContainer}>
             <PurchaseMenuCard
@@ -60,59 +60,59 @@ const PremiumSubscriptionScreen = (props) => {
           <Text style={styles.guideline}>
             Inclus dans l'abonnement Light
           </Text>
-          <View style={{ flexDirection:'column'}}>
-          <View style={{marginLeft: 34 * em,flexDirection:'row',marginBottom:22*hm}}>
-            <Rayon width={17*em} height={24*hm}/> 
-            <Text style={{marginLeft:19*em, fontFamily:'lato-bold',fontSize:14*em,color:"#1E2D60"}}>
-            Dans un rayon de 1Km 
+          <View style={{ flexDirection: 'column' }}>
+            <View style={{ marginLeft: 34 * em, flexDirection: 'row', marginBottom: 22 * hm }}>
+              <Rayon width={17 * em} height={24 * hm} />
+              <Text style={{ marginLeft: 19 * em, fontFamily: 'Lato-Bold', fontSize: 14 * em, color: "#1E2D60" }}>
+                Dans un rayon de 1Km
             </Text>
-          </View>
-          <View style={{marginLeft: 32 * em,flexDirection:'row',marginBottom:23*hm}}>
-            <Visibilite width={22*em} height={21*hm}/> 
-              <Text style={{marginLeft:16*em, fontFamily:'lato-bold',fontSize:14*em,color:"#1E2D60"}}>
+            </View>
+            <View style={{ marginLeft: 32 * em, flexDirection: 'row', marginBottom: 23 * hm }}>
+              <Visibilite width={22 * em} height={21 * hm} />
+              <Text style={{ marginLeft: 16 * em, fontFamily: 'Lato-Bold', fontSize: 14 * em, color: "#1E2D60" }}>
                 Forte visibilité
               </Text>
-          </View>
-          <View style={{marginLeft: 33 * em,flexDirection:'row',marginBottom:26*hm}}>
-            <Economie width={22*em} height={21*hm}/> 
-              <Text style={{marginLeft:15*em, fontFamily:'lato-bold',fontSize:14*em,color:"#1E2D60"}}>
-              Economie de frais de communication
+            </View>
+            <View style={{ marginLeft: 33 * em, flexDirection: 'row', marginBottom: 26 * hm }}>
+              <Economie width={22 * em} height={21 * hm} />
+              <Text style={{ marginLeft: 15 * em, fontFamily: 'Lato-Bold', fontSize: 14 * em, color: "#1E2D60" }}>
+                Economie de frais de communication
               </Text>
-          </View>
-          <View style={{marginLeft: 32 * em,flexDirection:'row',marginBottom:23*hm}}>
-            <Bonplan width={22*em} height={22*hm}/> 
-              <Text style={{marginLeft:16*em, fontFamily:'lato-bold',fontSize:14*em,color:"#1E2D60"}}>
-              Annonce Bon plans
+            </View>
+            <View style={{ marginLeft: 32 * em, flexDirection: 'row', marginBottom: 23 * hm }}>
+              <Bonplan width={22 * em} height={22 * hm} />
+              <Text style={{ marginLeft: 16 * em, fontFamily: 'Lato-Bold', fontSize: 14 * em, color: "#1E2D60" }}>
+                Annonce Bon plans
               </Text>
-          </View>
-          <View style={{marginLeft: 32 * em,flexDirection:'row',marginBottom:20*hm}}>
-            <Promotion width={22*em} height={22*hm}/> 
-              <Text style={{marginLeft:16*em, fontFamily:'lato-bold',fontSize:14*em,color:"#1E2D60"}}>
-              Annonce Promotion
+            </View>
+            <View style={{ marginLeft: 32 * em, flexDirection: 'row', marginBottom: 20 * hm }}>
+              <Promotion width={22 * em} height={22 * hm} />
+              <Text style={{ marginLeft: 16 * em, fontFamily: 'Lato-Bold', fontSize: 14 * em, color: "#1E2D60" }}>
+                Annonce Promotion
               </Text>
-          </View>
-          <View style={{marginLeft: 33 * em,flexDirection:'row',marginBottom:26*hm}}>
-            <Evenement width={20*em} height={22*hm}/> 
-              <Text style={{marginLeft:17*em, fontFamily:'lato-bold',fontSize:14*em,color:"#1E2D60"}}>
-              Annonce Évènement payant
+            </View>
+            <View style={{ marginLeft: 33 * em, flexDirection: 'row', marginBottom: 26 * hm }}>
+              <Evenement width={20 * em} height={22 * hm} />
+              <Text style={{ marginLeft: 17 * em, fontFamily: 'Lato-Bold', fontSize: 14 * em, color: "#1E2D60" }}>
+                Annonce Évènement payant
               </Text>
-          </View>
-          <View style={{marginLeft: 32 * em,flexDirection:'row',marginBottom:48*hm}}>
-            <Contact width={22*em} height={20*hm}/> 
-              <Text style={{marginLeft:16*em, fontFamily:'lato-bold',fontSize:14*em,color:"#1E2D60"}}>
-              Mise en contact direct avec sa cible
+            </View>
+            <View style={{ marginLeft: 32 * em, flexDirection: 'row', marginBottom: 48 * hm }}>
+              <Contact width={22 * em} height={20 * hm} />
+              <Text style={{ marginLeft: 16 * em, fontFamily: 'Lato-Bold', fontSize: 14 * em, color: "#1E2D60" }}>
+                Mise en contact direct avec sa cible
               </Text>
-          </View>
-          <View style={{alignItems:'center',height:500*hm}}>
-            <Commerce style={{marginBottom:10*hm}} width={30*em} height={32*hm}/>
-            <Text style={{marginBottom:10*hm,fontFamily:'lato-bold',fontSize:18*em,color:'#1E2D60'}}>Le commerce de proximité réinventé</Text>
-            <Text style={{textAlign:'center',width:313*em,fontFamily:'lato-medium',fontSize:14*em,color:'#1E2D60'}}>Le forfait light est parfait pour tous ceux qui veulent vendre simplement et rapidement dans à + de 1km à la ronde.</Text>
-          </View>
+            </View>
+            <View style={{ alignItems: 'center', height: 200 * hm }}>
+              <Commerce style={{ marginBottom: 10 * hm }} width={30 * em} height={32 * hm} />
+              <Text style={{ marginBottom: 10 * hm, fontFamily: 'Lato-Bold', fontSize: 18 * em, color: '#1E2D60' }}>Le commerce de proximité réinventé</Text>
+              <Text style={{ textAlign: 'center', width: 313 * em, fontFamily: 'Lato-Medium', fontSize: 14 * em, color: '#1E2D60' }}>Le forfait light est parfait pour tous ceux qui veulent vendre simplement et rapidement dans à + de 1km à la ronde.</Text>
+            </View>
           </View>
           {/* <CommentText text="Et si votre chiffre d'affaire augmentait considérablement pour le prix d'un café par mois." color="#1E2D60" style={styles.guideline2}></CommentText> */}
-          
-       
-       
+
+
+
         </View>
       </ScrollView>
       <CommonBackButton onPress={() => Actions.pop()} dark={true} style={styles.backBtn} />
@@ -186,7 +186,7 @@ const PremiumSubscriptionScreen = (props) => {
 
 const styles = {
   container: { flex: 1, backgroundColor: 'transparent' },
-  scrollView: { backgroundColor: '#FFF'},
+  scrollView: { backgroundColor: '#FFF' },
   purchaseBtn: { position: 'absolute', alignSelf: 'center', bottom: 25 * hm },
   backBtn: { position: 'absolute', left: 15 * em, top: 27 * hm },
 
@@ -198,14 +198,16 @@ const styles = {
     alignSelf: 'center',
     marginBottom: 15 * hm,
   },
-  title: { fontFamily: 'Cocon-Regular', fontSize: 27 * em, lineHeight: 30 * em },
+  title: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#1E2D60' },
+  titleBleu: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#40CDDE' },
   containerTitle: { marginBottom: 0, flexDirection: 'row', justifyContent: 'center' },
   subTitle: {
     fontFamily: 'Lato-SemiBold',
     fontSize: 13 * em,
+    textAlign: 'center',
     fontWeight: '500',
     lineHeight: 17 * em,
-    marginBottom: 25 * hm
+    marginBottom: 24 * hm
   },
   popView: {
 
@@ -213,7 +215,7 @@ const styles = {
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 28 * em,
     borderTopRightRadius: 28 * em,
-    height: 1264 * hm,
+    //height: 500 * hm,
   },
   cardContainer: {
     flexDirection: 'row',
@@ -225,7 +227,7 @@ const styles = {
   card: { width: 160 * em, height: 207 * em, marginLeft: 7.5 * em, marginRight: 7.5 * em },
   comment: { color: '#1E2D60', fontFamily: 'Lato-Medium', fontSize: 10 * em, lineHeight: 12 * em, marginTop: 10 * hm, marginBottom: 24 * hm, textAlign: 'center' },
   commentBold: { color: '#1E2D60', fontFamily: 'Lato-Black', fontSize: 10 * em },
-  guideline: { fontFamily: 'Lato-Black', marginLeft: 30 * em, marginRight: 30 * em, fontSize: 21 * em, color: '#1E2D60', lineHeight: 18 * em ,marginBottom:19*hm},
+  guideline: { fontFamily: 'Lato-Black', marginLeft: 30 * em, marginRight: 30 * em, fontSize: 21 * em, color: '#1E2D60', lineHeight: 18 * em, marginBottom: 19 * hm },
   guideline2: { marginLeft: 30 * em, marginRight: 30 * em, textAlign: 'left' },
 
   modal: {

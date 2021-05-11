@@ -8,6 +8,7 @@ import CommonHeader from '../../Components/header/CommonHeader';
 import CommonText from '../../text/CommonText';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { RightArrow, LeftArrow } from '../../assets/svg/icons';
+import TinyText from '../../text/TinyText';
 const sections = [
   { title: 'Politique\nde confidentialité', content: '' },
   {
@@ -59,7 +60,7 @@ const PrivacyPolicyScreen = () => {
       stickyHeaderHeight={71 * em}
       parallaxHeaderHeight={197 * em}
       backgroundSpeed={10}
-      renderFixedHeader={() => <CommonHeader dark style={{ position: 'absolute', top: 27 * hm }} />}
+      renderFixedHeader={() => <CommonHeader dark style={{ position: 'absolute', top: 20 * hm, }} />}
       renderForeground={() => <TitleText text={'Politique\nde confidentialité'} style={styles.title} />}
       renderStickyHeader={() => (
         <View key="sticky-header" style={{ marginTop: 40 * em, alignItems: 'center' }}>
@@ -82,6 +83,7 @@ const PrivacyPolicyScreen = () => {
 const styles = {
   container: { backgroundColor: '#FFFFFF' },
   title: {
+
     lineHeight: 38 * em,
     textAlign: 'left',
     marginLeft: 30 * em,
@@ -96,7 +98,7 @@ const styles = {
     paddingHorizontal: 30 * em,
   },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  headerText: { width: 260 * em, fontSize: 24 * em, lineHeight: 29 * em, textAlign: 'left', color: '#1E2D60' },
+  headerText: { fontFamily: 'Lato-Bold', width: 260 * em, fontSize: 24 * em, marginBottom: 5 * hm, lineHeight: 29 * em, textAlign: 'left', color: '#1E2D60' },
   contentText: { textAlign: 'left', lineHeight: 25 * em, marginBottom: 10 * hm },
   common: {
     fontFamily: 'Lato-Bold',

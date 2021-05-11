@@ -67,4 +67,5 @@ const styles = {
   title: { textAlign: 'left' },
   subTitle: { textAlign: 'left' },
   bottomView: { flexDirection: 'row' },
+
 };

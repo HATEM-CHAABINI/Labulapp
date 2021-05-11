@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Image, ImageBackground } from 'react-native';
+import { View, TouchableOpacity, Platform, Text, Image, ImageBackground } from 'react-native';
 import CommentText from '../../../text/CommentText';
 import SmallText from '../../../text/SmallText';
 import { em, WIDTH, HEIGHT, hm } from '../../../constants/consts';
@@ -207,7 +207,18 @@ const styles = {
   },
   cardContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: -46 * em, marginBottom: 30 * hm },
   cardStyle: {
-
+    ...Platform.select({
+      ios: {
+        shadowOffset: {
+          width: 0,
+          height: 12 * em,
+        }, shadowOpacity: 1,
+        shadowRadius: 25 * em,
+      },
+      android: {
+        elevation: 10,
+      },
+    }),
     width: 150 * em,
     flexGrow: 1,
   },

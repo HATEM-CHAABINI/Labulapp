@@ -156,9 +156,9 @@ const styles = {
   },
   listItem: { marginBottom: 35 * hm, width: '100%' },
   listItemUserName: { color: '#1E2D60', lineHeight: 21 * em, fontFamily: 'Lato-Black' },
-  listItemComment: { color: '#A0AEB8', lineHeight: 18 * em },
-  listItemDate: { color: '#A0AEB8', fontSize: 13 * em, textAlign: 'right' },
-  listItemNotification: { marginLeft: 55 * em, textAlign: 'left', color: '#1E2D60' },
+  listItemComment: { fontFamily: 'Lato-Regular', color: '#A0AEB8', lineHeight: 18 * em },
+  listItemDate: { fontFamily: 'Lato-Medium', color: '#A0AEB8', fontSize: 13 * em, textAlign: 'right' },
+  listItemNotification: { fontFamily: 'Lato-Medium', marginLeft: 55 * em, textAlign: 'left', color: '#1E2D60' },
 };
 
 export default MyNotificationsScreen;

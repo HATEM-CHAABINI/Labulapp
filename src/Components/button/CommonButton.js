@@ -17,9 +17,9 @@ const styles = {
   buttonStyle: {
     backgroundColor: '#40CDDE',
     paddingVertical: 20 * hm,
-    height: 59 * hm,
+    //height: 59 * hm,
     width: 315 * em,
-        borderRadius: 20 * em,
+    borderRadius: 20 * em,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',

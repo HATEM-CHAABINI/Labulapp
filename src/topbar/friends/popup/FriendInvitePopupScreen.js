@@ -87,7 +87,7 @@ const FriendInvitePopupScreen = (props) => {
 const styles = {
   container: {
     backgroundColor: 'white',
-    marginTop: 38 * hm,
+    marginTop: 20.5 * hm,
     marginRight: 0,
     marginLeft: 0,
     marginBottom: 0,

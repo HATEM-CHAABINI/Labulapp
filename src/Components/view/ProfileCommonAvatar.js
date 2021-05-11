@@ -25,7 +25,7 @@ const ProfileCommonAvatar = (props) => {
             width: props.style.width + borderWidth,
             height: props.style.width + borderWidth,
             borderRadius: (props.style.width + borderWidth) / 2,
-            backgroundColor: '#ffffff33',
+            backgroundColor: '#ffffff',
           },
         ]}>
         {props.pro

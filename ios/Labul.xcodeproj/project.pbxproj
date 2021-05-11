@@ -30,6 +30,7 @@
 		D01275A555EF42888CCBA2BF /* Lato-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FFDE3A4D5BD4E18BB40C23E /* Lato-SemiBold.ttf */; };
 		E55BA981343972669A4D5F0E /* libPods-Labul-LabulTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4FFCFB023B339E616849BDD /* libPods-Labul-LabulTests.a */; };
 		EF8EA2DCE66B4B2B8B5EDC8F /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C148FDB070934BDCBF381B8F /* Lato-Light.ttf */; };
+		D845AD52198F4FBB9DD2F2C0 /* Cocon-RegularTR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28C6ACAE136144959AAC93C8 /* Cocon-RegularTR.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		E839EECA938A4802BB6C5771 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FEE22BE222E84DB89EFB2F80 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		28C6ACAE136144959AAC93C8 /* Cocon-RegularTR.ttf */ = {isa = PBXFileReference; name = "Cocon-RegularTR.ttf"; path = "../src/assets/fonts/Lato/Cocon-RegularTR.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				DB5320A0CA914B18BE22236A /* Lato-ThinItalic.ttf */,
 				D41471D800B14487AC5CE368 /* Lato-Medium.ttf */,
 				6FFDE3A4D5BD4E18BB40C23E /* Lato-SemiBold.ttf */,
+				28C6ACAE136144959AAC93C8 /* Cocon-RegularTR.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				A5680D8A7B63425D99FADAD7 /* Lato-Medium.ttf in Resources */,
 				D01275A555EF42888CCBA2BF /* Lato-SemiBold.ttf in Resources */,
 				4A6493042649930500198607 /* launch_screen.png in Resources */,
+				D845AD52198F4FBB9DD2F2C0 /* Cocon-RegularTR.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

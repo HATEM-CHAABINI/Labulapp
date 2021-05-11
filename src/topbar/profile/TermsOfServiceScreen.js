@@ -65,7 +65,7 @@ const TermsOfServiceScreen = () => {
       stickyHeaderHeight={71 * em}
       parallaxHeaderHeight={197 * em}
       backgroundSpeed={10}
-      renderFixedHeader={() => <CommonHeader dark style={{ position: 'absolute', top: 27 * hm }} />}
+      renderFixedHeader={() => <CommonHeader dark style={{ position: 'absolute', top: 20 * hm }} />}
       renderForeground={() => <TitleText text={'Conditions générales d’utilisation'} style={styles.title} />}
       renderStickyHeader={() => (
         <View key="sticky-header" style={{ marginTop: 40 * hm, alignItems: 'center' }}>
@@ -103,7 +103,7 @@ const styles = {
     paddingHorizontal: 30 * em,
   },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  headerText: { fontSize: 24 * em, lineHeight: 29 * em, textAlign: 'left', color: '#1E2D60' },
+  headerText: { fontFamily: 'Lato-Bold', fontSize: 24 * em, marginBottom: 5 * hm, lineHeight: 29 * em, textAlign: 'left', color: '#1E2D60' },
   contentText: { textAlign: 'left', lineHeight: 25 * em, marginBottom: 10 * hm },
 };
 

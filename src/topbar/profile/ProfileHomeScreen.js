@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar } from 'react-native';
 import { em, WIDTH, HEIGHT, hm } from '../../constants/consts';
 import TitleText from '../../text/TitleText';
@@ -15,7 +15,7 @@ import User from '../../model/user/User';
 import AccountType from '../../model/user/AccountType';
 import { feedbackIcons } from '../../constants/icons';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import {userDetail} from '../../setup'
+import { userDetail } from '../../setup'
 
 import { useSelector } from 'react-redux';
 const originalMyProfile = new User(
@@ -65,10 +65,10 @@ const ProfileHomeScreen = (props) => {
   );
   const [userData, setuserData] = useState(null)
   const { userDetails } = useSelector((state) => state.loginReducers);
-useEffect(() => {
-  console.log(userDetails)
+  useEffect(() => {
+    console.log(userDetails)
 
-}, [])
+  }, [])
 
   return (
     <ParallaxScrollView
@@ -81,12 +81,12 @@ useEffect(() => {
         <View style={styles.topView}>
           <ProfileCommonAvatar
             style={styles.avatar}
-            fullName={userDetails.displayName === undefined ? userDetails.prenom+" "+userDetails.nom:userDetails.displayName}
+            fullName={userDetails.displayName === undefined ? userDetails.prenom + " " + userDetails.nom : userDetails.displayName}
             icon={userProfile.photo}
             borderWidth={3 * em}
           />
           <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
-            <TitleText style={styles.txtFullName} text={userDetails.displayName === undefined ? userDetails.prenom+" "+userDetails.nom:userDetails.displayName} />
+            <TitleText style={styles.txtFullName} text={userDetails.displayName === undefined ? userDetails.prenom + " " + userDetails.nom : userDetails.displayName} />
             <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" />
           </TouchableOpacity>
         </View>
@@ -279,7 +279,7 @@ const styles = {
   //marginBottom: 15 * hm,
   line2: { marginTop: 16 * hm, height: 1 * hm, backgroundColor: '#B3C6CF33' },
   imgBg: {
-    height: HEIGHT * 0.21,
+    height: 138 * hm,
     flex: 1,
     backgroundColor: '#40CDDE0C',
     marginTop: 35 * hm,
@@ -291,7 +291,7 @@ const styles = {
     marginTop: 25 * hm,
     fontSize: 20 * em,
     marginLeft: 18 * em,
-    fontFamily: 'Lato-Bold'
+    //fontFamily: 'Lato-Bold'
   },
   imageTextSub: {
     fontFamily: 'Lato-Medium',

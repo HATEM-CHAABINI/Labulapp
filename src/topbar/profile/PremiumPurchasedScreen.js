@@ -28,8 +28,8 @@ const PremiumPurchasedScreen = (props) => {
         <Premium width={230 * hm} height={121 * hm} />
       </View>
       <View style={styles.containerTitle}>
-        <TitleText text="Labul" style={styles.title} />
-        <TitleText text=" Premium" style={styles.title} color={'#40CDDE'} />
+        <Text style={styles.title} >Labul</Text>
+        <Text style={styles.titleBleu} >Premium</Text>
       </View>
       <SmallText
         text="Vous êtes abonné à Labul Premium Light"
@@ -53,8 +53,8 @@ const PremiumPurchasedScreen = (props) => {
           borderColor={'#ffffff'}
           name="Pro"
           price="1,90€"
-          commentRadius="Rayon de 1 à 3Km. "
-          comment="Idéal pour un professionnel qui veut faire grimper son chiffre d’affaire"
+          commentRadius="Rayon de 500m."
+          comment="Idéal pour vendre juste autour de soi"
           style={{ width: 315 * em, height: 150 * em, marginTop: 65 * hm }}
         />
       )}
@@ -68,7 +68,8 @@ const styles = {
   container: { flex: 1, alignItems: 'center' },
   backBtn: { zIndex: 1, position: 'absolute', left: 15 * em, top: 27 * hm },
   logo: { marginTop: 54.5 * hm, alignSelf: 'center', marginBottom: 15 * hm },
-  title: { fontSize: 27 * em, lineHeight: 30 * em, color: '#ffffff' },
+  title: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#1E2D60' },
+  titleBleu: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#40CDDE' },
   containerTitle: { marginBottom: 0, flexDirection: 'row', justifyContent: 'center' },
   cancelBtn: { position: 'absolute', bottom: 24 * em },
 };

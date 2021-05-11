@@ -5,6 +5,7 @@ import CommentText from '../../text/CommentText';
 import CommonBackButton from '../button/CommonBackButton';
 import CommonText from '../../text/CommonText';
 import { Actions } from 'react-native-router-flux';
+import TinyText from '../../text/TinyText';
 
 const CommonHeader = (props) => {
   var leftButton = props.leftTxt ? (
@@ -18,7 +19,7 @@ const CommonHeader = (props) => {
   );
 
   var centerView = props.centerTxt ? (
-    <CommonText text={props.centerTxt} color={'#1E2D60'} style={[styles.centerTxt, props.centerTxtStyle]} />
+    <TinyText text={props.centerTxt} color={'#1E2D60'} style={[styles.centerTxt, props.centerTxtStyle]} />
   ) : (
     props.centerView
   );
@@ -50,7 +51,7 @@ const styles = {
   left: { justifyContent: 'center' },
   leftTxt: { marginLeft: 15 * em, fontSize: 16 * em, color: '#6A8596', lineHeight: 18 * em, textAlign: 'left' },
   center: { flex: 1, justifyContent: 'center', flexDirection: 'row', alignSelf: 'center' },
-  centerTxt: { lineHeight: 18 * em, textAlign: 'center', alignSelf: 'center' },
+  centerTxt: { fontFamily: 'Lato-Bold', fontSize: 16 * em, lineHeight: 18 * em, textAlign: 'center', alignSelf: 'center' },
   right: { justifyContent: 'center', alignSelf: 'center' },
   rightTxt: { marginRight: 15 * em, lineHeight: 17 * em, textAlign: 'right' },
 };

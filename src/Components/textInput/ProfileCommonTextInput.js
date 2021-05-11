@@ -14,7 +14,7 @@ const ProfileCommonTextInput = (props) => {
         color={'#A0AEB8'}
       />
       <TextInput
-        style={[styles.textInput, { marginBottom: onFocus ? 25 * hm : 7 * hm }]}
+        style={[styles.textInput, { marginBottom: onFocus ? 20 * hm : 7 * hm }]}
         onFocus={() => setOnFocus(true)}
         onBlur={() => setOnFocus(false)}
         multiline={true}
@@ -59,13 +59,13 @@ const ProfileCommonTextInput = (props) => {
 export default ProfileCommonTextInput;
 const styles = {
   containerFocusOn: {
-    borderBottomColor: '#41D0E2',
+    borderBottomColor: '#41D0E280',
     borderBottomWidth: 2 * hm,
     justifyContent: 'flex-end',
   },
   containerFocusOff: { borderBottomColor: '#BFCDDB', borderBottomWidth: 1 * hm, justifyContent: 'flex-end' },
   textInput: {
-    fontFamily: 'Lato-Regular',
+    fontFamily: 'Lato-Bold',
     color: '#1E2D60',
     lineHeight: 18 * hm,
     fontSize: 16 * hm,
@@ -73,6 +73,6 @@ const styles = {
     paddingVertical: 0,
     textAlignVertical: 'center',
   },
-  commentTextFocusOn: { lineHeight: 14 * hm, marginBottom: 5 * hm },
-  commentTextFocusOff: { fontSize: 16 * hm, lineHeight: 18 * hm },
+  commentTextFocusOn: { fontFamily: 'Lato-Medium', lineHeight: 14 * hm, marginBottom: 4 * hm },
+  commentTextFocusOff: { fontFamily: 'Lato-Regular', fontSize: 16 * hm, lineHeight: 18 * hm, marginBottom: 4 * hm },
 };

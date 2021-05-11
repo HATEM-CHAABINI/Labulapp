@@ -158,8 +158,9 @@ const styles = StyleSheet.create({
     },
     descerrorText: {
       fontSize: 12 * em,
-      marginTop: 10 * hm,
-      color: "red",
+    bottom:30*hm,
+    // marginBottom: 4 * hm,
+    color: "red",
     },  
     contentWrapper:{
       width:WIDTH,

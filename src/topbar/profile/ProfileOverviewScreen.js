@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, WIDTH, hm } from '../../constants/consts';
@@ -11,10 +11,16 @@ import CommentText from '../../text/CommentText';
 import ProfileCommonSpecView from '../../Components/view/ProfileCommonSpecView';
 import { Family, Friend, Neighbor } from '../../assets/svg/icons';
 import AccountType from '../../model/user/AccountType';
+import firestore from '@react-native-firebase/firestore';
 
+
+import { useSelector } from 'react-redux';
+
+let fireKey = firestore().collection("user");
 const iconSize = { width: 48 * em, height: 48 * em };
 const ProfileOverviewScreen = (props) => {
   const [userProfile] = useState(props.userProfile);
+  const { userDetails } = useSelector((state) => state.loginReducers);
   const badgesView = userProfile.feedback ? (
     <ScrollView horizontal={true} style={{ paddingTop: 20 * hm, paddingBottom: 20 * hm, paddingLeft: 30 * em }}>
       {userProfile.feedback.map((badge, index) => (
@@ -27,6 +33,7 @@ const ProfileOverviewScreen = (props) => {
       <CommonText text={'Crée des demandes pour avoir des badges'} style={styles.requestText} />
     </>
   );
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -49,7 +56,7 @@ const ProfileOverviewScreen = (props) => {
             logoVisible={false}
             borderWidth={3 * em}
           />
-          <TitleText text={userProfile.name} style={styles.fullNameText} />
+          <TitleText text={userDetails.displayName === undefined ? userDetails.prenom+" "+userDetails.nom:userDetails.displayName} style={styles.fullNameText} />
           {userProfile.availability && <CommentText text={userProfile.availability} color="#1E2D60" />}
           {userProfile.presentation && <CommentText text={userProfile.presentation} color="#6A8596" />}
           {userProfile.specs && (

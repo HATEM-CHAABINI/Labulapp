@@ -21,7 +21,8 @@ export const firebase = !fb.apps.length
       measurementId: 'G-Z21P0XG9FY',
     })
   : fb.app();
-
+  import auth from '@react-native-firebase/auth';
+export const userDetail = auth().currentUser
 // Initialize Firebase
 //   firebase.initializeApp(firebaseConfig);
 //   firebase.analytics();

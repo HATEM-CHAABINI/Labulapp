@@ -21,65 +21,114 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 import * as Firebase from 'firebase'
-import app from 'firebase/app'
-const fireStore = app.firestore()
+import firestore from '@react-native-firebase/firestore';
+import auth, { firebase } from "@react-native-firebase/auth";
+import { LogBox } from 'react-native';
+
+
+let fireKey = firestore().collection("users");
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 export default ({ navigation }) => {
 const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
   const dispatch = useDispatch();
-console.log(signupData.adresse);
-  const login = () => {
-    setloading(true)
-Firebase.default.auth().createUserWithEmailAndPassword(signupData.email,signupData.password).then((userCredential) => {
-      var user = userCredential.user;
-      if(user){
-        user.updateProfile({
-           displayName: signupData.nom,
-           nom: signupData.nom,// some displayName,
-           prenom:signupData.prenom,
-           phoneNumber:  signupData.mobile,
-           adresse:  signupData.adresse,
-        }).then(
-          (s)=>{
-            Object.assign(user, { login: true, NotificationActive: false });
-           
-            dispatch(addLogin(user));
-          } // perform any other operation
-        )
-      }
-    })
-    .catch((error) => {
-      console.log(error.code,error.message)
-    });
-    setloading(false)
-   
-  }
-  const loginWithActiveNotification = () => {
-    setloading(true)
-    Firebase.default.auth().createUserWithEmailAndPassword(signupData.email,signupData.password).then((userCredential) => {
-          var user = userCredential.user;
-          
-          fireStore.collection("usersCollection")
-          .add({
-            uid: userCredential.user.uid,
-            nom: signupData.nom,
-            prenom: signupData.prenom,
-            mobile:  signupData.mobile,
-            adresse:  signupData.adresse,
-    
-          })
-    
-          Object.assign(signupData, { login: true, NotificationActive: true });
-        console.log(user)
-        dispatch(addLogin(user));
-        })
-        .catch((error) => {
-          console.log(error.code,error.message)
-        });
-        setloading(false)
-  
 
-  }
+  
+const login = () => {
+  setloading(true);
+  Firebase.default
+    .auth()
+    .createUserWithEmailAndPassword(signupData.email, signupData.password)
+    .then(userCredential => {
+      var user = userCredential.user;
+      let {nom, mobile, prenom, adresse, email} = signupData;
+      let activeNotification = false;
+      if (user) {
+        firestore()
+          .collection('users')
+          .doc(user.uid)
+          .set({
+            nom,
+            prenom,
+            adresse,
+            mobile,
+            email,
+            activeNotification,
+          })
+          .then(() => {
+         
+            setloading(false);
+          })
+          .catch(e => {
+            console.log(e);
+            setloading(false);
+          });
+      }
+    
+    })
+    .catch(error => {
+      alert(error.message);
+      setloading(false);
+      console.log(error.code, error.message);
+    });
+};
+  const loginWithActiveNotification = async () => {
+    setloading(true);
+    Firebase.default
+      .auth()
+      .createUserWithEmailAndPassword(signupData.email, signupData.password)
+      .then(userCredential => {
+        var user = userCredential.user;
+        let {nom, mobile, prenom, adresse, email} = signupData;
+        let activeNotification = true;
+        if (user) {
+          firestore()
+            .collection('users')
+            .doc(user.uid)
+            .set({
+              nom,
+              prenom,
+              adresse,
+              mobile,
+              email,
+              activeNotification,
+            })
+            .then(async() => {
+              try {
+                let response = await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
+                if (response && response.user) {
+                  // Alert.alert("Success ", "Authenticated successfully")
+                  fireKey.doc(response.user.uid).get().then((res )=>{
+                   
+                  
+          Object.assign(res._data,response.user)
+          console.log(res._data)
+                     dispatch(addLogin(res._data));
+                   }).catch((e)=>{
+                     console.log(e)
+                   })
+                  
+                }
+              } catch (e) {
+                alert(e.message)
+                console.error(e.message)
+              }
+              setloading(false);
+              // Actions.reset('main');
+            })
+            .catch(e => {
+              console.log(e);
+              setloading(false);
+            });
+        }
+      })
+      .catch(error => {
+        alert(error.message);
+        setloading(false);
+        console.log(error.code, error.message);
+      });
+  };
   return (
 
     <View style={{ flex: 1, backgroundColor: "#F0F5F7" }}>

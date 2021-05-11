@@ -129,7 +129,8 @@ export default () => {
     <Router>
       {!state.authenticated ? (
         <Scene key="root">
-          <Scene key="loading" authenticated={state.authenticated} hideNavBar component={LoadingScreen} />
+         
+          {/* <Scene key="loading" authenticated={state.authenticated} hideNavBar component={LoadingScreen} /> */}
           <Scene key="home" hideNavBar component={HomeScreen} />
           {/* landing page */}
           <Scene key="loginMenu" hideNavBar component={Connexion} />
@@ -154,6 +155,11 @@ export default () => {
             key="InscriptionPrenom"
             hideNavBar
             component={InscriptionPrenom}
+          />
+           <Scene
+            key="ActiverLocalisation"
+            hideNavBar
+            component={ActiverLocalisation}
           />
           {/* Enter password  */}
           <Scene key="InscriptionMdp" hideNavBar component={InscriptionMdp} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import ProfileInformationListItem from '../../adapter/ProfileInformationListItem';
@@ -34,6 +34,9 @@ const EditProfileScreen = (props) => {
   const [inputItemKey, setInputItemKey] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [userProfile, setUserProfileOnChanged] = useState(props.userProfile);
+
+  
+
   return (
     <ProfileCommonHeader
       title="Modifier mon profil"

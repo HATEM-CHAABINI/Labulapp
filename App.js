@@ -46,15 +46,34 @@ import FriendCancelParticipatePopupScreen from './src/ServiceScrenns/FriendCance
 import MabulHomeScreen from './src/Mabul/MabulHomeScreen';
 import MabulOrganizeScreen from './src/Mabul/organize/MabulOrganizeScreen';
 import FriendsSearchScreen from './src/Components/FriendSearchScreen';
-
+import fb from 'firebase/app';
 import {RootSiblingParent} from 'react-native-root-siblings';
 import RootRoutes from './src/routes';
 import SplashScreen from 'react-native-splash-screen';
-
+import LoadingScreen from './src/screens/LoadingScreen';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {persistor, store} from './src/redux/store';
 
+if(!fb.apps.length)
+{
+  fb.initializeApp({
+    apiKey: 'AIzaSyA-FKUgTuOhGiZ86WIN-wZ4a6_RK24nsUQ',
+    authDomain: 'labul-b362c.firebaseapp.com',
+    projectId: 'labul-b362c',
+    storageBucket: 'labul-b362c.appspot.com',
+    messagingSenderId: '555389901225',
+    appId: '1:555389901225:web:b59820563fe5a3dd710cb8',
+    measurementId: 'G-Z21P0XG9FY',
+  })
+  fb.storage().setMaxUploadRetryTime(5000)
+  
+  fb.firestore().settings({ experimentalForceLongPolling: true });
+}
+else{
+  fb.app()
+}
+  
 const App = () => {
   useEffect(() => {
      setTimeout(() => {
@@ -70,8 +89,8 @@ const App = () => {
     <RootSiblingParent>
       <SafeAreaView style={styles.safeArea} />
       <View style={styles.container}>
-        <Provider store={store}>
-          <PersistGate persistor={persistor}>
+        <Provider  store={store}>
+          <PersistGate loading={<LoadingScreen />} persistor={persistor}>
             <RootRoutes />
           </PersistGate>
         </Provider>

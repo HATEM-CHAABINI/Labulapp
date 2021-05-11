@@ -157,8 +157,8 @@ class Filtre extends Component {
           customStyles={{
 
             container: {
-              borderTopLeftRadius:50*em,
-              borderTopRightRadius:50*em,
+              borderTopLeftRadius:28*em,
+              borderTopRightRadius:28*em,
               justifyContent: "center",
               alignItems: "center",
             paddingTop:hm*180,
@@ -320,8 +320,8 @@ class Filtre extends Component {
           customStyles={{
 
             container: {
-              borderTopLeftRadius:50*em,
-              borderTopRightRadius:50*em,
+              borderTopLeftRadius:28*em,
+              borderTopRightRadius:28*em,
               justifyContent: "center",
               alignItems: "center",
             paddingTop:hm*180

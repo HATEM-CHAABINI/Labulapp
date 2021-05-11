@@ -9,11 +9,14 @@ import { Actions } from 'react-native-router-flux';
 import CommonButton from '../Components/button/CommonButton';
 import MessageCounterDownPopupScreen from './MessageCounterDownPopupScreen';
 import MessageProfilePopupScreen from './MessageProfilePopupScreen';
-import { TelephoneWhite } from '../assets/svg/icons';
+import { BackArrowWhite, TelephoneWhite } from '../assets/svg/icons';
 import MessageView from '../Components/view/MessageView';
 import { CheckedBlue, } from '../assets/svg/icons';
 import CommonHeader from '../Components/header/CommonHeader';
 import CommonListItem from '../adapter/CommonListItem';
+import FlecheM1 from '../assets/icons/message/FlecheM1';
+import Up from '../assets/icons/message/Up';
+import Down from '../assets/icons/message/Down';
 
 const OTHERSIDE = 1;
 const OURSIDE = 2;
@@ -73,8 +76,8 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   ) : (
     <CommonButton
       style={styles.optionBtn}
-      //leftIcon={<Like width={14 * em} height={13 * em} />}
-      text="Accepter"
+      leftIcon={<Up width={14 * em} height={13 * em} />}
+      text="   Accepter"
       textStyle={{ fontSize: 14 * em }}
       onPress={() => {
         activityType === 'invitation' ? setAccepted(true) : setMessageCounterVisible(true);
@@ -91,8 +94,8 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   ) : (
     <CommonButton
       style={[styles.optionBtn, { backgroundColor: '#F9547B' }]}
-      //leftIcon={<CheckedBlue width={12 * em} height={8.79 * em} />}
-      text="Refuser"
+      leftIcon={<Down width={14 * em} height={13 * em} />}
+      text="   Refuser"
       textStyle={{ fontSize: 14 * em }}
       onPress={() => {
         setRefused(true);
@@ -140,17 +143,28 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       <CommonHeader
         style={styles.header}
         rightView={
-          <TouchableOpacity style={styles.dialIcon} onPress={() => Actions.activityDial()}>
+          <TouchableOpacity style={styles.dialIcon}
+          //  onPress={() => Actions.activityDial()}
+           >
             <TelephoneWhite width={20 * em} height={20 * em} />
           </TouchableOpacity>
         }
+        
+        leftView={
+          <TouchableOpacity style={{ alignSelf: 'center',marginLeft:27*em,marginRight:12*em,top:3*hm}}
+          //  onPress={() => Actions.activityDial()}
+           >
+            <BackArrowWhite width={30 * em} height={30 * hm} />
+          </TouchableOpacity>
+        }
+        
         centerView={
           <CommonListItem
             onPress={() => setMessageProfileVisible(!messageProfileVisible)}
             style={{ flex: 1 }}
             icon={<Image source={message.user.photo} style={styles.avatarIcon} />}
             title={message.user.name}
-            titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff' }}
+            titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff' ,fontSize:16*em}}
           />
         }
       />
@@ -180,6 +194,11 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             <View style={styles.inputView}>
               <TextInput placeholder="Écrit ici ton message …" style={styles.inputText} />
             </View>
+       <TouchableOpacity
+              style={{right:15*em,position:'absolute'}}
+            onPress={() => console.log("ddjdjdjdjdjdj")}>
+             <FlecheM1 width={20*em} height={20*hm} />
+          </TouchableOpacity>            
           </View>
           {!isAccepted && optionView}
           <View style={{ flex: 1 }}>
@@ -209,7 +228,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 
 const styles = {
   container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#40CDDE' },
-  header: { marginBottom: 10 * hm, marginTop: 27 * hm },
+  header: { marginBottom: 10 * hm, marginTop: 40 * hm ,alignSelf:'center'},
   toast: {
     alignItems: 'center',
     marginLeft: -30 * em,
@@ -239,6 +258,7 @@ const styles = {
     paddingHorizontal: 29 * em,
     justifyContent: 'space-between',
     flexDirection: 'column',
+    
   },
   popupHeader: { paddingVertical: 15 * hm },
   titleView: { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' },
@@ -260,7 +280,6 @@ const styles = {
     paddingHorizontal: 22 * em,
     backgroundColor: '#40CDDE',
     borderRadius: 21 * em,
-    alignSelf: 'baseline',
     width: 125 * em,
     height: 41 * hm
 

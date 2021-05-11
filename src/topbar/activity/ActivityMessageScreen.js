@@ -138,7 +138,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   }
   return (
     <View style={styles.container}>
-      <CommonHeader
+      {/* <CommonHeader
         style={styles.header}
         rightView={
           <TouchableOpacity style={styles.dialIcon} onPress={() => Actions.activityDial()}>
@@ -154,7 +154,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff' }}
           />
         }
-      />
+      /> */}
 
       {/* <View style={styles.header}>
         <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
@@ -172,7 +172,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
           </View>
         </TouchableOpacity>
       </View> */}
-      <View style={styles.popup}>
+      {/* <View style={styles.popup}>
         {popupHeader}
         {isAccepted && SuccessToast}
         <View style={styles.popupBody}>
@@ -193,8 +193,8 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             />
           </View>
         </View>
-      </View>
-      <MessageCounterDownPopupScreen
+      </View> */}
+      {/* <MessageCounterDownPopupScreen
         onAccept={() => setIsAccepted(true)}
         visible={messageCounterVisible}
         onPress={() => setMessageCounterVisible(false)}
@@ -203,7 +203,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         onAccept={(val) => setIsAccepted(val)}
         visible={messageProfileVisible}
         onPress={() => setMessageProfileVisible(false)}
-      />
+      /> */}
     </View>
   );
 };

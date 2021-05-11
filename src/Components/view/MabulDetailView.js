@@ -39,7 +39,7 @@ const MabulDetailView = (props) => {
   );
   const AskButton = (
     <CommonButton
-      onPress={() => Actions.activityMessage({ message: new Message(data.user, data.title, data.coverImage) })}
+      // onPress={() => Actions.activityMessage({ message: new Message(data.user, data.title, data.coverImage) })}
       style={styles.quizBtn}
       textStyle={{ color: '#41D0E2' }}
       text="Poser une question"
@@ -137,7 +137,7 @@ const styles = {
   },
   body: {
     paddingHorizontal: 30 * em,
-    //marginTop: -41 * em,
+    marginTop: -41 * em,
     borderTopRightRadius: 28 * em,
     borderTopLeftRadius: 28 * em,
     backgroundColor: '#ffffff',

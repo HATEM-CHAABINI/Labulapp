@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 import CommonButton from '../Components/button/CommonButton';
 import MessageCounterDownPopupScreen from './MessageCounterDownPopupScreen';
 import MessageProfilePopupScreen from './MessageProfilePopupScreen';
-import { TelephoneWhite } from '../assets/svg/icons';
+import { BackArrowWhite, TelephoneWhite } from '../assets/svg/icons';
 import MessageView from '../Components/view/MessageView';
 import { CheckedBlue, } from '../assets/svg/icons';
 import CommonHeader from '../Components/header/CommonHeader';
@@ -150,13 +150,21 @@ const ActivityMessageScreen = ({ message, activityType }) => {
           </TouchableOpacity>
         }
         
+        leftView={
+          <TouchableOpacity style={{ alignSelf: 'center',marginLeft:27*em,marginRight:12*em,top:3*hm}}
+          //  onPress={() => Actions.activityDial()}
+           >
+            <BackArrowWhite width={30 * em} height={30 * hm} />
+          </TouchableOpacity>
+        }
+        
         centerView={
           <CommonListItem
             onPress={() => setMessageProfileVisible(!messageProfileVisible)}
             style={{ flex: 1 }}
             icon={<Image source={message.user.photo} style={styles.avatarIcon} />}
             title={message.user.name}
-            titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff' }}
+            titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff' ,fontSize:16*em}}
           />
         }
       />
@@ -220,7 +228,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 
 const styles = {
   container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#40CDDE' },
-  header: { marginBottom: 10 * hm, marginTop: 27 * hm },
+  header: { marginBottom: 10 * hm, marginTop: 40 * hm ,alignSelf:'center'},
   toast: {
     alignItems: 'center',
     marginLeft: -30 * em,
@@ -250,6 +258,7 @@ const styles = {
     paddingHorizontal: 29 * em,
     justifyContent: 'space-between',
     flexDirection: 'column',
+    
   },
   popupHeader: { paddingVertical: 15 * hm },
   titleView: { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' },

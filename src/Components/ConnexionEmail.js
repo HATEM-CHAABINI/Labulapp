@@ -34,6 +34,8 @@ import * as Yup from 'yup';
 import auth, { firebase } from "@react-native-firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
+import firestore from '@react-native-firebase/firestore';
+let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
@@ -59,9 +61,19 @@ const [loading, setloading] = useState(false)
       let response = await auth().signInWithEmailAndPassword(values.email, values.password)
       if (response && response.user) {
         // Alert.alert("Success ", "Authenticated successfully")
-         dispatch(addLogin(response.user));
+        fireKey.doc(response.user.uid).get().then((res )=>{
+         
+        
+Object.assign(res._data,response.user)
+console.log(res._data)
+           dispatch(addLogin(res._data));
+         }).catch((e)=>{
+           console.log(e)
+         })
+        
       }
     } catch (e) {
+      alert(e.message)
       console.error(e.message)
     }
     // dispatch(addLogin({

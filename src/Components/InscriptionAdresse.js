@@ -60,7 +60,7 @@ export default ({navigation}) => {
       adresse:values.adresse
     }));
    
-    navigation.navigate('ActiverLaNotif')
+    navigation.navigate('ActiverLocalisation')
   };
   const formik = useFormik({
     initialValues,

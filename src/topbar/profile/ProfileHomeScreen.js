@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar } from 'react-native';
 import { em, WIDTH, HEIGHT, hm } from '../../constants/consts';
 import TitleText from '../../text/TitleText';
@@ -15,7 +15,9 @@ import User from '../../model/user/User';
 import AccountType from '../../model/user/AccountType';
 import { feedbackIcons } from '../../constants/icons';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
+import {userDetail} from '../../setup'
 
+import { useSelector } from 'react-redux';
 const originalMyProfile = new User(
   'Mathieu Torin',
   null,
@@ -61,6 +63,13 @@ const ProfileHomeScreen = (props) => {
   const [userProfile] = useState(
     props.route.params.purchased !== AccountType.LIGHT ? originalMyProfile : updatedMyProfile
   );
+  const [userData, setuserData] = useState(null)
+  const { userDetails } = useSelector((state) => state.loginReducers);
+useEffect(() => {
+  console.log(userDetails)
+
+}, [])
+
   return (
     <ParallaxScrollView
       // onScroll={onScroll}
@@ -72,12 +81,12 @@ const ProfileHomeScreen = (props) => {
         <View style={styles.topView}>
           <ProfileCommonAvatar
             style={styles.avatar}
-            fullName={userProfile.name}
+            fullName={userDetails.displayName === undefined ? userDetails.prenom+" "+userDetails.nom:userDetails.displayName}
             icon={userProfile.photo}
             borderWidth={3 * em}
           />
           <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
-            <TitleText style={styles.txtFullName} text={userProfile.name} />
+            <TitleText style={styles.txtFullName} text={userDetails.displayName === undefined ? userDetails.prenom+" "+userDetails.nom:userDetails.displayName} />
             <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" />
           </TouchableOpacity>
         </View>

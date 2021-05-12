@@ -11,7 +11,7 @@ import {
   StyleSheet,
   StatusBar,
   Alert,
-  ActivityIndicator
+  ActivityIndicator, KeyboardAvoidingView
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -36,6 +36,7 @@ import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-simple-toast';
+import { Header } from 'react-navigation-stack';
 
 let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -43,7 +44,7 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 export default ({ navigation }) => {
 
-const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false)
   const dispatch = useDispatch();
   const initialValues = {
     email: '',
@@ -58,21 +59,21 @@ const [loading, setloading] = useState(false)
 
   });
   const onSubmit = async values => {
-    setloading(()=>true)
-      try {
+    setloading(() => true)
+    try {
       let response = await auth().signInWithEmailAndPassword(values.email, values.password)
       if (response && response.user) {
         // Alert.alert("Success ", "Authenticated successfully")
-        fireKey.doc(response.user.uid).get().then((res )=>{
-         
-        
-Object.assign(res._data,response.user)
-console.log(res._data)
-           dispatch(addLogin(res._data));
-         }).catch((e)=>{
-           console.log(e)
-         })
-        
+        fireKey.doc(response.user.uid).get().then((res) => {
+
+
+          Object.assign(res._data, response.user)
+          console.log(res._data)
+          dispatch(addLogin(res._data));
+        }).catch((e) => {
+          console.log(e)
+        })
+
       }
     } catch (e) {
       alert(e.message)
@@ -83,7 +84,7 @@ console.log(res._data)
     //   login: true,
     //   NotificationActive: false
     // }));
-    setloading(()=>false)
+    setloading(() => false)
   };
   const formik = useFormik({
     initialValues,
@@ -112,26 +113,26 @@ console.log(res._data)
             <Usercreat width={20 * em} height={25 * hm} />
           </View>
 
-          <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 45 * hm, fontFamily: 'lato-black' }}>
+          <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 45 * hm, fontFamily: 'Lato-Black' }}>
             Je me connecte
             </Text>
 
           <View style={styles.contentWrapper}>
             {/* <Text style={styles.descText}>Saisis ton email</Text> */}
             <Reinput
-              label='Saisie ton email'
+              label='Saisis ton email'
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"
-              labelActiveColor="#BFCDDB"
-              labelColor="#BFCDDB"
+              labelActiveColor="#A0AEB8"
+              labelColor="#A0AEB8"
               paddingBottom={12 * hm}
               clearButtonMode="while-editing"
-              color='#1E2D60'
-              fontFamily='lato-bold'
+              color='#A0AEB8'
+              fontFamily='Lato-Regular'
               fontSize={16 * em}
               keyboardType="email-address"
               selectionColor={'#41D0E2'}
-              autoFocus={true}
+              autoFocus={false}
               value={formik.values.email}
               onBlur={formik.handleBlur('email')}
               onChangeText={formik.handleChange('email')}
@@ -159,67 +160,76 @@ console.log(res._data)
           </View>
           <View style={{ marginLeft: 220 * em, bottom: 50 * em }}>
             <Text
-              style={{ color: '#1E2D60', fontSize: 12 * em, fontFamily: 'lato-medium' }}
+              style={{ color: '#1E2D60', fontSize: 12 * em, fontFamily: 'Lato-Medium' }}
               onPress={() => Actions.MotdePasseOublie()}>
               Mot de passe oublié ?
                 </Text>
           </View>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ alignItems: 'center' }}
+          >
+            <TouchableOpacity
+              onPress={formik.handleSubmit}
+              style={{
+                overflow: 'hidden',
+                borderRadius: 18 * em,
+                height: 59 * hm,
 
-          <TouchableOpacity
-            onPress={formik.handleSubmit}
-            style={{
-              overflow: 'hidden',
-              borderRadius: 18 * em,
-              height: 59 * hm,
-
-              width: 315 * em,
-              backgroundColor: '#40CDDE',
-              bottom: 36 * hm
-            }}>
-            <View style={styles.btnContainer}>
-            {loading ? <ActivityIndicator size='small' color='#FFFFFF' style={{ marginLeft: 10 * em,
-                  marginTop: 2 * hm,}} /> : <Text
-                style={{
-                  fontSize: 16 * em,
-                  color: '#FFFFFF',
+                width: 315 * em,
+                backgroundColor: '#40CDDE',
+                bottom: 36 * hm
+              }}>
+              <View style={styles.btnContainer}>
+                {loading ? <ActivityIndicator size='small' color='#FFFFFF' style={{
                   marginLeft: 10 * em,
                   marginTop: 2 * hm,
-                  fontFamily: 'lato-Medium'
-                }}>
-                Suivant
+                }} /> : <Text
+                  style={{
+                    fontSize: 16 * em,
+                    color: '#FFFFFF',
+                    marginLeft: 10 * em,
+                    marginTop: 2 * hm,
+                    fontFamily: 'Lato-Medium'
+                  }}>
+                  Suivant
                 </Text>}
-            </View>
-          </TouchableOpacity>
-
+              </View>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
         </View>
 
+        <KeyboardAvoidingView
 
-        <View style={{ position: 'absolute', bottom: 0, marginBottom: 50 * hm, alignSelf: 'center' }}>
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ alignItems: 'center' }}
+        >
 
-          <Text
-            style={
-              ({
+          <View style={{ position: 'absolute', bottom: 0, marginBottom: 50 * hm, alignSelf: 'center' }}>
 
-                fontSize: 16 * em,
-                fontFamily: 'lato-Regular',
-
-              },
-                StyleSheet.flatten([{ alignSelf: 'center', color: '#6A8596' }]))
-            }>
-            Je n’ai pas de compte ?
             <Text
-              style={{ color: '#40CDDE', fontSize: 16 * em, fontFamily: 'lato-semibold' }}
-              onPress={() => {
-                Actions.signupMenu();
-              }}>
-              {' '}
-              Je m’inscris
+              style={
+                ({
+
+                  fontSize: 16 * em,
+                  fontFamily: 'Lato-Regular',
+
+                },
+                  StyleSheet.flatten([{ alignSelf: 'center', color: '#6A8596' }]))
+              }>
+              Je n’ai pas de compte ?
+  <Text
+                style={{ color: '#40CDDE', fontSize: 16 * em, fontFamily: 'Lato-SemiBold' }}
+                onPress={() => {
+                  Actions.signupMenu();
+                }}>
+                {' '}
+    Je m’inscris
+  </Text>
             </Text>
-          </Text>
 
-        </View>
-
-
+          </View>
+        </KeyboardAvoidingView>
       </View>
 
 
@@ -235,7 +245,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 40 * hm,
     fontSize: 13 * em,
-    fontFamily: "lato-bold",
+    fontFamily: "Lato-Bold",
     // width:250*em,
     color: '#28c7ee',
     borderBottomWidth: 1 * em,
@@ -244,7 +254,7 @@ const styles = StyleSheet.create({
   },
   descerrorText: {
     fontSize: 12 * em,
-    bottom:30*hm,
+    bottom: 30 * hm,
     // marginBottom: 4 * hm,
     color: "red",
   },

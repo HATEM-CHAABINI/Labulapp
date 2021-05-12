@@ -17,7 +17,7 @@ import CommonListItem from '../adapter/CommonListItem';
 import FlecheM1 from '../assets/icons/message/FlecheM1';
 import Up from '../assets/icons/message/Up';
 import Down from '../assets/icons/message/Down';
-import Time_circle from '../assets/svg/icons';
+import Count from '../assets/icons/message/Count';
 
 const OTHERSIDE = 1;
 const OURSIDE = 2;
@@ -64,7 +64,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       icon={<Image source={message.service.coverImage} style={styles.titleIcon} />}
       title={message.service.title}
       titleStyle={{ fontFamily: 'Lato-Bold', color: '#1E2D60', fontSize: 14 * em }}
-      rightView={isAccepted && <Time_circle />}
+      rightView={isAccepted && <Count width={65 * em} height={28 * em} />}
     />
   );
   const AcceptButton = accepted ? (
@@ -153,7 +153,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 
         leftView={
           <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 27 * em, marginRight: 12 * em, top: 3 * hm }}
-          //  onPress={() => Actions.activityDial()}
+            onPress={() => Actions.main()}
           >
             <BackArrowWhite width={30 * em} height={30 * hm} />
           </TouchableOpacity>
@@ -273,7 +273,7 @@ const styles = {
     paddingVertical: 17 * em,
     paddingHorizontal: 17 * em,
   },
-  inputText: { fontSize: 14 * em, lineHeight: 16 * em, color: '#9093A3', padding: 0 },
+  inputText: { fontFamily: 'Lato-Medium', fontSize: 14 * em, lineHeight: 16 * em, color: '#9093A3', padding: 0 },
   imageIcon: { width: 40 * em, height: 40 * em, marginRight: 15 * em },
   optionBtn: {
 

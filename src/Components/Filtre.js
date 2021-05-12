@@ -271,7 +271,8 @@ class Filtre extends Component {
 
             </View>
 
-            <TouchableOpacity onPress={() => navigation.navigate('InscriptionPrenom')} style={{
+            <TouchableOpacity  onPress={() => this[RBSheet + 1].close()}  
+            style={{
               overflow: 'hidden',
               borderRadius: 18 * em,
               height: 59 * hm,
@@ -350,7 +351,8 @@ class Filtre extends Component {
 
             </View>
 
-            <TouchableOpacity onPress={() => navigation.navigate('InscriptionPrenom')} style={{
+            <TouchableOpacity  onPress={() => this[RBSheet + 2].close()}     
+                   style={{
               overflow: 'hidden',
               borderRadius: 18 * em,
               height: 59 * hm,
@@ -375,7 +377,7 @@ class Filtre extends Component {
                   fontSize: 16 * em,
                   color: '#FFFFFF',
                   marginLeft: 10 * em,
-                  marginTop: 2 * hm, fontFamily: 'Lato-Boldo'
+                  marginTop: 2 * hm, fontFamily: 'Lato-Bold'
                 }}>Voir demandes</Text>
               </View>
             </TouchableOpacity>

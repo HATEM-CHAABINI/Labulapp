@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     radioText: {
         marginRight: em*80,
         fontSize: 18*em,
-        color: '#1E2D60',fontFamily:'lato-bold'
+        color: '#1E2D60',fontFamily:'Lato-Bold'
     },
 	radioCircle: {
 		height: em*30,

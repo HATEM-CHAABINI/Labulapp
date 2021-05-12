@@ -111,7 +111,7 @@ console.log(e)
             proches.
           </Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ActiverLaNotif')}
+           // onPress={() => navigation.navigate('ActiverLaNotif')}
             style={{
               overflow: 'hidden',
               borderRadius: 18 * em,

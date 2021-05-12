@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="65" height="28" viewBox="0 0 65 28">
+
+
+import React from 'react';
+import { SvgXml } from 'react-native-svg';
+
+const xml = `<svg xmlns="http://www.w3.org/2000/svg" width="WD" height="HT" viewBox="0 0 65 28">
   <g id="Time_Circle" data-name="Time Circle" transform="translate(40)">
     <rect id="Rectangle_1880" data-name="Rectangle 1880" width="65" height="28" rx="14" transform="translate(-40)" fill="#f9547b" opacity="0.2"/>
     <g id="Groupe_1646" data-name="Groupe 1646">
@@ -8,3 +13,10 @@
     <text id="Dr._Melvin_send_you" data-name="Dr. Melvin send you" transform="translate(-5 20)" fill="#f9547b" font-size="15" font-family="HelveticaNeue-Medium, Helvetica Neue" font-weight="500"><tspan x="-24.465" y="0">20s</tspan></text>
   </g>
 </svg>
+`;
+
+export default Count = ({width, height}) => {
+  return(
+      <SvgXml xml={xml.replace('WD', width).replace('HT', height)} />
+  )
+}

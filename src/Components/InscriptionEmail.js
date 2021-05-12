@@ -82,7 +82,7 @@ export default ({ navigation }) => {
             <Email width={30 * em} height={30 * hm} />
           </View>
 
-          <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 60 * hm, fontFamily: 'lato-Black' }}>Mon Email</Text>
+          <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 60 * hm, fontFamily: 'Lato-Black' }}>Mon Email</Text>
 
           <View style={styles.contentWrapper}>
 
@@ -96,7 +96,7 @@ export default ({ navigation }) => {
               paddingBottom={12 * hm}
               clearButtonMode="while-editing"
               color='#1E2D60'
-              fontFamily='lato-bold'
+              fontFamily='Lato-Bold'
               fontSize={16 * em}
               keyboardType="email-address"
               selectionColor={'#41D0E2'}
@@ -115,7 +115,7 @@ export default ({ navigation }) => {
         </View>
       </View>
       <KeyboardAvoidingView
-        behavior='padding'
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ alignItems: 'center' }}
       >
 
@@ -126,7 +126,7 @@ export default ({ navigation }) => {
 
           width: 315 * em,
 
-          bottom: 30 
+          bottom: 30
           // top:240*hm
         }}
         >
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   descerrorText: {
     fontSize: 12 * em,
-    bottom:35*hm,
+    bottom: 35 * hm,
     // marginBottom: 4 * hm,
     color: "red",
   },

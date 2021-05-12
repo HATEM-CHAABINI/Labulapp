@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   Button,
   View,
@@ -13,7 +13,7 @@ import {
   Alert,
   KeyboardAvoidingView,
 } from 'react-native';
-import {em, HEIGHT, hm, WIDTH} from '../constants';
+import { em, HEIGHT, hm, WIDTH } from '../constants';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -25,18 +25,18 @@ import Googleicon from '../assets/icons/navigation-app/Googleicon';
 import Facebookicon from '../assets/icons/navigation-app/Facebookicon';
 import TitleLabul from '../assets/title/TitleLabul';
 import MyTextInput from './MyTextInput';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import Email from '../assets/svg/icons/navigation/Email';
 import BackArrowWhite from '../assets/svg/icons/navigation/BackArrowWhite';
 import Reinput from 'reinput';
-import {useFormik} from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import {useSelector} from 'react-redux';
-import {useDispatch} from 'react-redux';
-import {SignupData} from '../redux/actions/signup';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { SignupData } from '../redux/actions/signup';
 
-export default ({navigation}) => {
-  const {signupData} = useSelector(state => state.signupReducer);
+export default ({ navigation }) => {
+  const { signupData } = useSelector(state => state.signupReducer);
 
   const dispatch = useDispatch();
   const initialValues = {
@@ -67,8 +67,8 @@ export default ({navigation}) => {
   });
 
   return (
-    <View style={{flex: 1, backgroundColor: '#40CDDE'}}>
-      <View style={{paddingTop: 40 * hm, paddingLeft: 159 * em}}>
+    <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
+      <View style={{ paddingTop: 40 * hm, paddingLeft: 159 * em }}>
         <TouchableOpacity
           style={{
             position: 'absolute',
@@ -81,9 +81,9 @@ export default ({navigation}) => {
         <TitleLabul width={69 * em} height={20 * hm} />
       </View>
 
-      <View style={{flex: 2, paddingTop: 25 * hm}}>
+      <View style={{ flex: 2, paddingTop: 25 * hm }}>
         <View style={styles.ActionWrapper}>
-          <View style={{position: 'absolute', paddingTop: 40 * hm}}>
+          <View style={{ position: 'absolute', paddingTop: 40 * hm }}>
             <Email width={30 * em} height={30 * hm} />
           </View>
 
@@ -92,7 +92,7 @@ export default ({navigation}) => {
               color: '#1E2D60',
               fontSize: 28 * em,
               paddingTop: 60 * hm,
-              fontFamily: 'lato-Black',
+              fontFamily: 'Lato-Black',
             }}>
             Mon mot de passe
           </Text>
@@ -108,7 +108,7 @@ export default ({navigation}) => {
               paddingBottom={12 * hm}
               clearButtonMode="while-editing"
               color="#1E2D60"
-              fontFamily="lato-bold"
+              fontFamily="Lato-Bold"
               fontSize={16 * em}
               keyboardType="email-address"
               selectionColor={'#41D0E2'}
@@ -122,7 +122,7 @@ export default ({navigation}) => {
           </View>
         </View>
       </View>
-      <KeyboardAvoidingView behavior="padding" style={{alignItems: 'center'}}>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ alignItems: 'center' }}>
         <TouchableOpacity
           disabled={formik.values.password === '' ? true : false}
           onPress={formik.handleSubmit}
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   descerrorText: {
     fontSize: 12 * em,
-    bottom:30*hm,
+    bottom: 30 * hm,
     // marginBottom: 4 * hm,
     color: "red",
   },

@@ -30,49 +30,49 @@ let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 export default ({ navigation }) => {
-const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
   const dispatch = useDispatch();
 
-  
-const login = () => {
-  setloading(true);
-  Firebase.default
-    .auth()
-    .createUserWithEmailAndPassword(signupData.email, signupData.password)
-    .then(userCredential => {
-      var user = userCredential.user;
-      let {nom, mobile, prenom, adresse, email} = signupData;
-      let activeNotification = false;
-      if (user) {
-        firestore()
-          .collection('users')
-          .doc(user.uid)
-          .set({
-            nom,
-            prenom,
-            adresse,
-            mobile,
-            email,
-            activeNotification,
-          })
-          .then(() => {
-         
-            setloading(false);
-          })
-          .catch(e => {
-            console.log(e);
-            setloading(false);
-          });
-      }
-    
-    })
-    .catch(error => {
-      alert(error.message);
-      setloading(false);
-      console.log(error.code, error.message);
-    });
-};
+
+  const login = () => {
+    setloading(true);
+    Firebase.default
+      .auth()
+      .createUserWithEmailAndPassword(signupData.email, signupData.password)
+      .then(userCredential => {
+        var user = userCredential.user;
+        let { nom, mobile, prenom, adresse, email } = signupData;
+        let activeNotification = false;
+        if (user) {
+          firestore()
+            .collection('users')
+            .doc(user.uid)
+            .set({
+              nom,
+              prenom,
+              adresse,
+              mobile,
+              email,
+              activeNotification,
+            })
+            .then(() => {
+
+              setloading(false);
+            })
+            .catch(e => {
+              console.log(e);
+              setloading(false);
+            });
+        }
+
+      })
+      .catch(error => {
+        alert(error.message);
+        setloading(false);
+        console.log(error.code, error.message);
+      });
+  };
   const loginWithActiveNotification = async () => {
     setloading(true);
     Firebase.default
@@ -80,7 +80,7 @@ const login = () => {
       .createUserWithEmailAndPassword(signupData.email, signupData.password)
       .then(userCredential => {
         var user = userCredential.user;
-        let {nom, mobile, prenom, adresse, email} = signupData;
+        let { nom, mobile, prenom, adresse, email } = signupData;
         let activeNotification = true;
         if (user) {
           firestore()
@@ -94,21 +94,21 @@ const login = () => {
               email,
               activeNotification,
             })
-            .then(async() => {
+            .then(async () => {
               try {
                 let response = await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
                 if (response && response.user) {
                   // Alert.alert("Success ", "Authenticated successfully")
-                  fireKey.doc(response.user.uid).get().then((res )=>{
-                   
-                  
-          Object.assign(res._data,response.user)
-          console.log(res._data)
-                     dispatch(addLogin(res._data));
-                   }).catch((e)=>{
-                     console.log(e)
-                   })
-                  
+                  fireKey.doc(response.user.uid).get().then((res) => {
+
+
+                    Object.assign(res._data, response.user)
+                    console.log(res._data)
+                    dispatch(addLogin(res._data));
+                  }).catch((e) => {
+                    console.log(e)
+                  })
+
                 }
               } catch (e) {
                 alert(e.message)
@@ -154,8 +154,8 @@ const login = () => {
 
 
 
-          <Text style={{ color: '#1E2D60', fontSize: 24 * em, paddingTop: 40 * hm, textAlign: 'center', fontFamily: 'lato-Black' }}>Activer{"\n"}les notifications</Text>
-          <Text style={{ color: '#6A8596', fontSize: 16 * em, paddingTop: 10 * hm, textAlign: 'center', fontFamily: 'lato-Regular', width: 345 * em }}>Activer les notifications pour recevoir l’activité de tes amis, ta famille et tes voisins.</Text>
+          <Text style={{ color: '#1E2D60', fontSize: 24 * em, paddingTop: 40 * hm, textAlign: 'center', fontFamily: 'Lato-Black' }}>Activer{"\n"}les notifications</Text>
+          <Text style={{ color: '#6A8596', fontSize: 16 * em, paddingTop: 10 * hm, textAlign: 'center', fontFamily: 'Lato-Regular', width: 345 * em }}>Activer les notifications pour recevoir l’activité de tes amis, ta famille et tes voisins.</Text>
 
 
 
@@ -184,7 +184,7 @@ const login = () => {
 
           <View style={{ marginTop: 35 * hm }}>
 
-          {loading ? <ActivityIndicator size='small' color='#1E2D60' style={{ }} /> :<Text style={{ color: '#6A8596', fontSize: 16 * em }} onPress={()=>login()}>Activer plus tard</Text>}
+            {loading ? <ActivityIndicator size='small' color='#1E2D60' style={{}} /> : <Text style={{ color: '#6A8596', fontSize: 16 * em }} onPress={() => login()}>Activer plus tard</Text>}
           </View>
 
         </View>

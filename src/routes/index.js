@@ -129,6 +129,8 @@ export default () => {
     <Router>
       {!state.authenticated ? (
         <Scene key="root">
+                    <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
+
           <Scene key="loading" authenticated={state.authenticated} hideNavBar component={LoadingScreen} />
           <Scene key="home" hideNavBar component={HomeScreen} />
           {/* landing page */}

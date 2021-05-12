@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   ActionWrapper: {
 
     alignItems: "center",
-    paddingStart: 15 * hm,
+    // paddingStart: 15 * hm,
     width: em * 375,
     height: hm * 357,
     borderTopStartRadius: 28 * em,

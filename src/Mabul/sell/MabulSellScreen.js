@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import TitleText from '../../text/TitleText';
-import { em, HEIGHT, WIDTH } from '../../constants/consts';
+import { em, HEIGHT, hm, WIDTH } from '../../constants/consts';
 import { FlatList } from 'react-native';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
@@ -42,8 +42,13 @@ const MabulSellScreen = (props) => {
   );
   return (
     <View style={styles.container}>
-      <MabulCommonHeader style={styles.header} percent={props.process} noBackButton progressBarColor={'#AA87E5'} />
-      <View style={styles.body}>
+      <MabulCommonHeader
+        style={styles.header}
+        percent={props.process}
+        noBackButton={true}
+        progressBarColor={'#AA87E5'}
+      />
+       <View style={styles.body}>
         <TitleText text={'Je vends'} style={styles.title} />
         <FlatList data={sellItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
       </View>
@@ -55,10 +60,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * em,
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '10.3%',
+     marginTop: 16 * hm,
   },
   body: {
     flex: 1,

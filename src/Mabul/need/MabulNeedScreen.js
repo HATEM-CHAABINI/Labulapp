@@ -25,6 +25,7 @@ const MabulNeedScreen = (props) => {
   return (
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={props.process} noBackButton progressBarColor={'#38C2FF'} />
+    
       <View style={styles.body}>
         <TitleText text={'J’ai besoin'} style={styles.title} />
         <FlatList data={needItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
@@ -37,10 +38,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * hm,
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   body: {
     flex: 1,

@@ -23,7 +23,7 @@ const CommonBackButton = (props) => {
 
 const styles = {
   backBtnWrapper: {
-    marginTop: 13 * em,
+    marginBottom: 4 * hm,
     width: 44 * em,
     height: 44 * em,
     borderRadius: 14 * em,

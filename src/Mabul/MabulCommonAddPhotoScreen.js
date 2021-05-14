@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import TitleText from '../text/TitleText';
-import { em, mabulColors } from '../constants/consts';
+import { em, hm, mabulColors } from '../constants/consts';
 import CommentText from '../text/CommentText';
 import MabulCommonHeader from './MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
@@ -15,7 +15,7 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
       <MabulCommonHeader style={styles.header} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
       <View style={styles.body}>
         <View>
-          <TitleText text={'Ajoute de photos'} style={styles.title} />
+          <TitleText text={'Ajoute des photos'} style={styles.title} />
           <CommentText
             text="Les photos aident les utilisateurs à avoir une idée de ce que tu vends."
             style={styles.comment}
@@ -47,10 +47,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * em,
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   body: {
     flex: 1,

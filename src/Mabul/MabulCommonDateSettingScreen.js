@@ -154,6 +154,7 @@ const styles = {
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   body: {
     flex: 1,

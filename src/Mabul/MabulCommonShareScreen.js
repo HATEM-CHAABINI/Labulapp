@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import TitleText from '../text/TitleText';
-import { em, mabulColors } from '../constants/consts';
+import { em, hm, mabulColors } from '../constants/consts';
 import CommonText from '../text/CommonText';
 import MabulCommonHeader from './MabulCommonHeader';
 import CommonButton from '../Components/button/CommonButton';
@@ -56,10 +56,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * em,
+    // marginTop: 16 * em,
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   body: {
     flex: 1,

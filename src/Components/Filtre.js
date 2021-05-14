@@ -114,8 +114,9 @@ class Filtre extends Component {
           <Divider />
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm }]}
-
-          >
+            onPress={() => {
+              Actions.inputLocation();
+            }}          >
             <View style={styles.ButtonWrapper}>
               <View style={[styles.circleIconOverlay]}>
                 <Lieu width={20 * em} height={20 * hm} />

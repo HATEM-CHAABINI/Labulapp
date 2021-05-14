@@ -30,7 +30,7 @@ const AlertCircleSelectionScreen = () => {
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <View style={styles.iconView}>
               <Family width={48 * em} height={48 * em} />
-              <CommonText text="mes famille" color="#6A8596" style={{ marginTop: 15 * hm }} />
+              <CommonText text="Ma famille" color="#6A8596" style={{ marginTop: 15 * hm }} />
             </View>
             <View style={styles.iconView}>
               <All width={48 * em} height={48 * em} />

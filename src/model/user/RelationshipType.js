@@ -1,5 +1,5 @@
 export default {
-  FAMILIY: 'Mon familie',
-  FRIEND: 'Mon amis',
+  FAMILIY: 'Ma famille',
+  FRIEND: 'Mon ami',
   NEIGHBOR: 'Mon voisin',
 };

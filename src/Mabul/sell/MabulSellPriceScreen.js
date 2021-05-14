@@ -8,6 +8,7 @@ import { Actions } from 'react-native-router-flux';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 // import MabulNextButton from 'src/Components/button/MabulNextButton';
 import { TextInput } from 'react-native-gesture-handler';
+import { KeyboardAvoidingView } from 'react-native';
 
 const MabulSellPriceScreen = (props) => {
   const conceptColor = mabulColors.sell;
@@ -30,6 +31,11 @@ const MabulSellPriceScreen = (props) => {
             keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'}
           />
         </View>
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ alignItems: 'center', marginBottom: 30 * hm }}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 105*hm : 105*hm}
+      >
         <MabulNextButton
           color={hexToRGB(conceptColor, 0.5)}
           style={styles.nextBtn}
@@ -37,6 +43,8 @@ const MabulSellPriceScreen = (props) => {
             Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
           }}
         />
+              </KeyboardAvoidingView>
+
       </View>
     </View>
   );
@@ -86,7 +94,7 @@ const styles = {
   nextBtn: {
     alignSelf: 'flex-end',
     marginRight: 30 * em,
-    marginBottom: 30 * hm,
+   
   },
   input: {
     marginTop:44*hm,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { em } from '../../../constants/consts';
+import { em, hm } from '../../../constants/consts';
 import CommonText from '../../../text/CommonText';
 import TitleText from '../../../text/TitleText';
 import Modal from 'react-native-modal';
@@ -8,8 +8,11 @@ import CommonBackButton from '../../../Components/button/CommonBackButton';
 import CommonTextInput from '../../../textInput/CommonTextInput';
 import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
+import Reinput from "reinput"
 
 const FriendBadgeNoticePopupScreen = (props) => {
+  const [text, onChangeText] = React.useState("");
+
   return (
     <Modal
       isVisible={props.visible}
@@ -28,17 +31,49 @@ const FriendBadgeNoticePopupScreen = (props) => {
         </View>
         <TitleText text="Super !" style={styles.title} />
         <CommonText text="Tu veux laisser un commentaire ?" color="#1E2D60" style={styles.comment} />
-        <CommonTextInput text={'Écrit ici'} isPasswordInput={false} style={styles.input} />
+        {/* <CommonTextInput text={''} isPasswordInput={false} style={styles.input} onChangeText={onChangeText} value={text} /> */}
+        <Reinput
+              label='Écrit ici'
+              autoCorrect={false}
+              underlineColor="#BFCDDB"
+              underlineActiveColor="#41D0E2"
+              labelActiveColor="#BFCDDB"
+              labelColor="#BFCDDB"
+              paddingBottom={12 * hm}
+              clearButtonMode="while-editing"
+              color='#1E2D60'
+              fontFamily='Lato-Bold'
+              fontSize={16 * em}
+              keyboardType="email-address"
+              selectionColor={'#41D0E2'}
+              onChangeText={onChangeText} value={text}
+            />
+     
       </View>
-      <CommonButton
-        style={styles.btn}
-        textStyle={{ color: '#40CDDE' }}
-        text="Continuer sans commentaire"
-        onPress={() => {
-          props.onPress();
-          Actions.myNeedsHome({ tabNav: 'participations' });
-        }}
-      />
+      {text!=""? 
+   <CommonButton
+   style={styles.btn}
+   textStyle={{ color: '#40CDDE' }}
+   text="Laisser ce commentaire"
+   onPress={() => {
+     props.onPress();
+     Actions.myNeedsHome({ tabNav: 'participations' });
+    //  console.log(text);
+   }}
+ />
+   :
+   <CommonButton
+   style={styles.btn}
+   textStyle={{ color: '#40CDDE' }}
+   text="Continuer sans commentaire"
+   onPress={() => {
+     props.onPress();
+     Actions.myNeedsHome({ tabNav: 'participations' });
+    //  console.log(text);
+   }}
+ />
+      }
+      
     </Modal>
   );
 };

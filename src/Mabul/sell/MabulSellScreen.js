@@ -16,7 +16,7 @@ const sellItems = [
   },
   {
     id: 1,
-    itemName: 'Object',
+    itemName: 'Objet',
     onPress: () => {
       Actions.mabulSellObject({ process: 46 });
     },

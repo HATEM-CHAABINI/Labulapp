@@ -153,7 +153,7 @@ const CreateGroupScreen = (props) => {
 };
 
 const styles = {
-  container: { flex: 1, backgroundColor: '#ffffff', paddingHorizontal: 30 * em },
+  container: { flex: 1, backgroundColor: '#ffffff', paddingHorizontal: 20 * em },
   title: { textAlign: 'left', marginTop: 23 * em, marginBottom: 17 * em },
   header: { marginTop: 39 * em, alignSelf: 'flex-end' },
   selectedFullName: { fontSize: 12 * em, height: 30 * em, color: '#1E2D60', marginBottom: 0, fontFamily: 'Lato-Bold' },

@@ -112,7 +112,7 @@ const EditNeedScreen = () => {
         style={styles.listItem}
       />
       <CommonButton
-        text={'Supprimer mon compte'}
+        text={'Supprimer ma demande'}
         style={styles.deleteBtn}
         textStyle={{ color: '#F9547B' }}
         onPress={() => Actions.pop()}

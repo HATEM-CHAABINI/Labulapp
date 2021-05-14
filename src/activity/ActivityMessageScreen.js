@@ -153,7 +153,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 
         leftView={
           <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 27 * em, marginRight: 12 * em, top: 3 * hm }}
-            onPress={() => Actions.main()}
+            onPress={() => Actions.pop()}
           >
             <BackArrowWhite width={30 * em} height={30 * hm} />
           </TouchableOpacity>

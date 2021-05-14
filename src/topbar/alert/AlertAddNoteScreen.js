@@ -8,6 +8,7 @@ import { Actions } from 'react-native-router-flux';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 import CommonListItem from '../../adapter/CommonListItem';
 import { NoteInlineRed } from '../../assets/svg/icons';
+import Reinput from "reinput"
 
 const AlertAddNoteScreen = (props) => {
   const conceptColor = '#F9547B';
@@ -32,6 +33,23 @@ const AlertAddNoteScreen = (props) => {
             style={styles.comment}
             titleStyle={styles.listCaption}
           />
+
+<Reinput style={ {paddingTop:34*hm}}
+label={`Détail ta demande ici
+(Soit concis pour être plus efficace)`}
+icon={iconEdit}
+underlineColor="#6A8596"
+activeColor="#F9547B"
+labelActiveColor="#6A8596"
+labelColor="#6A8596"
+labelActiveTop={-38}
+height={300}
+paddingBottom={30*em}
+
+/>
+
+
+{/* 
           <CommonListItem
             icon={iconEdit}
             style={[styles.listItem, { height: 62 * em }]}
@@ -39,8 +57,9 @@ const AlertAddNoteScreen = (props) => {
             subTitle="(Soit concis pour être plus efficace)"
             titleStyle={styles.listCaption}
             subTitleStyle={styles.listComment}
-          />
-          <View style={styles.line} />
+          /> */}
+
+
         </View>
         <MabulNextButton
           color={conceptColor}

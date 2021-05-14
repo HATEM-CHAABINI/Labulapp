@@ -19,7 +19,7 @@ const organizeData = Object.assign(
     1,
     OrganizeServiceType.WORKSHOP
   ),
-  { relationship: 'Mon ami/ma familie' }
+  { relationship: 'Mon ami/ma famille' }
 );
 const FriendOrganizeScreen = () => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);

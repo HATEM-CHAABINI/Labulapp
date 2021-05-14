@@ -20,7 +20,7 @@ const needData = Object.assign(
     3,
     NeedServiceType.REPAIR
   ),
-  { status: null, relationship: 'Mon ami/ma familie' }
+  { status: null, relationship: 'Mon ami/ma famille' }
 );
 const FriendNeedScreen = (props) => {
   const [cancelParticipatePopupVisible, setcancelParticipatePopupVisible] = useState(false);

@@ -43,13 +43,13 @@ const FriendSellScreen = () => {
             </ReadMore>
           <CommonButton
             style={styles.quizBtn}
-            text="Je suis intéresse"
+            text="Intéressé"
             onPress={() => Actions.friendNeed({ status: NeedStatusType.WAITING })}
           />
 
           <CommonButton
             style={styles.inviteBtn}
-            text="Participer"
+            text="Partager"
             textStyle={{ color: '#41D0E2' }}
             onPress={() => setInvitePopupVisible(true)}
           />

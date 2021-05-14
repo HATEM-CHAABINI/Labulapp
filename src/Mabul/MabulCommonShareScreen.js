@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import TitleText from '../text/TitleText';
 import { em, hm, mabulColors } from '../constants/consts';
@@ -9,6 +9,31 @@ import { Family, Friend, Neighbor, All } from '../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 const MabulCommonShareScreen = ({ mabulService, process }) => {
   const conceptColor = mabulColors[mabulService];
+  const [vchecked, setvChecked] = useState(false);
+  const [achecked, setaChecked] = useState(false);
+  const [fchecked, setfChecked] = useState(false);
+  const [tchecked, settChecked] = useState(false);
+
+const check = (id) => {
+  setvChecked(false)
+  setaChecked(false)
+  setfChecked(false)
+  settChecked(false)
+  switch(id){
+  case 1:
+    setaChecked(true)
+    break;
+  case 2:
+    setvChecked(true)
+    break;
+  case 3:
+    setfChecked(true)
+    break;
+  case 4:
+    settChecked(true)
+    break;
+}
+}
   return (
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
@@ -16,21 +41,44 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
         <View>
           <TitleText text={'Je partage avec'} style={styles.title} />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity style={styles.iconView}>
+            <TouchableOpacity   activeOpacity={1}
+        style={[
+          vchecked ? styles.iconViewClicked : styles.iconView,
+          // { marginBottom: index === 2 ? 40 * em : 0 },
+        ]}
+        onPress={() => check(2)}>
               <Neighbor width={48 * em} height={48 * em} />
               <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconView}>
+            <TouchableOpacity 
+             activeOpacity={1}
+             style={[
+               achecked ? styles.iconViewClicked : styles.iconView,
+               // { marginBottom: index === 2 ? 40 * em : 0 },
+             ]}
+             onPress={() => check(1)}>
               <Friend width={48 * em} height={48 * em} />
               <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity style={styles.iconView}>
+            <TouchableOpacity 
+             activeOpacity={1}
+             style={[
+               fchecked ? styles.iconViewClicked : styles.iconView,
+               // { marginBottom: index === 2 ? 40 * em : 0 },
+             ]}
+             onPress={() => check(3)}>
               <Family width={48 * em} height={48 * em} />
               <CommonText text="mes famille" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconView}>
+            <TouchableOpacity 
+             activeOpacity={1}
+             style={[
+               tchecked ? styles.iconViewClicked : styles.iconView,
+               // { marginBottom: index === 2 ? 40 * em : 0 },
+             ]}
+             onPress={() => check(4)}>
               <All width={48 * em} height={48 * em} />
               <CommonText text="tous" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
@@ -72,6 +120,8 @@ const styles = {
     textAlign: 'left',
     marginTop: 35 * em,
     lineHeight: 38 * em,
+    marginBottom: 35 * hm,
+
   },
   comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * em },
   photoZone: {
@@ -90,16 +140,43 @@ const styles = {
     lineHeight: 14 * em,
     color: '#6A8596',
   },
+  iconViewClicked: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 150 * em,
+    height: 176 * em,
+    paddingHorizontal: 15 * em, backgroundColor: '#fff',
+
+    ...Platform.select({
+      ios: {
+        borderRadius:20*em,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+        
+        elevation: 2,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
+  },
   iconView: {
     alignItems: 'center',
     justifyContent: 'center',
     width: 150 * em,
     height: 176 * em,
+ 
   },
   btn: {
     marginBottom: 30 * em,
     backgroundColor: '#38C2FF',
   },
+
 };
 
 export default MabulCommonShareScreen;

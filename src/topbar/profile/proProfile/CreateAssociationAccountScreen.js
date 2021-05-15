@@ -1,5 +1,5 @@
 import React from 'react';
-import { em } from '../../../constants/consts';
+import { em, hm } from '../../../constants/consts';
 import { View } from 'react-native';
 import PopupHeader from '../../../Components/header/PopupHeader';
 import TitleText from '../../../text/TitleText';
@@ -42,7 +42,7 @@ const styles = {
     alignItems: 'center',
   },
   header: {
-    height: '12%',
+    //mariginVertical: 0 * hm
   },
   popupView: {
     flex: 1,

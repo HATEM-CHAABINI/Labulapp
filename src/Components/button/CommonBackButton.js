@@ -23,7 +23,7 @@ const CommonBackButton = (props) => {
 
 const styles = {
   backBtnWrapper: {
-    marginBottom: 4 * hm,
+    marginBottom: 0 * hm,
     width: 44 * em,
     height: 44 * em,
     borderRadius: 14 * em,
@@ -31,16 +31,16 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'transparent',
     // elevation: 3,
-    shadowColor: '#B3C6CF33',
-    shadowOffset: {
-      width: 0,
-      height: 20 * em,
-    },
-    shadowRadius: 40 * em,
+    // shadowColor: '#B3C6CF33',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 20 * em,
+    // },
+    // shadowRadius: 40 * em,
   },
   backButton: {
-    width: 18 * em,
-    height: 20 * hm,
+    width: 25 * em,
+    height: 23 * hm,
   },
 };
 

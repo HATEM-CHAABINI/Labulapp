@@ -4,7 +4,7 @@ import { em, hm } from '../constants/consts';
 import InviteButton from '..//Button/InviteButton';
 import CommonListItem from './CommonListItem';
 // import CheckBox from 'view/components/checkbox/CheckBox';
-import { LocationGray } from '../assets/svg/icons';
+import { LocationGray, OptionGray } from '../assets/svg/icons';
 const SearchCommonListItem = (props) => {
   var inviteBtn = props.inviteBtn && (
     <View style={{ justifyContent: 'center', flex: 1 }}>
@@ -15,6 +15,11 @@ const SearchCommonListItem = (props) => {
   // var option = props.option && (
   //   // <CheckBox oval red isChecked={checked} onClick={() => setChecked(!checked)} style={{ alignSelf: 'center' }} />
   // );
+  var optionBtn = props.option && (
+    <View style={styles.optionBtn}>
+      <OptionGray width={30 * em} height={30 * em} />
+    </View>
+  );
   var icon = props.icon && <Image source={props.icon} style={styles.icon} />;
   if (props.iconSize) {
     icon = (
@@ -38,19 +43,32 @@ const SearchCommonListItem = (props) => {
       </View>
     );
   }
-  return (
+  if (props.onPress) {
+    return (
+      <CommonListItem
+        title={props.text}
+        titleStyle={styles.textTitle}
+        subTitle={props.subText}
+        subTitleStyle={styles.subTextTitle}
+        icon={icon}
+        rightView={inviteBtn || optionBtn
+        }
+        onPress={props.onPress}
+        style={props.style}
+      />
+    );
+  } else {
     <CommonListItem
       title={props.text}
       titleStyle={styles.textTitle}
       subTitle={props.subText}
       subTitleStyle={styles.subTextTitle}
       icon={icon}
-      rightView={inviteBtn
-        // || option
+      rightView={inviteBtn || optionBtn
       }
       style={props.style}
     />
-  );
+  }
 };
 export default SearchCommonListItem;
 const styles = {

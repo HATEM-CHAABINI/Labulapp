@@ -103,6 +103,8 @@ import { useSelector } from 'react-redux';
 import InscriptionMdp from '../Components/InscriptionMdp';
 import auth, { firebase as fire } from '@react-native-firebase/auth';
 import { firebase } from '../setup';
+import MySellScreen from '../topbar/profile/myNeeds/MySellScreen';
+import MyGiveScreen from '../topbar/profile/myNeeds/MyGiveScreen';
 // import * as Firebase from 'firebase';
 
 export default () => {
@@ -192,7 +194,8 @@ export default () => {
           <Scene key="groupDetail" hideNavBar component={GroupDetailScreen} />
 
           <Scene key="myOrganize" hideNavBar component={MyOrganizeScreen} />
-
+          <Scene key="mySell" hideNavBar component={MySellScreen} />
+          <Scene key="myGive" hideNavBar component={MyGiveScreen} />
           <Scene key="editNeed" hideNavBar component={EditNeedScreen} />
 
           {/* <Scene key="loginMenu" hideNavBar component={LoginMenuScreen} /> */}

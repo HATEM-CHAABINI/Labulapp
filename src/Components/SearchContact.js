@@ -12,28 +12,30 @@ import Modal from 'react-native-modal';
 import SearchCommonListItem from '../adapter/SearchCommonListItem';
 import ProfileCommonHeader from './header/ProfileCommonHeader';
 import CircleHeader from './header/CircleHeader';
+import UserOptionPopupScreen from '../topbar/profile/myCircles/UserOptionPopupScreen';
+
 
 const users = [
     new User(
         'Amandine Bernard',
         require('../assets/images/avatar.png'),
-        [RelationshipType.FRIEND, RelationshipType.NEIGHBOR],
+        [RelationshipType.FRIEND, RelationshipType.FAMILIY],
         'user@labul.com'
     ),
-    new User('Amélie Petit', require('../assets/images/avatar.png'), [RelationshipType.NEIGHBOR], 'user@labul.com'),
-    new User('Antoine Durand', require('../assets/images/avatar.png'), [RelationshipType.NEIGHBOR], 'user@labul.com'),
-    new User('Robert Dupont', require('../assets/images/avatar.png'), '', 'user@labul.com'),
-    new User('Julien Girar', require('../assets/images/avatar.png'), '', 'user@labul.com'),
+    new User('Amélie Petit', require('../assets/images/sample_user_2.png'), [RelationshipType.NEIGHBOR, RelationshipType.FRIEND], 'user@labul.com'),
+
 ];
 
 const SearchContact = (props) => {
-
+    const [userOptionVisible, setUserOptionVisible] = useState(null);
     const [searchedUsers, getSearchResult] = useState(true);
     const renderFlatList = ({ item }) => (
         <SearchCommonListItem
             text={item.name}
             subText={item.relationship ? item.relationship.join('/') : undefined}
             icon={item.photo}
+            option={true}
+            onPress={() => setUserOptionVisible(item)}
             style={styles.listItem}
         />
     );
@@ -74,6 +76,7 @@ const SearchContact = (props) => {
                 />
                 <FlatList data={searchedUsers} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
             </View>
+            <UserOptionPopupScreen data={userOptionVisible} onPress={() => setUserOptionVisible(null)} />
 
         </Modal>
     );
@@ -90,7 +93,7 @@ const styles = {
         flex: 1,
         justifyContent: 'flex-start',
     },
-    header: { marginLeft: 0 * em, marginBottom: 10 * hm, marginTop: 27 * hm },
+    header: { marginLeft: 1 * em, marginBottom: 10 * hm, marginTop: 27 * hm },
     body: { paddingHorizontal: 30 * em, alignItems: 'center', flex: 1 },
     title: {
         marginTop: 15 * hm
@@ -99,8 +102,8 @@ const styles = {
     searchbox: { marginTop: 25 * hm, height: 44 * hm, width: 315 * em, marginLeft: 30 * em, marginRight: 30 * em },
     listItem: {
         height: 42 * hm,
-        marginTop: 35 * hm,
-        paddingHorizontal: 30 * em,
+        marginTop: 15 * hm,
+        paddingHorizontal: 3 * em,
         width: 315 * em,
     },
 };

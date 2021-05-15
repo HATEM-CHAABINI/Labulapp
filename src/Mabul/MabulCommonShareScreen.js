@@ -14,26 +14,26 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
   const [fchecked, setfChecked] = useState(false);
   const [tchecked, settChecked] = useState(false);
 
-const check = (id) => {
-  setvChecked(false)
-  setaChecked(false)
-  setfChecked(false)
-  settChecked(false)
-  switch(id){
-  case 1:
-    setaChecked(true)
-    break;
-  case 2:
-    setvChecked(true)
-    break;
-  case 3:
-    setfChecked(true)
-    break;
-  case 4:
-    settChecked(true)
-    break;
-}
-}
+  const check = (id) => {
+    setvChecked(false)
+    setaChecked(false)
+    setfChecked(false)
+    settChecked(false)
+    switch (id) {
+      case 1:
+        setaChecked(true)
+        break;
+      case 2:
+        setvChecked(true)
+        break;
+      case 3:
+        setfChecked(true)
+        break;
+      case 4:
+        settChecked(true)
+        break;
+    }
+  }
   return (
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
@@ -41,44 +41,44 @@ const check = (id) => {
         <View>
           <TitleText text={'Je partage avec'} style={styles.title} />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity   activeOpacity={1}
-        style={[
-          vchecked ? styles.iconViewClicked : styles.iconView,
-          // { marginBottom: index === 2 ? 40 * em : 0 },
-        ]}
-        onPress={() => check(2)}>
+            <TouchableOpacity activeOpacity={1}
+              style={[
+                vchecked ? styles.iconViewClicked : styles.iconView,
+                // { marginBottom: index === 2 ? 40 * em : 0 },
+              ]}
+              onPress={() => check(2)}>
               <Neighbor width={48 * em} height={48 * em} />
               <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
-            <TouchableOpacity 
-             activeOpacity={1}
-             style={[
-               achecked ? styles.iconViewClicked : styles.iconView,
-               // { marginBottom: index === 2 ? 40 * em : 0 },
-             ]}
-             onPress={() => check(1)}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[
+                achecked ? styles.iconViewClicked : styles.iconView,
+                // { marginBottom: index === 2 ? 40 * em : 0 },
+              ]}
+              onPress={() => check(1)}>
               <Friend width={48 * em} height={48 * em} />
               <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity 
-             activeOpacity={1}
-             style={[
-               fchecked ? styles.iconViewClicked : styles.iconView,
-               // { marginBottom: index === 2 ? 40 * em : 0 },
-             ]}
-             onPress={() => check(3)}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[
+                fchecked ? styles.iconViewClicked : styles.iconView,
+                // { marginBottom: index === 2 ? 40 * em : 0 },
+              ]}
+              onPress={() => check(3)}>
               <Family width={48 * em} height={48 * em} />
               <CommonText text="mes famille" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
-            <TouchableOpacity 
-             activeOpacity={1}
-             style={[
-               tchecked ? styles.iconViewClicked : styles.iconView,
-               // { marginBottom: index === 2 ? 40 * em : 0 },
-             ]}
-             onPress={() => check(4)}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[
+                tchecked ? styles.iconViewClicked : styles.iconView,
+                // { marginBottom: index === 2 ? 40 * em : 0 },
+              ]}
+              onPress={() => check(4)}>
               <All width={48 * em} height={48 * em} />
               <CommonText text="tous" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
@@ -91,8 +91,10 @@ const check = (id) => {
             mabulService === 'organize'
               ? Actions.myOrganize()
               : mabulService === 'give'
-              ? Actions.main()
-              : Actions.myNeed();
+                ? Actions.myGive()
+                : mabulService === 'sell'
+                  ? Actions.mySell()
+                  : Actions.myNeed();
           }}
         />
       </View>
@@ -149,7 +151,7 @@ const styles = {
 
     ...Platform.select({
       ios: {
-        borderRadius:20*em,
+        borderRadius: 20 * em,
         shadowColor: "#000",
         shadowOffset: {
           width: 0,
@@ -157,7 +159,7 @@ const styles = {
         },
         shadowOpacity: 0.20,
         shadowRadius: 1.41,
-        
+
         elevation: 2,
       },
       android: {
@@ -170,7 +172,7 @@ const styles = {
     justifyContent: 'center',
     width: 150 * em,
     height: 176 * em,
- 
+
   },
   btn: {
     marginBottom: 30 * em,

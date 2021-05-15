@@ -75,7 +75,7 @@ const styles = {
   searchbox: { marginTop: 25 * hm, height: 44 * hm, width: 315 * em, marginLeft: 30 * em, marginRight: 30 * em },
   listItem: {
     height: 42 * hm,
-    marginTop: 35 * hm,
+    marginTop: 25 * hm,
     paddingHorizontal: 30 * em,
     width: 315 * em,
   },

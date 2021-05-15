@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { View, Image ,Switch} from 'react-native';
+import { View, Image ,Switch,KeyboardAvoidingView} from 'react-native';
 import TitleText from '../text/TitleText';
 import { em, hm, hexToRGB, mabulColors } from '../constants/consts';
 import CommentText from '../text/CommentText';
@@ -63,22 +63,27 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   // console.warn(Moment(isDate).format('DD MMMM YYYY-HH:MM'));
 
   return (
+    <View  style={{ flex: 1,}}>
+    <MabulCommonHeader style={[styles.header,{zIndex: 999,backgroundColor: '#ffffff',}]} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
 
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+      
+    >
+    
        <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="datetime"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-      <MabulCommonHeader style={styles.header} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
       <View style={styles.body}>
-        <View>
+        <View style={{    justifyContent: 'flex-end',}}>
           <TitleText text={'Quand ?'} style={styles.title} />
           <CommentText text="Choisis une date si nécessaire" style={styles.comment} />
           <CommonListItem
             icon={iconDate}
-            style={styles.listItem}
             title="Date et heure de début"
             subTitle={Moment(isDate).format('DD MMMM YYYY-HH:MM')}
             subTitleStyle={styles.listComment}
@@ -88,7 +93,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
           
           <View style={styles.line} />
           <CommentText style={styles.addDateText} text="+ Date et heure de fin" color={conceptColor} />
-          <CommonListItem title="Pas de date" rightView={switchView} />
+          <CommonListItem title="Pas de date" rightView={switchView}style={styles.addDateText} />
           <TitleText text={'Lieu'} style={styles.title} />
           <CommentText text="Choisis un adresse si besoin" style={styles.comment} />
           
@@ -111,7 +116,6 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
             icon={iconAddress}
             title="Utiliser ma position"
           /> */}
-
 <Reinput 
 label='Rue, adresse, ville'
 icon={iconLocation}
@@ -143,6 +147,7 @@ paddingBottom={25*em}
           }}
         />
       </View>
+    </KeyboardAvoidingView>
     </View>
   );
 };
@@ -153,8 +158,11 @@ const styles = {
     backgroundColor: '#ffffff',
   },
   header: {
-    height: '10.3%',
-    marginTop: 16 * hm,
+    height: '12.83%',
+    //  marginTop: 16 * hm,
+     
+    //  height: '10.3%',
+    //  marginTop: 16 * hm,
   },
   body: {
     flex: 1,
@@ -163,10 +171,10 @@ const styles = {
   },
   title: {
     textAlign: 'left',
-    marginTop: 35 * hm,
+    marginTop: 14 * hm,
     lineHeight: 38 * em,
   },
-  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * em,marginBottom:33*em },
+  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * hm,marginBottom:23*hm },
 
   iconDate: { width: 19 * em, height: 20 * em, marginRight: 15 * em, marginTop: 9 * em },
   iconLocation: { width: 21 * em, height: 30 * em, marginRight: 15 * em },
@@ -177,14 +185,15 @@ const styles = {
   listAddLocation: { marginLeft: 37 * em, marginTop: 15 * em },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 36 * em, marginTop: 25 * em },
   addDateText: {
-    marginTop: 10 * em,
+    marginTop: 10 * hm,
     textAlign: 'left',
     marginLeft: 36 * em,
+    marginBottom:20*hm
   },
   nextBtn: {
     alignSelf: 'flex-end',
     // marginRight: 30 * em,
-    marginBottom: 30 * em,
+    marginBottom: 36 * em,
   },
 };
 

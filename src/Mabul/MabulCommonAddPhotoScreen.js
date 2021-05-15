@@ -87,7 +87,7 @@ const styles = {
   },
   nextBtn: {
     alignSelf: 'flex-end',
-    marginBottom: 30 * em,
+    marginBottom: 30 * hm,
   },
 };
 

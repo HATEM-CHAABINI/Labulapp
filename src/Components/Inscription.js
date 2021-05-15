@@ -67,21 +67,25 @@ export default ({ navigation }) => {
   }
   return (
 
-    <View style={{ flex: 1, bottom: 80 * hm }}>
+    <View style={{flex: 1, alignContent: 'center'}}>
+      <Image
+        source={require('../assets/images/onbording-1296x814.png')}
+        style={styles.topImage} 
+      />
 
 
-
-      <Image style={{ flex: 1 }}
-
-        source={require('../assets/img/hedaer.png')}
+<View
         style={{
-          width: em * 580,
-          height: 440 * hm,
-          right: 20 * em,
-        }} resizeMode={'center'} />
-
-
-      <View style={{ flex: 1, bottom: hm * 120 }}>
+          height: 420 * hm,
+          // flex: 1,
+          backgroundColor: '#ffffff',
+          borderTopStartRadius: 28 * em,
+          borderTopEndRadius: 28 * em,
+          width: '100%',
+          alignItems: 'center',
+          position: 'absolute',
+          bottom: 0,
+        }}>
         <View style={styles.ActionWrapper}>
 
           <TouchableOpacity style={{ position: 'absolute', left: 40 * em, top: 40 * hm }} onPress={() => Actions.pop()}>
@@ -235,4 +239,6 @@ const styles = StyleSheet.create({
     color: '#1E2D60',
     // marginTop: 2*hm,
   },
+  topImage: { flex: 1,resizeMode:'contain' ,width:'150%',bottom:200*hm,right:20*em},
+
 });

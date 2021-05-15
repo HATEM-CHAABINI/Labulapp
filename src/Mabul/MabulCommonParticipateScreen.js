@@ -28,7 +28,7 @@ const MabulCommonParticipateScreen = (props) => {
 
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ alignItems: 'center', marginBottom: 30 * hm }}
+        style={{ alignItems: 'center', marginBottom: 29 * hm }}
         keyboardVerticalOffset={Platform.OS === "ios" ? 105*hm : 105*hm}
       >
         <MabulNextButton
@@ -53,7 +53,7 @@ const styles = {
   },
   header: {
     height: '10.3%',
-  },
+    marginTop: 16 * hm,  },
   body: {
     flex: 1,
     paddingLeft: 30 * em,

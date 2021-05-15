@@ -29,7 +29,7 @@ const MyAlertScreen = () => {
       textStyle={{ color: '#F9547B' }}
       style={styles.inviteBtn}
       text="Partager"
-      onPress={() => setInvitePopupVisible(true)}
+      onPress={() => Actions.alertShare({ process: 94 })}
     />
   );
   const ModifyButton = (

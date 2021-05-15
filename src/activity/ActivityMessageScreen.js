@@ -81,7 +81,25 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       text="   Accepter"
       textStyle={{ fontSize: 14 * em }}
       onPress={() => {
-        activityType === 'invitation' ? setAccepted(true) : setMessageCounterVisible(true);
+        setMessageCounterVisible(true);
+      }}
+    />
+  );
+  const AcceptInvitationButton = accepted ? (
+    <CommonButton
+      style={styles.optionBtnClicked}
+      leftIcon={<CheckedBlue width={12 * em} height={8.79 * em} />}
+      text="Accepter"
+      textStyle={{ fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em }}
+    />
+  ) : (
+    <CommonButton
+      style={styles.optionBtn}
+      leftIcon={<Up width={14 * em} height={13 * em} />}
+      text="   Accepter"
+      textStyle={{ fontSize: 14 * em }}
+      onPress={() => {
+        setAccepted(true)
       }}
     />
   );
@@ -105,8 +123,10 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   );
   const optionView = (
     <View style={styles.optionView}>
-      {AcceptButton}
+      {(activityType == 'invitation') && AcceptInvitationButton}
+      {(!(activityType == 'invitation')) && AcceptButton}
       {RefuseButton}
+
     </View>
   );
   const SuccessToast = (
@@ -129,7 +149,10 @@ const ActivityMessageScreen = ({ message, activityType }) => {
     return <MessageView date={date} messages={messages} side={side} />;
   };
 
+
+
   if (activityType === 'invitation') {
+
     requestMessage = [
       {
         id: 0,
@@ -202,6 +225,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             </TouchableOpacity>
           </View>
           {!isAccepted && optionView}
+          { }
           <View style={{ flex: 1 }}>
             <FlatList
               data={isAccepted ? messageLists : requestMessage}

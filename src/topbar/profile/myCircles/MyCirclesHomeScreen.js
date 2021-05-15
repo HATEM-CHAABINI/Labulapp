@@ -1,5 +1,5 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity } from 'react-native';
 import TitleText from '../../../text/TitleText';
 import { em, hm } from '../../../constants/consts';
 import CommonTabBar from '../../../Components/other/CommonTabBar';
@@ -10,9 +10,13 @@ import CommonBackButton from '../../../Components/button/CommonBackButton';
 import { Actions } from 'react-native-router-flux';
 import { MagnifierBlue } from '../../../assets/svg/icons';
 import RelationshipType from '../../../model/user/RelationshipType';
-const Tab = createMaterialTopTabNavigator();
+import SearchContact from '../../../Components/SearchContact';
+
 
 const MyCirclesHomeScreen = () => {
+  const Tab = createMaterialTopTabNavigator();
+  const [SearchContactVisible, setSearchContactVisible] = useState(false);
+
   return (
     <NavigationContainer>
       <View style={styles.container}>
@@ -21,9 +25,14 @@ const MyCirclesHomeScreen = () => {
           style={{ marginLeft: 15 * em, marginTop: 27 * hm }}
           onPress={() => Actions.main({ tabNav: 'Profile' })}
         />
-        <View style={{ position: 'absolute', top: 39 * hm, right: 30 * em }}>
+        <TouchableOpacity
+          style={{
+            position: 'absolute', top: 39 * hm, right: 30 * em
+          }}
+          onPress={() => setSearchContactVisible(true)}
+        >
           <MagnifierBlue width={20 * em} height={20 * em} />
-        </View>
+        </TouchableOpacity>
         <TitleText text={'Mes cercles'} style={styles.title} />
         <Tab.Navigator tabBar={(props) => <CommonTabBar {...props} />} swipeEnabled={false} initialRouteName="families">
           <Tab.Screen
@@ -45,6 +54,10 @@ const MyCirclesHomeScreen = () => {
             initialParams={{ sort: RelationshipType.NEIGHBOR }}
           />
         </Tab.Navigator>
+        <SearchContact
+          visible={SearchContactVisible}
+          onPress={() => setSearchContactVisible(false)}
+        />
       </View>
     </NavigationContainer>
   );

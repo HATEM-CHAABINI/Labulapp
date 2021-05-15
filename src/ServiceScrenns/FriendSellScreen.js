@@ -27,29 +27,29 @@ const FriendSellScreen = () => {
           <TitleText text={'Spray cuisine 100% Bio'} style={styles.title} />
           <CommentText text={'5,00 €'} style={styles.price} color="#1E2D60" />
           <ReadMore
-          
-              
-              numberOfLines={3}
-              renderTruncatedFooter={this._renderTruncatedFooter}
-              renderRevealedFooter={this._renderRevealedFooter}
-              // onReady={this._handleTextReady}
-              >
-          
-          
-          <Text style={styles.content}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef
+
+
+            numberOfLines={3}
+            renderTruncatedFooter={this._renderTruncatedFooter}
+            renderRevealedFooter={this._renderRevealedFooter}
+          // onReady={this._handleTextReady}
+          >
+
+
+            <Text style={styles.content}>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+              dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef
         </Text>
-            </ReadMore>
+          </ReadMore>
           <CommonButton
             style={styles.quizBtn}
-            text="Je suis intéresse"
+            text="Je suis intéressé"
             onPress={() => Actions.friendNeed({ status: NeedStatusType.WAITING })}
           />
 
           <CommonButton
             style={styles.inviteBtn}
-            text="Participer"
+            text="Partager"
             textStyle={{ color: '#41D0E2' }}
             onPress={() => setInvitePopupVisible(true)}
           />
@@ -65,14 +65,14 @@ const FriendSellScreen = () => {
 
 _renderTruncatedFooter = (handlePress) => {
   return (
-    <Text style={{color: '#40CDDE',fontSize:14*em}} onPress={handlePress}>
-Continuer à lire    </Text>
+    <Text style={{ color: '#40CDDE', fontSize: 14 * em }} onPress={handlePress}>
+      Continuer à lire    </Text>
   );
 }
 
 _renderRevealedFooter = (handlePress) => {
   return (
-    <Text style={{color: '#40CDDE',fontSize:14*em}} onPress={handlePress}>
+    <Text style={{ color: '#40CDDE', fontSize: 14 * em }} onPress={handlePress}>
       Voir moins
     </Text>
   );

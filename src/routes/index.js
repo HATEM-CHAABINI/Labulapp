@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Router, Scene} from 'react-native-router-flux';
+import React, { useState, useEffect } from 'react';
+import { Router, Scene } from 'react-native-router-flux';
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
 // import LoginMenuScreen from 'view/screens/account/LoginMenuScreen';
@@ -99,14 +99,14 @@ import FriendGiveBadgeScreen from '../ServiceScrenns/FriendGiveBadgeScreen';
 import ActivityMessageScreen from '../activity/ActivityMessageScreen';
 import ActivityDialScreen from '../activity/ActivityDialScreen';
 import MotdePasseOublie from '../Components/MotdePasseOublie';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import InscriptionMdp from '../Components/InscriptionMdp';
-import auth, {firebase as fire} from '@react-native-firebase/auth';
-import {firebase} from '../setup';
+import auth, { firebase as fire } from '@react-native-firebase/auth';
+import { firebase } from '../setup';
 // import * as Firebase from 'firebase';
 
 export default () => {
-  const {userDetails} = useSelector(state => state.loginReducers);
+  const { userDetails } = useSelector(state => state.loginReducers);
   const [state, setstate] = useState({
     isLogin: false,
     authenticated: false,
@@ -120,9 +120,9 @@ export default () => {
     if (user) {
       // console.log(tag, user);
 
-      setstate({authenticated: true});
+      setstate({ authenticated: true });
     } else {
-      setstate({authenticated: false});
+      setstate({ authenticated: false });
     }
   };
   return (

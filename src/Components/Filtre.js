@@ -175,13 +175,13 @@ class Filtre extends Component {
             }}
           >
             <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity  onPress={() => this[RBSheet + 1].close()}  >
-              <Fleche  />
+              <TouchableOpacity onPress={() => this[RBSheet + 1].close()}  >
+                <Fleche />
               </TouchableOpacity>
               <Text style={{ marginLeft: em * 40, marginRight: em * 40, color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold' }}>Type de demande</Text>
-              <TouchableOpacity  onPress={() => this[RBSheet + 1].close()}  >
+              <TouchableOpacity onPress={() => this[RBSheet + 1].close()}  >
 
-              <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Regular' }} onPress={this.handleClick.bind(this)}>Réinitialiser</Text>
+                <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Regular' }} onPress={this.handleClick.bind(this)}>Réinitialiser</Text>
               </TouchableOpacity>
 
             </View>
@@ -286,17 +286,17 @@ class Filtre extends Component {
 
             </View>
 
-            <TouchableOpacity  onPress={() => this[RBSheet + 1].close()}  
-            style={{
-              overflow: 'hidden',
-              borderRadius: 18 * em,
-              height: 59 * hm,
-              width: 315 * em,
-              alignItems: 'center',
-              backgroundColor: '#40CDDE',
-              "opacity": 1,
-              marginBottom: 200 * hm
-            }}
+            <TouchableOpacity onPress={() => this[RBSheet + 1].close()}
+              style={{
+                overflow: 'hidden',
+                borderRadius: 18 * em,
+                height: 59 * hm,
+                width: 315 * em,
+                alignItems: 'center',
+                backgroundColor: '#40CDDE',
+                "opacity": 1,
+                marginBottom: 200 * hm
+              }}
             >
               <View
                 style={{
@@ -349,8 +349,8 @@ class Filtre extends Component {
             }}
           >
             <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 60, right: em * 85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity  onPress={() => this[RBSheet + 2].close()}  >
-              <Fleche  />
+              <TouchableOpacity onPress={() => this[RBSheet + 2].close()}  >
+                <Fleche />
               </TouchableOpacity>
               <Text style={{ marginLeft: em * 40, marginRight: em * 40, color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold' }}>Date</Text>
             </View>
@@ -368,17 +368,17 @@ class Filtre extends Component {
 
             </View>
 
-            <TouchableOpacity  onPress={() => this[RBSheet + 2].close()}     
-                   style={{
-              overflow: 'hidden',
-              borderRadius: 18 * em,
-              height: 59 * hm,
-              width: 315 * em,
-              alignItems: 'center',
-              backgroundColor: '#40CDDE',
-              "opacity": 1,
-              marginBottom: 200 * hm
-            }}
+            <TouchableOpacity onPress={() => this[RBSheet + 2].close()}
+              style={{
+                overflow: 'hidden',
+                borderRadius: 18 * em,
+                height: 59 * hm,
+                width: 315 * em,
+                alignItems: 'center',
+                backgroundColor: '#40CDDE',
+                "opacity": 1,
+                marginBottom: 200 * hm
+              }}
             >
               <View
                 style={{

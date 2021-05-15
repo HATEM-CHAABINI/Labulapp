@@ -70,7 +70,7 @@ export default ({navigation}) => {
     <View style={{flex: 1, alignContent: 'center'}}>
       <Image
         source={require('../assets/images/onbording-1296x814.png')}
-        style={{width: em * 500, height: 339 * hm,bottom:10*hm,}}
+        style={styles.topImage} 
       />
 
       <View
@@ -279,4 +279,5 @@ const styles = StyleSheet.create({
     color: '#1E2D60',
     // marginTop: 2*hm,
   },
+  topImage: { flex: 1,resizeMode:'contain' ,width:'150%',bottom:200*hm,right:20*em},
 });

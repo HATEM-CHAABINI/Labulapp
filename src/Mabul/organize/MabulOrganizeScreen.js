@@ -29,8 +29,13 @@ const MabulOrganizeScreen = ({ process }) => {
     />
   );
   return (
-    <View style={styles.container}>
-      <MabulCommonHeader style={styles.header} percent={process} noBackButton progressBarColor={'#FDC641'} />
+     <View style={styles.container}>
+      <MabulCommonHeader
+        style={styles.header}
+        percent={process}
+        noBackButton={true}
+        progressBarColor={'#FDC641'}
+      />
       <View style={styles.body}>
         <TitleText text={'J’organise'} style={styles.title} />
         <FlatList data={themeData} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
@@ -43,10 +48,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * hm,
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   body: {
     flex: 1,

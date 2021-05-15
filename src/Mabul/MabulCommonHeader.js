@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { em, WIDTH } from '../constants/consts';
+import { em, hm, WIDTH } from '../constants/consts';
 import CommentText from '../text/CommentText';
 import CommonBackButton from '../Components/button/CommonBackButton';
 import CommonHeader from './CommonHeader';
@@ -19,7 +19,7 @@ function hexToRGB(hex, alpha) {
 
 const MabulCommonHeader = (props) => {
 
-  const emptyBack = <View style={{ height: 44 * em, left: 44 * em }} />;
+  const emptyBack = <View style={{ height: 44 * hm, left: 44 * em }} />;
   var topViewHeader = (
     <CommonHeader
       dark
@@ -49,24 +49,24 @@ const styles = {
   container: { flexDirection: 'column', justifyContent: 'flex-end', width: '100%' },
   rightTxt: { color: 'rgba(106, 133, 150, 1)', fontSize: 14 * em, marginRight: 15 * em, fontFamily: 'Lato-Bold' },
   topViewHeader: {
-    height: 44 * em,
+    height: 44 * hm,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4 * em,
+    marginBottom: 4 * hm,
     justifyContent: 'space-between',
   },
   backBtnView: {
     alignSelf: 'flex-end',
     width: 44 * em,
-    height: 44 * em,
+    height: 44 * hm,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 15 * em,
   },
   headerTitle: { marginLeft: 10 * em },
   mainBtn: { marginRight: 30 * em },
-  progressBar: { height: 6 * em },
-  progressContainer: { width: '100%', height: 6 * em },
+  progressBar: { height: 6 * hm },
+  progressContainer: { width: '100%', height: 6 * hm },
 };
 
 export default MabulCommonHeader;

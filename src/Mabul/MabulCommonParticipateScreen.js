@@ -7,6 +7,7 @@ import MabulCommonHeader from './MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import MabulNextButton from '../Components/button/MabulNextButton';
 import { TextInput } from 'react-native-gesture-handler';
+import { KeyboardAvoidingView } from 'react-native';
 
 const MabulCommonParticipateScreen = (props) => {
   const conceptColor = mabulColors[props.mabulService];
@@ -24,6 +25,12 @@ const MabulCommonParticipateScreen = (props) => {
           <CommentText text="Combien de personnes peuvent participer dans votre demande ?" style={styles.comment} />
           <TextInput style={styles.input} placeholder="0" selectionColor={conceptColor} />
         </View>
+
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ alignItems: 'center', marginBottom: 30 * hm }}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 105*hm : 105*hm}
+      >
         <MabulNextButton
           color={hexToRGB(conceptColor, 0.5)}
           style={styles.nextBtn}
@@ -31,6 +38,8 @@ const MabulCommonParticipateScreen = (props) => {
             Actions.mabulCommonShare({ mabulService: props.mabulService, process: 93 });
           }}
         />
+                      </KeyboardAvoidingView>
+
       </View>
     </View>
   );
@@ -40,7 +49,7 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * hm,
+    // marginTop: 16 * hm,
   },
   header: {
     height: '10.3%',
@@ -80,7 +89,7 @@ const styles = {
   nextBtn: {
     alignSelf: 'flex-end',
     marginRight: 30 * em,
-    marginBottom: 30 * hm,
+    // marginBottom: 30 * hm,
   },
   input: {
     

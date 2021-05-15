@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Image } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import SearchBox from '../../Components/other/SearchBox';
-import SearchCommonListItem from '../../adapter/SearchCommonListItem';
 import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
 import CommonButton from '../../Components/button/CommonButton';
 import { AlertWhite } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 import { TouchableOpacity } from 'react-native';
 import CheckBox from '../../Components/checkbox/CheckBox';
+import CommonListItem from '../../adapter/CommonListItem';
 
 const usersList = [
-  { id: 0.1, userName: 'Tous' },
+  { id: 0.1, userName: 'Tous',tous:true },
   {
     id: 0,
     userName: 'Amandine Bernard',
@@ -50,42 +50,64 @@ const usersList = [
 const AlertShareScreen = (props) => {
   const conceptColor = '#F9547B';
 
-  const [optionCheck, setOptionCheck] = useState();
-  const [checked, setChecked] = useState();
-
-  const renderOptions = ({ item, index }) => {
-
-    return (
-      <TouchableOpacity
-        activeOpacity={1}
-        style={[
-          checked === index ? styles.optionBoxClicked : styles.optionBox,
-          { marginBottom: index === 2 ? 40 * em : 0 },
-        ]}
-        onPress={() => setChecked(index)}>
-        {/* <TitleText style={styles.optionCaption} text={item.userName} /> */}
-        <SearchCommonListItem text={item.userName} icon={item.avatar} style={styles.listItem} option />
+  const [optionCheck, setOptionCheck] = useState();  const [checked, setChecked] = useState(new Array(usersList.length).fill(false));
+  const renderCircleList = ({ item, index }) => {
+if (item.tous){
+  return (
+    <CommonListItem
+    
+    
+    style={styles.listItem}
+      title={item.userName}
+      titleStyle={{ color: '#1E2D60', fontFamily: 'Lato-Bold',fontSize:16*em }}
+      rightView={
         <CheckBox
           oval
           red
-          single
-          isChecked={checked === index}
-          singleSelection={true}
-          onClick={() => setChecked(index)}
+          isChecked={checked[index]}
+          onClick={() => {
+            const arr = [...checked];
+            arr[index] = !arr[index];
+            setChecked(arr);
+          }}
         />
-      </TouchableOpacity>
-    );
-  };
-  const renderFlatList = ({ item }) => (
-    <SearchCommonListItem text={item.userName} icon={item.avatar} style={styles.listItem} option />
+      }
+    />
   );
+}
+  else{    
+
+
+    return (
+      <CommonListItem
+      
+      icon={   <Image source={item.avatar} style={{ width: 40 * em, height: 40 * em, marginRight: 15 * em }} />}
+      style={styles.listItem}
+        title={item.userName}
+        titleStyle={{ color: '#1E2D60', fontFamily: 'Lato-Bold',fontSize:16*em }}
+        rightView={
+          <CheckBox
+            oval
+            red
+            isChecked={checked[index]}
+            onClick={() => {
+              const arr = [...checked];
+              arr[index] = !arr[index];
+              setChecked(arr);
+            }}
+          />
+        }
+      />
+    );}
+  };
+  
   return (
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} />
       <View style={styles.body}>
         <TitleText text={'Partager avec'} style={styles.title} />
         <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" />
-        <FlatList data={usersList} renderItem={renderOptions} keyExtractor={(i) => i.id} style={{ marginTop: 29 * hm }} />
+        <FlatList data={usersList} renderItem={renderCircleList} keyExtractor={(i) => i.id} style={{ marginTop: 70 * hm }} />
         {/* <FlatList
           data={usersList}
           renderItem={renderFlatList}
@@ -133,7 +155,7 @@ const styles = {
     flexDirection: 'row',
   },
 
-  listItem: { marginBottom: 35 * hm },
+  listItem: { width:'90%',marginBottom: 35 * hm },
   btn: {
     width: 315 * em,
     alignSelf: 'center',

@@ -48,9 +48,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * em,
+    PaddingTop: 16 * hm,
   },
-  header: { height: 81 * hm },
+  header: { 
+    height: 81 * hm 
+  },
   popView: {
     paddingLeft: 30 * em,
     borderTopLeftRadius: 28 * em,

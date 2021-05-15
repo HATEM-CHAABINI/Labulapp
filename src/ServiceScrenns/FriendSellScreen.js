@@ -43,7 +43,7 @@ const FriendSellScreen = () => {
           </ReadMore>
           <CommonButton
             style={styles.quizBtn}
-            text="Je suis intéressé"
+            text="Intéressé"
             onPress={() => Actions.friendNeed({ status: NeedStatusType.WAITING })}
           />
 

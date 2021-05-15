@@ -31,7 +31,12 @@ const MabulGiveScreen = (props) => {
   );
   return (
     <View style={styles.container}>
-      <MabulCommonHeader style={styles.header} percent={props.process} noBackButton progressBarColor={'#34D9B8'} />
+      <MabulCommonHeader
+        style={styles.header}
+        percent={props.process}
+        noBackButton={true}
+        progressBarColor={'#34D9B8'}
+      /> 
       <View style={styles.body}>
         <TitleText text={'Je donne'} style={styles.title} />
         <View style={styles.popView}>
@@ -46,10 +51,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * em,
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   popView: {
     paddingLeft: WIDTH * 0.08,

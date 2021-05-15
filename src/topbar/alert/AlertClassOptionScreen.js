@@ -65,9 +65,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '10.3%',
+     marginTop: 16 * hm,
   },
   body: { flex: 1, paddingHorizontal: 30 * em },
   title: {

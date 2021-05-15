@@ -1,29 +1,40 @@
 import React, { useState } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, TouchableOpacity } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import SearchBox from '../../Components/other/SearchBox';
 import CommentText from '../../text/CommentText';
 import SearchCommonListItem from '../../adapter/SearchCommonListItem';
 import FriendCommonHeader from '../../Components/header/FriendCommonHeader';
+import SearchBoxLieu from '../../Components/other/SearchBoxLieu';
 const InputLocationScreen = () => {
   const [searchedUsers, getSearchResult] = useState('');
+  const [text,setText]=useState('')
   const [locationViewVisible, setlocationViewVisible] = useState('flex');
   const renderFlatList = ({ item }) => (
+    <TouchableOpacity   onPress={() => {
+      setText(item.location);
+     
+    }} >
     <SearchCommonListItem
+  
       location
       text={item.location}
       subText={item.comment}
       icon={item.ic_location}
       style={styles.listItem}
     />
+    </TouchableOpacity>
   );
   return (
     <View style={styles.container}>
       <FriendCommonHeader upperTitle="Filtrer" title="Lieu" />
-      <SearchBox
+      <SearchBoxLieu
         style={styles.searchBox}
         comment="Rechercher par ville"
+        smallText="Rechercher par ville"
+        value={text}
         onChangeText={(text) => {
+          setText(text)
           if (text) {
             getSearchResult([
               { id: 0, location: 'Le Gosier' },

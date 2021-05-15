@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
-import { em, WIDTH } from '../constants/consts';
+import { em, hm, WIDTH } from '../constants/consts';
 import CommentText from '../text/CommentText';
 import CommonBackButton from '../Components/button/CommonBackButton';
 import CommonText from '../text/CommonText';
@@ -47,12 +47,12 @@ const styles = {
     alignItems: 'center',
     paddingHorizontal: 15 * em,
   },
-  left: { justifyContent: 'center' },
-  leftTxt: { marginLeft: 15 * em, fontSize: 16 * em, color: '#6A8596', lineHeight: 18 * em, textAlign: 'left' },
+  left: { justifyContent: 'center',height:54*hm },
+  leftTxt: { marginLeft: 15 * em, fontSize: 16 * em, color: '#6A8596', lineHeight: 18 * hm, textAlign: 'left' },
   center: { flex: 1, justifyContent: 'center', flexDirection: 'row', alignSelf: 'center' },
-  centerTxt: { lineHeight: 18 * em, textAlign: 'center', alignSelf: 'center' },
+  centerTxt: { lineHeight: 18 * hm, textAlign: 'center', alignSelf: 'center' },
   right: { justifyContent: 'center', alignSelf: 'center' },
-  rightTxt: { marginRight: 15 * em, lineHeight: 17 * em, textAlign: 'right' },
+  rightTxt: { marginRight: 15 * em, lineHeight: 17 * hm, textAlign: 'right' },
 };
 
 export default CommonHeader;

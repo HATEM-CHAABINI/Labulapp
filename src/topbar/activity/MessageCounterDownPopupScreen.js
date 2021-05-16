@@ -62,7 +62,7 @@ const MessageCounterDownPopupScreen = (props) => {
             style={styles.laterBtn}
             onPress={() => {
               props.onPress();
-              Actions.main({ tabNav: 'Activity', activityType: 'needs', noEmpty: true });
+              Actions.home({ tabNav: 'Activity', activityType: 'needs', noEmpty: true });
             }}
           />
         </View>

@@ -23,7 +23,7 @@ const MyCirclesHomeScreen = () => {
         <CommonBackButton
           dark
           style={{ marginLeft: 15 * em, marginTop: 27 * hm }}
-          onPress={() => Actions.main({ tabNav: 'Profile' })}
+          onPress={() => Actions.pop()}
         />
         <TouchableOpacity
           style={{

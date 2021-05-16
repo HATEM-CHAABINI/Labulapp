@@ -245,7 +245,7 @@ task.on("state_changed",taskProgress,error,taskCompleted)
         text={'Supprimer mon compte'}
         textStyle={{ color: '#F9547B' }}
         style={styles.deleteBtn}
-        onPress={() => Actions.main()}
+        onPress={() => Actions.home()}
       />
     <MyskillComponents
         visible={myskillModal}

@@ -38,7 +38,7 @@ const FriendsFilterDateModalScreen = (props) => {
         text="Voir demandes"
         onPress={() => {
           props.onPress();
-          Actions.main({ tabNav: 'Friends' });
+          Actions.home({ tabNav: 'Friends' });
         }}
       />
     </Modal>

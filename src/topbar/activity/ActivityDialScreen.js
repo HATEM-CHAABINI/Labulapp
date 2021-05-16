@@ -24,7 +24,7 @@ const ActivityDialScreen = () => {
         <View style={styles.btnView}>
           <TouchableOpacity
             style={[styles.controlBtn, { backgroundColor: '#F83D39' }]}
-            onPress={() => Actions.main({ tabNav: 'Activity', activityType: 'needs', noEmpty: true })}>
+            onPress={() => Actions.home({ tabNav: 'Activity', activityType: 'needs', noEmpty: true })}>
             <Image style={styles.btnIcon} />
           </TouchableOpacity>
           <Text style={styles.btnCaption}>Terminer</Text>

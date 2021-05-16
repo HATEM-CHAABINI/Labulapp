@@ -23,7 +23,7 @@ const ProRegisterEmailScreen = (props) => {
           <CommonButton
             text={'Suivant'}
             style={styles.btnNext}
-            onPress={() => Actions.main({ tabNav: 'ProProfile', accountType: props.accountType })}
+            onPress={() => Actions.home({ tabNav: 'ProProfile', accountType: props.accountType })}
           />
         </View>
       </View>

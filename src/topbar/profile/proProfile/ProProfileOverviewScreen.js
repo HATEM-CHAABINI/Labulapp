@@ -48,7 +48,7 @@ const ProProfileOverviewScreen = (props) => {
           rightTxt={'Modifier mon profil'}
           style={styles.header}
           onLeftPress={() =>
-            Actions.main({
+            Actions.home({
               tabNav: 'ProProfile',
               purchased: userProfile.cover ? AccountType.PRO : null,
             })

@@ -63,8 +63,8 @@ const AccountChangeMenu = (props) => {
               onPress={() => {
                 setMenuVisible(false);
                 props.type !== 'my'
-                  ? Actions.main({ tabNav: 'Profile', purchased: AccountType.LIGHT })
-                  : Actions.main({ tabNav: 'ProProfile', purchased: AccountType.PRO });
+                  ? Actions.home({ tabNav: 'Profile', purchased: AccountType.LIGHT })
+                  : Actions.home({ tabNav: 'ProProfile', purchased: AccountType.PRO });
               }}
             />
           </View>

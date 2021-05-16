@@ -15,6 +15,20 @@ const SearchBox = (props) => {
     props.onChangeText && props.onChangeText(text);
     setValue(text);
   };
+  const [searchData, setSearchData] = useState('');
+  const onSearch = (val) => {
+    if (val != '' && val != ' ' && val != undefined) {
+      const data = val;
+      props.onSearch(data.toLowerCase());
+    } else {
+      props.onSearch('');
+    }
+  };
+  const onClear = () => {
+
+    setSearchData('');
+    props.onClear();
+  };
   return (
     <View
       style={[
@@ -30,8 +44,11 @@ const SearchBox = (props) => {
         )}
         {onFocus && <SmallText text={props.smallText || 'Rechercher un contact'} color="rgba(160, 174, 184, 1)" />}
         <TextInput
-          value={value}
-          onChangeText={_handleText}
+          onChangeText={(val) => {
+            setSearchData(val);
+            onSearch(val);
+          }}
+          value={searchData}
           onFocus={() => {
             setOnFocus(true);
             // props.onFocus(true);
@@ -47,7 +64,7 @@ const SearchBox = (props) => {
         />
       </View>
       {onFocus && (
-        <TouchableOpacity style={styles.cross} onPress={() => _delete()}>
+        <TouchableOpacity style={styles.cross} onPress={() => onClear()}>
           <CrossCircle width={17 * em} height={17 * em} />
         </TouchableOpacity>
       )}

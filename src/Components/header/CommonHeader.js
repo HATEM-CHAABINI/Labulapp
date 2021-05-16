@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image,ActivityIndicator } from 'react-native';
 import { em, WIDTH } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 import CommonBackButton from '../button/CommonBackButton';
@@ -35,7 +35,7 @@ const CommonHeader = (props) => {
     <View style={[styles.container, props.style]}>
       <View style={styles.left}>{leftButton}</View>
       <View style={styles.center}>{centerView}</View>
-      <View style={styles.right}>{rightButton}</View>
+      {props.loading?<ActivityIndicator size='small' color='#1E2D60' style={styles.right} />:<View style={styles.right}>{rightButton}</View>}
     </View>
   );
 };

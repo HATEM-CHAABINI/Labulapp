@@ -20,7 +20,10 @@ let fireKey = firestore().collection("user");
 const iconSize = { width: 48 * em, height: 48 * em };
 const ProfileOverviewScreen = (props) => {
   const [userProfile] = useState(props.userProfile);
+  const [assets, setassets] = useState([])
   const { userDetails } = useSelector((state) => state.loginReducers);
+  const { profileData } = useSelector((state) => state.profileReducer);
+  console.log(profileData)
   const badgesView = userProfile.feedback ? (
     <ScrollView horizontal={true} style={{ paddingTop: 20 * hm, paddingBottom: 20 * hm, paddingLeft: 30 * em }}>
       {userProfile.feedback.map((badge, index) => (
@@ -33,7 +36,15 @@ const ProfileOverviewScreen = (props) => {
       <CommonText text={'Crée des demandes pour avoir des badges'} style={styles.requestText} />
     </>
   );
-
+  useEffect(() => {
+  
+    firestore().collection('assets').doc("123").get().then((res)=>{
+      
+      setassets(()=>res.data().assets)
+        
+       }).catch(e =>{console.log(e)})
+   
+  }, [])
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -42,21 +53,22 @@ const ProfileOverviewScreen = (props) => {
           rightTxtStyle={{ fontSize: 14 * em }}
           style={styles.header}
           onLeftPress={() =>
-            Actions.main({
+            Actions.home({
               tabNav: 'Profile',
               purchased: userProfile.photo ? AccountType.LIGHT : null,
             })
           }
-          onRightPress={() => Actions.editProfile({ userProfile: userProfile })}
+          onRightPress={() => Actions.editProfile({assest:assets})}
         />
         <View style={styles.firstPopView}>
           <ProfileCommonAvatar
-            icon={require('../../assets/images/tab_profile_off.png')}
+            icon={profileData.profilePic === undefined ?'':{uri:profileData.profilePic}}
             style={styles.avatar}
-            logoVisible={false}
+            fullName={profileData.firstName+' '+profileData.lastName}
+           logoVisible={false}
             borderWidth={3 * em}
           />
-          <TitleText text={userDetails.displayName === undefined ? userDetails.prenom+" "+userDetails.nom:userDetails.displayName} style={styles.fullNameText} />
+          <TitleText text={profileData.firstName + " " +profileData.lastName} style={styles.fullNameText} />
           {userProfile.availability && <CommentText text={userProfile.availability} color="#1E2D60" />}
           {userProfile.presentation && <CommentText text={userProfile.presentation} color="#6A8596" />}
           {userProfile.specs && (

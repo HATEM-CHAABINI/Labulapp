@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import { em, hm } from '../common/const';
+import { em, hm } from '../constants/consts';
 import SmallText from '../text/SmallText';
 
 const ProfileCommonTextInput = (props) => {
   const [onFocus, setOnFocus] = useState(!props.onFocus);
-  const [value, setValue] = useState(props.value);
+ 
   return (
     <View style={[onFocus ? styles.containerFocusOn : styles.containerFocusOff, props.style]}>
       <SmallText
@@ -18,8 +18,10 @@ const ProfileCommonTextInput = (props) => {
         onFocus={() => setOnFocus(true)}
         onBlur={() => setOnFocus(false)}
         multiline={true}
-        value={value}
-        onChangeText={(text) => setValue(text)}
+        maxLength={props.max}
+        value={props.value}
+        onChangeText={props.onChangeText}
+        onChange={props.onChangeText}
         selectionColor="#40CDDE"
         keyboardType={props.keyboardType || 'default'}
       />

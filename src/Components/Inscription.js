@@ -22,6 +22,8 @@ import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
+import { addProfile } from '../redux/actions/profile';
+import firestore from '@react-native-firebase/firestore';
 import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
 GoogleSignin.configure({
   webClientId: "555389901225-u0ooiaamgap21lj4i8f34aq0heiemd5n.apps.googleusercontent.com",
@@ -100,11 +102,31 @@ export default ({ navigation }) => {
           <TouchableOpacity
             onPress={() => {
               setloadinggoogle(() => true), onGoogleButtonPress().then((res) => {
-
-                Object.assign(res.user, { login: true, NotificationActive: false });
-
-                dispatch(addLogin(res.user));
-                setloadinggoogle(() => false)
+                var firstName = res.user.displayName.split(' ').slice(0, -1).join(' ');
+                var lastName = res.user.displayName.split(' ').slice(-1).join(' ');
+                var email = res.user.email
+                var activeNotification = false
+                var profilePic = res.user.photoURL
+                var uid = res.user.uid
+                firestore()
+                .collection('users')
+                .doc(res.user.uid)
+                .set({
+                  lastName,
+                  firstName,
+                  email,
+                  profilePic,
+                  activeNotification,
+                  uid
+                })
+                .then(async() => {
+                  // dispatch(addProfile({firstname:firstName,secondname:lastName,profilePic:profilePic,uid:uid,activeNotification:activeNotification,email:email}))
+                  setloadinggoogle(() => false);
+                })
+                .catch(error =>{
+                  alert("something went wrong!")
+                  setloadinggoogle(() => false);
+                })
               }).catch(e => { alert(e), setloadinggoogle(() => false) })
             }}
             style={{
@@ -127,11 +149,32 @@ export default ({ navigation }) => {
 
             onPress={() => {
               setloadingfacebook(() => true), onFacebookButtonPress().then((res) => {
-
-                Object.assign(res.user, { login: true, NotificationActive: false });
-
-                dispatch(addLogin(res.user));
-                setloadingfacebook(() => false)
+                var firstName = res.user.displayName.split(' ').slice(0, -1).join(' ');
+                var lastName = res.user.displayName.split(' ').slice(-1).join(' ');
+                var email = res.user.email
+                var activeNotification = false
+                var profilePic = res.user.photoURL
+                var uid = res.user.uid
+                firestore()
+                .collection('users')
+                .doc(res.user.uid)
+                .set({
+                  lastName,
+                  firstName,
+                  email,
+                  profilePic,
+                  activeNotification,
+                  uid
+                })
+                .then(async() => {
+                  // dispatch(addProfile({firstname:firstName,secondname:lastName,profilePic:profilePic,uid:uid,activeNotification:activeNotification,email:email}))
+                  // dispatch(addLogin(res.user));
+                  setloadingfacebook(() => false);
+                })
+                .catch(error =>{
+                  alert("something went wrong!")
+                  setloadingfacebook(() => false);
+                })
               }).catch(e => { console.log(e), setloadingfacebook(() => false) })
             }}
             style={{

@@ -65,10 +65,8 @@ const ProfileHomeScreen = (props) => {
   );
   const [userData, setuserData] = useState(null)
   const { userDetails } = useSelector((state) => state.loginReducers);
-  useEffect(() => {
-    console.log(userDetails)
-
-  }, [])
+  const { profileData } = useSelector((state) => state.profileReducer);
+ 
 
   return (
     <ParallaxScrollView
@@ -81,12 +79,12 @@ const ProfileHomeScreen = (props) => {
         <View style={styles.topView}>
           <ProfileCommonAvatar
             style={styles.avatar}
-            fullName={userDetails.displayName === undefined ? userDetails.prenom + " " + userDetails.nom : userDetails.displayName}
-            icon={userProfile.photo}
+            fullName={profileData.firstName + " " +profileData.lastName}
+            icon={profileData.profilePic === undefined ?'':{uri:profileData.profilePic}}
             borderWidth={3 * em}
           />
           <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
-            <TitleText style={styles.txtFullName} text={userDetails.displayName === undefined ? userDetails.prenom + " " + userDetails.nom : userDetails.displayName} />
+            <TitleText style={styles.txtFullName} text={profileData.firstName + " " +profileData.lastName} />
             <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" />
           </TouchableOpacity>
         </View>

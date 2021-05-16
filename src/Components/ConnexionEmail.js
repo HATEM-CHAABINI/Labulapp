@@ -37,7 +37,7 @@ import { addLogin } from '../redux/actions/login';
 import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-simple-toast';
 import { Header } from 'react-navigation-stack';
-
+import { addProfile } from '../redux/actions/profile';
 let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -68,8 +68,17 @@ export default ({ navigation }) => {
 
 
           Object.assign(res._data, response.user)
-          console.log(res._data)
-          dispatch(addLogin(res._data));
+       let profileData = {
+        ...res._data,
+         firstname:res._data.prenom,
+         secondname:res._data.nom,
+         profilePic:null,
+         
+
+      }
+     
+          // dispatch(addProfile(profileData))
+          // dispatch(addLogin(res._data));
         }).catch((e) => {
           console.log(e)
         })

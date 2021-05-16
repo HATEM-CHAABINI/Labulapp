@@ -20,12 +20,12 @@ import { Actions } from 'react-native-router-flux';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
+import { addProfile } from '../redux/actions/profile';
 import * as Firebase from 'firebase'
-import firestore from '@react-native-firebase/firestore';
+
 import auth, { firebase } from "@react-native-firebase/auth";
 import { LogBox } from 'react-native';
-
-
+import firestore from '@react-native-firebase/firestore';
 let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -45,19 +45,37 @@ export default ({ navigation }) => {
         let { nom, mobile, prenom, adresse, email } = signupData;
         let activeNotification = false;
         if (user) {
+          var firstName = prenom;
+                      var lastName = nom;
+                    var uid = user.uid
+                      var address = adresse
+                
           firestore()
             .collection('users')
             .doc(user.uid)
             .set({
-              nom,
-              prenom,
-              adresse,
-              mobile,
-              email,
-              activeNotification,
+              firstName,
+              lastName,
+              address,
+              uid,
+              mobile:mobile,
+              email:email,
+              activeNotification:false,
             })
-            .then(() => {
+            .then(async() => {
+              let response=  await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
+              if (response && response.user) {
+               
+                fireKey.doc(response.user.uid).get().then((res) => {
+                 Object.assign(res._data, response.user)
+                 dispatch(addProfile({activeNotification:activeNotification,firstname:firstName,secondname:lastName,uid:response.user.uid,address:address,mobile:mobile,email:email}))
+                }).catch((e) => {
+                  setloading(false);
+                  console.log(e)
+                })
 
+              }
+          
               setloading(false);
             })
             .catch(e => {
@@ -83,37 +101,38 @@ export default ({ navigation }) => {
         let { nom, mobile, prenom, adresse, email } = signupData;
         let activeNotification = true;
         if (user) {
+          var firstName = prenom;
+                      var lastName = nom;
+                    var uid = user.uid
+                      var address = adresse
           firestore()
             .collection('users')
             .doc(user.uid)
             .set({
-              nom,
-              prenom,
-              adresse,
-              mobile,
-              email,
-              activeNotification,
+              firstName,
+              lastName,
+              address,
+              uid,
+              mobile:mobile,
+              email:email,
+              activeNotification:true,
             })
-            .then(async () => {
-              try {
-                let response = await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
+            .then(async() => {
+             
+               let response= await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
                 if (response && response.user) {
-                  // Alert.alert("Success ", "Authenticated successfully")
+                
                   fireKey.doc(response.user.uid).get().then((res) => {
-
-
-                    Object.assign(res._data, response.user)
-                    console.log(res._data)
-                    dispatch(addLogin(res._data));
+                   Object.assign(res._data, response.user)
+                  
+                   dispatch(addProfile({activeNotification:activeNotification,firstname:firstName,secondname:lastName,uid:response.user.uid,address:address,mobile:mobile,email:email}))
                   }).catch((e) => {
+                    setloading(false);
                     console.log(e)
                   })
 
                 }
-              } catch (e) {
-                alert(e.message)
-                console.error(e.message)
-              }
+               
               setloading(false);
               // Actions.reset('main');
             })

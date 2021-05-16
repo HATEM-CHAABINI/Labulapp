@@ -56,6 +56,7 @@ const ProfileCommonAvatar = (props) => {
             width: props.style.width + borderWidth,
             height: props.style.width + borderWidth,
             borderRadius: (props.style.width + borderWidth) / 2,
+            overflow:'hidden'
             // borderWidth: props.borderWidth,
           },
         ]}>

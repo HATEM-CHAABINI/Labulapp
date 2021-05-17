@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { em, hm } from '../../../constants/consts';
 import CommonHeader from '../../../Components/header/CommonHeader';
 import Switch from '../../../Components/other/Switch';

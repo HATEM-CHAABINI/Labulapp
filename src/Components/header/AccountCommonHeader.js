@@ -20,6 +20,7 @@ const AccountCommonHeader = (props) => {
         logo
         style={{ marginBottom: 0 * hm, }}
         rightView={<View style={{ width: 44 * em, height: 44 * em }} />}
+        // rightText={props.rightText}
         centerView={
           <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
             <Image source={centerIcon} style={styles.icon} />
@@ -31,8 +32,8 @@ const AccountCommonHeader = (props) => {
 };
 
 const styles = {
-  container: { marginTop: 32.5 * hm },
-  icon: { width: 69 * em, height: 20 * em, resizeMode: 'contain', marginBottom: 12 * em },
+  container: { marginTop: 32.5 * hm, },
+  icon: { width: 69 * em, height: 20 * em, resizeMode: 'contain', marginBottom: 25 * em },
 };
 
 export default AccountCommonHeader;

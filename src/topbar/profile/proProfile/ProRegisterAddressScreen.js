@@ -42,7 +42,7 @@ const styles = {
     backgroundColor: '#7398FD',
   },
   header: {
-    height: '12%',
+    // height: '12%',
   },
   icon: {
     width: 21 * em,

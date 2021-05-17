@@ -43,7 +43,7 @@ const styles = {
     alignItems: 'center',
   },
   header: {
-    height: '10%',
+
   },
   popupView: {
     flex: 1,

@@ -18,7 +18,7 @@ const MySettingScreen = () => {
 
     auth()
       .signOut()
-      .then(() => { dispatch(addProfile('')) ,console.log('User signed out!')}).catch((e => { console.log(e), dispatch(addProfile('')) }));
+      .then(() => { dispatch(addProfile('')), console.log('User signed out!') }).catch((e => { console.log(e), dispatch(addProfile('')) }));
   }
   return (
     <View style={styles.container}>
@@ -76,6 +76,7 @@ const MySettingScreen = () => {
         }
         subTitle="Activez la réception de notifications"
       />
+      <View style={styles.line} />
       <View style={styles.rectangle} />
       <TouchableOpacity
         onPress={() =>

@@ -5,36 +5,20 @@ import CommonHeader from '../../../Components/header/CommonHeader';
 import Switch from '../../../Components/other/Switch';
 import CommonListItem from '../../../adapter/CommonListItem';
 import { Address, NotificationYellow } from '../../../assets/svg/icons';
+import { useDispatch } from 'react-redux';
+import auth, { firebase } from "@react-native-firebase/auth";
+
 const ProSettingScreen = () => {
+  const dispatch = useDispatch();
+  const logout = () => {
+
+    auth()
+      .signOut()
+      .then(() => { dispatch(addProfile('')), console.log('User signed out!') }).catch((e => { console.log(e), dispatch(addProfile('')) }));
+  }
   return (
     <View style={styles.container}>
       <CommonHeader dark={true} style={styles.header} />
-      <View style={styles.line} />
-      <CommonListItem
-        style={styles.listItem}
-        icon={
-          <View style={[styles.icon, { backgroundColor: 'rgba(64, 205, 222, 0.15)' }]}>
-            <Address height={22 * hm} width={15 * em} />
-          </View>
-        }
-        title="Localisation"
-        titleStyle={styles.listTitle}
-        subTitleStyle={styles.listComment}
-        rightView={
-          <Switch
-            switchWidth={49 * em}
-            switchHeight={27 * hm}
-            switchdirection="rtl"
-            switchBorderColor="#ffffff"
-            switchBackgroundColor="#40CDDE"
-            btnBorderColor="red"
-            btnBackgroundColor="#FFFFFF"
-            initialValue={1}
-            style={styles.switch}
-          />
-        }
-        subTitle="Vous êtes visibles dans la carte Labul"
-      />
       <View style={styles.line} />
       <CommonListItem
         style={styles.listItem}
@@ -61,8 +45,10 @@ const ProSettingScreen = () => {
         }
         subTitle="Activez la réception de notifications"
       />
+      <View style={styles.line} />
+
       <View style={styles.line2} />
-      {/* <View style={styles.rectangle} /> */}
+      <View style={styles.rectangle} />
       <TouchableOpacity
         onPress={() =>
           Alert.alert('Me déconnecter', 'Voulez-vous vous déconnecter?', [
@@ -149,6 +135,10 @@ const styles = {
   },
   switch: {
     marginTop: 6 * hm,
+  },
+  rectangle: {
+    height: 110 * hm,
+    backgroundColor: 'white',
   },
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { em } from '../../../constants/consts';
+import { em, hm } from '../../../constants/consts';
 import { View } from 'react-native';
 import PopupHeader from '../../../Components/header/PopupHeader';
 import TitleText from '../../../text/TitleText';
@@ -8,12 +8,13 @@ import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { EnterpriseInner } from '../../../assets/svg/icons';
+import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
 
 const CreateProfessionalAccountScreen = (props) => {
   return (
     <View style={styles.container}>
 
-      <AccountCommonHeader style={styles.header} rightTxt="Annuler" />
+      <AccountCommonHeaderpro style={styles.header} rightTxtStyle={{paddingBottom:19*hm}}rightTxt="Annuler" />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <EnterpriseInner width={33 * em} height={30 * em} />
@@ -39,10 +40,10 @@ const CreateProfessionalAccountScreen = (props) => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#7398FC',
-    alignItems: 'center',
+    backgroundColor: '#7398FC'
   },
   header: {
+    // marginTop: 27 * hm,
 
   },
   popupView: {

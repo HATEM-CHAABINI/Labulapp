@@ -126,7 +126,7 @@ export default ({ navigation }) => {
         <TouchableOpacity
           style={{ position: 'absolute', paddingTop: 40 * hm, paddingLeft: 27 * em }}
           onPress={() => Actions.pop()}>
-          <BackArrowWhite width={30 * em} height={30 * hm} />
+          <BackArrowWhite width={27 * em} height={25 * hm} />
         </TouchableOpacity>
         <TitleLabul width={69 * em} height={20 * hm} />
       </View>

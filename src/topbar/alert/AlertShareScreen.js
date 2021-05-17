@@ -3,7 +3,7 @@ import { View, FlatList, Image } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import SearchBox from '../../Components/other/SearchBox';
-import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
+import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import CommonButton from '../../Components/button/CommonButton';
 import { AlertWhite } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
@@ -57,7 +57,7 @@ if (item.tous){
     <CommonListItem
     
     
-    style={styles.listItem}
+    style={[styles.listItem,{paddingTop:10*hm}]}
       title={item.userName}
       titleStyle={{ color: '#1E2D60', fontFamily: 'Lato-Bold',fontSize:16*em }}
       rightView={
@@ -129,11 +129,11 @@ if (item.tous){
 const styles = {
   container: {
     flex: 1,
-    alignItems: 'flex-start',
     backgroundColor: '#ffffff',
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   body: {
     flex: 1,

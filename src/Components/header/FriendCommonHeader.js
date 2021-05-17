@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { em, hm } from '../../constants/consts';
-import CommonHeader from './CommonHeader';
+import CommonHeader from '../../Mabul/CommonHeader';
 import TitleText from '../../text/TitleText';
 
 const FriendCommonHeader = (props) => {

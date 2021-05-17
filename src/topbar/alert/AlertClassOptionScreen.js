@@ -3,7 +3,7 @@ import { View, Platform, FlatList, TouchableOpacity } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
-import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
+import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import CheckBox from '../../Components/checkbox/CheckBox';
 import MabulNextButton from '../../Components/button/MabulNextButton';
@@ -41,8 +41,14 @@ const AlertClassOptionScreen = (props) => {
     );
   };
   return (
-    <View style={styles.container}>
-      <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} />
+     <View style={styles.container}>
+      <MabulCommonHeader
+        style={styles.header}
+        percent={props.process}
+        isNoBackBtn={true}
+        progressBarColor={conceptColor}
+      />
+       
       <View style={styles.body}>
         <TitleText text={'J’alerte'} style={styles.title} />
         <View style={styles.circleSortView}>
@@ -65,11 +71,10 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    PaddingTop: 16 * hm,
   },
   header: {
     height: '10.3%',
-     marginTop: 16 * hm,
+    marginTop: 16 * hm,
   },
   body: { flex: 1, paddingHorizontal: 30 * em },
   title: {

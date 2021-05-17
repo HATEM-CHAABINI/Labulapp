@@ -4,7 +4,7 @@ import { em, hm } from '../../constants/consts';
 import CommonHeader from '../../Components/header/CommonHeader';
 import Switch from '../../Components/other/Switch';
 import CommonListItem from '../../adapter/CommonListItem';
-import { Address, NotificationYellow } from '../../assets/svg/icons';
+import { Address, BackArrowBlack, BackArrowWhite, NotificationYellow } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 import auth, { firebase } from "@react-native-firebase/auth";
 
@@ -22,7 +22,12 @@ const MySettingScreen = () => {
   }
   return (
     <View style={styles.container}>
-      <CommonHeader dark={true} style={styles.header} />
+        <TouchableOpacity
+            style={{ position: 'relative',marginTop:40*hm, paddingLeft: 27 * em ,paddingBottom:23*hm}}
+            onPress={() => Actions.pop()}>
+            <BackArrowBlack width={20 * em} height={18 * hm} />
+          </TouchableOpacity>
+      {/* <CommonHeader dark={true} style={styles.header} /> */}
       {/* <View style={styles.line} />
       <CommonListItem
         style={styles.listItem}

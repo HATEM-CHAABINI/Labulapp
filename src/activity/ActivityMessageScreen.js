@@ -177,9 +177,9 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         leftView={
           // <View style={{ paddingTop: 40 * hm, paddingLeft: 159 * em }}>
           <TouchableOpacity
-            style={{ position: 'relative',marginTop:8*em, paddingLeft: 17 * em ,paddingRight:22*em}}
+            style={{ position: 'relative',marginTop:8*em, paddingLeft: 14 * em ,paddingRight:27*em}}
             onPress={() => Actions.pop()}>
-            <BackArrowWhite width={30 * em} height={30 * hm} />
+            <BackArrowWhite width={25 * em} height={23 * hm} />
           </TouchableOpacity>
           
         }
@@ -255,7 +255,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 
 const styles = {
   container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#40CDDE' },
-  header: { marginBottom: 10 * hm, marginTop: 40 * hm, alignSelf: 'center' },
+  header: { marginBottom: 18 * hm, marginTop: 32 * hm, alignSelf: 'center' },
   toast: {
     alignItems: 'center',
     marginLeft: -30 * em,

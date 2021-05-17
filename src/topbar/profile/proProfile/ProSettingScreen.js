@@ -4,9 +4,10 @@ import { em, hm } from '../../../constants/consts';
 import CommonHeader from '../../../Components/header/CommonHeader';
 import Switch from '../../../Components/other/Switch';
 import CommonListItem from '../../../adapter/CommonListItem';
-import { Address, NotificationYellow } from '../../../assets/svg/icons';
+import { Address, BackArrowBlack, NotificationYellow } from '../../../assets/svg/icons';
 import { useDispatch } from 'react-redux';
 import auth, { firebase } from "@react-native-firebase/auth";
+import { Actions } from 'react-native-router-flux';
 
 const ProSettingScreen = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,39 @@ const ProSettingScreen = () => {
   }
   return (
     <View style={styles.container}>
-      <CommonHeader dark={true} style={styles.header} />
+        <TouchableOpacity
+            style={{ position: 'relative',marginTop:40*hm, paddingLeft: 27 * em ,paddingBottom:23*hm}}
+            onPress={() => Actions.pop()}>
+            <BackArrowBlack width={20 * em} height={18 * hm} />
+          </TouchableOpacity>
+      {/* <CommonHeader dark={true} style={styles.header} /> */}
+      {/* <View style={styles.line} />
+      <CommonListItem
+        style={styles.listItem}
+        icon={
+          <View style={[styles.icon, { backgroundColor: 'rgba(64, 205, 222, 0.15)' }]}>
+            <Address height={22 * hm} width={15 * em} />
+          </View>
+        }
+        title="Localisation"
+        titleStyle={styles.listTitle}
+        subTitleStyle={styles.listComment}
+        rightView={
+          <Switch
+            value={1}
+            switchWidth={49 * em}
+            switchHeight={27 * em}
+            switchdirection="ltr"
+            switchBorderColor="#ffffff"
+            switchBackgroundColor="#40CDDE"
+            btnBorderColor="red"
+            btnBackgroundColor="#FFFFFF"
+            initialValue={1}
+            style={styles.switch}
+          />
+        }
+        subTitle="Ma localisation est activé"
+      /> */}
       <View style={styles.line} />
       <CommonListItem
         style={styles.listItem}
@@ -33,8 +66,8 @@ const ProSettingScreen = () => {
         rightView={
           <Switch
             switchWidth={49 * em}
-            switchHeight={27 * hm}
-            switchdirection="rtl"
+            switchHeight={27 * em}
+            switchdirection="ltr"
             switchBorderColor="#ffffff"
             switchBackgroundColor="#40CDDE"
             btnBorderColor="red"
@@ -46,8 +79,6 @@ const ProSettingScreen = () => {
         subTitle="Activez la réception de notifications"
       />
       <View style={styles.line} />
-
-      <View style={styles.line2} />
       <View style={styles.rectangle} />
       <TouchableOpacity
         onPress={() =>
@@ -71,30 +102,26 @@ const ProSettingScreen = () => {
         <Text style={{ color: "#1E2D60", fontFamily: 'Lato-Bold', fontSize: 16 * em }}>Me déconnecter</Text>
 
       </TouchableOpacity>
-    </View>
-
+    </View >
   );
 };
 
 const styles = {
   container: {
     backgroundColor: '#FFFFFF',
+    flex: 1
   },
   header: {
-    marginTop: 27 * hm,
+    marginTop: 34 * hm,
     marginBottom: 10 * hm,
-  },
-  rectangle: {
-    height: 200 * hm,
-    backgroundColor: 'white',
   },
   line: {
     height: 10 * hm,
     backgroundColor: '#F0F5F7',
   },
-  line2: {
-    height: 370 * hm,
-    backgroundColor: '#FFF',
+  rectangle: {
+    height: 200 * hm,
+    backgroundColor: 'white',
   },
   listItem: {
     marginLeft: 30 * em,
@@ -111,7 +138,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     width: 39 * em,
-    height: 39 * hm,
+    height: 39 * em,
     borderRadius: 20 * em,
   },
   containerTxt: {
@@ -120,26 +147,23 @@ const styles = {
     justifyContent: 'space-between',
   },
   listTitle: {
-    fontFamily: 'Lato-Bold',
+    fontFamily: 'Lato-bold',
     fontSize: 18 * em,
     lineHeight: 23 * hm,
     textAlign: 'left',
     marginBottom: 7 * em,
-    color: 'rgba(30, 45, 96, 1)',
+    color: '#1E2D60',
   },
   listComment: {
     fontFamily: 'Lato-Medium',
-    lineHeight: 16 * hm,
+    lineHeight: 14 * em,
     textAlign: 'left',
-    marginRight: 15 * em,
+    width: 170 * em,
   },
   switch: {
     marginTop: 6 * hm,
   },
-  rectangle: {
-    height: 110 * hm,
-    backgroundColor: 'white',
-  },
 };
+
 
 export default ProSettingScreen;

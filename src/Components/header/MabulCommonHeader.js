@@ -5,6 +5,7 @@ import { em, hm, WIDTH } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 import CommonBackButton from '../button/CommonBackButton';
 import CommonHeader from './CommonHeader';
+import CommonHeaderpro from './CommonHeaderpro';
 
 function hexToRGB(hex, alpha) {
   var r = parseInt(hex.slice(1, 3), 16),
@@ -20,7 +21,7 @@ function hexToRGB(hex, alpha) {
 const MabulCommonHeader = (props) => {
   const emptyBack = <View style={{ height: 44 * em, left: 44 * em }} />;
   var topViewHeader = (
-    <CommonHeader
+    <CommonHeaderpro
       dark
       leftView={props.noBackButton ? emptyBack : null}
       rightTxt="Annuler"
@@ -49,7 +50,7 @@ const styles = {
     color: 'rgba(106, 133, 150, 1)',
     fontSize: 14 * em,
     marginRight: 17 * em,
-    marginBottom: -11 * hm,
+    marginBottom: 8 * hm,
     fontFamily: 'Lato-SemiBold'
   },
   topViewHeader: {

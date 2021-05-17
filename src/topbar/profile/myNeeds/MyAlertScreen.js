@@ -84,7 +84,10 @@ const styles = {
     flex: 1,
     backgroundColor: 'transparent',
   },
-  backBtn: { position: 'absolute', backgroundColor: '#ffffff', left: 15 * em, top: 15 * hm },
+  backBtn: { position: 'absolute', 
+  backgroundColor: '#ffffff',
+   left: 15 * em,
+    marginTop:30 * hm },
   cover: {
     width: '100%',
     height: 312 * hm,

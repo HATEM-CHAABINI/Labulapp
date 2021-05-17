@@ -1,5 +1,5 @@
 import React from 'react';
-import { em } from '../../../constants/consts';
+import { em, hm } from '../../../constants/consts';
 import { View } from 'react-native';
 import TitleText from '../../../text/TitleText';
 import CommonTextInput from '../../../Components/textInput/CommonTextInput';
@@ -7,12 +7,13 @@ import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { MobileBlue } from '../../../assets/svg/icons';
+import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
 const ProRegisterMobilScreen = (props) => {
   console.log(props.accountType);
 
   return (
     <View style={styles.container}>
-      <AccountCommonHeader style={styles.header} />
+      <AccountCommonHeaderpro style={styles.header} rightTxtStyle={{paddingBottom:19*hm}}rightTxt="Annuler"  />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <MobileBlue width={25 * em} height={25 * em} />

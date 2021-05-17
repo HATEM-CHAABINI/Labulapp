@@ -1,5 +1,5 @@
 import React from 'react';
-import { em } from '../../../constants/consts';
+import { em, hm } from '../../../constants/consts';
 import { View } from 'react-native';
 import PopupHeader from '../../../Components/header/PopupHeader';
 import TitleText from '../../../text/TitleText';
@@ -8,11 +8,12 @@ import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { InstitutionInner } from '../../../assets/svg/icons';
+import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
 const CreateCommunityAccountScreen = (props) => {
   console.log(props.type1)
   return (
     <View style={styles.container}>
-      <AccountCommonHeader style={styles.header} rightTxt="Annuler" />
+      <AccountCommonHeaderpro style={styles.header}  rightTxtStyle={{paddingBottom:19*hm}}rightTxt="Annuler"  />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <InstitutionInner width={35 * em} height={30 * em} />

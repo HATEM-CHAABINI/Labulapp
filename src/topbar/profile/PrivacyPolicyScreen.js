@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView,TouchableOpacity } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -7,8 +7,9 @@ import CommentText from '../../text/CommentText';
 import CommonHeader from '../../Components/header/CommonHeader';
 import CommonText from '../../text/CommonText';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import { RightArrow, LeftArrow } from '../../assets/svg/icons';
+import { RightArrow, LeftArrow, BackArrowWhite, BackArrowBlack } from '../../assets/svg/icons';
 import TinyText from '../../text/TinyText';
+import { Actions } from 'react-native-router-flux';
 const sections = [
   { title: 'Politique\nde confidentialité', content: '' },
   {
@@ -60,7 +61,11 @@ const PrivacyPolicyScreen = () => {
       stickyHeaderHeight={71 * em}
       parallaxHeaderHeight={197 * em}
       backgroundSpeed={10}
-      renderFixedHeader={() => <CommonHeader dark style={{ position: 'absolute', top: 20 * hm, }} />}
+      renderFixedHeader={() =>   <TouchableOpacity
+        style={{ position: 'absolute',paddingTop:40*hm,paddingLeft:27*em}}
+        onPress={() => Actions.pop()}>
+        <BackArrowBlack width={20 * em} height={18 * hm} />
+      </TouchableOpacity>}
       renderForeground={() => <TitleText text={'Politique\nde confidentialité'} style={styles.title} />}
       renderStickyHeader={() => (
         <View key="sticky-header" style={{ marginTop: 40 * em, alignItems: 'center' }}>

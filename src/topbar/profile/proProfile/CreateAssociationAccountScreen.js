@@ -8,10 +8,11 @@ import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { AssociationInner } from '../../../assets/svg/icons';
+import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
 const CreateAssociationAccountScreen = (props) => {
   return (
     <View style={styles.container}>
-      <AccountCommonHeader style={styles.header} rightTxt="Annuler" />
+      <AccountCommonHeaderpro style={styles.header} rightTxtStyle={{paddingBottom:19*hm}}rightTxt="Annuler"  />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <AssociationInner width={39 * em} height={30 * em} />

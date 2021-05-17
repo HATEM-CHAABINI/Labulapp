@@ -10,11 +10,12 @@ import { Premium } from '../../assets/svg/icons';
 import { feedbackIcons } from '../../constants/icons';
 import User from '../../model/user/User';
 import AccountType from '../../model/user/AccountType';
+import CommonBackButtonAccount from '../../Components/button/CommonBackButtonAccount';
 
 const PremiumPurchasedScreen = (props) => {
   return (
     <View style={[styles.container, { backgroundColor: props.profileType === 'my' ? '#40CDDE' : '#7398FC' }]}>
-      <CommonBackButton
+      <CommonBackButtonAccount
         dark={false}
         style={styles.backBtn}
         onPress={() =>

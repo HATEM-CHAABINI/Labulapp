@@ -1,5 +1,5 @@
 import React from 'react';
-import { em } from '../../../constants/consts';
+import { em, hm } from '../../../constants/consts';
 import { View, Image } from 'react-native';
 import TitleText from '../../../text/TitleText';
 import CommonTextInput from '../../../Components/textInput/CommonTextInput';
@@ -7,17 +7,18 @@ import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { EmailBlue } from '../../../assets/svg/icons';
+import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
 const ProRegisterEmailScreen = (props) => {
   console.log(props.accountType);
 
   return (
     <View style={styles.container}>
-      <AccountCommonHeader style={styles.header} />
+      <AccountCommonHeaderpro style={styles.header} rightTxtStyle={{paddingBottom:19*hm}}rightTxt="Annuler"  />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <EmailBlue width={30 * em} height={21 * em} />
           <TitleText text={'Mon Email'} style={styles.titleText} />
-          <CommonTextInput text={'Saisis to email'} isPasswordInput={false} style={styles.commonInput} />
+          <CommonTextInput text={'Saisis ton email'} isPasswordInput={false} style={styles.commonInput} />
         </View>
         <View style={styles.popupBottomView}>
           <CommonButton

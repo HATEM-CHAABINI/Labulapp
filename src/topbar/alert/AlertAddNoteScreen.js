@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
-import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
+import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 import CommonListItem from '../../adapter/CommonListItem';
@@ -78,6 +78,7 @@ const styles = {
   },
   header: {
     height: '10.3%',
+    marginTop: 16 * hm,
   },
   body: {
     flex: 1,

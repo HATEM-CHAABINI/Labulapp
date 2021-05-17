@@ -23,12 +23,13 @@ const MabulCommonParticipateScreen = (props) => {
         <View>
           <TitleText text={'Participants'} style={styles.title} />
           <CommentText text="Combien de personnes peuvent participer dans votre demande ?" style={styles.comment} />
-          <TextInput style={styles.input} placeholder="0" selectionColor={conceptColor} />
+          <TextInput               keyboardType="number-pad"
+ style={styles.input} placeholder="0" selectionColor={conceptColor} />
         </View>
 
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ alignItems: 'center', marginBottom: 29 * hm }}
+        style={{ alignItems: 'center', marginBottom: 50 * hm }}
         keyboardVerticalOffset={Platform.OS === "ios" ? 105*hm : 105*hm}
       >
         <MabulNextButton

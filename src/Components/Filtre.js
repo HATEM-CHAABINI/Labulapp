@@ -65,7 +65,7 @@ class Filtre extends Component {
       <View style={styles.mainContainer}>
 
         <View style={{ backgroundColor: 'white' }}>
-          <View style={{ paddingTop: hm * 40, paddingLeft: em * 30 }}>
+          <View style={{ paddingTop: hm *40, paddingLeft: em * 30 }}>
             <TouchableOpacity
               onPress={() => Actions.pop()}>
               <Fleche />

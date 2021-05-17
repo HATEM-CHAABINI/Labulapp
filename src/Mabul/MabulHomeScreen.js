@@ -70,9 +70,9 @@ const styles = {
     paddingBottom: 16 * em,
     opacity: 0.9,
   },
-  logoContainer: { flex: 0.5, width: '100%', alignItems: 'center', justifyContent: 'center' },
+  logoContainer: { flex: 0.5, width: '100%', alignItems: 'center', justifyContent: 'center',paddingBottom:100 },
   logoImage: { width: 84 * em, resizeMode: 'contain' },
-  logoLabel: { width: 125 * em, resizeMode: 'contain', marginTop: 18 * em },
+  logoLabel: { width: 125 * em, resizeMode: 'contain', marginTop: 18 * em ,PaddingBottom:100},
   buttonsContainer: {
     flex: 0.5,
     width: '100%',

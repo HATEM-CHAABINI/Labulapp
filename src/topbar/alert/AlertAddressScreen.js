@@ -5,7 +5,7 @@ import { em, hm } from '../../constants/consts';
 import SearchBox from '../../Components/other/SearchBoxAlert';
 import CommentText from '../../text/CommentText';
 import SearchCommonListItem from '../../adapter/SearchCommonListItem';
-import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
+import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 import { Actions } from 'react-native-router-flux';
 import { LocationRed } from '../../assets/svg/icons';
@@ -82,9 +82,14 @@ const AlertAddressScreen = (props) => {
 };
 
 const styles = {
-  container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#ffffff' },
-  header: { height: '10.3%', alignItems: 'flex-start', },
-  body: { flex: 1, width: '100%', paddingHorizontal: 30 * em, justifyContent: 'flex-start', alignItems: 'flex-start', },
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  header: {
+    height: '10.3%',
+    marginTop: 16 * hm,
+  },body: { flex: 1, width: '100%', paddingHorizontal: 30 * em, justifyContent: 'flex-start', alignItems: 'flex-start', },
   commonHeader: { marginTop: 27 * hm },
   title: { textAlign: 'left', marginTop: 35 * hm, lineHeight: 38 * em },
   searchBox: { marginTop: 16 * hm, height: 53 * em },

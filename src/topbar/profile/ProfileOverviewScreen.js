@@ -134,7 +134,7 @@ const styles = {
   container: { flex: 1, backgroundColor: 'transparent' },
   scrollView: { backgroundColor: '#40CDDE', paddingBottom: 16 * hm },
   header: {
-    marginTop: 27 * hm
+    marginTop: 30 * hm
   },
   firstPopView: {
     alignItems: 'center',

@@ -8,14 +8,14 @@ import { Actions } from 'react-native-router-flux';
 import TinyText from '../../text/TinyText';
 import CommonBackButtonAccount from '../button/CommonBackButtonAccount';
 
-const CommonHeader = (props) => {
+const CommonHeaderpro = (props) => {
   var leftButton = props.leftTxt ? (
     <TouchableOpacity onPress={props.onLeftPress ? props.onLeftPress : () => Actions.pop()}>
       <CommentText text={props.leftTxt} color={'#FFFFFF'} style={[styles.leftTxt, props.leftTxtStyle]} />
     </TouchableOpacity>
   ) : (
     props.leftView || (
-      <CommonBackButtonAccount style={{}} dark={props.dark} onPress={props.onLeftPress ? props.onLeftPress : () => Actions.pop()} />
+      <CommonBackButtonAccount style={{paddingBottom: 10 * hm,}} dark={props.dark} onPress={props.onLeftPress ? props.onLeftPress : () => Actions.pop()} />
     )
   );
 
@@ -57,4 +57,4 @@ const styles = {
   rightTxt: { marginRight: 15 * em, lineHeight: 17 * em, textAlign: 'right' },
 };
 
-export default CommonHeader;
+export default CommonHeaderpro;

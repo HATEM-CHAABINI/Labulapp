@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
-import MabulCommonHeader from '../../Components/header/MabulCommonHeader';
+import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 import { Actions } from 'react-native-router-flux';
 import { Family, Friend, Neighbor, CheckBlue, All } from '../../assets/svg/icons';

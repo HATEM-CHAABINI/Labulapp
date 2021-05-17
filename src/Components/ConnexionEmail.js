@@ -148,6 +148,7 @@ export default ({ navigation }) => {
             {/* <Text style={styles.descText}>Saisis ton email</Text> */}
             <Reinput
               label='Saisis ton email'
+              autoCorrect={false}
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"
               labelActiveColor="#A0AEB8"
@@ -155,7 +156,6 @@ export default ({ navigation }) => {
               paddingBottom={12 * hm}
               clearButtonMode="while-editing"
               color='#1E2D60'
-              multiline={true}
               fontFamily='Lato-Bold'
               fontSize={16 * em}
               keyboardType="email-address"
@@ -165,6 +165,7 @@ export default ({ navigation }) => {
               onBlur={formik.handleBlur('email')}
               onChangeText={formik.handleChange('email')}
             />
+ 
             {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}
             {/*       
               <MyTextInput
@@ -287,9 +288,8 @@ const styles = StyleSheet.create({
     color: "red",
   },
   contentWrapper: {
-    width: WIDTH,
-    paddingLeft: 20 * em,
-    paddingRight: 20 * em,
+    // alignItems:'center',
+    width: 315*em,
     paddingTop: 14 * hm,
 
   },

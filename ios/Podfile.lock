@@ -683,10 +683,10 @@ PODS:
     - React
   - RNDateTimePicker (3.4.7):
     - React-Core
-  - RNFBApp (11.4.1):
+  - RNFBApp (11.5.0):
     - Firebase/CoreOnly (= 7.11.0)
     - React-Core
-  - RNFBAuth (11.4.1):
+  - RNFBAuth (11.5.0):
     - Firebase/Auth (= 7.11.0)
     - React-Core
     - RNFBApp
@@ -1013,8 +1013,8 @@ SPEC CHECKSUMS:
   RNCCheckbox: d1749e6a92178ce5dbc31e63becd1f34f0c76bbd
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNDateTimePicker: 8dcfab802edece406f4f4780130974a0e04213b4
-  RNFBApp: 996860ad6832996faba79ef3f6ec2d3ea5870dd9
-  RNFBAuth: 3726f7f9bc9e9efb80cd1f5b2e65c4b04dc53760
+  RNFBApp: 9c90f9d576861947ba75fe0830567c570bcbcf6d
+  RNFBAuth: 99fdbce04ff3d39e57a7a3956d632ee69145685b
   RNFBFirestore: bedb9727c0df9a1f1ec23b5e23988075a4cbea78
   RNFBStorage: 052a32c5af38b106e4d6b0a296df304d97be995e
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211

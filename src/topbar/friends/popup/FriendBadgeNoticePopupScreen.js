@@ -23,7 +23,7 @@ const FriendBadgeNoticePopupScreen = (props) => {
       onBackButtonPress={() => props.onPress()}>
       <View style={styles.body}>
         <StatusBar opa backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
-        <CommonBackButton dark style={{ marginLeft: -15 * em }} />
+        <CommonBackButton dark style={{ marginLeft: -30 * em }} />
         <View style={styles.iconView}>
           <View style={styles.circleContainer}>{props.selected[0].icon}</View>
           <View style={[styles.circleContainer, { marginTop: -18 * em }]}>{props.selected[1].icon}</View>

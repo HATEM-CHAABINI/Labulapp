@@ -97,6 +97,9 @@ export default ({ navigation }) => {
       else if(e.code === 'auth/user-not-found'){
         alert("Il n'y a pas d'enregistrement d'utilisateur correspondant à cet identifiant. L'utilisateur a peut-être été supprimé.")
       }
+      else if ( e.code === 'auth/wrong-password'){
+        alert("Mot de passe incorrect")
+      }
       else{
         alert('Something went wrong!')
       }

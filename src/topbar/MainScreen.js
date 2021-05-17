@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, ImageBackground, Text } from 'react-native';
+import  React,{useState,useEffect} from 'react';
+import { View, StyleSheet, TouchableOpacity, Image, ImageBackground, Text,ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FriendsNavigator from './FriendsNavigator';
@@ -21,14 +21,18 @@ import {
   TabMessageOn,
 } from '../assets/svg/icons';
 import MabulHomeScreen from '../Mabul/MabulHomeScreen';
-
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import { useSelector } from 'react-redux';
 const Tab = createBottomTabNavigator();
 
 const myPhoto = require('../assets/images/tab_profile_off.png');
 const proPhoto = require('../assets/images/avatar_curology.png');
 
-const MainTabBar = ({ state, descriptors, navigation }) => {
+const MainTabBar = ({ state, descriptors, navigation,data }) => {
   const [mabulVisible, setMabulVisible] = React.useState(false);
+  const { profileData } = useSelector((state) => state.profileReducer);
+
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   const TabIcons = [
     { on: TabCardOn(styles.TapImage), off: TabCardOff(styles.TapImage) },
@@ -122,8 +126,8 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
             {tabIcon}
             {index === 4 && (
               <View
-                style={[styles.photoWrapper, { borderColor: isFocused || state.index === 5 ? '#4BD8E9' : '#ffffff' }]}>
-                <Image source={state.index === 5 ? proPhoto : myPhoto} style={styles.TapImage} />
+                style={[styles.photoWrapper, {overflow:'hidden', borderColor: isFocused || state.index === 5 ? '#4BD8E9' : '#ffffff' }]}>
+               {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<Image source={state.index === 5 ? proPhoto : {uri:data.profilePic}} style={styles.TapImage} />}
               </View>
             )}
           </TouchableOpacity>
@@ -142,13 +146,34 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
     </ImageBackground>
   );
 };
-export default function MainScreen(props) {
 
+export default (props) => {
+  // const [lodaing, setlodaing] = useState(true)
+  const [data, setdata] = useState({profilePic :''})
+
+  const updateUserProfile = () =>{
+    let user = auth().currentUser;
+  
+      firestore().collection('users').doc(user.uid).get().then((snapshot)=>{
+        setdata(snapshot.data())
+      
+   });
+}
+useEffect(() => {
+  updateUserProfile()
+  
+}, [])
+  // if(lodaing)
+  // {
+  //   return(<View>
+
+  //   </View>)
+  // }
   return (
     <View style={styles.TabBarMainContainer}>
       <NavigationContainer ref={navigationRef}>
         <Tab.Navigator
-          tabBar={(props) => <MainTabBar {...props} />}
+          tabBar={(props) => <MainTabBar {...props} data={data} />}
           initialRouteName={props.tabNav ? props.tabNav : 'Friends'}>
           <Tab.Screen
             name="Friends"

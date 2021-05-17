@@ -18,7 +18,7 @@ const PremiumPurchasedScreen = (props) => {
         dark={false}
         style={styles.backBtn}
         onPress={() =>
-          Actions.main({
+          Actions.home({
             tabNav: props.profileType === 'my' ? 'Profile' : 'ProProfile',
             purchased: props.profileType === 'my' ? AccountType.LIGHT : AccountType.PRO,
           })

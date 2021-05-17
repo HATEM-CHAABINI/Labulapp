@@ -1,18 +1,30 @@
 import { View, Image } from 'react-native';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { em, hm } from '../constants/consts';
 import CommonListItem from './CommonListItem';
 import ProfileCommonSpecView from '../Components/view/ProfileCommonSpecView';
 import { RightArrow } from '../assets/svg/icons';
 const ProfileInformationListItem = (props) => {
-  console.log(props.circleText);
-  const optionView = props.options && (
-    <>
-      {props.options.map((option, index) => (
-        <ProfileCommonSpecView text={option} key={index} style={{ marginTop: 10 * hm }} />
-      ))}
-    </>
-  );
+const [state, setstate] = useState(props.options !== undefined && props.options.length > 0 && (
+  <>
+    {props.options.map((val, index) => (
+      <ProfileCommonSpecView text={val.name} key={index} style={{ marginTop: 10 * hm }} />
+    ))}
+  </>
+))
+useEffect(() => {
+if(props.options !== undefined && props.options.length > 0)
+  {
+    setstate(( 
+      <>
+        {props.options.map((val, index) => (
+          <ProfileCommonSpecView text={val.name} key={index} style={{ marginTop: 10 * hm }} />
+        ))}
+      </>
+    ))
+  }
+}, [props.options ])
+
   //, { textTransform: props.titleUpperCase ? 'uppercase' : null } titleStyle uppercase not needed for now
   return (
     <CommonListItem
@@ -36,7 +48,7 @@ const ProfileInformationListItem = (props) => {
         )
       }
       textAddView={props.circleText}
-      commentView={optionView}
+      commentView={state}
     />
   );
 };

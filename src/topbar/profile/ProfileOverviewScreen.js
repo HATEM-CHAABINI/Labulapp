@@ -12,7 +12,7 @@ import ProfileCommonSpecView from '../../Components/view/ProfileCommonSpecView';
 import { Family, Friend, Neighbor } from '../../assets/svg/icons';
 import AccountType from '../../model/user/AccountType';
 import firestore from '@react-native-firebase/firestore';
-
+import SmallText from '../../text/SmallText';
 
 import { useSelector } from 'react-redux';
 
@@ -20,7 +20,9 @@ let fireKey = firestore().collection("user");
 const iconSize = { width: 48 * em, height: 48 * em };
 const ProfileOverviewScreen = (props) => {
   const [userProfile] = useState(props.userProfile);
-  const { userDetails } = useSelector((state) => state.loginReducers);
+  const [assets, setassets] = useState([])
+  const { profileData } = useSelector((state) => state.profileReducer);
+  console.log("asdasd ",profileData)
   const badgesView = userProfile.feedback ? (
     <ScrollView horizontal={true} style={{ paddingTop: 20 * hm, paddingBottom: 20 * hm, paddingLeft: 30 * em }}>
       {userProfile.feedback.map((badge, index) => (
@@ -33,7 +35,15 @@ const ProfileOverviewScreen = (props) => {
       <CommonText text={'Crée des demandes pour avoir des badges'} style={styles.requestText} />
     </>
   );
-
+  useEffect(() => {
+  
+    firestore().collection('assets').doc("123").get().then((res)=>{
+      
+      setassets(()=>res.data().assets)
+        
+       }).catch(e =>{console.log(e)})
+   
+  }, [])
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -42,27 +52,43 @@ const ProfileOverviewScreen = (props) => {
           rightTxtStyle={{ fontSize: 14 * em }}
           style={styles.header}
           onLeftPress={() =>
-            Actions.main({
+            Actions.home({
               tabNav: 'Profile',
               purchased: userProfile.photo ? AccountType.LIGHT : null,
             })
           }
-          onRightPress={() => Actions.editProfile({ userProfile: userProfile })}
+          onRightPress={() => Actions.editProfile({assest:assets})}
         />
         <View style={styles.firstPopView}>
           <ProfileCommonAvatar
-            icon={require('../../assets/images/tab_profile_off.png')}
+            icon={profileData.profilePic === undefined ?'':{uri:profileData.profilePic}}
             style={styles.avatar}
-            logoVisible={false}
+            fullName={profileData.firstName+' '+profileData.lastName}
+           logoVisible={false}
             borderWidth={3 * em}
           />
-          <TitleText text={userDetails.displayName === undefined ? userDetails.prenom+" "+userDetails.nom:userDetails.displayName} style={styles.fullNameText} />
-          {userProfile.availability && <CommentText text={userProfile.availability} color="#1E2D60" />}
-          {userProfile.presentation && <CommentText text={userProfile.presentation} color="#6A8596" />}
-          {userProfile.specs && (
+          <TitleText text={profileData.firstName + " " +profileData.lastName} style={styles.fullNameText} />
+          {profileData.availability && <CommentText text={profileData.availability !== undefined ?profileData.availability :' '} color="#1E2D60" />}
+          {profileData.presentation  && <CommentText text={profileData.presentation !== undefined ?profileData.presentation :' '} color="#6A8596" />}
+          {profileData.skill && (
             <View style={{ flexDirection: 'row', marginTop: 15 * hm }}>
-              {userProfile.specs.map((spec) => (
-                <ProfileCommonSpecView text={spec} />
+              {profileData.skill.map((spec) => (
+                <View style={{
+
+                  backgroundColor: '#F0F5F7',
+              
+                  paddingVertical: 5 * em,
+                  paddingHorizontal: 10 * em,
+              
+                  borderRadius: 19 * em,
+                  marginRight: 10 * em,
+                }} >
+                <SmallText style={{
+                  fontFamily: 'Lato-Italic',
+                  lineHeight: 14 * em,
+                  textAlign: 'center',
+                }} text={spec.name} color="#6A8596" />
+              </View>
               ))}
             </View>
           )}

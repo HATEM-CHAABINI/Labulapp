@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View } from 'react-native';
 import CommonText from '../../text/CommonText';
 import { em } from '../../constants/consts';
@@ -13,6 +13,7 @@ const CommonCheckBox = (props) => {
       <CommonText text={props.text} style={[styles.title, props.textStyle]} color={props.color || '#1E2D60'} />
       <CheckBox
         isChecked={checked}
+        value={props.isChecked}
         onClick={() => {
           setChecked(!checked);
           props.onClick && props.onClick(!checked);

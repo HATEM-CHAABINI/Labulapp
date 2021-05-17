@@ -23,6 +23,7 @@ const ProfileCommonHeader = (props) => {
           onLeftPress={props.onCancel}
           leftTxt={'Annuler'}
           rightTxtStyle={styles.rightTxt}
+          loading={props.loading}
         />
       )}
       renderForeground={() => <TitleText text={props.title} style={styles.title} />}

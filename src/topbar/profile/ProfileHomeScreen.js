@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar,ActivityIndicator } from 'react-native';
 import { em, WIDTH, HEIGHT, hm } from '../../constants/consts';
 import TitleText from '../../text/TitleText';
 import CommentText from '../../text/CommentText';
@@ -15,8 +15,6 @@ import User from '../../model/user/User';
 import AccountType from '../../model/user/AccountType';
 import { feedbackIcons } from '../../constants/icons';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import { userDetail } from '../../setup'
-
 import { useSelector } from 'react-redux';
 const originalMyProfile = new User(
   'Mathieu Torin',
@@ -64,12 +62,15 @@ const ProfileHomeScreen = (props) => {
     props.route.params.purchased !== AccountType.LIGHT ? originalMyProfile : updatedMyProfile
   );
   const [userData, setuserData] = useState(null)
-  const { userDetails } = useSelector((state) => state.loginReducers);
-  useEffect(() => {
-    console.log(userDetails)
-
-  }, [])
-
+  const { profileData } = useSelector((state) => state.profileReducer);
+ const [loading, setloading] = useState(true)
+useEffect(() => {
+  if(profileData.firstName !== undefined)
+  {
+    setloading(false)
+  }
+  
+}, [profileData])
   return (
     <ParallaxScrollView
       // onScroll={onScroll}
@@ -79,14 +80,14 @@ const ProfileHomeScreen = (props) => {
       backgroundSpeed={10}
       renderForeground={() => (
         <View style={styles.topView}>
-          <ProfileCommonAvatar
+          {loading ?<ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} />:<ProfileCommonAvatar
             style={styles.avatar}
-            fullName={userDetails.displayName === undefined ? userDetails.prenom + " " + userDetails.nom : userDetails.displayName}
-            icon={userProfile.photo}
+            fullName={profileData.firstName + " " +profileData.lastName}
+            icon={profileData.profilePic === undefined ?'':{uri:profileData.profilePic}}
             borderWidth={3 * em}
-          />
+          />}
           <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
-            <TitleText style={styles.txtFullName} text={userDetails.displayName === undefined ? userDetails.prenom + " " + userDetails.nom : userDetails.displayName} />
+          {loading ?<ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} />:<TitleText style={styles.txtFullName} text={profileData.firstName + " " +profileData.lastName} />}
             <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" />
           </TouchableOpacity>
         </View>

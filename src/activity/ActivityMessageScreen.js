@@ -175,11 +175,13 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         }
 
         leftView={
-          <TouchableOpacity style={{ alignSelf: 'center', marginLeft: 27 * em, marginRight: 12 * em, top: 3 * hm }}
-            onPress={() => Actions.pop()}
-          >
+          // <View style={{ paddingTop: 40 * hm, paddingLeft: 159 * em }}>
+          <TouchableOpacity
+            style={{ position: 'relative',marginTop:8*em, paddingLeft: 17 * em ,paddingRight:22*em}}
+            onPress={() => Actions.pop()}>
             <BackArrowWhite width={30 * em} height={30 * hm} />
           </TouchableOpacity>
+          
         }
 
         centerView={
@@ -272,7 +274,7 @@ const styles = {
     marginLeft: -32 * em,
     marginTop: -10 * hm,
   },
-  avatarIcon: { width: 28 * em, height: 28 * em, marginLeft: 10 * em, marginRight: 10 * em },
+  avatarIcon: { width: 28 * em, height: 28 * em, marginRight: 10 * em },
   dialIcon: { marginRight: 15 * em, alignSelf: 'center' },
   popup: {
     width: '100%',

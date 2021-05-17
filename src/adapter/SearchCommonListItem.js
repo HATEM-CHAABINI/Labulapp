@@ -58,6 +58,7 @@ const SearchCommonListItem = (props) => {
       />
     );
   } else {
+    return (
     <CommonListItem
       title={props.text}
       titleStyle={styles.textTitle}
@@ -68,6 +69,7 @@ const SearchCommonListItem = (props) => {
       }
       style={props.style}
     />
+    );
   }
 };
 export default SearchCommonListItem;

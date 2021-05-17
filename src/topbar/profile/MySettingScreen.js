@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 import auth, { firebase } from "@react-native-firebase/auth";
 
 import { useDispatch } from 'react-redux';
-import { addLogin } from '../../redux/actions/login';
+import { addProfile } from '../../redux/actions/profile';
 const MySettingScreen = () => {
 
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const MySettingScreen = () => {
 
     auth()
       .signOut()
-      .then(() => { console.log('User signed out!'), dispatch(addLogin('')) }).catch((e => { console.log(e), dispatch(addLogin('')) }));
+      .then(() => { dispatch(addProfile('')) ,console.log('User signed out!')}).catch((e => { console.log(e), dispatch(addProfile('')) }));
   }
   return (
     <View style={styles.container}>

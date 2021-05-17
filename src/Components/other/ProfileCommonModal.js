@@ -152,7 +152,8 @@ const ProfileCommonModal = (props) => {
           props.onChange(updatedMyProfile);
         }}
       />
-      {modalBody}
+      
+      {/* {modalBody} */}
     </Modal>
   );
 };

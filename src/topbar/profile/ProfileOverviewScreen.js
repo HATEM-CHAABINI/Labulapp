@@ -21,9 +21,8 @@ const iconSize = { width: 48 * em, height: 48 * em };
 const ProfileOverviewScreen = (props) => {
   const [userProfile] = useState(props.userProfile);
   const [assets, setassets] = useState([])
-  const { userDetails } = useSelector((state) => state.loginReducers);
   const { profileData } = useSelector((state) => state.profileReducer);
-  console.log(profileData)
+  console.log("asdasd ",profileData)
   const badgesView = userProfile.feedback ? (
     <ScrollView horizontal={true} style={{ paddingTop: 20 * hm, paddingBottom: 20 * hm, paddingLeft: 30 * em }}>
       {userProfile.feedback.map((badge, index) => (
@@ -69,8 +68,8 @@ const ProfileOverviewScreen = (props) => {
             borderWidth={3 * em}
           />
           <TitleText text={profileData.firstName + " " +profileData.lastName} style={styles.fullNameText} />
-          {profileData.availability && <CommentText text={profileData.availability !== undefined ?profileData.availability :''} color="#1E2D60" />}
-          {profileData.presentation  && <CommentText text={profileData.presentation !== undefined ?profileData.presentation :''} color="#6A8596" />}
+          {profileData.availability && <CommentText text={profileData.availability !== undefined ?profileData.availability :' '} color="#1E2D60" />}
+          {profileData.presentation  && <CommentText text={profileData.presentation !== undefined ?profileData.presentation :' '} color="#6A8596" />}
           {profileData.skill && (
             <View style={{ flexDirection: 'row', marginTop: 15 * hm }}>
               {profileData.skill.map((spec) => (

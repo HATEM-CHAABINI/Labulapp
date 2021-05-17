@@ -135,7 +135,7 @@ export default () => {
     function onResult(QuerySnapshot) {
         data = QuerySnapshot._data
         setprofilechange(data)
-        dispatch(addProfile(data))
+        // dispatch(addProfile(data))
       }
       
       function onError(error) {

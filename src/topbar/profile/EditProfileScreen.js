@@ -66,8 +66,8 @@ const EditProfileScreen = (props) => {
       profilePic:profileData.profilePic ===undefined ?'':profileData.profilePic,
       firstName:profileData.firstName,
       lastName:profileData.lastName,
-      availability:profileData.availability ===undefined ?'':profileData.availability,
-      presentation:profileData.presentation ===undefined ?'':profileData.presentation,
+      availability:profileData.availability ===undefined ?'Ajoute ta disponiblité':profileData.availability,
+      presentation:profileData.presentation ===undefined ?'Salut ! Je suis …\nPrésente toi ici. Ce texte sera affiché pour vous invitations et apparaitra sur ta page profil. Soit court, avent et efficace. Vivons ensemble !':profileData.presentation,
       skill:profileData.skill
     })
    

@@ -15,8 +15,6 @@ import User from '../../model/user/User';
 import AccountType from '../../model/user/AccountType';
 import { feedbackIcons } from '../../constants/icons';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import { userDetail } from '../../setup'
-
 import { useSelector } from 'react-redux';
 const originalMyProfile = new User(
   'Mathieu Torin',
@@ -64,7 +62,6 @@ const ProfileHomeScreen = (props) => {
     props.route.params.purchased !== AccountType.LIGHT ? originalMyProfile : updatedMyProfile
   );
   const [userData, setuserData] = useState(null)
-  const { userDetails } = useSelector((state) => state.loginReducers);
   const { profileData } = useSelector((state) => state.profileReducer);
  const [loading, setloading] = useState(true)
 useEffect(() => {

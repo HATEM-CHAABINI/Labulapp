@@ -235,7 +235,7 @@ task.on("state_changed",taskProgress,error,taskCompleted)
         placeholder
         value={'Sélectionne les compétences où tu es plus l’aise'}
         style={styles.listItem}
-        options={profileDataCurrent.skill}
+        options={profileDataCurrent.skill !== null ?profileDataCurrent.skill:[]}
         onPress={() => {
           setInputItemKey(8);
           setmyskillModal(!myskillModal);

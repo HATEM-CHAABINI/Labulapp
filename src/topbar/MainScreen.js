@@ -11,6 +11,7 @@ import { em, hm, WIDTH } from '../constants/consts';
 import { navigationRef } from './RootNavigation';
 import Modal from 'react-native-modal';
 import MyNotificationsScreen from './activity/MyNotificationsScreen';
+import ProfileCommonAvatar from '../Components/view/ProfileCommonAvatar';
 import {
   TabPlus,
   TabCalendarOff,
@@ -127,7 +128,15 @@ const MainTabBar = ({ state, descriptors, navigation,data }) => {
             {index === 4 && (
               <View
                 style={[styles.photoWrapper, {overflow:'hidden', borderColor: isFocused || state.index === 5 ? '#4BD8E9' : '#ffffff' }]}>
-               {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<Image source={state.index === 5 ? proPhoto : {uri:data.profilePic}} style={styles.TapImage} />}
+               {/* {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<Image source={state.index === 5 ? proPhoto : {uri:data.profilePic}} style={styles.TapImage} />} */}
+              
+          {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<ProfileCommonAvatar
+            icon={state.index === 5 ? proPhoto : data.profilePic === undefined?'': {uri:data.profilePic}}
+            style={styles.TapImage}
+            fullName={data.firstName+' '+data.lastName}
+           logoVisible={false}
+            borderWidth={3 * em}
+          /> }
               </View>
             )}
           </TouchableOpacity>
@@ -149,26 +158,21 @@ const MainTabBar = ({ state, descriptors, navigation,data }) => {
 
 export default (props) => {
   // const [lodaing, setlodaing] = useState(true)
-  const [data, setdata] = useState({profilePic :''})
+  const [data, setdata] = useState({profilePic :'',firstName:'',lastName:''})
 
   const updateUserProfile = () =>{
     let user = auth().currentUser;
   
       firestore().collection('users').doc(user.uid).get().then((snapshot)=>{
         setdata(snapshot.data())
-      
+     
    });
 }
 useEffect(() => {
   updateUserProfile()
   
 }, [])
-  // if(lodaing)
-  // {
-  //   return(<View>
 
-  //   </View>)
-  // }
   return (
     <View style={styles.TabBarMainContainer}>
       <NavigationContainer ref={navigationRef}>

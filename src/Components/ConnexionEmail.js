@@ -85,8 +85,23 @@ export default ({ navigation }) => {
 
       }
     } catch (e) {
-      alert(e.message)
+      if (e.code === 'auth/email-already-in-use') {
+        alert('Cette adresse email est déjà utilisée!')
+        // console.log('Cette adresse email est déjà utilisée!');
+      }
+  
+     else if (e.code === 'auth/invalid-email') {
+        alert('Cette adresse e-mail n\'est pas valide!')
+        // console.log('Cette adresse e-mail n\'est pas valide!');
+      }
+      else if(e.code === 'auth/user-not-found'){
+        alert("Il n'y a pas d'enregistrement d'utilisateur correspondant à cet identifiant. L'utilisateur a peut-être été supprimé.")
+      }
+      else{
+        alert('Something went wrong!')
+      }
       console.error(e.message)
+      setloading(() => false)
     }
     // dispatch(addLogin({
     //   email: values.email,
@@ -215,7 +230,7 @@ export default ({ navigation }) => {
           style={{ alignItems: 'center' }}
         >
 
-          <View style={{ position: 'absolute', bottom: 0, marginBottom: 50 * hm, alignSelf: 'center' }}>
+          <View style={{ position: 'absolute', bottom: 0, marginBottom: 70 * hm, alignSelf: 'center' }}>
 
             <Text
               style={

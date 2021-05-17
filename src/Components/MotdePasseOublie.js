@@ -5,6 +5,7 @@ import { Button, View, Text,Image,TextInput,
   StyleSheet ,
   StatusBar,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import * as Animatable from 'react-native-animatable';
@@ -23,12 +24,12 @@ import { Actions } from 'react-native-router-flux';
 import Motpass from '../assets/icons/navigation-app/Motpass';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-
+import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 import {SignupData} from '../redux/actions/signup';
 export default ({navigation}) => {
 
-
+const [loading, setloading] = useState(false)
   const dispatch = useDispatch();
   const initialValues = {
     email: '',
@@ -42,7 +43,16 @@ export default ({navigation}) => {
   });
   const onSubmit = values => {
    
-    Alert.alert("Réinitialisez l'e-mail envoyé à votre identifiant de messagerie.")
+    setloading(true)
+    auth().sendPasswordResetEmail(values.email).then((res)=> {
+      Alert.alert("Succès","Réinitialisez l'e-mail envoyé à votre identifiant de messagerie.")
+      setloading(false)
+    }).catch(function(error) {
+      Alert.alert("Alert","Un problème est survenu!!")
+      console.log(error)
+      setloading(false)
+    });
+
     
   };
   const formik = useFormik({
@@ -99,9 +109,11 @@ export default ({navigation}) => {
   <View
     style={styles.btnContainer}>
     
-    <Text style={{  fontSize: 16,
+   {loading?<ActivityIndicator style={{  fontSize: 16,
         color: '#FFFFFF',
-      fontFamily:"lato-Medium"}}>Demander</Text>
+      fontFamily:"lato-Medium"}} size={'small'} color={"#FFFFFF"}/>: <Text style={{  fontSize: 16,
+        color: '#FFFFFF',
+      fontFamily:"lato-Medium"}}>Demander</Text>}
   </View>
               </TouchableOpacity>
 

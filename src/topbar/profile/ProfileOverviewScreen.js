@@ -12,7 +12,7 @@ import ProfileCommonSpecView from '../../Components/view/ProfileCommonSpecView';
 import { Family, Friend, Neighbor } from '../../assets/svg/icons';
 import AccountType from '../../model/user/AccountType';
 import firestore from '@react-native-firebase/firestore';
-
+import SmallText from '../../text/SmallText';
 
 import { useSelector } from 'react-redux';
 
@@ -69,12 +69,27 @@ const ProfileOverviewScreen = (props) => {
             borderWidth={3 * em}
           />
           <TitleText text={profileData.firstName + " " +profileData.lastName} style={styles.fullNameText} />
-          {userProfile.availability && <CommentText text={userProfile.availability} color="#1E2D60" />}
-          {userProfile.presentation && <CommentText text={userProfile.presentation} color="#6A8596" />}
-          {userProfile.specs && (
+          {profileData.availability && <CommentText text={profileData.availability !== undefined ?profileData.availability :''} color="#1E2D60" />}
+          {profileData.presentation  && <CommentText text={profileData.presentation !== undefined ?profileData.presentation :''} color="#6A8596" />}
+          {profileData.skill && (
             <View style={{ flexDirection: 'row', marginTop: 15 * hm }}>
-              {userProfile.specs.map((spec) => (
-                <ProfileCommonSpecView text={spec} />
+              {profileData.skill.map((spec) => (
+                <View style={{
+
+                  backgroundColor: '#F0F5F7',
+              
+                  paddingVertical: 5 * em,
+                  paddingHorizontal: 10 * em,
+              
+                  borderRadius: 19 * em,
+                  marginRight: 10 * em,
+                }} >
+                <SmallText style={{
+                  fontFamily: 'Lato-Italic',
+                  lineHeight: 14 * em,
+                  textAlign: 'center',
+                }} text={spec.name} color="#6A8596" />
+              </View>
               ))}
             </View>
           )}

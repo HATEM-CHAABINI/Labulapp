@@ -110,7 +110,7 @@ const styles = {
     flex: 1
   },
   header: {
-    marginTop: 27 * hm,
+    marginTop: 34 * hm,
     marginBottom: 10 * hm,
   },
   line: {

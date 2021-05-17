@@ -1,4 +1,4 @@
-import React, { Component,useEffect } from 'react';
+import React, { Component,useEffect, useState } from 'react';
 import { Button, View, Text,Image,TextInput,   
   TouchableOpacity, Dimensions,
   Platform,
@@ -27,6 +27,8 @@ import * as Yup from 'yup';
 import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 import {SignupData} from '../redux/actions/signup';
+import Reinput from "reinput"
+
 export default ({navigation}) => {
 
 const [loading, setloading] = useState(false)
@@ -88,16 +90,30 @@ const [loading, setloading] = useState(false)
                 <Text style={{color:'#1E2D60',fontSize:28*em,paddingTop:80*hm,textAlign:'center',fontFamily:"lato-Black"}}>Demander un nouveau {"\n"}mot de passe</Text>
                 <Text style={{color:'#6A8596',fontSize:14*em,paddingTop:10*hm,textAlign:'center',fontFamily:"lato-Regular"}}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>
                 <View style={styles.contentWrapper}>
-              <Text style={styles.descText}>Saisis ton email</Text>
-              <MyTextInput style={styles.TextInput} textContentType={"emailAddress"} autoFocus={true} value={formik.values.email} 
-           
-           onBlur={formik.handleBlur('email')}
-           handleChange={formik.handleChange('email')} />
-          {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}
-              <MyTextInput />
+                 <Reinput
+              label='Saisie ton email'
+              autoCorrect={false}
+              underlineColor="#BFCDDB"
+              underlineActiveColor="#41D0E2"
+              labelActiveColor="#BFCDDB"
+              labelColor="#BFCDDB"
+              paddingBottom={12 * hm}
+              clearButtonMode="while-editing"
+              color='#1E2D60'
+              fontFamily='Lato-Bold'
+              fontSize={16 * em}
+              keyboardType="email-address"
+              selectionColor={'#41D0E2'}
+              value={formik.values.email}
+              onBlur={formik.handleBlur('email')}
+              onChangeText={formik.handleChange('email')}
+            />
+
+
+              
      
 </View>
-<View style={{flex:1,bottom:5*hm}}>
+<View style={{flex:1,bottom:20*hm}}>
               <TouchableOpacity  onPress={formik.handleSubmit} style={{ overflow: 'hidden',
     borderRadius: 18*em,
     height: 59*hm,
@@ -127,6 +143,7 @@ const [loading, setloading] = useState(false)
 }
 const styles = StyleSheet.create({
     TextInput:{
+      width:315*em,
         height: 45*em,
         fontSize: 16*em,
        // width:250*em,
@@ -143,9 +160,11 @@ const styles = StyleSheet.create({
         color: "red",
       },
       contentWrapper:{
-        width:WIDTH,
-        paddingLeft: 20*em,
-        paddingRight: 20*em,
+        alignItems:'center',
+
+        width:315*em,
+        // paddingLeft: 20*em,
+        // paddingRight: 20*em,
         paddingTop: 23*hm,
       },
     descText:{

@@ -171,10 +171,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#28c7ee',
   },
   contentWrapper: {
-    width: WIDTH,
-    paddingLeft: 20 * em,
-    paddingRight: 20 * em,
-    paddingTop: 30 * hm,
+    alignItems:'center',
+    width: 315*em,
+    paddingTop: 30 * hm
   },
   descerrorText: {
     fontSize: 12 * em,

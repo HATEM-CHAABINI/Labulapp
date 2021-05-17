@@ -167,9 +167,8 @@ const styles = StyleSheet.create({
     color: "red",
   },
   contentWrapper: {
-    width: WIDTH,
-    paddingLeft: 20 * em,
-    paddingRight: 20 * em,
+    alignItems:'center',
+    width: 315*em,
     paddingTop: 30 * hm
   },
   descText: {

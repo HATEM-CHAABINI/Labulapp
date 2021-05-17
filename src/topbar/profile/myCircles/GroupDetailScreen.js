@@ -53,6 +53,7 @@ const styles = {
     marginBottom: 10 * hm,
     justifyContent: 'flex-start',
     backgroundColor: '#ffffff',
+    paddingTop:20*hm
   },
   headerTitle: { marginLeft: 10 * em, fontSize: 18 * em, color: '#1E2D60' },
 };

@@ -32,7 +32,7 @@ const AccountCommonHeader = (props) => {
 };
 
 const styles = {
-  container: { marginTop: 32.5 * hm, },
+  container: { marginTop: 36 * hm, },
   icon: { width: 69 * em, height: 20 * em, resizeMode: 'contain', marginBottom: 25 * em },
 };
 

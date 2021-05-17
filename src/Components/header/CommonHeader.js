@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Image,ActivityIndicator } from 'react-native';
-import { em, WIDTH } from '../../constants/consts';
+import { em, hm, WIDTH } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 import CommonBackButton from '../button/CommonBackButton';
 import CommonText from '../../text/CommonText';
@@ -14,7 +14,7 @@ const CommonHeader = (props) => {
     </TouchableOpacity>
   ) : (
     props.leftView || (
-      <CommonBackButton dark={props.dark} onPress={props.onLeftPress ? props.onLeftPress : () => Actions.pop()} />
+      <CommonBackButton style={{paddingBottom: 12 * hm,}} dark={props.dark} onPress={props.onLeftPress ? props.onLeftPress : () => Actions.pop()} />
     )
   );
 

@@ -151,15 +151,17 @@ export default ({ navigation }) => {
               autoCorrect={false}
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"
-              labelActiveColor="#A0AEB8"
-              labelColor="#A0AEB8"
-              paddingBottom={12 * hm}
+              labelActiveColor="#BFCDDB"
+              labelColor="#BFCDDB"
               clearButtonMode="while-editing"
               color='#1E2D60'
-              fontFamily='Lato-Bold'
-              fontSize={16 * em}
               keyboardType="email-address"
+
+
+        
               selectionColor={'#41D0E2'}
+              paddingBottom={12 * hm}
+
               autoFocus={false}
               value={formik.values.email}
               onBlur={formik.handleBlur('email')}

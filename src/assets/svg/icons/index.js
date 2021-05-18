@@ -162,7 +162,9 @@ import LocationGray from './navigation/LocationGray.svg';
 import CreateGroupNeighbor from './profile/CreateGroupNeighbor.svg';
 import CreateGroupFriend from './profile/CreateGroupFriend.svg';
 import CreateGroupFamily from './profile/CreateGroupFamily.svg';
-
+import Trace from './navigation/Trace.svg';
+import Trace2 from './navigation/Trace2.svg';
+import Groupe from './navigation/Groupe.svg';
 import Filter from './navigation/Filter.svg';
 import MessageGray from './navigation/MessageGray.svg';
 import MessageBackground from './navigation/MessageBackground.svg';
@@ -209,7 +211,10 @@ export {ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGr
   NotificationGray,
   NotificationBlue,
   NotificationOutline,
-  LocationGray,Filter
+  LocationGray,Filter,
+  Trace,
+  Trace2,
+  Groupe,
 };
 
 import NoteInlineRed from './create/NoteInlineRed.svg';

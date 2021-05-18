@@ -25,6 +25,7 @@ const styles = {
   backBtnWrapper: {
     // paddingBottom: 12 * hm,
     marginBottom: 0 * hm,
+    marginTop: 7 * hm,
     width: 44 * em,
     height: 44 * em,
     borderRadius: 14 * em,

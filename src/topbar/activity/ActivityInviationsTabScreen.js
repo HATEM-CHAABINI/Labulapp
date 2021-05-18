@@ -9,6 +9,7 @@ import AvatarWithBadge from '../../Components/view/AvatarWithBadge';
 import CommonListItem from '../../adapter/CommonListItem';
 import Message from '../../model/message/Message';
 import User from '../../model/user/User';
+import { Groupe, Trace,Trace2 } from '../../assets/svg/icons';
 
 const invitationMessages = [
   new Message(
@@ -34,17 +35,20 @@ const ActivityInviationsTabScreen = () => {
 
   const emptyView = (
     <TouchableOpacity style={styles.emptyView} onPress={() => setIsEmpty(false)}>
-      <CircleDraw
-        radius={17.31 * em}
-        color="#A0AEB8"
-        style={{ opacity: 0.4, position: 'absolute', left: 103.85 * em }}
-      />
-      <CircleDraw
-        radius={8.31 * em}
-        color="#A0AEB8"
-        style={{ opacity: 0.4, position: 'absolute', top: 17.31 * em, left: 190.35 * em }}
-      />
-      <Image style={styles.msgIcon} />
+  
+  <View style={{ position: 'absolute', left: 103.85 * em }}>
+        <Trace width={22 * em} height={22 * hm} />
+      </View>
+
+
+        <View style={{ position: 'absolute', top: 10* hm, left: 190.35 * em }}>
+        <Trace2 width={22 * em} height={22 * hm} />
+      </View>
+
+<View style={styles.msgIcon}>
+        <Groupe width={37 * em} height={37 * hm} />
+      </View>
+      {/* <Image style={styles.msgIcon} /> */}
       <CommonText text={'Tu n’as pas d’invitations'} color={'#6A8596'} style={styles.msgTxt} />
       <CommentText
         text={'Ne t’inquiètes pas, quelqu’un de tes cercles t’invitera bientôt. Regarde les demandes autour de toi'}
@@ -101,15 +105,8 @@ const styles = {
     width: 315 * em,
     alignSelf: 'center',
   },
-  msgIcon: {
-    width: 37 * em,
-    height: 37 * em,
-    backgroundColor: '#A0AEB8',
-    opacity: 0.4,
-    marginTop: 13.15 * em,
-    alignSelf: 'center',
-    borderRadius: 19.5 * em,
-  },
+  msgIcon: { marginTop: 13.15 * em, alignSelf: 'center' },
+
   msgTxt: { fontFamily: 'Lato-Black', fontSize: 16 * em, marginTop: 15 * hm, textAlign: 'center', lineHeight: 23 * em },
   explainTxt: {
     fontFamily: 'Lato-Regular',

@@ -5,7 +5,7 @@ import CommonText from '../text/CommonText';
 import Modal from 'react-native-modal';
 import CommonListItem from '../adapter/CommonListItem';
 import CommonButton from '../Components/button/CommonButton';
-import { Delete, ReportProblem, Block } from '../assets/svg/icons';
+import { Delete, ReportProblem, Block, CheckBlue } from '../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 import RBSheet from "react-native-raw-bottom-sheet";
 import MabulCommonListItem from '../adapter/MabulCommonListItem';
@@ -92,35 +92,33 @@ const MessageProfilePopupScreen = (props) => {
           {isReported ?
             <View style={{}}>
               <View style={{ paddingTop: 26 * hm, paddingBottom: hm * 20, flexDirection: 'row', }}>
-                <TouchableOpacity style={{paddingLeft: 26 *em,paddingRight:109*em}} onPress={() => refRBSheet.current.close()}  >
-                  <Fleche />
+                <TouchableOpacity style={{ paddingLeft: 26 * em, paddingRight: 109 * em }} onPress={() => refRBSheet.current.close()}  >
+                  <Fleche width={20 * em} height={18 * em} />
                 </TouchableOpacity>
-                <Text style={{alignItems: 'center', color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
+                <Text style={{ alignItems: 'center', color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
                   Signaler
               </Text>
               </View>
               <View style={styles.containerSheet}>
 
-              <CommonText text={
-                'Sélectionne un problème à signaler'
-              }
-                style={{ alignItems: 'center', color: '#1E2D60' }}> </CommonText>
+                <CommonText text={
+                  'Sélectionne un problème à signaler'
+                }
+                  style={{ alignItems: 'center', color: '#1E2D60' }}> </CommonText>
 
-              <Text style={{ marginLeft: 56 * em, marginRight: 56 * em, color: '#6A8596', fontSize: 12 * em, fontFamily: 'Lato-Medium', textAlign: 'center' }}>
-                Nous n’informons pas la personne qui détient le compte que tu viens de signaler.
+                <Text style={{ marginLeft: 56 * em, marginRight: 56 * em, color: '#6A8596', fontSize: 12 * em, fontFamily: 'Lato-Medium', textAlign: 'center' }}>
+                  Nous n’informons pas la personne qui détient le compte que tu viens de signaler.
               </Text>
-              <FlatList style={{marginBottom:250*hm}} data={reportItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
-</View>
+                <FlatList style={{ marginBottom: 250 * hm }} data={reportItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
+              </View>
             </View>
             :
-            <View style={{ alignItems: 'center', margin: 0, flex: 1}}>
-
-              <Text style={{ color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
+            <View style={{ alignItems: 'center', margin: 0, flex: 1, marginTop: 80 * hm }}>
+              <CheckBlue width={25 * em} height={25 * em}></CheckBlue>
+              <Text style={{ color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', marginTop: 12 * hm }}>
                 Merci de nous avoir informés
               </Text>
-
-
-              <Text style={{ marginLeft: 56 * em, marginRight: 56 * em, color: '#1E2D60', fontSize: 1 * em, fontFamily: 'Lato-Medium', textAlign: 'center' }}>
+              <Text style={{ marginLeft: 56 * em, marginRight: 56 * em, color: '#1E2D60', fontSize: 16 * em, fontFamily: 'Lato-Medium', textAlign: 'center', marginTop: 12 * hm }}>
                 Ton aide nous permets de faire de Labul un endroit sûr.
               </Text>
 

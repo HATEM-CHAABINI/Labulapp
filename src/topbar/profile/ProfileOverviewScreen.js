@@ -61,7 +61,7 @@ const ProfileOverviewScreen = (props) => {
         />
         <View style={styles.firstPopView}>
           <ProfileCommonAvatar
-            icon={profileData.profilePic === undefined ?'':{uri:profileData.profilePic}}
+            icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
             style={styles.avatar}
             fullName={profileData.firstName+' '+profileData.lastName}
            logoVisible={false}

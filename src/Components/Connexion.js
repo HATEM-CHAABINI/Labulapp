@@ -69,6 +69,14 @@ export default ({navigation}) => {
 
     return auth().signInWithCredential(googleCredential);
   }
+  const updateUserProfile = () => {
+    let user = auth().currentUser;
+
+    firestore().collection('users').doc(user.uid).get().then((snapshot) => {
+      dispatch(addProfile(snapshot.data()))
+
+    });
+  }
   return (
     <View style={{flex: 1, alignContent: 'center'}}>
       <Image
@@ -116,24 +124,25 @@ export default ({navigation}) => {
                       var profilePic = res.user.photoURL
                       var uid = res.user.uid
                       firestore()
-                      .collection('users')
-                      .doc(res.user.uid)
-                      .set({
-                        lastName,
-                        firstName,
-                        email,
-                        profilePic,
-                        activeNotification,
-                        uid
-                      })
-                      .then(async() => {
-                        // dispatch(addProfile({firstname:firstName,secondname:lastName,profilePic:profilePic,uid:uid,activeNotification:activeNotification,email:email}))
-                        setloadinggoogle(() => false);
-                      })
-                      .catch(error =>{
-                        alert("something went wrong!")
-                        setloadinggoogle(() => false);
-                      })
+                        .collection('users')
+                        .doc(res.user.uid)
+                        .set({
+                          lastName,
+                          firstName,
+                          email,
+                          profilePic,
+                          activeNotification,
+                          uid
+                        })
+                        .then(async () => {
+                          // dispatch(addProfile({firstname:firstName,secondname:lastName,profilePic:profilePic,uid:uid,activeNotification:activeNotification,email:email}))
+                          setloadinggoogle(() => false);
+                          updateUserProfile()
+                        })
+                        .catch(error => {
+                          alert("something went wrong!")
+                          setloadinggoogle(() => false);
+                        })
                     })
                     .catch(e => {
                       alert(e), setloadinggoogle(() => false);
@@ -181,31 +190,33 @@ export default ({navigation}) => {
                       var profilePic = res.user.photoURL
                       var uid = res.user.uid
                       firestore()
-                      .collection('users')
-                      .doc(res.user.uid)
-                      .set({
-                        lastName,
-                        firstName,
-                        email,
-                        profilePic,
-                        activeNotification,
-                        uid
-                      })
-                      .then(async() => {
-                        // dispatch(addProfile({firstname:firstName,secondname:lastName,profilePic:profilePic,uid:uid,activeNotification:activeNotification,email:email}))
-                        // dispatch(addLogin(res.user));
-                        setloadingfacebook(() => false);
-                      })
-                      .catch(error =>{
-                        alert("something went wrong!")
-                        setloadingfacebook(() => false);
-                      })
+                        .collection('users')
+                        .doc(res.user.uid)
+                        .set({
+                          lastName,
+                          firstName,
+                          email,
+                          profilePic,
+                          activeNotification,
+                          uid
+                        })
+                        .then(async () => {
+                          // dispatch(addProfile({firstname:firstName,secondname:lastName,profilePic:profilePic,uid:uid,activeNotification:activeNotification,email:email}))
+                          // dispatch(addLogin(res.user));
+                          setloadingfacebook(() => false);
+                          updateUserProfile()
+                        })
+                        .catch(error => {
+                          alert("something went wrong!")
+                          setloadingfacebook(() => false);
+                        })
                       // dispatch(addProfile({firstname:res.user.displayName,secondname:'',profilePic:res.user.photoURL}))
                       // dispatch(addLogin(res.user));
                       
                     })
                     .catch(e => {
                       console.log(e), setloadingfacebook(() => false);
+                      alert("Server Error")
                     });
               }}
               style={{

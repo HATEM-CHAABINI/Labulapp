@@ -5,25 +5,24 @@ import CommonListItem from './CommonListItem';
 import ProfileCommonSpecView from '../Components/view/ProfileCommonSpecView';
 import { RightArrow } from '../assets/svg/icons';
 const ProfileInformationListItem = (props) => {
-const [state, setstate] = useState(props.options !== undefined && props.options.length > 0 && (
-  <>
-    {props.options.map((val, index) => (
-      <ProfileCommonSpecView text={val.name} key={index} style={{ marginTop: 10 * hm }} />
-    ))}
-  </>
-))
-useEffect(() => {
-if(props.options !== undefined && props.options.length > 0)
-  {
-    setstate(( 
-      <>
-        {props.options.map((val, index) => (
-          <ProfileCommonSpecView text={val.name} key={index} style={{ marginTop: 10 * hm }} />
-        ))}
-      </>
-    ))
-  }
-}, [props.options ])
+  const [state, setstate] = useState(props.options !== undefined && props.options.length > 0 && (
+    <>
+      {props.options.map((val, index) => (
+        <ProfileCommonSpecView text={val.name} key={index} style={{ marginTop: 10 * hm }} />
+      ))}
+    </>
+  ))
+  useEffect(() => {
+    if (props.options !== undefined && props.options.length > 0) {
+      setstate((
+        <>
+          {props.options.map((val, index) => (
+            <ProfileCommonSpecView text={val.name} key={index} style={{ marginTop: 10 * hm }} />
+          ))}
+        </>
+      ))
+    }
+  }, [props.options])
 
   //, { textTransform: props.titleUpperCase ? 'uppercase' : null } titleStyle uppercase not needed for now
   return (

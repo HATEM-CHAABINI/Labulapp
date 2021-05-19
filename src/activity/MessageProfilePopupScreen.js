@@ -23,16 +23,15 @@ const reportItems = [
 
 const MessageProfilePopupScreen = (props) => {
   const refRBSheet = useRef();
-  const [isReported, setisReported] = useState(true)
+  const [isReported, setIsReported] = useState(true)
 
 
   const renderFlatList = ({ item }) => (
     <ReportCommonListItem
       text={item.itemName}
       style={styles.items}
-      onPress={() => {
-        () => setisReported(false);
-      }}
+      onPress={() => setIsReported(false)
+      }
     />
   );
   return (
@@ -110,7 +109,7 @@ const MessageProfilePopupScreen = (props) => {
               <Text style={{ marginLeft: 56 * em, marginRight: 56 * em, color: '#6A8596', fontSize: 12 * em, fontFamily: 'Lato-Medium', textAlign: 'center' }}>
                 Nous n’informons pas la personne qui détient le compte que tu viens de signaler.
               </Text>
-              <FlatList data={reportItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
+              <FlatList style={{marginBottom:250*hm}} data={reportItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
 </View>
             </View>
             :

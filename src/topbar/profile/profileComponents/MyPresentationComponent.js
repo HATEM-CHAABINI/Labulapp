@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { em, WIDTH, hm } from '../../../constants/consts';
-import ProfileModalHeader from'../../../Components/header/ProfileModalHeader';
+import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
 import ProfileCommonTextInput from '../../../textInput/ProfileCommonTextInput';
 import CommonText from '../../../text/CommonText';
@@ -14,12 +14,12 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { updateProfile } from '../../../redux/actions/profile';
 const ProfileNameComponent = (props) => {
-const [value, setvalue] = useState(props.value)
+  const [value, setvalue] = useState(props.value)
 
 
   const initialValues = {
     presentation: value,
-   
+
   };
   const validationSchema = Yup.object({
     presentation: Yup.string()
@@ -27,8 +27,8 @@ const [value, setvalue] = useState(props.value)
   });
   const onSubmit = async values => {
 
- props.setprofileDataCurrent({...props.profileDataCurrent,presentation:values.presentation})
-  props.onPress();
+    props.setprofileDataCurrent({ ...props.profileDataCurrent, presentation: values.presentation })
+    props.onPress();
   };
   const formik = useFormik({
     initialValues,
@@ -60,22 +60,22 @@ const [value, setvalue] = useState(props.value)
       <ProfileModalHeader
         title={props.title}
         style={styles.header}
-        onCancelPress={() => {props.onPress()}}
+        onCancelPress={() => { props.onPress() }}
         onFinishPress={
           // props.onPress();
           formik.handleSubmit
-         }
+        }
       />
       <ProfileCommonTextInput
-              style={styles.input}
-              text={'Ma présentation'}
-              value={formik.values.presentation}
-              onFocus={true}
-              max={100}
-             kyeboardType={'default'}
-             onChangeText={formik.handleChange('presentation')}
-            />
-     </Modal>
+        style={styles.input}
+        text={'Ma prÃ©sentation'}
+        value={formik.values.presentation}
+        onFocus={true}
+        max={100}
+        kyeboardType={'default'}
+        onChangeText={formik.handleChange('presentation')}
+      />
+    </Modal>
   );
 };
 const styles = {

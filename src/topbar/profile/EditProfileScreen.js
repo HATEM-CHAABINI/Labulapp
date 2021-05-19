@@ -78,7 +78,7 @@ const EditProfileScreen = (props) => {
       'Choisissez l\'option que vous aimez',
       [
         { text: 'Annuler', onPress: () => { }, style: 'cancel' },
-        { text: 'Choisissez parmi gallary.', onPress: () => choosePhotoFromLibreary() },
+        { text: 'Choisissez parmis gallary.', onPress: () => choosePhotoFromLibreary() },
         { text: 'Cliquez sur une image.', onPress: () => takePhotoFromCamera() },
       ],
       { cancelable: true }

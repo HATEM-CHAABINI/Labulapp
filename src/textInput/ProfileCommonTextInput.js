@@ -5,7 +5,7 @@ import SmallText from '../text/SmallText';
 
 const ProfileCommonTextInput = (props) => {
   const [onFocus, setOnFocus] = useState(!props.onFocus);
- 
+
   return (
     <View style={[onFocus ? styles.containerFocusOn : styles.containerFocusOff, props.style]}>
       <SmallText

@@ -1,12 +1,40 @@
-import React from 'react';
-import { View, Image, StatusBar } from 'react-native';
-import { em } from '../constants';
+import React, { useRef, useState } from 'react';
+import { View, Image, StatusBar, TouchableOpacity, Text, FlatList } from 'react-native';
+import { em, hm } from '../constants';
 import CommonText from '../text/CommonText';
 import Modal from 'react-native-modal';
 import CommonListItem from '../adapter/CommonListItem';
 import CommonButton from '../Components/button/CommonButton';
 import { Delete, ReportProblem, Block } from '../assets/svg/icons';
+import { Actions } from 'react-native-router-flux';
+import RBSheet from "react-native-raw-bottom-sheet";
+import MabulCommonListItem from '../adapter/MabulCommonListItem';
+import ReportCommonListItem from '../topbar/activity/ReportCommonListItem';
+
+const reportItems = [
+  { id: 1, itemName: 'Nudité ou actes sexuels' },
+  { id: 2, itemName: 'Discours ou symboles haineux' },
+  { id: 3, itemName: 'Violence ou organisations dangereuses' },
+  { id: 4, itemName: 'Vente de produits illégaux ou réglementés' },
+  { id: 5, itemName: 'Intimidation ou harcèlement' },
+  { id: 6, itemName: 'Contenu indésirable' },
+  { id: 7, itemName: 'Intimidation ou harcèlement' },
+];
+
 const MessageProfilePopupScreen = (props) => {
+  const refRBSheet = useRef();
+  const [isReported, setisReported] = useState(true)
+
+
+  const renderFlatList = ({ item }) => (
+    <ReportCommonListItem
+      text={item.itemName}
+      style={styles.items}
+      onPress={() => {
+        () => setisReported(false);
+      }}
+    />
+  );
   return (
     <Modal
       isVisible={props.visible}
@@ -30,6 +58,7 @@ const MessageProfilePopupScreen = (props) => {
           title="Signaler profil"
           titleStyle={{ color: '#F9547B' }}
           rightView={ReportProblem({ width: 20 * em, height: 20 * em })}
+          onPress={() => refRBSheet.current.open()}
         />
         <CommonListItem
           style={styles.listItem}
@@ -44,11 +73,69 @@ const MessageProfilePopupScreen = (props) => {
         textStyle={{ color: '#1E2D60' }}
         onPress={() => props.onPress()}
       />
-    </Modal>
+      <View style={{ flex: 0.1, justifyContent: "center", alignItems: "center" }}>
+        <RBSheet
+          ref={refRBSheet}
+          height={hm * 550}
+
+          openDuration={250}
+          closeOnDragDown={true}
+
+          customStyles={{
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
+              paddingTop: hm * 15,
+              paddingBottom: 30 * em
+            }
+          }}
+        >
+          {isReported ?
+            <View style={styles.containerSheet}>
+              <View style={{ paddingTop: 26 * hm, paddingBottom: hm * 20, flexDirection: 'row', }}>
+                <TouchableOpacity style={{}} onPress={() => refRBSheet.current.close()}  >
+                  <Fleche />
+                </TouchableOpacity>
+                <Text style={{ color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
+                  Signaler
+              </Text>
+              </View>
+
+              <CommonText text={
+                'Sélectionne un problème à signaler'
+              }
+                style={{ alignItems: 'center', color: '#1E2D60' }}> </CommonText>
+
+              <Text style={{ marginLeft: 56 * em, marginRight: 56 * em, color: '#6A8596', fontSize: 12 * em, fontFamily: 'Lato-Medium', textAlign: 'center' }}>
+                Nous n’informons pas la personne qui détient le compte que tu viens de signaler.
+              </Text>
+              <FlatList data={reportItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
+
+            </View>
+            :
+            <View style={styles.containerSheet}>
+
+              <Text style={{ color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
+                Merci de nous avoir informés
+              </Text>
+
+
+              <Text style={{ marginLeft: 56 * em, marginRight: 56 * em, color: '#1E2D60', fontSize: 1 * em, fontFamily: 'Lato-Medium', textAlign: 'center' }}>
+                Ton aide nous permets de faire de Labul un endroit sûr.
+              </Text>
+
+            </View>}
+
+        </RBSheet>
+      </View>
+    </Modal >
+
+
   );
 };
 const styles = {
   container: { margin: 0, flex: 1, justifyContent: 'flex-end' },
+  containerSheet: { alignItems: 'center', margin: 0, flex: 1, },
   avatar: { width: 54 * em, height: 54 * em, marginTop: 29 * em },
   userName: { fontFamily: 'Lato-Bold', color: '#1E2D60', marginBottom: 23 * em, marginTop: 10 * em },
 
@@ -68,6 +155,7 @@ const styles = {
     borderColor: '#B3C6CF33',
     width: '100%',
   },
+  items: { width: 345 * em, marginTop: 25 * hm, },
   cancelBtn: { marginTop: 35 * em, backgroundColor: '#ffffff', alignSelf: 'center', marginBottom: 23 * em },
 };
 export default MessageProfilePopupScreen;

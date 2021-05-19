@@ -109,6 +109,7 @@ import firestore from '@react-native-firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../redux/actions/profile';
 import { addLogin } from '../redux/actions/login';
+
 let data = {}
 
 
@@ -414,6 +415,8 @@ export default () => {
           hideNavBar
           component={TermsOfServiceScreen}
         />
+
+
       </Scene>
 
     </Router>

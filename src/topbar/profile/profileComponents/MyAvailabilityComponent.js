@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { em, WIDTH, hm } from '../../../constants/consts';
-import ProfileModalHeader from'../../../Components/header/ProfileModalHeader';
+import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
 import ProfileCommonTextInput from '../../../textInput/ProfileCommonTextInput';
 import CommonText from '../../../text/CommonText';
@@ -14,12 +14,12 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { updateProfile } from '../../../redux/actions/profile';
 const ProfileNameComponent = (props) => {
-const [value, setvalue] = useState(props.value)
+  const [value, setvalue] = useState(props.value)
 
 
   const initialValues = {
     availability: value,
-   
+
   };
   const validationSchema = Yup.object({
     availability: Yup.string()
@@ -27,8 +27,8 @@ const [value, setvalue] = useState(props.value)
   });
   const onSubmit = async values => {
 
- props.setprofileDataCurrent({...props.profileDataCurrent,availability:values.availability})
-  props.onPress();
+    props.setprofileDataCurrent({ ...props.profileDataCurrent, availability: values.availability })
+    props.onPress();
   };
   const formik = useFormik({
     initialValues,
@@ -60,22 +60,22 @@ const [value, setvalue] = useState(props.value)
       <ProfileModalHeader
         title={props.title}
         style={styles.header}
-        onCancelPress={() => {props.onPress()}}
+        onCancelPress={() => { props.onPress() }}
         onFinishPress={
           // props.onPress();
           formik.handleSubmit
-         }
+        }
       />
       <ProfileCommonTextInput
-              style={styles.input}
-              text={'Ma disponibilité'}
-              value={formik.values.availability}
-              onFocus={true}
-              max={45}
-             kyeboardType={'default'}
-             onChangeText={formik.handleChange('availability')}
-            />
-     </Modal>
+        style={styles.input}
+        text={'Ma disponibilitÃ©'}
+        value={formik.values.availability}
+        onFocus={true}
+        max={45}
+        kyeboardType={'default'}
+        onChangeText={formik.handleChange('availability')}
+      />
+    </Modal>
   );
 };
 const styles = {

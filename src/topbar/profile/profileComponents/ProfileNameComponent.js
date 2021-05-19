@@ -1,6 +1,6 @@
 import React from 'react';
 import { em, WIDTH, hm } from '../../../constants/consts';
-import ProfileModalHeader from'../../../Components/header/ProfileModalHeader';
+import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
 import ProfileCommonTextInput from '../../../textInput/ProfileCommonTextInput';
 import CommonText from '../../../text/CommonText';
@@ -25,8 +25,8 @@ const ProfileNameComponent = (props) => {
   });
   const onSubmit = async values => {
 
- props.setprofileDataCurrent({...props.profileDataCurrent,firstName:values.firstName,lastName:values.lastName})
-  props.onPress();
+    props.setprofileDataCurrent({ ...props.profileDataCurrent, firstName: values.firstName, lastName: values.lastName })
+    props.onPress();
   };
   const formik = useFormik({
     initialValues,
@@ -58,29 +58,29 @@ const ProfileNameComponent = (props) => {
       <ProfileModalHeader
         title={props.title}
         style={styles.header}
-        onCancelPress={() => {formik.handleReset(), props.onPress()}}
+        onCancelPress={() => { formik.handleReset(), props.onPress() }}
         onFinishPress={
           // props.onPress();
           formik.handleSubmit
-         }
+        }
       />
       <ProfileCommonTextInput
-              style={styles.input}
-              text={'Prénom'}
-              value={formik.values.firstName}
-              onFocus={true}
-             kyeboardType={'default'}
-             onChangeText={formik.handleChange('firstName')}
-            />
-            <ProfileCommonTextInput
-              style={styles.input}
-              text={'Nom de famille'}
-              value={formik.values.lastName}
-              onChangeText={formik.handleChange('lastName')}
-              onFocus={true}
-             kyeboardType={'default'}
-            />
-     
+        style={styles.input}
+        text={'PrÃ©nom'}
+        value={formik.values.firstName}
+        onFocus={true}
+        kyeboardType={'default'}
+        onChangeText={formik.handleChange('firstName')}
+      />
+      <ProfileCommonTextInput
+        style={styles.input}
+        text={'Nom de famille'}
+        value={formik.values.lastName}
+        onChangeText={formik.handleChange('lastName')}
+        onFocus={true}
+        kyeboardType={'default'}
+      />
+
     </Modal>
   );
 };

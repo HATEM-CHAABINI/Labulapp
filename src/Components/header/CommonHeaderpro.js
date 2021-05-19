@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image,ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { em, hm, WIDTH } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 // import CommonBackButton from '../button/CommonBackButton';
@@ -7,6 +7,7 @@ import CommonText from '../../text/CommonText';
 import { Actions } from 'react-native-router-flux';
 import TinyText from '../../text/TinyText';
 import CommonBackButtonAccount from '../button/CommonBackButtonAccount';
+import AccountType from '../../model/user/AccountType';
 
 const CommonHeaderpro = (props) => {
   var leftButton = props.leftTxt ? (
@@ -15,7 +16,7 @@ const CommonHeaderpro = (props) => {
     </TouchableOpacity>
   ) : (
     props.leftView || (
-      <CommonBackButtonAccount style={{paddingBottom: 10 * hm,}} dark={props.dark} onPress={props.onLeftPress ? props.onLeftPress : () => Actions.pop()} />
+      <CommonBackButtonAccount style={{ paddingBottom: 10 * hm, }} dark={props.dark} onPress={props.onLeftPress ? props.onLeftPress : () => Actions.pop()} />
     )
   );
 
@@ -25,7 +26,7 @@ const CommonHeaderpro = (props) => {
     props.centerView
   );
   var rightButton = props.rightTxt ? (
-    <TouchableOpacity onPress={props.onRightPress ? props.onRightPress : () => Actions.pop()}>
+    <TouchableOpacity onPress={props.onRightPress ? props.onRightPress : () => Actions.home({ tabNav: 'Profile', purchased: false })}>
       <CommonText text={props.rightTxt} color={'#FFFFFF'} style={[styles.rightTxt, props.rightTxtStyle]} />
     </TouchableOpacity>
   ) : (
@@ -36,7 +37,7 @@ const CommonHeaderpro = (props) => {
     <View style={[styles.container, props.style]}>
       <View style={styles.left}>{leftButton}</View>
       <View style={styles.center}>{centerView}</View>
-      {props.loading?<ActivityIndicator size='small' color='#1E2D60' style={styles.right} />:<View style={styles.right}>{rightButton}</View>}
+      {props.loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.right} /> : <View style={styles.right}>{rightButton}</View>}
     </View>
   );
 };

@@ -14,7 +14,7 @@ const ProfileCommonTextInput = (props) => {
         color={'#A0AEB8'}
       />
       <TextInput
-        style={[styles.textInput, { marginBottom: onFocus ? 20 * hm : 7 * hm }]}
+        style={[styles.textInput, { marginBottom: onFocus ? 15 * hm : 7 * hm }]}
         onFocus={() => setOnFocus(true)}
         onBlur={() => setOnFocus(false)}
         multiline={true}

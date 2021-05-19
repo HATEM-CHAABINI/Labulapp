@@ -153,7 +153,7 @@ const ProfileCommonModal = (props) => {
         }}
       />
       
-      {/* {modalBody} */}
+      {modalBody}
     </Modal>
   );
 };

@@ -91,15 +91,16 @@ const MessageProfilePopupScreen = (props) => {
           }}
         >
           {isReported ?
-            <View style={styles.containerSheet}>
+            <View style={{}}>
               <View style={{ paddingTop: 26 * hm, paddingBottom: hm * 20, flexDirection: 'row', }}>
-                <TouchableOpacity style={{}} onPress={() => refRBSheet.current.close()}  >
+                <TouchableOpacity style={{paddingLeft: 26 *em,paddingRight:109*em}} onPress={() => refRBSheet.current.close()}  >
                   <Fleche />
                 </TouchableOpacity>
-                <Text style={{ color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
+                <Text style={{alignItems: 'center', color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
                   Signaler
               </Text>
               </View>
+              <View style={styles.containerSheet}>
 
               <CommonText text={
                 'Sélectionne un problème à signaler'
@@ -110,10 +111,10 @@ const MessageProfilePopupScreen = (props) => {
                 Nous n’informons pas la personne qui détient le compte que tu viens de signaler.
               </Text>
               <FlatList data={reportItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
-
+</View>
             </View>
             :
-            <View style={styles.containerSheet}>
+            <View style={{ alignItems: 'center', margin: 0, flex: 1}}>
 
               <Text style={{ color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold', }}>
                 Merci de nous avoir informés
@@ -135,7 +136,7 @@ const MessageProfilePopupScreen = (props) => {
 };
 const styles = {
   container: { margin: 0, flex: 1, justifyContent: 'flex-end' },
-  containerSheet: { alignItems: 'center', margin: 0, flex: 1, },
+  containerSheet: { alignItems: 'center', margin: 0, },
   avatar: { width: 54 * em, height: 54 * em, marginTop: 29 * em },
   userName: { fontFamily: 'Lato-Bold', color: '#1E2D60', marginBottom: 23 * em, marginTop: 10 * em },
 

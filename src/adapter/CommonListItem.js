@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Image, Text } from 'react-native';
 import React from 'react';
 import CommentText from '../text/CommentText';
 import CommonText from '../text/CommonText';
+import { em } from '../constants/consts';
 
 const CommonListItem = (props) => {
   var textView;
@@ -57,7 +58,7 @@ export default CommonListItem;
 const styles = {
   container: { flexDirection: 'column', justifyContent: 'space-between' },
   topView: { flexDirection: 'row', justifyContent: 'space-between' },
-  rightView: {},
+  rightView: {right:5*em},
   txtView: {
     alignSelf: 'center',
     flex: 1,

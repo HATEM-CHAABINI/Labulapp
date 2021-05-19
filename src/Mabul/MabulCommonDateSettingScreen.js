@@ -11,6 +11,7 @@ import CommonListItem from '../adapter/CommonListItem';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Moment from 'moment';
 import Reinput from "reinput"
+import { Header } from 'react-native/Libraries/NewAppScreen';
 
 const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const conceptColor = mabulColors[mabulService];
@@ -63,7 +64,9 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   // console.warn(Moment(isDate).format('DD MMMM YYYY-HH:MM'));
 
   return (
-    <View  style={{ flex: 1,}}>
+
+    <View  style={{ flex: 1,    backgroundColor: 'red',zIndex: 999,
+  }}>
     <MabulCommonHeader style={[styles.header,{zIndex: 999,backgroundColor: '#ffffff',}]} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
 
     <KeyboardAvoidingView
@@ -156,10 +159,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
+    
   },
   header: {
-    height: '12.83%',
-    //  marginTop: 16 * hm,
+    height: '12.45%',
+    // marginTop: 15 * hm,
      
     //  height: '10.3%',
     //  marginTop: 16 * hm,

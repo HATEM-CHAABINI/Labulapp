@@ -51,7 +51,8 @@ const styles = {
     PaddingTop: 16 * hm,
   },
   header: { 
-    height: 81 * hm 
+    height: '12.45%',
+
   },
   popView: {
     paddingLeft: 30 * em,

@@ -87,8 +87,8 @@ const styles = {
     backgroundColor: '#ffffff',
   },
   header: {
-    height: '10.3%',
-    marginTop: 16 * hm,
+    height: '12.45%',
+
   },body: { flex: 1, width: '100%', paddingHorizontal: 30 * em, justifyContent: 'flex-start', alignItems: 'flex-start', },
   commonHeader: { marginTop: 27 * hm },
   title: { textAlign: 'left', marginTop: 35 * hm, lineHeight: 38 * em },

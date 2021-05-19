@@ -50,8 +50,7 @@ const styles = {
     PaddingTop: 16 * hm,
   },
   header: {
-    height: '10.3%',
-    marginTop: 16 * hm,
+    height: '12.45%',
   },
   body: { backgroundColor: '#F0F5F7', flex: 1, justifyContent: 'space-between' },
   topBody: { paddingHorizontal: 30 * em, backgroundColor: '#ffffff' },

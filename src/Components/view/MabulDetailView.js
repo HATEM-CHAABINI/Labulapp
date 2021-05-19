@@ -129,7 +129,7 @@ const styles = {
     backgroundColor: '#ffffff',
     position: 'absolute',
     left: 15 * em,
-    top: 27 * em,
+    top: 30 * em,
   },
   cover: {
     width: '100%',

@@ -188,7 +188,7 @@ const styles = {
   container: { flex: 1, backgroundColor: 'transparent' },
   scrollView: { backgroundColor: '#FFF' },
   purchaseBtn: { position: 'absolute', alignSelf: 'center', bottom: 25 * hm },
-  backBtn: { position: 'absolute', left: 15 * em, top: 27 * hm },
+  backBtn: { position: 'absolute', left: 15 * em, paddingTop: 48 * hm },
 
   logo: {
     marginTop: 54.5 * hm,

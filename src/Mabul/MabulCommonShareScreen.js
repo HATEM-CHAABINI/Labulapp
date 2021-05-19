@@ -5,7 +5,7 @@ import { em, hm, mabulColors } from '../constants/consts';
 import CommonText from '../text/CommonText';
 import MabulCommonHeader from './MabulCommonHeader';
 import CommonButton from '../Components/button/CommonButton';
-import { Family, Friend, Neighbor, All } from '../assets/svg/icons';
+import { Family, Friend, Neighbor, All, CheckBlue } from '../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 const MabulCommonShareScreen = ({ mabulService, process }) => {
   const conceptColor = mabulColors[mabulService];
@@ -47,7 +47,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
                 // { marginBottom: index === 2 ? 40 * em : 0 },
               ]}
               onPress={() => check(2)}>
-              <Neighbor width={48 * em} height={48 * em} />
+              {vchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Neighbor width={48 * em} height={48 * em} />}
               <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
             <TouchableOpacity
@@ -57,7 +57,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
                 // { marginBottom: index === 2 ? 40 * em : 0 },
               ]}
               onPress={() => check(1)}>
-              <Friend width={48 * em} height={48 * em} />
+              {achecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Friend width={48 * em} height={48 * em} />}
               <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
           </View>
@@ -69,7 +69,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
                 // { marginBottom: index === 2 ? 40 * em : 0 },
               ]}
               onPress={() => check(3)}>
-              <Family width={48 * em} height={48 * em} />
+              {fchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Family width={48 * em} height={48 * em} />}
               <CommonText text="mes famille" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
             <TouchableOpacity
@@ -79,7 +79,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
                 // { marginBottom: index === 2 ? 40 * em : 0 },
               ]}
               onPress={() => check(4)}>
-              <All width={48 * em} height={48 * em} />
+              {tchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <All width={48 * em} height={48 * em} />}
               <CommonText text="tous" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
           </View>
@@ -109,8 +109,8 @@ const styles = {
     // marginTop: 16 * em,
   },
   header: {
-    height: '10.3%',
-    marginTop: 16 * hm,
+    height: '12.45%',
+
   },
   body: {
     flex: 1,

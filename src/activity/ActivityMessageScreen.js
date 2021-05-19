@@ -255,7 +255,9 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 
 const styles = {
   container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#40CDDE' },
-  header: { marginBottom: 18 * hm, marginTop: 32 * hm, alignSelf: 'center' },
+  header: {
+     marginBottom: 20 * hm, marginTop: 32 * hm, alignSelf: 'center' 
+    },
   toast: {
     alignItems: 'center',
     marginLeft: -30 * em,

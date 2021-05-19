@@ -69,7 +69,8 @@ const styles = {
     backgroundColor: '#ffffff',
     PaddingTop: 16 * em,
   },
-  header: { height: 81 * hm },
+  header: {     height: '12.45%',
+},
   popView: {
     paddingLeft: 30 * em,
     borderTopLeftRadius: 28 * em,

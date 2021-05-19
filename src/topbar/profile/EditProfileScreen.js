@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react';
-import { View, ScrollView,Alert,ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import ProfileInformationListItem from '../../adapter/ProfileInformationListItem';
 import ProfileCommonHeader from '../../Components/header/ProfileCommonHeader';
@@ -20,7 +20,7 @@ import MyAvailabilityComponent from './profileComponents/MyAvailabilityComponent
 import MyPresentationComponent from './profileComponents/MyPresentationComponent'
 import MyskillComponents from './profileComponents/MyskillComponents'
 import { useSelector } from 'react-redux';
-import {updateUserProfile,getassest } from '../../services/firebase'
+import { updateUserProfile, getassest, deleteUser, deleteUserData } from '../../services/firebase'
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../../redux/actions/profile';
 
@@ -57,33 +57,33 @@ const EditProfileScreen = (props) => {
   const [loading, setloading] = useState(false)
   const { profileData } = useSelector((state) => state.profileReducer);
   const [loadingSet, setloadingSet] = useState(false)
-  const [assestLoading, setassestLoading] = useState(true)
+  const [deleteUseLoading, setdeleteUseLoading] = useState(false)
   // const { profileData } = useSelector((state) => state.loginReducer);
-// console.log(props.assest)
+  // console.log(props.assest)
   const [skillsList, setskillsList] = useState(props.assest)
   const [profileDataCurrent, setprofileDataCurrent] = useState(
     {
-      profilePic:profileData.profilePic ===undefined ?'':profileData.profilePic,
-      firstName:profileData.firstName,
-      lastName:profileData.lastName,
-      availability:profileData.availability ===undefined ?'Ajoute ta disponiblité':profileData.availability,
-      presentation:profileData.presentation ===undefined ?'Salut ! Je suis …\nPrésente toi ici. Ce texte sera affiché pour vous invitations et apparaitra sur ta page profil. Soit court, avent et efficace. Vivons ensemble !':profileData.presentation,
-      skill:profileData.skill
+      profilePic: profileData.profilePic === undefined ? '' : profileData.profilePic,
+      firstName: profileData.firstName,
+      lastName: profileData.lastName,
+      availability: profileData.availability === undefined ? 'Ajoute ta disponiblité' : profileData.availability,
+      presentation: profileData.presentation === undefined ? 'Salut ! Je suis …\nPrésente toi ici. Ce texte sera affiché pour vous invitations et apparaitra sur ta page profil. Soit court, avent et efficace. Vivons ensemble !' : profileData.presentation,
+      skill: profileData.skill
     })
-   
-  const [image, setimage] = useState(profileData.profilePic?profileData.profilePic :null)
-  const imageOptions = () =>{
+
+  const [image, setimage] = useState(profileData.profilePic ? profileData.profilePic : null)
+  const imageOptions = () => {
     Alert.alert(
-     'Image',
-     'Choisissez l\'option que vous aimez',
-     [
-      {text: 'Annuler', onPress: () => {},style: 'cancel'},
-       {text: 'Choisissez parmi gallary.', onPress: () => choosePhotoFromLibreary()},
-       {text: 'Cliquez sur une image.', onPress: () => takePhotoFromCamera()},
-     ],
-     { cancelable: true }
-     
-   );
+      'Image',
+      'Choisissez l\'option que vous aimez',
+      [
+        { text: 'Annuler', onPress: () => { }, style: 'cancel' },
+        { text: 'Choisissez parmi gallary.', onPress: () => choosePhotoFromLibreary() },
+        { text: 'Cliquez sur une image.', onPress: () => takePhotoFromCamera() },
+      ],
+      { cancelable: true }
+
+    );
   }
 
   const takePhotoFromCamera = () => {
@@ -105,100 +105,127 @@ const EditProfileScreen = (props) => {
     })
       .then(image => {
         uploadeImage(image.path)
-         });
+      });
   }
 
-  const uploadeImage = async(img) =>{
+  const uploadeImage = async (img) => {
     setloading(true)
-    try{
-    const childPath = `users/${auth().currentUser.uid}/profilePic/0}`
-    const response = await fetch(img)
-    const blob = await response.blob()
-    const task = storage().ref().child(childPath).put(blob);
-    const taskProgress =(snapshot) =>{
-  console.log(`transferFile : ${snapshot}`)
-  
-}
+    try {
+      const childPath = `users/${auth().currentUser.uid}/profilePic/0}`
+      const response = await fetch(img)
+      const blob = await response.blob()
+      const task = storage().ref().child(childPath).put(blob);
+      const taskProgress = (snapshot) => {
+        console.log(`transferFile : ${snapshot}`)
 
-const error =(snapshot) =>{
-  console.log(snapshot )
-  setloading(false)
-}
-const taskCompleted =() =>{
-  
-  task.snapshot.ref.getDownloadURL()
-  .then((snap)=> {
-    
-    setprofileDataCurrent({...profileDataCurrent,profilePic:snap})
-    setimage(()=>snap);
-    setloading(false)
-  }).catch((e)=>{console.log(e)})
-}
-task.on("state_changed",taskProgress,error,taskCompleted)
+      }
+
+      const error = (snapshot) => {
+        console.log(snapshot)
+        setloading(false)
+      }
+      const taskCompleted = () => {
+
+        task.snapshot.ref.getDownloadURL()
+          .then((snap) => {
+
+            setprofileDataCurrent({ ...profileDataCurrent, profilePic: snap })
+            setimage(() => snap);
+            setloading(false)
+          }).catch((e) => { console.log(e) })
+      }
+      task.on("state_changed", taskProgress, error, taskCompleted)
     }
-    catch(e){
+    catch (e) {
       console.log(e)
       setloading(false)
     }
 
   }
- 
-  const saveProfile =(data)=>{
+
+  const saveProfile = (data) => {
     setloadingSet(true)
-     firestore().collection('users').doc(auth().currentUser.uid).update(
-       {
-         profilePic:image,
-         firstName:profileDataCurrent.firstName,
-         lastName:profileDataCurrent.lastName,
-         availability:profileDataCurrent.availability,
-         presentation:profileDataCurrent.presentation,
-         skill:profileDataCurrent.skill
-        })
-        setTimeout(() => {
-     updateUserProfile().then((res)=>{
-       
-       console.log()
+    firestore().collection('users').doc(auth().currentUser.uid).update(
+      {
+        profilePic: image,
+        firstName: profileDataCurrent.firstName,
+        lastName: profileDataCurrent.lastName,
+        availability: profileDataCurrent.availability,
+        presentation: profileDataCurrent.presentation,
+        skill: profileDataCurrent.skill,
+
+      })
+
+    setTimeout(() => {
+      updateUserProfile(auth().currentUser.uid).then((res) => {
+
         dispatch(addProfile(res))
         setloadingSet(false)
-        Actions.profileOverview({userProfile:updatedMyProfile})
-     })
+        Actions.profileOverview({ userProfile: updatedMyProfile })
+      })
     }, 500);
-    //  console.log(ad)
-    //  .then(res =>{
-      
-    //  
-    //  })
-    // Actions.profileOverview({userProfile:updatedMyProfile})
   }
+  const deleteUserr = () => {
+    Alert.alert(
+      'Supprimer le compte',
+      'Voulez-vous vraiment supprimer votre compte?',
+      [
+        {
+          text: 'Annuler',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK', onPress: () => {
+            setdeleteUseLoading(true)
+            deleteUserData(profileData.uid).then(res => {
+              if (res) {
+                deleteUser().then(res => {
+                  setdeleteUseLoading(true),
+                    Alert.alert(
+                      'Succès',
+                      'Votre compte a été supprimé avec succès',
+                      [
 
-// useEffect(() => {
+                        { text: 'OK', onPress: () => { dispatch(addProfile('')) } },
+                      ]
+                    );
 
-//   console.log("profileDataCurrent ",profileDataCurrent)
 
-// }, [profileDataCurrent])
+                })
+              }
+            })
+
+
+
+          }
+        },
+      ]
+    );
+  }
 
 
   return (
     <ProfileCommonHeader
       title="Modifier mon profil"
       onCancel={() => Actions.pop()}
-      onFinish={() => {saveProfile()}}
+      onFinish={() => { saveProfile() }}
       loading={loadingSet}
-      >
+    >
       <View style={styles.listItem}>
-        {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} />:<ProfileCommonAvatar
+        {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : <ProfileCommonAvatar
           initialSize={36 * em}
-          fullName={profileDataCurrent.firstName+' '+profileDataCurrent.lastName}
-           style={styles.avatar}
-          icon={image === null ?'':{uri:image}}
+          fullName={profileDataCurrent.firstName + ' ' + profileDataCurrent.lastName}
+          style={styles.avatar}
+          icon={image === null ? '' : { uri: image }}
           borderWidth={3 * em}
         />}
-        <CommentText text="Changer ma photo de profil" style={styles.addPhotoBtn} color="#40CDDE" onPress={()=>imageOptions()} />
+        <CommentText text="Changer ma photo de profil" style={styles.addPhotoBtn} color="#40CDDE" onPress={() => imageOptions()} />
       </View>
 
       <ProfileInformationListItem
         caption={'Mon nom'}
-        value={profileDataCurrent.firstName+' '+profileDataCurrent.lastName}
+        value={profileDataCurrent.firstName + ' ' + profileDataCurrent.lastName}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(5);
@@ -235,25 +262,25 @@ task.on("state_changed",taskProgress,error,taskCompleted)
         placeholder
         value={'Sélectionne les compétences où tu es plus l’aise'}
         style={styles.listItem}
-        options={profileDataCurrent.skill !== null ?profileDataCurrent.skill:[]}
+        options={profileDataCurrent.skill !== null ? profileDataCurrent.skill : []}
         onPress={() => {
           setInputItemKey(8);
           setmyskillModal(!myskillModal);
         }}
       />
-      <CommonButton
+      {deleteUseLoading ? <ActivityIndicator size='small' color='#F9547B' style={styles.deleteBtn} /> : <CommonButton
         text={'Supprimer mon compte'}
         textStyle={{ color: '#F9547B' }}
         style={styles.deleteBtn}
-        onPress={() => Actions.home()}
-      />
-    <MyskillComponents
+        onPress={() => { deleteUserr() }}
+      />}
+      <MyskillComponents
         visible={myskillModal}
         itemKey={inputItemKey}
         title={'Mes atouts (3 max)'}
         value={props.assest}
-        
-         profileDataCurrent={profileDataCurrent}
+
+        profileDataCurrent={profileDataCurrent}
         setprofileDataCurrent={setprofileDataCurrent}
         onPress={() => {
           setmyskillModal(false);
@@ -272,31 +299,31 @@ task.on("state_changed",taskProgress,error,taskCompleted)
         onPress={() => {
           setnameModal(false);
         }}
-      /> 
-       <MyAvailabilityComponent
+      />
+      <MyAvailabilityComponent
         visible={availabilityModal}
         itemKey={inputItemKey}
         title={'Ma disponibilité'}
         value={profileDataCurrent.availability}
-         profileDataCurrent={profileDataCurrent}
+        profileDataCurrent={profileDataCurrent}
         setprofileDataCurrent={setprofileDataCurrent}
         onPress={() => {
           setavailabilityModal(false);
         }}
-      /> 
-       <MyPresentationComponent
+      />
+      <MyPresentationComponent
         visible={presentationModal}
         itemKey={inputItemKey}
         title={'Ma présentation'}
         value={profileDataCurrent.presentation}
-         profileDataCurrent={profileDataCurrent}
+        profileDataCurrent={profileDataCurrent}
         setprofileDataCurrent={setprofileDataCurrent}
         onPress={() => {
           setpresentationModal(false);
         }}
       />
-      
-      
+
+
     </ProfileCommonHeader>
   );
 };

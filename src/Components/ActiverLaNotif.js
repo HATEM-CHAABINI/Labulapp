@@ -22,7 +22,7 @@ import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 import { addProfile } from '../redux/actions/profile';
 import * as Firebase from 'firebase'
-
+import { createUser, setUserData, verifyUserEmail } from '../services/firebase'
 import auth, { firebase } from "@react-native-firebase/auth";
 import { LogBox } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
@@ -36,117 +36,97 @@ export default ({ navigation }) => {
 
 
   const login = () => {
-    setloading(true);
-    Firebase.default
-      .auth()
-      .createUserWithEmailAndPassword(signupData.email, signupData.password)
-      .then(userCredential => {
-        var user = userCredential.user;
-        let { nom, mobile, prenom, adresse, email } = signupData;
-        let activeNotification = false;
-        if (user) {
-          var firstName = prenom;
-                      var lastName = nom;
-                    var uid = user.uid
-                      var address = adresse
-                
-          firestore()
-            .collection('users')
-            .doc(user.uid)
-            .set({
-              firstName,
-              lastName,
-              address,
-              uid,
-              mobile:mobile,
-              email:email,
-              activeNotification:false,
-            })
-            .then(async() => {
-              let response=  await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
-              if (response && response.user) {
-               
-                fireKey.doc(response.user.uid).get().then((res) => {
-                 Object.assign(res._data, response.user)
-                 dispatch(addProfile({activeNotification:activeNotification,firstname:firstName,secondname:lastName,uid:response.user.uid,address:address,mobile:mobile,email:email}))
-                }).catch((e) => {
-                  setloading(false);
-                  console.log(e)
-                })
+    setloading(true)
+    createUser(signupData, false).then(async (response) => {
 
-              }
-          
-              setloading(false);
-            })
-            .catch(e => {
-              console.log(e);
-              setloading(false);
-            });
+
+      if (response.error) {
+        if (response.error.code === 'auth/email-already-in-use') {
+          alert("Cette adresse email est déjà utilisée.")
         }
+        setloading(false)
+      }
+      else {
 
-      })
-      .catch(error => {
-        alert(error.message);
-        setloading(false);
-        console.log(error.code, error.message);
-      });
+        setUserData(response.DataToBeSet).then(res => {
+
+          auth().currentUser.sendEmailVerification()
+            .then(function () {
+
+              Alert.alert(
+                "Succès",
+                "Merci pour votre inscription. Un e-mail envoyé à votre adresse e-mail avec un lien de vérification, veuillez cliquer sur le lien pour vérifier votre adresse e-mail",
+                [
+
+                  { text: "OK", onPress: () => { Actions.registerEmail() } }
+                ]
+              );
+              auth().signOut()
+              setloading(false)
+            })
+            .catch(function (error) {
+
+              Alert.alert("Erreur", "Un problème est survenu")
+              auth().currentUser.delete().then(function () {
+                setloading(false)
+                // User deleted.
+              }).catch(function (error) {
+                // An error happened.
+                setloading(false)
+              });
+              // Error occurred. Inspect error.code.
+            });
+        })
+
+      }
+    })
+
   };
   const loginWithActiveNotification = async () => {
-    setloading(true);
-    Firebase.default
-      .auth()
-      .createUserWithEmailAndPassword(signupData.email, signupData.password)
-      .then(userCredential => {
-        var user = userCredential.user;
-        let { nom, mobile, prenom, adresse, email } = signupData;
-        let activeNotification = true;
-        if (user) {
-          var firstName = prenom;
-                      var lastName = nom;
-                    var uid = user.uid
-                      var address = adresse
-          firestore()
-            .collection('users')
-            .doc(user.uid)
-            .set({
-              firstName,
-              lastName,
-              address,
-              uid,
-              mobile:mobile,
-              email:email,
-              activeNotification:true,
-            })
-            .then(async() => {
-             
-               let response= await auth().signInWithEmailAndPassword(signupData.email, signupData.password)
-                if (response && response.user) {
-                
-                  fireKey.doc(response.user.uid).get().then((res) => {
-                   Object.assign(res._data, response.user)
-                  
-                   dispatch(addProfile({activeNotification:activeNotification,firstname:firstName,secondname:lastName,uid:response.user.uid,address:address,mobile:mobile,email:email}))
-                  }).catch((e) => {
-                    setloading(false);
-                    console.log(e)
-                  })
+    setloading(true)
+    createUser(signupData, true).then(async (response) => {
 
-                }
-               
-              setloading(false);
-              // Actions.reset('main');
-            })
-            .catch(e => {
-              console.log(e);
-              setloading(false);
-            });
+
+      if (response.error) {
+        if (response.error.code === 'auth/email-already-in-use') {
+          alert("Cette adresse email est déjà utilisée.")
         }
-      })
-      .catch(error => {
-        alert(error.message);
-        setloading(false);
-        console.log(error.code, error.message);
-      });
+        setloading(false)
+      }
+      else {
+
+        setUserData(response.DataToBeSet).then(res => {
+
+          auth().currentUser.sendEmailVerification()
+            .then(function () {
+
+              Alert.alert(
+                "Succès",
+                "Merci pour votre inscription. Un e-mail envoyé à votre adresse e-mail avec un lien de vérification, veuillez cliquer sur le lien pour vérifier votre adresse e-mail",
+                [
+
+                  { text: "OK", onPress: () => { Actions.registerEmail() } }
+                ]
+              );
+              auth().signOut()
+              setloading(false)
+            })
+            .catch(function (error) {
+
+              Alert.alert("Erreur", "Un problème est survenu")
+              auth().currentUser.delete().then(function () {
+                setloading(false)
+                // User deleted.
+              }).catch(function (error) {
+                // An error happened.
+                setloading(false)
+              });
+              // Error occurred. Inspect error.code.
+            });
+        })
+
+      }
+    })
   };
   return (
 
@@ -178,7 +158,7 @@ export default ({ navigation }) => {
 
 
 
-          <TouchableOpacity onPress={loginWithActiveNotification} style={{
+          <TouchableOpacity onPress={() => loginWithActiveNotification()} style={{
             overflow: 'hidden',
             borderRadius: 18 * em,
             height: 59 * hm,

@@ -35,8 +35,7 @@ import auth, { firebase } from "@react-native-firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 import firestore from '@react-native-firebase/firestore';
-import Toast from 'react-native-simple-toast';
-import { Header } from 'react-navigation-stack';
+import { updateUserProfile } from '../services/firebase'
 import { addProfile } from '../redux/actions/profile';
 let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -58,49 +57,37 @@ export default ({ navigation }) => {
     password: Yup.string().required(),
 
   });
+
   const onSubmit = async values => {
     setloading(() => true)
     try {
       let response = await auth().signInWithEmailAndPassword(values.email, values.password)
-      if (response && response.user) {
-        // Alert.alert("Success ", "Authenticated successfully")
-        fireKey.doc(response.user.uid).get().then((res) => {
-
-
-          Object.assign(res._data, response.user)
-       let profileData = {
-        ...res._data,
-         firstname:res._data.prenom,
-         secondname:res._data.nom,
-         profilePic:null,
-         
-
+      if (response && response.user && response.user.emailVerified === false) {
+        alert("Votre email n'est pas vérifié!")
+        // auth().signOut()
       }
-     
-          // dispatch(addProfile(profileData))
-          // dispatch(addLogin(res._data));
-        }).catch((e) => {
-          console.log(e)
+      else {
+        updateUserProfile(response.user.uid).then((res) => {
+          dispatch(addProfile(res))
         })
-
       }
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') {
         alert('Cette adresse email est déjà utilisée!')
         // console.log('Cette adresse email est déjà utilisée!');
       }
-  
-     else if (e.code === 'auth/invalid-email') {
+
+      else if (e.code === 'auth/invalid-email') {
         alert('Cette adresse e-mail n\'est pas valide!')
         // console.log('Cette adresse e-mail n\'est pas valide!');
       }
-      else if(e.code === 'auth/user-not-found'){
+      else if (e.code === 'auth/user-not-found') {
         alert("Il n'y a pas d'enregistrement d'utilisateur correspondant à cet identifiant. L'utilisateur a peut-être été supprimé.")
       }
-      else if ( e.code === 'auth/wrong-password'){
+      else if (e.code === 'auth/wrong-password') {
         alert("Mot de passe incorrect")
       }
-      else{
+      else {
         alert('Something went wrong!')
       }
       console.error(e.message)
@@ -158,7 +145,7 @@ export default ({ navigation }) => {
               keyboardType="email-address"
 
 
-        
+
               selectionColor={'#41D0E2'}
               paddingBottom={12 * hm}
 
@@ -167,7 +154,7 @@ export default ({ navigation }) => {
               onBlur={formik.handleBlur('email')}
               onChangeText={formik.handleChange('email')}
             />
- 
+
             {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}
             {/*       
               <MyTextInput
@@ -291,7 +278,7 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     // alignItems:'center',
-    width: 315*em,
+    width: 315 * em,
     paddingTop: 14 * hm,
 
   },

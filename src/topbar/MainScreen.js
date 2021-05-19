@@ -116,30 +116,30 @@ const MainTabBar = ({ state, descriptors, navigation,data }) => {
         }
         return (
           <View key={route.key}>
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ marginBottom: index === 2 ? -8 * hm : 4,marginLeft: index === 2 ? 40 * em : 30 }}>
-            {tabIcon}
-            {index === 4 && (
-              <View
-                style={[styles.photoWrapper, {overflow:'hidden', borderColor: isFocused || state.index === 5 ? '#4BD8E9' : '#ffffff' }]}>
-               {/* {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<Image source={state.index === 5 ? proPhoto : {uri:data.profilePic}} style={styles.TapImage} />} */}
-              
-          {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<ProfileCommonAvatar
-            icon={state.index === 5 ? proPhoto : data.profilePic === undefined?'': {uri:data.profilePic}}
-            style={styles.TapImage}
-            fullName={data.firstName+' '+data.lastName}
-           logoVisible={false}
-            borderWidth={3 * em}
-          /> }
-              </View>
-            )}
-          </TouchableOpacity>
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityState={isFocused ? { selected: true } : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              testID={options.tabBarTestID}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              style={{ marginBottom: index === 2 ? -8 * hm : 4, marginLeft: index === 2 ? 40 * em : 30 }}>
+              {tabIcon}
+              {index === 4 && (
+                <View
+                  style={[styles.photoWrapper, { overflow: 'hidden', borderColor: isFocused || state.index === 5 ? '#4BD8E9' : '#ffffff' }]}>
+                  {/* {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<Image source={state.index === 5 ? proPhoto : {uri:data.profilePic}} style={styles.TapImage} />} */}
+
+                  {data.profilePic === '' ? <ActivityIndicator size='small' color='#000' /> : <ProfileCommonAvatar
+                    icon={state.index === 5 ? proPhoto : data.profilePic === undefined || data.profilePic === null ? '' : { uri: data.profilePic }}
+                    style={styles.TapImage}
+                    fullName={data.firstName + ' ' + data.lastName}
+                    logoVisible={false}
+                    borderWidth={3 * em}
+                  />}
+                </View>
+              )}
+            </TouchableOpacity>
           </View>
 
         );

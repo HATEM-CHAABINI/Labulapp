@@ -63,14 +63,13 @@ const ProfileHomeScreen = (props) => {
   );
   const [userData, setuserData] = useState(null)
   const { profileData } = useSelector((state) => state.profileReducer);
- const [loading, setloading] = useState(true)
-useEffect(() => {
-  if(profileData.firstName !== undefined)
-  {
-    setloading(false)
-  }
-  
-}, [profileData])
+  const [loading, setloading] = useState(true)
+  useEffect(() => {
+    if (profileData.firstName !== undefined) {
+      setloading(false)
+    }
+
+  }, [profileData])
   return (
     <ParallaxScrollView
       // onScroll={onScroll}
@@ -82,8 +81,8 @@ useEffect(() => {
         <View style={styles.topView}>
           {loading ?<ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} />:<ProfileCommonAvatar
             style={styles.avatar}
-            fullName={profileData.firstName + " " +profileData.lastName}
-            icon={profileData.profilePic === undefined ?'':{uri:profileData.profilePic}}
+            fullName={profileData.firstName + " " + profileData.lastName}
+            icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
             borderWidth={3 * em}
           />}
           <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
@@ -105,11 +104,11 @@ useEffect(() => {
         <View key="sticky-header" style={{ marginTop: 18 * em, alignItems: 'center' }}>
           <ProfileCommonAvatar
             style={{ width: 30 * em, height: 30 * em }}
-            fullName={userProfile.name}
-            icon={userProfile.photo}
+            icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
+            fullName={profileData.firstName + ' ' + profileData.lastName}
             borderWidth={3 * em}
           />
-          <SmallText text={userProfile.name.split(' ')[0]} color="#1E2D60" style={{}} />
+          <SmallText text={profileData.firstName + " " + profileData.lastName} color="#1E2D60" style={{}} />
         </View>
       )}>
       <View style={styles.bottomView}>

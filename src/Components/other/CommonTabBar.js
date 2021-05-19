@@ -62,7 +62,7 @@ export default class CommonTabBar extends Component {
     return (
       <View style={{ paddingLeft: 20 * em }}>
         <ScrollView
-          style={{ height: 41 * em }}
+          style={{ height: 41 *hm }}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ref={(view) => (this.tabContainer = view)}>

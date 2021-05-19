@@ -85,7 +85,7 @@ const SelectedAvatarView = ({ avatar, userName }) => (
     <ImageBackground
       source={avatar}
       style={{
-        marginBottom: 5 * em,
+        marginBottom: 5 * hm,
         width: 54 * em,
         height: 54 * em,
         alignItems: 'flex-end',
@@ -113,7 +113,9 @@ const CreateGroupScreen = (props) => {
   const renderCircleList = ({ item, index }) => {
     return (
       <CommonListItem
-        icon={<Image source={item.photo} style={{ width: 40 * em, height: 40 * em, marginRight: 15 * em }} />}
+        icon={<Image source={item.photo}
+         style={{ width: 40 * em, height: 40 * em, marginRight: 15 * em }} 
+         />}
         title={item.name}
         titleStyle={{ color: '#1E2D60', fontFamily: 'Lato-Black' }}
         rightView={
@@ -155,9 +157,9 @@ const CreateGroupScreen = (props) => {
 const styles = {
   container: { flex: 1, backgroundColor: '#ffffff', paddingHorizontal: 20 * em },
   title: { textAlign: 'left', marginTop: 23 * em, marginBottom: 17 * em },
-  header: { marginTop: 39 * em, alignSelf: 'flex-end' },
+  header: { marginTop: 39 * hm, alignSelf: 'flex-end' },
   selectedFullName: { fontSize: 12 * em, height: 30 * em, color: '#1E2D60', marginBottom: 0, fontFamily: 'Lato-Bold' },
-  listItem: { marginBottom: 35 * em },
+  listItem: { marginBottom: 35 * em,marginTop:2*hm },
 };
 
 export default CreateGroupScreen;

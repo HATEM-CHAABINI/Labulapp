@@ -137,7 +137,7 @@ const ProfileHomeScreen = (props) => {
             style={styles.listItem}
             icon={Information(iconSize)}
             onPress={() => {
-              Actions.myInformation({ userProfile: userProfile });
+              Actions.myInformation({ userProfile: userProfile, firbaseInfo: profileData });
             }}
           />
           <View style={styles.line1} />

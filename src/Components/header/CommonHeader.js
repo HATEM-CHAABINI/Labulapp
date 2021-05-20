@@ -36,7 +36,7 @@ const CommonHeader = (props) => {
     <View style={[styles.container, props.style]}>
       <View style={styles.left}>{leftButton}</View>
       <View style={styles.center}>{centerView}</View>
-      {props.loading?<ActivityIndicator size='small' color='#1E2D60' style={styles.right} />:<View style={styles.right}>{rightButton}</View>}
+      {props.loading ? <ActivityIndicator size='small' color='#1E2D60' style={[styles.right, { marginLeft: '12%', marginRight: '5%' }]} /> : <View style={styles.right}>{rightButton}</View>}
     </View>
   );
 };

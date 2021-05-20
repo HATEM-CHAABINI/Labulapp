@@ -24,15 +24,15 @@ import {
 import MabulHomeScreen from '../Mabul/MabulHomeScreen';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { useSelector } from 'react-redux';
+
 const Tab = createBottomTabNavigator();
 
 const myPhoto = require('../assets/images/tab_profile_off.png');
 const proPhoto = require('../assets/images/avatar_curology.png');
 
-const MainTabBar = ({ state, descriptors, navigation,data }) => {
+const MainTabBar = ({ state, descriptors, navigation, data }) => {
   const [mabulVisible, setMabulVisible] = React.useState(false);
-  const { profileData } = useSelector((state) => state.profileReducer);
+
 
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   const TabIcons = [

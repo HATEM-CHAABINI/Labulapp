@@ -48,7 +48,7 @@ export default class Switch extends Component {
       dirsign = 1;
     }
     if (this.state.activeSwitch === 1) {
-      this.setState({ activeSwitch: 2 }, () => onValueChange(this.state.activeSwitch));
+      this.setState({ activeSwitch: 2 }, () => { onValueChange(this.state.activeSwitch) });
 
       Animated.timing(this.state.offsetX, {
         toValue: (this.props.switchWidth - this.props.switchHeight) * dirsign,
@@ -72,6 +72,8 @@ export default class Switch extends Component {
           activeOpacity={1}
           onPress={() => {
             this._switchThump(this.props.switchdirection || this.state.direction);
+            // console.log(this.state)
+            this.props.setstate(this.state.activeSwitch)
           }}>
           <View
             style={[

@@ -13,7 +13,7 @@ const ProfileModalHeader = (props) => {
       onLeftPress={() => props.onCancelPress()}
       onRightPress={() => props.onFinishPress()}
       rightTxtStyle={styles.rightTxt}
-
+      loading={props.loading}
     />
   );
 };

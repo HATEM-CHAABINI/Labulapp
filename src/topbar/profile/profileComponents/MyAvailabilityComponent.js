@@ -11,8 +11,7 @@ import User from '../../../model/user/User';
 import { feedbackIcons } from '../../../constants/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { updateProfile } from '../../../redux/actions/profile';
+
 const ProfileNameComponent = (props) => {
   const [value, setvalue] = useState(props.value)
 

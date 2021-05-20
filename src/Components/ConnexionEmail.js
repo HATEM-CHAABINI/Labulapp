@@ -35,7 +35,7 @@ import auth, { firebase } from "@react-native-firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addLogin } from '../redux/actions/login';
 import firestore from '@react-native-firebase/firestore';
-import { updateUserProfile } from '../services/firebase'
+import { getUserProfile } from '../services/firebase'
 import { addProfile } from '../redux/actions/profile';
 let fireKey = firestore().collection("users");
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -67,7 +67,7 @@ export default ({ navigation }) => {
         // auth().signOut()
       }
       else {
-        updateUserProfile(response.user.uid).then((res) => {
+        getUserProfile(response.user.uid).then((res) => {
           dispatch(addProfile(res))
         })
       }

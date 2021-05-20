@@ -104,7 +104,7 @@ import { useSelector } from 'react-redux';
 import InscriptionMdp from '../Components/InscriptionMdp';
 import auth, { firebase as fire } from '@react-native-firebase/auth';
 import { firebase } from '../setup';
-import { updateUserProfile } from '../services/firebase'
+import { getUserProfile } from '../services/firebase'
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../redux/actions/profile';
@@ -119,14 +119,14 @@ export default () => {
 
   useEffect(() => {
     let user = auth().currentUser;
-    updateUserProfile(user.uid)
+
     if (user) {
-      updateUserProfile(user.uid).then((res) => {
-        console.log(res)
+      getUserProfile(user.uid).then((res) => {
+
         dispatch(addProfile(res))
       })
     }
-    updateUserProfile()
+
   }, [profilechange])
 
   function onResult(QuerySnapshot) {
@@ -190,6 +190,11 @@ export default () => {
           key="friendsFilter"
           hideNavBar
           component={FriendsFilterScreen}
+        />
+        <Scene
+          key="MotdePasseOublie"
+          hideNavBar
+          component={MotdePasseOublie}
         />
         <Scene
           key="inputLocation"

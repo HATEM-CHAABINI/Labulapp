@@ -18,8 +18,9 @@ const ProfileCommonTextInput = (props) => {
         onFocus={() => setOnFocus(true)}
         onBlur={() => setOnFocus(false)}
         multiline={true}
-        value={value}
-        onChangeText={(text) => setValue(text)}
+        value={props.value}
+        onChangeText={props.onChangeText}
+        onChange={props.onChangeText}
         selectionColor="#40CDDE"
         keyboardType={props.keyboardType || 'default'}
       />

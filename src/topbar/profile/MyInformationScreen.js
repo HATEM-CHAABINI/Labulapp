@@ -1,56 +1,88 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, ScrollView } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import ProfileInformationListItem from '../../adapter/ProfileInformationListItem';
+import MyEmailComponent from '../profile/InformationComponents/MyEmailComponent'
 import CommonText from '../../text/CommonText';
 import ProfileCommonHeader from '../../Components/header/ProfileCommonHeader';
 import ProfileCommonModal from '../../Components/other/ProfileCommonModal';
 import { Actions } from 'react-native-router-flux';
-
+import MypasswordComponent from '../profile/InformationComponents/MypasswordComponent'
+import MyMobileComponent from '../profile/InformationComponents/MyMobileComponent'
+import MyAddressComponent from '../profile/InformationComponents/MyAddressComponent'
+import { updateUserProfile, getUserProfile } from '../../services/firebase'
+import { useDispatch } from 'react-redux'
+import { addProfile, updateProfile } from '../../redux/actions/profile';
 const MyInformationScreen = (props) => {
+  const dispatch = useDispatch()
   const [inputItemKey, setInputItemKey] = useState(1);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [userProfile, setUserProfile] = useState(props.userProfile);
+  const [loading, setloading] = useState(false);
+  const [emailModalVisible, setemailModalVisible] = useState(false);
+  const [passwordModalVisible, setpasswordModalVisible] = useState(false);
+  const [mobileModalVisible, setmobileModalVisible] = useState(false);
+  const [addressModalVisible, setaddressModalVisible] = useState(false);
+  const [profileData, setprofileData] = useState(props.firbaseInfo);
+  const [currentData, setcurrentData] = useState({ mobile: profileData.mobile === undefined || profileData.mobile === '' ? ' ' : profileData.mobile, address: profileData.address === undefined || profileData.address === '' ? ' ' : profileData.address })
+  console.log(profileData)
+  useEffect(() => {
+
+    getUserProfile(profileData.uid).then(res => {
+      setprofileData(() => res)
+    })
+
+  }, [currentData])
+
+  const updateDate = () => {
+    setloading(true)
+    updateUserProfile(profileData.uid, currentData).then(res => {
+      setloading(false)
+      getUserProfile(profileData.uid).then(res => {
+        dispatch(updateProfile(res))
+        // Actions.pop()
+      })
+    })
+  }
+
   return (
-    <ProfileCommonHeader title="Mes informations" onCancel={() => Actions.pop()} onFinish={() => Actions.pop()} >
+    <ProfileCommonHeader title="Mes informations" onCancel={() => Actions.pop()} onFinish={() => updateDate()} loading={loading}>
       {/* <ProfileCommonHeader title="Mes informations" onCancel={() => Actions.pop()} onFinish={() => Actions.pop()} /> */}
       <Text style={styles.itemTitle} >Connexion et sécurité</Text>
       <ProfileInformationListItem
         caption={'Mon email'}
-        value={userProfile.email}
+        value={profileData.email}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(1);
-          setModalVisible(!modalVisible);
+          setemailModalVisible(!emailModalVisible);
         }}
       />
       <ProfileInformationListItem
         caption={'Modifier mot de passe'}
-        value={'...........'}
+        value={'************'}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(2);
-          setModalVisible(!modalVisible);
+          setpasswordModalVisible(!passwordModalVisible);
         }}
       />
       <Text style={styles.itemTitle} >Contact</Text>
       <ProfileInformationListItem
         caption={'Mon mobile'}
-        value={'+590 6 90 874 258'}
+        value={currentData.mobile && currentData.mobile !== undefined ? currentData.mobile : ''}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(3);
-          setModalVisible(!modalVisible);
+          setmobileModalVisible(!mobileModalVisible);
         }}
       />
       <Text style={styles.itemTitle} >Localisation</Text>
       <ProfileInformationListItem
         caption={'Mon adresse'}
-        value={'ABYMES 97139\nGuadeloupe'}
+        value={currentData.address && currentData.address !== undefined ? currentData.address : ''}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(4);
-          setModalVisible(!modalVisible);
+          setaddressModalVisible(!addressModalVisible);
         }}
       />
       <CommonText
@@ -59,11 +91,45 @@ const MyInformationScreen = (props) => {
         }
         style={styles.notice}
       />
-      <ProfileCommonModal
-        visible={modalVisible}
+      <MyEmailComponent
+        visible={emailModalVisible}
         itemKey={inputItemKey}
+        heading={"Mon email"}
+        value={profileData.email}
         onPress={() => {
-          setModalVisible(false);
+          setemailModalVisible(false)
+        }}
+        onChange={(profile) => { }}
+      />
+      <MypasswordComponent
+        visible={passwordModalVisible}
+        itemKey={inputItemKey}
+        heading={"Mon mot de passe"}
+        value={''}
+        onPress={() => {
+          setpasswordModalVisible(false)
+        }}
+        onChange={(profile) => { }}
+      />
+      <MyMobileComponent
+        visible={mobileModalVisible}
+        itemKey={inputItemKey}
+        heading={"Mon mobile"}
+        value={currentData}
+        setcurrentData={(val) => setcurrentData(() => val)}
+        onPress={() => {
+          setmobileModalVisible(false)
+        }}
+        onChange={(profile) => { }}
+      />
+      <MyAddressComponent
+        visible={addressModalVisible}
+        itemKey={inputItemKey}
+        heading={"Ma localisation"}
+        value={currentData}
+        setcurrentData={(val) => setcurrentData(() => val)}
+        onPress={() => {
+          setaddressModalVisible(false)
         }}
         onChange={(profile) => { }}
       />

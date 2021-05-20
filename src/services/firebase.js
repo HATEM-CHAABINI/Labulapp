@@ -2,7 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from "@react-native-firebase/auth";
 let fireKey = firestore().collection("users");
 
-export const updateUserProfile = (id) => {
+export const getUserProfile = (id) => {
     // const dispatch = useDispatch()
 
     return firestore().collection('users').doc(id).get().then((snapshot) => {
@@ -11,6 +11,13 @@ export const updateUserProfile = (id) => {
 
 }
 
+export const updateUserProfile = (id, data) => {
+    return firestore().collection('users').doc(id).update(data).then((res) => {
+        return true
+    }).catch((error) => {
+        return { error: error }
+    })
+}
 
 export const getassest = () => {
     firestore().collection('assets').doc("123").get().then((res) => {
@@ -60,12 +67,23 @@ export const verifyUserEmail = async (email) => {
     return auth().sendEmailVerification()
         .then((res) => {
             return "Verification mail send"
-            // console.log("verification response ", res)
         })
         .catch((error) => {
-            console.log("verification  ", error)
+
             return { error: 'somthing went wrong' }
         });
+
+}
+
+export const changeEmail = async (email) => {
+    var user = auth().currentUser;
+
+    user.updateEmail(email).then((res) => {
+        return res
+    }).catch((error) => {
+        return { error: error }
+    });
+
 
 }
 

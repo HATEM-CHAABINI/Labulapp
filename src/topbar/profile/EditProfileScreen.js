@@ -20,7 +20,7 @@ import MyAvailabilityComponent from './profileComponents/MyAvailabilityComponent
 import MyPresentationComponent from './profileComponents/MyPresentationComponent'
 import MyskillComponents from './profileComponents/MyskillComponents'
 import { useSelector } from 'react-redux';
-import { updateUserProfile, getassest, deleteUser, deleteUserData } from '../../services/firebase'
+import { getUserProfile, getassest, deleteUser, deleteUserData } from '../../services/firebase'
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../../redux/actions/profile';
 
@@ -66,8 +66,8 @@ const EditProfileScreen = (props) => {
       profilePic: profileData.profilePic === undefined ? '' : profileData.profilePic,
       firstName: profileData.firstName,
       lastName: profileData.lastName,
-      availability: profileData.availability === undefined ? 'Ajoute ta disponiblité' : profileData.availability,
-      presentation: profileData.presentation === undefined ? 'Salut ! Je suis …\nPrésente toi ici. Ce texte sera affiché pour vous invitations et apparaitra sur ta page profil. Soit court, avent et efficace. Vivons ensemble !' : profileData.presentation,
+      availability: profileData.availability === undefined ? '' : profileData.availability,
+      presentation: profileData.presentation === undefined ? '' : profileData.presentation,
       skill: profileData.skill
     })
 
@@ -78,7 +78,7 @@ const EditProfileScreen = (props) => {
       'Choisissez l\'option que vous aimez',
       [
         { text: 'Annuler', onPress: () => { }, style: 'cancel' },
-        { text: 'Choisissez parmis gallary.', onPress: () => choosePhotoFromLibreary() },
+        { text: 'Choisissez parmi gallary.', onPress: () => choosePhotoFromLibreary() },
         { text: 'Cliquez sur une image.', onPress: () => takePhotoFromCamera() },
       ],
       { cancelable: true }
@@ -157,7 +157,7 @@ const EditProfileScreen = (props) => {
       })
 
     setTimeout(() => {
-      updateUserProfile(auth().currentUser.uid).then((res) => {
+      getUserProfile(auth().currentUser.uid).then((res) => {
 
         dispatch(addProfile(res))
         setloadingSet(false)

@@ -190,18 +190,11 @@ const EditProfileScreen = (props) => {
                         { text: 'OK', onPress: () => { dispatch(addProfile('')) } },
                       ]
                     );
-
-
                 })
               }
             })
-
-
-
           }
-        },
-      ]
-    );
+        },]);
   }
 
 

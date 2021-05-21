@@ -13,7 +13,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { updateUserProfile } from '../../../services/firebase'
 import auth from '@react-native-firebase/auth'
-import { addProfile } from '../../../redux/actions/profile';
+import { addProfile, updateProfile } from '../../../redux/actions/profile';
 import { useDispatch } from 'react-redux';
 const insertInformations = [
     { title: 'Mon email', inputTexts: [{ commentInput: 'Mon email', value: 'mathieu@labul.com' }] },
@@ -114,13 +114,11 @@ export default (props) => {
 
                             Alert.alert(
                                 "Succès",
-                                "Merci pour votre inscription. Un e-mail envoyé à votre adresse e-mail avec un lien de vérification, veuillez cliquer sur le lien pour vérifier votre adresse e-mail",
+                                "Un e-mail envoyé à votre adresse e-mail avec le lien de vérification, veuillez cliquer sur le lien pour vérifier votre adresse e-mail",
                                 [
                                     {
                                         text: "OK", onPress: () => {
-                                            auth()
-                                                .signOut()
-                                                .then(() => { dispatch(addProfile('')), console.log('User signed out!'), setloading(false) }).catch((e => { setloading(false), console.log(e), dispatch(addProfile('')) }));
+                                            dispatch(updateProfile(data)), setloading(false)
                                         }
                                     }
                                 ]
@@ -177,7 +175,7 @@ export default (props) => {
                 onCancelPress={() => props.onPress()}
                 onFinishPress={() => Alert.alert(
                     "Changer l'e-mail",
-                    `Voulez-vous vraiment changer votre adresse e-mail en ${formik.values.email}? vous serez déconnecté?`,
+                    `Voulez-vous vraiment changer votre adresse e-mail en ${formik.values.email}?`,
                     [
                         {
                             text: "Cancel",

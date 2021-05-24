@@ -1,5 +1,5 @@
-import  React,{useState,useEffect} from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, ImageBackground, Text,ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, Image, ImageBackground, Text, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FriendsNavigator from './FriendsNavigator';
@@ -24,7 +24,7 @@ import {
 import MabulHomeScreen from '../Mabul/MabulHomeScreen';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-
+import { useSelector } from 'react-redux'
 const Tab = createBottomTabNavigator();
 
 const myPhoto = require('../assets/images/tab_profile_off.png');
@@ -109,10 +109,10 @@ const MainTabBar = ({ state, descriptors, navigation, data }) => {
           });
         };
         if (route.name === 'MyNotifictions') {
-          return <View  key={route.key}></View>   ;
+          return <View key={route.key}></View>;
         }
         if (route.name === 'ProProfile') {
-          return           <View  key={route.key}></View>          ;
+          return <View key={route.key}></View>;
         }
         return (
           <View key={route.key}>
@@ -129,9 +129,8 @@ const MainTabBar = ({ state, descriptors, navigation, data }) => {
                 <View
                   style={[styles.photoWrapper, { overflow: 'hidden', borderColor: isFocused || state.index === 5 ? '#4BD8E9' : '#ffffff' }]}>
                   {/* {data.profilePic === '' ?<ActivityIndicator  size='small'color='#000'/>:<Image source={state.index === 5 ? proPhoto : {uri:data.profilePic}} style={styles.TapImage} />} */}
-
-                  {data.profilePic === '' ? <ActivityIndicator size='small' color='#000' /> : <ProfileCommonAvatar
-                    icon={state.index === 5 ? proPhoto : data.profilePic === undefined || data.profilePic === null ? '' : { uri: data.profilePic }}
+                  {data.profilePic === null && data.profilePic === '' ? <ActivityIndicator size='small' color='#000' /> : <ProfileCommonAvatar
+                    icon={data.profilePic === '' || data.profilePic === null ? '' : { uri: data.profilePic }}
                     style={styles.TapImage}
                     fullName={data.firstName + ' ' + data.lastName}
                     logoVisible={false}
@@ -158,20 +157,30 @@ const MainTabBar = ({ state, descriptors, navigation, data }) => {
 
 export default (props) => {
   // const [lodaing, setlodaing] = useState(true)
-  const [data, setdata] = useState({profilePic :'',firstName:'',lastName:''})
+  const { profileData } = useSelector((state) => state.profileReducer);
+  const [data, setdata] = useState({
+    profilePic: profileData.profilePic !== undefined && profileData.profilePic !== null ? profileData.profilePic : '',
+    firstName: profileData.firstName !== undefined && profileData.firstName !== null ? profileData.firstName : '',
+    lastName: profileData.lastName !== undefined && profileData.lastName !== null ? profileData.lastName : '',
+  })
 
-  const updateUserProfile = () =>{
-    let user = auth().currentUser;
-  
-      firestore().collection('users').doc(user.uid).get().then((snapshot)=>{
-        setdata(snapshot.data())
-     
-   });
-}
-useEffect(() => {
-  updateUserProfile()
-  
-}, [])
+  // const updateUserProfile = () => {
+  //   setdata({
+  //     profilePic: profileData.profilePic !== undefined && profileData.profilePic !== null ? profileData.profilePic : '',
+  //     firstName: profileData.firstName !== undefined && profileData.firstName !== null ? profileData.firstName : '',
+  //     lastName: profileData.lastName !== undefined && profileData.lastName !== null ? profileData.lastName : '',
+  //   })
+  //   // let user = auth().currentUser;
+
+  //   // firestore().collection('users').doc(user.uid).get().then((snapshot) => {
+  //   //   setdata(snapshot.data())
+
+  //   // });
+  // }
+  // useEffect(() => {
+
+
+  // }, [])
 
   return (
     <View style={styles.TabBarMainContainer}>

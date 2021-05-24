@@ -6,6 +6,8 @@ import { FlatList } from 'react-native';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
 import {
   ChildCare,
   SupportChildren,
@@ -36,14 +38,17 @@ const needItems = [
   { id: 6, itemName: 'Administrative', icon: MealPreparation(iconSize) },
 ];
 
-const MabulFamilyNeedScreen = () => {
+const MabulFamilyNeedScreen = (props) => {
+  const dispatch = useDispatch()
+  // const { demandData } = useSelector((state) => state.demandReducer);
+
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}
       style={styles.listItem}
       subText={item.subName}
       icon={item.icon}
-      onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'need', process: 40 })}
+      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'need', process: 40, }) }}
     />
   );
   return (
@@ -65,8 +70,8 @@ const styles = {
     backgroundColor: '#ffffff',
     // marginTop: 16 * em,
   },
-  header: { 
-    
+  header: {
+
     height: '12.45%',
 
   },

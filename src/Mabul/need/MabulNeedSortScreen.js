@@ -1,11 +1,13 @@
 import React from 'react';
-import { View,FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm, WIDTH } from '../../constants/consts';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import { NeedDaily, NeedFamily } from '../../assets/svg/icons';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
 const iconSize = { width: 38 * em, height: 38 * em };
 const needItems = [
   {
@@ -28,20 +30,22 @@ const needItems = [
   },
 ];
 const MabulNeedSortScreen = (props) => {
+
+  const dispatch = useDispatch()
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}
       style={styles.listItem}
       subText={item.subName}
       icon={item.icon}
-      onPress={() => item.onPress()}
+      onPress={() => { item.onPress(), item.id === 0 ? dispatch(update_into_demand({ belongsTo: { name: "family", id: item.id } })) : dispatch(update_into_demand({ belongsTo: { name: "dailyUse", id: item.id } })) }}
     />
   );
   return (
     <View style={styles.container}>
-    <MabulCommonHeader style={styles.header} percent={props.process}         isNoBackBtn={false}
- progressBarColor={'#38C2FF'} />
-   
+      <MabulCommonHeader style={styles.header} percent={props.process} isNoBackBtn={false}
+        progressBarColor={'#38C2FF'} />
+
       <View style={styles.body}>
         <TitleText text={'J’ai besoin\n' + props.title} style={styles.title} />
         <View style={styles.popView}>

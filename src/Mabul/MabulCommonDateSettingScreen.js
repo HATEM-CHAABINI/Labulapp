@@ -1,5 +1,5 @@
-import React , { useState } from 'react';
-import { View, Image ,Switch,KeyboardAvoidingView} from 'react-native';
+import React, { useState } from 'react';
+import { View, Image, Switch, KeyboardAvoidingView, ScrollView, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import TitleText from '../text/TitleText';
 import { em, hm, hexToRGB, mabulColors } from '../constants/consts';
 import CommentText from '../text/CommentText';
@@ -12,12 +12,84 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Moment from 'moment';
 import Reinput from "reinput"
 import { Header } from 'react-native/Libraries/NewAppScreen';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../redux/actions/demand'
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
+import Geocoder from 'react-native-geocoding';
+import Geolocation from 'react-native-geolocation-service';
 
+/////////                 HERE GOES API KEY
+Geocoder.init("########################");
+//////////
 const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
+  const dispatch = useDispatch()
+  const { demandData } = useSelector((state) => state.demandReducer);
   const conceptColor = mabulColors[mabulService];
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isEndDatePickerVisible, setisEndDatePickerVisible] = useState(false);
   const [isDate, setDate] = useState(new Date());
+  const [isEndDate, setisEndDate] = useState('');
   const [isSwitch, setSwitch] = useState(false);
+  const [showEndDataView, setshowEndDataView] = useState(false)
+  const [loading, setloading] = useState(false)
+  const initialValues = {
+    address: ''
+  };
+  const validationSchema = Yup.object({
+
+    address: Yup.string()
+      .required('Obligatoire')
+    ,
+  });
+  const getlocation = () => {
+    setloading(() => true)
+    Geolocation.getCurrentPosition(
+      (position) => {
+
+
+        Geocoder.from(position.coords.latitude, position.coords.longitude)
+          .then(json => {
+            var addressComponent = json.results[0].formatted_address;
+
+            formik.setFieldValue('address', addressComponent)
+            setloading(() => false)
+          })
+          .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
+      },
+      (error) => {
+        setloading(() => false)
+        console.log(error.code, error.message);
+
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+  }
+  const onSubmit = values => {
+
+    let value = {}
+    if (isSwitch) {
+      value = { demandStartDate: isDate, demandEndData: '', address: values.address }
+    } else {
+      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address }
+    }
+
+    dispatch(update_into_demand(value))
+    mabulService === 'give'
+      ? Actions.mabulCommonShare({ mabulService: mabulService, process: 97 })
+      : mabulService === 'sell'
+        ? Actions.mabulCommonShare({ mabulService: mabulService, process: 93 })
+        : mabulService === 'organize'
+          ? Actions.mabulOrganizeParticipation({ mabulService: mabulService, process: 80 })
+          : Actions.mabulCommonParticipate({ mabulService: mabulService, process: 80 });
+
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+
   const toggleSwitch = () => setSwitch(previousState => !previousState);
 
   var iconDate = (
@@ -35,15 +107,15 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
       source={require('../assets/images/ic_location_green.png')}
     />
   );
+
   var switchView = (
-
-
     <Switch
-    trackColor={{ true: conceptColor }}
+      trackColor={{ true: conceptColor, false: 'grey' }}
       onValueChange={toggleSwitch}
-        value={isSwitch}
+      value={isSwitch}
     />
   );
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -53,104 +125,116 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   };
 
   const handleConfirm = (date) => {
-    
     setDate(date)
-    // console.warn("A date has been picked: ", isDate);
     hideDatePicker();
   };
+  const hideendDatePicker = () => {
+    setisEndDatePickerVisible(false);
+  };
+  const handleEndConfirm = (date) => {
+    setisEndDate(date);
+    hideendDatePicker();
 
-  // Moment.locale('fr');
-  
-  // console.warn(Moment(isDate).format('DD MMMM YYYY-HH:MM'));
+  };
+  const showEndDatePicker = () => {
+    setisEndDatePickerVisible(true);
+  };
+
+
+
 
   return (
 
-    <View  style={{ flex: 1,    backgroundColor: 'red',zIndex: 999,
-  }}>
-    <MabulCommonHeader style={[styles.header,{zIndex: 999,backgroundColor: '#ffffff',}]} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
+    <View style={{
+      flex: 1, backgroundColor: '#ffffff', zIndex: 999,
+    }}>
+      <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} />
 
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-      
-    >
-    
-       <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="datetime"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
-      <View style={styles.body}>
-        <View style={{    justifyContent: 'flex-end',}}>
-          <TitleText text={'Quand ?'} style={styles.title} />
-          <CommentText text="Choisis une date si nécessaire" style={styles.comment} />
-          <CommonListItem
-            icon={iconDate}
-            title="Date et heure de début"
-            subTitle={Moment(isDate).format('DD MMMM YYYY-HH:MM')}
-            subTitleStyle={styles.listComment}
-            titleStyle={styles.listCaption}
-            onPress={showDatePicker}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+
+      >
+        <ScrollView>
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="datetime"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
           />
-          
-          <View style={styles.line} />
-          <CommentText style={styles.addDateText} text="+ Date et heure de fin" color={conceptColor} />
-          <CommonListItem title="Pas de date" rightView={switchView}style={styles.addDateText} />
-          <TitleText text={'Lieu'} style={styles.title} />
-          <CommentText text="Choisis un adresse si besoin" style={styles.comment} />
-          
-          
-          
-          {/* <CommonListItem
-            icon={iconLocation}
-            style={styles.listItem}
-            title="Rue, adresse, ville"
-            titleStyle={[styles.listCaption, { fontSize: 16 * em, lineHeight: 18 * em, color: '#6A8596' }]}
+          <DateTimePickerModal
+            isVisible={isEndDatePickerVisible}
+            mode="datetime"
+            minimumDate={new Date()}
+            onConfirm={handleEndConfirm}
+            onCancel={hideendDatePicker}
           />
+          <View style={styles.body}>
+            <View style={{ justifyContent: 'flex-end', }}>
+              <TitleText text={'Quand ?'} style={styles.title} />
+              <CommentText text="Choisis une date si nécessaire" style={styles.comment} />
+              <View style={{ marginVertical: 20 }}>
+                <CommonListItem
+                  icon={iconDate}
+                  title="Date et heure de début"
+                  subTitle={Moment(isDate).format('DD MMMM YYYY-HH:MM')}
+                  subTitleStyle={styles.listComment}
+                  titleStyle={styles.listCaption}
+                  onPress={showDatePicker}
+                />
+                <View style={styles.line} />
+              </View>
+              {showEndDataView ? <View style={{ marginVertical: 20 }}>
+                <CommonListItem
+                  icon={iconDate}
+                  title="Date et heure de fin"
+                  subTitle={isEndDate === '' ? ' ' : Moment(isEndDate).format('DD MMMM YYYY-HH:MM')}
+                  subTitleStyle={styles.listComment}
+                  titleStyle={styles.listCaption}
+                  onPress={showEndDatePicker}
+                />
+                <View style={styles.line} />
+              </View> : null}
 
 
-          
-          <View style={[styles.line, { marginTop: 13 * em }]} />
-          
-          <CommonListItem
-            style={styles.listAddLocation}
-            titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}
-            icon={iconAddress}
-            title="Utiliser ma position"
-          /> */}
-<Reinput 
-label='Rue, adresse, ville'
-icon={iconLocation}
-underlineColor="#BFCDDB"
- activeColor={conceptColor}
-labelActiveColor="#6A8596"
-labelColor="#6A8596"
-paddingBottom={25*em}
- 
- />
-          <CommonListItem
-            style={{marginLeft: 37 * em,bottom:20*em}}
-            titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}
-            icon={iconAddress}
-            title="Utiliser ma position"
-          />
-        </View>
-        <MabulNextButton
-          color={hexToRGB(conceptColor, 0.5)}
-          style={styles.nextBtn}
-          onPress={() => {
-            mabulService === 'give'
-              ? Actions.mabulCommonShare({ mabulService: mabulService, process: 97 })
-              : mabulService === 'sell'
-              ? Actions.mabulCommonShare({ mabulService: mabulService, process: 93 })
-              : mabulService === 'organize'
-              ? Actions.mabulOrganizeParticipation({ mabulService: mabulService, process: 80 })
-              : Actions.mabulCommonParticipate({ mabulService: mabulService, process: 80 });
-          }}
-        />
-      </View>
-    </KeyboardAvoidingView>
+
+              {!showEndDataView ? <CommentText style={styles.addDateText} onPress={() => setshowEndDataView(true)} text="+ Date et heure de fin" color={conceptColor} /> : null}
+              <CommonListItem title="Pas de date" rightView={switchView} style={styles.addDateText} />
+              <TitleText text={'Lieu'} style={styles.title} />
+              <CommentText text="Choisis un adresse si besoin" style={styles.comment} />
+
+              <Reinput
+                label='Rue, adresse, ville'
+                icon={iconLocation}
+                underlineColor="#BFCDDB"
+                activeColor={conceptColor}
+                labelActiveColor="#6A8596"
+                labelColor="#6A8596"
+                paddingBottom={25 * em}
+                value={formik.values.address}
+
+                onBlur={formik.handleBlur('address')}
+                onChangeText={formik.handleChange('address')} />
+              {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
+
+              {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * em }} color={conceptColor} size={'small'} />
+                : <CommonListItem
+                  style={{ marginLeft: 37 * em, bottom: 20 * em }}
+                  titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}
+                  icon={iconAddress}
+                  title="Utiliser ma position"
+                  onPress={() => { getlocation() }}
+                />}
+            </View>
+            <MabulNextButton
+              color={hexToRGB(conceptColor)}
+              style={styles.nextBtn}
+              onPress={formik.handleSubmit}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+
     </View>
   );
 };
@@ -159,12 +243,12 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    
+
   },
   header: {
     height: '12.45%',
     // marginTop: 15 * hm,
-     
+
     //  height: '10.3%',
     //  marginTop: 16 * hm,
   },
@@ -173,12 +257,18 @@ const styles = {
     paddingHorizontal: 30 * em,
     justifyContent: 'space-between',
   },
+  descerrorText: {
+    fontSize: 12 * em,
+    bottom: 30 * hm,
+    left: 40 * hm,
+    color: "red",
+  },
   title: {
     textAlign: 'left',
     marginTop: 14 * hm,
     lineHeight: 38 * em,
   },
-  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * hm,marginBottom:23*hm },
+  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * hm, marginBottom: 23 * hm },
 
   iconDate: { width: 19 * em, height: 20 * em, marginRight: 15 * em, marginTop: 9 * em },
   iconLocation: { width: 21 * em, height: 30 * em, marginRight: 15 * em },
@@ -192,7 +282,7 @@ const styles = {
     marginTop: 10 * hm,
     textAlign: 'left',
     marginLeft: 36 * em,
-    marginBottom:20*hm
+    marginBottom: 20 * hm
   },
   nextBtn: {
     alignSelf: 'flex-end',

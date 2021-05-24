@@ -6,11 +6,11 @@ import { Actions } from 'react-native-router-flux';
 import { MabulCancel } from '../assets/svg/icons';
 
 const MabulHomeScreen = (props) => {
-  console.log("prrroooooooosss");
-  console.log(props);
-  console.log("prrroooooooosss");
-  const { navigation } = props;
 
+
+
+  const { navigation } = props;
+  console.log(props);
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#40cdde" barStyle="light-content" />
@@ -51,10 +51,13 @@ const MabulHomeScreen = (props) => {
             }}
           />
         </View>
-        <TouchableOpacity onPress={props.onClosePress} style={{    shadowColor: '#0C15233D',
-            shadowOffset: {      width: 0,      height: 16 * hm,
-            },shadowOpacity:1,
-            shadowRadius: 24 * em,}}>
+        <TouchableOpacity onPress={props.onClosePress} style={{
+          shadowColor: '#0C15233D',
+          shadowOffset: {
+            width: 0, height: 16 * hm,
+          }, shadowOpacity: 1,
+          shadowRadius: 24 * em,
+        }}>
           <MabulCancel style={styles.closeButton} />
         </TouchableOpacity>
       </View>
@@ -70,9 +73,9 @@ const styles = {
     paddingBottom: 16 * em,
     opacity: 0.9,
   },
-  logoContainer: { flex: 0.5, width: '100%', alignItems: 'center', justifyContent: 'center',paddingBottom:100 },
+  logoContainer: { flex: 0.5, width: '100%', alignItems: 'center', justifyContent: 'center', paddingBottom: 100 },
   logoImage: { width: 84 * em, resizeMode: 'contain' },
-  logoLabel: { width: 125 * em, resizeMode: 'contain', marginTop: 18 * em ,PaddingBottom:100},
+  logoLabel: { width: 125 * em, resizeMode: 'contain', marginTop: 18 * em, PaddingBottom: 100 },
   buttonsContainer: {
     flex: 0.5,
     width: '100%',

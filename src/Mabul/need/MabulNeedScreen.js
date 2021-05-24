@@ -1,23 +1,28 @@
 import React from 'react';
-import { View ,FlatList} from 'react-native';
+import { View, FlatList } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm, WIDTH } from '../../constants/consts';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand } from '../../redux/actions/demand'
 const needItems = [
   { id: 0, itemName: 'Coup de main' },
   { id: 1, itemName: 'Service' },
   { id: 2, itemName: 'Outil' },
 ];
+
 const MabulNeedScreen = (props) => {
+  const dispatch = useDispatch()
+
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}
       style={styles.listItem}
       icon={item.icon}
       onPress={() => {
+        dispatch(add_into_demand({ type: item }))
         Actions.mabulNeedSort({ title: item.itemName, process: 11.2 });
       }}
     />
@@ -25,7 +30,7 @@ const MabulNeedScreen = (props) => {
   return (
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={props.process} noBackButton progressBarColor={'#38C2FF'} />
-    
+
       <View style={styles.body}>
         <TitleText text={'J’ai besoin'} style={styles.title} />
         <FlatList data={needItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />

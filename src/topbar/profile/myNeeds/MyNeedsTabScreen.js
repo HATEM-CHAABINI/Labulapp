@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { em, hm } from '../../../constants/consts';
 import { FlatList } from 'react-native';
@@ -11,6 +11,11 @@ import User from '../../../model/user/User';
 import OrganizeServiceType from '../../../model/service/OrganizeServiceType';
 import ServiceType from '../../../model/service/ServiceType';
 import NeedStatusType from '../../../model/service/NeedStatusType';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth'
+let currentUser = auth().currentUser
+
+// console.log(hh)
 
 const needsLists = [
   Object.assign(
@@ -51,6 +56,29 @@ const needsLists = [
   ),
 ];
 const MyNeedsTabScreen = () => {
+
+  const [data, setdata] = useState([])
+  const getData = async (imageArray) => {
+
+
+    await Promise.all(
+      firestore().collection('userDemands').doc(auth().currentUser.uid).collection('Need').get().then(async (snapshot) => {
+
+
+        let data = await snapshot._docs.map((val) => {
+          return val._data
+        })
+        setdata(data)
+      })
+    );
+  };
+  useEffect(() => {
+    getData()
+  }, [])
+
+
+
+
   const renderFlatList = ({ item, index }) => (
     <ProfileCommonNeedCard
       data={item}

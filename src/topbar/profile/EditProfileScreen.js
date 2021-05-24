@@ -111,7 +111,7 @@ const EditProfileScreen = (props) => {
   const uploadeImage = async (img) => {
     setloading(true)
     try {
-      const childPath = `users/${auth().currentUser.uid}/profilePic/0}`
+      const childPath = `users/${auth().currentUser.uid}/profilePic/0`
       const response = await fetch(img)
       const blob = await response.blob()
       const task = storage().ref().child(childPath).put(blob);

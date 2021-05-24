@@ -1,10 +1,12 @@
 import React from 'react';
-import { View ,FlatList} from 'react-native';
+import { View, FlatList } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, HEIGHT, WIDTH } from '../../constants/consts';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
 import {
   HouseWork,
   BricologeIcon,
@@ -32,13 +34,14 @@ const needItems = [
 ];
 
 const MabulDailyNeedScreen = () => {
+  const dispatch = useDispatch()
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}
       style={styles.listItem}
       subText={item.subName}
       icon={item.icon}
-      onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'need', process: 40 })}
+      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'need', process: 40 }) }}
     />
   );
   return (

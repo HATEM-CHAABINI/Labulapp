@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import TitleText from '../text/TitleText';
 import { em, mabulColors, hm, hexToRGB } from '../constants/consts';
@@ -8,9 +8,19 @@ import { Actions } from 'react-native-router-flux';
 import MabulNextButton from '../Components/button/MabulNextButton';
 import { TextInput } from 'react-native-gesture-handler';
 import { KeyboardAvoidingView } from 'react-native';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 const MabulCommonParticipateScreen = (props) => {
+  const dispatch = useDispatch()
+  const { demandData } = useSelector((state) => state.demandReducer);
+  const [participatents, setparticipatents] = useState('')
+
   const conceptColor = mabulColors[props.mabulService];
+  const onSubmit = () => {
+    // console.log(participatents)
+    dispatch(update_into_demand({ participatents: participatents }))
+    Actions.mabulCommonShare({ mabulService: props.mabulService, process: 93 });
+  }
   return (
     <View style={styles.container}>
       <MabulCommonHeader
@@ -23,23 +33,24 @@ const MabulCommonParticipateScreen = (props) => {
         <View>
           <TitleText text={'Participants'} style={styles.title} />
           <CommentText text="Combien de personnes peuvent participer dans votre demande ?" style={styles.comment} />
-          <TextInput               keyboardType="number-pad"
- style={styles.input} placeholder="0" selectionColor={conceptColor} />
+          <TextInput keyboardType="number-pad"
+            style={styles.input} placeholder="0" selectionColor={conceptColor} value={participatents} onChangeText={(value) => { setparticipatents(value) }} onChange={(value) => { setparticipatents(value) }} />
         </View>
 
         <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ alignItems: 'center', marginBottom: 50 * hm }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 105*hm : 105*hm}
-      >
-        <MabulNextButton
-          color={hexToRGB(conceptColor, 0.5)}
-          style={styles.nextBtn}
-          onPress={() => {
-            Actions.mabulCommonShare({ mabulService: props.mabulService, process: 93 });
-          }}
-        />
-                      </KeyboardAvoidingView>
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ alignItems: 'center', marginBottom: 50 * hm }}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 105 * hm : 105 * hm}
+        >
+          <MabulNextButton
+            color={participatents.length <= 0 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
+            style={styles.nextBtn}
+            disabled={participatents.length <= 0 ? true : false}
+            onPress={() => {
+              onSubmit()
+            }}
+          />
+        </KeyboardAvoidingView>
 
       </View>
     </View>
@@ -93,9 +104,9 @@ const styles = {
     // marginBottom: 30 * hm,
   },
   input: {
-    
+
     fontSize: 49 * em,
-    marginTop:24*em,
+    marginTop: 24 * em,
 
     textAlign: 'center',
     color: '#A0AEB8',

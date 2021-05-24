@@ -5,7 +5,7 @@ import CommonText from '../../text/CommentText';
 
 const CommonMediumButton = (props) => {
     return (
-        <TouchableOpacity onPress={props.onPress} style={[styles.buttonStyle, props.style]}>
+        <TouchableOpacity onPress={props.onPress} style={[styles.buttonStyle, props.style]} disabled={props.disabled}>
             {props.leftIcon && <View style={[styles.iconStyle, props.iconStyle]}>{props.leftIcon}</View>}
             <CommonText text={props.text} style={[styles.textStyle, props.textStyle]} color={props.color} />
             {props.rightIcon && <View style={[styles.iconStyle, props.iconStyle]}>{props.rightIcon}</View>}

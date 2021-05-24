@@ -7,13 +7,21 @@ import MabulCommonHeader from './MabulCommonHeader';
 import CommonButton from '../Components/button/CommonButton';
 import { Family, Friend, Neighbor, All, CheckBlue } from '../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../redux/actions/demand'
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+
 const MabulCommonShareScreen = ({ mabulService, process }) => {
+  const dispatch = useDispatch()
+  const { demandData } = useSelector((state) => state.demandReducer);
   const conceptColor = mabulColors[mabulService];
   const [vchecked, setvChecked] = useState(false);
   const [achecked, setaChecked] = useState(false);
   const [fchecked, setfChecked] = useState(false);
   const [tchecked, settChecked] = useState(false);
-
+  const [contactType, setcontactType] = useState()
+  const [loadingSet, setloadingSet] = useState(false)
   const check = (id) => {
     setvChecked(false)
     setaChecked(false)
@@ -22,17 +30,44 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
     switch (id) {
       case 1:
         setaChecked(true)
+        setcontactType({ type: 2, name: 'mes amis' })
         break;
       case 2:
         setvChecked(true)
+        setcontactType({ type: 1, name: 'mes voisins' })
         break;
       case 3:
         setfChecked(true)
+        setcontactType({ type: 3, name: 'mes famille' })
         break;
       case 4:
         settChecked(true)
+        setcontactType({ type: 4, name: 'tous' })
         break;
     }
+  }
+  const saveData = (data) => {
+
+    firestore().collection('userDemands').doc(auth().currentUser.uid).collection('needs').doc().set(data).then((res) => {
+      setloadingSet(false)
+    })
+
+    mabulService === 'organize'
+      ? Actions.myOrganize()
+      : mabulService === 'give'
+        ? Actions.myGive()
+        : mabulService === 'sell'
+          ? Actions.mySell()
+          : Actions.myNeed({ data: data });
+
+  }
+
+  const onSubmit = () => {
+    setloadingSet(true)
+    let data = Object.assign(demandData, { contactType: contactType })
+    saveData(data);
+
+
   }
   return (
     <View style={styles.container}>
@@ -88,14 +123,9 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
           style={[styles.btn, { backgroundColor: conceptColor }]}
           text="Publier"
           onPress={() => {
-            mabulService === 'organize'
-              ? Actions.myOrganize()
-              : mabulService === 'give'
-                ? Actions.myGive()
-                : mabulService === 'sell'
-                  ? Actions.mySell()
-                  : Actions.myNeed();
+            onSubmit()
           }}
+          loading={loadingSet}
         />
       </View>
     </View>

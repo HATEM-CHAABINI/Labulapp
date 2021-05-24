@@ -16,12 +16,14 @@ const needData = new NeedService(
   NeedServiceType.REPAIR
 );
 
-const MyNeedScreen = () => {
+const MyNeedScreen = (props) => {
   const [] = useState(false);
+  console.log("asda ", props.data)
   const [data] = useState(needData);
+  const [data2] = useState(props.data);
   return (
     <View style={styles.container}>
-      <MabulDetailView data={data} />
+      <MabulDetailView data={data} data2={data2} />
     </View>
   );
 };

@@ -1,7 +1,9 @@
 
-export const LOGIN= 'LOGIN';
+export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGNUP_DETAILS = 'SIGNUP_DETAILS';
 export const PROFILE_DETAILS_ADD = 'PROFILE_DETAILS_ADD';
 export const PROFILE_DETAILS_UPDATE = 'PROFILE_DETAILS_UPDATE';
+export const DEMAND_OBJECT = 'DEMAND_OBJECT';
+export const DEMAND_OBJECT_UPDATE = 'DEMAND_OBJECT_UPDATE';
 

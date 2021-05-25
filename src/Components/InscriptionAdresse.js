@@ -34,7 +34,7 @@ import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
 
 /////////                 HERE GOES API KEY
-Geocoder.init("############################");
+Geocoder.init("AIzaSyDoAjhMLWRtJT62MhtNPxcGugVdLFKjMFU");
 //////////
 export default ({ navigation }) => {
   const [loading, setloading] = useState(false)
@@ -71,6 +71,8 @@ export default ({ navigation }) => {
 
   const getlocation = () => {
     setloading(() => true)
+//     const status = Geolocation.requestAuthorization("whenInUse"); // or "always"
+// console.log(status); 
     Geolocation.getCurrentPosition(
       (position) => {
 
@@ -78,8 +80,11 @@ export default ({ navigation }) => {
         Geocoder.from(position.coords.latitude, position.coords.longitude)
           .then(json => {
             var addressComponent = json.results[0].formatted_address;
+console.log("loccccccccc");
+console.log(addressComponent);
+console.log("loccccccccc");
 
-            formik.setFieldValue('adresse', addressComponent)
+formik.setFieldValue('adresse', addressComponent)
             setloading(() => false)
           })
           .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });

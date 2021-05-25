@@ -72,7 +72,7 @@ const AlertCircleSelectionScreen = () => {
               ]}
               onPress={() => check(3)}>
               {fchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Family width={48 * em} height={48 * em} />}
-              <CommonText text="mes famille" color="#6A8596" style={{ marginTop: 15 * em }} />
+              <CommonText text="Ma famille" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={1}

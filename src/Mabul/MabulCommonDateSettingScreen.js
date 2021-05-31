@@ -18,9 +18,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
-import { google_api } from '../constants/consts'
+
 /////////                 HERE GOES API KEY
-Geocoder.init(google_api);
+Geocoder.init("########################");
 //////////
 const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const dispatch = useDispatch()
@@ -34,8 +34,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const [showEndDataView, setshowEndDataView] = useState(false)
   const [loading, setloading] = useState(false)
   const initialValues = {
-    address: '',
-    coordinate: {}
+    address: ''
   };
   const validationSchema = Yup.object({
 
@@ -54,7 +53,6 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
             var addressComponent = json.results[0].formatted_address;
 
             formik.setFieldValue('address', addressComponent)
-            formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
             setloading(() => false)
           })
           .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
@@ -71,9 +69,9 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
 
     let value = {}
     if (isSwitch) {
-      value = { demandStartDate: isDate, demandEndData: '', address: values.address, coordinate: values.coordinate }
+      value = { demandStartDate: isDate, demandEndData: '', address: values.address }
     } else {
-      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address, coordinate: values.coordinate }
+      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address }
     }
 
     dispatch(update_into_demand(value))
@@ -136,8 +134,8 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const handleEndConfirm = (date) => {
     setisEndDate(date);
     hideendDatePicker();
-  };
 
+  };
   const showEndDatePicker = () => {
     setisEndDatePickerVisible(true);
   };
@@ -157,7 +155,6 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
         style={styles.container}
 
       >
-        <ScrollView>
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
             mode="datetime"
@@ -172,10 +169,10 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
             onCancel={hideendDatePicker}
           />
           <View style={styles.body}>
-            <View style={{ justifyContent: 'flex-end', }}>
+            <View style={{ justifyContent: 'flex-end',paddingBottom:5*hm }}>
               <TitleText text={'Quand ?'} style={styles.title} />
               <CommentText text="Choisis une date si nécessaire" style={styles.comment} />
-              <View style={{ marginVertical: 20 }}>
+              <View style={{ }}>
                 <CommonListItem
                   icon={iconDate}
                   title="Date et heure de début"
@@ -186,7 +183,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
                 />
                 <View style={styles.line} />
               </View>
-              {showEndDataView ? <View style={{ marginVertical: 20 }}>
+              {showEndDataView ? <View style={{ paddingTop:10*hm }}>
                 <CommonListItem
                   icon={iconDate}
                   title="Date et heure de fin"
@@ -219,9 +216,11 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
                 onChangeText={formik.handleChange('address')} />
               {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
 
-              {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * em }} color={conceptColor} size={'small'} />
+              {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * hm }} color={conceptColor} size={'small'} />
                 : <CommonListItem
-                  style={{ marginLeft: 37 * em, bottom: 20 * em }}
+                  style={{ marginLeft: 37 * em, bottom: 20 * hm
+                    // ,paddingBottom:50*hm 
+                  }}
                   titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}
                   icon={iconAddress}
                   title="Utiliser ma position"
@@ -234,7 +233,6 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
               onPress={formik.handleSubmit}
             />
           </View>
-        </ScrollView>
       </KeyboardAvoidingView>
 
     </View>
@@ -245,12 +243,12 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-
+    
   },
   header: {
     height: '12.45%',
     // marginTop: 15 * hm,
-
+     
     //  height: '10.3%',
     //  marginTop: 16 * hm,
   },
@@ -259,18 +257,12 @@ const styles = {
     paddingHorizontal: 30 * em,
     justifyContent: 'space-between',
   },
-  descerrorText: {
-    fontSize: 12 * em,
-    bottom: 30 * hm,
-    left: 40 * hm,
-    color: "red",
-  },
   title: {
     textAlign: 'left',
-    marginTop: 14 * hm,
+    marginTop: 10 * hm,
     lineHeight: 38 * em,
   },
-  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * hm, marginBottom: 23 * hm },
+  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * hm,marginBottom:23*hm },
 
   iconDate: { width: 19 * em, height: 20 * em, marginRight: 15 * em, marginTop: 9 * em },
   iconLocation: { width: 21 * em, height: 30 * em, marginRight: 15 * em },
@@ -284,12 +276,12 @@ const styles = {
     marginTop: 10 * hm,
     textAlign: 'left',
     marginLeft: 36 * em,
-    marginBottom: 20 * hm
+    marginBottom:20*hm
   },
   nextBtn: {
     alignSelf: 'flex-end',
     // marginRight: 30 * em,
-    marginBottom: 36 * em,
+    marginBottom: 30 * hm,
   },
 };
 

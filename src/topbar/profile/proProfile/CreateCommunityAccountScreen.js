@@ -1,6 +1,6 @@
 import React from 'react';
 import { em, hm } from '../../../constants/consts';
-import { View } from 'react-native';
+import { View , KeyboardAvoidingView,Platform} from 'react-native';
 import PopupHeader from '../../../Components/header/PopupHeader';
 import TitleText from '../../../text/TitleText';
 import CommonTextInput from '../../../Components/textInput/CommonTextInput';
@@ -24,10 +24,17 @@ const CreateCommunityAccountScreen = (props) => {
             style={styles.commonInput}
           />
         </View>
-        <View style={styles.popupBottomView}>
+
+        </View>
+
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ alignItems: 'center' }}
+      >
+        <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
           <CommonButton text={'Suivant'} onPress={() => Actions.proRegisterMobile({ accountType: props.accountType })} style={styles.btnNext} />
         </View>
-      </View>
+        </KeyboardAvoidingView>
     </View>
   );
 };
@@ -36,7 +43,6 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#7398FC',
-    alignItems: 'center',
   },
   header: {
     //height: '12%',

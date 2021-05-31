@@ -1,6 +1,6 @@
 import React from 'react';
 import { em, hm } from '../../../constants/consts';
-import { View } from 'react-native';
+import { View , KeyboardAvoidingView,Platform} from 'react-native';
 import PopupHeader from '../../../Components/header/PopupHeader';
 import TitleText from '../../../text/TitleText';
 import CommonTextInput from '../../../Components/textInput/CommonTextInput';
@@ -25,14 +25,20 @@ const CreateProfessionalAccountScreen = (props) => {
             style={styles.commonInput}
           />
         </View>
-        <View style={styles.popupBottomView}>
+        </View>
+
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ alignItems: 'center' }}
+      >
+        <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
           <CommonButton
             text={'Suivant'}
             onPress={() => Actions.proRegisterMobile({ accountType: props.accountType })}
             style={styles.btnNext}
           />
         </View>
-      </View>
+        </KeyboardAvoidingView>
     </View>
   );
 };
@@ -58,7 +64,14 @@ const styles = {
   },
   popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
   titleText: { fontFamily: 'Lato-Black', marginTop: 11 * em, marginBottom: 35 * em },
-  btnNext: { backgroundColor: '#7398FD', marginBottom: 30 * em },
+  btnNext: { backgroundColor: '#7398FD' ,
+  overflow: 'hidden',
+  borderRadius: 18 * em,
+  height: 59 * hm,
+
+  width: 315 * em,
+
+  bottom: 30},
   commonInput: {
     width: '100%',
     height: 52 * em,

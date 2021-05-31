@@ -31,7 +31,7 @@ const SearchBoxLieu = (props) => {
         {onFocus && <SmallText text={props.smallText || 'Rechercher un contact'} color="rgba(160, 174, 184, 1)" />}
         <TextInput
           value={props.value}
-
+          autoFocus={true}
           onChangeText={_handleText}
           onFocus={() => {
             setOnFocus(true);

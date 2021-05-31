@@ -13,7 +13,7 @@ const MabulNextButton = (props) => {
       loading={props.loading}
       disabled={props.disabled}
       onPress={props.onPress}
-      style={[styles.container, props.style, { backgroundColor: props.color }]}
+      style={[styles.container, { backgroundColor: props.color }, props.style]}
     />
   );
 };

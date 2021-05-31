@@ -34,6 +34,8 @@ const MabulCommonParticipateScreen = (props) => {
           <TitleText text={'Participants'} style={styles.title} />
           <CommentText text="Combien de personnes peuvent participer dans votre demande ?" style={styles.comment} />
           <TextInput keyboardType="number-pad"
+                      autoFocus={true}
+
             style={styles.input} placeholder="0" selectionColor={conceptColor} value={participatents} onChangeText={(value) => { setparticipatents(value) }} onChange={(value) => { setparticipatents(value) }} />
         </View>
 

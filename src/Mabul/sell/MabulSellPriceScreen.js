@@ -44,6 +44,8 @@ const MabulSellPriceScreen = (props) => {
           /> */}
            <TextInput 
             style={styles.input} 
+            autoFocus={true}
+
             placeholder="0"
             selectionColor={conceptColor} 
             value={price} 

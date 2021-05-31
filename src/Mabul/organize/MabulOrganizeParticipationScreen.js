@@ -59,6 +59,8 @@ const MabulOrganizeParticipationScreen = (props) => {
           <TextInput
             keyboardType="number-pad"
             style={styles.input}
+            autoFocus={true}
+
             placeholder="0"
             selectionColor={conceptColor}
             value={participants}

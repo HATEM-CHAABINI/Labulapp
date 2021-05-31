@@ -1,6 +1,6 @@
 import React from 'react';
 import { em, hm } from '../../../constants/consts';
-import { View } from 'react-native';
+import { View , KeyboardAvoidingView,Platform} from 'react-native';
 import TitleText from '../../../text/TitleText';
 import CommonTextInput from '../../../Components/textInput/CommonTextInput';
 import CommonButton from '../../../Components/button/CommonButton';
@@ -24,14 +24,21 @@ const ProRegisterMobilScreen = (props) => {
             style={styles.commonInput}
           />
         </View>
-        <View style={styles.popupBottomView}>
+        </View>
+
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ alignItems: 'center' }}
+      >
+        <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
           <CommonButton
             text={'Suivant'}
             onPress={() => Actions.proRegisterAddress({ accountType: props.accountType })}
             style={styles.btnNext}
           />
         </View>
-      </View>
+        </KeyboardAvoidingView>
+
     </View>
   );
 };
@@ -40,7 +47,6 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#7398FC',
-    alignItems: 'center',
   },
   header: {
     // height: '12%',
@@ -57,10 +63,14 @@ const styles = {
   },
   popupTopView: { paddingTop: 41 * em, alignItems: 'center', width: '80%' },
   titleText: { marginTop: 14 * em, marginBottom: 35 * em },
-  btnNext: {
-    marginBottom: 30 * em,
-    backgroundColor: '#7398FC',
-  },
+  btnNext: { backgroundColor: '#7398FC' ,
+  overflow: 'hidden',
+  borderRadius: 18 * em,
+  height: 59 * hm,
+
+  width: 315 * em,
+
+  bottom: 30},
   commonInput: {
     width: '100%',
     height: 52 * em,

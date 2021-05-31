@@ -42,6 +42,9 @@ const CommonTextInput = (props) => {
         <SmallText text={props.text} style={{ fontSize: onFocus ? 12 * em : 16 * em }} color="#A0AEB8" />
         <TextInput
           ref={input}
+          autoFocus={true}
+          autoCorrect={false}
+
           secureTextEntry={passwd}
           value={value}
           onChangeText={(t) => setValue(t)}

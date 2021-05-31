@@ -134,7 +134,7 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
           }
         </View>
         <MabulNextButton
-          disabled={images.images.length < 3 ? true : false}
+          // disabled={images.images.length < 3 ? true : false}
           color={images.images.length < 3 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
           style={styles.nextBtn}
           onPress={() => uploadeImage(images.images)}

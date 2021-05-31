@@ -1,6 +1,6 @@
 import React from 'react';
 import { em, hm } from '../../../constants/consts';
-import { View, Image } from 'react-native';
+import { View , KeyboardAvoidingView,Platform} from 'react-native';
 import TitleText from '../../../text/TitleText';
 import CommonTextInput from '../../../Components/textInput/CommonTextInput';
 import CommonButton from '../../../Components/button/CommonButton';
@@ -25,14 +25,20 @@ const ProRegisterAddressScreen = (props) => {
             <CommonText color={'#7398FD'} text={'Me géolocaliser'} />
           </View>
         </View>
-        <View style={styles.popupBottomView}>
+        </View>
+
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ alignItems: 'center' }}
+      >
+        <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
           <CommonButton
             text={'Contiuer'}
             onPress={() => Actions.proRegisterEmail({ accountType: props.accountType })}
             style={styles.btnNext}
           />
         </View>
-      </View>
+        </KeyboardAvoidingView>
     </View>
   );
 };
@@ -62,7 +68,14 @@ const styles = {
   },
   popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
   titleText: { fontFamily: 'Lato-Black', marginTop: 15.5 * em, marginBottom: 35 * em },
-  btnNext: { backgroundColor: '#7398FD', marginBottom: 30 * em },
+  btnNext: { backgroundColor: '#7398FD' ,
+  overflow: 'hidden',
+  borderRadius: 18 * em,
+  height: 59 * hm,
+
+  width: 315 * em,
+
+  bottom: 30},
   viewText: {
     marginTop: 25 * em,
   },

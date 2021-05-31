@@ -80,6 +80,7 @@ const MabulCommonRequestDetailScreen = (props) => {
           />
           <Reinput style={{ paddingTop: 33 * em }}
             label='Écrit un titre court'
+            autoFocus={true}
             icon={iconEdit}
             underlineColor="#BFCDDB"
             activeColor={conceptColor}

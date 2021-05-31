@@ -1,6 +1,6 @@
 import React from 'react';
 import { em, hm } from '../../../constants/consts';
-import { View, Image } from 'react-native';
+import { View , KeyboardAvoidingView,Platform} from 'react-native';
 import TitleText from '../../../text/TitleText';
 import CommonTextInput from '../../../Components/textInput/CommonTextInput';
 import CommonButton from '../../../Components/button/CommonButton';
@@ -20,14 +20,21 @@ const ProRegisterEmailScreen = (props) => {
           <TitleText text={'Mon Email'} style={styles.titleText} />
           <CommonTextInput text={'Saisis ton email'} isPasswordInput={false} style={styles.commonInput} />
         </View>
-        <View style={styles.popupBottomView}>
-          <CommonButton
+        </View>
+
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ alignItems: 'center' }}
+      >
+        <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
+       <CommonButton
             text={'Suivant'}
             style={styles.btnNext}
             onPress={() => Actions.home({ tabNav: 'ProProfile', accountType: props.accountType })}
           />
-        </View>
       </View>
+      </KeyboardAvoidingView>
+
     </View>
   );
 };
@@ -36,7 +43,6 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#7398FD',
-    alignItems: 'center',
   },
   header: {
     // height: '12%',

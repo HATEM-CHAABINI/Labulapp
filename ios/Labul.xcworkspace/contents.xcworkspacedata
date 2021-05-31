@@ -5,6 +5,9 @@
       location = "group:Labul.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:/Users/hatemchaabini/Downloads/labull-App/Labulapp/ios/Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

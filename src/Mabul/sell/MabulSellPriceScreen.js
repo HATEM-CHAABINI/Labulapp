@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { View, Platform } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, mabulColors, hexToRGB, hm } from '../../constants/consts';
@@ -9,9 +9,21 @@ import MabulNextButton from '../../Components/button/MabulNextButton';
 // import MabulNextButton from 'src/Components/button/MabulNextButton';
 import { TextInput } from 'react-native-gesture-handler';
 import { KeyboardAvoidingView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
+
 
 const MabulSellPriceScreen = (props) => {
+  const dispatch = useDispatch()
+  const [price, setprice] = useState('')
+
   const conceptColor = mabulColors.sell;
+  const onSubmit = () => {
+    console.log(price)
+    dispatch(update_into_demand({price:price}))
+    Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
+  }
+
   return (
     <View style={styles.container}>
       <MabulCommonHeader
@@ -22,12 +34,21 @@ const MabulSellPriceScreen = (props) => {
       />
       <View style={styles.body}>
         <View>
-          <TitleText text={'Prix'} style={styles.title} />
-          <CommentText text="Ajoutez un prix" style={styles.comment} />
-          <TextInput
+          <TitleText text={'Prix'} style={styles.title}/>
+          <CommentText text="Ajoutez un prix" style={styles.comment}/>
+          {/* <TextInput
             style={styles.input}
             placeholder="0"
             selectionColor={conceptColor}
+            keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'}
+          /> */}
+           <TextInput 
+            style={styles.input} 
+            placeholder="0"
+            selectionColor={conceptColor} 
+            value={price} 
+            onChangeText={(value) => { setprice(value) }} 
+            onChange={(value) => { setprice(value) }}
             keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'}
           />
         </View>
@@ -39,8 +60,11 @@ const MabulSellPriceScreen = (props) => {
         <MabulNextButton
           color={hexToRGB(conceptColor, 0.5)}
           style={styles.nextBtn}
+          disabled={price.length <= 0 ? true : false}
           onPress={() => {
-            Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
+            // dispatch(update_into_demand({price:price }))
+            // Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
+            onSubmit()
           }}
         />
               </KeyboardAvoidingView>

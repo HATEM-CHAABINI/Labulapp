@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Platform, FlatList, TouchableOpacity } from 'react-native';
 import TitleText from '../../text/TitleText';
-import { em, hm } from '../../constants/consts';
+import { em, hm, hexToRGB } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
 import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
@@ -13,10 +13,17 @@ const options = [
   { id: 1, title: 'Route barrée' },
   { id: 2, title: 'Travaux' },
 ];
+import { useSelector, useDispatch } from 'react-redux'
+import { update_into_demand } from '../../redux/actions/demand'
+
 const AlertClassOptionScreen = (props) => {
   const conceptColor = '#F9547B';
+  const dispatch = useDispatch()
+  // const { demandData } = useSelector((state) => state.demandReducer);
+  // console.log("demand ", demandData);
   const [optionCheck, setOptionCheck] = useState();
   const [checked, setChecked] = useState();
+
   const renderOptions = ({ item, index }) => {
     var elevation = !checked ? 0 : 2;
 
@@ -27,7 +34,7 @@ const AlertClassOptionScreen = (props) => {
           checked === index ? styles.optionBoxClicked : styles.optionBox,
           { marginBottom: index === 2 ? 40 * em : 0 },
         ]}
-        onPress={() => setChecked(index)}>
+        onPress={() => { dispatch(update_into_demand({ type: item })), setChecked(index) }}>
         <TitleText style={styles.optionCaption} text={item.title} />
         <CheckBox
           oval
@@ -35,20 +42,20 @@ const AlertClassOptionScreen = (props) => {
           single
           isChecked={checked === index}
           singleSelection={true}
-          onClick={() => setChecked(index)}
+          onClick={() => (dispatch(update_into_demand({ type: item })), setChecked(index))}
         />
       </TouchableOpacity>
     );
   };
   return (
-     <View style={styles.container}>
+    <View style={styles.container}>
       <MabulCommonHeader
         style={styles.header}
         percent={props.process}
         isNoBackBtn={true}
         progressBarColor={conceptColor}
       />
-       
+
       <View style={styles.body}>
         <TitleText text={'J’alerte'} style={styles.title} />
         <View style={styles.circleSortView}>
@@ -58,9 +65,10 @@ const AlertClassOptionScreen = (props) => {
         <FlatList data={options} renderItem={renderOptions} keyExtractor={(i) => i.id} />
       </View>
       <MabulNextButton
-        color={conceptColor}
+        color={checked === undefined ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
         style={[styles.btn, { backgroundColor: conceptColor }]}
         text="Suivant"
+        disabled={checked === undefined ? true : false}
         onPress={() => Actions.alertAddress({ process: 40 })}
       />
     </View>

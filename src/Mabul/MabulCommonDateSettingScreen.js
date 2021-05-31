@@ -18,9 +18,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
-
+import { google_api } from '../constants/consts'
 /////////                 HERE GOES API KEY
-Geocoder.init("########################");
+Geocoder.init(google_api);
 //////////
 const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const dispatch = useDispatch()
@@ -34,7 +34,8 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const [showEndDataView, setshowEndDataView] = useState(false)
   const [loading, setloading] = useState(false)
   const initialValues = {
-    address: ''
+    address: '',
+    coordinate: {}
   };
   const validationSchema = Yup.object({
 
@@ -53,6 +54,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
             var addressComponent = json.results[0].formatted_address;
 
             formik.setFieldValue('address', addressComponent)
+            formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
             setloading(() => false)
           })
           .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
@@ -69,9 +71,9 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
 
     let value = {}
     if (isSwitch) {
-      value = { demandStartDate: isDate, demandEndData: '', address: values.address }
+      value = { demandStartDate: isDate, demandEndData: '', address: values.address, coordinate: values.coordinate }
     } else {
-      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address }
+      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address, coordinate: values.coordinate }
     }
 
     dispatch(update_into_demand(value))
@@ -134,8 +136,8 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const handleEndConfirm = (date) => {
     setisEndDate(date);
     hideendDatePicker();
-
   };
+
   const showEndDatePicker = () => {
     setisEndDatePickerVisible(true);
   };

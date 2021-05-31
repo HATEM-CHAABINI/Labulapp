@@ -1,14 +1,14 @@
 import React from 'react';
 import { em, hm } from '../../constants/consts';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import CommonText from '../../text/CommentText';
 
 const CommonMediumButton = (props) => {
     return (
         <TouchableOpacity onPress={props.onPress} style={[styles.buttonStyle, props.style]} disabled={props.disabled}>
             {props.leftIcon && <View style={[styles.iconStyle, props.iconStyle]}>{props.leftIcon}</View>}
-            <CommonText text={props.text} style={[styles.textStyle, props.textStyle]} color={props.color} />
-            {props.rightIcon && <View style={[styles.iconStyle, props.iconStyle]}>{props.rightIcon}</View>}
+            {props.loading ? <ActivityIndicator style={styles.textStyle} color={'#fcfcfc'} size={'small'} /> : <CommonText text={props.text} style={[styles.textStyle, props.textStyle]} color={props.color} />}
+            {props.rightIcon && !props.loading && <View style={[styles.iconStyle, props.iconStyle]}>{props.rightIcon}</View>}
         </TouchableOpacity>
     );
 };

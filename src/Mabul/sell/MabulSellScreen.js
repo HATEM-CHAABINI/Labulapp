@@ -6,6 +6,8 @@ import { FlatList } from 'react-native';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand } from '../../redux/actions/demand'
 const sellItems = [
   {
     id: 0,
@@ -30,6 +32,8 @@ const sellItems = [
   },
 ];
 const MabulSellScreen = (props) => {
+  const dispatch = useDispatch()
+
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}
@@ -37,7 +41,11 @@ const MabulSellScreen = (props) => {
       icon={item.icon}
       noIcons={true}
       percent={0}
-      onPress={() => item.onPress()}
+        // onPress={() =>dispatch(add_into_demand({ type: item }))}
+    onPress={() => { item.onPress(), 
+       item.id === 0 ? dispatch(add_into_demand({ belongsTo: { name: "service", id: item.id } })) 
+    : item.id === 1 ? dispatch(add_into_demand({ belongsTo: { name: "object", id: item.id } }))
+    : dispatch(update_into_demand({ belongsTo: { name: "event", id: item.id } })) }}
     />
   );
   return (

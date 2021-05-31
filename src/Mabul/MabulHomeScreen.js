@@ -21,6 +21,7 @@ const MabulHomeScreen = (props) => {
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonFirstRow}>
           <CircularButton
+            type="organize"
             onPress={() => {
               props.onClosePress();
               // navigation.navigate('MabulOrganizeScreen',{ process: 20 })

@@ -19,11 +19,12 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
   const { demandData } = useSelector((state) => state.demandReducer);
   const [images, setimages] = useState({ images: [] })
   const [loading, setloading] = useState(false)
+  const [buttonloading, setbuttonloading] = useState(false)
 
   const uploadeImage = async (imageArray) => {
     const imagesBlob = [];
-    setimages({ images: imagesBlob })
-    setloading(true)
+    // setimages({ images: imagesBlob })
+    setbuttonloading(true)
     await Promise.all(
       imageArray.map(async (image, index) => {
         const response = await fetch(image.path);
@@ -31,12 +32,16 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
         const ref = storage().ref().child(`users/${auth().currentUser.uid}/demands/${Math.random().toString(36).substring(2, 12)}`)
         await ref.put(blob).then(async (result) => {
           await ref.getDownloadURL().then((result) => { imagesBlob.push({ uri: result, id: index }) })
+
         });
       }),
+
     );
 
-    setimages({ images: imagesBlob })
-    setloading(false)
+
+    setbuttonloading(false)
+
+    submit(imagesBlob)
   };
 
 
@@ -47,8 +52,9 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
       includeExif: true,
       forceJpg: true,
     }).then(images => {
-      uploadeImage(images)
-        ;
+      setimages({ images: images })
+
+
     }).catch(e => alert(e));
   }
   const removeByAttr = function (arr, attr, value) {
@@ -60,9 +66,10 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
     }, 50);
   }
 
-  const submit = () => {
-
-    dispatch(update_into_demand({ images: images.images }))
+  const submit = (images) => {
+    // uploadeImage(images.images)
+    setimages({ images: images })
+    dispatch(update_into_demand({ images: images }))
 
     Actions.mabulCommonDateSetting({
       mabulService: mabulService,
@@ -109,7 +116,7 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
 
                     <Image
                       style={styles.imageThumbnail}
-                      source={{ uri: item.uri }}
+                      source={{ uri: item.path === undefined ? item.uri : item.path }}
                     />
                     <TouchableOpacity style={{ position: 'absolute', right: 0, top: 0, }} onPress={() => { removeByAttr(images.images, id, item.id) }}>
 
@@ -121,20 +128,17 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
                     </TouchableOpacity>
                   </View>)
                 }}
-
                 numColumns={3}
-                keyExtractor={(item, index) => index}
-              />
+                keyExtractor={(item, index) => index} />
             </SafeAreaView>
-
           }
-
         </View>
         <MabulNextButton
           disabled={images.images.length < 3 ? true : false}
           color={images.images.length < 3 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
           style={styles.nextBtn}
-          onPress={() => submit()}
+          onPress={() => uploadeImage(images.images)}
+          loading={buttonloading}
         />
       </View>
     </View>

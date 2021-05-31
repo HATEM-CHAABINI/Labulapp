@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-
+export const google_api = 'AIzaSyDoAjhMLWRtJT62MhtNPxcGugVdLFKjMFU'
 export const WIDTH = Dimensions.get('window').width;
 export const HEIGHT = Dimensions.get('window').height;
 export const em = WIDTH / 375;

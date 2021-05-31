@@ -6,6 +6,9 @@ import { FlatList } from 'react-native';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
+
 import { AperoSell, MealSell, MeetSell, PartySell, ShowSell, WorkshopSell } from '../../assets/svg/icons';
 const iconSize = { width: 38 * em, height: 38 * em };
 
@@ -18,12 +21,15 @@ const themeData = [
   { id: 5, icon: WorkshopSell(iconSize), themeName: 'Atelier' },
 ];
 const MabulSellEnvironmentScreen = (props) => {
+  const dispatch = useDispatch()
+
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.themeName}
       style={styles.listItem}
       icon={item.icon}
-      onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 })}
+      // onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 })}
+      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) } }
     />
   );
   return (

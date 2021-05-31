@@ -6,6 +6,9 @@ import { FlatList } from 'react-native';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
+
 import {
   AnimalSell,
   BeautyCareSell,
@@ -37,12 +40,15 @@ const giveItems = [
   { id: 20, itemName: 'Soins d’esthétique à domicile', icon: BeautyCareSell(iconSize) },
 ];
 const MabulSellObjectScreen = (props) => {
+  const dispatch = useDispatch()
+
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}
       style={styles.listItem}
       icon={item.icon}
-      onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 })}
+      // onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 })}
+      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) } }
     />
   );
   return (

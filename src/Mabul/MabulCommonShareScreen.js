@@ -48,17 +48,38 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
   }
   const saveData = (data) => {
 
-    firestore().collection('userDemands').doc(auth().currentUser.uid).collection('needs').doc().set(data).then((res) => {
-      setloadingSet(false)
-    })
+    console.log("data ", data);
+    console.log("auth().currentUser.uid ", auth().currentUser.uid);
+    if (mabulService === 'organize') {
+      firestore().collection('userDemands').doc(auth().currentUser.uid)
+        .collection('organize').doc().set(data).then((res) => { setloadingSet(false); Actions.myOrganize({ data: data }), console.log("res ", res); });
 
-    mabulService === 'organize'
-      ? Actions.myOrganize()
-      : mabulService === 'give'
-        ? Actions.myGive()
-        : mabulService === 'sell'
-          ? Actions.mySell()
-          : Actions.myNeed({ data: data });
+    } else if (mabulService === 'give') {
+      firestore().collection('userDemands').doc(auth().currentUser.uid)
+        .collection('give').doc().set(data).then((res) => { setloadingSet(false); Actions.myGive({ data: data }) });
+
+    } else if (mabulService === 'sell') {
+      firestore().collection('userDemands').doc(auth().currentUser.uid)
+        .collection('sell').doc().set(data).then((res) => { setloadingSet(false); Actions.mySell({ data: data }) });
+
+    } else {
+
+      firestore().collection('userDemands').doc(auth().currentUser.uid)
+        .collection('needs').doc().set(data).then((res) => { setloadingSet(false); Actions.myNeed({ data: data }) });
+    }
+
+
+    // mabulService === 'organize'
+    //   ? Actions.myOrganize({ data: data })
+    //   : mabulService === 'give'
+    //     ? Actions.myGive({ data: data })
+    //     : mabulService === 'sell'
+    //       ?
+    //       Actions.mySell({ data: data })
+    //       // firestore().collection('userDemands').doc(auth().currentUser.uid)
+    //       // .collection('sell').doc().set(data).then((res) => { setloadingSet(false)})
+    //       : firestore().collection('userDemands').doc(auth().currentUser.uid)
+    //         .collection('needs').doc().set(data).then((res) => { setloadingSet(false) }), Actions.myNeed({ data: data });
 
   }
 

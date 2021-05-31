@@ -107,9 +107,9 @@ export const createUser = async (signupData, activeNotification) => {
         .createUserWithEmailAndPassword(signupData.email, signupData.password)
         .then(userCredential => {
             var userCreated = userCredential.user;
-            let { nom, mobile, prenom, adresse, email } = signupData;
+            let { nom, mobile, prenom, adresse, email, coordinate } = signupData;
             if (userCreated) {
-                let DataToBeSet = { firstName: prenom, lastName: nom, uid: userCreated.uid, address: adresse, mobile: mobile, email: email, activeNotification: activeNotification }
+                let DataToBeSet = { firstName: prenom, lastName: nom, uid: userCreated.uid, address: adresse, mobile: mobile, email: email, activeNotification: activeNotification, coordinate: coordinate }
                 return { userCreated, DataToBeSet }
                 // return setUserData(DataToBeSet, userCreated.uid, signupData.password)
             }

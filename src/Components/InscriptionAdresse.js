@@ -32,9 +32,9 @@ import { useDispatch } from 'react-redux';
 import { SignupData } from '../redux/actions/signup';
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
-
+import { google_api } from '../constants/consts'
 /////////                 HERE GOES API KEY
-Geocoder.init("AIzaSyDoAjhMLWRtJT62MhtNPxcGugVdLFKjMFU");
+Geocoder.init(google_api);
 //////////
 export default ({ navigation }) => {
   const [loading, setloading] = useState(false)
@@ -43,6 +43,7 @@ export default ({ navigation }) => {
   const dispatch = useDispatch();
   const initialValues = {
     adresse: '',
+    coordinate: {}
   };
   const validationSchema = Yup.object({
     adresse: Yup.string().trim()
@@ -58,7 +59,8 @@ export default ({ navigation }) => {
       password: signupData.password,
       nom: signupData.nom,
       mobile: signupData.mobile,
-      adresse: values.adresse
+      adresse: values.adresse,
+      coordinate: values.coordinate
     }));
 
     navigation.navigate('ActiverLaNotif')
@@ -71,8 +73,8 @@ export default ({ navigation }) => {
 
   const getlocation = () => {
     setloading(() => true)
-//     const status = Geolocation.requestAuthorization("whenInUse"); // or "always"
-// console.log(status); 
+    //     const status = Geolocation.requestAuthorization("whenInUse"); // or "always"
+    // console.log(status); 
     Geolocation.getCurrentPosition(
       (position) => {
 
@@ -80,11 +82,10 @@ export default ({ navigation }) => {
         Geocoder.from(position.coords.latitude, position.coords.longitude)
           .then(json => {
             var addressComponent = json.results[0].formatted_address;
-console.log("loccccccccc");
-console.log(addressComponent);
-console.log("loccccccccc");
 
-formik.setFieldValue('adresse', addressComponent)
+
+            formik.setFieldValue('adresse', addressComponent)
+            formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
             setloading(() => false)
           })
           .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
@@ -206,8 +207,8 @@ const styles = StyleSheet.create({
     borderBottomColor: "#28c7ee",
   },
   contentWrapper: {
-    alignItems:'center',
-    width: 315*em,
+    alignItems: 'center',
+    width: 315 * em,
     paddingTop: 30 * hm
   },
   descText: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
@@ -9,14 +9,39 @@ import MabulNextButton from '../../Components/button/MabulNextButton';
 import CommonListItem from '../../adapter/CommonListItem';
 import { NoteInlineRed } from '../../assets/svg/icons';
 import Reinput from "reinput"
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
+import { useSelector, useDispatch } from 'react-redux'
+import { update_into_demand } from '../../redux/actions/demand'
 const AlertAddNoteScreen = (props) => {
   const conceptColor = '#F9547B';
+  const dispatch = useDispatch()
   var iconEdit = (
     <View style={{ marginRight: 19 * em }}>
       <NoteInlineRed width={20 * em} height={22 * em} />
     </View>
   );
+  const initialValues = {
+    description: '',
+
+  };
+  const validationSchema = Yup.object({
+
+    description: Yup.string()
+      .required('Obligatoire')
+    ,
+  });
+  const onSubmit = values => {
+    console.log(values)
+    dispatch(update_into_demand(values))
+
+    Actions.alertShare({ process: 94 })
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
   return (
     <View style={styles.container}>
       <MabulCommonHeader
@@ -34,22 +59,24 @@ const AlertAddNoteScreen = (props) => {
             titleStyle={styles.listCaption}
           />
 
-<Reinput style={ {paddingTop:34*hm}}
-label={`Détail ta demande ici
-(Soit concis pour être plus efficace)`}
-icon={iconEdit}
-underlineColor="#6A8596"
-activeColor="#F9547B"
-labelActiveColor="#6A8596"
-labelColor="#6A8596"
-labelActiveTop={-38}
-height={300}
-paddingBottom={30*em}
+          <Reinput style={{ paddingTop: 34 * hm }}
+            label={`Détail ta demande ici
+            (Soit concis pour être plus efficace)`}
+            icon={iconEdit}
+            underlineColor="#6A8596"
+            activeColor="#F9547B"
+            labelActiveColor="#6A8596"
+            labelColor="#6A8596"
+            labelActiveTop={-38}
+            height={300}
+            paddingBottom={30 * em}
+            value={formik.values.description}
 
-/>
+            onBlur={formik.handleBlur('description')}
+            onChangeText={formik.handleChange('description')} />
+          {formik.errors.description && formik.touched.description && <Text style={styles.descerrorText}>{formik.errors.description}</Text>}
 
-
-{/* 
+          {/* 
           <CommonListItem
             icon={iconEdit}
             style={[styles.listItem, { height: 62 * em }]}
@@ -64,7 +91,7 @@ paddingBottom={30*em}
         <MabulNextButton
           color={conceptColor}
           style={styles.nextBtn}
-          onPress={() => Actions.alertShare({ process: 94 })}
+          onPress={formik.handleSubmit}
         />
       </View>
     </View>
@@ -79,6 +106,12 @@ const styles = {
   header: {
     height: '12.45%',
 
+  },
+  descerrorText: {
+    fontSize: 12 * em,
+    bottom: 30 * hm,
+    left: 40 * hm,
+    color: "red",
   },
   body: {
     flex: 1,

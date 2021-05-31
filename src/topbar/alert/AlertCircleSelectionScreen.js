@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import TitleText from '../../text/TitleText';
-import { em, hm } from '../../constants/consts';
+import { em, hm, hexToRGB } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
 import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import MabulNextButton from '../../Components/button/MabulNextButton';
 import { Actions } from 'react-native-router-flux';
 import { Family, Friend, Neighbor, CheckBlue, All } from '../../assets/svg/icons';
 import { TouchableOpacity } from 'react-native';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand } from '../../redux/actions/demand'
 const AlertCircleSelectionScreen = () => {
+
+  const dispatch = useDispatch()
   const conceptColor = '#F9547B';
   const [vchecked, setvChecked] = useState(false);
   const [achecked, setaChecked] = useState(false);
@@ -36,6 +39,25 @@ const AlertCircleSelectionScreen = () => {
         break;
     }
   }
+
+  const onsubmit = () => {
+    if (vchecked) {
+      dispatch(add_into_demand({ belongsTo: { title: "mes voisins", id: 1 } }))
+      Actions.alertClass({ process: 40 })
+    } else if (achecked) {
+      dispatch(add_into_demand({ belongsTo: { title: "mes amis", id: 2 } }))
+      Actions.alertClass({ process: 40 })
+    } else if (fchecked) {
+      dispatch(add_into_demand({ belongsTo: { title: "Ma famille", id: 3 } }))
+      Actions.alertClass({ process: 40 })
+    } else if (tchecked) {
+      dispatch(add_into_demand({ belongsTo: { title: "tous", id: 4 } }))
+      Actions.alertClass({ process: 40 })
+    }
+
+
+  }
+
   return (
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={20} noBackButton={true} progressBarColor={conceptColor} />
@@ -89,10 +111,21 @@ const AlertCircleSelectionScreen = () => {
 
       </View>
       <MabulNextButton
-        color={conceptColor}
-        style={[styles.btn, { backgroundColor: conceptColor }]}
+        color={
+          !vchecked &&
+            !achecked &&
+            !fchecked &&
+            !tchecked
+            ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)
+        }
+        disabled={!vchecked &&
+          !achecked &&
+          !fchecked &&
+          !tchecked
+          ? true : false}
+        style={[styles.btn, { backgroundColor: conceptColor, }]}
         text="Suivant"
-        onPress={() => Actions.alertClass({ process: 40 })}
+        onPress={() => onsubmit()}
       />
     </View>
   );

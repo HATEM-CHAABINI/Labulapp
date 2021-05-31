@@ -164,23 +164,6 @@ export default (props) => {
     lastName: profileData.lastName !== undefined && profileData.lastName !== null ? profileData.lastName : '',
   })
 
-  // const updateUserProfile = () => {
-  //   setdata({
-  //     profilePic: profileData.profilePic !== undefined && profileData.profilePic !== null ? profileData.profilePic : '',
-  //     firstName: profileData.firstName !== undefined && profileData.firstName !== null ? profileData.firstName : '',
-  //     lastName: profileData.lastName !== undefined && profileData.lastName !== null ? profileData.lastName : '',
-  //   })
-  //   // let user = auth().currentUser;
-
-  //   // firestore().collection('users').doc(user.uid).get().then((snapshot) => {
-  //   //   setdata(snapshot.data())
-
-  //   // });
-  // }
-  // useEffect(() => {
-
-
-  // }, [])
 
   return (
     <View style={styles.TabBarMainContainer}>

@@ -7,6 +7,8 @@ import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import { Aliments, Education, HighTech, Mebule, ObjetDrivers, Repas, Vetements } from '../../assets/svg/icons';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
 
 const iconSize = { width: 38 * em, height: 38 * em };
 const giveItems = [
@@ -19,14 +21,17 @@ const giveItems = [
   { id: 6, itemName: 'Aliments', icon: Aliments(iconSize) },
 ];
 const MabulGiveScreen = (props) => {
+  const dispatch = useDispatch() 
+
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}
       style={styles.listItem}
       icon={item.icon}
       onPress={() =>
-        Actions.mabulCommonRequestDetail({ mabulService: 'give', process: props.mabulService === 'give' ? 84 : 50 })
-      }
+     { dispatch(add_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'give', process: props.mabulService === 'give' ? 84 : 50 }) 
+        // Actions.mabulCommonRequestDetail({ mabulService: 'give', process: props.mabulService === 'give' ? 84 : 50 })
+      }}
     />
   );
   return (

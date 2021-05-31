@@ -10,6 +10,7 @@ const MabulNextButton = (props) => {
       rightIcon={<ArrowRightWhite width={10 * em} height={17 * em} />}
       textStyle={styles.txt}
       text="Suivant"
+      loading={props.loading}
       disabled={props.disabled}
       onPress={props.onPress}
       style={[styles.container, props.style, { backgroundColor: props.color }]}

@@ -86,6 +86,7 @@ const updatedMyProfile = new User(
     '+590 6 90 874 258',
     'ABYMES 97139 Guadeloupe'
 );
+
 export default (props) => {
     // console.log(insertInfo.inputTexts[0].toString())
     const insertInfo = insertInformations[props.itemKey - 1];

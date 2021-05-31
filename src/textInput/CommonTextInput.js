@@ -4,7 +4,7 @@ import { em, hm } from '../constants/consts';
 import { Invisible, CrossCircle } from '../assets/svg/icons';
 import SmallText from '../text/SmallText';
 const CommonTextInput = (props) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(props.value);
   const [onFocus, setOnFocus] = useState(false);
   const [passwd, setPasswd] = useState(props.isPasswordInput);
   const input = useRef();
@@ -28,7 +28,7 @@ const CommonTextInput = (props) => {
     setPasswd(!passwd);
   };
   return (
-    <TouchableOpacity onPress={()=>input.current.focus()} activeOpacity={1}
+    <TouchableOpacity onPress={() => input.current.focus()} activeOpacity={1}
       style={[
         styles.container,
         {
@@ -43,11 +43,14 @@ const CommonTextInput = (props) => {
         <TextInput
           ref={input}
           secureTextEntry={passwd}
-          value={value}
-          onChangeText={(t) => setValue(t)}
+          value={props.value}
+          onChangeText={props.onChangeText}
+          onChange={props.onChangeText}
+          // onChange={(t) => setValue(t)}      
           style={styles.textInput}
           onFocus={() => setOnFocus(true)}
-          onBlur={() => setOnFocus(false)}
+          // onBlur={() => setOnFocus(false)}
+          onBlur={props.onBlur}
           selectionColor="#40CDDE"
         />
       </View>

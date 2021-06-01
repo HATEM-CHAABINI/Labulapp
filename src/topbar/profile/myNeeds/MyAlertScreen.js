@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import TitleText from '../../../text/TitleText';
 import { em, hm } from '../../../constants/consts';
 import CommonButton from '../../../Components/button/CommonButton';
@@ -12,6 +12,7 @@ import FriendInvitePopupScreen from '../../friends/popup/FriendInvitePopupScreen
 import { LocationPink, Alert } from '../../../assets/svg/icons/index.js';
 import CommonListItem from '../../../adapter/CommonListItem';
 import CommonBackButton from '../../../Components/button/CommonBackButton';
+
 const needData = new NeedService(
   new User('Mathieu Torin', require('../../../assets/images/tab_profile_off.png'), 'anton@gmail.com'),
   'J’ai besoin coup de main bricolage',
@@ -21,7 +22,11 @@ const needData = new NeedService(
   3,
   NeedServiceType.REPAIR
 );
-const MyAlertScreen = () => {
+const MyAlertScreen = ({ alertData, user }) => {
+
+  // console.log("alertData ", alertData);
+  // console.log("user ", user);
+
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(needData);
   const InviteButton = (
@@ -32,12 +37,13 @@ const MyAlertScreen = () => {
       onPress={() => Actions.alertShare({ process: 94 })}
     />
   );
+
   const ModifyButton = (
     <CommonButton
       textStyle={{ color: '#F9547B' }}
       style={styles.quizBtn}
       text="Modifier"
-      onPress={() => Actions.editNeed()}
+      onPress={() => Actions.editAlert({ alertData: alertData })}
     />
   );
   const AskButton = <CommonButton textStyle={{ color: '#F9547B' }} style={styles.quizBtn} text="Poser une question" />;
@@ -50,23 +56,23 @@ const MyAlertScreen = () => {
         <CommonListItem
           icon={
             <AvatarWithBadge
-              avatar={require('../../../assets/images/tab_profile_off.png')}
+              avatar={user.profilePic !== undefined && user.profilePic !== null ? { uri: user.profilePic } : require('../../../assets/images/tab_profile_off.png')}
               badge={require('../../../assets/images/ic_sample_5.png')}
               avatarDiameter={35 * em}
               badgeDiameter={21 * em}
             />
           }
-          title={data.user.name}
+          title={user.firstName + " " + user.lastName}
           titleStyle={{ color: '#1E2D60', marginLeft: 21 * em, fontFamily: 'Lato-Black', fontSize: 16 * em }}
         />
-        <TitleText text={'Alerte Travaux'} style={styles.title} />
+        <TitleText text={alertData !== undefined ? alertData.type.title : 'Alert Title'} style={styles.title} />
         <CommonListItem
           icon={
             <View style={{ marginRight: 10 * em }}>
               <LocationPink width={16 * em} height={19 * em} />
             </View>
           }
-          title={'77 Boulevard Amedee Clara \n Le Gosier'}
+          title={alertData !== undefined ? alertData.address : 'Alert Address undefine'}
           titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
         />
         {data.status === 'canceled' ? <></> : data.relationship ? AskButton : ModifyButton}
@@ -84,10 +90,12 @@ const styles = {
     flex: 1,
     backgroundColor: 'transparent',
   },
-  backBtn: { position: 'absolute', 
-  backgroundColor: '#ffffff',
-   left: 15 * em,
-    marginTop:30 * hm },
+  backBtn: {
+    position: 'absolute',
+    backgroundColor: '#ffffff',
+    left: 15 * em,
+    marginTop: 30 * hm
+  },
   cover: {
     width: '100%',
     height: 312 * hm,

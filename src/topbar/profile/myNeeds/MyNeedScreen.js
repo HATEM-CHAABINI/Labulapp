@@ -18,7 +18,7 @@ const needData = new NeedService(
 
 const MyNeedScreen = (props) => {
   const [] = useState(false);
-  console.log("asda ", props.data)
+
   const [data] = useState(needData);
   const [data2] = useState(props.data);
   return (

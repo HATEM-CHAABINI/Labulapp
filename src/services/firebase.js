@@ -10,6 +10,58 @@ export const getUserProfile = (id) => {
     });
 
 }
+export const fetchAlerts = async () => {
+    let alerts = []
+    const responseAlert = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection('alerts')
+    const dataAlert = await responseAlert.get();
+
+    dataAlert.docs.forEach(async item => {
+        if (item.data() !== undefined) {
+            alerts.push(item.data())
+        }
+
+    })
+    return alerts
+
+}
+export const fetchDemands = async () => {
+    let demands = []
+    const responseNeed = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('needs')
+    const dataNeed = await responseNeed.get();
+
+    dataNeed.docs.forEach(async item => {
+        if (item.data() !== undefined) {
+            demands.push(item.data())
+        }
+
+    })
+    const responseGive = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('give')
+    const dataGive = await responseGive.get();
+
+    dataGive.docs.forEach(async item => {
+        if (item.data() !== undefined) {
+            demands.push(item.data())
+        }
+    })
+    const responseOrganize = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('organize')
+    const dataOrganize = await responseOrganize.get();
+
+    dataOrganize.docs.forEach(async item => {
+        if (item.data() !== undefined) {
+            demands.push(item.data())
+        }
+    })
+    const responseSell = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('sell')
+    const dataSell = await responseSell.get();
+
+    dataSell.docs.forEach(async item => {
+        if (item.data() !== undefined) {
+            demands.push(item.data())
+        }
+    })
+    // console.log(needs);
+    return demands
+}
 
 export const updateUserProfile = (id, data) => {
     return firestore().collection('users').doc(id).update(data).then((res) => {

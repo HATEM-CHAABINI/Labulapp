@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar,ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar, ActivityIndicator } from 'react-native';
 import { em, WIDTH, HEIGHT, hm } from '../../constants/consts';
 import TitleText from '../../text/TitleText';
 import CommentText from '../../text/CommentText';
@@ -79,14 +79,14 @@ const ProfileHomeScreen = (props) => {
       backgroundSpeed={10}
       renderForeground={() => (
         <View style={styles.topView}>
-          {loading ?<ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} />:<ProfileCommonAvatar
+          {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : <ProfileCommonAvatar
             style={styles.avatar}
             fullName={profileData.firstName + " " + profileData.lastName}
             icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
             borderWidth={3 * em}
           />}
           <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
-          {loading ?<ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} />:<TitleText style={styles.txtFullName} text={profileData.firstName + " " +profileData.lastName} />}
+            {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : <TitleText style={styles.txtFullName} text={profileData.firstName + " " + profileData.lastName} />}
             <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" />
           </TouchableOpacity>
         </View>

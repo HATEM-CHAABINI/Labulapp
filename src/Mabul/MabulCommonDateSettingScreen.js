@@ -18,9 +18,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
-
+import { google_api } from '../constants/consts'
 /////////                 HERE GOES API KEY
-Geocoder.init("########################");
+Geocoder.init(google_api);
 //////////
 const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const dispatch = useDispatch()
@@ -69,9 +69,9 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
 
     let value = {}
     if (isSwitch) {
-      value = { demandStartDate: isDate, demandEndData: '', address: values.address }
+      value = { demandStartDate: Moment(isDate).format('DD MMMM YYYY-HH:MM'), demandEndData: '', address: values.address }
     } else {
-      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address }
+      value = { demandStartDate: Moment(isDate).format('DD MMMM YYYY-HH:MM'), demandEndData: Moment(isEndDate).format('DD MMMM YYYY-HH:MM'), address: values.address }
     }
 
     dispatch(update_into_demand(value))
@@ -155,84 +155,85 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
         style={styles.container}
 
       >
-          <DateTimePickerModal
-            isVisible={isDatePickerVisible}
-            mode="datetime"
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-          />
-          <DateTimePickerModal
-            isVisible={isEndDatePickerVisible}
-            mode="datetime"
-            minimumDate={new Date()}
-            onConfirm={handleEndConfirm}
-            onCancel={hideendDatePicker}
-          />
-          <View style={styles.body}>
-            <View style={{ justifyContent: 'flex-end',paddingBottom:5*hm }}>
-              <TitleText text={'Quand ?'} style={styles.title} />
-              <CommentText text="Choisis une date si nécessaire" style={styles.comment} />
-              <View style={{ }}>
-                <CommonListItem
-                  icon={iconDate}
-                  title="Date et heure de début"
-                  subTitle={Moment(isDate).format('DD MMMM YYYY-HH:MM')}
-                  subTitleStyle={styles.listComment}
-                  titleStyle={styles.listCaption}
-                  onPress={showDatePicker}
-                />
-                <View style={styles.line} />
-              </View>
-              {showEndDataView ? <View style={{ paddingTop:10*hm }}>
-                <CommonListItem
-                  icon={iconDate}
-                  title="Date et heure de fin"
-                  subTitle={isEndDate === '' ? ' ' : Moment(isEndDate).format('DD MMMM YYYY-HH:MM')}
-                  subTitleStyle={styles.listComment}
-                  titleStyle={styles.listCaption}
-                  onPress={showEndDatePicker}
-                />
-                <View style={styles.line} />
-              </View> : null}
-
-
-
-              {!showEndDataView ? <CommentText style={styles.addDateText} onPress={() => setshowEndDataView(true)} text="+ Date et heure de fin" color={conceptColor} /> : null}
-              <CommonListItem title="Pas de date" rightView={switchView} style={styles.addDateText} />
-              <TitleText text={'Lieu'} style={styles.title} />
-              <CommentText text="Choisis un adresse si besoin" style={styles.comment} />
-
-              <Reinput
-                label='Rue, adresse, ville'
-                icon={iconLocation}
-                underlineColor="#BFCDDB"
-                activeColor={conceptColor}
-                labelActiveColor="#6A8596"
-                labelColor="#6A8596"
-                paddingBottom={25 * em}
-                value={formik.values.address}
-
-                onBlur={formik.handleBlur('address')}
-                onChangeText={formik.handleChange('address')} />
-              {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
-
-              {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * hm }} color={conceptColor} size={'small'} />
-                : <CommonListItem
-                  style={{ marginLeft: 37 * em, bottom: 20 * hm
-                    // ,paddingBottom:50*hm 
-                  }}
-                  titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}
-                  icon={iconAddress}
-                  title="Utiliser ma position"
-                  onPress={() => { getlocation() }}
-                />}
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="datetime"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+        <DateTimePickerModal
+          isVisible={isEndDatePickerVisible}
+          mode="datetime"
+          minimumDate={isDate}
+          onConfirm={handleEndConfirm}
+          onCancel={hideendDatePicker}
+        />
+        <View style={styles.body}>
+          <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
+            <TitleText text={'Quand ?'} style={styles.title} />
+            <CommentText text="Choisis une date si nécessaire" style={styles.comment} />
+            <View style={{}}>
+              <CommonListItem
+                icon={iconDate}
+                title="Date et heure de début"
+                subTitle={Moment(isDate).format('DD MMMM YYYY-HH:MM')}
+                subTitleStyle={styles.listComment}
+                titleStyle={styles.listCaption}
+                onPress={showDatePicker}
+              />
+              <View style={styles.line} />
             </View>
-            <MabulNextButton
-              color={hexToRGB(conceptColor)}
-              style={styles.nextBtn}
-              onPress={formik.handleSubmit}
-            />
+            {showEndDataView ? <View style={{ paddingTop: 10 * hm }}>
+              <CommonListItem
+                icon={iconDate}
+                title="Date et heure de fin"
+                subTitle={isEndDate === '' ? ' ' : Moment(isEndDate).format('DD MMMM YYYY-HH:MM')}
+                subTitleStyle={styles.listComment}
+                titleStyle={styles.listCaption}
+                onPress={showEndDatePicker}
+              />
+              <View style={styles.line} />
+            </View> : null}
+
+
+
+            {!showEndDataView ? <CommentText style={styles.addDateText} onPress={() => setshowEndDataView(true)} text="+ Date et heure de fin" color={conceptColor} /> : null}
+            <CommonListItem title="Pas de date" rightView={switchView} style={styles.addDateText} />
+            <TitleText text={'Lieu'} style={styles.title} />
+            <CommentText text="Choisis un adresse si besoin" style={styles.comment} />
+
+            <Reinput
+              label='Rue, adresse, ville'
+              icon={iconLocation}
+              underlineColor="#BFCDDB"
+              activeColor={conceptColor}
+              labelActiveColor="#6A8596"
+              labelColor="#6A8596"
+              paddingBottom={25 * em}
+              value={formik.values.address}
+
+              onBlur={formik.handleBlur('address')}
+              onChangeText={formik.handleChange('address')} />
+            {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
+
+            {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * hm }} color={conceptColor} size={'small'} />
+              : <CommonListItem
+                style={{
+                  marginLeft: 37 * em, bottom: 20 * hm
+                  // ,paddingBottom:50*hm 
+                }}
+                titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}
+                icon={iconAddress}
+                title="Utiliser ma position"
+                onPress={() => { getlocation() }}
+              />}
           </View>
+          <MabulNextButton
+            color={hexToRGB(conceptColor)}
+            style={styles.nextBtn}
+            onPress={formik.handleSubmit}
+          />
+        </View>
       </KeyboardAvoidingView>
 
     </View>
@@ -243,12 +244,12 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    
+
   },
   header: {
     height: '12.45%',
     // marginTop: 15 * hm,
-     
+
     //  height: '10.3%',
     //  marginTop: 16 * hm,
   },
@@ -262,7 +263,7 @@ const styles = {
     marginTop: 10 * hm,
     lineHeight: 38 * em,
   },
-  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * hm,marginBottom:23*hm },
+  comment: { textAlign: 'left', lineHeight: 20 * em, height: 16 * em, textAlignVertical: 'center', marginTop: 10 * hm, marginBottom: 23 * hm },
 
   iconDate: { width: 19 * em, height: 20 * em, marginRight: 15 * em, marginTop: 9 * em },
   iconLocation: { width: 21 * em, height: 30 * em, marginRight: 15 * em },
@@ -276,7 +277,7 @@ const styles = {
     marginTop: 10 * hm,
     textAlign: 'left',
     marginLeft: 36 * em,
-    marginBottom:20*hm
+    marginBottom: 20 * hm
   },
   nextBtn: {
     alignSelf: 'flex-end',

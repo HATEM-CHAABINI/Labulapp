@@ -52,6 +52,7 @@ import ProProfileOverviewScreen from '../topbar/profile/proProfile/ProProfileOve
 import ProfileHomeScreen from '../topbar/profile/ProfileHomeScreen';
 import MyNeedScreen from '../topbar/profile/myNeeds/MyNeedScreen';
 import EditNeedScreen from '../topbar/profile/myNeeds/EditNeedScreen';
+import EditAlertScreen from '../topbar/profile/myNeeds/EditAlertScreen'
 import MabulCommonRequestDetailScreen from '../Mabul/MabulCommonRequestDetailScreen';
 
 import MyOrganizeScreen from '../topbar/profile/myNeeds/MyOrganizeScreen';
@@ -157,6 +158,7 @@ export default () => {
         <Scene key="myOrganize" hideNavBar component={MyOrganizeScreen} />
 
         <Scene key="editNeed" hideNavBar component={EditNeedScreen} />
+        <Scene key="editAlert" hideNavBar component={EditAlertScreen} />
 
         {/* <Scene key="loginMenu" hideNavBar component={LoginMenuScreen} /> */}
 

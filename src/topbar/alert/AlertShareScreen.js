@@ -58,10 +58,13 @@ const usersLista = [
 
 const AlertShareScreen = (props) => {
   const conceptColor = '#F9547B';
+  const { demandData } = useSelector((state) => state.demandReducer);
+  const { profileData } = useSelector((state) => state.profileReducer);
+
   const [allChecked, setallChecked] = useState(false)
   const [usersList, setusersList] = useState({ data: usersLista })
+  const [user, setuser] = useState(profileData)
 
-  const { demandData } = useSelector((state) => state.demandReducer);
   const [optionCheck, setOptionCheck] = useState([]);
   const [checked, setChecked] = useState(new Array(usersList.length).fill(false));
 
@@ -74,7 +77,7 @@ const AlertShareScreen = (props) => {
       setOptionCheck(arr);
     }, 50);
   }
-
+  // console.log("user ", user);
 
 
   useEffect(() => {
@@ -125,7 +128,7 @@ const AlertShareScreen = (props) => {
   const dataSave = (selected) => {
     Object.assign(demandData, { invited: selected })
     firestore().collection('userAlerts').doc(auth().currentUser.uid)
-      .collection('alerts').doc().set(demandData).then((res) => { Actions.myAlert({ data: demandData }), console.log("res ", res); });
+      .collection('alerts').doc().set(demandData).then((res) => { Actions.myAlert({ alertData: demandData, user: user }), console.log("res ", res); });
   }
 
   const getselecteditem = () => {

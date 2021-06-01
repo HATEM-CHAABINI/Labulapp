@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
-import { em, hm } from '../../../constants/consts';
+import { View, ActivityIndicator, Text } from 'react-native';
+import { em, hm, WIDTH, HEIGHT } from '../../../constants/consts';
 import { FlatList } from 'react-native';
 import ProfileCommonNeedCard from '../../../adapter/ProfileCommonNeedCard';
+import ProfileCommonNeedCard2 from '../../../adapter/ProfileCommonNeedCards2';
 import { Actions } from 'react-native-router-flux';
 import NeedService from '../../../model/service/NeedService';
 import NeedServiceType from '../../../model/service/NeedServiceType';
@@ -13,6 +14,7 @@ import ServiceType from '../../../model/service/ServiceType';
 import NeedStatusType from '../../../model/service/NeedStatusType';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth'
+import { fetchDemands } from '../../../services/firebase'
 let currentUser = auth().currentUser
 
 // console.log(hh)
@@ -58,26 +60,26 @@ const needsLists = [
 const MyNeedsTabScreen = () => {
 
   const [data, setdata] = useState([])
-  const getData = async (imageArray) => {
-
-
-    await Promise.all(
-      firestore().collection('userDemands').doc(auth().currentUser.uid).collection('Need').get().then(async (snapshot) => {
-
-
-        let data = await snapshot._docs.map((val) => {
-          return val._data
-        })
-        setdata(data)
-      })
-    );
-  };
+  const [demands, setdemands] = useState([])
+  const [loadingData, setloadingData] = useState(true)
   useEffect(() => {
-    getData()
+
+    fetchDemands().then(async (item) => {
+
+      if (item !== undefined) {
+        setdemands(() => item)
+      }
+
+
+    })
   }, [])
+  useEffect(() => {
+    if (demands.length > 0) {
+      setloadingData(false)
+    }
 
 
-
+  }, [demands])
 
   const renderFlatList = ({ item, index }) => (
     <ProfileCommonNeedCard
@@ -92,6 +94,36 @@ const MyNeedsTabScreen = () => {
       }}
     />
   );
+  const renderFlatList2 = ({ item, index }) => (
+    <ProfileCommonNeedCard2
+      data={item}
+      style={[styles.listItem, { marginBottom: needsLists.length === index + 1 ? 50 * hm : 15 * hm }]}
+      onPress={() => {
+        if (item.type === ServiceType.ORGANIZE) {
+          Actions.myOrganize();
+        } else {
+          Actions.myNeed({ data: item });
+        }
+      }
+      }
+    />
+  );
+  const renderEmptyContainer = () => {
+    return (<View style={{
+      flex: 1,
+      alignItems: 'center',
+      minWidth: WIDTH,
+      right: '5%'
+    }}>
+      <Text style={{
+        alignItems: 'center',
+        fontSize: 18,
+
+      }}>
+        No Data Found
+</Text>
+    </View>)
+  }
   const listView = (
     <FlatList
       data={needsLists}
@@ -99,8 +131,25 @@ const MyNeedsTabScreen = () => {
       keyExtractor={(i) => i.id}
       style={{ paddingTop: 25 * hm, paddingHorizontal: 30 * em, backgroundColor: '#ffffff' }}
     />
+
   );
-  return <View style={styles.container}>{listView}</View>;
+  const listView2 = (
+    <FlatList
+      data={demands}
+      renderItem={renderFlatList2}
+      ListEmptyComponent={renderEmptyContainer}
+      keyExtractor={({ item, index }) => index}
+      style={{ paddingTop: 25 * hm, paddingHorizontal: 30 * em, backgroundColor: '#ffffff' }}
+    />
+
+  );
+  return (<>
+    {/* <View style={styles.container}>{listView}</View> */}
+    {loadingData ? <ActivityIndicator size={'large'} color={'#41D0E2'} style={{
+      flex: 1,
+      alignItems: 'center',
+      backgroundColor: '#F0F5F7',
+    }} /> : <View style={styles.container}>{listView2}</View>}</>);
 };
 
 const styles = {

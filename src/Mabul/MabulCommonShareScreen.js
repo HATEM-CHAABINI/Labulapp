@@ -48,8 +48,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
   }
   const saveData = (data) => {
 
-    console.log("data ", data);
-    console.log("auth().currentUser.uid ", auth().currentUser.uid);
+
     if (mabulService === 'organize') {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
         .collection('organize').doc().set(data).then((res) => { setloadingSet(false); Actions.myOrganize({ data: data }), console.log("res ", res); });
@@ -87,8 +86,6 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
     setloadingSet(true)
     let data = Object.assign(demandData, { contactType: contactType })
     saveData(data);
-
-
   }
   return (
     <View style={styles.container}>

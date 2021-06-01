@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Text, ImageBackground, Platform, Image, TouchableOpacity,StyleSheet,TouchableHighlight } from 'react-native';
+import { View, Text, ImageBackground, Platform, Image, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
 import { em, hm } from '../constants/consts';
 import { Actions } from 'react-native-router-flux';
 import { Animals, Bricolage, HomeCare, Interview, Workshop, Path, Return2Point, Alert } from '../assets/svg/icons';
@@ -8,7 +8,7 @@ const servicIconSize = { width: 18 * em, height: 18 * em };
 const locationList = [
   {
     id: '0',
-    latitude:    48.857716,
+    latitude: 48.857716,
     longitude: 2.3367652,
     avatar: require('../assets/images/sample_user_2.png'),
     serviceIcon: Animals(servicIconSize),
@@ -16,7 +16,7 @@ const locationList = [
   },
   {
     id: '1',
-    latitude:    48.8593816,
+    latitude: 48.8593816,
     longitude: 2.3372225,
     avatar: require('../assets/images/sample_ic_plant.png'),
     serviceIcon: Interview(servicIconSize),
@@ -24,8 +24,8 @@ const locationList = [
   },
   {
     id: '2',
-    latitude:   48.8594982,
-    longitude:2.340837,
+    latitude: 48.8594982,
+    longitude: 2.340837,
     avatar: require('../assets/images/sample_user_2.png'),
     serviceIcon: Bricolage(servicIconSize),
     bgColor: 'rgba(56, 194, 255, 0.2)',
@@ -59,21 +59,21 @@ const locationList = [
 const FriendsMenuScreen = () => {
   return (
     <View style={styles.container}>
-             <MapView
-          provider={PROVIDER_DEFAULT} // remove if not using Google Maps
-          style={styles.map}
-          region={{
-         
-            latitude:    48.857716,
-            longitude: 2.3367652,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
-        >
-          
-{locationList.map((location,i) => 
-PositionView(location,i  ))}
-{/* <Marker
+      <MapView
+        provider={PROVIDER_DEFAULT} // remove if not using Google Maps
+        style={styles.map}
+        region={{
+
+          latitude: 48.857716,
+          longitude: 2.3367652,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
+        }}
+      >
+
+        {locationList.map((location, i) =>
+          PositionView(location, i))}
+        {/* <Marker
   
 key={i}
 // tracksViewChanges={false}
@@ -117,8 +117,8 @@ shadowOpacity:1,
 </Marker> */}
 
 
-        </MapView> 
-        <View
+      </MapView>
+      <View
         style={{
           position: 'absolute',
           top: 529 * hm,
@@ -344,53 +344,57 @@ shadowOpacity:1,
   );
 };
 
-const PositionView = ({ latitude, longitude, avatar, serviceIcon, bgColor, id,i }) => (
- 
+const PositionView = ({ latitude, longitude, avatar, serviceIcon, bgColor, id, i }) => (
+
 
   <Marker
-  
-  key={id}
-  // tracksViewChanges={false}
-  coordinate={{
-    latitude: latitude,
-    longitude:longitude}}
-    
-   
+
+    key={id}
+    // tracksViewChanges={false}
+    coordinate={{
+      latitude: latitude,
+      longitude: longitude
+    }}
+
+
     onPress={() => Actions.friendOrganize()}
 
-  
-     >
-     <View style={{padding: 10,width:76 * em, height:48 * hm }}>
-     <View
-  style={{
-  shadowColor: '#254D5621',
-  shadowOffset: {
-    width: 0,
-    height: 10 * hm,
-  },
-  shadowRadius: 12 * em,
-  shadowOpacity:1,
-   position: 'absolute', }}>
-  <Path width={76 * em} height={48 * hm} />
-  </View> 
-  <View style={{ zIndex: 1,
-    position: 'absolute',marginTop:4*hm,
-    marginRight:2*em,
-    marginLeft:2*em,
-    marginBottom:2*hm,
-    width: 72 * em,
-    height: 30 * hm,
-    borderRadius: 18 * em,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between', backgroundColor: bgColor}}>
-  
-  <Image source={avatar} style={{marginLeft: 2 * em, width: 36 * em, height: 36 * em}} />
-  <View style={{  marginRight: 8.83 * em }}>{serviceIcon}</View>
-  </View> 
-   </View>
+
+  >
+    <View style={{ padding: 10, width: 76 * em, height: 48 * hm }}>
+      <View
+        style={{
+          shadowColor: '#254D5621',
+          shadowOffset: {
+            width: 0,
+            height: 10 * hm,
+          },
+          shadowRadius: 12 * em,
+          shadowOpacity: 1,
+          position: 'absolute',
+        }}>
+        <Path width={76 * em} height={48 * hm} />
+      </View>
+      <View style={{
+        zIndex: 1,
+        position: 'absolute', marginTop: 4 * hm,
+        marginRight: 2 * em,
+        marginLeft: 2 * em,
+        marginBottom: 2 * hm,
+        width: 72 * em,
+        height: 30 * hm,
+        borderRadius: 18 * em,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between', backgroundColor: bgColor
+      }}>
+
+        <Image source={avatar} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} />
+        <View style={{ marginRight: 8.83 * em }}>{serviceIcon}</View>
+      </View>
+    </View>
   </Marker>
-  
+
 );
 const styles = StyleSheet.create({
   map: {
@@ -407,7 +411,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  
+
   TabControlContainer: {
     position: 'absolute',
     flex: 1,

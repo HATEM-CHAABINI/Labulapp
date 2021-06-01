@@ -19,6 +19,8 @@ import ReadMore from 'react-native-read-more-text';
 const MabulDetailView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(props.data);
+  const [data2] = useState(props.data2);
+  console.log("data2 ", data2);
   const userBadge = getUserBadge(data.type, data.subType);
   const colorStyles = { button: { color: '#41D0E2' }, label: { color: '#A0AEB8' } };
   const InviteButton = (
@@ -50,6 +52,7 @@ const MabulDetailView = (props) => {
       <ScrollView style={styles.scrollView}>
         <Image
           source={typeof data.coverImage === 'number' ? data.coverImage : require('../../assets/images/sample_cover_2.png')}
+          // source={data2.images !== undefined ? { uri: data2.images[0].uri } : require('../../assets/images/sample_cover_2.png')}
           style={styles.cover}
         />
         <View style={styles.body}>

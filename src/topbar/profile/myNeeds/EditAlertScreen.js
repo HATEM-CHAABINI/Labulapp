@@ -23,82 +23,25 @@ const EditNeedScreen = ({ alertData }) => {
     const [userProfile] = useState(updateUserPrfile);
     console.log("alertData ", alertData);
     return (
-        <ProfileCommonHeader title="Modifier demande" onCancel={() => Actions.pop()} onFinish={() => Actions.pop()}>
-            {/* <View style={styles.listItem}>
-                <View style={{ flexDirection: 'row', marginBottom: 15 * em, justifyContent: 'space-between' }}>
-                    <CommentText text="Photos" color="#6A8596" />
-                    <CommentText text="3 maximum" color="#A0AEB8" />
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
-                    <ImageBackground
-                        imageStyle={{ borderRadius: 15 * em }}
-                        source={require('../../../assets/images/sample_cover_9.png')}
-                        style={styles.photo}>
-                        <View style={styles.cancel}>
-                            <CrossGray width={12 * em} height={12 * em} />
-                        </View>
-                    </ImageBackground>
-                    <ImageBackground
-                        imageStyle={{ borderRadius: 15 * em }}
-                        source={require('../../../assets/images/sample_cover_9.png')}
-                        style={styles.photo}>
-                        <View style={styles.cancel}>
-                            <CrossGray width={12 * em} height={12 * em} />
-                        </View>
-                    </ImageBackground>
-                    <View
-                        imageStyle={{ borderRadius: 15 * em }}
-                        style={[
-                            styles.photo,
-                            {
-                                borderWidth: 2 * em,
-                                borderColor: '#BFCDDB',
-                                borderStyle: 'dashed',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                flexDirection: 'column',
-                            },
-                        ]}>
-                        <View style={styles.addPhoto}>
-                            <EditAddPhoto width={32.86 * em} height={23 * em} />
-                        </View>
-                        <CommentText text="Clique ici" color="#40CDDE" />
-                    </View>
-                </View>
-            </View> */}
+        <ProfileCommonHeader title="Modifier alerte" onCancel={() => Actions.pop()} onFinish={() => Actions.pop()}>
             <ProfileInformationListItem
-                caption={'Type de demande'}
+                caption={'Type d’alerte'}
                 titleUpperCase
-                value={'J’ai besoin/ coup de main'}
+                value={'Accident'}
                 style={styles.listItem}
             />
             <ProfileInformationListItem
                 titleUpperCase
-                caption={'Catégorie'}
-                value={'Bricolage/ jardinage'}
-                style={styles.listItem}
-            />
-            <ProfileInformationListItem
-                titleUpperCase
-                caption={'Titre'}
-                value={'Récolter des figues'}
-                noClick
+                caption={'Où'}
+                value={'France'}
                 style={styles.listItem}
             />
             <ProfileInformationListItem
                 titleUpperCase
                 caption={'Description'}
-                noClick
                 value={
-                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos…'
-                }
-                style={styles.listItem}
-            />
-            <ProfileInformationListItem
-                titleUpperCase
-                caption={'Date'}
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos…'}
                 noClick
-                value={'29 Fév · 14h00'}
                 style={styles.listItem}
             />
             <ProfileInformationListItem
@@ -113,7 +56,7 @@ const EditNeedScreen = ({ alertData }) => {
                 style={styles.listItem}
             />
             <CommonButton
-                text={'Supprimer ma demande'}
+                text={'Supprimer mon alerte'}
                 style={styles.deleteBtn}
                 textStyle={{ color: '#F9547B' }}
                 onPress={() => Actions.pop()}

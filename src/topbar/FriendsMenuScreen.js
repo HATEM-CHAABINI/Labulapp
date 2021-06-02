@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, Platform, Image, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
 import { em, hm } from '../constants/consts';
 import { Actions } from 'react-native-router-flux';
 import { Animals, Bricolage, HomeCare, Interview, Workshop, Path, Return2Point, Alert } from '../assets/svg/icons';
 import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import { fetchallDemands, getUserProfile } from '../services/firebase'
+import { ActivityIndicator } from 'react-native';
+
 const servicIconSize = { width: 18 * em, height: 18 * em };
 const locationList = [
   {
@@ -57,8 +60,38 @@ const locationList = [
 ];
 
 const FriendsMenuScreen = () => {
-  return (
+  const [demands, setdemands] = useState([])
+  const [loadingData, setloadingData] = useState(true)
+  useEffect(() => {
+
+    fetchallDemands().then(async (item) => {
+
+      if (item !== undefined) {
+        setdemands(() => item)
+      }
+
+
+    })
+  }, [])
+  useEffect(() => {
+    if (demands.length > 0) {
+      setloadingData(false)
+    }
+
+
+  }, [demands])
+ 
+
+  return (<>
+  
+    {/* <View style={styles.container}>{listView}</View> */}
+    {loadingData ? <ActivityIndicator size={'large'} color={'#41D0E2'} style={{
+      flex: 1,
+      alignItems: 'center',
+      backgroundColor: '#F0F5F7',
+    }} /> :
     <View style={styles.container}>
+      
       <MapView
         provider={PROVIDER_DEFAULT} // remove if not using Google Maps
         style={styles.map}
@@ -71,52 +104,71 @@ const FriendsMenuScreen = () => {
         }}
       >
 
-        {locationList.map((location, i) =>
-          PositionView(location, i))}
-        {/* <Marker
+        {
+        demands.map((demand, i) =>
+          
+demand.forEach( doc => 
   
-key={i}
+  
+  
+  console.log("usssssssssssssssssss",doc) )
+/* <Marker
+
+key={id}
 // tracksViewChanges={false}
 coordinate={{
-  latitude: location.latitude,
-  longitude:location.longitude}}
-  
- 
-  onPress={() =>console.log("kdkdkdkdkdkdkdkd " +i)}
-
-   >
-   <View style={{padding: 10,width:76 * em, height:48 * hm }}>
-   <View
-style={{
-shadowColor: '#254D5621',
-shadowOffset: {
-  width: 0,
-  height: 10 * hm,
-},
-shadowRadius: 12 * em,
-shadowOpacity:1,
- position: 'absolute', }}>
-<Path width={76 * em} height={48 * hm} />
-</View> 
-<View style={{ zIndex: 1,
-  position: 'absolute',marginTop:4*hm,
-  marginRight:2*em,
-  marginLeft:2*em,
-  marginBottom:2*hm,
-  width: 72 * em,
-  height: 30 * hm,
-  borderRadius: 18 * em,
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between', backgroundColor: location.bgColor}}>
-
-<Image source={location.avatar} style={{marginLeft: 2 * em, width: 36 * em, height: 36 * em}} />
-<View style={{  marginRight: 8.83 * em }}>{location.serviceIcon}</View>
-</View> 
- </View>
-</Marker> */}
+  latitude: latitude,
+  longitude: longitude
+}}
 
 
+onPress={() => Actions.friendOrganize()}
+
+
+>
+<View style={{ padding: 10, width: 76 * em, height: 48 * hm }}>
+  <View
+    style={{
+      shadowColor: '#254D5621',
+      shadowOffset: {
+        width: 0,
+        height: 10 * hm,
+      },
+      shadowRadius: 12 * em,
+      shadowOpacity: 1,
+      position: 'absolute',
+    }}>
+    <Path width={76 * em} height={48 * hm} />
+  </View>
+  <View style={{
+    zIndex: 1,
+    position: 'absolute', marginTop: 4 * hm,
+    marginRight: 2 * em,
+    marginLeft: 2 * em,
+    marginBottom: 2 * hm,
+    width: 72 * em,
+    height: 30 * hm,
+    borderRadius: 18 * em,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between', backgroundColor: bgColor
+  }}>
+
+    <Image source={avatar} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} />
+    <View style={{ marginRight: 8.83 * em }}>{serviceIcon}</View>
+  </View>
+</View>
+</Marker> */
+
+
+// 
+
+
+          // PositionView(location, i)
+          
+          
+          
+          )}
       </MapView>
       <View
         style={{
@@ -185,164 +237,9 @@ shadowOpacity:1,
           {Alert({ width: 26.45 * em, height: 22.31 * em })}
         </TouchableOpacity>
       </View>
-      {/* <Image style={styles.TabControlContainer} source={require('../assets/images/bg_map.png')} />
 
-      <View style={{ position: 'absolute', top: 203 * hm, left: 34 * em }}>
-        <Path width={76 * em} height={48 * em} />
-      </View>
-      <View
-        style={{
-          position: 'absolute',
-          top: 213 * hm,
-          left: 309 * em,
-          alignItems: 'center',
-          justifyContent: 'center',
-          //backgroundColor: '#FFF',
-          elevation: 10,
-          shadowColor: '#254D5621',
-          shadowOffset: {
-            width: 0,
-            height: 5 * hm,
-          },
-          shadowRadius: 9 * em,
-        }}>
-        <Image source={require('../assets/images/img_alert.png')} />
-      </View>
-     
-      <View
-        style={{
-          position: 'absolute',
-          top: 335 * hm,
-          width: 36 * em,
-          height: 36 * em,
-          left: 297 * em,
-          borderRadius: 18 * em,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'rgba(238, 231, 250, 1)',
-          borderColor: '#ffffff',
-          borderWidth: 2 * em,
-          elevation: 10,
-          shadowColor: '#254D5621',
-          shadowOffset: {
-            width: 0,
-            height: 10 * hm,
-          }, shadowOpacity: 1,
-          shadowRadius: 12 * em,
-        }}>
-        {Interview(servicIconSize)}
-      </View>
-
-      <View
-        style={{
-          position: 'absolute',
-          top: 529 * hm,
-          width: 46 * em,
-          height: 46 * em,
-          left: 309 * em,
-          borderRadius: 23 * em,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#ffffff',
-          borderColor: '#ffffff',
-          borderWidth: 2 * em,
-          ...Platform.select({
-            ios: {
-              shadowColor: '#254D5621',
-              shadowOffset: {
-                width: 0,
-                height: 10 * hm,
-              }, shadowOpacity: 1,
-              shadowRadius: 12 * em,
-            },
-            android: {
-              elevation: 5,
-            },
-          }),
-
-        }}>
-        {Return2Point(servicIconSize)}
-      </View>
-
-      <View
-        style={{
-          position: 'absolute',
-          top: 463 * hm,
-          width: 46 * em,
-          height: 46 * em,
-          left: 309 * em,
-          borderRadius: 23 * em,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderColor: '#ffffff',
-          borderWidth: 2 * em,
-          backgroundColor: '#FFF',
-          ...Platform.select({
-            ios: {
-              shadowColor: '#254D5621',
-              shadowOffset: {
-                width: 0,
-                height: 10 * hm,
-              }, shadowOpacity: 1,
-              shadowRadius: 12 * em,
-            },
-            android: {
-              elevation: 5,
-            },
-          }),
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => Actions.alertCircles()}
-        >
-          {Alert({ width: 26.45 * em, height: 22.31 * em })}
-        </TouchableOpacity>
-      </View>
-      <Image
-        source={require('../assets/images/img_navigator.png')}
-        style={{ position: 'absolute', top: 316 * hm, zIndex: 0, opacity: 0.8 }}
-      />
-      <View
-        style={{
-          position: 'absolute',
-          top: 463 * hm,
-          width: 36 * em,
-          height: 36 * em,
-          left: 34 * em,
-          borderRadius: 23 * em,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'rgba(255, 244, 217, 1)',
-          borderColor: '#ffffff',
-          borderWidth: 2 * em,
-          ...Platform.select({
-            ios: {
-              shadowColor: '#254D5621',
-              shadowOffset: {
-                width: 0,
-                height: 10 * hm,
-              }, shadowOpacity: 1,
-              shadowRadius: 12 * em,
-            },
-            android: {
-              elevation: 5,
-            },
-          }),
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => Actions.friendOrganize()}
-        >
-          {Workshop(servicIconSize)}
-        </TouchableOpacity>
-      </View> */}
-    </View >
-  );
-};
+    </View >}</>);
+ }
 
 const PositionView = ({ latitude, longitude, avatar, serviceIcon, bgColor, id, i }) => (
 

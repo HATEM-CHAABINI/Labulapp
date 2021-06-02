@@ -1,5 +1,10 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from "@react-native-firebase/auth";
+import User from '../model/user/User';
+import NeedService from '../model/service/NeedService';
+import NeedServiceType from '../model/service/NeedServiceType';
+import NeedStatusType from '../model/service/NeedStatusType';
+
 let fireKey = firestore().collection("users");
 
 export const getUserProfile = (id) => {
@@ -24,6 +29,37 @@ export const fetchAlerts = async () => {
     return alerts
 
 }
+
+
+export const fetchallDemands = async () => {
+    let demands = []
+    const responseNeed = firestore().collectionGroup("needs")
+    const users = await responseNeed.get();
+
+
+    users.docs.forEach(async doc => {
+
+        if (doc.data() !== undefined) {
+            getUserProfile(doc.ref.parent.parent.id).then((res) => {
+                if(res.profilePic !== undefined){
+      
+                customData = [
+                    {
+                      user: res,
+                      id: doc.ref.id,
+                      need: doc.data()
+                    }
+                  ]
+                }
+            })
+           
+                demands.push(customData)
+        }
+
+});
+return demands
+}
+
 export const fetchDemands = async () => {
     let demands = []
     const responseNeed = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('needs')

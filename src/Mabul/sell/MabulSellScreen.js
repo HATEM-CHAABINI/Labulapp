@@ -7,7 +7,7 @@ import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import { useSelector, useDispatch } from 'react-redux'
-import { add_into_demand } from '../../redux/actions/demand'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
 const sellItems = [
   {
     id: 0,
@@ -41,11 +41,14 @@ const MabulSellScreen = (props) => {
       icon={item.icon}
       noIcons={true}
       percent={0}
-        // onPress={() =>dispatch(add_into_demand({ type: item }))}
-    onPress={() => { item.onPress(), 
-       item.id === 0 ? dispatch(add_into_demand({ belongsTo: { name: "service", id: item.id } })) 
-    : item.id === 1 ? dispatch(add_into_demand({ belongsTo: { name: "object", id: item.id } }))
-    : dispatch(update_into_demand({ belongsTo: { name: "event", id: item.id } })) }}
+      // onPress={() =>dispatch(add_into_demand({ type: item }))}
+      onPress={() => {
+
+        item.id === 0 ? dispatch(add_into_demand({ belongsTo: { name: "Service", id: item.id } }))
+          : item.id === 1 ? dispatch(add_into_demand({ belongsTo: { name: "Objet", id: item.id } }))
+            : dispatch(update_into_demand({ belongsTo: { name: "Évènement", id: item.id } }));
+        item.onPress()
+      }}
     />
   );
   return (
@@ -56,7 +59,7 @@ const MabulSellScreen = (props) => {
         noBackButton={true}
         progressBarColor={'#AA87E5'}
       />
-       <View style={styles.body}>
+      <View style={styles.body}>
         <TitleText text={'Je vends'} style={styles.title} />
         <FlatList data={sellItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
       </View>

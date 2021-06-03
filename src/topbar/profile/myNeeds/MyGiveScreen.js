@@ -16,12 +16,14 @@ const needData = new NeedService(
     NeedServiceType.REPAIR
 );
 
-const MyGiveScreen = () => {
+const MyGiveScreen = (props) => {
     const [] = useState(false);
     const [data] = useState(needData);
+    const [data2] = useState(props.data);
+    const [user] = useState(props.user);
     return (
         <View style={styles.container}>
-            <MabulDetailView data={data} />
+            <MabulDetailView data={data} data2={data2} user={user} />
         </View>
     );
 };

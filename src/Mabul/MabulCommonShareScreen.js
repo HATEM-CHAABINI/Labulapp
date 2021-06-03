@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import TitleText from '../text/TitleText';
 import { em, hm, mabulColors } from '../constants/consts';
@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-
+import { getUserProfile } from '../services/firebase'
 const MabulCommonShareScreen = ({ mabulService, process }) => {
   const dispatch = useDispatch()
   const { demandData } = useSelector((state) => state.demandReducer);
@@ -21,6 +21,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
   const [fchecked, setfChecked] = useState(false);
   const [tchecked, settChecked] = useState(false);
   const [contactType, setcontactType] = useState()
+  const [user, setuser] = useState()
   const [loadingSet, setloadingSet] = useState(false)
   const check = (id) => {
     setvChecked(false)
@@ -46,45 +47,61 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
         break;
     }
   }
+
+
+  useEffect(() => {
+
+
+    getUserProfile(auth().currentUser.uid).then(async (item) => {
+
+      setuser(() => item)
+    })
+
+  }, [])
   const saveData = (data) => {
 
 
     if (mabulService === 'organize') {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('organize').doc().set(data).then((res) => { setloadingSet(false); Actions.myOrganize({ data: data }), console.log("res ", res); });
+        .collection('organize').doc().set(data).then((res) => { setloadingSet(false); Actions.myOrganize({ data: data, data2: data, user: user }), console.log("res ", res); });
 
     } else if (mabulService === 'give') {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('give').doc().set(data).then((res) => { setloadingSet(false); Actions.myGive({ data: data }) });
+        .collection('give').doc().set(data).then((res) => { setloadingSet(false); Actions.myGive({ data: data, data2: data, user: user }) });
 
     } else if (mabulService === 'sell') {
+
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('sell').doc().set(data).then((res) => { setloadingSet(false); Actions.mySell({ data: data }) });
+        .collection('sell').doc().set(data).then((res) => { setloadingSet(false); Actions.mySell({ data: data, data2: data, user: user }) });
 
     } else {
 
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('needs').doc().set(data).then((res) => { setloadingSet(false); Actions.myNeed({ data: data }) });
+        .collection('need').doc().set(data).then((res) => { setloadingSet(false); Actions.myNeed({ data: data, data2: data, user: user }) });
     }
 
 
-    // mabulService === 'organize'
-    //   ? Actions.myOrganize({ data: data })
-    //   : mabulService === 'give'
-    //     ? Actions.myGive({ data: data })
-    //     : mabulService === 'sell'
-    //       ?
-    //       Actions.mySell({ data: data })
-    //       // firestore().collection('userDemands').doc(auth().currentUser.uid)
-    //       // .collection('sell').doc().set(data).then((res) => { setloadingSet(false)})
-    //       : firestore().collection('userDemands').doc(auth().currentUser.uid)
-    //         .collection('needs').doc().set(data).then((res) => { setloadingSet(false) }), Actions.myNeed({ data: data });
 
   }
 
+
   const onSubmit = () => {
     setloadingSet(true)
-    let data = Object.assign(demandData, { contactType: contactType })
+    let data = {}
+    if (mabulService === 'organize') {
+      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'organize', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+
+    } else if (mabulService === 'give') {
+      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'give', code: 1, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+
+    } else if (mabulService === 'sell') {
+      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'sell', code: 2, subCode: 40 }, status: { status: 'INPROGRESS', code: 102 } })
+
+    } else {
+
+      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'need', code: 3, subCode: 11 }, status: { status: 'INPROGRESS', code: 102 } })
+    }
+
     saveData(data);
   }
   return (

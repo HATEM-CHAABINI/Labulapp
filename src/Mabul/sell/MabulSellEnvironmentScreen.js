@@ -13,23 +13,24 @@ import { AperoSell, MealSell, MeetSell, PartySell, ShowSell, WorkshopSell } from
 const iconSize = { width: 38 * em, height: 38 * em };
 
 const themeData = [
-  { id: 0, icon: PartySell(iconSize), themeName: 'Fête' },
-  { id: 1, icon: AperoSell(iconSize), themeName: 'Apéro' },
-  { id: 2, icon: ShowSell(iconSize), themeName: 'Spectacle' },
-  { id: 3, icon: MeetSell(iconSize), themeName: 'Rencontre' },
-  { id: 4, icon: MealSell(iconSize), themeName: 'Repas' },
-  { id: 5, icon: WorkshopSell(iconSize), themeName: 'Atelier' },
+  { id: 0, icon: PartySell(iconSize), itemName: 'Fête' },
+  { id: 1, icon: AperoSell(iconSize), itemName: 'Apéro' },
+  { id: 2, icon: ShowSell(iconSize), itemName: 'Spectacle' },
+  { id: 3, icon: MeetSell(iconSize), itemName: 'Rencontre' },
+  { id: 4, icon: MealSell(iconSize), itemName: 'Repas' },
+  { id: 5, icon: WorkshopSell(iconSize), itemName: 'Atelier' },
 ];
 const MabulSellEnvironmentScreen = (props) => {
   const dispatch = useDispatch()
 
   const renderFlatList = ({ item }) => (
+
     <MabulCommonListItem
-      text={item.themeName}
+      text={item.itemName}
       style={styles.listItem}
       icon={item.icon}
       // onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 })}
-      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) } }
+      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) }}
     />
   );
   return (
@@ -56,7 +57,7 @@ const styles = {
     backgroundColor: '#ffffff',
     PaddingTop: 16 * hm,
   },
-  header: { 
+  header: {
     height: '12.45%',
 
   },

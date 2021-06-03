@@ -18,11 +18,13 @@ const organizeData = Object.assign(
   )
 );
 
-const MyOrganizeScreen = () => {
+const MyOrganizeScreen = (props) => {
   const [data] = useState(organizeData);
+  const [data2] = useState(props.data);
+  const [user] = useState(props.user);
   return (
     <View style={styles.container}>
-      <MabulDetailView data={data} />
+      <MabulDetailView data={data} data2={data2} user={user} />
     </View>
   );
 };

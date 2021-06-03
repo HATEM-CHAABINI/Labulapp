@@ -14,10 +14,8 @@ import ServiceType from '../../../model/service/ServiceType';
 import NeedStatusType from '../../../model/service/NeedStatusType';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth'
-import { fetchDemands } from '../../../services/firebase'
-let currentUser = auth().currentUser
+import { fetchDemands, getUserProfile } from '../../../services/firebase'
 
-// console.log(hh)
 
 const needsLists = [
   Object.assign(
@@ -60,6 +58,7 @@ const needsLists = [
 const MyNeedsTabScreen = () => {
 
   const [data, setdata] = useState([])
+  const [user, setuser] = useState()
   const [demands, setdemands] = useState([])
   const [loadingData, setloadingData] = useState(true)
   useEffect(() => {
@@ -68,9 +67,16 @@ const MyNeedsTabScreen = () => {
 
       if (item !== undefined) {
         setdemands(() => item)
+        if (item.length === 0) {
+          setloadingData(false)
+        }
       }
 
 
+    })
+    getUserProfile(auth().currentUser.uid).then(async (item) => {
+
+      setuser(() => item)
     })
   }, [])
   useEffect(() => {
@@ -78,8 +84,10 @@ const MyNeedsTabScreen = () => {
       setloadingData(false)
     }
 
-
   }, [demands])
+
+
+
 
   const renderFlatList = ({ item, index }) => (
     <ProfileCommonNeedCard
@@ -95,14 +103,15 @@ const MyNeedsTabScreen = () => {
     />
   );
   const renderFlatList2 = ({ item, index }) => (
+
     <ProfileCommonNeedCard2
-      data={item}
+      data={item.data}
       style={[styles.listItem, { marginBottom: needsLists.length === index + 1 ? 50 * hm : 15 * hm }]}
       onPress={() => {
-        if (item.type === ServiceType.ORGANIZE) {
+        if (item.data.type === ServiceType.ORGANIZE) {
           Actions.myOrganize();
         } else {
-          Actions.myNeed({ data: item });
+          Actions.myNeed({ data: item.data, user: user, docId: item.docId });
         }
       }
       }
@@ -133,6 +142,7 @@ const MyNeedsTabScreen = () => {
     />
 
   );
+  console.log(demands);
   const listView2 = (
     <FlatList
       data={demands}

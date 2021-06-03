@@ -56,7 +56,7 @@ const MabulSellServiceScreen = (props) => {
       subText={item.comment}
       icon={item.icon}
       // onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 })}
-      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) } }
+      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) }}
     />
   );
   return (

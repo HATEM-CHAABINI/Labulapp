@@ -15,14 +15,16 @@ import CommonListItem from '../../adapter/CommonListItem';
 import NeedStatusType from '../../model/service/NeedStatusType';
 import Message from '../../model/message/Message';
 import ReadMore from 'react-native-read-more-text';
-
+import Moment from 'moment';
 const MabulDetailView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(props.data);
   const [data2] = useState(props.data2);
-  console.log("data2 ", data2);
-  const userBadge = getUserBadge(data.type, data.subType);
+  const [user] = useState(props.user);
+
+  const userBadge = getUserBadge(data2.serviceType.code, data2.serviceType.subCode);
   const colorStyles = { button: { color: '#41D0E2' }, label: { color: '#A0AEB8' } };
+
   const InviteButton = (
     <CommonButton
       style={styles.inviteBtn}
@@ -36,7 +38,7 @@ const MabulDetailView = (props) => {
       style={styles.quizBtn}
       textStyle={colorStyles.button}
       text="Modifier"
-      onPress={() => Actions.editNeed()}
+      onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
     />
   );
   const AskButton = (
@@ -51,14 +53,15 @@ const MabulDetailView = (props) => {
     <>
       <ScrollView style={styles.scrollView}>
         <Image
-          source={typeof data.coverImage === 'number' ? data.coverImage : require('../../assets/images/sample_cover_2.png')}
-          // source={data2.images !== undefined ? { uri: data2.images[0].uri } : require('../../assets/images/sample_cover_2.png')}
+          // source={typeof data.coverImage === 'number' ? data.coverImage : require('../../assets/images/sample_cover_2.png')}
+          source={data2.images !== undefined ? { uri: data2.images[0].uri } : require('../../assets/images/sample_cover_2.png')}
           style={styles.cover}
         />
         <View style={styles.body}>
           <View style={styles.ViewtimeTxt}>
             <CommonText
-              text={data.status === NeedStatusType.CANCELED ? 'Terminé' : '04 Fév · 08h00'}
+              // text={data.status === NeedStatusType.CANCELED ? 'Terminé' : '04 Fév · 08h00'}.seconds * 1000
+              text={data.status === NeedStatusType.CANCELED ? 'Terminé' : data2.demandStartDate !== undefined ? data2.demandStartDate.seconds !== undefined ? Moment(data2.demandStartDate.seconds * 1000).format('DD MMMM YYYY-HH:MM') : Moment(data2.demandStartDate).format('DD MMMM YYYY-HH:MM') : ' '}
               style={styles.timeTxt}
               color="#6A8596"
             />
@@ -68,19 +71,20 @@ const MabulDetailView = (props) => {
             icon={
               <AvatarWithBadge
                 style={{ marginRight: 21 * em }}
-                avatar={data.user.photo}
+                avatar={user.profilePic !== undefined ? { uri: user.profilePic } : data.user.photo}
                 badge={userBadge}
                 avatarDiameter={35 * em}
                 badgeDiameter={21 * em}
               />
             }
-            title={data.user.name}
+            // title={data.user.name}
+            title={user.firstName + " " + user.lastName}
             titleStyle={styles.userName}
-            subTitle={data.relationship || 'Mon ami/ ma famille'}
+            subTitle={data.relationship || data2.category !== undefined ? data2.category.name : ' '}
             subTitleStyle={colorStyles.label}
           />
-          <CommentText style={styles.comment} text={data.organName} color={'#1E2D60'} />
-          <TitleText text={data.title} style={styles.title} />
+          <CommentText style={styles.comment} text={data2.type !== undefined ? data2.type.itemName : data.organName} color={'#1E2D60'} />
+          <TitleText text={data2.data !== undefined ? data2.data.title : data.title} style={styles.title} />
           <ReadMore
 
 
@@ -92,9 +96,8 @@ const MabulDetailView = (props) => {
 
 
             <Text style={styles.content}>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-              dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef
-        </Text>
+              {data2.data !== undefined ? data2.data.description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef"}
+            </Text>
           </ReadMore>
           {data.status === NeedStatusType.CANCELED ? <></> : data.relationship ? AskButton : ModifyButton}
           {data.status !== NeedStatusType.CANCELED && InviteButton}
@@ -108,7 +111,8 @@ const MabulDetailView = (props) => {
 _renderTruncatedFooter = (handlePress) => {
   return (
     <Text style={{ color: '#40CDDE', fontSize: 14 * em }} onPress={handlePress}>
-      Continuer à lire    </Text>
+      Continuer à lire
+    </Text>
   );
 }
 

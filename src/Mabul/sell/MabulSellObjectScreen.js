@@ -43,12 +43,13 @@ const MabulSellObjectScreen = (props) => {
   const dispatch = useDispatch()
 
   const renderFlatList = ({ item }) => (
+
     <MabulCommonListItem
       text={item.itemName}
       style={styles.listItem}
       icon={item.icon}
       // onPress={() => Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 })}
-      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) } }
+      onPress={() => { dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })), Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) }}
     />
   );
   return (
@@ -75,8 +76,9 @@ const styles = {
     backgroundColor: '#ffffff',
     PaddingTop: 16 * em,
   },
-  header: {     height: '12.45%',
-},
+  header: {
+    height: '12.45%',
+  },
   popView: {
     paddingLeft: 30 * em,
     borderTopLeftRadius: 28 * em,

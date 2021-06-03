@@ -9,7 +9,7 @@ import NeedStatusType from '../model/service/NeedStatusType';
 import Moment from 'moment';
 const ProfileCommonNeedCard = (props) => {
     const { data } = props;
-    console.log(data)
+
     if (data.type === ServiceType.SELL) {
         return (
             <TouchableOpacity onPress={props.onPress}>
@@ -42,10 +42,10 @@ const ProfileCommonNeedCard = (props) => {
             <View style={[styles.container, props.style]}>
                 <Image source={{ uri: data.images[0].uri }} style={styles.cover} />
                 <View style={styles.textView}>
-                    <SmallText text={data.demandStartDate} style={styles.date} color="#6A8596" />
+                    <SmallText text={Moment(data.demandStartDate.seconds * 1000).format('DD MMMM YYYY-HH:MM')} style={styles.date} color="#6A8596" />
                     <SmallText text={data.category !== undefined ? data.category.name : ''} style={styles.title} color={'#1E2D60'} />
                     <CommentText text={data.data.title} style={styles.organName} color={'#1E2D60'} />
-                    <StatusView text={data.status} style={styles.status} />
+                    <StatusView text={data.status} style={styles.status} status={data.status} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -73,15 +73,16 @@ const statusStyle = [
     { id: NeedStatusType.PARTICPATED, title: 'Je participe', color: '#1BD39A', backgroundColor: '#D1F6EB', fontFamily: 'Lato-medium', fontSize: '12*em' },
     { id: NeedStatusType.REFUSED, title: 'Réfusé', color: '#F9547B', backgroundColor: '#FEDDE4', fontFamily: 'Lato-medium', fontSize: '12*em' },
 ];
-export default ProfileCommonNeedCard;
 const StatusView = (props) => {
-    const status = statusStyle.find((element) => element.id === props.text);
+    const status = statusStyle.find((element) => element.id === props.status.code);
     return (
         <View style={[styles.statusView, { backgroundColor: status.backgroundColor }]}>
             <SmallText
-
                 text={status.title}
                 color={status.color}
-            /></View>
+            />
+        </View>
     );
 };
+export default ProfileCommonNeedCard;
+

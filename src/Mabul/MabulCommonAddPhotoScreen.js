@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, TouchableOpacity, NativeModules, StyleSheet, ScrollView, SafeAreaView, FlatList, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Image, TouchableOpacity, NativeModules, StyleSheet, ScrollView, SafeAreaView, FlatList, Dimensions, ActivityIndicator, ImageBackground } from 'react-native';
 import TitleText from '../text/TitleText';
 import { em, hm, mabulColors, hexToRGB } from '../constants/consts';
 import CommentText from '../text/CommentText';
@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
+import { CrossGray, EditAddPhoto, Family } from '../assets/svg/icons';
 // import ImagePicker from 'react-native-image-crop-picker';
 var ImagePicker = NativeModules.ImageCropPicker;
 let numColumns = 3;
@@ -23,7 +24,11 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
 
   const uploadeImage = async (imageArray) => {
     const imagesBlob = [];
-    // setimages({ images: imagesBlob })
+
+    if (imageArray.length > 3) {
+      alert("You can only choose 3 max photos !!")
+      return
+    }
     setbuttonloading(true)
     await Promise.all(
       imageArray.map(async (image, index) => {
@@ -57,7 +62,8 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
 
     }).catch(e => alert(e));
   }
-  const removeByAttr = function (arr, attr, value) {
+
+  const removeByAttr = (arr, attr, value) => {
 
     const findIndex = arr.findIndex(a => a.id === value)
     findIndex !== -1 && arr.splice(findIndex, 1)
@@ -87,11 +93,11 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
             text="Les photos aident les utilisateurs à avoir une idée de ce que tu vends."
             style={styles.comment}
           />
-          {images.images.length > 0 ? <View style={styles.addButton}>
+          {/* {images.images.length > 0 ? <View style={styles.addButton}>
             <TouchableOpacity onPress={() => { imageSelect() }} >
               <CommentText text="add another set" style={[styles.commentAdd, { color: conceptColor }]} />
             </TouchableOpacity>
-          </View> : null}
+          </View> : null} */}
           {images.images.length < 1 ? loading ? <ActivityIndicator style={styles.photoZone} color={conceptColor} size={'small'} /> : <View style={styles.photoZone}>
             <TouchableOpacity onPress={() => { imageSelect() }} >
               <Image
@@ -102,40 +108,135 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
             </TouchableOpacity>
           </View> :
             <SafeAreaView style={styles.photoZone2}>
-              <FlatList
-                data={images.images}
 
-                renderItem={({ item }) => {
 
-                  return (<View
+              <View style={{ flexDirection: 'row', justifyContent: 'flex-start', width: '100%' }}>
+
+                {images.images.map((item) => {
+                  return (<ImageBackground
+                    imageStyle={{ borderRadius: 15 * em }}
+                    source={{ uri: item.path === undefined ? item.uri : item.path }}
                     style={{
-                      marginHorizontal: "1%",
-                      marginVertical: '2%',
-                      backgroundColor: '#00000030'
+                      width: 95 * em,
+                      height: 95 * em,
+                      borderRadius: 15 * em,
+                      resizeMode: 'cover',
+                      flexDirection: 'row-reverse',
+                      alignItems: 'flex-end',
+                      marginLeft: '3%',
+                      marginTop: '1%'
                     }}>
+                    <TouchableOpacity style={{
+                      width: 26 * em,
+                      height: 26 * em,
+                      borderRadius: 13 * em,
+                      marginBottom: 4 * em,
+                      marginRight: 4 * em,
+                      backgroundColor: '#ffffff',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }} onPress={() => { removeByAttr(images.images, 'id', item.id) }}>
 
-                    <Image
-                      style={styles.imageThumbnail}
-                      source={{ uri: item.path === undefined ? item.uri : item.path }}
-                    />
-                    <TouchableOpacity style={{ position: 'absolute', right: 0, top: 0, }} onPress={() => { removeByAttr(images.images, id, item.id) }}>
+                      <CrossGray width={12 * em} height={12 * em} />
 
-
-                      <Image
-                        style={{ height: 20, width: 20, resizeMode: 'contain' }}
-                        source={require('../assets/images/cross.jpg')}
-                      />
                     </TouchableOpacity>
-                  </View>)
-                }}
-                numColumns={3}
-                keyExtractor={(item, index) => index} />
+
+                  </ImageBackground>)
+                })}
+
+                {images.images.length < 3 ? <TouchableOpacity
+                  imageStyle={{ borderRadius: 15 * em }}
+                  style={
+                    {
+                      width: 95 * em,
+                      height: 95 * em,
+                      // borderRadius: 15 * em,
+                      resizeMode: 'cover',
+                      flexDirection: 'row-reverse',
+                      alignItems: 'flex-end',
+                      // marginHorizontal: ',
+                      // borderWidth: 2 * em,
+                      // borderColor: '#BFCDDB',
+                      // borderStyle: 'dashed',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      flexDirection: 'column',
+
+                    }
+                  }
+                  onPress={() => { imageSelect() }}
+                >
+                  <View style={{ marginBottom: 5 * em, lineHeight: 21 * em }}>
+                    <EditAddPhoto width={32.86 * em} height={23 * em} />
+                  </View>
+                  <CommentText text="Clique ici" color="#40CDDE" />
+                </TouchableOpacity> : null}
+              </View>
+
             </SafeAreaView>
+            // <SafeAreaView style={styles.photoZone2}>
+            //   <FlatList
+            //     data={images.images}
+
+            //     ListFooterComponent={() => {
+            //       return (images.images.length >= 3 ? null : <View
+            //         imageStyle={{ borderRadius: 15 * em }}
+
+            //         style={[
+            //           styles.photo,
+            //           {
+            //             borderWidth: 2 * em,
+            //             borderColor: '#BFCDDB',
+            //             borderStyle: 'dashed',
+            //             justifyContent: 'center',
+            //             alignItems: 'center',
+            //             flexDirection: 'column',
+            //           },
+            //         ]}>
+            //         <TouchableOpacity onPress={() => { imageSelect() }}>
+            //           <View style={styles.addPhoto}>
+            //             <EditAddPhoto width={32.86 * em} height={23 * em} />
+            //           </View>
+            //           <CommentText text="Clique ici" color="#40CDDE" />
+            //         </TouchableOpacity>
+
+            //       </View>)
+            //     }}
+            //     renderItem={({ item }) => {
+
+            //       return (
+            //         <View
+            //           style={{
+            //             marginHorizontal: "1%",
+            //             marginVertical: '2%',
+            //             backgroundColor: '#00000030'
+            //           }}>
+
+            //           <Image
+            //             style={styles.imageThumbnail}
+            //             source={{ uri: item.path === undefined ? item.uri : item.path }}
+            //           />
+            //           <TouchableOpacity style={{ position: 'absolute', right: 0, top: 0, }} onPress={() => { removeByAttr(images.images, id, item.id) }}>
+
+
+            //             <Image
+            //               style={{ height: 20, width: 20, resizeMode: 'contain' }}
+            //               source={require('../assets/images/cross.jpg')}
+            //             />
+            //           </TouchableOpacity>
+            //         </View>
+            //       )
+            //     }}
+            //     numColumns={3}
+            //     keyExtractor={(item, index) => index} />
+
+
+            // </SafeAreaView>
           }
         </View>
         <MabulNextButton
-          // disabled={images.images.length < 3 ? true : false}
-          color={images.images.length < 3 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
+          disabled={images.images.length >= 1 ? false : true}
+          color={images.images.length >= 1 ? hexToRGB(conceptColor) : hexToRGB(conceptColor, 0.5)}
           style={styles.nextBtn}
           onPress={() => uploadeImage(images.images)}
           loading={buttonloading}
@@ -151,6 +252,7 @@ const styles = {
 
     width: 100, height: 100, resizeMode: 'contain'
   },
+  addPhoto: { left: 10 * em, width: 33 * em, height: 23 * em, marginBottom: 5.5 * em },
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
@@ -193,7 +295,7 @@ const styles = {
   },
   photoZone2: {
     width: 315 * em,
-    padding: '2%',
+    padding: '1%',
     flexGrow: 1,
     maxHeight: 415 * em,
     minHeight: 115 * em,
@@ -213,6 +315,14 @@ const styles = {
     marginBottom: 10,
     alignItems: 'flex-start',
     marginTop: 20 * em,
+  },
+  photo: {
+    width: 95 * em,
+    height: 95 * em,
+    borderRadius: 15 * em,
+    resizeMode: 'cover',
+    flexDirection: 'row-reverse',
+    alignItems: 'flex-end',
   },
   commentPhoto: {
     fontSize: 12 * em,

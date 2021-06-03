@@ -33,41 +33,42 @@ export const fetchAlerts = async () => {
 
 export const fetchallDemands = async () => {
     let demands = []
-    const responseNeed = firestore().collectionGroup("needs")
+    const responseNeed = firestore().collectionGroup("need")
     const users = await responseNeed.get();
 
-
+    let customData = []
     users.docs.forEach(async doc => {
 
         if (doc.data() !== undefined) {
             getUserProfile(doc.ref.parent.parent.id).then((res) => {
-                if(res.profilePic !== undefined){
-      
-                customData = [
-                    {
-                      user: res,
-                      id: doc.ref.id,
-                      need: doc.data()
-                    }
-                  ]
+                if (res.profilePic !== undefined) {
+
+                    customData = [
+                        {
+                            user: res,
+                            id: doc.ref.id,
+                            need: doc.data()
+                        }
+                    ]
                 }
             })
-           
-                demands.push(customData)
+
+            demands.push(customData)
         }
 
-});
-return demands
+    });
+    return demands
 }
 
 export const fetchDemands = async () => {
     let demands = []
-    const responseNeed = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('needs')
+
+    const responseNeed = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('need')
     const dataNeed = await responseNeed.get();
 
     dataNeed.docs.forEach(async item => {
         if (item.data() !== undefined) {
-            demands.push(item.data())
+            demands.push({ docId: item.id, data: item.data() })
         }
 
     })
@@ -76,7 +77,7 @@ export const fetchDemands = async () => {
 
     dataGive.docs.forEach(async item => {
         if (item.data() !== undefined) {
-            demands.push(item.data())
+            demands.push({ docId: item.id, data: item.data() })
         }
     })
     const responseOrganize = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('organize')
@@ -84,7 +85,7 @@ export const fetchDemands = async () => {
 
     dataOrganize.docs.forEach(async item => {
         if (item.data() !== undefined) {
-            demands.push(item.data())
+            demands.push({ docId: item.id, data: item.data() })
         }
     })
     const responseSell = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('sell')
@@ -92,10 +93,10 @@ export const fetchDemands = async () => {
 
     dataSell.docs.forEach(async item => {
         if (item.data() !== undefined) {
-            demands.push(item.data())
+            demands.push({ docId: item.id, data: item.data() })
         }
     })
-    // console.log(needs);
+
     return demands
 }
 
@@ -106,6 +107,15 @@ export const updateUserProfile = (id, data) => {
         return { error: error }
     })
 }
+
+export const updateUserDemands = (id, data) => {
+    return firestore().collection('userDemands').doc(id).update(data).then((res) => {
+        return true
+    }).catch((error) => {
+        return { error: error }
+    })
+}
+
 
 export const getassest = () => {
     firestore().collection('assets').doc("123").get().then((res) => {
@@ -146,6 +156,12 @@ export const deleteUser = async () => {
 }
 export const deleteUserData = async (id) => {
     return firestore().collection('users').doc(id).delete().then((snapshot) => {
+        return true
+    });
+}
+
+export const deleteUserDemands = async (id, demandType, demandId) => {
+    return firestore().collection('userDemands').doc(id).collection(demandType).doc(demandId).delete().then((snapshot) => {
         return true
     });
 }

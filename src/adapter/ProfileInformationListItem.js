@@ -26,6 +26,7 @@ const ProfileInformationListItem = (props) => {
 
   //, { textTransform: props.titleUpperCase ? 'uppercase' : null } titleStyle uppercase not needed for now
   return (
+    
     <CommonListItem
       style={[styles.container, props.style]}
       onPress={props.onPress}

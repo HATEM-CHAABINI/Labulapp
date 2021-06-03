@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { View, Platform } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, mabulColors, hexToRGB, hm } from '../../constants/consts';
@@ -20,7 +20,7 @@ const MabulSellPriceScreen = (props) => {
   const conceptColor = mabulColors.sell;
   const onSubmit = () => {
     console.log(price)
-    dispatch(update_into_demand({price:price}))
+    dispatch(update_into_demand({ price: price }))
     Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
   }
 
@@ -34,42 +34,42 @@ const MabulSellPriceScreen = (props) => {
       />
       <View style={styles.body}>
         <View>
-          <TitleText text={'Prix'} style={styles.title}/>
-          <CommentText text="Ajoutez un prix" style={styles.comment}/>
+          <TitleText text={'Prix'} style={styles.title} />
+          <CommentText text="Ajoutez un prix" style={styles.comment} />
           {/* <TextInput
             style={styles.input}
             placeholder="0"
             selectionColor={conceptColor}
             keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'}
           /> */}
-           <TextInput 
-            style={styles.input} 
+          <TextInput
+            style={styles.input}
             autoFocus={true}
 
             placeholder="0"
-            selectionColor={conceptColor} 
-            value={price} 
-            onChangeText={(value) => { setprice(value) }} 
+            selectionColor={conceptColor}
+            value={price}
+            onChangeText={(value) => { setprice(value) }}
             onChange={(value) => { setprice(value) }}
             keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'}
           />
         </View>
         <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ alignItems: 'center', marginBottom: 30 * hm }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 105*hm : 105*hm}
-      >
-        <MabulNextButton
-          color={hexToRGB(conceptColor, 0.5)}
-          style={styles.nextBtn}
-          disabled={price.length <= 0 ? true : false}
-          onPress={() => {
-            // dispatch(update_into_demand({price:price }))
-            // Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
-            onSubmit()
-          }}
-        />
-              </KeyboardAvoidingView>
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ alignItems: 'center', marginBottom: 30 * hm }}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 105 * hm : 105 * hm}
+        >
+          <MabulNextButton
+            color={hexToRGB(conceptColor)}
+            style={styles.nextBtn}
+            disabled={price.length <= 0 ? true : false}
+            onPress={() => {
+              // dispatch(update_into_demand({price:price }))
+              // Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
+              onSubmit()
+            }}
+          />
+        </KeyboardAvoidingView>
 
       </View>
     </View>
@@ -80,7 +80,7 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-     PaddingTop: 16 * hm,
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '12.45%',
@@ -121,10 +121,10 @@ const styles = {
   nextBtn: {
     alignSelf: 'flex-end',
     marginRight: 30 * em,
-   
+
   },
   input: {
-    marginTop:44*hm,
+    marginTop: 44 * hm,
     fontSize: 49 * em,
     textAlign: 'center',
     color: '#A0AEB8',

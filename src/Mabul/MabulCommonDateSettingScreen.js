@@ -34,7 +34,8 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const [showEndDataView, setshowEndDataView] = useState(false)
   const [loading, setloading] = useState(false)
   const initialValues = {
-    address: ''
+    address: '',
+    coordinate: {}
   };
   const validationSchema = Yup.object({
 
@@ -53,6 +54,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
             var addressComponent = json.results[0].formatted_address;
 
             formik.setFieldValue('address', addressComponent)
+            formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
             setloading(() => false)
           })
           .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
@@ -69,9 +71,9 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
 
     let value = {}
     if (isSwitch) {
-      value = { demandStartDate: Moment(isDate).format('DD MMMM YYYY-HH:MM'), demandEndData: '', address: values.address }
+      value = { demandStartDate: isDate, demandEndData: '', address: values.address, coordinate: values.coordinate }
     } else {
-      value = { demandStartDate: Moment(isDate).format('DD MMMM YYYY-HH:MM'), demandEndData: Moment(isEndDate).format('DD MMMM YYYY-HH:MM'), address: values.address }
+      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address, coordinate: values.coordinate }
     }
 
     dispatch(update_into_demand(value))
@@ -158,6 +160,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="datetime"
+          minimumDate={new Date()}
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />

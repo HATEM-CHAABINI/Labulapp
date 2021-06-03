@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { em, hexToRGB } from '../../../constants/consts';
 import NeedService from '../../../model/service/NeedService';
 import NeedServiceType from '../../../model/service/NeedServiceType';
 import User from '../../../model/user/User';
 import MabulDetailView from '../../../Components/view/MabulDetailView';
-
+import { getUserProfile } from '../../../services/firebase'
+import auth from "@react-native-firebase/auth";
 const needData = new NeedService(
   new User('Mathieu Torin', require('../../../assets/images/tab_profile_off.png'), 'anton@gmail.com'),
   'J’ai besoin Coup de main bricolage',
@@ -21,9 +22,13 @@ const MyNeedScreen = (props) => {
 
   const [data] = useState(needData);
   const [data2] = useState(props.data);
+  const [user] = useState(props.user);
+
+
+
   return (
     <View style={styles.container}>
-      <MabulDetailView data={data} data2={data2} />
+      <MabulDetailView data={data} data2={data2} user={user} docId={props.docId} />
     </View>
   );
 };

@@ -7,7 +7,7 @@ const CommonButton = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress} style={[styles.buttonStyle, props.style]}>
       {props.leftIcon && <View style={[styles.iconStyle, props.iconStyle]}>{props.leftIcon}</View>}
-      {props.loading ? <ActivityIndicator size={'small'} color={props.color} style={[styles.textStyle, props.textStyle]} /> : <CommonText text={props.text} style={[styles.textStyle, props.textStyle]} color={props.color} />}
+      {props.loading ? <ActivityIndicator size={'small'} color={"#fcfcfc"} style={[styles.textStyle, props.textStyle]} /> : <CommonText text={props.text} style={[styles.textStyle, props.textStyle]} color={props.color} />}
       {props.rightIcon && <View style={[styles.iconStyle, props.iconStyle]}>{props.rightIcon}</View>}
     </TouchableOpacity>
   );

@@ -71,7 +71,7 @@ const MabulDetailView = (props) => {
             icon={
               <AvatarWithBadge
                 style={{ marginRight: 21 * em }}
-                avatar={user.profilePic !== undefined ? { uri: user.profilePic } : data.user.photo}
+                avatar={user.profilePic !== undefined ? { uri: user.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }}
                 badge={userBadge}
                 avatarDiameter={35 * em}
                 badgeDiameter={21 * em}

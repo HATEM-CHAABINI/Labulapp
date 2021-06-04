@@ -19,10 +19,6 @@ export default (props) => {
     const [achecked, setaChecked] = useState(false);
     const [fchecked, setfChecked] = useState(false);
     const [tchecked, settChecked] = useState(false);
-
-
-
-
     const check = (id) => {
         setvChecked(false)
         setaChecked(false)
@@ -30,12 +26,13 @@ export default (props) => {
         settChecked(false)
         switch (id) {
             case 1:
-                setaChecked(true)
-                setcontactType({ type: 2, name: 'mes amis' })
-                break;
-            case 2:
                 setvChecked(true)
                 setcontactType({ type: 1, name: 'mes voisins' })
+                break;
+            case 2:
+
+                setaChecked(true)
+                setcontactType({ type: 2, name: 'mes amis' })
                 break;
             case 3:
                 setfChecked(true)
@@ -126,7 +123,7 @@ export default (props) => {
                             vchecked ? styles.iconViewClicked : styles.iconView,
                             // { marginBottom: index === 2 ? 40 * em : 0 },
                         ]}
-                        onPress={() => check(2)}>
+                        onPress={() => check(1)}>
                         {vchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Neighbor width={48 * em} height={48 * em} />}
                         <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
                     </TouchableOpacity>
@@ -136,7 +133,7 @@ export default (props) => {
                             achecked ? styles.iconViewClicked : styles.iconView,
                             // { marginBottom: index === 2 ? 40 * em : 0 },
                         ]}
-                        onPress={() => check(1)}>
+                        onPress={() => check(2)}>
                         {achecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Friend width={48 * em} height={48 * em} />}
                         <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
                     </TouchableOpacity>

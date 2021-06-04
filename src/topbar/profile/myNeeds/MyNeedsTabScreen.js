@@ -61,24 +61,22 @@ const MyNeedsTabScreen = () => {
   const [user, setuser] = useState()
   const [demands, setdemands] = useState([])
   const [loadingData, setloadingData] = useState(true)
+
   useEffect(() => {
-
     fetchDemands().then(async (item) => {
-
       if (item !== undefined) {
         setdemands(() => item)
         if (item.length === 0) {
           setloadingData(false)
         }
       }
-
-
     })
     getUserProfile(auth().currentUser.uid).then(async (item) => {
 
       setuser(() => item)
     })
   }, [])
+
   useEffect(() => {
     if (demands.length > 0) {
       setloadingData(false)
@@ -102,8 +100,8 @@ const MyNeedsTabScreen = () => {
       }}
     />
   );
-  const renderFlatList2 = ({ item, index }) => (
 
+  const renderFlatList2 = ({ item, index }) => (
     <ProfileCommonNeedCard2
       data={item.data}
       style={[styles.listItem, { marginBottom: needsLists.length === index + 1 ? 50 * hm : 15 * hm }]}
@@ -117,6 +115,7 @@ const MyNeedsTabScreen = () => {
       }
     />
   );
+
   const renderEmptyContainer = () => {
     return (<View style={{
       flex: 1,
@@ -142,7 +141,7 @@ const MyNeedsTabScreen = () => {
     />
 
   );
-  console.log(demands);
+
   const listView2 = (
     <FlatList
       data={demands}

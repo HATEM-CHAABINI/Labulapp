@@ -127,6 +127,8 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   };
 
   const handleConfirm = (date) => {
+    let datee = toTimestamp(date)
+
     setDate(date)
     hideDatePicker();
   };
@@ -141,7 +143,10 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
   const showEndDatePicker = () => {
     setisEndDatePickerVisible(true);
   };
-
+  function toTimestamp(strDate) {
+    var datum = Date.parse(strDate);
+    return datum / 1000;
+  }
 
 
 

@@ -11,6 +11,7 @@ export const getUserProfile = (id) => {
     // const dispatch = useDispatch()
 
     return firestore().collection('users').doc(id).get().then((snapshot) => {
+        console.log("snapshot ", snapshot.data());
         return snapshot.data()
     });
 

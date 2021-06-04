@@ -94,7 +94,7 @@ const EditNeedScreen = (props) => {
   };
 
 
-
+  console.log("Data we get -> ", props.data2);
 
 
   const imageSelect = () => {
@@ -120,24 +120,10 @@ const EditNeedScreen = (props) => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date) => {
-    // console.log(data);
-    setstartDate(date)
-    hideDatePicker();
-  };
-  const hideendDatePicker = () => {
-    setisEndDatePickerVisible(false);
-  };
-  const handleEndConfirm = (date) => {
-    setendDate(date);
-    hideendDatePicker();
 
-  };
-  const showEndDatePicker = () => {
-    setisEndDatePickerVisible(true);
-  };
+
   const updateUserDemands = (id, data) => {
-
+    console.log("Data To give -> ", data);
     if (props.data2.serviceType.name === 'organize') {
       firestore().collection('userDemands').doc(id).collection('organize').doc(props.docId).update(data).then((res) => {
         Actions.home(), setloading(false)
@@ -166,7 +152,6 @@ const EditNeedScreen = (props) => {
       }).catch((error) => {
         console.log(error); setloading(false)
       })
-
     }
   }
   const SaveData = (imagesBlob) => {
@@ -215,12 +200,10 @@ const EditNeedScreen = (props) => {
           images: imagesBlob,
         }
       }
-
     }
-
     updateUserDemands(auth().currentUser.uid, data)
-
   }
+
   const deleteDemand = () => {
 
     deleteUserDemands(auth().currentUser.uid, props.data2.serviceType.name, props.docId).then((item) => {
@@ -232,6 +215,7 @@ const EditNeedScreen = (props) => {
       console.log(error);
     })
   }
+
 
   return (
     <ProfileCommonHeader title="Modifier demande" onCancel={() => Actions.pop()} loading={loading} onFinish={() => {
@@ -288,6 +272,7 @@ const EditNeedScreen = (props) => {
       </View>
 
 
+
       {/* /////////////////// */}
       {props.data2.serviceType.name === 'sell' || props.data2.serviceType.name === 'give' || props.data2.serviceType.name === 'organize' ? null : <><ProfileInformationListItem
         caption={'Type de demande'}
@@ -312,6 +297,8 @@ const EditNeedScreen = (props) => {
       </>
       }
       {/* ///////// */}
+
+
 
       {/* ////////////// */}
       <ProfileInformationListItem
@@ -340,6 +327,8 @@ const EditNeedScreen = (props) => {
 
       />
       {/* ///////////////// */}
+
+
 
       <ProfileInformationListItem
         titleUpperCase
@@ -405,7 +394,6 @@ const EditNeedScreen = (props) => {
       <TouchableOpacity onPress={() => {
         setshareModel(!shareModel);
       }}>
-
 
         <ProfileInformationListItem
           titleUpperCase

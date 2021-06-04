@@ -9,24 +9,15 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { em, WIDTH, hm } from '../constants';
-import * as Animatable from 'react-native-animatable';
-import LinearGradient from 'react-native-linear-gradient';
-import Feather from 'react-native-vector-icons/Feather';
-import Fleche from './Fleche';
-import Usercreat from './Usercreat'
-import Googleicon from '../assets/icons/navigation-app/Googleicon';
-import Facebookicon from '../assets/icons/navigation-app/Facebookicon';
 import { Actions } from 'react-native-router-flux';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addLogin } from '../redux/actions/login';
-import { addProfile } from '../redux/actions/profile';
-import * as Firebase from 'firebase'
+
 import { createUser, setUserData, verifyUserEmail } from '../services/firebase'
-import auth, { firebase } from "@react-native-firebase/auth";
+import auth from "@react-native-firebase/auth";
 import { LogBox } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
-let fireKey = firestore().collection("users");
+
+
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 export default ({ navigation }) => {

@@ -23,7 +23,7 @@ const MyNeedScreen = (props) => {
   const [data] = useState(needData);
   const [data2] = useState(props.data);
   const [user] = useState(props.user);
-
+  console.log("user", user);
 
 
   return (

@@ -30,12 +30,13 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
     settChecked(false)
     switch (id) {
       case 1:
-        setaChecked(true)
-        setcontactType({ type: 2, name: 'mes amis' })
-        break;
-      case 2:
         setvChecked(true)
         setcontactType({ type: 1, name: 'mes voisins' })
+        break;
+
+      case 2:
+        setaChecked(true)
+        setcontactType({ type: 2, name: 'mes amis' })
         break;
       case 3:
         setfChecked(true)
@@ -63,25 +64,22 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
 
     if (mabulService === 'organize') {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('organize').doc().set(data).then((res) => { setloadingSet(false); Actions.myOrganize({ data: data, data2: data, user: user }), console.log("res ", res); });
+        .collection('organize').add(data).then((res) => { setloadingSet(false); Actions.myOrganize({ data: data, data2: data, user: user, docId: res.id }) });
 
     } else if (mabulService === 'give') {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('give').doc().set(data).then((res) => { setloadingSet(false); Actions.myGive({ data: data, data2: data, user: user }) });
+        .collection('give').add(data).then((res) => { setloadingSet(false); Actions.myGive({ data: data, data2: data, user: user, docId: res.id }) });
 
     } else if (mabulService === 'sell') {
 
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('sell').doc().set(data).then((res) => { setloadingSet(false); Actions.mySell({ data: data, data2: data, user: user }) });
+        .collection('sell').add(data).then((res) => { setloadingSet(false); Actions.mySell({ data: data, data2: data, user: user, docId: res.id }) });
 
     } else {
 
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('need').doc().set(data).then((res) => { setloadingSet(false); Actions.myNeed({ data: data, data2: data, user: user }) });
+        .collection('need').add(data).then((res) => { console.log("res,daya ", data); setloadingSet(false); Actions.myNeed({ data: data, data2: data, user: user, docId: res.id }) });
     }
-
-
-
   }
 
 
@@ -116,7 +114,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
                 vchecked ? styles.iconViewClicked : styles.iconView,
                 // { marginBottom: index === 2 ? 40 * em : 0 },
               ]}
-              onPress={() => check(2)}>
+              onPress={() => check(1)}>
               {vchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Neighbor width={48 * em} height={48 * em} />}
               <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>
@@ -126,7 +124,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
                 achecked ? styles.iconViewClicked : styles.iconView,
                 // { marginBottom: index === 2 ? 40 * em : 0 },
               ]}
-              onPress={() => check(1)}>
+              onPress={() => check(2)}>
               {achecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Friend width={48 * em} height={48 * em} />}
               <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
             </TouchableOpacity>

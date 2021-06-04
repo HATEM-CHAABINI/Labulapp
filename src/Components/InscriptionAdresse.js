@@ -63,16 +63,8 @@ export default ({ navigation }) => {
       adresse: values.adresse,
       coordinate: values.coordinate
     }));
-    console.log({
-      email: signupData.email,
-      prenom: signupData.prenom,
-      password: signupData.password,
-      nom: signupData.nom,
-      mobile: signupData.mobile,
-      adresse: values.adresse,
-      coordinate: values.coordinate
-    });
-    // navigation.navigate('ActiverLaNotif')
+
+    navigation.navigate('ActiverLaNotif')
   };
   const formik = useFormik({
     initialValues,
@@ -80,33 +72,33 @@ export default ({ navigation }) => {
     validationSchema,
   });
 
-  // const getlocation = () => {
-  //   setloading(() => true)
-  //   //     const status = Geolocation.requestAuthorization("whenInUse"); // or "always"
-  //   // console.log(status); 
-  //   Geolocation.getCurrentPosition(
-  //     (position) => {
+  const getlocation = () => {
+    setloading(() => true)
+    //     const status = Geolocation.requestAuthorization("whenInUse"); // or "always"
+    // console.log(status); 
+    Geolocation.getCurrentPosition(
+      (position) => {
 
 
-  //       Geocoder.from(position.coords.latitude, position.coords.longitude)
-  //         .then(json => {
-  //           var addressComponent = json.results[0].formatted_address;
+        Geocoder.from(position.coords.latitude, position.coords.longitude)
+          .then(json => {
+            var addressComponent = json.results[0].formatted_address;
 
 
-  //           formik.setFieldValue('adresse', addressComponent)
-  //           formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
-  //           setloading(() => false)
-  //         })
-  //         .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
-  //     },
-  //     (error) => {
-  //       setloading(() => false)
-  //       console.log(error.code, error.message);
+            formik.setFieldValue('adresse', addressComponent)
+            formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
+            setloading(() => false)
+          })
+          .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
+      },
+      (error) => {
+        setloading(() => false)
+        console.log(error.code, error.message);
 
-  //     },
-  //     { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-  //   );
-  // }
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+  }
   return (
 
     <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>

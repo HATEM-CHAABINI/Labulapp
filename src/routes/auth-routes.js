@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Router, Scene} from 'react-native-router-flux';
+import React, { useState, useEffect } from 'react';
+import { Router, Scene } from 'react-native-router-flux';
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
 // import LoginMenuScreen from 'view/screens/account/LoginMenuScreen';
@@ -99,72 +99,72 @@ import FriendGiveBadgeScreen from '../ServiceScrenns/FriendGiveBadgeScreen';
 import ActivityMessageScreen from '../activity/ActivityMessageScreen';
 import ActivityDialScreen from '../activity/ActivityDialScreen';
 import MotdePasseOublie from '../Components/MotdePasseOublie';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import InscriptionMdp from '../Components/InscriptionMdp';
-import auth, {firebase as fire} from '@react-native-firebase/auth';
-import {firebase} from '../setup';
+import auth, { firebase as fire } from '@react-native-firebase/auth';
+import { firebase } from '../setup';
 // import * as Firebase from 'firebase';
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../redux/actions/profile';
 
-export default () => { 
-    
-    return(
-        <Router>
-        <Scene key="root">
-          <Scene key="loading"  hideNavBar component={LoadingScreen} />
-          <Scene key="home" hideNavBar component={HomeScreen} />
-          {/* landing page */}
-          <Scene key="loginMenu" hideNavBar component={Connexion} />
-          {/* Login start page  google , facebook , button for login*/}
-          <Scene key="registerEmail" hideNavBar component={ConnexionEmail} />
-          {/* Login with email and password  */}
-          <Scene
-            key="MotdePasseOublie"
-            hideNavBar
-            component={MotdePasseOublie}
-          />
-          {/* forget password  */}
-          <Scene key="signupMenu" hideNavBar component={Inscription} />
-          {/* signup start page  google , facebook , button for login*/}
-          <Scene
-            key="InscriptionEmail"
-            hideNavBar
-            component={InscriptionEmail}
-          />
-          {/* Enter Email first  */}
-          <Scene
-            key="InscriptionPrenom"
-            hideNavBar
-            component={InscriptionPrenom}
-          />
-          {/* Enter password  */}
-          <Scene key="InscriptionMdp" hideNavBar component={InscriptionMdp} />
-          {/* Enter First name  */}
-          <Scene key="InscriptionNom" hideNavBar component={InscriptionNom} />
-          {/* Enter family name  */}
-          <Scene
-            key="InscriptionMobile"
-            hideNavBar
-            component={InscriptionMobile}
-          />
-          {/* Enter mobile */}
-          <Scene
-            key="InscriptionAdresse"
-            hideNavBar
-            component={InscriptionAdresse}
-          />
-          {/* Enter address  */}
-          <Scene
-            key="ActiverLocalisation"
-            hideNavBar
-            component={ActiverLocalisation}
-          />
-          {/* active notification and localisation view */}
-          <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
-          {/*Activ notification or not */}
-        </Scene>
-        </Router>
-    )
+export default () => {
+
+  return (
+    <Router>
+      <Scene key="root">
+        <Scene key="loading" hideNavBar component={LoadingScreen} />
+        <Scene key="home" hideNavBar component={HomeScreen} />
+        {/* landing page */}
+        <Scene key="loginMenu" hideNavBar component={Connexion} />
+        {/* Login start page  google , facebook , button for login*/}
+        <Scene key="registerEmail" hideNavBar component={ConnexionEmail} />
+        {/* Login with email and password  */}
+        <Scene
+          key="MotdePasseOublie"
+          hideNavBar
+          component={MotdePasseOublie}
+        />
+        {/* forget password  */}
+        <Scene key="signupMenu" hideNavBar component={Inscription} />
+        {/* signup start page  google , facebook , button for login*/}
+        <Scene
+          key="InscriptionEmail"
+          hideNavBar
+          component={InscriptionEmail}
+        />
+        {/* Enter Email first  */}
+        <Scene
+          key="InscriptionPrenom"
+          hideNavBar
+          component={InscriptionPrenom}
+        />
+        {/* Enter password  */}
+        <Scene key="InscriptionMdp" hideNavBar component={InscriptionMdp} />
+        {/* Enter First name  */}
+        <Scene key="InscriptionNom" hideNavBar component={InscriptionNom} />
+        {/* Enter family name  */}
+        <Scene
+          key="InscriptionMobile"
+          hideNavBar
+          component={InscriptionMobile}
+        />
+        {/* Enter mobile */}
+        <Scene
+          key="InscriptionAdresse"
+          hideNavBar
+          component={InscriptionAdresse}
+        />
+        {/* Enter address  */}
+        <Scene
+          key="ActiverLocalisation"
+          hideNavBar
+          component={ActiverLocalisation}
+        />
+        {/* active notification and localisation view */}
+        <Scene key="ActiverLaNotif" hideNavBar component={ActiverLaNotif} />
+        {/*Activ notification or not */}
+      </Scene>
+    </Router>
+  )
 }

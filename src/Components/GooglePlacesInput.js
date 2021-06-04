@@ -39,9 +39,10 @@ const GooglePlacesInput = (props) => {
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
     }
+    ///41D0E2
     return (
         <>
-            <View style={{ width: '100%', flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'grey', zIndex: 10 }}>
+            <View style={[{ width: '100%', flexDirection: 'row', borderBottomWidth: 2, borderBottomColor: props.borderBottomColor ? props.borderBottomColor : 'grey', zIndex: 10 }, props.style]}>
                 <View style={{ marginRight: 15 * em, top: '3%', }}>
                     <Magnifier width={20 * em} height={20 * em} />
                 </View>
@@ -84,13 +85,13 @@ const GooglePlacesInput = (props) => {
 
             </View>
 
-            <KeyboardAvoidingView style={{ position: 'absolute', alignSelf: 'center', }} >
-                <View style={{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginTop: '90%', }}>
+            {props.show || props.show == undefined ? <KeyboardAvoidingView style={{ position: 'absolute', alignSelf: 'center', }} >
+                <View style={[{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginTop: '90%', }, props.myLocationStyle]}>
                     <LocationRed width={16 * em} height={19 * em} />
                     <CommentText text={'Utiliser ma position'} color="#F9547B" style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} />
 
                 </View>
-            </KeyboardAvoidingView>
+            </KeyboardAvoidingView> : null}
         </>
     );
 };

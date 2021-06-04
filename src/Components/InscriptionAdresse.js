@@ -36,6 +36,7 @@ import { google_api } from '../constants/consts'
 /////////                 HERE GOES API KEY
 Geocoder.init(google_api);
 //////////
+import GooglePlacesInput from './GooglePlacesInput'
 export default ({ navigation }) => {
   const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
@@ -62,8 +63,16 @@ export default ({ navigation }) => {
       adresse: values.adresse,
       coordinate: values.coordinate
     }));
-
-    navigation.navigate('ActiverLaNotif')
+    console.log({
+      email: signupData.email,
+      prenom: signupData.prenom,
+      password: signupData.password,
+      nom: signupData.nom,
+      mobile: signupData.mobile,
+      adresse: values.adresse,
+      coordinate: values.coordinate
+    });
+    // navigation.navigate('ActiverLaNotif')
   };
   const formik = useFormik({
     initialValues,
@@ -71,33 +80,33 @@ export default ({ navigation }) => {
     validationSchema,
   });
 
-  const getlocation = () => {
-    setloading(() => true)
-    //     const status = Geolocation.requestAuthorization("whenInUse"); // or "always"
-    // console.log(status); 
-    Geolocation.getCurrentPosition(
-      (position) => {
+  // const getlocation = () => {
+  //   setloading(() => true)
+  //   //     const status = Geolocation.requestAuthorization("whenInUse"); // or "always"
+  //   // console.log(status); 
+  //   Geolocation.getCurrentPosition(
+  //     (position) => {
 
 
-        Geocoder.from(position.coords.latitude, position.coords.longitude)
-          .then(json => {
-            var addressComponent = json.results[0].formatted_address;
+  //       Geocoder.from(position.coords.latitude, position.coords.longitude)
+  //         .then(json => {
+  //           var addressComponent = json.results[0].formatted_address;
 
 
-            formik.setFieldValue('adresse', addressComponent)
-            formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
-            setloading(() => false)
-          })
-          .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
-      },
-      (error) => {
-        setloading(() => false)
-        console.log(error.code, error.message);
+  //           formik.setFieldValue('adresse', addressComponent)
+  //           formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
+  //           setloading(() => false)
+  //         })
+  //         .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
+  //     },
+  //     (error) => {
+  //       setloading(() => false)
+  //       console.log(error.code, error.message);
 
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-    );
-  }
+  //     },
+  //     { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+  //   );
+  // }
   return (
 
     <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
@@ -120,9 +129,39 @@ export default ({ navigation }) => {
             <Address width={30 * em} height={30 * hm} />
           </View>
           <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 60 * hm, fontFamily: 'Lato-Black' }}>Mon adresse</Text>
+          <View style={{ marginTop: '10%' }}>
+            <GooglePlacesInput
+              placeholder={"Rechercher une addresse"}
+              containerStyle={{
+                backgroundColor: 'white',
+                width: "100%",
+
+              }}
+              borderBottomColor={'#41D0E2'}
+              style={{ width: '80%', }}
+              show={true}
+              textInputStyle={{
+                // height: 40,
+                color: '#1E2D60',
+                fontSize: 16 * em,
+                fontFamily: 'Lato-Bold',
+              }}
+              myLocationStyle={{ marginTop: '40%' }}
+              // autoFillOnNotFound={true}
+              value={formik.values.adresse}
+              formik={formik}
+
+              changedValue={(val) => {
+                // console.log(val.adresse);
+                formik.setFieldValue('adresse', val.address);
+                formik.setFieldValue('coordinate', val.coordinate)
+              }}
+            />
+          </View>
 
           <View style={styles.contentWrapper}>
-            <Reinput
+
+            {/* <Reinput
               label='Saisis ton adresse complète'
               autoCorrect={false}
 
@@ -137,21 +176,19 @@ export default ({ navigation }) => {
               fontSize={16 * em}
               keyboardType="email-address"
               selectionColor={'#41D0E2'}
-
               // onChangeText={}
               value={formik.values.adresse}
-
               onBlur={formik.handleBlur('adresse')}
-              onChangeText={formik.handleChange('adresse')} />
+              onChangeText={formik.handleChange('adresse')} /> */}
             {formik.errors.adresse && formik.touched.adresse && <Text style={styles.descerrorText}>l'adresse ne peut pas être vide</Text>}
 
 
-
+            {/* 
             <View style={{ bottom: 30 * hm, alignItems: 'center' }}>
 
               {loading ? <ActivityIndicator size='small' color='#40CDDE' /> : <Text style={{ color: '#40CDDE', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} onPress={() => { getlocation() }}>Me géolocaliser</Text>}
 
-            </View>
+            </View> */}
 
 
 
@@ -209,7 +246,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     alignItems: 'center',
     width: 315 * em,
-    paddingTop: 30 * hm
+    paddingTop: 50 * hm
   },
   descText: {
     fontSize: 12 * em,

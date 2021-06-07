@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { em, hexToRGB } from '../../../constants/consts';
 import OrganizeService from '../../../model/service/OrganizeService';
 import User from '../../../model/user/User';
 import OrganizeServiceType from '../../../model/service/OrganizeServiceType';
 import MabulDetailView from '../../../Components/view/MabulDetailView';
-
+import auth from "@react-native-firebase/auth";
+import firestore from '@react-native-firebase/firestore';
 const organizeData = Object.assign(
   new OrganizeService(
     new User('Mathieu Torin', require('../../../assets/images/sample_user_2.png'), 'anton@gmail.com'),
@@ -20,11 +21,24 @@ const organizeData = Object.assign(
 
 const MyOrganizeScreen = (props) => {
   const [data] = useState(organizeData);
-  const [data2] = useState(props.data);
+  const [data2, setdata2] = useState(props.data);
   const [user] = useState(props.user);
+  useEffect(() => {
+
+    if (props.created == undefined) {
+
+      firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data2.serviceType.name).doc(props.docId).onSnapshot((sanp) => {
+        if (sanp.data() !== undefined) {
+          setdata2(
+            sanp.data()
+          )
+        }
+      })
+    }
+  }, [])
   return (
     <View style={styles.container}>
-      <MabulDetailView data={data} data2={data2} user={user} />
+      <MabulDetailView data={data} data2={data2} user={user} created={props.created} />
     </View>
   );
 };

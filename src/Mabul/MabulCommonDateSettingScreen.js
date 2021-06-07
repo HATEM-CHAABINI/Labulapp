@@ -222,12 +222,12 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
 
               onBlur={formik.handleBlur('address')}
               onChangeText={formik.handleChange('address')} />
-            {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
+            {formik.errors.address && formik.touched.address && <Text style={{ color: 'red', top: '5%', left: '12%' }}>{formik.errors.address}</Text>}
 
             {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * hm }} color={conceptColor} size={'small'} />
               : <CommonListItem
                 style={{
-                  marginLeft: 37 * em, bottom: 20 * hm
+                  marginLeft: 37 * em, bottom: 20 * hm,
                   // ,paddingBottom:50*hm 
                 }}
                 titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}

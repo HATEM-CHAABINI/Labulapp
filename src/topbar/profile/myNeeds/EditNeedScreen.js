@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, ImageBackground, TouchableOpacity, NativeModules, FlatList, ActivityIndicator } from 'react-native';
+import { View, ScrollView, ImageBackground, TouchableOpacity, NativeModules, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { em, hexToRGB } from '../../../constants/consts';
 import ProfileInformationListItem from '../../../adapter/ProfileInformationListItem';
 import ProfileCommonHeader from '../../../Components/header/ProfileCommonHeader';
@@ -94,7 +94,7 @@ const EditNeedScreen = (props) => {
   };
 
 
-  console.log("Data we get -> ", props.data2);
+
 
 
   const imageSelect = () => {
@@ -126,14 +126,14 @@ const EditNeedScreen = (props) => {
     console.log("Data To give -> ", data);
     if (props.data2.serviceType.name === 'organize') {
       firestore().collection('userDemands').doc(id).collection('organize').doc(props.docId).update(data).then((res) => {
-        Actions.home(), setloading(false)
+        Actions.pop(), setloading(false)
       }).catch((error) => {
         console.log(error); setloading(false)
       })
 
     } else if (props.data2.serviceType.name === 'give') {
       firestore().collection('userDemands').doc(id).collection('give').doc(props.docId).update(data).then((res) => {
-        Actions.home(), setloading(false)
+        Actions.pop(), setloading(false)
       }).catch((error) => {
         console.log(error); setloading(false)
       })
@@ -141,14 +141,14 @@ const EditNeedScreen = (props) => {
     } else if (props.data2.serviceType.name === 'sell') {
 
       firestore().collection('userDemands').doc(id).collection('sell').doc(props.docId).update(data).then((res) => {
-        Actions.home(), setloading(false)
+        Actions.pop(), setloading(false)
       }).catch((error) => {
         console.log(error); setloading(false)
       })
 
     } else {
       firestore().collection('userDemands').doc(id).collection('need').doc(props.docId).update(data).then((res) => {
-        Actions.home(), setloading(false)
+        Actions.pop(), setloading(false)
       }).catch((error) => {
         console.log(error); setloading(false)
       })
@@ -205,26 +205,45 @@ const EditNeedScreen = (props) => {
   }
 
   const deleteDemand = () => {
+    Alert.alert(
+      "Delete",
+      "Are you sure?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK", onPress: () => {
+            deleteUserDemands(auth().currentUser.uid, props.data2.serviceType.name, props.docId).then((item) => {
+              Actions.home()
+            }).catch((error) => {
+              console.log(error);
+            })
+          }
+        }
+      ]
+    );
 
-    deleteUserDemands(auth().currentUser.uid, props.data2.serviceType.name, props.docId).then((item) => {
-      if (item) { Actions.home() }
-      else {
-        console.log(item);
-      }
-    }).catch((error) => {
-      console.log(error);
-    })
   }
 
 
   return (
     <ProfileCommonHeader title="Modifier demande" onCancel={() => Actions.pop()} loading={loading} onFinish={() => {
-      setloading(true)
-      if (images.images === props.data2.images) {
-        SaveData(images.images)
-      } else {
-        uploadeImage(images.images)
+
+      if (images.images.length > 0) {
+        setloading(true)
+        if (images.images === props.data2.images) {
+          SaveData(images.images)
+        } else {
+          uploadeImage(images.images)
+        }
       }
+      else {
+        alert("Need to select one pic!!")
+      }
+
     }}>
       <View style={styles.listItem}>
         <View style={{ flexDirection: 'row', marginBottom: 15 * em, justifyContent: 'space-between' }}>

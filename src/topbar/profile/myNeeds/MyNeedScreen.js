@@ -7,6 +7,7 @@ import User from '../../../model/user/User';
 import MabulDetailView from '../../../Components/view/MabulDetailView';
 import { getUserProfile } from '../../../services/firebase'
 import auth from "@react-native-firebase/auth";
+import firestore from '@react-native-firebase/firestore';
 const needData = new NeedService(
   new User('Mathieu Torin', require('../../../assets/images/tab_profile_off.png'), 'anton@gmail.com'),
   'J’ai besoin Coup de main bricolage',
@@ -21,10 +22,25 @@ const MyNeedScreen = (props) => {
   const [] = useState(false);
 
   const [data] = useState(needData);
-  const [data2] = useState(props.data);
+  const [data2, setdata2] = useState(props.data);
   const [user] = useState(props.user);
-  console.log("user", user);
 
+  useEffect(() => {
+
+    if (props.created == undefined) {
+
+      firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data2.serviceType.name).doc(props.docId).onSnapshot(async (sanp) => {
+
+        if (sanp.data() !== undefined) {
+
+          setdata2(
+            sanp.data()
+          )
+        }
+
+      })
+    }
+  }, [])
 
   return (
     <View style={styles.container}>

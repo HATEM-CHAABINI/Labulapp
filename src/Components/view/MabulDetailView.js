@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Image, ScrollView, Text } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hexToRGB, hm } from '../../constants/consts';
@@ -16,15 +16,22 @@ import NeedStatusType from '../../model/service/NeedStatusType';
 import Message from '../../model/message/Message';
 import ReadMore from 'react-native-read-more-text';
 import Moment from 'moment';
+import { fetchPerticularDemand } from '../../services/firebase'
+import firestore from '@react-native-firebase/firestore';
+import auth from "@react-native-firebase/auth";
 const MabulDetailView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(props.data);
-  const [data2] = useState(props.data2);
+  const [data2, setdata2] = useState(props.data2);
   const [user] = useState(props.user);
 
-  const userBadge = getUserBadge(data2.serviceType.code, data2.serviceType.subCode);
+
   const colorStyles = { button: { color: '#41D0E2' }, label: { color: '#A0AEB8' } };
 
+  useEffect(() => {
+    setdata2(props.data2)
+  }, [props.data2])
+  const userBadge = getUserBadge(data2.serviceType.code, data2.serviceType.subCode);
   const InviteButton = (
     <CommonButton
       style={styles.inviteBtn}
@@ -43,7 +50,7 @@ const MabulDetailView = (props) => {
   );
   const AskButton = (
     <CommonButton
-      // onPress={() => Actions.activityMessage({ message: new Message(data.user, data.title, data.coverImage) })}
+
       style={styles.quizBtn}
       textStyle={{ color: '#41D0E2' }}
       text="Poser une question"
@@ -53,7 +60,6 @@ const MabulDetailView = (props) => {
     <>
       <ScrollView style={styles.scrollView}>
         <Image
-          // source={typeof data.coverImage === 'number' ? data.coverImage : require('../../assets/images/sample_cover_2.png')}
           source={data2.images !== undefined ? { uri: data2.images[0].uri } : require('../../assets/images/sample_cover_2.png')}
           style={styles.cover}
         />
@@ -86,15 +92,8 @@ const MabulDetailView = (props) => {
           <CommentText style={styles.comment} text={data2.type !== undefined ? data2.type.itemName : data.organName} color={'#1E2D60'} />
           <TitleText text={data2.data !== undefined ? data2.data.title : data.title} style={styles.title} />
           <ReadMore
-
-
             numberOfLines={3}
-          // renderTruncatedFooter={this._renderTruncatedFooter}
-          // renderRevealedFooter={this._renderRevealedFooter}
-          // onReady={this._handleTextReady}
           >
-
-
             <Text style={styles.content}>
               {data2.data !== undefined ? data2.data.description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef"}
             </Text>

@@ -61,6 +61,18 @@ export const fetchallDemands = async () => {
     return demands
 }
 
+export const fetchPerticularDemand = async (docId) => {
+    const response = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('need').doc(docId)
+    const data = await response.get();
+    // data.data()
+    // console.log(" Datata  ", data.data());
+
+    return data.data()
+
+
+
+}
+
 export const fetchDemands = async () => {
     let demands = []
 

@@ -64,21 +64,45 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
 
     if (mabulService === 'organize') {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('organize').add(data).then((res) => { setloadingSet(false); Actions.myOrganize({ data: data, data2: data, user: user, docId: res.id }) });
+        .collection('organize').add(data).then(async (res) => {
+          const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+
+          const datas = await responce.get();
+          setloadingSet(false); Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
+        });
 
     } else if (mabulService === 'give') {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('give').add(data).then((res) => { setloadingSet(false); Actions.myGive({ data: data, data2: data, user: user, docId: res.id }) });
+        .collection('give').add(data).then(async (res) => {
+          const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+
+          const datas = await responce.get();
+          setloadingSet(false); Actions.myGive({ data: data, data2: datas.data(), user: user, docId: res.id, })
+        });
 
     } else if (mabulService === 'sell') {
 
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('sell').add(data).then((res) => { setloadingSet(false); Actions.mySell({ data: data, data2: data, user: user, docId: res.id }) });
+        .collection('sell').add(data).then(async (res) => {
+
+          const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+
+          const datas = await responce.get();
+          setloadingSet(false); Actions.mySell({ data: data, data2: datas.data(), user: user, docId: res.id, })
+
+        });
 
     } else {
 
       firestore().collection('userDemands').doc(auth().currentUser.uid)
-        .collection('need').add(data).then((res) => { console.log("res,daya ", data); setloadingSet(false); Actions.myNeed({ data: data, data2: data, user: user, docId: res.id }) });
+        .collection('need').add(data).then(async (res) => {
+
+          const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+
+          const datas = await responce.get();
+
+          setloadingSet(false); Actions.myNeed({ data: data, data2: datas.data(), user: user, docId: res.id, })
+        });
     }
   }
 

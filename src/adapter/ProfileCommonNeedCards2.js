@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import { em } from '../constants/consts';
 import CommentText from '../text/CommentText';
@@ -7,9 +7,16 @@ import SellServiceType from '../model/service/SellServiceType';
 import SmallText from '../text/SmallText';
 import NeedStatusType from '../model/service/NeedStatusType';
 import Moment from 'moment';
+import { fetchPerticularDemand } from '../services/firebase'
 const ProfileCommonNeedCard = (props) => {
     const { data } = props;
+    useEffect(() => {
+        console.log("data ", data);
+        // fetchPerticularDemand().then((item) => {
+        //     console.log(" item ", item);
+        // })
 
+    }, [])
     if (data.type === ServiceType.SELL) {
         return (
             <TouchableOpacity onPress={props.onPress}>

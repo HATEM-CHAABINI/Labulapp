@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text } from 'react-native';
+import { View,ActivityIndicator , Image, Text } from 'react-native';
 import { em, hm, WIDTH, HEIGHT } from '../../../constants/consts';
 import { FlatList } from 'react-native';
 import CommonListItem from '../../../adapter/CommonListItem';
@@ -12,10 +12,18 @@ const MyAlertsTabScreen = () => {
   const [alerts, setalerts] = useState([])
   const [user, setuser] = useState()
 
+  const [loadingData, setloadingData] = useState(true)
+
   useEffect(() => {
 
     fetchAlerts().then(async (item) => {
-      setalerts(() => item)
+    //  console.log('priteshitem',item)
+      if (item !== undefined) {
+      setalerts(() =>item)
+      if (item.length === 0) {
+        setloadingData(false)
+      }
+    }
     })
     getUserProfile(auth().currentUser.uid).then(async (item) => {
 
@@ -24,15 +32,23 @@ const MyAlertsTabScreen = () => {
 
   }, [])
 
+  useEffect(() => {
+    if (alerts.length > 0) {
+      setloadingData(false)
+    }
+
+  }, [alerts])
 
   const renderFlatList = ({ item }) => (
 
     <CommonListItem
       style={styles.listItem}
-      title={item.name}
+      // title={item.name}
+       title={item}
       titleStyle={styles.titleStyle}
       subTitleStyle={styles.subTitleStyle}
-      subTitle={item.comment}
+      // subTitle={item.comment}
+      subTitle={item}
       icon={
         <View style={styles.alertIconContainer}>
           <AlertRed width={50 * em} height={50 * em} />
@@ -69,17 +85,17 @@ const MyAlertsTabScreen = () => {
 
     <CommonListItem
       style={styles.listItem}
-      title={item.type.title}
+     title={item.data.type.title} 
       titleStyle={styles.titleStyle}
       subTitleStyle={styles.subTitleStyle}
-      subTitle={item.description}
+      subTitle={item.data.description}
       icon={
         <View style={styles.alertIconContainer}>
           <AlertRed width={50 * em} height={50 * em} />
         </View>
       }
-      onPress={() => Actions.myAlert({ alertData: item, user: user })}
-    />
+      onPress={() => Actions.myAlert({ alertData:item.data, user: user ,docId:item.docId})}
+    /> 
   );
   const listView2 = (
     <FlatList
@@ -93,7 +109,11 @@ const MyAlertsTabScreen = () => {
 
   return (<>
     {/* <View style={styles.container}>{listView}</View> */}
-    <View style={styles.container}>{listView2}</View>
+    {loadingData ? <ActivityIndicator size={'large'} color={'#41D0E2'} style={{
+      flex: 1,
+      alignItems: 'center',
+      backgroundColor: '#F0F5F7',
+    }} /> :<View style={styles.container}>{listView2}</View>}
   </>
   );
 };

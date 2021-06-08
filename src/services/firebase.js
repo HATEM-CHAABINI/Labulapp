@@ -16,6 +16,12 @@ export const getUserProfile = (id) => {
     });
 
 }
+
+export const deleteUserAlerts = async (id, alertType, alertId) => {
+    return firestore().collection('userAlerts').doc(id).collection(alertType).doc(alertId).delete().then((snapshot) => {
+        return true
+    });
+}
 export const fetchAlerts = async () => {
     let alerts = []
     const responseAlert = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection('alerts')
@@ -23,54 +29,12 @@ export const fetchAlerts = async () => {
 
     dataAlert.docs.forEach(async item => {
         if (item.data() !== undefined) {
-            alerts.push(item.data())
+        //    alerts.push(item.data()) 
+            alerts.push({docId: item.id, data:item.data()})
         }
 
     })
     return alerts
-
-}
-
-
-export const fetchallDemands = async () => {
-    let demands = []
-    const responseNeed = firestore().collectionGroup("need")
-    const users = await responseNeed.get();
-
-    let customData = []
-    users.docs.forEach(async doc => {
-
-        if (doc.data() !== undefined) {
-            getUserProfile(doc.ref.parent.parent.id).then((res) => {
-                if (res.profilePic !== undefined) {
-
-                    customData = [
-                        {
-                            user: res,
-                            id: doc.ref.id,
-                            need: doc.data()
-                        }
-                    ]
-                }
-            })
-
-            demands.push(customData)
-        }
-
-    });
-    return demands
-}
-
-export const fetchPerticularDemand = async (docId) => {
-    const response = firestore().collection('userDemands').doc(auth().currentUser.uid).collection('need').doc(docId)
-    const data = await response.get();
-    // data.data()
-    // console.log(" Datata  ", data.data());
-
-    return data.data()
-
-
-
 }
 
 export const fetchDemands = async () => {

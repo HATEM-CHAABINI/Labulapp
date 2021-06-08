@@ -119,40 +119,18 @@ const EditNeedScreen = (props) => {
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
-
+  console.log(startDate);
 
 
   const updateUserDemands = (id, data) => {
-    console.log("Data To give -> ", data);
-    if (props.data2.serviceType.name === 'organize') {
-      firestore().collection('userDemands').doc(id).collection('organize').doc(props.docId).update(data).then((res) => {
-        Actions.pop(), setloading(false)
-      }).catch((error) => {
-        console.log(error); setloading(false)
-      })
 
-    } else if (props.data2.serviceType.name === 'give') {
-      firestore().collection('userDemands').doc(id).collection('give').doc(props.docId).update(data).then((res) => {
-        Actions.pop(), setloading(false)
-      }).catch((error) => {
-        console.log(error); setloading(false)
-      })
 
-    } else if (props.data2.serviceType.name === 'sell') {
+    firestore().collection('userDemands').doc(id).collection(props.data2.serviceType.name).doc(props.docId).update(data).then((res) => {
+      Actions.pop(), setloading(false)
+    }).catch((error) => {
+      console.log(error); setloading(false)
+    })
 
-      firestore().collection('userDemands').doc(id).collection('sell').doc(props.docId).update(data).then((res) => {
-        Actions.pop(), setloading(false)
-      }).catch((error) => {
-        console.log(error); setloading(false)
-      })
-
-    } else {
-      firestore().collection('userDemands').doc(id).collection('need').doc(props.docId).update(data).then((res) => {
-        Actions.pop(), setloading(false)
-      }).catch((error) => {
-        console.log(error); setloading(false)
-      })
-    }
   }
   const SaveData = (imagesBlob) => {
 
@@ -397,7 +375,7 @@ const EditNeedScreen = (props) => {
         }}
         onChange={(item) => { setdemandData({ ...demandData, description: item }), setdescriptionModelVisible(false) }}
       />
-      <TouchableOpacity onPress={showDatePicker}>
+      <TouchableOpacity onPress={() => showDatePicker()}>
 
 
         <ProfileInformationListItem

@@ -38,7 +38,7 @@ const MySellScreen = (props) => {
     }, [])
     return (
         <View style={styles.container}>
-            <MabulDetailView data={data} data2={data2} user={user} created={props.created} />
+            <MabulDetailView data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
         </View>
     );
 };

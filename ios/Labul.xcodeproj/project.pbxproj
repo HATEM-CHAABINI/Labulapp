@@ -619,7 +619,7 @@
 				CODE_SIGN_ENTITLEMENTS = Labul/Labul.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = 2.1;
 				DEVELOPMENT_TEAM = ZSVQXPQ3L5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Labul/Info.plist;
@@ -653,7 +653,7 @@
 				CODE_SIGN_ENTITLEMENTS = Labul/Labul.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = 2.1;
 				DEVELOPMENT_TEAM = ZSVQXPQ3L5;
 				INFOPLIST_FILE = Labul/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

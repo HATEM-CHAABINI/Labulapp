@@ -92,20 +92,25 @@ export const fetchallDemand = async () => {
     let RefNeed = firestore().collectionGroup("need");
     let allNeeds = await RefNeed.get();
     for(const doc of allNeeds.docs){
+        if((doc.data().coordinate.latitude !==undefined )){
+
         let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
         let res = await cc.get();
         if (res.data() !== undefined) {
+
         data.push({
                       ...doc.data(),
                       key: doc.id,
                       user:res.data()
-                    }); } 
+                    }); } }
             
     }
 
     let RefSell = firestore().collectionGroup("sell");
     let allSell = await RefSell.get();
     for(const doc of allSell.docs){
+        if((doc.data().coordinate.latitude !==undefined )){
+
         let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
         let res = await cc.get();
         if (res.data() !== undefined) {
@@ -114,12 +119,14 @@ export const fetchallDemand = async () => {
                       key: doc.id,
                       user:res.data()
                     });  }
-            
+                }
     }
 
     let RefOrganize = firestore().collectionGroup("organize");
     let allOrganize = await RefOrganize.get();
     for(const doc of allOrganize.docs){
+        if((doc.data().coordinate.latitude !==undefined )){
+
         let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
         let res = await cc.get();
         if (res.data() !== undefined) {
@@ -128,21 +135,24 @@ export const fetchallDemand = async () => {
                         key: doc.id,
                         user:res.data()
                     });  
-                }
+                }}
     }
 
 let RefGive = firestore().collectionGroup("give");
 let allGive = await RefGive.get();
 for(const doc of allGive.docs){
+    if((doc.data().coordinate.latitude !==undefined )){
+
     let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
     let res = await cc.get();
     if (res.data() !== undefined) {
+        console.log(doc.data());
     data.push({
                     ...doc.data(),
                     key: doc.id,
                     user:res.data()
                 });  
-            }
+            }}
 }
 
 return data

@@ -75,6 +75,7 @@
     "redux-thunk": "^2.3.0",
     "reinput": "^3.7.2",
     "rn-material-ui-textfield": "^1.0.3",
+    "use-force-update": "^1.0.7",
     "yup": "^0.32.9"
   },
   "devDependencies": {

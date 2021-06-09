@@ -176,10 +176,7 @@ const friends = [
 
 const FriendsListScreen = (props) => {
   const navigation  = props.navigation;
-  console.log("bbbbbbbbbbb");
 
-console.log(navigation);
-console.log("bbbbbbbbbbb");
 
   const renderFlatList = ({ item, index }) => (
     <FriendListCard

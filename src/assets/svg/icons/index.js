@@ -42,7 +42,56 @@ import ChildCareSell from './category/ChildCareSell.svg';
 import TransportSell from './category/TransportSell.svg';
 import AdministrativeSell from './category/AdministrativeSell.svg';
 import ComputerSell from './category/ComputerSell.svg';
+import Gardeenfant from './category/Gardeenfant.svg';
+import Soutienscolaire from './category/Soutienscolaire.svg';
+import Accompagnementenfants from './category/Accompagnementenfants.svg';
+import Personnesagees from './category/Personnesagees.svg';
+import Informatique from './category/Informatique.svg';
+import Aministrative from './category/Aministrative.svg';
+import Entretien from './category/Entretien.svg';
+import Bricolage from './category/Bricolage.svg';
+import Outillage from './category/Outillage.svg';
+import Jardinage from './category/Jardinage.svg';
+import Preparationrepas from './category/Preparationrepas.svg';
+import Repassage from './category/Repassage.svg';
+import Livraisonachats from './category/Livraisonachats.svg';
+import TransportNeed from './category/TransportNeed.svg';
+import Soinsdomicile from './category/Soinsdomicile.svg';
+import AperoSell1 from './category/AperoSell1.svg';
+import Fetesell from './category/Fetesell.svg';
+import SpectacleSell from './category/SpectacleSell.svg';
+import RencontreSell from './category/RencontreSell.svg';
+import RepasSell from './category/RepasSell.svg';
+import AtelierSell from './category/AtelierSell.svg';
 
+import GardeenfantSell from './category/GardeenfantSell.svg';
+import SoutienscolaireSell from './category/SoutienscolaireSell.svg';
+import PersonnesageesSell from './category/PersonnesageesSell.svg';
+import InformatiqueSell from './category/InformatiqueSell.svg';
+import AministrativeSell from './category/AministrativeSell.svg';
+import EntretienSell from './category/EntretienSell.svg';
+import JardinageSell from './category/JardinageSell.svg';
+import LivraisonachatsSell from './category/LivraisonachatsSell.svg';
+import TransportSells from './category/TransportSells.svg';
+import AccompagnementenfantsSell from './category/AccompagnementenfantsSell.svg';
+import AnimalsSell from './category/AnimalsSell.svg';
+import PreparationrepasSell from './category/PreparationrepasSell.svg';
+import RepassageSell from './category/RepassageSell.svg';
+import SoinsdomicileSell from './category/SoinsdomicileSell.svg';
+import Aperoorg from './category/Aperoorg.svg';
+import Spectacleorg from './category/Spectacleorg.svg';
+import Rencontreorg from './category/Rencontreorg.svg';
+import Repasorg from './category/Repasorg.svg';
+import Atelierorg from './category/Atelierorg.svg';
+import Feteorg from './category/Feteorg.svg';
+
+import Objetdiversgive from './category/Objetdiversgive.svg';
+import Meublegive from './category/Meublegive.svg';
+import Hightechgive from './category/Hightechgive.svg';
+import Educationgive from './category/Educationgive.svg';
+import Vetementsgive from './category/Vetementsgive.svg';
+import Repasgive from './category/Repasgive.svg';
+import Alimentsgive from './category/Alimentsgive.svg';
 export {
   AnimalSell,
   BeautyCareSell,
@@ -58,6 +107,23 @@ export {
   TransportSell,
   AdministrativeSell,
   ComputerSell,
+  Gardeenfant,Soutienscolaire,
+  Accompagnementenfants,
+  Personnesagees,Informatique,
+  Aministrative
+  , Entretien,Bricolage,Outillage,Jardinage,Preparationrepas,Repassage,Livraisonachats,TransportNeed,Soinsdomicile
+  ,AperoSell1,
+
+  Fetesell,
+   SpectacleSell,RencontreSell ,RepasSell , AtelierSell ,
+   GardeenfantSell,SoutienscolaireSell,PersonnesageesSell,InformatiqueSell,AministrativeSell,EntretienSell,
+   JardinageSell,LivraisonachatsSell,TransportSells,AccompagnementenfantsSell,AnimalsSell,PreparationrepasSell,
+   RepassageSell,SoinsdomicileSell,
+
+   Aperoorg,Spectacleorg,Rencontreorg,Repasorg,Atelierorg,Feteorg,
+   Objetdiversgive,Meublegive,Hightechgive,Educationgive,Vetementsgive,Repasgive,Alimentsgive
+
+
 };
 
 import Send from './navigation/Send.svg';
@@ -331,14 +397,13 @@ export {
   SwissKnife,
 };
 import Animals from './category/Animals.svg';
-import Bricolage from './category/Bricolage.svg';
 import HomeCare from './category/HomeCare.svg';
 import Interview from './category/Interview.svg';
 import Workshop from './category/Workshop.svg';
 import Path from './navigation/Path.svg';
 import Return2Point from './navigation/Return2Point.svg';
 
-export { Animals, Bricolage, HomeCare, Interview, Workshop, Path, Return2Point };
+export { Animals, HomeCare, Interview, Workshop, Path, Return2Point };
 
 import Edit from './post/Edit.svg';
 import Edit1 from './post/Edit1.svg';

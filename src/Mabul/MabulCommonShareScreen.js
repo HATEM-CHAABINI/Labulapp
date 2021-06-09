@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { getUserProfile } from '../services/firebase'
+import { getUserProfile,fetchcoordinate } from '../services/firebase'
 const MabulCommonShareScreen = ({ mabulService, process }) => {
   const dispatch = useDispatch()
   const { demandData } = useSelector((state) => state.demandReducer);
@@ -59,7 +59,32 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
     })
 
   }, [])
-  const saveData = (data) => {
+  const saveData = async (data) => {
+
+var verif = true
+ 
+
+
+              do{
+               console.log(data.coordinate.logitude,"30= ",data.coordinate.latitude) 
+let result = await fetchcoordinate(data.coordinate.latitude,data.coordinate.logitude)
+.then(async (item) => {
+
+        if(item== true)
+        {
+          console.log("trueeee");
+           data.coordinate.latitude = data.coordinate.latitude-0.001
+          console.log("2= ",data.coordinate.latitude)}
+          else{
+            console.log("falseeeee");
+            console.log("3= ",data.coordinate.latitude)
+            verif = false
+            return data.coordinate.latitude
+          }
+        })
+              }while (verif==true) 
+        console.log(verif,"resullllllttt====== ",data.coordinate.latitude);
+
 
     firestore().collection('userDemands').doc(auth().currentUser.uid)
       .collection(data.serviceType.name).add(data).then(async (res) => {

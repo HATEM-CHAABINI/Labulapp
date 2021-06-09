@@ -318,7 +318,6 @@ const FriendsMenuScreen = () => {
 
 const PositionView = (location,i) => (
 
-console.log('============',location.coordinate,'============'),
   <Marker
     key={location.key}
     coordinate={{

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import TitleText from '../../../text/TitleText';
 import { em, hm } from '../../../constants/consts';
@@ -12,6 +13,10 @@ import FriendInvitePopupScreen from '../../friends/popup/FriendInvitePopupScreen
 import { LocationPink, Alert } from '../../../assets/svg/icons/index.js';
 import CommonListItem from '../../../adapter/CommonListItem';
 import CommonBackButton from '../../../Components/button/CommonBackButton';
+import firestore from '@react-native-firebase/firestore';
+import auth from "@react-native-firebase/auth";
+import { fetchAlerts, getUserProfile } from '../../../services/firebase'
+import { DateSchema } from 'yup';
 
 const needData = new NeedService(
   new User('Mathieu Torin', require('../../../assets/images/tab_profile_off.png'), 'anton@gmail.com'),
@@ -22,13 +27,38 @@ const needData = new NeedService(
   3,
   NeedServiceType.REPAIR
 );
-const MyAlertScreen = ({ alertData, user }) => {
 
-  // console.log("alertData ", alertData);
-  // console.log("user ", user);
 
+const MyAlertScreen = (props) => {
+  const [] = useState(false);
+  const [user, setuser] = useState(props.user);
+  const [alertData, setAlertData] = useState(props.alertData);
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(needData);
+
+  useEffect(() => {
+    setAlertData(props.alertData)
+  }, [props.alertData])
+
+  useEffect(() => {
+    if (props.created == undefined) {
+    }
+
+    if (props.created == undefined) {
+      firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(alertData.serviceType.name).doc(props.docId).onSnapshot(async (sanp) => {
+        if (sanp.data() !== undefined) {
+
+          setAlertData(
+            sanp.data()
+          )
+        }
+      })
+    }
+    getUserProfile(auth().currentUser.uid).then(async (item) => {
+      setuser(() => item)
+    })
+  }, [])
+
   const InviteButton = (
     <CommonButton
       textStyle={{ color: '#F9547B' }}
@@ -43,10 +73,12 @@ const MyAlertScreen = ({ alertData, user }) => {
       textStyle={{ color: '#F9547B' }}
       style={styles.quizBtn}
       text="Modifier"
-      onPress={() => Actions.editAlert({ alertData: alertData })}
+      onPress={() => Actions.editAlert({ alertData: alertData, user: user, docId: props.docId })}
     />
   );
+
   const AskButton = <CommonButton textStyle={{ color: '#F9547B' }} style={styles.quizBtn} text="Poser une question" />;
+
   return (
     <View style={styles.container}>
       <View style={styles.cover}>
@@ -56,8 +88,10 @@ const MyAlertScreen = ({ alertData, user }) => {
         <CommonListItem
           icon={
             <AvatarWithBadge
-              avatar={user.profilePic !== undefined && user.profilePic !== null ? { uri: user.profilePic } : require('../../../assets/images/tab_profile_off.png')}
+              // avatar={user.profilePic !== undefined && user.profilePic !== null ? { uri: user.profilePic } : require('../../../assets/images/tab_profile_off.png')}
+              avatar={user.profilePic !== undefined ? { uri: user.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }}
               badge={require('../../../assets/images/ic_sample_5.png')}
+              // badge={userBadge}
               avatarDiameter={35 * em}
               badgeDiameter={21 * em}
             />
@@ -65,14 +99,15 @@ const MyAlertScreen = ({ alertData, user }) => {
           title={user.firstName + " " + user.lastName}
           titleStyle={{ color: '#1E2D60', marginLeft: 21 * em, fontFamily: 'Lato-Black', fontSize: 16 * em }}
         />
-        <TitleText text={alertData !== undefined ? alertData.type.title : 'Alert Title'} style={styles.title} />
+        <TitleText text={alertData.type !== undefined ? alertData.type.title : 'Alert Title'} style={styles.title} />
+
         <CommonListItem
           icon={
             <View style={{ marginRight: 10 * em }}>
               <LocationPink width={16 * em} height={19 * em} />
             </View>
           }
-          title={alertData !== undefined ? alertData.address : 'Alert Address undefine'}
+          title={alertData.address !== undefined ? alertData.address.address : 'Alert Address undefine'}
           titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
         />
         {data.status === 'canceled' ? <></> : data.relationship ? AskButton : ModifyButton}
@@ -84,6 +119,7 @@ const MyAlertScreen = ({ alertData, user }) => {
     </View>
   );
 };
+
 
 const styles = {
   container: {

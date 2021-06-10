@@ -35,8 +35,10 @@ const AlertAddressScreen = (props) => {
     ,
   });
   const onSubmit = values => {
+    const value = { address: values }
+    //  console.log('hello address',value)
+    dispatch(update_into_demand(value))
 
-    dispatch(update_into_demand(values))
     Actions.alertAddNote({ process: 60 })
 
   };

@@ -32,8 +32,10 @@ const AlertAddNoteScreen = (props) => {
     ,
   });
   const onSubmit = values => {
-    console.log(values)
-    dispatch(update_into_demand(values))
+   
+    const  value= { description:values}
+    console.log(value)
+    dispatch(update_into_demand(value))
 
     Actions.alertShare({ process: 94 })
   };

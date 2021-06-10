@@ -84,11 +84,11 @@ const GooglePlacesInput = (props) => {
                 />
 
             </View>
-            <View style={[{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginTop: '90%', }, props.myLocationStyle]}>
+            {/* <View style={[{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginTop: '90%', }, props.myLocationStyle]}>
                     <LocationRed width={16 * em} height={19 * em} />
                     <CommentText text={'Utiliser ma position'} color="#F9547B" style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} />
 
-                </View>
+                </View> */}
             {props.show || props.show == undefined ? <KeyboardAvoidingView style={{ position: 'absolute', alignSelf: 'center', }} >
                 <View style={[{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginTop: '90%', }, props.myLocationStyle]}>
                     <LocationRed width={16 * em} height={19 * em} />

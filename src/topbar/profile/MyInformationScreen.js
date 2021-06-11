@@ -23,7 +23,7 @@ const MyInformationScreen = (props) => {
   const [addressModalVisible, setaddressModalVisible] = useState(false);
   const [profileData, setprofileData] = useState(props.firbaseInfo);
   const [currentData, setcurrentData] = useState({ mobile: profileData.mobile === undefined || profileData.mobile === '' ? ' ' : profileData.mobile, address: profileData.address === undefined || profileData.address === '' ? ' ' : profileData.address })
-  console.log(profileData)
+
   useEffect(() => {
 
     getUserProfile(profileData.uid).then(res => {

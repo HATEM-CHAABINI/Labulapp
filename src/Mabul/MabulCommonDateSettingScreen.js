@@ -18,6 +18,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
+import GooglePlacesInput from '../Components/GooglePlacesInput'
 import { google_api } from '../constants/consts'
 /////////                 HERE GOES API KEY
 Geocoder.init(google_api);
@@ -55,6 +56,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
 
             formik.setFieldValue('address', addressComponent)
             formik.setFieldValue('coordinate', { latitude: position.coords.latitude, logitude: position.coords.longitude })
+            console.log(formik.values.address);
             setloading(() => false)
           })
           .catch(error => { console.warn(error), setloading(() => false), alert(error.origin.error_message) });
@@ -209,8 +211,46 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
             <CommonListItem title="Pas de date" rightView={switchView} style={styles.addDateText} />
             <TitleText text={'Lieu'} style={styles.title} />
             <CommentText text="Choisis un adresse si besoin" style={styles.comment} />
+            <GooglePlacesInput
+              placeholder={"Rechercher une addresse"}
+              containerStyle={{
+                backgroundColor: 'white',
+                width: "100%",
+              }}
+              borderBottomColor={conceptColor}
+              style={{ width: '100%', }}
+              show={true}
+              textInputStyle={{
+                // height: 40,
+                color: '#1E2D60',
+                fontSize: 12 * em,
+                fontFamily: 'Lato-Bold',
+              }}
+              myLocationContainer={{ top: 280 * hm }}
+              // autoFillOnNotFound={true}
+              value={formik.values.address}
+              myLocationColor={conceptColor}
+              myLocationIconColor={conceptColor}
+              formik={formik}
 
-            <Reinput
+              changedValue={(val) => {
+                // console.log(val.adresse);
+                formik.setFieldValue('address', val.address);
+                formik.setFieldValue('coordinate', val.coordinate);
+              }}
+            />
+            {formik.errors.address && formik.touched.address && <Text style={{ color: 'red', top: '1%', bottom: "5%", }}>{formik.errors.address}</Text>}
+            {/* {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * hm }} color={conceptColor} size={'small'} />
+              : <CommonListItem
+                style={{
+                  marginLeft: 0 * em, bottom: 0 * hm, top: 10 * hm
+                }}
+                titleStyle={[styles.listaddLocationTitle, { color: conceptColor }]}
+                icon={iconAddress}
+                title="Utiliser ma position"
+                onPress={() => { getlocation() }}
+              />} */}
+            {/* <Reinput
               label='Rue, adresse, ville'
               icon={iconLocation}
               underlineColor="#BFCDDB"
@@ -222,7 +262,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
 
               onBlur={formik.handleBlur('address')}
               onChangeText={formik.handleChange('address')} />
-            {formik.errors.address && formik.touched.address && <Text style={{ color: 'red', top: '5%', left: '12%' }}>{formik.errors.address}</Text>}
+            
 
             {loading ? <ActivityIndicator style={{ marginLeft: 37 * em, bottom: 20 * hm }} color={conceptColor} size={'small'} />
               : <CommonListItem
@@ -234,7 +274,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
                 icon={iconAddress}
                 title="Utiliser ma position"
                 onPress={() => { getlocation() }}
-              />}
+              />} */}
           </View>
           <MabulNextButton
             color={hexToRGB(conceptColor)}

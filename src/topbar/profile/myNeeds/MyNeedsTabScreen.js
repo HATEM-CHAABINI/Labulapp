@@ -15,7 +15,7 @@ import NeedStatusType from '../../../model/service/NeedStatusType';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth'
 import { fetchDemands, getUserProfile } from '../../../services/firebase'
-
+import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../../../constants/renderBange'
 let dem = []
 
 const needsLists = [

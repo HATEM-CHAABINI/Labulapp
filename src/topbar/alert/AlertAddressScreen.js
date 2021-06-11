@@ -22,8 +22,6 @@ import GooglePlacesInput from '../../Components/GooglePlacesInput'
 const AlertAddressScreen = (props) => {
   const conceptColor = '#F9547B';
   const dispatch = useDispatch()
-  // const { demandData } = useSelector((state) => state.demandReducer);
-  // console.log("demand ", demandData);
   const initialValues = {
     address: '',
     coordinate: {}
@@ -48,11 +46,6 @@ const AlertAddressScreen = (props) => {
     validationSchema,
   });
 
-  const [searchedUsers, getSearchResult] = useState('');
-  const [locationViewVisible, setlocationViewVisible] = useState('flex');
-  const renderFlatList = ({ item }) => (
-    <SearchCommonListItem text={item.userName} subText={item.address} icon={item.ic_location} style={styles.listItem} />
-  );
   return (
     <View style={styles.container}>
 
@@ -68,13 +61,10 @@ const AlertAddressScreen = (props) => {
           containerStyle={{
             backgroundColor: 'white',
             width: "100%",
-
           }}
           textInputStyle={{
-            // height: 40,
             color: '#5d5d5d',
             fontSize: 18,
-
           }}
           value={formik.values.address}
           formik={formik}
@@ -100,7 +90,6 @@ const AlertAddressScreen = (props) => {
           text="Suivant"
           onPress={
             formik.handleSubmit
-            // Actions.alertAddNote({ process: 60 })
           }
         />
 

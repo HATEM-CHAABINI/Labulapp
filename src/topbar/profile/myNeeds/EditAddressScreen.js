@@ -28,7 +28,7 @@ export default (props) => {
         address: Yup.string().required('required')
 
     });
-    const onSubmit = async values => {
+    const onSubmit = async (values) => {
         console.log("val ", values);
         props.onChange(values.address)
     };

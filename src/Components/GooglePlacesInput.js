@@ -42,7 +42,7 @@ const GooglePlacesInput = (props) => {
     ///41D0E2
     return (
         <>
-            <View style={[{ width: '100%', flexDirection: 'row', borderBottomWidth: 2, borderBottomColor: props.borderBottomColor ? props.borderBottomColor : 'grey', zIndex: 10 }, props.style]}>
+            <View style={[{ width: '100%', flexDirection: 'row', borderBottomWidth: 2, borderBottomColor: props.borderBottomColor ? props.borderBottomColor : 'grey', zIndex: 1 }, props.style]}>
                 <View style={{ marginRight: 15 * em, top: '3%', }}>
                     <Magnifier width={20 * em} height={20 * em} />
                 </View>
@@ -51,6 +51,13 @@ const GooglePlacesInput = (props) => {
                     placeholder={props.placeholder}
                     minLength={2}
                     onPress={(data, details = null) => {
+                        console.log("sdsdffsdf ", {
+                            "address": data.description,
+                            "coordinate": {
+                                "latitude": details.geometry.location.lat,
+                                "logitude": details.geometry.location.lng
+                            }
+                        });
                         props.changedValue(
                             {
                                 address: data.description,
@@ -67,6 +74,7 @@ const GooglePlacesInput = (props) => {
                         textInput: props.textInputStyle,
                         predefinedPlacesDescription: {
                             color: '#1faadb',
+                            zIndex: 2001
                         },
                     }}
 

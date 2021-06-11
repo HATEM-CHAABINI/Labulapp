@@ -11,7 +11,7 @@ import { fetchPerticularDemand } from '../services/firebase'
 const ProfileCommonNeedCard = (props) => {
     const { data } = props;
     useEffect(() => {
-        console.log("data ", data);
+
         // fetchPerticularDemand().then((item) => {
         //     console.log(" item ", item);
         // })

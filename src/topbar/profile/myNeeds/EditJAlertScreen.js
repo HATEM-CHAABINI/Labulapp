@@ -1,9 +1,9 @@
 
-import React, { useState,useEffect } from 'react';
-import { em,hm } from '../../../constants/consts';
+import React, { useState, useEffect } from 'react';
+import { em, hm } from '../../../constants/consts';
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
-import { StatusBar, View, Text, FlatList , TouchableOpacity } from 'react-native';
+import { StatusBar, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import TitleText from '../../../text/TitleText';
 import CheckBox from '../../../Components/checkbox/CheckBox';
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,39 +11,27 @@ import { update_into_demand } from '../../../redux/actions/demand'
 
 
 export default (props) => {
-    
+
     const [value, setvalue] = useState(props.value)
     const [loading, setloading] = useState(false)
-    
     const [alertType, setAlertType] = useState(props.value)
     const dispatch = useDispatch();
     const [checked, setChecked] = useState();
-    // const [checked, setChecked] = useState();
- 
+
     const options = [
         { id: 0, title: 'Accident' },
         { id: 1, title: 'Route barrée' },
         { id: 2, title: 'Travaux' },
     ];
-  
     useEffect(() => {
         setloading(false)
-        // options[{checked}]
-        // setChecked
-    }, [])
-  
-    
+        setChecked(props.value)
+    }, [props.value])
     const onSubmit = () => {
         props.onChange(checked)
-        // console.log('checked',checked)
         props.onPress()
     }
-    // console.log(insertInfo.inputTexts[0].toString())
-    // const insertInfo = insertInformations[props.title];
-  
-
     const renderOptions = ({ item, index }) => {
-        // console.log('item aa rha he',item)
         var elevation = !checked ? 0 : 2;
         return (
             <TouchableOpacity
@@ -53,12 +41,11 @@ export default (props) => {
                     { marginBottom: index === 2 ? 40 * em : 0 },
                 ]}
                 // onPress={() => { dispatch(update_into_demand({ type: item })), setChecked(item.id),console.log('hello',item.id) }}>
-               onPress={()=> setChecked(item.title)}>
-                <TitleText 
-                style={styles.optionCaption}
-                 text={item.title}
-                
-                  />
+                onPress={() => setChecked(item.title)}>
+                <TitleText
+                    style={styles.optionCaption}
+                    text={item.title}
+                />
                 <CheckBox
                     oval
                     red
@@ -66,13 +53,13 @@ export default (props) => {
                     isChecked={checked === item.title}
                     singleSelection={true}
                     // onClick={() => (dispatch(update_into_demand({ type: item })), setChecked(item.id))}
-                    onClick={()=> setChecked(item.title)}
+                    onClick={() => setChecked(item.title)}
                 />
             </TouchableOpacity>
         );
     };
- 
-    
+
+
     return (
         <Modal
             isVisible={props.visible}
@@ -104,31 +91,15 @@ export default (props) => {
                 onFinishPress={() => { onSubmit() }}
             />
             <View style={styles.body}>
-                {/* <View style={styles.circleSortView}>
-                    <Neighbor width={31 * em} height={31 * em} />
-                    <CommonText text="Mes voisins" style={{ marginLeft: 10 }} />
-                </View> */}
                 <FlatList
                     data={options}
                     renderItem={renderOptions}
-                    // keyExtractor={(i) => i.id}
+                    keyExtractor={(i) => i.id}
                     keyExtractor={(props) => props.id}
                 />
             </View>
-            {/* <ProfileCommonTextInput
-                style={styles.input}
-                text={props.title}
-                value={formik.values.title}
-                onFocus={true}
-                key={0}
-                kyeboardType={'default'}
-                onChangeText={formik.handleChange('title')}
-            />
-            {
-                formik.errors.title && formik.touched.title && <Text style={styles.descerrorText}>{formik.errors.title}</Text>} */}
-
         </Modal>
-      
+
     );
 };
 const styles = {
@@ -144,26 +115,19 @@ const styles = {
         flex: 1,
         justifyContent: 'flex-start',
     },
-    // descerrorText: {
-    //     fontSize: 12 * em,
-    //     bottom: 0,
-    //     // marginBottom: 4 * hm,
-    //     color: "red",
-    // },
-    // // header: { marginBottom: 10 * hm, marginTop: 27 * hm },
-    // input: { marginTop: 25 * hm },
-    // forgotPsswd: { lineHeight: 18 * em, marginTop: 78 * hm, textAlign: 'center' },
-    // comment: { fontSize: 12 * em, lineHeight: 20 * em, marginTop: 15 * hm },
-    // listItem: { paddingHorizontal: 10 * em, marginBottom: 35 * hm },
-
-
-
-    //ruf
+    descerrorText: {
+        fontSize: 12 * em,
+        bottom: 0,
+        // marginBottom: 4 * hm,
+        color: "red",
+    },
+    header: { marginBottom: 10 * hm, marginTop: 27 * hm },
+    input: { marginTop: 25 * hm },
 
     header: {
         height: '12.45%',
     },
-    body: { flex: 1, paddingHorizontal: 30 * em },
+    body: { paddingHorizontal: 30 * em },
     title: {
         width: 315 * em,
         textAlign: 'left',
@@ -214,7 +178,6 @@ const styles = {
         lineHeight: 23 * em,
         color: '#1E2D60',
     },
-    //ruf
 };
 
 

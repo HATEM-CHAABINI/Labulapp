@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { em, hm } from '../constants/consts';
@@ -9,17 +9,41 @@ import SwitchButton from './SwitchButton';
 import { Actions } from 'react-native-router-flux';
 import { MagnifierBlue, Filter } from '../assets/svg/icons';
 const Tab = createMaterialTopTabNavigator();
-
+import { fetchallDemand } from '../services/firebase'
 export default function FriendsNavigator(props) {
-  const [activeTab, setActiveTab] = React.useState(1);
+  const [activeTab, setActiveTab] = useState(1);
+  const [Data, setData] = useState([])
+  const [Loading, setLoading] = useState(true)
+  useEffect(() => {
+
+    fetchallDemand().then((item) => {
+      if (item !== undefined) {
+        setData(() => item)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+
+    if (Data.length > 0) {
+      setLoading(false)
+
+    }
+  }, [Data])
   return (
     <View style={styles.TabBarMainContainer}>
       <Tab.Navigator
         tabBar={() => null}
         swipeEnabled={false}
         initialRouteName={props.route.params.friendNav || 'Carte'}>
-        <Tab.Screen name="Carte" component={FriendsMenuScreen} />
-        <Tab.Screen name="Liste" component={FriendsListScreen} />
+        {/* <Tab.Screen name="Carte" component={FriendsMenuScreen}  /> */}
+        <Tab.Screen name="Carte">
+          {(props) => <FriendsMenuScreen  {...props} data={Data} loading={Loading} />}
+        </Tab.Screen>
+        {/* <Tab.Screen name="Liste" component={FriendsListScreen} /> */}
+        <Tab.Screen name="Liste">
+          {(props) => <FriendsListScreen  {...props} data={Data} loading={Loading} />}
+        </Tab.Screen>
       </Tab.Navigator>
       <View style={styles.TabControlContainer}>
         <CommonBlueHeader />

@@ -9,13 +9,14 @@ import CommonListItem from '../adapter/CommonListItem';
 import AvatarWithBadge from './AvatarWithBadge';
 import { CrossGray, LocationRed } from '../assets/svg/icons';
 const padding = 15 * em;
+import Moment from 'moment';
 const textBoxMargin = 52 * em;
 const userPhotoSize = 36 * em;
-
+import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../constants/renderBange'
 const FriendListCard = (props) => {
   const { data } = props;
   const userBadge = getUserBadge(data.type, data.subType);
-  if (data.type === ServiceType.SELL) {
+  if (data.serviceType.code === ServiceType.SELL) {
     return (
       <TouchableOpacity onPress={props.onPress}>
         <View style={[styles.container, props.style]}>
@@ -23,9 +24,9 @@ const FriendListCard = (props) => {
             <CrossGray width={12 * em} height={12 * em} />
           </View>
           <View style={{ alignItems: 'center' }}>
-            <Image source={data.coverImage} style={styles.coverImage} />
+            <Image source={{ uri: data.images[0].uri }} style={styles.coverImage} />
             <Image
-              source={userBadge}
+              source={renderimgSell(data.belongsTo.id, data.category.id)}
               style={{ position: 'absolute', width: 64 * em, height: 64 * em, bottom: -32 * em }}
             />
           </View>
@@ -37,18 +38,18 @@ const FriendListCard = (props) => {
             />
           )} */}
           <View style={{ marginTop: 30 * hm }}>
-            <CommentText text={data.title} color="#1E2D60" style={{ fontFamily: 'Lato-Black' }} />
-            <SmallText style={[styles.plan, { marginTop: 15 * hm }]} text={data.slogan} />
+            <CommentText text={data.data.title} color="#1E2D60" style={{ fontFamily: 'Lato-Black' }} />
+            <SmallText style={[styles.plan, { marginTop: 15 * hm }]} text={data.category.name} />
             <CommentText
               align="left"
-              text={data.comment}
+              text={data.data.description}
               color="#1E2D60"
               style={{ fontFamily: 'Lato-Black', marginTop: 5 * hm }}
             />
             <View style={{ flexDirection: 'row', marginTop: 17 * hm }}>
               <CommentText align="left" text={data.price} color="#1E2D60" style={{ fontFamily: 'Lato-Medium' }} />
-              <CommentText align="left" text={data.discountPrice} color="#6A8596" style={styles.discountPrice} />
-              <CommentText align="left" text={data.discountInfo} color="#6A8596" style={{ marginLeft: 10 * em, color: "#A0AEB8" }} />
+              {/* <CommentText align="left" text={data.discountPrice} color="#6A8596" style={styles.discountPrice} /> */}
+              {/* <CommentText align="left" text={data.discountInfo} color="#6A8596" style={{ marginLeft: 10 * em, color: "#A0AEB8" }} /> */}
             </View>
           </View>
         </View>
@@ -62,16 +63,17 @@ const FriendListCard = (props) => {
           <CrossGray width={12 * em} height={12 * em} />
         </View>
         {typeof data.coverImage === 'number' ? (
-          <Image source={data.coverImage} style={styles.coverImage} />
+          <Image source={{ uri: data.images[0].uri }} style={styles.coverImage} />
         ) : (
-          data.coverImage
+          // data.coverImage
+          <Image source={{ uri: data.images[0].uri }} style={styles.coverImage} />
         )}
         <View style={styles.textBox}>
           {data.date && (
             <View style={styles.dateText}>
               <SmallText
 
-                text={data.type === ServiceType.ORGANIZE ? '01 Mar · 13h00' : '04 Fév · 08h00'}
+                text={data.type === ServiceType.ORGANIZE ? Moment(data.demandStartDate.seconds * 1000).format('DD MMMM YYYY-HH:MM') : Moment(data.demandStartDate.seconds * 1000).format('DD MMMM YYYY-HH:MM')}
                 color="#6A8596"
               /></View>
           )}
@@ -79,29 +81,37 @@ const FriendListCard = (props) => {
             style={styles.bottomContent}
             icon={
               <AvatarWithBadge
-                avatar={data.user.photo}
-                badge={userBadge}
+                avatar={data.user.profilePic === undefined ? { uri: 'https://image.shutterstock.com/image-vector/user-login-authenticate-icon-human-600w-1365533969.jpg' } : { uri: data.user.profilePic }}
+                badge={
+                  data.serviceType.code === 0 ?
+                    renderimgorganize(data.category.id) :
+                    data.serviceType.code === 1 ?
+                      renderimggive(data.category.id)
+                      : data.serviceType.code === 2 ?
+                        renderimgSell(data.belongsTo.id, data.category.id) :
+                        renderimgneed(data.belongsTo.id, data.category.id)
+                }
                 avatarDiameter={35 * em}
                 badgeDiameter={21 * em}
                 style={{ marginRight: 16 * em }}
                 onPress={() => props.onAvatarPress()}
               />
             }
-            title={data.user.name}
+            title={data.user.firstName + ' ' + data.user.lastName}
             titleStyle={styles.userDescText}
-            subTitle={data.organName}
+            subTitle={data.data.title}
             subTitleStyle={styles.userDescTexts}
           />
-          {data.type === ServiceType.GIVE && (
+          {data.serviceType.code === ServiceType.GIVE && (
             <CommonListItem
               style={styles.locationContainer}
               icon={<LocationRed width={16 * em} height={19 * em} />}
               titleStyle={styles.locationText}
-              title={data.location}
+              title={data.address}
             />
           )}
-          {data.type !== ServiceType.GIVE && (
-            <CommentText align="left" color="#1E2D60" style={styles.organText} text={data.title} />
+          {data.serviceType.code !== ServiceType.GIVE && (
+            <CommentText align="left" color="#1E2D60" style={styles.organText} text={data.data.title} />
           )}
           {data.price && <CommentText align="left" color="#1E2D60" style={styles.priceText} text={data.price} />}
         </View>

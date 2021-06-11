@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, FlatList, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text, ActivityIndicator } from 'react-native';
 import { em, hm } from '../constants/consts';
 
 import OrganizeService from '../model/service/OrganizeService';
@@ -78,7 +78,7 @@ const friends = [
       (
         <View
           style={{
-            backgroundColor: '#EEE7FA', marginTop:15*hm,
+            backgroundColor: '#EEE7FA', marginTop: 15 * hm,
             width: '100%',
             height: 85 * hm,
             borderRadius: 15 * hm,
@@ -140,7 +140,7 @@ const friends = [
       (
         <View
           style={{
-            marginTop:15*hm,
+            marginTop: 15 * hm,
             backgroundColor: '#FBEAEE',
             width: '100%',
             height: 85 * hm,
@@ -175,33 +175,34 @@ const friends = [
 ];
 
 const FriendsListScreen = (props) => {
-  const navigation  = props.navigation;
+  const navigation = props.navigation;
 
+  const [loading, setLoading] = useState(props.loading)
+  const [datas, setData] = useState(props.data);
+
+  useEffect(() => {
+    setLoading(props.loading)
+    setData(props.data)
+  }, [props.loading, props.data])
 
   const renderFlatList = ({ item, index }) => (
     <FriendListCard
-      key={(Date.now() + parseInt(Math.random() * 100000000)).toString()}
-      style={[styles.card, { marginBottom: index === friends.length - 1 ? 120 * hm : 15 * hm }]}
+      key={item.key}
+      style={[styles.card, { marginBottom: index === datas.length - 1 ? 120 * hm : 15 * hm }]}
       data={item}
       onPress={() => {
         if (item.type === ServiceType.ORGANIZE) {
-          console.log("aaaaaaaaaaaa");
-          console.log(item);
-          console.log("aaaaaaaaaaaa");
-           Actions.friendOrganize({ detail: item });
+
+          Actions.friendOrganize({ detail: item });
         } else {
           if (item.type !== ServiceType.SELL) {
-            console.log("aaaaaaaaaaaa");
-          console.log(item);
-          console.log("aaaaaaaaaaaa");
-          // navigation.navigate('FriendNeedScreen')
+
+            // navigation.navigate('FriendNeedScreen')
 
             Actions.friendNeed({ detail: item });
           } else {
-            console.log("aaaaaaaaaaaa");
-          console.log(item);
-          console.log("aaaaaaaaaaaa");
-          // navigation.navigate('FriendSellScreen')
+
+            // navigation.navigate('FriendSellScreen')
 
             Actions.friendSell({ detail: item });
           }
@@ -210,10 +211,19 @@ const FriendsListScreen = (props) => {
       onAvatarPress={() => Actions.userProfile()}
     />
   );
+  if (loading) {
+    return (
+      <ActivityIndicator size={'large'} color={'#41D0E2'} style={{
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#F0F5F7',
+      }} />
+    )
+  }
   return (
     <View style={styles.container}>
       <FlatList
-        data={friends}
+        data={datas}
         renderItem={renderFlatList}
         keyExtractor={(i) => i.id}
         style={{ paddingTop: 35 * hm, paddingBottom: 100 * hm }}

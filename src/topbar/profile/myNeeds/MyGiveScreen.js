@@ -23,9 +23,8 @@ const MyGiveScreen = (props) => {
     const [data2, setdata2] = useState(props.data);
     const [user] = useState(props.user);
     useEffect(() => {
-
         if (props.created == undefined) {
-            console.log("data2data2data2data2data2data2 ", data2, " props.created ", props.created);
+
             firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data2.serviceType.name).doc(props.docId).onSnapshot((sanp) => {
                 if (sanp.data() !== undefined) {
                     setdata2(

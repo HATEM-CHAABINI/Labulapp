@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { TouchableOpacity, Alert } from 'react-native';
 import { em, hexToRGB } from '../../../constants/consts';
@@ -15,8 +14,6 @@ import EditJAlertScreen from './EditJAlertScreen';
 import EditShareScreen from './EditShareScreen';
 import EditDescriptionScreen from './EditDescriptionScreen';
 import EditAddressScreen from './EditAddressScreen';
-import MyAddressComponent from '../InformationComponents/MyAddressComponent';
-
 const updateUserPrfile = {
   avatar: require('../../../assets/images/avatar_curology.png'),
   cover: require('../../../assets/images/img_curology.png'),
@@ -27,9 +24,9 @@ const updateUserPrfile = {
   badges: [],
   presentation:
     'Des soins de la peau personnalisés pour les besoins uniques de votre peau. Maintenant disponible dans un ensemble avec nettoyant et hydratant!',
-};
+}
 
-const EditNeedScreen = (props) => {
+const EditAlertScreen = (props) => {
 
   const [typeModalVisible, settypeModalVisible] = useState(false);
   const [addressModalVisible, setaddressModalVisible] = useState(false);
@@ -41,6 +38,7 @@ const EditNeedScreen = (props) => {
   const [description, setDescription] = useState(props.alertData.description)
   const [address, setAddress] = useState(props.alertData.address)
   const [alertType, setAlertType] = useState(props.alertData.type)
+  const [checked, setChecked] = useState(props.alertData.type);
   const [contactType, setcontactType] = useState(props.alertData.belongsTo)
   const [user, setUser] = useState(props.user)
 
@@ -48,7 +46,6 @@ const EditNeedScreen = (props) => {
     firestore().collection('userAlerts').doc(id).collection(props.alertData.serviceType.name).doc(props.docId).update(data).then((res) => {
       Actions.pop(),
 
-        // Actions.myAlert({alertData:data})
         setloading(false)
     }).catch((error) => {
       console.log(error); setloading(false)
@@ -59,15 +56,14 @@ const EditNeedScreen = (props) => {
   const saveData = () => {
     let data = {}
     data = {
-      type: alertType,
+      type: checked,
       address: address,
       description: description,
-
       belongsTo: contactType,
     },
 
       updateUserDemands(auth().currentUser.uid, data)
-
+    console.log()
   }
 
   const deletealert = () => {
@@ -99,7 +95,7 @@ const EditNeedScreen = (props) => {
       <ProfileInformationListItem
         caption={'Type d’alerte'}
         titleUpperCase
-        value={alertType.title}
+        value={checked.title}
         style={styles.listItem}
         onPress={() => {
           // setInputItemKey(1);
@@ -109,13 +105,13 @@ const EditNeedScreen = (props) => {
       <EditJAlertScreen
         visible={typeModalVisible}
         changeItem={'Type d’alerte'}
-        // value={alertType.title}
-        text={alertType.title}
+        value={alertType.title}
+        // text={checked.title}
         title={'Type d’alerte'}
         onPress={() => {
           settypeModalVisible(false)
         }}
-        onChange={(item) => { setAlertType({ ...alertType, title: item }), settypeModalVisible(false) }}
+        onChange={(item) => { setChecked({ ...checked, title: item }), settypeModalVisible(false) }}
       />
 
 
@@ -133,6 +129,7 @@ const EditNeedScreen = (props) => {
         visible={addressModalVisible}
         changeItem={'Où'}
         value={address.address}
+        // coordinate={address}
         title={"Ma localisation"}
         onPress={() => {
           setaddressModalVisible(false)
@@ -194,9 +191,6 @@ const EditNeedScreen = (props) => {
         }}
         onChange={(item) => { setcontactType(item), setbelongsModalVisible(false) }}
       />
-
-
-
       <CommonButton
         text={'Supprimer mon alerte'}
         style={styles.deleteBtn}
@@ -271,6 +265,4 @@ const styles = {
   modalLine: { backgroundColor: '#3F3F3F', width: 0.5 * em, flexGrow: 1 },
 };
 
-export default EditNeedScreen;
-
-
+export default EditAlertScreen;

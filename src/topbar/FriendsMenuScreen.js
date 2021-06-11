@@ -3,20 +3,12 @@ import { View, Text, ImageBackground, Platform, Image, TouchableOpacity, StyleSh
 import { em, hm } from '../constants/consts';
 import { Actions } from 'react-native-router-flux';
 import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps';
+
 import { fetchcoordinate, fetchallDemands, fetchallneed, fetchallorganize, fetchallsell, getUserProfile, fetchallgive, fetchallDemand } from '../services/firebase'
 import { ActivityIndicator } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {
-  Gardeenfant, Soutienscolaire, Accompagnementenfants, Personnesagees, Informatique, Aministrative, ChildCare, ChildCareSell, SupportChildren, SchoolSupport, Animals, HomeCare, Interview, Workshop, Path, Return2Point, Alert
-  , Entretien, Bricolage, Outillage, Jardinage, Preparationrepas, Repassage, Livraisonachats, TransportNeed, Soinsdomicile
-  , Fetesell, AperoSell1, SpectacleSell, RencontreSell, RepasSell, AtelierSell,
-  GardeenfantSell, SoutienscolaireSell, PersonnesageesSell, InformatiqueSell, AministrativeSell, EntretienSell,
-  JardinageSell, LivraisonachatsSell, TransportSells, AccompagnementenfantsSell, AnimalsSell, PreparationrepasSell,
-  RepassageSell, SoinsdomicileSell,
-
-  Feteorg, Aperoorg, Spectacleorg, Rencontreorg, Repasorg, Atelierorg,
-
-  Objetdiversgive, Meublegive, Hightechgive, Educationgive, Vetementsgive, Repasgive, Alimentsgive
+  Path, Return2Point, Alert
 
 } from '../assets/svg/icons';
 import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../constants/renderBange'
@@ -27,32 +19,17 @@ const servicIconSize = { width: 18 * em, height: 18 * em };
 
 
 
-const FriendsMenuScreen = () => {
-  const [loading, setLoading] = useState(true)
-  const [datas, setData] = useState([]);
+const FriendsMenuScreen = (props) => {
+  const [loading, setLoading] = useState(props.loading)
+  const [datas, setData] = useState(props.data);
   const [datasSell, setDataSell] = useState([]);
   const [datasOrganize, setDataOrganize] = useState([]);
   const [datasGive, setDataGive] = useState([]);
 
-
   useEffect(() => {
-
-    fetchallDemand().then((item) => {
-      if (item !== undefined) {
-        // console.log("fetchhhhhhhhh=======give",item);
-        setData(() => item)
-      }
-    })
-
-  }, [])
-
-  useEffect(() => {
-
-    if (datas.length > 0) {
-      setLoading(false)
-    }
-
-  }, [datas])
+    setLoading(props.loading)
+    setData(props.data)
+  }, [props.loading])
 
   return (<>
 

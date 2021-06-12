@@ -16,47 +16,10 @@ import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '
 const FriendListCard = (props) => {
   const { data } = props;
   const userBadge = getUserBadge(data.type, data.subType);
-  if (data.serviceType.code === ServiceType.SELL) {
-    return (
-      <TouchableOpacity onPress={props.onPress}>
-        <View style={[styles.container, props.style]}>
-          <View style={styles.containerIcon}>
-            <CrossGray width={12 * em} height={12 * em} />
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <Image source={{ uri: data.images[0].uri }} style={styles.coverImage} />
-            <Image
-              source={renderimgSell(data.belongsTo.id, data.category.id)}
-              style={{ position: 'absolute', width: 64 * em, height: 64 * em, bottom: -32 * em }}
-            />
-          </View>
-          {/* {data.date && (
-            <SmallText
-              style={styles.dateTextCommon}
-              text={data.type === ServiceType.ORGANIZE ? '01 Mar · 13h00' : '04 Fév · 08h00'}
-              color="#6A8596"
-            />
-          )} */}
-          <View style={{ marginTop: 30 * hm }}>
-            <CommentText text={data.data.title} color="#1E2D60" style={{ fontFamily: 'Lato-Black' }} />
-            <SmallText style={[styles.plan, { marginTop: 15 * hm }]} text={data.category.name} />
-            <CommentText
-              align="left"
-              text={data.data.description}
-              color="#1E2D60"
-              style={{ fontFamily: 'Lato-Black', marginTop: 5 * hm }}
-            />
-            <View style={{ flexDirection: 'row', marginTop: 17 * hm }}>
-              <CommentText align="left" text={data.price} color="#1E2D60" style={{ fontFamily: 'Lato-Medium' }} />
-              {/* <CommentText align="left" text={data.discountPrice} color="#6A8596" style={styles.discountPrice} /> */}
-              {/* <CommentText align="left" text={data.discountInfo} color="#6A8596" style={{ marginLeft: 10 * em, color: "#A0AEB8" }} /> */}
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
+
   return (
+   
+
     <TouchableOpacity onPress={props.onPress}>
       <View style={[styles.container, props.style]}>
         <View style={styles.containerIcon}>
@@ -83,11 +46,11 @@ const FriendListCard = (props) => {
               <AvatarWithBadge
                 avatar={data.user.profilePic === undefined ? { uri: 'https://image.shutterstock.com/image-vector/user-login-authenticate-icon-human-600w-1365533969.jpg' } : { uri: data.user.profilePic }}
                 badge={
-                  data.serviceType.code === 0 ?
+                  data.serviceType.code == 0 ?
                     renderimgorganize(data.category.id) :
-                    data.serviceType.code === 1 ?
+                    data.serviceType.code == 1 ?
                       renderimggive(data.category.id)
-                      : data.serviceType.code === 2 ?
+                      : data.serviceType.code == 2 ?
                         renderimgSell(data.belongsTo.id, data.category.id) :
                         renderimgneed(data.belongsTo.id, data.category.id)
                 }

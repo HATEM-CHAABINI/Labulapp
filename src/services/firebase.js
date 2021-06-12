@@ -96,9 +96,25 @@ export const fetchAllDemands = async () => {
 export const fetchallDemand = async () => {
     const data = [];
 
-    let RefNeed = firestore().collectionGroup("need");
-    let allNeeds = await RefNeed.get();
-    for (const doc of allNeeds.docs) {
+    let RefNeed = firestore().collectionGroup("need").get();
+    let RefSell = firestore().collectionGroup("sell").get();
+    let RefOrganize = firestore().collectionGroup("organize").get();
+    let RefGive = firestore().collectionGroup("give").get();
+    const [allNeedssnap, allSellsnap,allOrganizesnap,allGivesnap] = await Promise.all([
+        RefNeed,
+        RefSell,
+        RefOrganize,
+        RefGive
+      ]);
+
+      const allNeed = allNeedssnap.docs;
+      const allSell = allSellsnap.docs;
+      const allOrganize = allOrganizesnap.docs;
+      const allGive = allGivesnap.docs;
+
+      const citiesArray = allNeed.concat(allSell).concat(allOrganize).concat(allGive);
+    for (const doc of citiesArray) {
+        console.log("========> ",doc);
         if ((doc.data().coordinate.latitude !== undefined)) {
 
             let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
@@ -115,57 +131,57 @@ export const fetchallDemand = async () => {
 
     }
 
-    let RefSell = firestore().collectionGroup("sell");
-    let allSell = await RefSell.get();
-    for (const doc of allSell.docs) {
-        if ((doc.data().coordinate.latitude !== undefined)) {
+    // let RefSell = firestore().collectionGroup("sell");
+    // let allSell = await RefSell.get();
+    // for (const doc of allSell.docs) {
+    //     if ((doc.data().coordinate.latitude !== undefined)) {
 
-            let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
-            let res = await cc.get();
-            if (res.data() !== undefined) {
-                data.push({
-                    ...doc.data(),
-                    key: doc.id,
-                    user: res.data()
-                });
-            }
-        }
-    }
+    //         let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+    //         let res = await cc.get();
+    //         if (res.data() !== undefined) {
+    //             data.push({
+    //                 ...doc.data(),
+    //                 key: doc.id,
+    //                 user: res.data()
+    //             });
+    //         }
+    //     }
+    // }
 
-    let RefOrganize = firestore().collectionGroup("organize");
-    let allOrganize = await RefOrganize.get();
-    for (const doc of allOrganize.docs) {
-        if ((doc.data().coordinate.latitude !== undefined)) {
+    // let RefOrganize = firestore().collectionGroup("organize");
+    // let allOrganize = await RefOrganize.get();
+    // for (const doc of allOrganize.docs) {
+    //     if ((doc.data().coordinate.latitude !== undefined)) {
 
-            let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
-            let res = await cc.get();
-            if (res.data() !== undefined) {
-                data.push({
-                    ...doc.data(),
-                    key: doc.id,
-                    user: res.data()
-                });
-            }
-        }
-    }
+    //         let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+    //         let res = await cc.get();
+    //         if (res.data() !== undefined) {
+    //             data.push({
+    //                 ...doc.data(),
+    //                 key: doc.id,
+    //                 user: res.data()
+    //             });
+    //         }
+    //     }
+    // }
 
-    let RefGive = firestore().collectionGroup("give");
-    let allGive = await RefGive.get();
-    for (const doc of allGive.docs) {
-        if ((doc.data().coordinate.latitude !== undefined)) {
+    // let RefGive = firestore().collectionGroup("give");
+    // let allGive = await RefGive.get();
+    // for (const doc of allGive.docs) {
+    //     if ((doc.data().coordinate.latitude !== undefined)) {
 
-            let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
-            let res = await cc.get();
-            if (res.data() !== undefined) {
+    //         let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+    //         let res = await cc.get();
+    //         if (res.data() !== undefined) {
 
-                data.push({
-                    ...doc.data(),
-                    key: doc.id,
-                    user: res.data()
-                });
-            }
-        }
-    }
+    //             data.push({
+    //                 ...doc.data(),
+    //                 key: doc.id,
+    //                 user: res.data()
+    //             });
+    //         }
+    //     }
+    // }
 
     return data
 }

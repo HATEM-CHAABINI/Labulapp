@@ -22,9 +22,7 @@ const servicIconSize = { width: 18 * em, height: 18 * em };
 const FriendsMenuScreen = (props) => {
   const [loading, setLoading] = useState(props.loading)
   const [datas, setData] = useState(props.data);
-  const [datasSell, setDataSell] = useState([]);
-  const [datasOrganize, setDataOrganize] = useState([]);
-  const [datasGive, setDataGive] = useState([]);
+ 
 
   useEffect(() => {
     setLoading(props.loading)

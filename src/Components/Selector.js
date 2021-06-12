@@ -47,7 +47,7 @@ export default class Selector extends Component {
                 navigation.navigate('HomePage')
             }
         else{               
-            navigation.navigate('FriendsListScreen',{ navigation: navigation }            )
+            navigation.navigate('FriendsListScreens',{ navigation: navigation }            )
         }
     }}
         />

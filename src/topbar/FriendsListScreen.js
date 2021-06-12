@@ -191,24 +191,22 @@ const FriendsListScreen = (props) => {
       style={[styles.card, { marginBottom: index === datas.length - 1 ? 120 * hm : 15 * hm }]}
       data={item}
       onPress={() => {
-        if (item.type === ServiceType.ORGANIZE) {
-
-          Actions.friendOrganize({ detail: item });
-        } else {
-          if (item.type !== ServiceType.SELL) {
-
-            // navigation.navigate('FriendNeedScreen')
-
-            Actions.friendNeed({ detail: item });
-          } else {
-
-            // navigation.navigate('FriendSellScreen')
-
-            Actions.friendSell({ detail: item });
-          }
+        if (item.serviceType.code == 0) {
+          Actions.myOrganize({ data: item, user: item.user, docId: item.key });
+  
+        }
+        else if (item.serviceType.code == 1) {
+          Actions.myGive({ data: item, user: item.user, docId: item.key });
+        } else if (item.serviceType.code == 2) {
+          Actions.mySell({ data: item, user: item.user, docId: item.key });
+  
+        }
+  
+        else if (item.serviceType.code == 3) {
+          Actions.myNeed({ data: item, user: item.user, docId: item.key });
+  
         }
       }}
-      onAvatarPress={() => Actions.userProfile()}
     />
   );
   if (loading) {

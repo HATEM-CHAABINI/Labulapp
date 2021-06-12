@@ -73,7 +73,7 @@ let result = await fetchcoordinate(data.coordinate.latitude,data.coordinate.logi
         if(item== true)
         {
           console.log("trueeee");
-           data.coordinate.latitude = data.coordinate.latitude-0.001
+           data.coordinate.latitude = data.coordinate.latitude-0.002
           console.log("2= ",data.coordinate.latitude)}
           else{
             console.log("falseeeee");

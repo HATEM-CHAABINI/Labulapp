@@ -114,7 +114,6 @@ export const fetchallDemand = async () => {
 
       const citiesArray = allNeed.concat(allSell).concat(allOrganize).concat(allGive);
     for (const doc of citiesArray) {
-        console.log("========> ",doc);
         if ((doc.data().coordinate.latitude !== undefined)) {
 
             let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);

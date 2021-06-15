@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, ScrollView,TouchableOpacity } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm } from '../../constants/consts';
 import Accordion from 'react-native-collapsible/Accordion';
 import CommentText from '../../text/CommentText';
-import CommonHeader from '../../Components/header/CommonHeader';
-import CommonText from '../../text/CommonText';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { RightArrow, LeftArrow, BackArrowWhite, BackArrowBlack } from '../../assets/svg/icons';
-import TinyText from '../../text/TinyText';
 import { Actions } from 'react-native-router-flux';
-const sections = [
-  { title: 'Politique\nde confidentialité', content: '' },
-  {
-    title: 'Politique\nde confidentialité',
-    content:
-      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
-  },
-  { title: 'Politique\nde confidentialité', content: '' },
-  { title: 'Politique\nde confidentialité', content: '' },
-  { title: 'Politique\nde confidentialité', content: '' },
-  { title: 'Politique\nde confidentialité', content: '' },
-];
+import {getInfoProject} from '../../redux/actions/app';
+import { useSelector,useDispatch } from 'react-redux';
+
 
 const PrivacyPolicyScreen = () => {
   const [activeSections, setActiveSections] = useState([]);
+  const [sections, setSections] = useState([]);
+  
+  const  {data}  = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(getInfoProject())
+      if (data) {
+        setSections(data.Politics_Confidentialities)
+      }
+   })();
+  }, [sections])
   const _renderHeader = (section, index, isActive) => {
     const Arrow = !isActive ? (
       <View style={{ transform: [{ rotate: '-90deg' }] }}>

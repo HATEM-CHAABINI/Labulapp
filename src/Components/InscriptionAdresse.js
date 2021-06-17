@@ -121,7 +121,7 @@ export default ({ navigation }) => {
             <Address width={30 * em} height={30 * hm} />
           </View>
           <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 60 * hm, fontFamily: 'Lato-Black' }}>Mon adresse</Text>
-          <View style={{ marginTop: '10%' }}>
+          <View style={{ marginTop: '10%', }}>
             <GooglePlacesInput
               placeholder={"Rechercher une addresse"}
               containerStyle={{
@@ -129,6 +129,7 @@ export default ({ navigation }) => {
                 width: "100%",
 
               }}
+              TextBtn={"Me géolocaliser"}
               borderBottomColor={'#41D0E2'}
               style={{ width: '80%', }}
               show={true}
@@ -138,7 +139,9 @@ export default ({ navigation }) => {
                 fontSize: 16 * em,
                 fontFamily: 'Lato-Bold',
               }}
-              myLocationStyle={{ marginTop: '40%' }}
+              myLocationStyle={{ marginTop: '50%' }}
+              myLocationIconColor={{color:'#40CDDE'}}
+              myLocationColor={'#40CDDE'}
               // autoFillOnNotFound={true}
               value={formik.values.adresse}
               formik={formik}
@@ -151,40 +154,17 @@ export default ({ navigation }) => {
             />
           </View>
 
-          <View style={styles.contentWrapper}>
+          {/* <View style={styles.contentWrapper}>
 
-            {/* <Reinput
-              label='Saisis ton adresse complète'
-              autoCorrect={false}
-
-              underlineColor="#BFCDDB"
-              underlineActiveColor="#41D0E2"
-              labelActiveColor="#BFCDDB"
-              labelColor="#BFCDDB"
-              paddingBottom={12 * hm}
-              clearButtonMode="while-editing"
-              color='#1E2D60'
-              fontFamily='Lato-Bold'
-              fontSize={16 * em}
-              keyboardType="email-address"
-              selectionColor={'#41D0E2'}
-              // onChangeText={}
-              value={formik.values.adresse}
-              onBlur={formik.handleBlur('adresse')}
-              onChangeText={formik.handleChange('adresse')} /> */}
+          
             {formik.errors.adresse && formik.touched.adresse && <Text style={styles.descerrorText}>l'adresse ne peut pas être vide</Text>}
 
 
-            {/* 
-            <View style={{ bottom: 30 * hm, alignItems: 'center' }}>
-
-              {loading ? <ActivityIndicator size='small' color='#40CDDE' /> : <Text style={{ color: '#40CDDE', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} onPress={() => { getlocation() }}>Me géolocaliser</Text>}
-
-            </View> */}
+            
 
 
 
-          </View>
+          </View> */}
         </View>
       </View>
 

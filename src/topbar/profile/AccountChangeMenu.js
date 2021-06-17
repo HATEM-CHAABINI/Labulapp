@@ -40,30 +40,36 @@ const AccountChangeMenu = (props) => {
           <DropDownButton
             style={{ marginRight: 30 * em, marginTop: 30 * hm }}
             type={props.type}
-            onPress={() => setMenuVisible(true)}
+            onPress={() => setMenuVisible(false)}
             modal
           />
           <View style={styles.menu}>
             <CommonListItem
-              onPress={() => setMenuVisible(false)}
+               onPress={() => {
+                setMenuVisible(false);
+                props.type !== 'my'
+                  ? Actions.home({ tabNav: 'Profile', purchased: AccountType.LIGHT }):
+                  setMenuVisible(false)    }}
               title="Leaves"
               titleStyle={styles.menuCaption}
               style={{ marginBottom: 25 * hm }}
-              icon={<Image style={styles.menuIcon} />}
+              icon={<Image style={styles.menuIcon}
+               source={profileTypes.my.avatar} />}
             />
             <CommonListItem
-              title={props.type !== 'my' ? profileTypes.my.name : profileTypes.pro.name}
+              title="Curology"
+              // {props.type !== 'my' ? profileTypes.my.name : profileTypes.pro.name}
               titleStyle={styles.menuCaption}
               icon={
                 <Image
                   style={styles.menuIcon}
-                  source={props.type !== 'my' ? profileTypes.my.avatar : profileTypes.pro.avatar}
+                  source={profileTypes.pro.avatar}
                 />
               }
               onPress={() => {
                 setMenuVisible(false);
                 props.type !== 'my'
-                  ? Actions.home({ tabNav: 'Profile', purchased: AccountType.LIGHT })
+                  ? setMenuVisible(false) 
                   : Actions.home({ tabNav: 'ProProfile', purchased: AccountType.PRO });
               }}
             />
@@ -145,7 +151,7 @@ const DropDownButton = (props) => (
             : 'rgba(47,188,205,0.5)',
       },
     ]}
-    onPress={() => props.onPress()}>
+    onPress={() => console.log(props.onPress())}>
     <View style={styles.iconView}>
       <Image style={styles.leaveIcon} />
       <Image

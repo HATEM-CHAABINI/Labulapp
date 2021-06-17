@@ -11,7 +11,10 @@ const ProfileModalHeader = (props) => {
       centerTxtStyle={styles.centerTxt}
       rightTxt={'Terminer'}
       onLeftPress={() => props.onCancelPress()}
-      onRightPress={() => props.onFinishPress()}
+      onRightPress={() => 
+        // props.onFinishPress()
+        props.onCancelPress()
+      }
       rightTxtStyle={styles.rightTxt}
       loading={props.loading}
     />

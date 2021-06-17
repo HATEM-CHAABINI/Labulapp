@@ -155,6 +155,10 @@ const CalendarHomeScreen = () => {
             <TitleText text="Mon calendrier" textAlign="left" style={styles.titleText} />
             <CalendarStrip
               style={styles.calendarStripStyle}
+              dayComponentHeight={100}
+              scrollable
+
+
               locale={locale}
               calendarHeaderStyle={styles.calendarHeaderStyle}
               calendarHeaderContainerStyle={styles.calendarHeaderContainerStyle}

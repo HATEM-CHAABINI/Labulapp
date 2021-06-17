@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text,KeyboardAvoidingView } from 'react-native';
 import TitleText from '../text/TitleText';
 import { hexToRGB, em, mabulColors, hm } from '../constants/consts';
 import CommentText from '../text/CommentText';
@@ -63,15 +63,22 @@ const MabulCommonRequestDetailScreen = (props) => {
   }
   const mabulService = props.mabulService;
   return (
-    <View style={styles.container}>
-      <MabulCommonHeader
-        style={styles.header}
-        percent={props.process}
+    <View style={{
+      flex: 1, backgroundColor: '#ffffff', zIndex: 999,
+    }}>
+      <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]}      percent={props.process}
         isNoBackBtn={true}
-        progressBarColor={conceptColor}
-      />
+        progressBarColor={conceptColor} />
+     
+    
+   
+<KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+
+      > 
       <View style={styles.body}>
-        <View>
+       <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
           <TitleText text={title[props.mabulService]} style={styles.title} />
           <CommentText
             text="Soi court et précis dans les détails"
@@ -124,6 +131,7 @@ const MabulCommonRequestDetailScreen = (props) => {
           onPress={formik.handleSubmit}
         />
       </View>
+      </KeyboardAvoidingView>
     </View>
   );
 };

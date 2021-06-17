@@ -174,7 +174,7 @@ export default (props) => {
           <Tab.Screen
             name="Friends"
             component={FriendsNavigator}
-            initialParams={{ friendNav: props.friendNav || 'Carte' }}
+            initialParams={{ friendNav: props.friendNav || 'Carte' ,filtre: props.filtre,filtreD: props.filtreD}}
           />
           <Tab.Screen name="Calendar" component={CalendarHomeScreen} />
           <Tab.Screen name="Mabul" component={MabulHomeScreen} />

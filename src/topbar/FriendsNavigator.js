@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { em, hm } from '../constants/consts';
@@ -9,23 +9,41 @@ import SwitchButton from './SwitchButton';
 import { Actions } from 'react-native-router-flux';
 import { MagnifierBlue, Filter } from '../assets/svg/icons';
 const Tab = createMaterialTopTabNavigator();
-import { fetchallDemand } from '../services/firebase'
+import { fetchallDemand ,fetchDemandFiltre} from '../services/firebase'
 export default function FriendsNavigator(props) {
   const [activeTab, setActiveTab] = useState(1);
   const [Data, setData] = useState([])
   const [Loading, setLoading] = useState(true)
+  
   useEffect(() => {
+    // console.log(props.route.params.filtre," ===========> ",props.route.params.filtreD);
+if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=0 )|| (props.route.params.filtreD !="Toutes" && props.route.params.filtreD !==undefined && props.route.params.filtreD.length!=0)){
+  console.log("filtrageeee");
+  fetchDemandFiltre(props.route.params.filtre,props.route.params.filtreD).then((item) => {
+    
 
+    if (item !== undefined) {
+      // console.log("filtrrreeee=== ", item);
+      setData(() => item)
+    }
+  })
+  console.log("jdjdjdjdjdjddjdjdjncirnricnircirni",props.route.params.filtre);
+}else
+{
     fetchallDemand().then((item) => {
+      console.log("ncncncncnc",item[0].demandStartDate.seconds);
+
       if (item !== undefined) {
         setData(() => item)
       }
     })
+  }
   }, [])
 
   useEffect(() => {
 
     if (Data.length > 0) {
+      console.log("leennnnghhhththt");
       setLoading(false)
 
     }

@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { View, FlatList, TouchableOpacity } from 'react-native';
+import { View, FlatList, TouchableOpacity, Dimensions, } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import SearchBox from '../../Components/other/SearchBox';
 import CommentText from '../../text/CommentText';
 import SearchCommonListItem from '../../adapter/SearchCommonListItem';
 import FriendCommonHeader from '../../Components/header/FriendCommonHeader';
 import SearchBoxLieu from '../../Components/other/SearchBoxLieu';
+import Geocoder from 'react-native-geocoding';
+import Geolocation from 'react-native-geolocation-service';
+import GooglePlacesInput from '../../Components/GooglePlacesInput'
+import { google_api } from '../../constants/consts'
+Geocoder.init(google_api);
+
 const InputLocationScreen = () => {
   const [searchedUsers, getSearchResult] = useState('');
   const [text,setText]=useState('')
@@ -28,7 +34,40 @@ const InputLocationScreen = () => {
   return (
     <View style={styles.container}>
       <FriendCommonHeader upperTitle="Filtrer" title="Lieu" />
-      <SearchBoxLieu
+      <View style={styles.ActionWrapper}>
+      <GooglePlacesInput
+              placeholder={"Rechercher par ville"}
+              containerStyle={{
+                backgroundColor: 'white',
+                width: "100%",
+
+              }}
+              TextBtn={"Utiliser ma position"}
+              borderBottomColor={'#41D0E2'}
+              style={{ width: '80%', }}
+              show={true}
+              textInputStyle={{
+                // height: 40,
+                color: '#1E2D60',
+                fontSize: 16 * em,
+                fontFamily: 'Lato-Bold',
+              }}
+              myLocationStyle={{ marginTop: '80%' }}
+              myLocationIconColor={{color:'#40CDDE'}}
+              myLocationColor={'#40CDDE'}
+              // autoFillOnNotFound={true}
+              value={text}
+              // formik={formik}
+
+              changedValue={(val) => {
+                console.log(val.adresse);
+                setText(val)
+                // formik.setFieldValue('adresse', val.address);
+                // formik.setFieldValue('coordinate', val.coordinate)
+              }}
+            />
+</View>
+      {/* <SearchBoxLieu
         style={styles.searchBox}
         comment="Rechercher par ville"
         smallText="Rechercher par ville"
@@ -47,23 +86,36 @@ const InputLocationScreen = () => {
             setlocationViewVisible('flex');
           }
         }}
-      />
-      <View style={[styles.location, { display: locationViewVisible }]}>
-        {/* <LocationBlue width={16 * hm} height={19 * hm} /> */}
+      /> */}
+      {/* <View style={[styles.location, { display: locationViewVisible }]}>
         <CommentText text={'Utiliser ma position'} color="#40CDDE" style={{ marginTop: 5 * em }} />
-      </View>
+      </View> */}
 
-      <FlatList
+      {/* <FlatList
         data={searchedUsers}
         renderItem={renderFlatList}
         keyExtractor={(i) => i.id}
         style={{ marginTop: 25 * hm }}
-      />
+      /> */}
     </View>
   );
 };
 
 const styles = {
+  ActionWrapper: {
+
+    alignItems: "center",
+    // paddingStart: 15*hm,
+    paddingTop: 20 * hm,
+    width: em * 375,
+    height: Dimensions.get('window').height,
+    borderTopStartRadius: 28 * em,
+    borderTopEndRadius: 28 * em,
+    borderBottomEndRadius: 0 * em,
+    borderBottomStartRadius: 0 * em,
+    backgroundColor: "rgba(255, 255, 255, 255)"
+
+  },
   container: {
     flex: 1,
     alignItems: 'flex-start',

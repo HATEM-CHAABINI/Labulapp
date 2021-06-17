@@ -14,7 +14,7 @@ import { Actions } from 'react-native-router-flux';
 class Filtre extends Component {
   constructor(props) {
     super(props)
-
+    this.ChildElement = React.createRef();
     this.state = {
       switchValue: true,
       besoin: false,
@@ -22,8 +22,101 @@ class Filtre extends Component {
       organise: false,
       cherche: false,
       vends: false,
+      filtre:[],
+      filtreDate:"Toutes",
+      filtreD:[]
     }
   }
+
+  handleDateClick = async ()=> {
+    // console.log(this.ChildElement.current.state.value,"11111111111111",this.state.filtreDate);
+    const childelement = this.ChildElement.current;
+    await this.setState({filtreDate:childelement.state.value});
+    // console.log(this.state.filtreDate);
+    if (this.state.filtreDate == null ||this.state.filtreDate == "Toutes" )
+    {
+
+      await this.setState({filtreDate:"Toutes"});
+      await this.setState({filtreD:"Toutes"});
+
+      // console.log("dddddddd    ",this.state.filtreDate);
+      this[RBSheet + 2].close()
+      return "Toutes";
+    }else{
+    
+
+    
+    const todays = new Date()
+    const theDay = new Date(todays)
+    var today = new Date(todays.getFullYear(), todays.getMonth(), todays.getDate());
+    var lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
+let filtreD=[]
+
+    switch (this.state.filtreDate) {
+      case 'Aujourd hui':
+      
+        theDay.setDate(theDay.getDate() )
+        lastSunday.setDate(theDay.getDate() )
+        lastSunday.setHours(24, 60, 0);
+
+
+        filtreD.push({
+          "d1":theDay,
+          "d2":lastSunday
+        })
+        break;
+      case 'Demain':
+
+        theDay.setHours(24, 60, 0);
+        lastSunday.setDate(theDay.getDate() )
+        lastSunday.setHours(24, 60, 0);
+        filtreD.push({
+          "d1":theDay,
+          "d2":lastSunday
+        })
+        break;
+      case 'Cette semaine':
+        
+        lastSunday.setDate(lastSunday.getDate() +8)
+        filtreD.push({
+          "d1":theDay,
+          "d2":lastSunday
+        })
+        break;
+      case 'Semaine prochaine':
+        theDay.setDate(lastSunday.getDate() +8)
+        lastSunday.setDate(lastSunday.getDate() +15)
+        filtreD.push({
+          "d1":theDay,
+          "d2":lastSunday
+        })
+        // theDay.setDate(theDay.getDate() +14)    
+        break;
+    }
+    // theDay.setHours(24, 59, 59);
+    var todaym = Date.parse(theDay);
+    todaym=   todaym / 1000;
+    // console.log(theDay,"dddddddd",lastSunday);
+    
+    // await this.setState({ filtreDate });
+    this[RBSheet + 2].close()
+    await this.setState({filtreD});
+
+  
+
+    }
+ 
+  
+      
+  };
+
+  handleDateClickD = async ()=> {
+  await this.handleDateClick();
+    Actions.home({ tabNav: 'Friends', friendNav: 'Carte',filtre:this.state.filtre,filtreD:this.state.filtreD})
+      
+      
+  };
+
   handleClick() {
     this.setState({
       besoin: false,
@@ -31,12 +124,63 @@ class Filtre extends Component {
       organise: false,
       cherche: false,
       vends: false,
+      filtre:[]
     })
   }
   onSelect(index, value) {
     this.setState({
       text: `Selected index: ${index} , value: ${value}`
     })
+  }
+  _onSubmitdemande = async () => {
+await this._onPressGet();
+Actions.home({ tabNav: 'Friends', friendNav: 'Carte',filtre:this.state.filtre,filtreD:this.state.filtreD})
+  
+  }
+  _onPressGet = async () => {
+    let filtre=[]
+    if (this.state.besoin==true){
+      filtre.push(
+        "besoin"
+      )
+    }
+    if (this.state.donne==true){
+      filtre.push(
+        "donne"
+      )
+    }
+    if (this.state.organise==true){
+      filtre.push(
+        "organise"
+      ) 
+    }
+    if (this.state.cherche==true){
+      filtre.push(
+        "cherche"
+      )
+    }
+    if (this.state.vends==true){
+      filtre.push(
+        "vends"
+      )
+    }
+    this[RBSheet + 1].close()
+  
+await this.setState({ filtre });
+// console.log("dkdkdkdkdkdkdkdkdkdk====> ",this.state.filtre);
+    // Actions.home({ tabNav: 'Friends', friendNav: 'Carte',filtre:this.state.filtre})
+  
+
+  }
+   renderT = (arr)=> {
+     var left=-200;
+     var te="";
+   arr.map((obj,i) => {
+    //  left=left+25*i
+      te= te+"/"+obj
+    });
+    te = te.substring(1);
+    return <Text style={styles.contentDescdem} >{te}</Text>;
   }
 
   render() {
@@ -60,6 +204,8 @@ class Filtre extends Component {
         text: 'Semaine prochaine',
       },
     ];
+
+
 
     return (
       <View style={styles.mainContainer}>
@@ -90,8 +236,12 @@ class Filtre extends Component {
                 <Flechedroite width={14 * em} height={14 * hm} />
               </View>
             </View>
+{
+this.state.filtre.length == 0?
+            <Text style={styles.contentDesc}>Toutes</Text>:
+            this.renderT(this.state.filtre)
 
-            <Text style={styles.contentDesc}>Toutes</Text>
+          }
           </TouchableOpacity>
           <Divider />
           <TouchableOpacity
@@ -108,8 +258,9 @@ class Filtre extends Component {
                 <Flechedroite width={14 * em} height={14 * hm} />
               </View>
             </View>
+   
 
-            <Text style={styles.contentDesc}>Toutes</Text>
+            <Text style={this.state.filtreDate=="Toutes"?styles.contentDesc:styles.contentDescdem}>{this.state.filtreDate}</Text>
           </TouchableOpacity>
           <Divider />
           <TouchableOpacity
@@ -128,7 +279,7 @@ class Filtre extends Component {
               </View>
             </View>
 
-            <Text style={[styles.contentDesc, { color: '#40CDDE', marginLeft: -150 * em }]}>Autour de moi</Text>
+            <Text style={[styles.contentDesc, { color: '#40CDDE',marginLeft:65*em}]}>Autour de moi</Text>
           </TouchableOpacity>
           <Divider />
 
@@ -176,7 +327,7 @@ class Filtre extends Component {
             }}
           >
             <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <TouchableOpacity onPress={() => this[RBSheet + 1].close()}  >
+              <TouchableOpacity onPress={this._onPressGet.bind(this)}  >
                 <Fleche />
               </TouchableOpacity>
               <Text style={{ marginLeft: em * 40, marginRight: em * 40, color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold' }}>Type de demande</Text>
@@ -287,7 +438,13 @@ class Filtre extends Component {
 
             </View>
 
-            <TouchableOpacity onPress={() => this[RBSheet + 1].close()}
+            <TouchableOpacity
+            //  onPress={
+            //   () =>
+            //  console.log("djdjdjdjdjdjdjjjdjjjjj====<<>> ",this.state.filtre)
+            // // this._onPressGet.bind(this)
+            // }
+            onPress={this._onSubmitdemande.bind(this)} 
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
@@ -350,7 +507,7 @@ class Filtre extends Component {
             }}
           >
             <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 60, right: em * 85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <TouchableOpacity onPress={() => this[RBSheet + 2].close()}  >
+              <TouchableOpacity onPress={() => this.handleDateClick()}  >
                 <Fleche />
               </TouchableOpacity>
               <Text style={{ marginLeft: em * 40, marginRight: em * 40, color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Bold' }}>Date</Text>
@@ -358,9 +515,8 @@ class Filtre extends Component {
             <View style={styles.container}>
 
 
-
-
-              <RadioButton PROP={PROP} />
+          
+            <RadioButton PROP={PROP} ref={this.ChildElement}   />
 
 
 
@@ -368,8 +524,10 @@ class Filtre extends Component {
 
 
             </View>
-
-            <TouchableOpacity onPress={() => this[RBSheet + 2].close()}
+     
+            <TouchableOpacity onPress={() => this.handleDateClickD()
+            // this[RBSheet + 2].close()
+          }
               style={{
                 overflow: 'hidden',
                 borderRadius: 18 * em,
@@ -414,8 +572,17 @@ class Filtre extends Component {
 
 const styles = {
   contentDesc: {
-    marginLeft: -200 * em,
+    // marginLeft: -200 * em,
     color: "#A0AEB8",
+    marginLeft:65*em,
+
+    fontSize: 16 * em,
+    fontFamily: 'Lato-Regular'
+  },
+  contentDescdem: {
+    // padding:1,
+    marginLeft:65*em,
+    color: "#40CDDE",
     fontSize: 16 * em,
     fontFamily: 'Lato-Regular'
   },
@@ -495,7 +662,7 @@ const styles = {
   ActionButton: {
     overflow: 'hidden',
     borderRadius: 18 * em,
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: '#fff',
     justifyContent: 'center',
     shadowOffset: {

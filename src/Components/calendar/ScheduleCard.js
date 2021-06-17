@@ -22,7 +22,7 @@ const renderService = (data, onPressSee) => {
             <SmallText text={data.service.organName} style={styles.smallTopPadding} />
             <TinyText text={data.service.title} fontSize={14} style={styles.smallTopPaddings} />
           </View>
-          <TouchableOpacity onPress={onPressSee} style={styles.colReverse}>
+          <TouchableOpacity onPress={()=>{}} style={styles.colReverse}>
             <TinyText text="Voir>" fontSize={14} color="#40CDDE" style={styles.largeTopPaddings} />
           </TouchableOpacity>
         </View>

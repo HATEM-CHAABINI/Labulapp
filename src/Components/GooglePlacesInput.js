@@ -91,10 +91,12 @@ const GooglePlacesInput = (props) => {
 
             </View>
 
-            {props.show || props.show == undefined ? <KeyboardAvoidingView style={[{ position: 'absolute', alignSelf: 'center', }, props.myLocationContainer]} >
-                <View style={[{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginTop: '90%', }, props.myLocationStyle]}>
-                    {props.myLocationIconColor === undefined ? <LocationRed width={16 * em} height={19 * em} /> : <View style={{ top: 15 * em }} />}
-                    <CommentText text={'Utiliser ma position'} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} />
+            {props.show || props.show == undefined ?
+             <KeyboardAvoidingView style={[{ position: 'absolute', alignSelf: 'center', }, props.myLocationContainer]} >
+                <View style={[{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginBottom: '-30%', }, props.myLocationStyle]}>
+                    {props.myLocationIconColor === undefined ? <LocationRed width={16 * em} height={19 * hm} /> : <View style={{ top: 15 * hm }} />}
+                    
+                    <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} />
 
                 </View>
             </KeyboardAvoidingView> : null}

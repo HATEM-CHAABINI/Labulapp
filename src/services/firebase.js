@@ -86,8 +86,117 @@ export const fetchcoordinate = async (latitude, longitude) => {
     return false
 }
 
-export const fetchAllDemands = async () => {
+export const fetchDemandFiltre = async (filtre,filtreD) => {
+    console.log("waaaaaaaaa",(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined));
+    if(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined){
+    var d1 = filtreD[0].d1;
 
+
+    var d2 = filtreD[0].d2;
+   
+
+    }
+
+    const data = [];
+    for(const elem of filtre){
+        if (elem =="vends"){
+
+            let RefSell ;
+            if(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined){
+                RefSell = firestore().collectionGroup("sell").where("demandStartDate", ">", d1).where("demandStartDate", "<", d2);
+            }
+            else{
+     RefSell = firestore().collectionGroup("sell");}
+
+
+    let allSell = await RefSell.get();
+    for (const doc of allSell.docs) {
+        if ((doc.data().coordinate.latitude !== undefined)) {
+                console.log("1. ",doc.data().demandStartDate.seconds,"2. ", d1," 3. ",d2);
+            let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+            let res = await cc.get();
+            if (res.data() !== undefined) {
+                data.push({
+                    ...doc.data(),
+                    key: doc.id,
+                    user: res.data()
+                });
+            }
+        }
+    }
+}
+if (elem =="besoin"){
+    let RefSell ;
+    if(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined){
+        RefSell = firestore().collectionGroup("need").where("demandStartDate", ">", d1).where("demandStartDate", "<", d2);
+    }
+    else{
+RefSell = firestore().collectionGroup("need");}
+    let allSell = await RefSell.get();
+    for (const doc of allSell.docs) {
+        if ((doc.data().coordinate.latitude !== undefined)) {
+
+            let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+            let res = await cc.get();
+            if (res.data() !== undefined) {
+                data.push({
+                    ...doc.data(),
+                    key: doc.id,
+                    user: res.data()
+                });
+            }
+        }
+    }
+}
+if (elem =="organise"){
+    let RefSell ;
+    if(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined){
+        RefSell = firestore().collectionGroup("organize").where("demandStartDate", ">", d1).where("demandStartDate", "<", d2);
+    }
+    else{
+RefSell = firestore().collectionGroup("organize");}
+    let allSell = await RefSell.get();
+    for (const doc of allSell.docs) {
+        if ((doc.data().coordinate.latitude !== undefined)) {
+
+            let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+            let res = await cc.get();
+            if (res.data() !== undefined) {
+                data.push({
+                    ...doc.data(),
+                    key: doc.id,
+                    user: res.data()
+                });
+            }
+        }
+    }
+}
+if (elem =="donne"){
+    let RefSell ;
+    if(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined){
+        RefSell = firestore().collectionGroup("give").where("demandStartDate", ">", d1).where("demandStartDate", "<", d2);
+    }
+    else{
+RefSell = firestore().collectionGroup("v");}
+    let allSell = await RefSell.get();
+    for (const doc of allSell.docs) {
+        if ((doc.data().coordinate.latitude !== undefined)) {
+
+            let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+            let res = await cc.get();
+            if (res.data() !== undefined) {
+                data.push({
+                    ...doc.data(),
+                    key: doc.id,
+                    user: res.data()
+                });
+            }
+        }
+    }
+}
+
+}
+return data
 
 
 }

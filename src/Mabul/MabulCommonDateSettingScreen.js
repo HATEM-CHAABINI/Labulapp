@@ -199,7 +199,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
                 title="Date et heure de fin"
                 subTitle={isEndDate === '' ? ' ' : Moment(isEndDate).format('DD MMMM YYYY-HH:MM')}
                 subTitleStyle={styles.listComment}
-                titleStyle={styles.listCaption}
+                titleStyle={styles.listCaption} 
                 onPress={showEndDatePicker}
               />
               <View style={styles.line} />
@@ -217,6 +217,7 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
                 backgroundColor: 'white',
                 width: "100%",
               }}
+              TextBtn={"Utiliser ma position"}
               borderBottomColor={conceptColor}
               style={{ width: '100%', }}
               show={true}
@@ -226,7 +227,10 @@ const MabulCommonDateSettingScreen = ({ mabulService, process }) => {
                 fontSize: 12 * em,
                 fontFamily: 'Lato-Bold',
               }}
-              myLocationContainer={{ top: 280 * hm }}
+              myLocationContainer={{
+                //  paddingTop: s50 * hm 
+                // top:550
+                }}
               // autoFillOnNotFound={true}
               value={formik.values.address}
               myLocationColor={conceptColor}

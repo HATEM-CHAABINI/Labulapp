@@ -79,7 +79,7 @@ export default ({ navigation }) => {
 
     <View style={{flex: 1, alignContent: 'center'}}>
       <Image
-        source={require('../assets/images/onbording-1296x814.png')}
+        source={require('../assets/images/robot.png')}
         style={styles.topImage} 
       />
 
@@ -105,7 +105,7 @@ export default ({ navigation }) => {
             <Inscrire width={30 * em} height={30 * hm} />
           </View>
 
-          <Text style={{ color: '#1E2D60', fontFamily: 'Lato-Black', fontSize: 28 * em, paddingTop: 60 * hm }}>Je m’inscris</Text>
+          <Text style={{ color: '#1E2D60', fontFamily: 'Lato-Black', fontSize: 28 * em, paddingTop: 60 * hm }}>Inscris-toi</Text>
           <Text style={{ color: '#6A8596', fontFamily: 'Lato-Medium', fontSize: 16 * em, paddingTop: 10 * hm }}>Rentre dans Labul </Text>
           <TouchableOpacity
             onPress={() => {
@@ -148,9 +148,11 @@ export default ({ navigation }) => {
             }}>
             <View style={styles.btnContainer}>
               <Googleicon width={18 * em} height={18 * hm} />
-              {loadinggoogle ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 25 * em, }} /> : <Text style={[styles.btnText, {
-                marginLeft: 25 * em,
-              }]}>Je me connecte avec Google</Text>}
+              {loadinggoogle ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 45 * em, }} /> : <Text style={[styles.btnText, {
+                marginLeft: 45 * em,
+              }]}>
+                Connexion avec Google
+                </Text>}
             </View>
           </TouchableOpacity>
 
@@ -198,9 +200,10 @@ export default ({ navigation }) => {
             }}>
             <View style={styles.btnContainer}>
               <Facebookicon width={18 * em} height={18 * hm} />
-              {loadingfacebook ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 25 * em, }} /> : <Text style={[styles.btnText, {
-                marginLeft: 16 * em,
-              }]}>Je me connecte avec Facebook</Text>}
+              {loadingfacebook ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 36 * em, }} /> : <Text style={[styles.btnText, {
+                marginLeft: 36 * em,
+              }]}>Connexion avec Facebook                  </Text>
+            }
             </View>
           </TouchableOpacity>
 
@@ -229,7 +232,7 @@ export default ({ navigation }) => {
                   // marginLeft: 10*em,
                   // marginTop: 2*hm,
                   fontFamily: "Lato-Medium"
-                }}>Je m’inscris avec mon email</Text>
+                }}>Inscrit-toi avec ton email</Text>
             </View>
           </TouchableOpacity>
 
@@ -292,6 +295,6 @@ const styles = StyleSheet.create({
     color: '#1E2D60',
     // marginTop: 2*hm,
   },
-  topImage: { flex: 1,resizeMode:'contain' ,width:'150%',bottom:200*hm,right:20*em},
+  topImage: { flex: 1,resizeMode:'contain' ,width:'100%',bottom:200*hm,right:50*em},
 
 });

@@ -94,7 +94,7 @@ export default ({ navigation }) => {
             <Motpass width={30 * em} height={30 * hm} />
           </View>
           <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 80 * hm, textAlign: 'center', fontFamily: "lato-Black" }}>Demander un nouveau {"\n"}mot de passe</Text>
-          <Text style={{ color: '#6A8596', fontSize: 14 * em, paddingTop: 10 * hm, textAlign: 'center', fontFamily: "lato-Regular" }}>Entrez votre adresse e-mail pour réinitialiser votre{"\n"} mot de passe</Text>
+          <Text style={{ color: '#6A8596', fontSize: 14 * em, paddingTop: 10 * hm, textAlign: 'center', fontFamily: "lato-Regular" }}>Rentre ton adresse e-mail pour réinitialiser ton mot {"\n"} de passe</Text>
           <View style={styles.contentWrapper}>
             <Reinput
               label='Saisie ton email'

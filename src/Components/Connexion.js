@@ -80,7 +80,7 @@ export default ({navigation}) => {
   return (
     <View style={{flex: 1, alignContent: 'center'}}>
       <Image
-        source={require('../assets/images/onbording-1296x814.png')}
+        source={require('../assets/images/robot.png')}
         style={styles.topImage} 
       />
 
@@ -105,7 +105,7 @@ export default ({navigation}) => {
           <View style={{position: 'absolute', top: 39 * hm}}>
             <Usercreat width={20 * em} height={25 * em} />
           </View>
-          <TitleText text="Je me connecte" style={{marginTop: 79 * hm}} />
+          <TitleText text="Connecte toi" style={{marginTop: 79 * hm}} />
           <CommonText
             text="Ravis de te revoir :)"
             style={{color: '#6A8596', marginTop: 7 * hm}}
@@ -169,10 +169,10 @@ export default ({navigation}) => {
                     style={[
                       styles.btnText,
                       {
-                        marginLeft: 25 * em,
+                        marginLeft: 45 * em,
                       },
                     ]}>
-                    Je me connecte avec Google
+                   Connexion avec Google
                   </Text>
                 )}
               </View>
@@ -241,11 +241,10 @@ export default ({navigation}) => {
                     style={[
                       styles.btnText,
                       {
-                        marginLeft: 16 * em,
+                        marginLeft: 36 * em,
                       },
                     ]}>
-                    Je me connecte avec Facebook
-                  </Text>
+Connexion avec Facebook                  </Text>
                 )}
               </View>
             </TouchableOpacity>
@@ -279,7 +278,7 @@ export default ({navigation}) => {
                     // marginTop: 2*hm,
                     fontFamily: 'lato-Medium',
                   }}>
-                  Je me connecte avec mon email
+                  Connecte toi avec ton email
                 </Text>
               </View>
             </TouchableOpacity>
@@ -334,5 +333,5 @@ const styles = StyleSheet.create({
     color: '#1E2D60',
     // marginTop: 2*hm,
   },
-  topImage: { flex: 1,resizeMode:'contain' ,width:'150%',bottom:200*hm,right:20*em},
+  topImage: { flex: 1,resizeMode:'contain' ,width:'100%',bottom:200*hm,right:50*em},
 });

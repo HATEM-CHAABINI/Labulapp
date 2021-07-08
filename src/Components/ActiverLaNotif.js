@@ -149,7 +149,8 @@ export default ({ navigation }) => {
 
 
 
-          <TouchableOpacity onPress={() => loginWithActiveNotification()} style={{
+          <TouchableOpacity onPress={() => 
+navigation.navigate('ActiverLaNotif')        } style={{
             overflow: 'hidden',
             borderRadius: 18 * em,
             height: 59 * hm,

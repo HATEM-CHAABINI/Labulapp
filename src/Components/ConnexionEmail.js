@@ -128,8 +128,8 @@ export default ({ navigation }) => {
           </View>
 
           <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 45 * hm, fontFamily: 'Lato-Black' }}>
-            Je me connecte
-            </Text>
+          Connecte toi
+                      </Text>
 
           <View style={styles.contentWrapper}>
             {/* <Text style={styles.descText}>Saisis ton email</Text> */}
@@ -210,7 +210,7 @@ export default ({ navigation }) => {
                     marginTop: 2 * hm,
                     fontFamily: 'Lato-Medium'
                   }}>
-                  Suivant
+                  Connecter
                 </Text>}
               </View>
             </TouchableOpacity>
@@ -223,7 +223,7 @@ export default ({ navigation }) => {
           style={{ alignItems: 'center' }}
         >
 
-          <View style={{ position: 'absolute', bottom: 0, marginBottom: 70 * hm, alignSelf: 'center' }}>
+          <View style={{ position: 'absolute', bottom: 0, marginBottom: 130 * hm, alignSelf: 'center' }}>
 
             <Text
               style={
@@ -235,14 +235,14 @@ export default ({ navigation }) => {
                 },
                   StyleSheet.flatten([{ alignSelf: 'center', color: '#6A8596' }]))
               }>
-              Je n’ai pas de compte ?
+              Tu n’as pas de compte ?
   <Text
                 style={{ color: '#40CDDE', fontSize: 16 * em, fontFamily: 'Lato-SemiBold' }}
                 onPress={() => {
                   Actions.signupMenu();
                 }}>
                 {' '}
-    Je m’inscris
+                Inscris-toi ici !
   </Text>
             </Text>
 

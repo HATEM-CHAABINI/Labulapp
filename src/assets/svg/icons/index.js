@@ -442,6 +442,7 @@ import ObjetDrivers from './category/ObjetDrivers.svg';
 import Repas from './category/Repas.svg';
 import Vetements from './category/Vetements.svg';
 
-export { Aliments, Education, HighTech, Mebule, ObjetDrivers, Repas, Vetements,Clock };
+export { Aliments, Education, HighTech, Mebule, ObjetDrivers, Repas, Vetements,Clock ,Labullogo};
 
 import Clock from '../images/Clock.svg';
+import Labullogo from '../images/Labullogo';

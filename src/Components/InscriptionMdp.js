@@ -39,93 +39,106 @@ export default ({ navigation }) => {
   const { signupData } = useSelector(state => state.signupReducer);
 
   const dispatch = useDispatch();
-  const initialValues = {
-    password: '',
-  };
-  const validationSchema = Yup.object({
-    password: Yup.string()
-      .required('Aucun mot de passe fourni.')
-      .min(
-        8,
-        'Le mot de passe est trop court minimum 8 caractères.',
-      ),
-  });
-  const onSubmit = values => {
-    dispatch(
-      SignupData({
-        email: signupData.email,
-        password: values.password,
-      }),
-    );
 
-    Actions.jump('InscriptionPrenom');
+ 
+  const onSubmit = values => {
+ 
+    // navigation.navigate('ActiverLaNotif')
+
+    Actions.jump('InscriptionEmail');
   };
   const formik = useFormik({
-    initialValues,
     onSubmit,
-    validationSchema,
   });
 
   return (
     <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
       <View style={{ paddingTop: 40 * hm, paddingLeft: 159 * em }}>
         <TouchableOpacity
-          style={{
-            position: 'absolute',
-            paddingTop: 40 * hm,
-            paddingLeft: 27 * em,
-          }}
+          style={{ position: 'absolute', paddingTop: 40 * hm, paddingLeft: 27 * em }}
           onPress={() => Actions.pop()}>
           <BackArrowWhite width={27 * em} height={25 * hm} />
         </TouchableOpacity>
         <TitleLabul width={69 * em} height={20 * hm} />
       </View>
 
-      <View style={{ flex: 2, paddingTop: 25 * hm }}>
+      <View style={{ flex: 2, paddingTop: 25 * hm, paddingBottom: 90 * hm }}>
         <View style={styles.ActionWrapper}>
-          <View style={{ position: 'absolute', paddingTop: 40 * hm }}>
-            <Email width={30 * em} height={30 * hm} />
+          <TouchableOpacity
+            style={{ position: 'absolute' }}
+            onPress={() => { console.log("Click") }}></TouchableOpacity>
+          <View style={{ position: 'absolute', top: 40 * hm }}>
+            <Usercreat width={20 * em} height={25 * hm} />
           </View>
 
-          <Text
-            style={{
-              color: '#1E2D60',
-              fontSize: 28 * em,
-              paddingTop: 60 * hm,
-              fontFamily: 'Lato-Black',
-            }}>
-            Mon mot de passe
-          </Text>
-
+          <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 45 * hm, fontFamily: 'Lato-Black' }}>
+          Complète ton profil
+                      </Text>
+                      <Text style={{ color: '#6A8596', fontSize: 12 * em,  fontFamily: 'Lato-italic' }}>
+                      * champs obligatoires
+                      </Text>
           <View style={styles.contentWrapper}>
+            {/* <Text style={styles.descText}>Saisis ton email</Text> */}
             <Reinput
-              label="Saisie ton mot de passe"
+              label='Quel est ton prénom ? *'
               autoCorrect={false}
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"
               labelActiveColor="#BFCDDB"
               labelColor="#BFCDDB"
-              paddingBottom={12 * hm}
               clearButtonMode="while-editing"
-              color="#1E2D60"
-              fontFamily="Lato-Bold"
-              fontSize={16 * em}
+              color='#1E2D60'
               keyboardType="email-address"
+
+
+
               selectionColor={'#41D0E2'}
-              value={formik.values.password}
-              onBlur={formik.handleBlur('password')}
-              onChangeText={formik.handleChange('password')}
+              paddingBottom={12 * hm}
+
+              autoFocus={false}
+            
             />
-            {formik.errors.password && formik.touched.password && (
-              <Text style={styles.descerrorText}>{formik.errors.password}</Text>
-            )}
+ <Reinput
+ style={{bottom:15*hm}}
+              label='Quel est ton nom ? *'
+              autoCorrect={false}
+              underlineColor="#BFCDDB"
+              underlineActiveColor="#41D0E2"
+              labelActiveColor="#BFCDDB"
+              labelColor="#BFCDDB"
+              clearButtonMode="while-editing"
+              color='#1E2D60'
+              keyboardType="email-address"
+
+
+
+              selectionColor={'#41D0E2'}
+              paddingBottom={12 * hm}
+
+              autoFocus={false}
+              // value={formik.values.email}
+              // onBlur={formik.handleBlur('email')}
+              // onChangeText={formik.handleChange('email')}
+            />
+            {/* {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>} */}
+            {/*       
+              <MyTextInput
+                style={styles.TextInput}
+                textContentType={'emailAddress'}
+                
+              /> */}
+          
           </View>
         </View>
+
+      
       </View>
+
+       
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ alignItems: 'center' }}>
         <TouchableOpacity
-          disabled={formik.values.password === '' ? true : false}
-          onPress={formik.handleSubmit}
+          // disabled={formik.values.password === '' ? true : false}
+          onPress={() => Actions.jump('ActiverLocalisation')} 
           style={{
             overflow: 'hidden',
             borderRadius: 18 * em,
@@ -133,7 +146,7 @@ export default ({ navigation }) => {
 
             width: 315 * em,
 
-            bottom: 30 * hm,
+            bottom: 25 * hm,
             // top:240*hm
           }}>
           <View
@@ -143,7 +156,6 @@ export default ({ navigation }) => {
                 backgroundColor: '#40CDDE',
                 height: 59 * hm,
                 width: 315 * em,
-                opacity: formik.values.password === '' ? 0.5 : 1,
               },
             ]}>
             <Text
@@ -158,22 +170,25 @@ export default ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
+
+
+      {/* <View style={{ marginBottom: 60 * hm ,marginTop:80*hm}}>
+         
+       </View> */}
     </View>
   );
-};
+
+}
 const styles = StyleSheet.create({
   TextInput: {
-    height: 45 * hm,
+    height: 40 * hm,
     fontSize: 13 * em,
-    width: 315 * em,
+    fontFamily: "Lato-Bold",
+    // width:250*em,
     color: '#28c7ee',
     borderBottomWidth: 1 * em,
     borderBottomColor: '#28c7ee',
-  },
-  contentWrapper: {
-    alignItems:'center',
-    width: 315*em,
-    paddingTop: 30 * hm
+    marginBottom: 23 * hm,
   },
   descerrorText: {
     fontSize: 12 * em,
@@ -181,23 +196,71 @@ const styles = StyleSheet.create({
     // marginBottom: 4 * hm,
     color: "red",
   },
+  contentWrapper: {
+    // alignItems:'center',
+    width: 315 * em,
+    paddingTop: 14 * hm,
+
+  },
   descText: {
     fontSize: 12 * em,
     marginTop: 10 * hm,
-    color: '#928da6',
+    color: '#A0AEB8',
+    fontFamily: 'Lato'
   },
   ActionWrapper: {
     alignItems: 'center',
     // paddingStart: 15*hm,
-    paddingTop: 20 * hm,
+    paddingTop: 25 * hm,
     width: em * 375,
     height: Dimensions.get('window').height,
     borderTopStartRadius: 28 * em,
     borderTopEndRadius: 28 * em,
     borderBottomEndRadius: 0 * em,
     borderBottomStartRadius: 0 * em,
-    backgroundColor: 'rgba(255, 255, 255, 255)',
+    backgroundColor: 'rgba(255, 255, 255, 255)'
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#009387',
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20 * em,
+    paddingBottom: 50 * hm,
+  },
+  footer: {
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 30 * em,
+    borderTopRightRadius: 30 * em,
+    paddingHorizontal: 20 * hm,
+    paddingVertical: 30 * em,
+  },
+  text_header: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 30 * em,
+  },
+  text_footer: {
+    color: '#05375a',
+    fontSize: 18 * em,
+  },
+  action: {
+    flexDirection: 'row',
+    marginTop: 10 * hm,
+    borderBottomWidth: 1 * hm,
+    borderBottomColor: '#f2f2f2',
+    paddingBottom: 5 * hm,
+  },
+  actionError: {
+    flexDirection: 'row',
+    marginTop: 10 * hm,
+    borderBottomWidth: 1 * em,
+    borderBottomColor: '#FF0000',
+    paddingBottom: 5 * hm,
+  },
+
   btnContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -206,4 +269,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10 * em,
   },
+
 });

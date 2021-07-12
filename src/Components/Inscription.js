@@ -202,7 +202,7 @@ export default ({ navigation }) => {
               <Facebookicon width={18 * em} height={18 * hm} />
               {loadingfacebook ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 36 * em, }} /> : <Text style={[styles.btnText, {
                 marginLeft: 36 * em,
-              }]}>Connexion avec Facebook                  </Text>
+              }]}>Connexion avec Facebook </Text>
             }
             </View>
           </TouchableOpacity>

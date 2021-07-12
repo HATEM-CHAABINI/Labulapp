@@ -26,11 +26,54 @@ import {addLogin} from '../redux/actions/login';
 import {firebase} from '../setup';
 import * as Fire from 'firebase';
 import firestore from '@react-native-firebase/firestore';
-
+import { google_api} from '../constants/consts'
+import Geocoder from 'react-native-geocoding';
+import Geolocation from 'react-native-geolocation-service';
+Geocoder.init(google_api);
 export default ({navigation}) => {
   const [loading, setloading] = useState(false);
+  const [location , setlocation] = useState(null)
   const {signupData} = useSelector(state => state.signupReducer);
   const dispatch = useDispatch();
+  
+    console.log("Signup ",signupData);
+    const getlocation = async() => {
+      // await Geolocation.requestAuthorization();
+    
+      // await Geolocation.requestAuthorization();
+      navigation.navigate('ActiverLaNotif')
+      // Geolocation.getCurrentPosition(
+      //     (position) => {
+      //       console.log({ 'latitude': position.coords.latitude, 'logitude': position.coords.longitude } );
+
+      //         // Geocoder.from(position.coords.latitude, position.coords.longitude)
+      //         //     .then(json => {
+      //         //         var addressComponent = json.results[0].formatted_address;
+                      
+
+      //         //         // setlocation({ address: addressComponent, coordinate: { latitude: position.coords.latitude, logitude: position.coords.longitude } })
+      //         //         console.log("asd ",{ address: addressComponent, coordinate: { latitude: position.coords.latitude, logitude: position.coords.longitude } });
+      //         //         // navigation.navigate('ActiverLaNotif')
+
+      //         //     })
+      //         //     .catch(error => { console.warn(error), alert(error.origin.error_message) });
+      //     },
+      //     (error) => {
+
+      //         console.log("ss error ",error.code, error.message);
+
+      //     },
+      //     { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+      // );
+  }
+const activeLocation = () =>{
+
+  dispatch(SignupData({
+      activeLocation:true,
+
+  }));
+}
+
   const login = () => {
     setloading(true);
    
@@ -111,7 +154,7 @@ console.log(e)
             proches.
           </Text>
           <TouchableOpacity
-           onPress={() => navigation.navigate('ActiverLaNotif')}
+           onPress={getlocation}
             style={{
               overflow: 'hidden',
               borderRadius: 18 * em,

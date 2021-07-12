@@ -7,7 +7,8 @@ const initialState = {
 const signupReducer=(state = initialState, action) => {
   switch (action.type) {
     case SIGNUP_DETAILS:
-      return { ...state, signupData: action.data };
+      let data = state.signupData
+      return {signupData:{ ...data,...action.data }};
 
       default:
       return state;

@@ -32,7 +32,6 @@ import { useDispatch } from 'react-redux';
 import { SignupData } from '../redux/actions/signup';
 export default ({ navigation }) => {
 
-
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch();
   const initialValues = {
@@ -41,17 +40,17 @@ export default ({ navigation }) => {
   };
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email('Oops! Adresse e-mail invalide.')
+      .email('entrez une adresse e-mail valide')
       .trim()
-      .required(),
-    password: Yup.string().required(),
+      .required('entrez une adresse e-mail valide'),
+    password: Yup.string().required('Le mot de passe ne peut pas être vide'),
 
   });
 
   const onSubmit = values => {
-
     dispatch(SignupData({
       email: values.email,
+      password:values.password
     }));
 
     Actions.jump('InscriptionMdp')
@@ -113,7 +112,7 @@ export default ({ navigation }) => {
               onChangeText={formik.handleChange('email')}
             />
 
-            {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>}
+            {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>{formik.errors.email}</Text>}
             {/*       
               <MyTextInput
                 style={styles.TextInput}
@@ -132,7 +131,7 @@ export default ({ navigation }) => {
                 onBlur={formik.handleBlur('password')}
                 onChangeText={formik.handleChange('password')}
               />
-              {formik.errors.password && formik.touched.password && <Text style={styles.descerrorText}>Le mot de passe ne peut pas être vide</Text>}
+              {formik.errors.password && formik.touched.password && <Text style={styles.descerrorText}>{formik.errors.password}</Text>}
             </View>
           </View>
         </View>
@@ -143,7 +142,7 @@ export default ({ navigation }) => {
        
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ alignItems: 'center' }}>
         <TouchableOpacity
-          disabled={formik.values.password === '' ? true : false}
+          // disabled={formik.values.password === '' ? true : false}
           onPress={formik.handleSubmit}
           style={{
             overflow: 'hidden',
@@ -162,7 +161,7 @@ export default ({ navigation }) => {
                 backgroundColor: '#40CDDE',
                 height: 59 * hm,
                 width: 315 * em,
-                opacity: formik.values.password === '' ? 0.5 : 1,
+                // opacity: formik.values.password === '' ? 0.5 : 1,
               },
             ]}>
             <Text

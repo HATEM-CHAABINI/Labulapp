@@ -39,16 +39,33 @@ export default ({ navigation }) => {
   const { signupData } = useSelector(state => state.signupReducer);
 
   const dispatch = useDispatch();
+  const initialValues = {
+    firstName: '',
+    lastName: ''
+  };
+  const validationSchema = Yup.object({
+    firstName: Yup.string()
+      .trim()
+      .required('Obligatoire'),
+      lastName: Yup.string()
+      .trim()
+      .required('Obligatoire'),
 
- 
+  });
   const onSubmit = values => {
- 
+    dispatch(SignupData({
+      firstName:values.firstName,
+      lastName:values.lastName
+    }));
+    
     // navigation.navigate('ActiverLaNotif')
 
-    Actions.jump('InscriptionEmail');
+    Actions.jump('ActiverLocalisation')
   };
   const formik = useFormik({
+    initialValues,
     onSubmit,
+    validationSchema,
   });
 
   return (
@@ -79,6 +96,9 @@ export default ({ navigation }) => {
                       </Text>
           <View style={styles.contentWrapper}>
             {/* <Text style={styles.descText}>Saisis ton email</Text> */}
+            <View >
+
+           
             <Reinput
               label='Quel est ton prénom ? *'
               autoCorrect={false}
@@ -96,10 +116,17 @@ export default ({ navigation }) => {
               paddingBottom={12 * hm}
 
               autoFocus={false}
-            
+              value={formik.values.firstName}
+              onBlur={formik.handleBlur('firstName')}
+              onChangeText={formik.handleChange('firstName')}
             />
+            {formik.errors.firstName && formik.touched.firstName && <Text style={styles.descerrorText}>{formik.errors.firstName}</Text>}
+            </View>
+            <View>
+
+           
  <Reinput
- style={{bottom:15*hm}}
+ 
               label='Quel est ton nom ? *'
               autoCorrect={false}
               underlineColor="#BFCDDB"
@@ -116,10 +143,12 @@ export default ({ navigation }) => {
               paddingBottom={12 * hm}
 
               autoFocus={false}
-              // value={formik.values.email}
-              // onBlur={formik.handleBlur('email')}
-              // onChangeText={formik.handleChange('email')}
+              value={formik.values.lastName}
+              onBlur={formik.handleBlur('lastName')}
+              onChangeText={formik.handleChange('lastName')}
             />
+            {formik.errors.lastName && formik.touched.lastName && <Text style={styles.descerrorText}>{formik.errors.lastName}</Text>}
+            </View>
             {/* {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>entrez une adresse e-mail valide</Text>} */}
             {/*       
               <MyTextInput
@@ -137,8 +166,9 @@ export default ({ navigation }) => {
        
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ alignItems: 'center' }}>
         <TouchableOpacity
-          // disabled={formik.values.password === '' ? true : false}
-          onPress={() => Actions.jump('ActiverLocalisation')} 
+          // disabled={formik.values.firstName === '' ? true : false}
+          // onPress={() => Actions.jump('ActiverLocalisation')}
+          onPress={formik.handleSubmit} 
           style={{
             overflow: 'hidden',
             borderRadius: 18 * em,

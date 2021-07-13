@@ -30,22 +30,21 @@ du vivre ensemble</Text>
                     Actions.loginMenu();
                 }}
             />
-              <View style={styles.registerWrapper}>
+                <View style={styles.registerWrapper}>
 
-<Text style={{ color: '#6A8596', fontFamily: 'lato-Regular', fontSize: 16 * em }} >
-Tu n’as pas de compte ?
+                    <Text style={{ color: '#6A8596', fontFamily: 'lato-Regular', fontSize: 16 * em }} >
+                        Tu n’as pas de compte ?
 </Text>
-<Text
-    onPress={() => {
-        Actions.signupMenu();
-    }}
-    style={{ fontFamily: 'Lato-Semibold', color: '#40CDDE', fontSize: 16 * em }}
->
-{" "}Inscris-toi
+                    <Text
+                        onPress={() => {
+                            Actions.signupMenu();
+                        }}
+                        style={{ fontFamily: 'Lato-Semibold', color: '#40CDDE', fontSize: 16 * em }}
+                    >
+                        {" "}Inscris-toi
 </Text>
-
-</View>
-           </View>
+                </View>
+        </View>
             <Image style={styles.topImage} source={require('../assets/images/Onboarding.png')} />
         </View>
     );

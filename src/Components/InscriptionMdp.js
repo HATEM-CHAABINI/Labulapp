@@ -36,8 +36,9 @@ import { useDispatch } from 'react-redux';
 import { SignupData } from '../redux/actions/signup';
 
 export default ({ navigation }) => {
+// console.log('hello',navigation)
   const { signupData } = useSelector(state => state.signupReducer);
-
+  // console.log(signupData)
   const dispatch = useDispatch();
   const initialValues = {
     firstName: '',
@@ -50,7 +51,6 @@ export default ({ navigation }) => {
       lastName: Yup.string()
       .trim()
       .required('Obligatoire'),
-
   });
   const onSubmit = values => {
     dispatch(SignupData({

@@ -11,7 +11,6 @@ import {
 import { em, HEIGHT, hm, WIDTH } from '../constants';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
 import Fleche from './Fleche';
@@ -30,8 +29,8 @@ import PasswordInputText from '../Components/textInput/PasswordTextInput';
 
 import { useDispatch } from 'react-redux';
 import { SignupData } from '../redux/actions/signup';
-export default ({ navigation }) => {
 
+export default ({ navigation }) => {
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch();
   const initialValues = {
@@ -44,15 +43,13 @@ export default ({ navigation }) => {
       .trim()
       .required('entrez une adresse e-mail valide'),
     password: Yup.string().required('Le mot de passe ne peut pas être vide'),
-
   });
 
   const onSubmit = values => {
     dispatch(SignupData({
       email: values.email,
-      password:values.password
+      password:values.password,
     }));
-
     Actions.jump('InscriptionMdp')
   };
   const formik = useFormik({
@@ -60,7 +57,6 @@ export default ({ navigation }) => {
     onSubmit,
     validationSchema,
   });
-
 
   return (
     <View style={{ flex: 1, backgroundColor: '#40CDDE' }}>
@@ -72,7 +68,6 @@ export default ({ navigation }) => {
         </TouchableOpacity>
         <TitleLabul width={69 * em} height={20 * hm} />
       </View>
-
       <View style={{ flex: 2, paddingTop: 25 * hm, paddingBottom: 90 * hm }}>
         <View style={styles.ActionWrapper}>
           <TouchableOpacity
@@ -81,7 +76,6 @@ export default ({ navigation }) => {
           <View style={{ position: 'absolute', top: 40 * hm }}>
             <Usercreat width={20 * em} height={25 * hm} />
           </View>
-
           <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 45 * hm, fontFamily: 'Lato-Black' }}>
           Crée ton compte
                       </Text>

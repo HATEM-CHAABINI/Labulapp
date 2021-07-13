@@ -514,15 +514,34 @@ export const setUserData = async (data) => {
 
 }
 
-export const createUser = async (signupData, activeNotification) => {
+// export const createUser = async (signupData, activeNotification) => {
+
+//     return auth()
+//         .createUserWithEmailAndPassword(signupData.email, signupData.password)
+//         .then(userCredential => {
+//             var userCreated = userCredential.user;
+//             let { nom, mobile, prenom, adresse, email, coordinate } = signupData;
+//             if (userCreated) {
+//                 let DataToBeSet = { firstName: prenom, lastName: nom, uid: userCreated.uid, address: adresse, mobile: mobile, email: email, activeNotification: activeNotification, coordinate: coordinate }
+//                 return { userCreated, DataToBeSet }
+//                 // return setUserData(DataToBeSet, userCreated.uid, signupData.password)
+//             }
+//         })
+//         .catch(error => {
+//             return { error: error }
+//         });
+
+
+// }
+export const createUser = async (signupData) => {
 
     return auth()
         .createUserWithEmailAndPassword(signupData.email, signupData.password)
         .then(userCredential => {
             var userCreated = userCredential.user;
-            let { nom, mobile, prenom, adresse, email, coordinate } = signupData;
+            let {firstName,lastName, email,activeLocation,activeNotification} = signupData;
             if (userCreated) {
-                let DataToBeSet = { firstName: prenom, lastName: nom, uid: userCreated.uid, address: adresse, mobile: mobile, email: email, activeNotification: activeNotification, coordinate: coordinate }
+                let DataToBeSet = { firstName: firstName, lastName:lastName, uid: userCreated.uid, email: email, activeNotification: activeNotification,activeLocation:activeLocation }
                 return { userCreated, DataToBeSet }
                 // return setUserData(DataToBeSet, userCreated.uid, signupData.password)
             }

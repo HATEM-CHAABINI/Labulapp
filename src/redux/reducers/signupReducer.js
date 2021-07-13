@@ -9,7 +9,6 @@ const signupReducer=(state = initialState, action) => {
     case SIGNUP_DETAILS:
       let data = state.signupData
       return {signupData:{ ...data,...action.data }};
-
       default:
       return state;
   }

@@ -244,7 +244,7 @@ export default ({navigation}) => {
                         marginLeft: 36 * em,
                       },
                     ]}>
-Connexion avec Facebook                  </Text>
+Connexion avec Facebook</Text>
                 )}
               </View>
             </TouchableOpacity>

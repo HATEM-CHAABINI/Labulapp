@@ -59,9 +59,11 @@ export default ({ navigation }) => {
   });
 
   const onSubmit = async values => {
+  
     setloading(() => true)
     try {
       let response = await auth().signInWithEmailAndPassword(values.email, values.password)
+      // console.log('response aa gya re...',response)
       if (response && response.user && response.user.emailVerified === false) {
         alert("Votre email n'est pas vérifié!")
         // auth().signOut()
@@ -217,43 +219,36 @@ export default ({ navigation }) => {
           </KeyboardAvoidingView>
         </View>
 
-        <KeyboardAvoidingView
 
+        <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ alignItems: 'center' }}
         >
-
           <View style={{ position: 'absolute', bottom: 0, marginBottom: 130 * hm, alignSelf: 'center' }}>
-
             <Text
               style={
                 ({
-
                   fontSize: 16 * em,
                   fontFamily: 'Lato-Regular',
-
                 },
                   StyleSheet.flatten([{ alignSelf: 'center', color: '#6A8596' }]))
-              }>
+               }>
               Tu n’as pas de compte ?
-  <Text
+              <Text
                 style={{ color: '#40CDDE', fontSize: 16 * em, fontFamily: 'Lato-SemiBold' }}
                 onPress={() => {
                   Actions.signupMenu();
                 }}>
                 {' '}
                 Inscris-toi ici !
-  </Text>
+             </Text>
             </Text>
-
           </View>
         </KeyboardAvoidingView>
+
+
       </View>
-
-
-
-      {/* <View style={{ marginBottom: 60 * hm ,marginTop:80*hm}}>
-         
+      {/* <View style={{ marginBottom: 60 * hm ,marginTop:80*hm}}>   
        </View> */}
     </View>
   );

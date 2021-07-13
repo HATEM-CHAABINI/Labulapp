@@ -225,6 +225,7 @@ export default ({ navigation }) => {
               justifyContent: 'center',
               borderRadius: 10 * em,
             }}>
+
               <Text
                 style={{
                   fontSize: 16 * em,
@@ -235,18 +236,13 @@ export default ({ navigation }) => {
                 }}>Inscrit-toi avec ton email</Text>
             </View>
           </TouchableOpacity>
-
-
         </View>
       </View>
-
     </View>
   )
-
 }
 const styles = StyleSheet.create({
   ActionWrapper: {
-
     alignItems: "center",
     // paddingStart: 15*hm,
     paddingTop: 20 * hm,

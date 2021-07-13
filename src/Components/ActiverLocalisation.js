@@ -29,19 +29,23 @@ import firestore from '@react-native-firebase/firestore';
 import { google_api} from '../constants/consts'
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
+import { SignupData } from '../redux/actions/signup';
 Geocoder.init(google_api);
 export default ({navigation}) => {
   const [loading, setloading] = useState(false);
   const [location , setlocation] = useState(null)
   const {signupData} = useSelector(state => state.signupReducer);
+
   const dispatch = useDispatch();
+
   
-    console.log("Signup ",signupData);
-    const getlocation = async() => {
+  
+    // console.log("Signup ",signupData);
+    // const getlocation = async() => {
       // await Geolocation.requestAuthorization();
     
       // await Geolocation.requestAuthorization();
-      navigation.navigate('ActiverLaNotif')
+      // navigation.navigate('ActiverLaNotif')
       // Geolocation.getCurrentPosition(
       //     (position) => {
       //       console.log({ 'latitude': position.coords.latitude, 'logitude': position.coords.longitude } );
@@ -65,58 +69,62 @@ export default ({navigation}) => {
       //     },
       //     { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
       // );
-  }
+  // }
 const activeLocation = () =>{
-
   dispatch(SignupData({
       activeLocation:true,
-
   }));
 }
-
+const getlocation=()=>{
+  dispatch(SignupData({
+    activeLocation:true,
+}));
+  navigation.navigate('ActiverLaNotif') 
+ }
   const login = () => {
-    setloading(true);
-   
-    Fire.default
-      .auth()
-      .createUserWithEmailAndPassword(signupData.email, signupData.password)
-      .then(userCredential => {
-        var user = userCredential.user;
-        let {nom, mobile, prenom, adresse, email} = signupData;
-        let activeNotification = false;
+  //   setloading(true);
+  dispatch(SignupData({
+    activeLocation:false,
+}));
+  navigation.navigate('ActiverLaNotif')
 
-        if (user) {
+  //   Fire.default
+  //     .auth()
+  //     .createUserWithEmailAndPassword(signupData.email, signupData.password)
+  //     .then(userCredential => {
+  //       var user = userCredential.user;
+  //       let {nom, mobile, prenom, adresse, email} = signupData;
+  //       let activeNotification = false;
 
-
-          try{
-            firestore()
-            .collection("users")
-            .doc(userCredential.user.uid)
-            .set({
-              nom, mobile, prenom, adresse, email,activeNotification
-            })
-            .then((res) => {
-              
-              setloading(false);
-            })
-            .catch((e) => {
-              console.log(e);
-              setloading(false);
-            });
-          }
-          catch(e){
-console.log(e)
-          }
-          
-            // setloading(false);
-        }
-      })
-      .catch(error => {
-        alert(error.message);
-        console.log(error.code, error.message);
-        setloading(false);
-      });
+  //       if (user) {
+  //         try{
+  //           firestore()
+  //           .collection("users")
+  //           .doc(userCredential.user.uid)
+  //           .set({
+  //             nom, mobile, prenom, adresse, email,activeNotification
+  //           })
+  //           .then((res) => { 
+  //             setloading(false);
+  //           })
+  //           .catch((e) => {
+  //             console.log(e);
+  //             setloading(false);
+  //           });
+  //         }
+  //         catch(e){
+  //         console.log(e)
+  //         }
+  //           // setloading(false);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       alert(error.message);
+  //       console.log('pritesh',error.code, error.message);
+  //       setloading(false);
+  //     });
   };
+
   return (
     <View style={{flex: 1, bottom: 40 * hm, backgroundColor: '#F0F5F7'}}>
       <Image

@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import { createUser, setUserData, verifyUserEmail } from '../services/firebase'
 import auth from "@react-native-firebase/auth";
 import { LogBox } from 'react-native';
-
+import { SignupData } from '../redux/actions/signup';
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -24,12 +24,27 @@ export default ({ navigation }) => {
   const [loading, setloading] = useState(false)
   const { signupData } = useSelector((state) => state.signupReducer);
   const dispatch = useDispatch();
+   
+  // console.log(signupData)
 
+  // const login = () => {
+  //   setloading(true)
+  //   dispatch(SignupData({
+  //     activeNotification:false,
+  // }));
+  // navigation.navigate('registerEmail')
+  // }
 
   const login = () => {
-    setloading(true)
-    createUser(signupData, false).then(async (response) => {
 
+    dispatch(SignupData({
+      activeNotification:false,
+  }));
+
+    setloading(true)
+    createUser(signupData).then(async (response) => {
+      // console.log('login response',response)
+      // console.log('login ',signupData)
 
       if (response.error) {
         if (response.error.code === 'auth/email-already-in-use') {
@@ -38,17 +53,13 @@ export default ({ navigation }) => {
         setloading(false)
       }
       else {
-
         setUserData(response.DataToBeSet).then(res => {
-
           auth().currentUser.sendEmailVerification()
             .then(function () {
-
               Alert.alert(
                 "Succès",
                 "Merci pour votre inscription. Un e-mail envoyé à votre adresse e-mail avec un lien de vérification, veuillez cliquer sur le lien pour vérifier votre adresse e-mail",
                 [
-
                   { text: "OK", onPress: () => { Actions.registerEmail() } }
                 ]
               );
@@ -56,7 +67,6 @@ export default ({ navigation }) => {
               setloading(false)
             })
             .catch(function (error) {
-
               Alert.alert("Erreur", "Un problème est survenu")
               auth().currentUser.delete().then(function () {
                 setloading(false)
@@ -73,11 +83,64 @@ export default ({ navigation }) => {
     })
 
   };
+
+
+  // const loginWithActiveNotification = async () => {
+  //   setloading(true)
+  //   createUser(signupData, true).then(async (response) => {
+
+
+  //     if (response.error) {
+  //       if (response.error.code === 'auth/email-already-in-use') {
+  //         alert("Cette adresse email est déjà utilisée.")
+  //       }
+  //       setloading(false)
+  //     }
+  //     else {
+
+  //       setUserData(response.DataToBeSet).then(res => {
+
+  //         auth().currentUser.sendEmailVerification()
+  //           .then(function () {
+
+  //             Alert.alert(
+  //               "Succès",
+  //               "Merci pour votre inscription. Un e-mail envoyé à votre adresse e-mail avec un lien de vérification, veuillez cliquer sur le lien pour vérifier votre adresse e-mail",
+  //               [
+
+  //                 { text: "OK", onPress: () => { Actions.registerEmail() } }
+  //               ]
+  //             );
+  //             auth().signOut()
+  //             setloading(false)
+  //           })
+  //           .catch(function (error) {
+  //             Alert.alert("Erreur", "Un problème est survenu")
+  //             auth().currentUser.delete().then(function () {
+  //               setloading(false)
+  //               // User deleted.
+  //             }).catch(function (error) {
+  //               // An error happened.
+  //               setloading(false)
+  //             });
+  //             // Error occurred. Inspect error.code.
+  //           });
+  //       })
+  //     }
+  //   })
+  // };
+
+  
+
   const loginWithActiveNotification = async () => {
+  
+    dispatch(SignupData({
+      activeNotification:true,
+  }));
     setloading(true)
-    createUser(signupData, true).then(async (response) => {
-
-
+    createUser(signupData).then(async (response) => {
+      // console.log('response ',response)
+      // console.log(signupData)
       if (response.error) {
         if (response.error.code === 'auth/email-already-in-use') {
           alert("Cette adresse email est déjà utilisée.")
@@ -85,17 +148,13 @@ export default ({ navigation }) => {
         setloading(false)
       }
       else {
-
         setUserData(response.DataToBeSet).then(res => {
-
           auth().currentUser.sendEmailVerification()
             .then(function () {
-
               Alert.alert(
                 "Succès",
                 "Merci pour votre inscription. Un e-mail envoyé à votre adresse e-mail avec un lien de vérification, veuillez cliquer sur le lien pour vérifier votre adresse e-mail",
                 [
-
                   { text: "OK", onPress: () => { Actions.registerEmail() } }
                 ]
               );
@@ -103,7 +162,6 @@ export default ({ navigation }) => {
               setloading(false)
             })
             .catch(function (error) {
-
               Alert.alert("Erreur", "Un problème est survenu")
               auth().currentUser.delete().then(function () {
                 setloading(false)
@@ -115,18 +173,15 @@ export default ({ navigation }) => {
               // Error occurred. Inspect error.code.
             });
         })
-
       }
     })
   };
+  
+
   return (
 
     <View style={{ flex: 1, backgroundColor: "#F0F5F7" }}>
-
-
-
       <Image style={{ flex: 0.3 }}
-
         source={require('../assets/images/notifications-personnes-1106x814.png')}
         style={{
           width: em * 310.58,
@@ -136,21 +191,15 @@ export default ({ navigation }) => {
           marginTop: 59.51 * hm,
           marginBottom: 32.27 * hm,
         }} resizeMode={'contain'} />
-
-
       <View style={{ flex: 1 }}>
         <View style={styles.ActionWrapper}>
-
-
-
-
           <Text style={{ color: '#1E2D60', fontSize: 24 * em, paddingTop: 40 * hm, textAlign: 'center', fontFamily: 'Lato-Black' }}>Activer{"\n"}les notifications</Text>
           <Text style={{ color: '#6A8596', fontSize: 16 * em, paddingTop: 10 * hm, textAlign: 'center', fontFamily: 'Lato-Regular', width: 345 * em }}>Activer les notifications pour recevoir l’activité de tes amis, ta famille et tes voisins.</Text>
-
-
-
-          <TouchableOpacity onPress={() => 
-navigation.navigate('ActiverLaNotif')        } style={{
+          <TouchableOpacity 
+          // onPress={() => navigation.navigate('ActiverLaNotif')}
+          // onPress={() => loginWithActiveNotification()}
+          onPress={() => loginWithActiveNotification()}
+           style={{
             overflow: 'hidden',
             borderRadius: 18 * em,
             height: 59 * hm,
@@ -162,7 +211,6 @@ navigation.navigate('ActiverLaNotif')        } style={{
           >
             <View
               style={styles.btnContainer}>
-
               <Text style={{
                 fontSize: 16 * em,
                 color: '#FFFFFF',
@@ -171,16 +219,11 @@ navigation.navigate('ActiverLaNotif')        } style={{
               }}>Activer</Text>
             </View>
           </TouchableOpacity>
-
-
           <View style={{ marginTop: 35 * hm }}>
-
             {loading ? <ActivityIndicator size='small' color='#1E2D60' style={{}} /> : <Text style={{ color: '#6A8596', fontSize: 16 * em }} onPress={() => login()}>Activer plus tard</Text>}
           </View>
-
         </View>
       </View>
-
     </View>
   )
 

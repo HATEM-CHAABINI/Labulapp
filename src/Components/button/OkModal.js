@@ -27,7 +27,7 @@ style={{
   height: 50 * hm,
   width: 255 * em,
   alignItems: 'center',
-  backgroundColor: '#40CDDE',
+  backgroundColor: props.conceptColor,
   "opacity": 1,
   marginBottom: 10 * hm
 }}

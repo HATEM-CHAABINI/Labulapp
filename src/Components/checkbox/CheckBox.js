@@ -17,7 +17,7 @@ import {
   CheckRed,
   CheckedWhite,
   CheckDarkBlue,
-  CheckPink,
+  CheckPink,CheckGray,CheckOrange
 } from '../../assets/svg/icons';
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
@@ -83,6 +83,10 @@ export default class CheckBox extends Component {
         CheckDarkBlue(checkShapeSize)
       ) : this.props.pink ? (
         CheckPink(checkShapeSize)
+      ) : this.props.gray ? (
+        CheckGray(checkShapeSize)
+      ) : this.props.orange ? (
+        CheckOrange(checkShapeSize)
       ) : (
         CheckBlue(checkShapeSize)
       )

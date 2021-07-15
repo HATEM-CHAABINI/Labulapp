@@ -191,12 +191,13 @@ const MabulRechercheContact = (props) => {
 
 
 
-<ShareButton text={"mes amis"} style={{ marginBottom:10*hm ,backgroundColor: 'rgba(255,148,23,0.7)'}} leftIcon={<Amis/>} rightIcon={
+<ShareButton text={"mes amis"} style={{ marginBottom:10*hm ,backgroundColor: 'rgba(255,244,217,0.62)'}} leftIcon={<Amis/>} rightIcon={
        
        <CheckBox
           oval
-       color="#FF9417"
+          orange={true}
           bgColor="#FF9417"
+          
           isChecked={true}
           onClick={() => {
             const arr = [...checked];
@@ -208,12 +209,11 @@ const MabulRechercheContact = (props) => {
 
 
 
-<ShareButton text={"ma famille"} style={{ marginBottom:10*hm ,backgroundColor: 'rgba(215,243,255,0.7)'}} leftIcon={<Famille/>} rightIcon={
+<ShareButton text={"ma famille"} style={{ marginBottom:10*hm ,backgroundColor: 'rgba(255,23,103,0.11)'}} leftIcon={<Famille/>} rightIcon={
        
        <CheckBox
           oval
-          pink={props.sort === RelationshipType.FAMILIY ? true : false}
-          blue={props.sort === RelationshipType.FRIEND ? true : false}
+          pink={true}
           bgColor="#EF88B9"
           isChecked={true}
           onClick={() => {
@@ -227,12 +227,11 @@ const MabulRechercheContact = (props) => {
 
 
 
-<ShareButton text={"TOUS"} style={{ marginBottom:10*hm ,backgroundColor: 'rgba(215,243,255,0.7)'}} leftIcon={<Tous/>} rightIcon={
+<ShareButton text={"TOUS"} style={{ marginBottom:10*hm ,backgroundColor: 'rgba(240,245,247,0.62)'}} leftIcon={<Tous/>} rightIcon={
        
        <CheckBox
           oval
-          pink={props.sort === RelationshipType.FAMILIY ? true : false}
-          blue={props.sort === RelationshipType.FRIEND ? true : false}
+          gray={true}
           bgColor="#EF88B9"
           isChecked={true}
           onClick={() => {

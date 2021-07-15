@@ -247,6 +247,8 @@ import ArrowRightWhite from './navigation/ArrowRightWhite.svg';
 import AddressBlue from './navigation/AddressBlue.svg';
 import OptionGray from './navigation/OptionGray.svg';
 import CheckPink from './navigation/CheckPink.svg';
+import CheckOrange from './navigation/CheckOrange.svg';
+import CheckGray from './navigation/CheckGray.svg';
 import CheckDarkBlue from './navigation/CheckDarkBlue.svg';
 import MagnifierBlue from './navigation/MagnifierBlue.svg';
 import ArrowDownBlack from './navigation/ArrowDownBlack.svg';
@@ -261,7 +263,7 @@ import PartySell from './category/PartySell.svg';
 import ShowSell from './category/ShowSell.svg';
 import WorkshopSell from './category/WorkshopSell.svg';
 import Bluecircle from './category/Bluecircle.svg';
-export {Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
+export {CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
   AddressBlue,CheckDarkBlue,CheckPink,
   OptionGray,
   LocationRed,

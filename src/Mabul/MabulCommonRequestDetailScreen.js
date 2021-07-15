@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Image, Text,KeyboardAvoidingView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Image, Text,KeyboardAvoidingView ,Switch } from 'react-native';
 import TitleText from '../text/TitleText';
 import { hexToRGB, em, mabulColors, hm } from '../constants/consts';
 import CommentText from '../text/CommentText';
@@ -25,6 +25,7 @@ import MabulCommonDateSettingScreen from './MabulCommonDateSettingScreen';
 import MabulAddDate from './MabulAddDate';
 import MabulAddLieu from './MabulAddLieu';
 import MabulRechercheContact from './MabulRechercheContact';
+import { TextInput } from 'react-native';
 const title = {
   organize: 'Donne un titre à ton apéro',
   sell: 'Donne un titre à ta vente',
@@ -34,6 +35,7 @@ const title = {
 const MabulCommonRequestDetailScreen = (props) => {
   // const { demandData } = useSelector((state) => state.demandReducer);
   const dispatch = useDispatch()
+  const [Promo, setPromo] = useState(false);
   const initialValues = {
     title: '',
     description: ''
@@ -76,6 +78,7 @@ const MabulCommonRequestDetailScreen = (props) => {
     iconDocument = Document(styles.icon);
   }
   const mabulService = props.mabulService;
+
   return (
     <View style={{
       flex: 1,     backgroundColor:'#F0F5F7', zIndex: 999,
@@ -113,7 +116,23 @@ const MabulCommonRequestDetailScreen = (props) => {
             <Text style={styles.contentDesc}>Description</Text>
             <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
           </TouchableOpacity>
-   
+   {
+     mabulService==='organize'?
+     <TouchableOpacity
+            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
+            onPress={() => this[RBSheet + 6].open()}
+          >
+            <View style={{  flexDirection: "row" ,justifyContent:'space-between',marginRight:30*em }}>
+              <Text style={[styles.contentDesc,{paddingRight:180*em}]}>À prévoir</Text>
+              
+              <Flechedroite width={14 * em} height={14 * hm} />
+            </View>
+            <Text style={styles.contentDescSub} >Les participants doivent ramener</Text>
+
+              </TouchableOpacity>
+     :
+     <></>
+   }
    
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
@@ -124,6 +143,23 @@ const MabulCommonRequestDetailScreen = (props) => {
               <Flechedroite width={14 * em} height={14 * hm} />
             </View>
               </TouchableOpacity>
+              {
+     mabulService==='sell'?
+     <TouchableOpacity
+            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
+            onPress={() => this[RBSheet + 7].open()}
+          >
+            <View style={{  flexDirection: "row" ,justifyContent:'space-between',marginRight:30*em }}>
+              <Text style={[styles.contentDesc,{paddingRight:180*em}]}>Ajoute un prix</Text>
+              
+              <Flechedroite width={14 * em} height={14 * hm} />
+            </View>
+            <Text style={styles.contentDescSub} >Ex : 5,00 €</Text>
+
+              </TouchableOpacity>
+     :
+     <></>
+   }
 
         <View style={[styles.ActionButton, { height: 199 * hm ,marginTop:10*hm,}]}>
        <View style={{flexDirection:'row',marginTop:20*hm,justifyContent:'space-between'}}>
@@ -145,7 +181,7 @@ const MabulCommonRequestDetailScreen = (props) => {
 
               <Text style={[styles.contentDesc,{marginBottom:10*hm}]}>Lieu</Text>
               <TouchableOpacity   onPress={() => this[RBSheet + 3].open()}>
-              <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:'#40CDDE',marginRight:30*em}}>Modifier</Text>
+              <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:conceptColor,marginRight:30*em}}>Modifier</Text>
 </TouchableOpacity>
               </View>
  <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>ABYMES 97139 Guadeloupe</Text>
@@ -203,7 +239,7 @@ comprendre ta demande`}
 
 
   </View>
-  <OkModal closeModal={ () =>  this[RBSheet + 1].close()}/>
+  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 1].close()}/>
 </RBSheet>
 
 
@@ -233,7 +269,7 @@ comprendre ta demande`}
   <View style={styles.container}>
 <MabulAddDate conceptColor={conceptColor}/>
  </View>
-  <OkModal closeModal={ () =>  this[RBSheet + 2].close()}/>
+  <OkModal conceptColor={conceptColor} closeModal={ () =>  this[RBSheet + 2].close()}/>
 </RBSheet>
 
 
@@ -265,7 +301,7 @@ comprendre ta demande`}
   <View style={styles.container}>
 <MabulAddLieu conceptColor={conceptColor}/>
  </View>
-  <OkModal closeModal={ () =>  this[RBSheet + 3].close()}/>
+  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 3].close()}/>
 </RBSheet>
 
 
@@ -310,7 +346,124 @@ comprendre ta demande`}
 </RBSheet>
 
 
+<RBSheet
+  ref={ref => {
+    this[RBSheet + 6] = ref;
+  }}
+  height={hm * 630}
 
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
+  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
+  </View>
+
+  <View style={styles.container}>
+
+
+  <Reinput style={{ paddingTop: 15 * em ,marginRight:30*em,marginLeft:30*em}}
+            label={`Écris ce que ton invité ramène …`}
+            underlineColor="#BFCDDB"
+            multiline={true}
+            activeColor={conceptColor}
+            labelActiveColor="#6A8596"
+            labelColor="#6A8596"
+            labelActiveTop={-38}
+            height={30*hm}
+            paddingBottom={10 * em}
+/>        
+  
+
+<Text style={{ marginLeft:30*em,bottom:20*hm}} >Sépare chaque mot avec des virgules</Text>
+
+
+<View style={styles.SwitchbuttonWrapper}>
+
+
+<View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
+  <Text style={styles.SwitchTitle}>Voir les alertes</Text>
+</View>
+
+<Switch
+  trackColor={{ false: "white", true: conceptColor }}
+  thumbColor={true ? "white" : conceptColor}
+  value={true}
+  />
+
+</View>
+  </View>
+  
+  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 6].close()}/>
+</RBSheet>
+
+<RBSheet
+  ref={ref => {
+    this[RBSheet + 7] = ref;
+  }}
+  height={hm * 630}
+
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
+  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Prix</Text>
+  </View>
+
+  <View style={styles.container}>
+
+{Promo ?
+<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+<TextInput placeholder="5€" style={[{width:148*em,marginLeft:30*em},styles.BoxPrice]} />
+<TextInput placeholder="3,99€" style={[{width:148*em,marginRight:30*em},styles.BoxPrice]} />
+
+</View>
+
+:
+  <TextInput placeholder="5€" style={[{width:310*em},styles.BoxPrice]} />
+
+}
+
+<View style={styles.SwitchbuttonWrapper}>
+
+
+<View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
+  <Text style={styles.SwitchTitle}>Activer promotion</Text>
+</View>
+
+<Switch
+  trackColor={{ false: "white", true: conceptColor }}
+  thumbColor={Promo ? "white" : conceptColor}
+        value={Promo}
+        onValueChange={(Promo) => setPromo(Promo)} 
+  />
+
+</View>
+<Text style={{bottom:50*hm,color:conceptColor,fontFamily:'Lato-Semibold',fontSize:18*em,marginLeft:30*em}}>Une promo sur ce prix ?</Text>
+
+  </View>
+  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 7].close()}/>
+</RBSheet>
 
 <MabulPubButton
         text={"Publier"}
@@ -325,6 +478,23 @@ comprendre ta demande`}
 };
 
 const styles = {
+  BoxPrice:{ backgroundColor:"#F0F5F7",height:80*hm,borderRadius:20*em,justifyContent:'center',alignSelf:'center',textAlign:'center',fontSize:25*em,fontFamily:"Lato-Regular"},
+  SwitchTitle: {
+    flex: 1,
+    color: "#6A8596",
+    // fontFamily: 'Helvetica-Regular',
+    fontSize: 14 * em,
+    // paddingLeft: 15 * em,
+    // paddingRight: 25 * em,
+  },
+  SwitchbuttonWrapper: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 30 * em,
+    paddingRight: 30 * em,
+    paddingTop:90*hm
+  },
   ActionButton: {
     overflow: 'hidden',
     backgroundColor: '#fff',
@@ -396,7 +566,7 @@ const styles = {
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc:{fontFamily:'Lato-Regular',fontSize:16*em,color:'#6A8596',paddingLeft:40*em},
-  contentDescSub:{fontFamily:'Lato-Italic',fontSize:12*em,color:'#A0AEB8',paddingLeft:40*em}
+  contentDescSub:{marginTop:3*hm,fontFamily:'Lato-Italic',fontSize:12*em,color:'#A0AEB8',paddingLeft:40*em}
 
 };
 

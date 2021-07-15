@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, Image } from 'react-native';
-import { em } from '../../constants/consts';
+import { em, hm } from '../../constants/consts';
 import { TouchableOpacity } from 'react-native';
-import CommonMediumButton from './CommonMediumButton';
+import CommonBigButton from './CommonBigButton';
 import { ArrowRightWhite } from '../../assets/svg/icons';
-const MabulNextButton = (props) => {
+const MabulPubButton = (props) => {
   return (
-    <CommonMediumButton
-      rightIcon={<ArrowRightWhite width={10 * em} height={17 * em} />}
+    <CommonBigButton
+    //   rightIcon={<ArrowRightWhite width={10 * em} height={17 * em} />}
       textStyle={styles.txt}
       text={props.text?props.text:"Suivant"}
       loading={props.loading}
@@ -23,7 +23,8 @@ const styles = {
     flexDirection: 'row',
     borderRadius: 20 * em,
     paddingVertical: 20 * em,
-    width: 163 * em,
+    width: "80%",
+    height:47*hm,
     backgroundColor: '#40CDDE',
     alignItems: 'center',
     justifyContent: 'center',
@@ -38,4 +39,4 @@ const styles = {
   },
 };
 
-export default MabulNextButton;
+export default MabulPubButton;

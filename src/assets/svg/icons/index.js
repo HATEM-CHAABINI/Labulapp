@@ -2,7 +2,7 @@ import NextIcon from './NextIcon.svg';
 import PrevIcon from './PrevIcon.svg';
 import LocationPink from './LocationPink.svg';
 import Alert from './Alert.svg';
-
+import Alerte from './Alerte.svg';
 import Animal from './category/Animal.svg';
 import BricologeIcon from './category/BricologeIcon.svg';
 import ComputerIcon from './category/ComputerIcon.svg';
@@ -125,7 +125,7 @@ export {
 
 
 };
-
+import Dansmabul from './navigation/Dansmabul.svg';
 import Send from './navigation/Send.svg';
 import Option from './navigation/Option.svg';
 import ReportProblem from './navigation/ReportProblem.svg';
@@ -193,7 +193,7 @@ import TabCalendarOff from './navigation/TabCalendarOff.svg';
 import TabPlus from './navigation/TabPlus.svg';
 import PurchasedPremium from './navigation/PurchasedPremium.svg';
 
-export {PurchasedPremium, TabPlus, TabCalendarOff, TabCalendarOn, TabCardOff, TabCardOn, TabMessageOff, TabMessageOn };
+export {Dansmabul,PurchasedPremium, TabPlus, TabCalendarOff, TabCalendarOn, TabCardOff, TabCardOn, TabMessageOff, TabMessageOn };
 
 export {RightArrowBlue,
   EmailBlue,
@@ -251,7 +251,7 @@ import CheckDarkBlue from './navigation/CheckDarkBlue.svg';
 import MagnifierBlue from './navigation/MagnifierBlue.svg';
 import ArrowDownBlack from './navigation/ArrowDownBlack.svg';
 import ArrowUpWhite from './navigation/ArrowUpWhite.svg';
-
+import Flecheposition from './navigation/Flecheposition.svg'
 import AlertRed from './create/AlertRed.svg';
 import Computer from './create/Computer.svg';
 import AperoSell from './category/AperoSell.svg';
@@ -260,8 +260,8 @@ import MeetSell from './category/MeetSell.svg';
 import PartySell from './category/PartySell.svg';
 import ShowSell from './category/ShowSell.svg';
 import WorkshopSell from './category/WorkshopSell.svg';
-
-export {ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
+import Bluecircle from './category/Bluecircle.svg';
+export {Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
   AddressBlue,CheckDarkBlue,CheckPink,
   OptionGray,
   LocationRed,
@@ -318,8 +318,12 @@ import Promotion from './profile/Promotion.svg';
 import AssociationInformation from './profile/AssociationInformation.svg';
 import EnterpriseInformation from './profile/EnterpriseInformation.svg';
 import InstitutionInformation from './profile/InstitutionInformation.svg';
+import Voisins from './profile/Voisins.svg';
+import Amis from './profile/Amis.svg';
+import Famille from './profile/Famille.svg';
+import Tous from './profile/Tous.svg';
 
-export {AssociationInformation,EnterpriseInformation,InstitutionInformation,
+export {Voisins,Amis,Famille,Tous,AssociationInformation,EnterpriseInformation,InstitutionInformation,
   Promotion,
   Tips,
   Events,
@@ -338,7 +342,7 @@ export {AssociationInformation,EnterpriseInformation,InstitutionInformation,
 };
 
 export { ProAvatarBg, AvatarBg, Setting, MyNeeds, Circles, Information, ProNeeds, AddGroup, DeleteRed, ProAddCover };
-export { NextIcon, PrevIcon, LocationPink, Alert };
+export { NextIcon, PrevIcon, LocationPink, Alert ,  Alerte};
 export {
   ComputerIcon,
   BricologeIcon,

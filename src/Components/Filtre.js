@@ -16,7 +16,13 @@ class Filtre extends Component {
     super(props)
     this.ChildElement = React.createRef();
     this.state = {
-      switchValue: true,
+      switchValuePro: true,
+      switchValueAsso: true,
+      switchValueColl: true,
+      switchValueAle: true,
+
+
+
       besoin: false,
       donne: false,
       organise: false,
@@ -284,29 +290,75 @@ this.state.filtre.length == 0?
           <Divider />
 
           <View
-            style={[styles.ActionButton, { height: 90 * hm }]}
+            style={{ flex:2,height:'100%'}}
 
           >
-            <View style={styles.ButtonWrapper}>
+            <View style={styles.SwitchbuttonWrapper}>
 
 
               <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-around" }}>
-                <Text style={styles.contentTitle}>Voir que des demandes des professionnels</Text>
+                <Text style={styles.SwitchTitle}>Voir les professionnels</Text>
               </View>
 
               <Switch
                 trackColor={{ false: "white", true: "#40CDDE" }}
-                thumbColor={this.state.switchValue ? "white" : "#40CDDE"}
-                value={this.state.switchValue}
-                onValueChange={(switchValue) => this.setState({ switchValue })} />
+                thumbColor={this.state.switchValuePro ? "white" : "#40CDDE"}
+                value={this.state.switchValuePro}
+                onValueChange={(switchValuePro) => this.setState({ switchValuePro })} />
 
             </View>
+            <View style={styles.SwitchbuttonWrapper}>
+
+
+              <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-around" }}>
+                <Text style={styles.SwitchTitle}>Voir les associations</Text>
+              </View>
+
+              <Switch
+                trackColor={{ false: "white", true: "#40CDDE" }}
+                thumbColor={this.state.switchValueAsso ? "white" : "#40CDDE"}
+                value={this.state.switchValueAsso}
+                onValueChange={(switchValueAsso) => this.setState({ switchValueAsso })} />
+
+              </View>
+
+
+              <View style={styles.SwitchbuttonWrapper}>
+
+
+      <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-around" }}>
+        <Text style={styles.SwitchTitle}>Voir les collectivités</Text>
+      </View>
+
+      <Switch
+        trackColor={{ false: "white", true: "#40CDDE" }}
+        thumbColor={this.state.switchValueColl ? "white" : "#40CDDE"}
+        value={this.state.switchValueColl}
+        onValueChange={(switchValueColl) => this.setState({ switchValueColl })} />
+
+      </View>
+
+      <View style={styles.SwitchbuttonWrapper}>
+
+
+      <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-around" }}>
+        <Text style={styles.SwitchTitle}>Voir les alertes</Text>
+      </View>
+
+      <Switch
+        trackColor={{ false: "white", true: "#40CDDE" }}
+        thumbColor={this.state.switchValueAle ? "white" : "#40CDDE"}
+        value={this.state.switchValueAle}
+        onValueChange={(switchValueAle) => this.setState({ switchValueAle })} />
+
+      </View>
+
 
           </View>
 
 
         </View>
-        <View style={{ flex: 0.1, justifyContent: "center", alignItems: "center" }}>
+        <View style={{  justifyContent: "center", alignItems: "center", }}>
 
           <RBSheet
             ref={ref => {
@@ -316,8 +368,11 @@ this.state.filtre.length == 0?
 
             openDuration={250}
             customStyles={{
-
+              wrapper:{
+                backgroundColor: 'rgba(209,226,237,0.9)'
+              },
               container: {
+               
                 borderTopLeftRadius: 28 * em,
                 borderTopRightRadius: 28 * em,
                 justifyContent: "center",
@@ -496,7 +551,9 @@ this.state.filtre.length == 0?
 
             openDuration={250}
             customStyles={{
-
+              wrapper:{
+                backgroundColor: 'rgba(209,226,237,0.9)'
+              },
               container: {
                 borderTopLeftRadius: 28 * em,
                 borderTopRightRadius: 28 * em,
@@ -594,12 +651,28 @@ const styles = {
     paddingLeft: 15 * em,
     paddingRight: 15 * em,
   },
+  SwitchTitle: {
+    flex: 1,
+    color: "#1E2D60",
+    fontFamily: 'Lato-Medium',
+    fontSize: 16 * em,
+    paddingLeft: 15 * em,
+    paddingRight: 15 * em,
+  },
   ButtonWrapper: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 15 * em,
-    paddingRight: 15 * em,
+    paddingRight: 25 * em,
+  },
+  SwitchbuttonWrapper: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 44 * em,
+    paddingRight: 25 * em,
+    paddingTop:25*hm
   },
   circleIconOverlay: {
     width: 34 * em,
@@ -642,7 +715,7 @@ const styles = {
 
   listDivider: {
     height: 1 * em,
-    marginLeft: 18 * em,
+    marginLeft: 60 * em,
     backgroundColor: "#eee"
   },
 
@@ -652,13 +725,13 @@ const styles = {
 
 
 
-  listDivider: {
-    height: 1 * hm,
-    marginLeft: 18 * em,
-    marginTop: 15 * hm,
-    marginBottom: 5 * hm,
-    backgroundColor: "#eee"
-  },
+  // listDivider: {
+  //   height: 1 * hm,
+  //   marginLeft: 18 * em,
+  //   marginTop: 15 * hm,
+  //   marginBottom: 5 * hm,
+  //   backgroundColor: "#eee"
+  // },
   ActionButton: {
     overflow: 'hidden',
     borderRadius: 18 * em,
@@ -669,7 +742,7 @@ const styles = {
       width: 0,
       height: 0,
     }, ButtonWrapper: {
-      flexDirection: "row",
+      flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       paddingLeft: 15 * em,

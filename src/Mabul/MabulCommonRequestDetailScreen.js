@@ -11,7 +11,20 @@ import Reinput from "reinput"
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 import { useFormik } from 'formik';
+import RBSheet from "react-native-raw-bottom-sheet";
+import Cta from '../assets/svg/icons/navigation/Cta'
 import * as Yup from 'yup'
+import { TouchableOpacity } from 'react-native';
+import Fleche from '../Components/Fleche';
+import OkModal from '../Components/button/OkModal';
+import MabulAddPhoto from './MabulAddPhoto';
+import MabulCommonAddPhotoScreen from './MabulCommonAddPhotoScreen';
+import { ScrollView } from 'react-native';
+import MabulPubButton from '../Components/button/MabulPubButton';
+import MabulCommonDateSettingScreen from './MabulCommonDateSettingScreen';
+import MabulAddDate from './MabulAddDate';
+import MabulAddLieu from './MabulAddLieu';
+import MabulRechercheContact from './MabulRechercheContact';
 const title = {
   organize: 'Donne un titre à ton apéro',
   sell: 'Donne un titre à ta vente',
@@ -36,6 +49,7 @@ const MabulCommonRequestDetailScreen = (props) => {
   const onSubmit = values => {
 
     dispatch(update_into_demand({ data: values }))
+    console.log('suiiivivvvvvvvvvv');
     mabulService === 'sell'
       ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 67 })
       : Actions.mabulCommonAddPhoto({
@@ -44,9 +58,9 @@ const MabulCommonRequestDetailScreen = (props) => {
       });
   };
   const formik = useFormik({
-    initialValues,
+    // initialValues,
     onSubmit,
-    validationSchema,
+    // validationSchema,
   });
   const conceptColor = mabulColors[props.mabulService];
   var iconEdit = Edit2(styles.icon);
@@ -64,7 +78,7 @@ const MabulCommonRequestDetailScreen = (props) => {
   const mabulService = props.mabulService;
   return (
     <View style={{
-      flex: 1, backgroundColor: '#ffffff', zIndex: 999,
+      flex: 1,     backgroundColor:'#F0F5F7', zIndex: 999,
     }}>
       <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]}      percent={props.process}
         isNoBackBtn={true}
@@ -72,71 +86,274 @@ const MabulCommonRequestDetailScreen = (props) => {
      
     
    
-<KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
 
-      > 
       <View style={styles.body}>
-       <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
-          <TitleText text={title[props.mabulService]} style={styles.title} />
-          <CommentText
-            text="Soi court et précis dans les détails"
-            style={styles.comment}
-            titleStyle={styles.listCaption}
-          />
-          <Reinput style={{ paddingTop: 33 * em }}
-            label='Écrit un titre court'
+       <ScrollView style={{  paddingBottom: 5 * hm }}>
+        
+          <Reinput style={{height:76*hm,paddingLeft:40*em, paddingTop: 20 * hm, marginTop:10*hm,backgroundColor:'#FFFFFF' }}
+            label='Écrit un titre '
             autoFocus={true}
-            icon={iconEdit}
-            underlineColor="#BFCDDB"
+            // icon={iconEdit}
+            underlineActiveColor="#FFFFFF"
+            underlineColor="#FFFFFF"
             activeColor={conceptColor}
             labelActiveColor="#6A8596"
             labelColor="#6A8596"
             paddingBottom={25 * em}
-            value={formik.values.title}
+         />
+          <Text style={{paddingLeft:40*em,color:'#6A8596',fontSize:11*em,fontFamily:'Lato-Italic',marginTop:5*hm,marginBottom:10*hm}}>(68 caractères maximum)</Text>
+   
+   
+   
+          <TouchableOpacity
+            style={[styles.ActionButton, { height: 90 * hm }]}
+            onPress={() => this[RBSheet + 1].open()}
+          >
+        
+            <Text style={styles.contentDesc}>Description</Text>
+            <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+          </TouchableOpacity>
+   
+   
+          <TouchableOpacity
+            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
+            onPress={() => this[RBSheet + 2].open()}
+          >
+            <View style={{  flexDirection: "row" ,justifyContent:'space-between',marginRight:30*em }}>
+              <Text style={[styles.contentDesc,{paddingRight:180*em}]}>Ajouter une date</Text>
+              <Flechedroite width={14 * em} height={14 * hm} />
+            </View>
+              </TouchableOpacity>
 
-            onBlur={formik.handleBlur('title')}
-            onChangeText={formik.handleChange('title')} />
-          {formik.errors.title && formik.touched.title && <Text style={styles.descerrorText}>{formik.errors.title}</Text>}
-          <Reinput style={{ paddingTop: 15 * em }}
-            label={`Détail ta demande ici
-(Soit concis pour être plus efficace)`}
-            icon={iconDocument}
+        <View style={[styles.ActionButton, { height: 199 * hm ,marginTop:10*hm,}]}>
+       <View style={{flexDirection:'row',marginTop:20*hm,justifyContent:'space-between'}}>
+       <Text style={styles.contentDesc}>Photos</Text>
+       <Text style={[styles.contentDesc,{color:'#A0AEB8',marginRight:30*em}]}>(3 max)</Text>
+        </View>
+            <Text style={[styles.contentDescSub,{marginTop:10*hm}]} >Les photos aident à mieux cerner ta demande.</Text>
+        
+<MabulAddPhoto  conceptColor={conceptColor}/>
+
+
+</View>
+<View
+            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
+           
+          >
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              
+
+              <Text style={[styles.contentDesc,{marginBottom:10*hm}]}>Lieu</Text>
+              <TouchableOpacity   onPress={() => this[RBSheet + 3].open()}>
+              <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:'#40CDDE',marginRight:30*em}}>Modifier</Text>
+</TouchableOpacity>
+              </View>
+ <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>ABYMES 97139 Guadeloupe</Text>
+
+              </View>
+              </ScrollView>
+        
+       
+      </View>
+    
+      <View style={{ flex: 0.1 }}>
+
+<RBSheet
+  ref={ref => {
+    this[RBSheet + 1] = ref;
+  }}
+  height={hm * 630}
+
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
+  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
+  </View>
+
+  <View style={styles.container}>
+
+
+  <Reinput style={{ paddingTop: 15 * em ,marginRight:30*em,marginLeft:30*em}}
+            label={`Cela permet à ton entourage de mieux 
+comprendre ta demande`}
             underlineColor="#BFCDDB"
+            multiline={true}
             activeColor={conceptColor}
             labelActiveColor="#6A8596"
             labelColor="#6A8596"
             labelActiveTop={-38}
-            height={300}
-            paddingBottom={30 * em}
-            value={formik.values.description}
+            height={30*hm}
+            paddingBottom={10 * em}
+/>        
+  
 
-            onBlur={formik.handleBlur('description')}
-            onChangeText={formik.handleChange('description')} />
-          {formik.errors.description && formik.touched.description && <Text style={styles.descerrorText}>{formik.errors.description}</Text>}
-          {/* <CommonListItem
-            icon={iconDocument}
-            style={[styles.listItem, { height: 62 * em }]}
-            title="Détail ta demande ici"
-            subTitle="(Soit concis pour être plus efficace)"
-            titleStyle={styles.listCaption}
-            subTitleStyle={styles.listComment}
-          />
-          <View style={styles.line} /> */}
-        </View>
-        <MabulNextButton
+
+
+
+
+  </View>
+  <OkModal closeModal={ () =>  this[RBSheet + 1].close()}/>
+</RBSheet>
+
+
+<RBSheet
+  ref={ref => {
+    this[RBSheet + 2] = ref;
+  }}
+  height={hm * 630}
+
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
+  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Date</Text>
+  </View>
+
+  <View style={styles.container}>
+<MabulAddDate conceptColor={conceptColor}/>
+ </View>
+  <OkModal closeModal={ () =>  this[RBSheet + 2].close()}/>
+</RBSheet>
+
+
+
+
+<RBSheet
+  ref={ref => {
+    this[RBSheet + 3] = ref;
+  }}
+  height={hm * 630}
+
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
+  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Lieu</Text>
+  </View>
+
+  <View style={styles.container}>
+<MabulAddLieu conceptColor={conceptColor}/>
+ </View>
+  <OkModal closeModal={ () =>  this[RBSheet + 3].close()}/>
+</RBSheet>
+
+
+
+<RBSheet
+  ref={ref => {
+    this[RBSheet + 4] = ref;
+  }}
+  height={hm * 630}
+
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
+
+<View style={{  marginLeft: em * 30,marginRight: em * 30,paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+                <Fleche />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+
+                <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
+              </TouchableOpacity>
+
+            </View>
+
+  <View style={{ paddingTop: 20 * hm, }}>
+
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
+  </View>
+
+<MabulRechercheContact conceptColor={conceptColor}/>
+  {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
+</RBSheet>
+
+
+
+
+<MabulPubButton
+        text={"Publier"}
           color={hexToRGB(conceptColor)}
           style={styles.nextBtn}
-          onPress={formik.handleSubmit}
+          onPress={()=> this[RBSheet + 4].open()}
         />
-      </View>
-      </KeyboardAvoidingView>
+</View>
+
     </View>
   );
 };
 
 const styles = {
+  ActionButton: {
+    overflow: 'hidden',
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    }, ButtonWrapper: {
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      paddingLeft: 15 * em,
+      paddingRight: 15 * em,
+    },
+    circleIconOverlay: {
+      width: 34 * em,
+      height: 34 * hm,
+      borderRadius: 17 * em,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }, contentTitle: {
+      flex: 1,
+      color: "#251b4d",
+      fontSize: 14 * em,
+      paddingLeft: 15 * em,
+      paddingRight: 15 * em,
+    }
+
+  },
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
@@ -152,8 +369,8 @@ const styles = {
     color: "red",
   },
   body: {
+    backgroundColor:'#F0F5F7',
     flex: 1,
-    paddingHorizontal: 30 * em,
     justifyContent: 'space-between',
   },
   title: {
@@ -173,10 +390,15 @@ const styles = {
   listCaption: { color: '#6A8596' },
   listComment: { fontSize: 13 * em, lineHeight: 17 * em, color: '#6A8596' },
   nextBtn: {
-    alignSelf: 'flex-end',
-    marginBottom: 30 * hm,
+    width:315*em,
+    alignSelf: 'center',
+   bottom:10*hm
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
+  contentDesc:{fontFamily:'Lato-Regular',fontSize:16*em,color:'#6A8596',paddingLeft:40*em},
+  contentDescSub:{fontFamily:'Lato-Italic',fontSize:12*em,color:'#A0AEB8',paddingLeft:40*em}
+
 };
+
 
 export default MabulCommonRequestDetailScreen;

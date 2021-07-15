@@ -2,12 +2,16 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { em } from '../../constants/consts';
 import { TouchableOpacity } from 'react-native';
-import { MabulGive, MabulNeed, MabulSell, MabulOrganize } from '../../assets/svg/icons';
+import { MabulGive, MabulNeed, MabulSell, MabulOrganize ,Alerte} from '../../assets/svg/icons';
 
 const CircularButton = (props) => {
   let imageTag = MabulOrganize(styles.buttonImage);
-  let text = "J'organisé";
-  if (props.type === 'sell') {
+  let text = "J'organise";
+  if (props.type === 'alerte') {
+    imageTag = Alerte(styles.buttonImage);
+    text = "J'alerte";
+  }
+  else if (props.type === 'sell') {
     imageTag = MabulSell(styles.buttonImage);
     text = 'Je vends';
   } else if (props.type === 'need') {

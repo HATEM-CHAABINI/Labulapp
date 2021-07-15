@@ -91,42 +91,8 @@ const FriendsMenuScreen = (props) => {
           {Return2Point(servicIconSize)}
         </View>
 
-        <View
-          style={{
-            position: 'absolute',
-            top: 463 * hm,
-            width: 46 * em,
-            height: 46 * em,
-            left: 309 * em,
-            borderRadius: 23 * em,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderColor: '#ffffff',
-            borderWidth: 2 * em,
-            backgroundColor: '#FFF',
-            ...Platform.select({
-              ios: {
-                shadowColor: '#254D5621',
-                shadowOffset: {
-                  width: 0,
-                  height: 10 * hm,
-                }, shadowOpacity: 1,
-                shadowRadius: 12 * em,
-              },
-              android: {
-                elevation: 5,
-              },
-            }),
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => Actions.alertCircles()}
-          >
-            {Alert({ width: 26.45 * em, height: 22.31 * em })}
-          </TouchableOpacity>
-        </View>
-
+      
+             
       </View >}</>);
 }
 

@@ -87,7 +87,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View,Image } from 'react-native';
 import { em, hm } from '../constants/consts';
 import SearchBox from '../Search/SearchBox';
 import SearchCommonListItem from '../adapter/SearchCommonListItem';
@@ -172,12 +172,20 @@ const FriendsSearchScreen = (props) => {
           onChangeText={(text) => serchFilter(text)}
         />
         <ScrollView showsVerticalScrollIndicator={false}><View style={styles.container}>{listView2}</View></ScrollView>
+        <Image source={require('../assets/img/robotlupe.png')} style={styles.avatar} />
       </View>
     </>
   );
 };
 
 const styles = {
+  avatar:{
+    height:322*hm,
+    width:188*em,
+    position: "absolute", bottom: 0, right: 0,
+ 
+
+  },
   container: {
     flex: 1,
     alignItems: 'flex-start',

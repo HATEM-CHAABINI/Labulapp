@@ -3,7 +3,7 @@ import { View, Image, TouchableOpacity, StatusBar } from 'react-native';
 import { em, hm } from '../constants/consts';
 import CircularButton from '../Components/button/CircularButton';
 import { Actions } from 'react-native-router-flux';
-import { MabulCancel } from '../assets/svg/icons';
+import { Bluecircle, Dansmabul, MabulCancel } from '../assets/svg/icons';
 
 const MabulHomeScreen = (props) => {
 
@@ -15,19 +15,31 @@ const MabulHomeScreen = (props) => {
     <View style={styles.container}>
       <StatusBar backgroundColor="#40cdde" barStyle="light-content" />
       <View style={styles.logoContainer}>
-        <Image source={require('../assets/images/img_mabul_logo.png')} style={styles.logoImage} />
-        <Image source={require('../assets/images/img_mabul_label.png')} style={styles.logoLabel} />
+        <Dansmabul/>
       </View>
+      <Bluecircle style={{position:'absolute',marginTop:370*hm}}/>
       <View style={styles.buttonsContainer}>
-        <View style={styles.buttonFirstRow}>
+
+      <View style={styles.buttonFirstRowA}>
           <CircularButton
-            type="organize"
+            type="alerte"
             onPress={() => {
               props.onClosePress();
               // navigation.navigate('MabulOrganizeScreen',{ process: 20 })
-              Actions.mabulOrganize({ process: 20 });
+              Actions.alertCircles();
             }}
           />
+        {/* </View> */}
+      
+        <CircularButton
+            type="sell"
+            onPress={() => {
+              props.onClosePress();
+              Actions.mabulSell({ process: 26 });
+            }}
+          />
+        {/* <View style={styles.buttonFirstRow}> */}
+         
         </View>
         <View style={styles.buttonSecondRow}>
           <CircularButton
@@ -37,18 +49,20 @@ const MabulHomeScreen = (props) => {
               Actions.mabulGive({ process: 25 });
             }}
           />
-          <CircularButton
-            type="sell"
-            onPress={() => {
-              props.onClosePress();
-              Actions.mabulSell({ process: 26 });
-            }}
-          />
+        
           <CircularButton
             type="need"
             onPress={() => {
               props.onClosePress();
               Actions.mabulNeed({ process: 7 });
+            }}
+          />
+           <CircularButton
+            type="organize"
+            onPress={() => {
+              props.onClosePress();
+              // navigation.navigate('MabulOrganizeScreen',{ process: 20 })
+              Actions.mabulOrganize({ process: 20 });
             }}
           />
         </View>
@@ -74,7 +88,7 @@ const styles = {
     paddingBottom: 16 * em,
     opacity: 0.9,
   },
-  logoContainer: { flex: 0.5, width: '100%', alignItems: 'center', justifyContent: 'center', paddingBottom: 100 },
+  logoContainer: { flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center', paddingTop: 50*hm },
   logoImage: { width: 84 * em, resizeMode: 'contain' },
   logoLabel: { width: 125 * em, resizeMode: 'contain', marginTop: 18 * em, PaddingBottom: 100 },
   buttonsContainer: {
@@ -84,6 +98,7 @@ const styles = {
     justifyContent: 'space-between',
     padding: 16 * em,
   },
+  buttonFirstRowA:{ width: '40%', flexDirection: 'row', justifyContent: 'center' ,justifyContent: 'space-between' },
   buttonFirstRow: { width: '100%', flexDirection: 'row', justifyContent: 'center' },
   buttonSecondRow: { width: '80%', flexDirection: 'row', justifyContent: 'space-between' },
   closeButton: { width: 48 * em, resizeMode: 'contain', marginTop: 18 * em },

@@ -10,193 +10,143 @@ import { Family, Friend, Neighbor, CheckBlue, All } from '../../assets/svg/icons
 import { TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand } from '../../redux/actions/demand'
-const AlertCircleSelectionScreen = () => {
+import { update_into_demand } from '../../redux/actions/demand'
+import { FlatList } from 'react-native';
+import Flechedroite from '../../assets/icons/navigation-app/Flechedroite';
 
-  const dispatch = useDispatch()
-  const conceptColor = '#F9547B';
-  const [vchecked, setvChecked] = useState(false);
-  const [achecked, setaChecked] = useState(false);
-  const [fchecked, setfChecked] = useState(false);
-  const [tchecked, settChecked] = useState(false);
+  const options = [
+    { id: 0, title: 'Accident' },
+    { id: 1, title: 'Route barrée' },
+    { id: 2, title: 'Travaux' },
+    { id: 3, title: 'Autre type d’alerte' },
+  ];
+  
+  const AlertCircleSelectionScreen = (props) => {
+    const conceptColor = '#F9547B';
+    const dispatch = useDispatch()
+    // const { demandData } = useSelector((state) => state.demandReducer);
+    // console.log("demand ", demandData);
+    const [optionCheck, setOptionCheck] = useState();
+    const [checked, setChecked] = useState();
+  
+    const renderOptions = ({ item, index }) => {
+      var elevation = !checked ? 0 : 2;
+      const Divider = () => (<View style={styles.listDivider} />)
 
-  const check = (id) => {
-    setvChecked(false)
-    setaChecked(false)
-    setfChecked(false)
-    settChecked(false)
-    switch (id) {
-      case 1:
-        setaChecked(true)
-        break;
-      case 2:
-        setvChecked(true)
-        break;
-      case 3:
-        setfChecked(true)
-        break;
-      case 4:
-        settChecked(true)
-        break;
-    }
-  }
-
-  const onsubmit = () => {
-    if (vchecked) {
-      dispatch(add_into_demand({ belongsTo: { title: "mes voisins", id: 1 } }))
-      Actions.alertClass({ process: 40 })
-    } else if (achecked) {
-      dispatch(add_into_demand({ belongsTo: { title: "mes amis", id: 2 } }))
-      Actions.alertClass({ process: 40 })
-    } else if (fchecked) {
-      dispatch(add_into_demand({ belongsTo: { title: "Ma famille", id: 3 } }))
-      Actions.alertClass({ process: 40 })
-    } else if (tchecked) {
-      dispatch(add_into_demand({ belongsTo: { title: "tous", id: 4 } }))
-      Actions.alertClass({ process: 40 })
-    }
-
-
-  }
-
-  return (
-    <View style={styles.container}>
-      <MabulCommonHeader style={styles.header} percent={20} noBackButton={true} progressBarColor={conceptColor} />
-      <View style={styles.body}>
+      return (
         <View>
-          <TitleText text={'J’alerte'} style={styles.title} />
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity activeOpacity={1}
-              style={[
-                vchecked ? styles.iconViewClicked : styles.iconView,
-                // { marginBottom: index === 2 ? 40 * em : 0 },
-              ]}
-              onPress={() => check(2)}>
-              {vchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Neighbor width={48 * em} height={48 * em} />}
-              <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={1}
-              style={[
-                achecked ? styles.iconViewClicked : styles.iconView,
-                // { marginBottom: index === 2 ? 40 * em : 0 },
-              ]}
-              onPress={() => check(1)}>
-              {achecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Friend width={48 * em} height={48 * em} />}
-              <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
-            </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={1}
+          style={[
+           styles.optionBox,
+            
+          ]}
+          onPress={() =>  Actions.alertType({ item : item,process: 40}) }>
+          <TitleText style={styles.optionCaption} text={item.title} />
+       <View style={{paddingRight:30}} >
+          <Flechedroite  width={14 * em} height={14 * hm} />
           </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity
-              activeOpacity={1}
-              style={[
-                fchecked ? styles.iconViewClicked : styles.iconView,
-                // { marginBottom: index === 2 ? 40 * em : 0 },
-              ]}
-              onPress={() => check(3)}>
-              {fchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Family width={48 * em} height={48 * em} />}
-              <CommonText text="Ma famille" color="#6A8596" style={{ marginTop: 15 * em }} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={1}
-              style={[
-                tchecked ? styles.iconViewClicked : styles.iconView,
-                // { marginBottom: index === 2 ? 40 * em : 0 },
-              ]}
-              onPress={() => check(4)}>
-              {tchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <All width={48 * em} height={48 * em} />}
-              <CommonText text="tous" color="#6A8596" style={{ marginTop: 15 * em }} />
-            </TouchableOpacity>
-          </View>
+        </TouchableOpacity>
+        <Divider />
         </View>
-
+      );
+    };
+    return (
+      <View style={styles.container}>
+        <MabulCommonHeader
+          style={styles.header}
+          percent={20}
+          isNoBackBtn={true}
+          progressBarColor={conceptColor}
+        />
+  
+        <View style={styles.body}>
+          <TitleText text={'J’alerte'} style={styles.title} />
+        
+          <FlatList data={options} renderItem={renderOptions} keyExtractor={(i) => i.id} />
+        </View>
+        {/* <MabulNextButton
+          color={checked === undefined ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
+          style={[styles.btn, { backgroundColor: conceptColor }]}
+          text="Suivant"
+          disabled={checked === undefined ? true : false}
+          onPress={() =>}
+        /> */}
       </View>
-      <MabulNextButton
-        color={
-          !vchecked &&
-            !achecked &&
-            !fchecked &&
-            !tchecked
-            ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)
-        }
-        disabled={!vchecked &&
-          !achecked &&
-          !fchecked &&
-          !tchecked
-          ? true : false}
-        style={[styles.btn, { backgroundColor: conceptColor, }]}
-        text="Suivant"
-        onPress={() => onsubmit()}
-      />
-    </View>
-  );
-};
-
-const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    PaddingTop: 16 * hm,
-  },
-  header: {
-    height: '12.45%',
-
-  },
-  body: { flex: 1, paddingHorizontal: 30 * em, justifyContent: 'space-between' },
-  title: {
-    width: 315 * em,
-    textAlign: 'left',
-    marginTop: 34 * hm,
-    marginBottom: 35 * hm,
-    lineHeight: 38 * em,
-  },
-  iconView: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 32 * hm,
-    paddingVertical: 47 * hm,
-  },
-  iconViewClicked: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 150 * em,
-    height: 176 * em,
-    paddingHorizontal: 15 * em, backgroundColor: '#fff',
-
-    ...Platform.select({
-      ios: {
-        borderRadius: 20 * em,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 1,
+    );
+  };
+  
+  const styles = {
+    container: {
+      flex: 1,
+      backgroundColor: '#ffffff',
+    },
+    header: {
+      height: '12.45%',
+  
+    },
+    body: { flex: 1,
+       paddingLeft: 30 * em },
+    title: {
+      width: 315 * em,
+      textAlign: 'left',
+      marginTop: 35 * em,
+      lineHeight: 38 * em,
+    },
+    circleSortView: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: 10 * em,
+      marginBottom: 19 * em
+    },
+  
+    btn: { position: 'absolute', alignSelf: 'flex-end', bottom: 30 * hm, right: 30 * em, backgroundColor: '#38C2FF' },
+    optionBox: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      height: 78 * em,
+      alignItems: 'center',
+      marginTop: 10 * em,
+      borderRadius: 20 * em,
+    },
+    optionBoxClicked: {
+      marginHorizontal: 10 * em,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      height: 78 * em,
+      alignItems: 'center',
+      marginTop: 10 * em,
+      borderRadius: 20 * em,
+      paddingHorizontal: 15 * em, backgroundColor: '#fff',
+      ...Platform.select({
+        ios: {
+          shadowColor: '#254D5612',
+          shadowOffset: {
+            width: 0,
+            height: 8 * hm,
+          },
+          shadowRadius: 20 * em, shadowOpacity: 1,
         },
-        shadowOpacity: 0.20,
-        shadowRadius: 1.41,
+        android: {
+          elevation: 5,
+        },
+      }),
+    },
+    optionCaption: {
+      fontFamily:'Lato-Regular',
+      fontSize: 18 * em,
+      lineHeight: 23 * em,
+      color: '#1E2D60',
+    },
+    listDivider: {
+      height: 1 * em,
 
-        elevation: 2,
-      },
-      android: {
-        elevation: 5,
-      },
-    }),
-  },
-  iconViewChecked: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 32 * hm,
-    paddingVertical: 47 * hm,
-    borderRadius: 20 * em,
-    backgroundColor: '#ffffff',
-    elevation: 5
-  },
-
-  btn: {
-    postion: 'absolute',
-    alignSelf: 'flex-end',
-    right: 30 * em,
-    bottom: 30 * hm,
-    backgroundColor: '#38C2FF'
-  },
-};
-
+      // marginLeft: 30 * em,
+      backgroundColor: "#eee"
+    },
+  
+  
+  
+  };
+  
 export default AlertCircleSelectionScreen;

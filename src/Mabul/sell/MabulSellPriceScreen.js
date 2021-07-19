@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform,Text } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, mabulColors, hexToRGB, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
@@ -11,7 +11,12 @@ import { TextInput } from 'react-native-gesture-handler';
 import { KeyboardAvoidingView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
-
+import { Image } from 'react-native';
+import CommonBigButton from '../../Components/button/CommonBigButton';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import { TouchableOpacity } from 'react-native';
+import Fleche from '../../Components/Fleche';
+import MabulRechercheContact from '../MabulRechercheContact';
 
 const MabulSellPriceScreen = (props) => {
   const dispatch = useDispatch()
@@ -34,44 +39,80 @@ const MabulSellPriceScreen = (props) => {
       />
       <View style={styles.body}>
         <View>
-          <TitleText text={'Prix'} style={styles.title} />
-          <CommentText text="Ajoutez un prix" style={styles.comment} />
-          {/* <TextInput
-            style={styles.input}
-            placeholder="0"
-            selectionColor={conceptColor}
-            keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'}
-          /> */}
-          <TextInput
-            style={styles.input}
-            autoFocus={true}
+          <TitleText text={'Zones de diffusion'} style={styles.title} />
+          <CommentText text="Choisissez une ou plusieurs zones de diffusion de votre annonce.
+          Vous avez droit à 3 zones / semaine
+" style={styles.comment} />
+ 
+       
+ <TitleText text={'Semaine 32 : il vous reste 2 /3 zones'} style={{    textAlign: 'left',fontSize:12*em}} />
+ <Image source={require('../../assets/images/mapsell.png')}  style={{borderRadius:17*em,textAlign: 'center',marginTop:25*hm,height:270*hm,width:318*em}} />
 
-            placeholder="0"
-            selectionColor={conceptColor}
-            value={price}
-            onChangeText={(value) => { setprice(value) }}
-            onChange={(value) => { setprice(value) }}
-            keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'}
-          />
         </View>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ alignItems: 'center', marginBottom: 30 * hm }}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 105 * hm : 105 * hm}
-        >
-          <MabulNextButton
-            color={hexToRGB(conceptColor)}
-            style={styles.nextBtn}
+   
+          <CommonBigButton
+            color={conceptColor}
+            text={"Je vends dans Labul"}
+            style={{backgroundColor:conceptColor
+            }}
+            textStyle={{fontFamily:'Lato-Medium',fontSize:16*em}}
+
             disabled={price.length <= 0 ? true : false}
             onPress={() => {
-              // dispatch(update_into_demand({price:price }))
-              // Actions.mabulCommonAddPhoto({ mabulService: 'sell', process: 73 });
-              onSubmit()
+              this[RBSheet + 4].open()
             }}
           />
-        </KeyboardAvoidingView>
+ <CommonBigButton
+            color={conceptColor}
+            text={"Choix des zones"}
+            style={{marginBottom:30*hm,backgroundColor:"#F0F5F7",
+            }}
+            textStyle={{color:'#AA87E5'}}
+            disabled={price.length <= 0 ? true : false}
+            onPress={() => {
+              // onSubmit()
+            }}
+          />
 
       </View>
+      <RBSheet
+  ref={ref => {
+    this[RBSheet + 4] = ref;
+  }}
+  height={hm * 630}
+
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
+
+<View style={{  marginLeft: em * 30,marginRight: em * 30,paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+                <Fleche />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+
+                <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
+              </TouchableOpacity>
+
+            </View>
+
+  <View style={{ paddingTop: 20 * hm, }}>
+
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
+  </View>
+
+<MabulRechercheContact conceptColor={conceptColor}/>
+  {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
+</RBSheet>
     </View>
   );
 };
@@ -97,7 +138,7 @@ const styles = {
     marginTop: 35 * em,
     lineHeight: 38 * em,
   },
-  comment: { width: 315 * em, textAlign: 'left', lineHeight: 20 * em, textAlignVertical: 'center', marginTop: 10 * hm },
+  comment: {fontSize:10*em, width: 315 * em, textAlign: 'left', lineHeight: 15 * em, textAlignVertical: 'center', marginTop: 10 * hm },
   photoZone: {
     width: 315 * em,
     height: 121 * em,
@@ -119,9 +160,6 @@ const styles = {
     height: 28 * em,
   },
   nextBtn: {
-    alignSelf: 'flex-end',
-    marginRight: 30 * em,
-
   },
   input: {
     marginTop: 44 * hm,

@@ -70,7 +70,7 @@ import ProSettingScreen from '../topbar/profile/proProfile/ProSettingScreen';
 import EditProNeedScreen from '../topbar/profile/proProfile/proNeeds/EditProNeedScreen';
 import Filtre from '../Components/Filtre';
 import FriendsSearchScreen from '../Components/FriendSearchScreen';
-import FriendOrganizeScreen from '../ServiceScrenns/FriendOrganizeScreen';
+import FriendDetailScreen from '../ServiceScrenns/FriendDetailScreen';
 import MabulCommonAddPhotoScreen from '../Mabul/MabulCommonAddPhotoScreen';
 import MabulCommonDateSettingScreen from '../Mabul/MabulCommonDateSettingScreen';
 import MabulOrganizeParticipationScreen from '../Mabul/organize/MabulOrganizeParticipationScreen';

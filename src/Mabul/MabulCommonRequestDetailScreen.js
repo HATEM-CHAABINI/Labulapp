@@ -33,8 +33,8 @@ const title = {
   need: 'Donne un titre à ta demande',
 };
 const MabulCommonRequestDetailScreen = (props) => {
-  // const { demandData } = useSelector((state) => state.demandReducer);
   const dispatch = useDispatch()
+  const { demandData } = useSelector((state) => state.demandReducer);
   const [Promo, setPromo] = useState(false);
   const initialValues = {
     title: '',
@@ -50,20 +50,20 @@ const MabulCommonRequestDetailScreen = (props) => {
   });
   const onSubmit = values => {
 
-    dispatch(update_into_demand({ data: values }))
+   
     console.log('suiiivivvvvvvvvvv');
     mabulService === 'sell'
-      ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 67 })
-      : Actions.mabulCommonAddPhoto({
-        mabulService: props.mabulService,
-        process: mabulService === 'need' ? 53 : mabulService === 'organize' ? 40 : 74,
-      });
+      ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 90 })
+      : this[RBSheet + 4].open()
+      
   };
   const formik = useFormik({
     // initialValues,
     onSubmit,
     // validationSchema,
   });
+
+
   const conceptColor = mabulColors[props.mabulService];
   var iconEdit = Edit2(styles.icon);
   var iconDocument = Document2(styles.icon);
@@ -341,7 +341,7 @@ comprendre ta demande`}
     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
   </View>
 
-<MabulRechercheContact conceptColor={conceptColor}/>
+<MabulRechercheContact data={demandData} mabulService={mabulService} conceptColor={conceptColor}/>
   {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
 </RBSheet>
 
@@ -469,7 +469,9 @@ comprendre ta demande`}
         text={"Publier"}
           color={hexToRGB(conceptColor)}
           style={styles.nextBtn}
-          onPress={()=> this[RBSheet + 4].open()}
+          onPress={()=> onSubmit()
+            
+          }
         />
 </View>
 

@@ -1,31 +1,74 @@
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, ScrollView } from 'react-native';
-import TitleText from '../text/TitleText';
+import { View,Image } from 'react-native';
 import { em, hm } from '../constants/consts';
-import CommentText from '../text/CommentText';
 import CommonButton from '../Components/button/CommonButton';
-import CommonBackButton from '../Components/button/CommonBackButton';
+import FriendParticipatePopupScreen from '../Components/FriendParticipatePopupScreen';
 import FriendInvitePopupScreen from '../Components/FriendInvitePopupScreen';
-import { Actions } from 'react-native-router-flux';
-import NeedStatusType from '../model/service/NeedStatusType';
-// import SeeMore from 'react-native-see-more-inline';
+import OrganizeServiceType from '../model/service/OrganizeServiceType';
+import OrganizeService from '../model/service/OrganizeService';
+import User from '../model/user/User';
+import MabulDetailView from '../Components/view/MabulDetailView';
+import { ScrollView } from 'react-native';
+import CommentText from '../text/CommentText';
+import TitleText from '../text/TitleText';
 import ReadMore from 'react-native-read-more-text';
 import { Text } from 'react-native';
+import CommonBackButton from '../Components/button/CommonBackButton';
+import Up from '../assets/icons/message/Up';
+import { Intero, Inviter } from '../assets/svg/icons';
 
-const FriendSellScreen = () => {
+const organizeData = Object.assign(
+  new OrganizeService(
+    new User('Philippe Durand', require('../assets/images/sample_user_2.png'), 'anton@gmail.com'),
+    'J’organise Atelier',
+    'Photographie vintage',
+    new Date(),
+    require('../assets/images/sample_cover_1.png'),
+    1,
+    OrganizeServiceType.WORKSHOP
+  ),
+  { relationship: 'Mon ami/ma famille' }
+);
+const FriendDetailScreen = () => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
-
+  const [participatePopupVisible, setParticipatePopupVisible] = useState(false);
+  const [data] = useState(organizeData);
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <Image source={require('../assets/images/sample_cover_2_big.png')} style={styles.cover} />
+
+    <ScrollView style={{}} >
+    <Image source={require('../assets/images/sample_cover_2_big.png')} style={styles.cover} />
 
         <View style={styles.body}>
-          <Image source={require('../assets/images/sample_ic_plant.png')} style={styles.icon} />
+          <Image source={data.photo} style={styles.icon} />
           <CommentText style={styles.itemName} text="Arbre de vie" color={'#1E2D60'} />
           <CommentText style={styles.comment} text="Je vends Objet Entretien de la maison" color={'#1E2D60'} />
           <TitleText text={'Spray cuisine 100% Bio'} style={styles.title} />
-          <CommentText text={'5,00 €'} style={styles.price} color="#1E2D60" />
+          <View style={styles.btnBox}>
+       
+          <View style={{flexDirection:'row', justifyContent:'space-between',alignItems:'center'}}>
+          <CommonButton leftIcon={<Up width={20* em} height={18 * hm} />} text={'Participer'} onPress={() => setParticipatePopupVisible(true)} style={{width:185*em,height:50*hm,paddingVertical: 0 * hm}} textStyle={{marginLeft:10*em}} />
+         
+          
+          <CommonButton
+      style={{paddingVertical: 0 * hm, width:50*em,height:50*em,  backgroundColor: "white",borderColor:'#D2E2EC',    borderWidth: 1,borderRadius:100}}
+     
+      
+      leftIcon={<Intero width={14* em} height={20 * hm} />}
+      // iconStyle={{marginLeft:5*em}}
+      onPress={() => setInvitePopupVisible(true)}
+    />
+          <CommonButton
+      style={{paddingVertical: 0 * hm, width:50*em,height:50*em,  backgroundColor: "white",borderColor:'#D2E2EC',    borderWidth: 1,borderRadius:100}}
+      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
+      
+      leftIcon={<Inviter width={24* em} height={24 * hm} />}
+      iconStyle={{marginLeft:5*em}}
+      onPress={() => setInvitePopupVisible(true)}
+    />
+          </View>
+
+      </View>
           <ReadMore
 
 
@@ -41,44 +84,21 @@ const FriendSellScreen = () => {
               dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef
         </Text>
           </ReadMore>
-          <CommonButton
-            style={styles.quizBtn}
-            text="Intéressé"
-            onPress={() => Actions.friendNeed({ status: NeedStatusType.WAITING })}
-          />
-
-          <CommonButton
-            style={styles.inviteBtn}
-            text="Partager"
-            textStyle={{ color: '#41D0E2' }}
-            onPress={() => setInvitePopupVisible(true)}
-          />
-          <View style={{ height: 130 * em }} />
-        </View>
-      </ScrollView>
-
-      <CommonBackButton dark style={styles.backBtnView} />
+      
       <FriendInvitePopupScreen visible={invitePopupVisible} onPress={() => setInvitePopupVisible(false)} />
+      <FriendParticipatePopupScreen
+        visible={participatePopupVisible}
+        onPress={() => setParticipatePopupVisible(false)}
+      />
+    </View>
+    </ScrollView>
+    <CommonBackButton dark style={styles.backBtnView} />
     </View>
   );
 };
 
-_renderTruncatedFooter = (handlePress) => {
-  return (
-    <Text style={{ color: '#40CDDE', fontSize: 14 * em }} onPress={handlePress}>
-      Continuer à lire    </Text>
-  );
-}
-
-_renderRevealedFooter = (handlePress) => {
-  return (
-    <Text style={{ color: '#40CDDE', fontSize: 14 * em }} onPress={handlePress}>
-      Voir moins
-    </Text>
-  );
-}
 const styles = {
-  container: { flex: 1, backgroundColor: 'transparent' },
+  container: { flex: 1,backgroundColor:'white' },
   backBtnView: {
     shadowColor: '#B3C6CF33',
     shadowOffset: {
@@ -96,11 +116,12 @@ const styles = {
 
   backBtn: { width: 44 * em, height: 44 * em, resizeMode: 'contain', zIndex: 1 },
   cover: {
+    position:'absolute',
     width: '100%',
-    height: 312 * em,
+    height: 312 * hm,
   },
   body: {
-    marginTop:41 * em,
+    marginTop: 290 * hm,
     borderTopRightRadius: 28 * em,
     borderTopLeftRadius: 28 * em,
     backgroundColor: '#ffffff',
@@ -157,12 +178,14 @@ const styles = {
   quizBtn: { color: '#41D0E2', marginTop: 25 * hm },
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent', color: '#41D0E2' },
 
+  
   btnBox: {
-    paddingLeft: 26 * em,
-    paddingRight: 26 * em,
+    // paddingLeft: 26 * em,
+    // paddingRight: 26 * em,
     paddingTop: 15 * hm,
     paddingBottom: 22 * hm,
+    backgroundColor:'white'
   },
 };
 
-export default FriendSellScreen;
+export default FriendGiveScreen;

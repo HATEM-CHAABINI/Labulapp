@@ -72,7 +72,7 @@ import ProSettingScreen from '../topbar/profile/proProfile/ProSettingScreen';
 import EditProNeedScreen from '../topbar/profile/proProfile/proNeeds/EditProNeedScreen';
 import Filtre from '../Components/Filtre';
 import FriendsSearchScreen from '../Components/FriendSearchScreen';
-import FriendOrganizeScreen from '../ServiceScrenns/FriendOrganizeScreen';
+import FriendDetailScreen from '../ServiceScrenns/FriendDetailScreen';
 import MabulCommonAddPhotoScreen from '../Mabul/MabulCommonAddPhotoScreen';
 import MabulCommonDateSettingScreen from '../Mabul/MabulCommonDateSettingScreen';
 import MabulOrganizeParticipationScreen from '../Mabul/organize/MabulOrganizeParticipationScreen';
@@ -110,6 +110,7 @@ import firestore from '@react-native-firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../redux/actions/profile';
 import { addLogin } from '../redux/actions/login';
+import AlertTypeScreen from '../topbar/alert/AlertTypeScreen';
 
 let data = {}
 
@@ -217,6 +218,7 @@ export default () => {
           component={AlertClassOptionScreen}
         />
         <Scene key="alertAddress" hideNavBar component={AlertAddressScreen} />
+        <Scene key="alertType" hideNavBar component={AlertTypeScreen} />
         <Scene key="alertAddNote" hideNavBar component={AlertAddNoteScreen} />
         <Scene key="alertShare" hideNavBar component={AlertShareScreen} />
 
@@ -337,7 +339,7 @@ export default () => {
         <Scene
           key="friendOrganize"
           hideNavBar
-          component={FriendOrganizeScreen}
+          component={FriendDetailScreen}
         />
         <Scene
           key="mabulCommonAddPhoto"

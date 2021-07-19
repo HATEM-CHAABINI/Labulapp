@@ -177,7 +177,7 @@ if (elem =="donne"){
         RefSell = firestore().collectionGroup("give").where("demandStartDate", ">", d1).where("demandStartDate", "<", d2);
     }
     else{
-RefSell = firestore().collectionGroup("v");}
+RefSell = firestore().collectionGroup("give");}
     let allSell = await RefSell.get();
     for (const doc of allSell.docs) {
         if ((doc.data().coordinate.latitude !== undefined)) {

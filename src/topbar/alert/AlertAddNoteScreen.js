@@ -1,154 +1,348 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import TitleText from '../../text/TitleText';
-import { em, hm } from '../../constants/consts';
-import CommentText from '../../text/CommentText';
+import React, { useState } from 'react';
+import { View, Image, Text,KeyboardAvoidingView ,Switch } from 'react-native';
+import { hexToRGB, em, mabulColors, hm } from '../../constants/consts';
 import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
-import MabulNextButton from '../../Components/button/MabulNextButton';
-import CommonListItem from '../../adapter/CommonListItem';
-import { NoteInlineRed } from '../../assets/svg/icons';
+import { Edit, Edit1, Edit2, Edit3, Document, Document1, Document2, Document3 } from '../../assets/svg/icons';
 import Reinput from "reinput"
-import { useFormik } from 'formik';
-import * as Yup from 'yup'
 import { useSelector, useDispatch } from 'react-redux'
-import { update_into_demand } from '../../redux/actions/demand'
+import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
+import { useFormik } from 'formik';
+import RBSheet from "react-native-raw-bottom-sheet";
+import * as Yup from 'yup'
+import { TouchableOpacity } from 'react-native';
+import Fleche from '../../Components/Fleche';
+import OkModal from '../../Components/button/OkModal';
+import MabulAddPhoto from '../../Mabul/MabulAddPhoto';
+import { ScrollView } from 'react-native';
+import MabulPubButton from '../../Components/button/MabulPubButton';
+import MabulAddDate from '../../Mabul/MabulAddDate';
+import MabulAddLieu from '../../Mabul/MabulAddLieu';
+import MabulRechercheContact from '../../Mabul/MabulRechercheContact';
+import { TextInput } from 'react-native';
 const AlertAddNoteScreen = (props) => {
   const conceptColor = '#F9547B';
-  
-  const dispatch = useDispatch()
-  var iconEdit = (
-    <View style={{ marginRight: 19 * em }}>
-      <NoteInlineRed width={20 * em} height={22 * em} />
-    </View>
-  );
-  const initialValues = {
-    description: '',
-
-  };
-  const validationSchema = Yup.object({
-
-    description: Yup.string()
-      .required('Obligatoire')
-    ,
-  });
-  const onSubmit = values => {
+ 
+   // const { demandData } = useSelector((state) => state.demandReducer);
+   const dispatch = useDispatch()
+   const [Promo, setPromo] = useState(false);
+   const initialValues = {
+     title: '',
+     description: ''
+   };
+   const validationSchema = Yup.object({
+     title: Yup.string()
+       .required('Obligatoire')
+     ,
+     description: Yup.string()
+       .required('Obligatoire')
+     ,
+   });
+   const onSubmit = values => {
+ 
+     dispatch(update_into_demand({ data: values }))
+     console.log('suiiivivvvvvvvvvv');
+     mabulService === 'sell'
+       ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 67 })
+       : Actions.mabulCommonAddPhoto({
+         mabulService: props.mabulService,
+         process: mabulService === 'need' ? 53 : mabulService === 'organize' ? 40 : 74,
+       });
+   };
+   const formik = useFormik({
+     // initialValues,
+     onSubmit,
+     // validationSchema,
+   });
+   var iconEdit = Edit2(styles.icon);
+   var iconDocument = Document2(styles.icon);
+   if (props.mabulService === 'give') {
+     iconEdit = Edit3(styles.icon);
+     iconDocument = Document3(styles.icon);
+   } else if (props.mabulService === 'sell') {
+     iconEdit = Edit1(styles.icon);
+     iconDocument = Document1(styles.icon);
+   } else if (props.mabulService === 'need') {
+     iconEdit = Edit(styles.icon);
+     iconDocument = Document(styles.icon);
+   }
+   const mabulService = props.mabulService;
+ 
+   return (
+     <View style={{
+       flex: 1,     backgroundColor:'#F0F5F7', zIndex: 999,
+     }}>
+       <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]}      percent={props.process}
+         isNoBackBtn={true}
+         progressBarColor={conceptColor} />
+      
+     
+    
+ 
+       <View style={styles.body}>
+        <ScrollView style={{  paddingBottom: 5 * hm }}>
+         
+         
+           
+    
+           <TouchableOpacity
+             style={[styles.ActionButton, { height: 90 * hm }]}
+             onPress={() => this[RBSheet + 1].open()}
+           >
+         
+             <Text style={styles.contentDesc}>Description</Text>
+             <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+           </TouchableOpacity>
    
-    const  value= { description:values}
-    console.log(value)
-    dispatch(update_into_demand(value))
+ <View
+             style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
+            
+           >
+             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+               
+ 
+               <Text style={[styles.contentDesc,{marginBottom:10*hm}]}>Lieu</Text>
+               <TouchableOpacity   onPress={() => this[RBSheet + 3].open()}>
+               <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:conceptColor,marginRight:30*em}}>Modifier</Text>
+ </TouchableOpacity>
+               </View>
+  <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>ABYMES 97139 Guadeloupe</Text>
+ 
+               </View>
+               </ScrollView>
+         
+        
+       </View>
+     
+       <View style={{ flex: 0.1 }}>
+ 
+ <RBSheet
+   ref={ref => {
+     this[RBSheet + 1] = ref;
+   }}
+   height={hm * 630}
+ 
+   openDuration={250}
+   customStyles={{
+     wrapper:{
+       backgroundColor: 'rgba(209,226,237,0.9)'
+     },
+     container: {
+       borderTopLeftRadius: 28 * em,
+       borderTopRightRadius: 28 * em,
+     
+     }
+   }}
+ >
+   <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+ 
+     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
+   </View>
+ 
+   <View style={styles.container}>
+ 
+ 
+   <Reinput style={{ paddingTop: 15 * em ,marginRight:30*em,marginLeft:30*em}}
+             label={`Cela permet à ton entourage de mieux 
+ comprendre ta demande`}
+             underlineColor="#BFCDDB"
+             multiline={true}
+             activeColor={conceptColor}
+             labelActiveColor="#6A8596"
+             labelColor="#6A8596"
+             labelActiveTop={-38}
+             height={30*hm}
+             paddingBottom={10 * em}
+ />        
+   
+ 
+ 
+ 
+ 
+ 
+   </View>
+   <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 1].close()}/>
+ </RBSheet>
+ 
+ 
+ 
+ 
+ 
+ 
+ <RBSheet
+   ref={ref => {
+     this[RBSheet + 3] = ref;
+   }}
+   height={hm * 630}
+ 
+   openDuration={250}
+   customStyles={{
+     wrapper:{
+       backgroundColor: 'rgba(209,226,237,0.9)'
+     },
+     container: {
+       borderTopLeftRadius: 28 * em,
+       borderTopRightRadius: 28 * em,
+     
+     }
+   }}
+ >
+   <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+ 
+     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Lieu</Text>
+   </View>
+ 
+   <View style={styles.container}>
+ <MabulAddLieu conceptColor={conceptColor}/>
+  </View>
+   <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 3].close()}/>
+ </RBSheet>
+ 
+ 
+ 
 
-    Actions.alertShare({ process: 94 })
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
-  return (
-    <View style={styles.container}>
-      <MabulCommonHeader
-        style={styles.header}
-        percent={props.process}
-        isNoBackBtn={true}
-        progressBarColor={conceptColor}
-      />
-      <View style={styles.body}>
-        <View>
-          <TitleText text="Ajoute une note" style={styles.title} />
-          <CommentText
-            text="Si besoin, ajoute des détails de cette alerte"
-            style={styles.comment}
-            titleStyle={styles.listCaption}
-          />
+<RBSheet
+  ref={ref => {
+    this[RBSheet + 4] = ref;
+  }}
+  height={hm * 630}
 
-          <Reinput style={{ paddingTop: 34 * hm }}
-            label={`Détail ta demande ici
-            (Soit concis pour être plus efficace)`}
-            icon={iconEdit}
-            underlineColor="#6A8596"
-            activeColor="#F9547B"
-            labelActiveColor="#6A8596"
-            labelColor="#6A8596"
-            labelActiveTop={-38}
-            height={300}
-            paddingBottom={30 * em}
-            value={formik.values.description}
+  openDuration={250}
+  customStyles={{
+    wrapper:{
+      backgroundColor: 'rgba(209,226,237,0.9)'
+    },
+    container: {
+      borderTopLeftRadius: 28 * em,
+      borderTopRightRadius: 28 * em,
+    
+    }
+  }}
+>
 
-            onBlur={formik.handleBlur('description')}
-            onChangeText={formik.handleChange('description')} />
-          {formik.errors.description && formik.touched.description && <Text style={styles.descerrorText}>{formik.errors.description}</Text>}
+<View style={{  marginLeft: em * 30,marginRight: em * 30,paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+                <Fleche />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
 
-          {/* 
-          <CommonListItem
-            icon={iconEdit}
-            style={[styles.listItem, { height: 62 * em }]}
-            title="Détaille l'alerte ici"
-            subTitle="(Soit concis pour être plus efficace)"
-            titleStyle={styles.listCaption}
-            subTitleStyle={styles.listComment}
-          /> */}
+                <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
+              </TouchableOpacity>
 
+            </View>
 
-        </View>
-        <MabulNextButton
-          color={conceptColor}
-          style={styles.nextBtn}
-          onPress={formik.handleSubmit}
-        />
-      </View>
-    </View>
-  );
-};
+  <View style={{ paddingTop: 20 * hm, }}>
 
-const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  header: {
-    height: '12.45%',
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
+  </View>
 
-  },
-  descerrorText: {
-    fontSize: 12 * em,
-    bottom: 30 * hm,
-    left: 40 * hm,
-    color: "red",
-  },
-  body: {
-    flex: 1,
-    paddingHorizontal: 30 * em,
-    justifyContent: 'space-between',
-  },
-  title: {
-    width: 300 * em,
-    textAlign: 'left',
-    marginTop: 35 * hm,
-    lineHeight: 38 * em,
-    fontSize: 28 * em,
-    fontWeight: 'bold',
-  },
-  comment: {
-    fontFamily: 'Lato-Regular',
-    textAlign: 'left',
-    lineHeight: 20 * em,
-    height: 17 * hm,
-    textAlignVertical: 'center',
-    marginTop: 10 * em
-  },
-  listItem: {
-    height: 43 * em,
-    marginTop: 25 * hm,
-  },
-  icon: { width: 19 * em, height: 22 * em, marginRight: 20 * em },
-  listCaption: { fontFamily: 'Lato-Medium', fontSize: 16 * em, color: '#6A8596' },
-  listComment: { fontFamily: 'Lato-Medium', fontSize: 13 * em, lineHeight: 17 * em, color: '#6A8596' },
-  nextBtn: {
-    alignSelf: 'flex-end',
-    marginBottom: 30 * hm,
-  },
-  line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
-};
-
+<MabulRechercheContact conceptColor={conceptColor}/>
+  {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
+</RBSheet>
+ 
+ <MabulPubButton
+         text={"Publier"}
+           color={hexToRGB(conceptColor)}
+           style={styles.nextBtn}
+           onPress={()=> this[RBSheet + 4].open()}
+         />
+ </View>
+ 
+     </View>
+   );
+ };
+ 
+ const styles = {
+   BoxPrice:{ backgroundColor:"#F0F5F7",height:80*hm,borderRadius:20*em,justifyContent:'center',alignSelf:'center',textAlign:'center',fontSize:25*em,fontFamily:"Lato-Regular"},
+   SwitchTitle: {
+     flex: 1,
+     color: "#6A8596",
+     // fontFamily: 'Helvetica-Regular',
+     fontSize: 14 * em,
+     // paddingLeft: 15 * em,
+     // paddingRight: 25 * em,
+   },
+   SwitchbuttonWrapper: {
+     flexDirection: "row",
+     justifyContent: "center",
+     alignItems: "center",
+     paddingLeft: 30 * em,
+     paddingRight: 30 * em,
+     paddingTop:90*hm
+   },
+   ActionButton: {
+     overflow: 'hidden',
+     backgroundColor: '#fff',
+     justifyContent: 'center',
+     shadowOffset: {
+       width: 0,
+       height: 0,
+     }, ButtonWrapper: {
+       flexDirection: "column",
+       justifyContent: "center",
+       alignItems: "center",
+       paddingLeft: 15 * em,
+       paddingRight: 15 * em,
+     },
+     circleIconOverlay: {
+       width: 34 * em,
+       height: 34 * hm,
+       borderRadius: 17 * em,
+       alignItems: 'center',
+       justifyContent: 'center',
+     }, contentTitle: {
+       flex: 1,
+       color: "#251b4d",
+       fontSize: 14 * em,
+       paddingLeft: 15 * em,
+       paddingRight: 15 * em,
+     }
+ 
+   },
+   container: {
+     flex: 1,
+     backgroundColor: '#ffffff',
+   },
+   header: {
+     height: '12.45%',
+ 
+   },
+   descerrorText: {
+     fontSize: 12 * em,
+     bottom: 30 * hm,
+     left: 40 * hm,
+     color: "red",
+   },
+   body: {
+     backgroundColor:'#F0F5F7',
+     flex: 1,
+     justifyContent: 'space-between',
+   },
+   title: {
+     width: 300 * em,
+     textAlign: 'left',
+     marginTop: 35 * hm,
+     lineHeight: 38 * em,
+     fontSize: 28 * em,
+     fontWeight: 'bold',
+   },
+   comment: { textAlign: 'left', lineHeight: 20 * em, textAlignVertical: 'center', marginTop: 10 * hm },
+   listItem: {
+     height: 43 * em,
+     marginTop: 25 * em,
+   },
+   icon: { width: 19 * em, height: 22 * em, marginRight: 20 * em },
+   listCaption: { color: '#6A8596' },
+   listComment: { fontSize: 13 * em, lineHeight: 17 * em, color: '#6A8596' },
+   nextBtn: {
+     width:315*em,
+     alignSelf: 'center',
+    bottom:10*hm
+   },
+   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
+   contentDesc:{fontFamily:'Lato-Regular',fontSize:16*em,color:'#6A8596',paddingLeft:40*em},
+   contentDescSub:{marginTop:3*hm,fontFamily:'Lato-Italic',fontSize:12*em,color:'#A0AEB8',paddingLeft:40*em}
+ 
+ };
 export default AlertAddNoteScreen;
+

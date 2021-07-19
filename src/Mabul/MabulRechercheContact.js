@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image, ImageBackground, FlatList } from 'react-native';
 import TitleText from '../text/TitleText';
-import { em, hm } from '../constants/consts';
+import { em, hm,mabulColors } from '../constants/consts';
 import { Actions } from 'react-native-router-flux';
 import CommonText from '../text/CommonText';
 import SearchBox from '../Components/other/SearchBox';
@@ -18,7 +18,10 @@ import { TouchableOpacity } from 'react-native';
 import OkModal from '../Components/button/OkModal';
 import MabulPubButton from '../Components/button/MabulPubButton';
 import ShareButton from '../Components/button/ShareButton';
-
+import { useSelector } from 'react-redux';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import { getUserProfile,fetchcoordinate } from '../services/firebase'
 const usersData = [
   {
     sort: 'families',
@@ -116,9 +119,55 @@ const SelectedAvatarView = ({ avatar, userName }) => (
 );
 
 const MabulRechercheContact = (props) => {
+  
+  const [demandData, setdemandData] = useState(props.data)
+
+  const mabulService= props.mabulService;
+
+  const conceptColor = mabulColors[mabulService];
+  const [vchecked, setvChecked] = useState(false);
+  const [achecked, setaChecked] = useState(false);
+  const [fchecked, setfChecked] = useState(false);
+  const [tchecked, settChecked] = useState(false);
+  const [contactType, setcontactType] = useState()
+  const [user, setuser] = useState()
+  const [loadingSet, setloadingSet] = useState(false)
+  const check = (id) => {
+    setvChecked(false)
+    setaChecked(false)
+    setfChecked(false)
+    settChecked(false)
+    switch (id) {
+      case 1:
+        setvChecked(true)
+        setcontactType({ type: 1, name: 'mes voisins' })
+        break;
+
+      case 2:
+        setaChecked(true)
+        setcontactType({ type: 2, name: 'mes amis' })
+        break;
+      case 3:
+        setfChecked(true)
+        setcontactType({ type: 3, name: 'mes famille' })
+        break;
+      case 4:
+        settChecked(true)
+        setcontactType({ type: 4, name: 'tous' })
+        break;
+    }
+  }
+  useEffect(() => {
+
+
+    getUserProfile(auth().currentUser.uid).then(async (item) => {
+
+      setuser(() => item)
+    })
+
+  }, [])
   const [usersList, setusersList] = useState({ data: usersData })
   const [allChecked, setallChecked] = useState(false)
-
   const [checked, setChecked] = useState(new Array(usersData.length).fill(false));
   const renderSelectedList = ({ item }) => <SelectedAvatarView avatar={item.avatar} userName={item.userName} />;
   const onSearch = (search) => {
@@ -135,6 +184,81 @@ const MabulRechercheContact = (props) => {
   const onClear = () => {
     setusersList({ data: usersData });
   };
+
+
+  const saveData = async (data) => {
+
+    var verif = true
+     
+    
+    
+                  // do{
+                    // setdemandData({ ...demandData, title: "dddddd" })
+                    // console.log(demandData);
+
+                  //  console.log(data.coordinate.logitude,"30= ",data.coordinate.latitude) 
+    // let result = await fetchcoordinate(data.coordinate.latitude,data.coordinate.logitude)
+    // .then(async (item) => {
+    
+    //         if(item== true)
+    //         {
+    //           console.log("trueeee");
+    //            data.coordinate.latitude = data.coordinate.latitude-0.002
+    //           console.log("2= ",data.coordinate.latitude)}
+    //           else{
+    //             console.log("falseeeee");
+    //             console.log("3= ",data.coordinate.latitude)
+    //             verif = false
+    //             return data.coordinate.latitude
+    //           }
+    //         })
+                  // }while (verif==true) 
+            // console.log(verif,"resullllllttt====== ",data.coordinate.latitude);
+    
+        firestore().collection('userDemands').doc(auth().currentUser.uid)
+          .collection(data.serviceType.name).add(data).then(async (res) => {
+    
+            const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+    
+            const datas = await responce.get();
+            console.log(datas,"dhddbncnxcncncnncnc    ",mabulService);
+
+            setloadingSet(false);
+            this[RBSheet + 4].close()
+            if (mabulService === 'organize') {
+              Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
+            } else if (mabulService === 'give') {
+              Actions.myGive({ data: data, data2: datas.data(), user: user, docId: res.id, })
+            } else if (mabulService === 'sell') {
+              Actions.mySell({ data: data, data2: datas.data(), user: user, docId: res.id, })
+            } else {
+              Actions.myNeed({ data: data, data2: datas.data(), user: user, docId: res.id, })
+            }
+    
+    
+          });
+    
+    
+      }
+      const onSubmit = () => {
+        setloadingSet(true)
+        let data = {}
+        if (mabulService === 'organize') {
+          data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'organize', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+    
+        } else if (mabulService === 'give') {
+          data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'give', code: 1, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+    
+        } else if (mabulService === 'sell') {
+          data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'sell', code: 2, subCode: 40 }, status: { status: 'INPROGRESS', code: 102 } })
+    
+        } else {
+    
+          data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'need', code: 3, subCode: 11 }, status: { status: 'INPROGRESS', code: 102 } })
+        }
+    
+        saveData(data);
+      }
   const renderCircleList = ({ item, index }) => {
     return (
       <CommonListItem
@@ -250,7 +374,9 @@ const MabulRechercheContact = (props) => {
         text={"Partager dans Labul"}
           color={props.conceptColor}
           style={styles.nextBtn}
-          onPress={()=> this[RBSheet + 4].open()}
+          onPress={()=> 
+            onSubmit()
+          }
         />
 
 

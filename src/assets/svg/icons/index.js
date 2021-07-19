@@ -92,7 +92,9 @@ import Educationgive from './category/Educationgive.svg';
 import Vetementsgive from './category/Vetementsgive.svg';
 import Repasgive from './category/Repasgive.svg';
 import Alimentsgive from './category/Alimentsgive.svg';
-export {
+import Intero from './category/Intero.svg';
+
+export {Intero,
   AnimalSell,
   BeautyCareSell,
   DeliverySell,
@@ -263,7 +265,8 @@ import PartySell from './category/PartySell.svg';
 import ShowSell from './category/ShowSell.svg';
 import WorkshopSell from './category/WorkshopSell.svg';
 import Bluecircle from './category/Bluecircle.svg';
-export {CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
+import Inviter from './category/Inviter.svg';
+export {Inviter,CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
   AddressBlue,CheckDarkBlue,CheckPink,
   OptionGray,
   LocationRed,

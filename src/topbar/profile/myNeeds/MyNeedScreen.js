@@ -8,6 +8,7 @@ import MabulDetailView from '../../../Components/view/MabulDetailView';
 import { getUserProfile } from '../../../services/firebase'
 import auth from "@react-native-firebase/auth";
 import firestore from '@react-native-firebase/firestore';
+import FriendDetailScreen from '../../../ServiceScrenns/FriendDetailScreen';
 const needData = new NeedService(
   new User('Mathieu Torin', require('../../../assets/images/tab_profile_off.png'), 'anton@gmail.com'),
   'J’ai besoin Coup de main bricolage',
@@ -24,6 +25,7 @@ const MyNeedScreen = (props) => {
   const [data] = useState(needData);
   const [data2, setdata2] = useState(props.data);
   const [user] = useState(props.user);
+  const usercon=user.uid==auth().currentUser.uid
 
   useEffect(() => {
 
@@ -44,7 +46,14 @@ const MyNeedScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <MabulDetailView data={data} data2={data2} user={user} docId={props.docId} />
+          {usercon  ?
+                
+                <MabulDetailView data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
+               
+                  :
+                  <FriendDetailScreen servicetype={"need"} data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
+
+                } 
     </View>
   );
 };

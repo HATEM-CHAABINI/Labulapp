@@ -7,6 +7,7 @@ import OrganizeServiceType from '../../../model/service/OrganizeServiceType';
 import MabulDetailView from '../../../Components/view/MabulDetailView';
 import auth from "@react-native-firebase/auth";
 import firestore from '@react-native-firebase/firestore';
+import FriendDetailScreen from '../../../ServiceScrenns/FriendDetailScreen';
 const organizeData = Object.assign(
   new OrganizeService(
     new User('Mathieu Torin', require('../../../assets/images/sample_user_2.png'), 'anton@gmail.com'),
@@ -23,6 +24,8 @@ const MyOrganizeScreen = (props) => {
   const [data] = useState(organizeData);
   const [data2, setdata2] = useState(props.data);
   const [user] = useState(props.user);
+  const usercon=user.uid==auth().currentUser.uid
+
   useEffect(() => {
 
     if (props.created == undefined) {
@@ -38,8 +41,14 @@ const MyOrganizeScreen = (props) => {
   }, [])
   return (
     <View style={styles.container}>
-      <MabulDetailView data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
-    </View>
+        {usercon  ?
+                
+                <MabulDetailView data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
+               
+                  :
+                  <FriendDetailScreen servicetype={"organize"} data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
+                } 
+                   </View>
   );
 };
 

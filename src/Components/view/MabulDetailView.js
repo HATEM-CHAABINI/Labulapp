@@ -16,6 +16,7 @@ import NeedStatusType from '../../model/service/NeedStatusType';
 import ReadMore from 'react-native-read-more-text';
 import Moment from 'moment';
 import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../../constants/renderBange';
+import { Inviter } from '../../assets/svg/icons';
 const MabulDetailView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(props.data);
@@ -30,17 +31,28 @@ const MabulDetailView = (props) => {
   const userBadge = getUserBadge(data2.serviceType.code, data2.serviceType.subCode);
   const InviteButton = (
     <CommonButton
-      style={styles.inviteBtn}
-      text="Inviter à participer"
-      textStyle={colorStyles.button}
+      style={{paddingVertical: 0 * hm, width:50*em,height:50*em, marginTop: 25 * hm, backgroundColor: "white",borderColor:'#D2E2EC',    borderWidth: 1,borderRadius:100}}
+      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
+      
+      leftIcon={<Inviter width={24* em} height={24 * hm} />}
+      iconStyle={{marginLeft:5*em}}
       onPress={() => setInvitePopupVisible(true)}
     />
   );
   const ModifyButton = (
     <CommonButton
       style={styles.quizBtn}
-      textStyle={colorStyles.button}
+      textStyle={{color:"#FFFFFF",fontFamily:'Lato-Medium',fontSize:16*em}}
       text="Modifier"
+      onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
+    />
+  );
+  const DeleteButton = (
+    <CommonButton
+      style={{ paddingVertical: 0 * hm, width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "white",borderColor:'red',    borderWidth: 1,
+    }}
+      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
+      text="Supprimer"
       onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
     />
   );
@@ -54,20 +66,20 @@ const MabulDetailView = (props) => {
   );
   return (
     <>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={{backgroundColor:'white'}}>
         <Image
           source={data2.images !== undefined ? { uri: data2.images[0].uri } : require('../../assets/images/sample_cover_2.png')}
           style={styles.cover}
         />
         <View style={styles.body}>
-          <View style={styles.ViewtimeTxt}>
+          {/* <View style={styles.ViewtimeTxt}>
             <CommonText
               // text={data.status === NeedStatusType.CANCELED ? 'Terminé' : '04 Fév · 08h00'}.seconds * 1000
               text={data.status === NeedStatusType.CANCELED ? 'Terminé' : data2.demandStartDate !== undefined ? data2.demandStartDate.seconds !== undefined ? Moment(data2.demandStartDate.seconds * 1000).format('DD MMMM YYYY-HH:MM') : Moment(data2.demandStartDate).format('DD MMMM YYYY-HH:MM') : ' '}
               style={styles.timeTxt}
               color="#6A8596"
             />
-          </View>
+          </View> */}
           <CommonListItem
             style={styles.userInfo}
             icon={
@@ -102,8 +114,11 @@ const MabulDetailView = (props) => {
               {data2.data !== undefined ? data2.data.description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef"}
             </Text>
           </ReadMore>
+          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
           {data.status === NeedStatusType.CANCELED ? <></> : data.relationship ? AskButton : ModifyButton}
+          {DeleteButton}
           {data.status !== NeedStatusType.CANCELED && InviteButton}
+          </View>
         </View>
       </ScrollView>
       <CommonBackButton dark style={styles.backBtnView} onPress={() => Actions.pop()} />
@@ -181,7 +196,7 @@ const styles = {
   },
   userInfo: {
     fontFamily: 'Lato-Medium',
-    marginTop: 14 * em,
+    marginTop: 34 * hm,
     height: 39 * em,
   },
   userName: { fontFamily: 'Lato-Medium', fontFamily: 'Lato-Black', fontSize: 16 * em, textAlign: 'left', textAlignVertical: 'center', color: '#1E2D60' },
@@ -207,7 +222,8 @@ const styles = {
     marginTop: 3 * hm,
     fontFamily: 'Lato-Medium',
   },
-  quizBtn: { marginTop: 25 * hm, backgroundColor: hexToRGB('#41D0E2', 0.2) },
+  quizBtn: {    paddingVertical: 0 * hm,
+    width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "#40CDDE" },
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent' },
 };
 

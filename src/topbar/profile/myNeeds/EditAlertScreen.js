@@ -147,6 +147,7 @@ const EditAlertScreen = (props) => {
           setdescriptionModalVisible(!descriptionModalVisible);
         }}
       />
+
       <EditDescriptionScreen
         visible={descriptionModalVisible}
         changeItem={'Description'}
@@ -157,7 +158,6 @@ const EditAlertScreen = (props) => {
         }}
         onChange={(item) => { setDescription({ ...description, description: item }), setdescriptionModalVisible(false) }}
       />
-
 
       <TouchableOpacity
         onPress={() => {
@@ -197,8 +197,6 @@ const EditAlertScreen = (props) => {
         textStyle={{ color: '#F9547B' }}
         onPress={() => { deletealert() }}
       />
-
-
     </ProfileCommonHeader>
   );
 };
@@ -264,5 +262,4 @@ const styles = {
   modalBtnTxt: { color: '#007AFF', fontSize: 17 * em, lineHeight: 22 * em },
   modalLine: { backgroundColor: '#3F3F3F', width: 0.5 * em, flexGrow: 1 },
 };
-
 export default EditAlertScreen;

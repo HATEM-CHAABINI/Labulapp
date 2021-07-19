@@ -28,7 +28,6 @@ const needData = new NeedService(
   NeedServiceType.REPAIR
 );
 
-
 const MyAlertScreen = (props) => {
   const [] = useState(false);
   const [user, setuser] = useState(props.user);
@@ -47,7 +46,6 @@ const MyAlertScreen = (props) => {
     if (props.created == undefined) {
       firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(alertData.serviceType.name).doc(props.docId).onSnapshot(async (sanp) => {
         if (sanp.data() !== undefined) {
-
           setAlertData(
             sanp.data()
           )
@@ -161,5 +159,7 @@ const styles = {
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent', color: '#F9547B' },
 
 };
-
 export default MyAlertScreen;
+
+
+

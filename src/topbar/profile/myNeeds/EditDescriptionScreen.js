@@ -3,7 +3,6 @@ import { em, WIDTH, hm } from '../../../constants/consts';
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
 import ProfileCommonTextInput from '../../../Components/textInput/ProfileCommonTextInput';
-
 import { StatusBar, View, Text, Platform, Alert } from 'react-native';
 import User from '../../../model/user/User';
 import { feedbackIcons } from '../../../constants/icons';
@@ -23,11 +22,9 @@ export default (props) => {
 
     const initialValues = {
         description: value,
-
     };
     const validationSchema = Yup.object({
         description: Yup.string().required('required')
-
     });
     const onSubmit = async values => {
         console.log("val ", values);
@@ -107,4 +104,3 @@ const styles = {
     comment: { fontSize: 12 * em, lineHeight: 20 * em, marginTop: 15 * hm },
     listItem: { paddingHorizontal: 10 * em, marginBottom: 35 * hm },
 };
-

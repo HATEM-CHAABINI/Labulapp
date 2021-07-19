@@ -23,6 +23,7 @@ export default (props) => {
         { id: 1, title: 'Route barrée' },
         { id: 2, title: 'Travaux' },
     ];
+
     useEffect(() => {
         setloading(false)
         setChecked(props.value)
@@ -31,6 +32,7 @@ export default (props) => {
         props.onChange(checked)
         props.onPress()
     }
+    
     const renderOptions = ({ item, index }) => {
         var elevation = !checked ? 0 : 2;
         return (
@@ -179,10 +181,6 @@ const styles = {
         color: '#1E2D60',
     },
 };
-
-
-
-
 
 
 

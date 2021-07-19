@@ -209,6 +209,7 @@ const AlertShareScreen = (props) => {
   };
 
   return (
+    
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} />
       <View style={styles.body}>

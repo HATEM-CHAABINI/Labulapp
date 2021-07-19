@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { update_into_demand } from '../../redux/actions/demand'
 const AlertAddNoteScreen = (props) => {
   const conceptColor = '#F9547B';
+  
   const dispatch = useDispatch()
   var iconEdit = (
     <View style={{ marginRight: 19 * em }}>

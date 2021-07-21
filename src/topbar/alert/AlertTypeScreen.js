@@ -62,7 +62,7 @@ const AlertTypeScreen = (props) => {
         <View style={{width:'100%',alignItems:'center'}}>
           <CommonBigButton
             text={'Contiuer'}
-            onPress={() =>     Actions.alertAddNote({ process: 60 })        }
+            onPress={() =>     Actions.alertAddNote({ item: props.item,process: 60 })        }
             style={styles.btnNext}
           />
         </View>

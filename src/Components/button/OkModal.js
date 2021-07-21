@@ -8,6 +8,16 @@ import { KeyboardAvoidingView } from 'react-native';
 import Cta from '../../assets/svg/icons/navigation/Cta';
 import { View } from 'react-native-animatable';
 const OkModal = (props) => {
+  const resetModal= () => {
+  
+    props.closeModal()
+  };
+
+  const presok=()=>{
+    
+    props.okoModal(),
+    props.closeModal()
+  }
   return (
     <KeyboardAvoidingView
     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -15,10 +25,10 @@ const OkModal = (props) => {
 
   > 
 <View style={{paddingBottom:5*hm,flexDirection:'row', justifyContent:'space-between',marginRight:30*em,marginLeft:30*em,alignContent:'center',alignItems:'center'}}>
-<TouchableOpacity onPress={  props.closeModal}  >
+<TouchableOpacity onPress={ () =>  resetModal()}  >
   <Cta width={50 * em} height={50 * hm} />
 </TouchableOpacity>
-<TouchableOpacity onPress={() => this.handleDateClickD()
+<TouchableOpacity onPress={() => presok()
 // this[RBSheet + 2].close()
 }
 style={{

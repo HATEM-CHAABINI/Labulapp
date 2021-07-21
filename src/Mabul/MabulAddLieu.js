@@ -20,6 +20,7 @@ import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
 import GooglePlacesInput from '../Components/GooglePlacesInput'
 import { google_api } from '../constants/consts'
+import OkModal from '../Components/button/OkModal';
 /////////                 HERE GOES API KEY
 Geocoder.init(google_api);
 //////////
@@ -37,23 +38,11 @@ const MabulAddLieu = (props) => {
     ,
   });
 
-  const onSubmit = values => {
+  const onSubmit = () => {
 
-    let value = {}
-    if (isSwitch) {
-      value = { demandStartDate: isDate, demandEndData: '', address: values.address, coordinate: values.coordinate }
-    } else {
-      value = { demandStartDate: isDate, demandEndData: isEndDate, address: values.address, coordinate: values.coordinate }
-    }
-
-    dispatch(update_into_demand(value))
-    mabulService === 'give'
-      ? Actions.mabulCommonShare({ mabulService: mabulService, process: 97 })
-      : mabulService === 'sell'
-        ? Actions.mabulCommonShare({ mabulService: mabulService, process: 93 })
-        : mabulService === 'organize'
-          ? Actions.mabulOrganizeParticipation({ mabulService: mabulService, process: 80 })
-          : Actions.mabulCommonParticipate({ mabulService: mabulService, process: 80 });
+    
+      props.setadresse(formik.values.address,formik.values.coordinate);
+      props.closeModal()
 
   };
   const formik = useFormik({
@@ -127,6 +116,7 @@ const MabulAddLieu = (props) => {
     
         </View>
       </KeyboardAvoidingView>
+      <OkModal conceptColor={conceptColor} okoModal={()=>onSubmit()} closeModal={ () =>  props.closeModal()}/>
 
     </View>
   );

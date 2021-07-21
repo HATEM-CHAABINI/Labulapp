@@ -35,10 +35,19 @@ const title = {
 const MabulCommonRequestDetailScreen = (props) => {
   const dispatch = useDispatch()
   const { demandData } = useSelector((state) => state.demandReducer);
+  const [isDate, setDate] = useState(new Date());
+  const [isEndDate, setisEndDate] = useState('');
+
   const [Promo, setPromo] = useState(false);
   const initialValues = {
     title: '',
-    description: ''
+    description: '',
+    address: '',
+    coordinate: {},
+    prix:0,
+    promo:0,
+    prevoir:''
+    
   };
   const validationSchema = Yup.object({
     title: Yup.string()
@@ -48,6 +57,9 @@ const MabulCommonRequestDetailScreen = (props) => {
       .required('Obligatoire')
     ,
   });
+
+  
+
   const onSubmit = values => {
 
    
@@ -58,10 +70,26 @@ const MabulCommonRequestDetailScreen = (props) => {
       
   };
   const formik = useFormik({
-    // initialValues,
+    initialValues,
     onSubmit,
-    // validationSchema,
+    validationSchema,
   });
+
+
+setdatea = (date) => {
+  setDate(date)
+}
+
+setdatee = (date) => {
+  setisEndDate(date)
+}
+setadresse=(add,coor)=>{
+
+  formik.setFieldValue('address',add )
+  formik.setFieldValue('coordinate',coor )
+}
+
+
 
 
   const conceptColor = mabulColors[props.mabulService];
@@ -231,6 +259,9 @@ comprendre ta demande`}
             labelActiveTop={-38}
             height={30*hm}
             paddingBottom={10 * em}
+             value={formik.values.description}
+            onBlur={formik.handleBlur('description')}
+            onChangeText={formik.handleChange('description')}
 />        
   
 
@@ -239,7 +270,7 @@ comprendre ta demande`}
 
 
   </View>
-  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 1].close()}/>
+  <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 1].close()} closeModal={ () =>  this[RBSheet + 1].close()}/>
 </RBSheet>
 
 
@@ -267,9 +298,8 @@ comprendre ta demande`}
   </View>
 
   <View style={styles.container}>
-<MabulAddDate conceptColor={conceptColor}/>
+<MabulAddDate Datea={isDate} setdatea={this.setdatea} setdatee={this.setdatee} conceptColor={conceptColor} closeModal={ () =>  this[RBSheet + 2].close()}/>
  </View>
-  <OkModal conceptColor={conceptColor} closeModal={ () =>  this[RBSheet + 2].close()}/>
 </RBSheet>
 
 
@@ -299,9 +329,8 @@ comprendre ta demande`}
   </View>
 
   <View style={styles.container}>
-<MabulAddLieu conceptColor={conceptColor}/>
+<MabulAddLieu conceptColor={conceptColor} setadresse={this.setadresse} closeModal={ () =>  this[RBSheet + 3].close()}/>
  </View>
-  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 3].close()}/>
 </RBSheet>
 
 
@@ -366,7 +395,7 @@ comprendre ta demande`}
 >
   <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
 
-    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
+    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>À prévoir</Text>
   </View>
 
   <View style={styles.container}>
@@ -382,17 +411,21 @@ comprendre ta demande`}
             labelActiveTop={-38}
             height={30*hm}
             paddingBottom={10 * em}
+            value={formik.values.prevoir}
+            onBlur={formik.handleBlur('prevoir')}
+            onChangeText={formik.handleChange('prevoir')}
+            
 />        
   
 
-<Text style={{ marginLeft:30*em,bottom:20*hm}} >Sépare chaque mot avec des virgules</Text>
+<Text style={{ marginLeft:30*em,bottom:20*hm,fontFamily:'Lato-Italic',fontSize:12*em,color:'#A0AEB8'}} >Sépare chaque mot avec des virgules</Text>
 
 
 <View style={styles.SwitchbuttonWrapper}>
 
 
 <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
-  <Text style={styles.SwitchTitle}>Voir les alertes</Text>
+  <Text style={styles.SwitchTitle}>Obligatoire</Text>
 </View>
 
 <Switch
@@ -404,7 +437,7 @@ comprendre ta demande`}
 </View>
   </View>
   
-  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 6].close()}/>
+  <OkModal conceptColor={conceptColor} okoModal={() =>  this[RBSheet + 6].close()} closeModal={ () =>  this[RBSheet + 6].close()}/>
 </RBSheet>
 
 <RBSheet
@@ -434,13 +467,24 @@ comprendre ta demande`}
 
 {Promo ?
 <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-<TextInput placeholder="5€" style={[{width:148*em,marginLeft:30*em},styles.BoxPrice]} />
-<TextInput placeholder="3,99€" style={[{width:148*em,marginRight:30*em},styles.BoxPrice]} />
+<TextInput placeholder="5€"
+ style={[{width:148*em,marginLeft:30*em},styles.BoxPrice]}
+ value={formik.values.prix}
+ onBlur={formik.handleBlur('prix')}
+ onChangeText={formik.handleChange('prix')}
+ 
+ />
+<TextInput placeholder="3,99€" style={[{width:148*em,marginRight:30*em},styles.BoxPrice]}
+value={formik.values.promo}
+onBlur={formik.handleBlur('promo')}
+onChangeText={formik.handleChange('promo')} />
 
 </View>
 
 :
-  <TextInput placeholder="5€" style={[{width:310*em},styles.BoxPrice]} />
+  <TextInput placeholder="5€" style={[{width:310*em},styles.BoxPrice]} value={formik.values.prix}
+  onBlur={formik.handleBlur('prix')}
+  onChangeText={formik.handleChange('prix')}/>
 
 }
 
@@ -462,7 +506,7 @@ comprendre ta demande`}
 <Text style={{bottom:50*hm,color:conceptColor,fontFamily:'Lato-Semibold',fontSize:18*em,marginLeft:30*em}}>Une promo sur ce prix ?</Text>
 
   </View>
-  <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 7].close()}/>
+  <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 7].close()} closeModal={ () =>  this[RBSheet + 7].close()}/>
 </RBSheet>
 
 <MabulPubButton

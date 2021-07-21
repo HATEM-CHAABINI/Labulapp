@@ -225,13 +225,22 @@ const MabulRechercheContact = (props) => {
 
             setloadingSet(false);
             this[RBSheet + 4].close()
+            if (mabulService==='Alerte'){
+              // let data = {}
+                firestore().collection('userAlerts').doc(auth().currentUser.uid)
+                .collection(data.serviceType.name).add(data).then(async (res) => {
+                  const responce = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+                  const datas = await responce.get(); setloadingSet(false);
+                  Actions.myAlert({ alertData: datas.data(), data2: data, user: user, docId: res.id }), console.log("res ",);
+                });
+            }
             if (mabulService === 'organize') {
               Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
             } else if (mabulService === 'give') {
               Actions.myGive({ data: data, data2: datas.data(), user: user, docId: res.id, })
             } else if (mabulService === 'sell') {
               Actions.mySell({ data: data, data2: datas.data(), user: user, docId: res.id, })
-            } else {
+            } else if (mabulService === 'need') {
               Actions.myNeed({ data: data, data2: datas.data(), user: user, docId: res.id, })
             }
     
@@ -241,6 +250,7 @@ const MabulRechercheContact = (props) => {
     
       }
       const onSubmit = () => {
+        console.log(mabulService," jjjsjsjsjsjsqqssseerrfvviiicceee");
         setloadingSet(true)
         let data = {}
         if (mabulService === 'organize') {
@@ -252,11 +262,16 @@ const MabulRechercheContact = (props) => {
         } else if (mabulService === 'sell') {
           data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'sell', code: 2, subCode: 40 }, status: { status: 'INPROGRESS', code: 102 } })
     
-        } else {
+        } else if (mabulService === 'need') {
     
           data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'need', code: 3, subCode: 11 }, status: { status: 'INPROGRESS', code: 102 } })
         }
-    
+  
+        if(mabulService === 'Alerte'){
+          data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'alerts', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+          console.log('data aa gra re',data)
+      
+        }
         saveData(data);
       }
   const renderCircleList = ({ item, index }) => {

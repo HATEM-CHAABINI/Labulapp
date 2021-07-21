@@ -10,7 +10,7 @@ import NeedServiceType from '../../../model/service/NeedServiceType';
 import User from '../../../model/user/User';
 import AvatarWithBadge from '../../../Components/view/AvatarWithBadge';
 import FriendInvitePopupScreen from '../../friends/popup/FriendInvitePopupScreen';
-import { LocationPink, Alert } from '../../../assets/svg/icons/index.js';
+import { LocationPink, Alert, InviterModif } from '../../../assets/svg/icons/index.js';
 import CommonListItem from '../../../adapter/CommonListItem';
 import CommonBackButton from '../../../Components/button/CommonBackButton';
 import firestore from '@react-native-firebase/firestore';
@@ -56,39 +56,53 @@ const MyAlertScreen = (props) => {
       setuser(() => item)
     })
   }, [])
-
   const InviteButton = (
     <CommonButton
-      textStyle={{ color: '#F9547B' }}
-      style={styles.inviteBtn}
-      text="Partager"
+      style={{paddingVertical: 0 * hm, width:50*em,height:50*em, marginTop: 25 * hm, backgroundColor: "white",borderColor:'#D2E2EC',    borderWidth: 1,borderRadius:100}}
+      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
+      
+      leftIcon={<InviterModif width={24* em} height={24 * hm} />}
+      iconStyle={{marginLeft:5*em}}
       onPress={() => Actions.alertShare({ process: 94 })}
     />
   );
-
   const ModifyButton = (
     <CommonButton
-      textStyle={{ color: '#F9547B' }}
       style={styles.quizBtn}
+      textStyle={{color:"#FFFFFF",fontFamily:'Lato-Medium',fontSize:16*em}}
       text="Modifier"
-      onPress={() => Actions.editAlert({ alertData: alertData, user: user, docId: props.docId })}
+      onPress={() => 
+        Actions.editAlert({ alertData: alertData, user: user, docId: props.docId })
+      }    />
+  );
+  const DeleteButton = (
+    <CommonButton
+      style={{ paddingVertical: 0 * hm, width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "white",borderColor:'red',    borderWidth: 1,
+    }}
+      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
+      text="Supprimer"
+      onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
     />
   );
 
+
+
+  
+ 
   const AskButton = <CommonButton textStyle={{ color: '#F9547B' }} style={styles.quizBtn} text="Poser une question" />;
 
   return (
     <View style={styles.container}>
       <View style={styles.cover}>
-        <Alert width={80.59 * em} height={65.25 * em} />
+        <Alert width={160 * em} height={140.25 * hm} />
       </View>
-      <View style={styles.body}>
+      <ScrollView style={styles.body}>
         <CommonListItem
           icon={
             <AvatarWithBadge
               // avatar={user.profilePic !== undefined && user.profilePic !== null ? { uri: user.profilePic } : require('../../../assets/images/tab_profile_off.png')}
               avatar={user.profilePic !== undefined ? { uri: user.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }}
-              badge={require('../../../assets/images/ic_sample_5.png')}
+              // badge={require('../../../assets/images/ic_sample_5.png')}
               // badge={userBadge}
               avatarDiameter={35 * em}
               badgeDiameter={21 * em}
@@ -108,10 +122,13 @@ const MyAlertScreen = (props) => {
           title={alertData.address !== undefined ? alertData.address.address : 'Alert Address undefine'}
           titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
         />
-        {data.status === 'canceled' ? <></> : data.relationship ? AskButton : ModifyButton}
-        {data.status !== 'canceled' && InviteButton}
+          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+          {ModifyButton}
+          {DeleteButton}
+          {InviteButton}
+          </View>
         <View style={{ height: 130 * em }} />
-      </View>
+      </ScrollView>
       <CommonBackButton dark style={styles.backBtn} />
       <FriendInvitePopupScreen visible={invitePopupVisible} onPress={() => setInvitePopupVisible(false)} />
     </View>
@@ -133,19 +150,20 @@ const styles = {
   cover: {
     width: '100%',
     height: 312 * hm,
-    backgroundColor: '#FEE0E7',
+    backgroundColor: '#FC3867',
     alignItems: 'center',
     justifyContent: 'center',
   },
   body: {
+    paddingTop:40,
+    paddingHorizontal: 30 * em,
+    marginTop: -41 * em,
     borderTopRightRadius: 28 * em,
     borderTopLeftRadius: 28 * em,
     backgroundColor: '#ffffff',
     width: '100%',
-    paddingHorizontal: 30 * em,
-    paddingTop: 38 * hm,
+    //paddingBottom: '100%',
   },
-
   title: {
     height: 28 * em,
     lineHeight: 30 * em,
@@ -155,9 +173,9 @@ const styles = {
     marginBottom: 14 * hm,
     fontFamily: 'Lato-Black',
   },
-  quizBtn: { marginTop: 25 * hm, backgroundColor: '#FEE0E7' },
-  inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent', color: '#F9547B' },
-
+  quizBtn: {    paddingVertical: 0 * hm,
+    width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "#40CDDE" },
+  inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent' },
 };
 export default MyAlertScreen;
 

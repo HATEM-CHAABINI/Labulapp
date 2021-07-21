@@ -30,43 +30,10 @@ const AlertAddNoteScreen = (props) => {
      title: '',
      description: ''
    };
-   const validationSchema = Yup.object({
-     title: Yup.string()
-       .required('Obligatoire')
-     ,
-     description: Yup.string()
-       .required('Obligatoire')
-     ,
-   });
-   const onSubmit = values => {
  
-     dispatch(update_into_demand({ data: values }))
-     console.log('suiiivivvvvvvvvvv');
-     mabulService === 'sell'
-       ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 67 })
-       : Actions.mabulCommonAddPhoto({
-         mabulService: props.mabulService,
-         process: mabulService === 'need' ? 53 : mabulService === 'organize' ? 40 : 74,
-       });
-   };
-   const formik = useFormik({
-     // initialValues,
-     onSubmit,
-     // validationSchema,
-   });
-   var iconEdit = Edit2(styles.icon);
-   var iconDocument = Document2(styles.icon);
-   if (props.mabulService === 'give') {
-     iconEdit = Edit3(styles.icon);
-     iconDocument = Document3(styles.icon);
-   } else if (props.mabulService === 'sell') {
-     iconEdit = Edit1(styles.icon);
-     iconDocument = Document1(styles.icon);
-   } else if (props.mabulService === 'need') {
-     iconEdit = Edit(styles.icon);
-     iconDocument = Document(styles.icon);
-   }
-   const mabulService = props.mabulService;
+  
+
+   const mabulService = "Alerte";
  
    return (
      <View style={{
@@ -236,7 +203,7 @@ const AlertAddNoteScreen = (props) => {
     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
   </View>
 
-<MabulRechercheContact conceptColor={conceptColor}/>
+<MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor}/>
   {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
 </RBSheet>
  
@@ -244,7 +211,10 @@ const AlertAddNoteScreen = (props) => {
          text={"Publier"}
            color={hexToRGB(conceptColor)}
            style={styles.nextBtn}
-           onPress={()=> this[RBSheet + 4].open()}
+           onPress={()=> 
+            this[RBSheet + 4].open()
+            // console.log(mabulService)
+          }
          />
  </View>
  

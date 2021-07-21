@@ -266,7 +266,9 @@ import ShowSell from './category/ShowSell.svg';
 import WorkshopSell from './category/WorkshopSell.svg';
 import Bluecircle from './category/Bluecircle.svg';
 import Inviter from './category/Inviter.svg';
-export {Inviter,CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
+import InviterModif from './category/InviterModif.svg';
+
+export {InviterModif,Inviter,CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
   AddressBlue,CheckDarkBlue,CheckPink,
   OptionGray,
   LocationRed,

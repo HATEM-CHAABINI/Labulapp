@@ -211,16 +211,16 @@ const AlertShareScreen = (props) => {
   return (
     
     <View style={styles.container}>
-      <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} />
+      {/* <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} /> */}
       <View style={styles.body}>
-        <TitleText text={'Partager avec'} style={styles.title} />
-        <SearchBox
+        {/* <TitleText text={'Partager avec'} style={styles.title} /> */}
+        {/* <SearchBox
          style={styles.searchBox} 
          comment="Rechercher un contact" 
          smallText="Rechercher un contact" 
          onSearch={onSearch} 
-         onClear={onClear} />
-        <FlatList
+         onClear={onClear} /> */}
+        {/* <FlatList
           data={usersList.data}
           ListHeaderComponent={() => {
             return (<CommonListItem
@@ -242,7 +242,7 @@ const AlertShareScreen = (props) => {
           }}
           renderItem={renderCircleList}
           keyExtractor={(i) => i.id}
-          style={{ marginTop: 70 * hm }}/>
+          style={{ marginTop: 70 * hm }}/> */}
         <CommonButton
           style={[styles.btn, { backgroundColor: conceptColor }]}
           text="J’alerte"

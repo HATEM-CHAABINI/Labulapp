@@ -19,6 +19,7 @@ import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
 import GooglePlacesInput from '../Components/GooglePlacesInput'
 import { google_api } from '../constants/consts'
+import OkModal from '../Components/button/OkModal';
 /////////                 HERE GOES API KEY
 Geocoder.init(google_api);
 //////////
@@ -28,7 +29,7 @@ const MabulAddDate = (props) => {
   const conceptColor = props.conceptColor;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isEndDatePickerVisible, setisEndDatePickerVisible] = useState(false);
-  const [isDate, setDate] = useState(new Date());
+  const [isDate, setDate] = useState(props.Datea);
   const [isEndDate, setisEndDate] = useState('');
   const [isSwitch, setSwitch] = useState(false);
   const [showEndDataView, setshowEndDataView] = useState(false)
@@ -80,8 +81,7 @@ const MabulAddDate = (props) => {
   };
 
   const handleConfirm = (date) => {
-    let datee = toTimestamp(date)
-
+    // let datee = toTimestamp(date)
     setDate(date)
     hideDatePicker();
   };
@@ -96,6 +96,11 @@ const MabulAddDate = (props) => {
   const showEndDatePicker = () => {
     setisEndDatePickerVisible(true);
   };
+  const okoModal=()=>{
+    props.setdatea(isDate);
+    props.setdatee(isEndDate)
+    props.closeModal()
+  }
   function toTimestamp(strDate) {
     var datum = Date.parse(strDate);
     return datum / 1000;
@@ -159,6 +164,7 @@ const MabulAddDate = (props) => {
         
         </View>
       </KeyboardAvoidingView>
+      <OkModal conceptColor={conceptColor} closeModal={ () =>  props.closeModal()} okoModal={()=>okoModal()}/>
 
     </View>
   );

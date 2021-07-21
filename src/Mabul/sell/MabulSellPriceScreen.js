@@ -21,6 +21,7 @@ import MabulRechercheContact from '../MabulRechercheContact';
 const MabulSellPriceScreen = (props) => {
   const dispatch = useDispatch()
   const [price, setprice] = useState('')
+  const { demandData } = useSelector((state) => state.demandReducer);
 
   const conceptColor = mabulColors.sell;
   const onSubmit = () => {
@@ -110,7 +111,7 @@ const MabulSellPriceScreen = (props) => {
     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
   </View>
 
-<MabulRechercheContact conceptColor={conceptColor}/>
+<MabulRechercheContact data={demandData} mabulService={"sell"} conceptColor={conceptColor}/>
   {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
 </RBSheet>
     </View>

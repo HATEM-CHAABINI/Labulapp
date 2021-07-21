@@ -28,11 +28,31 @@ const AlertAddNoteScreen = (props) => {
    const [Promo, setPromo] = useState(false);
    const initialValues = {
      title: '',
-     description: ''
+     description: '',
+     address: '',
+     coordinate: {},
    };
- 
+   const validationSchema = Yup.object({
   
+    description: Yup.string()
+      .required('Obligatoire')
+    ,
+  });
+  const onSubmit = values => {
 
+  this[RBSheet + 4].open()
+      
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+  setadresse=(add,coor)=>{
+
+    formik.setFieldValue('address',add )
+    formik.setFieldValue('coordinate',coor )
+  }
    const mabulService = "Alerte";
  
    return (
@@ -120,6 +140,9 @@ const AlertAddNoteScreen = (props) => {
              labelActiveTop={-38}
              height={30*hm}
              paddingBottom={10 * em}
+             value={formik.values.description}
+             onBlur={formik.handleBlur('description')}
+             onChangeText={formik.handleChange('description')}
  />        
    
  
@@ -128,7 +151,7 @@ const AlertAddNoteScreen = (props) => {
  
  
    </View>
-   <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 1].close()}/>
+   <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 1].close()} closeModal={ () =>  this[RBSheet + 1].close()}/>
  </RBSheet>
  
  
@@ -160,9 +183,8 @@ const AlertAddNoteScreen = (props) => {
    </View>
  
    <View style={styles.container}>
- <MabulAddLieu conceptColor={conceptColor}/>
+   <MabulAddLieu conceptColor={conceptColor} setadresse={this.setadresse} closeModal={ () =>  this[RBSheet + 3].close()}/>
   </View>
-   <OkModal conceptColor={conceptColor}  closeModal={ () =>  this[RBSheet + 3].close()}/>
  </RBSheet>
  
  
@@ -212,7 +234,7 @@ const AlertAddNoteScreen = (props) => {
            color={hexToRGB(conceptColor)}
            style={styles.nextBtn}
            onPress={()=> 
-            this[RBSheet + 4].open()
+            onSubmit()
             // console.log(mabulService)
           }
          />

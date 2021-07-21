@@ -221,6 +221,7 @@ export {RightArrowBlue,
   CrossCircle,
 };
 
+import Editprofile from './profile/Editprofile.svg';
 import Setting from './profile/Setting.svg';
 import MyNeeds from './profile/MyNeeds.svg';
 import Circles from './profile/Circles.svg';
@@ -268,7 +269,7 @@ import Bluecircle from './category/Bluecircle.svg';
 import Inviter from './category/Inviter.svg';
 import InviterModif from './category/InviterModif.svg';
 
-export {InviterModif,Inviter,CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
+export {Editprofile,InviterModif,Inviter,CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
   AddressBlue,CheckDarkBlue,CheckPink,
   OptionGray,
   LocationRed,

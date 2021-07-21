@@ -10,8 +10,9 @@ import ProfileCommonCard from '../../adapter/ProfileCommonCard';
 import ProfileCommonListItem from '../../adapter/ProfileCommonListItem';
 import CommonButton from '../../Components/button/CommonButton';
 import AccountChangeMenu from './AccountChangeMenu';
-import { MyNeeds, Circles, Information, Setting, PurchasedPremium } from '../../assets/svg/icons';
+import {Editprofile, MyNeeds, Circles, Information, Setting, PurchasedPremium } from '../../assets/svg/icons';
 import User from '../../model/user/User';
+import firestore from '@react-native-firebase/firestore';
 import AccountType from '../../model/user/AccountType';
 import { feedbackIcons } from '../../constants/icons';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
@@ -59,8 +60,11 @@ const iconSize = { width: 38 * em, height: 38 * em };
 
 const ProfileHomeScreen = (props) => {
   const [userProfile] = useState(
+    
     props.route.params.purchased !== AccountType.LIGHT ? originalMyProfile : updatedMyProfile
   );
+  const [assets, setassets] = useState([])
+
   const [userData, setuserData] = useState(null)
   const { profileData } = useSelector((state) => state.profileReducer);
   const [loading, setloading] = useState(true)
@@ -70,6 +74,16 @@ const ProfileHomeScreen = (props) => {
     }
 
   }, [profileData])
+
+  useEffect(() => {
+
+    firestore().collection('assets').doc("123").get().then((res) => {
+
+      setassets(() => res.data().assets)
+
+    }).catch(e => { console.log(e) })
+
+  }, [])
   return (
     <ParallaxScrollView
       // onScroll={onScroll}
@@ -133,6 +147,15 @@ const ProfileHomeScreen = (props) => {
         <View style={styles.listBox}>
           <CommentText text={'Mon compte'} style={styles.caption} color={'#A0AEB8'} />
           <ProfileCommonListItem
+            text={'Editer mon profil'}
+            style={styles.listItem}
+            icon={Editprofile(iconSize)}
+            onPress={() => {
+              Actions.editProfile({ assest: assets })            }}
+          />
+                    <View style={styles.line1} />
+
+           <ProfileCommonListItem
             text={'Mes informations'}
             style={styles.listItem}
             icon={Information(iconSize)}
@@ -274,7 +297,7 @@ const styles = {
     marginBottom: 25 * hm,
     marginTop: 15 * hm,
     height: 1 * hm,
-    backgroundColor: '#B3C6CF33',
+    // backgroundColor: '#B3C6CF33',
   },
   //marginBottom: 15 * hm,
   line2: { marginTop: 16 * hm, height: 1 * hm, backgroundColor: '#B3C6CF33' },

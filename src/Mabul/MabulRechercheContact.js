@@ -214,7 +214,18 @@ const MabulRechercheContact = (props) => {
     //         })
                   // }while (verif==true) 
             // console.log(verif,"resullllllttt====== ",data.coordinate.latitude);
-    
+            if (mabulService==='Alerte'){
+              // let data = {}
+                firestore().collection('userAlerts').doc(auth().currentUser.uid)
+                .collection(data.serviceType.name).add(data).then(async (res) => {
+                  const responce = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+                  const datas = await responce.get(); setloadingSet(false);
+                  Actions.myAlert({ alertData: datas.data(), data2: data, user: user, docId: res.id }), console.log("res ",);
+                });
+                setloadingSet(false);
+                this[RBSheet + 4].close()
+            }
+else{
         firestore().collection('userDemands').doc(auth().currentUser.uid)
           .collection(data.serviceType.name).add(data).then(async (res) => {
     
@@ -225,15 +236,7 @@ const MabulRechercheContact = (props) => {
 
             setloadingSet(false);
             this[RBSheet + 4].close()
-            if (mabulService==='Alerte'){
-              // let data = {}
-                firestore().collection('userAlerts').doc(auth().currentUser.uid)
-                .collection(data.serviceType.name).add(data).then(async (res) => {
-                  const responce = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
-                  const datas = await responce.get(); setloadingSet(false);
-                  Actions.myAlert({ alertData: datas.data(), data2: data, user: user, docId: res.id }), console.log("res ",);
-                });
-            }
+          
             if (mabulService === 'organize') {
               Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
             } else if (mabulService === 'give') {
@@ -247,7 +250,7 @@ const MabulRechercheContact = (props) => {
     
           });
     
-    
+        }
       }
       const onSubmit = () => {
         console.log(mabulService," jjjsjsjsjsjsqqssseerrfvviiicceee");

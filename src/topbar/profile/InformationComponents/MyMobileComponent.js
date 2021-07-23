@@ -6,7 +6,7 @@ import ProfileCommonTextInput from '../../../Components/textInput/ProfileCommonT
 import CommonText from '../../../text/CommonText';
 import SearchBox from '../../../Components/other/SearchBox';
 import CommonCheckBox from '../../../Components/checkbox/CommonCheckBox';
-import { StatusBar, View, Text, Platform, Alert } from 'react-native';
+import { StatusBar, View, Text, Platform, Alert,KeyboardAvoidingView } from 'react-native';
 import User from '../../../model/user/User';
 import { feedbackIcons } from '../../../constants/icons';
 import { useFormik } from 'formik';
@@ -15,6 +15,8 @@ import { updateUserProfile, getUserProfile } from '../../../services/firebase'
 import auth from '@react-native-firebase/auth'
 import { addProfile } from '../../../redux/actions/profile';
 import { useDispatch } from 'react-redux';
+import OkModalchange from '../../../Components/button/OkModalchange';
+import TitleText from '../../../text/TitleText';
 const insertInformations = [
     { title: 'Mon email', inputTexts: [{ commentInput: 'Mon email', value: 'mathieu@labul.com' }] },
     {
@@ -120,6 +122,17 @@ export default (props) => {
             backdropColor={'#1E2D60'}
             swipeDirection={'up'}
             onBackButtonPress={() => props.onPress()}>
+                <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          
+       
+          flex: 1,
+          justifyContent: 'flex-start',
+  
+        }}
+
+      >
             <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
             <View
                 style={{
@@ -134,17 +147,11 @@ export default (props) => {
                 }}
                 opacity={0.5}
             />
-            <ProfileModalHeader
-                title={props.heading}
-                style={styles.header}
-                loading={loading}
-                setloading={setloading}
-                onCancelPress={() => props.onPress()}
-                onFinishPress={formik.handleSubmit}
-            />
+                           <TitleText text={"Modifier mon contact"} textAlign={"left"} style={{marginTop:55*hm,marginBottom:5*hm}}/>
+
             <ProfileCommonTextInput
                 style={styles.input}
-                text={props.heading}
+                text={"Mon téléphone"}
                 value={formik.values.mobile}
                 onFocus={true}
                 key={0}
@@ -152,6 +159,14 @@ export default (props) => {
                 onChangeText={formik.handleChange('mobile')}
             />
             {formik.errors.mobile && formik.touched.mobile && <Text style={styles.descerrorText}>{formik.errors.mobile}</Text>}
+            </KeyboardAvoidingView>
+
+
+         
+<OkModalchange conceptColor={"#40CDDE"}txt={"Enregistrer"} closeModal={props.onPress} 
+okoModal={formik.handleSubmit}
+style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center',alignItems:'center'}}/>
+
         </Modal>
     );
 };

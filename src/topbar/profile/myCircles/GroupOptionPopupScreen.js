@@ -5,7 +5,7 @@ import CommonText from '../../../text/CommonText';
 import Modal from 'react-native-modal';
 import CommonListItem from '../../../adapter/CommonListItem';
 import CommonButton from '../../../Components/button/CommonButton';
-import { DeleteRed } from '../../../assets/svg/icons';
+import { DeleteRed, SortirGroupe } from '../../../assets/svg/icons';
 import { Friend, Family, Neighbor } from '../../../assets/svg/icons';
 import RelationshipType from '../../../model/user/RelationshipType';
 
@@ -40,12 +40,8 @@ const GroupOptionPopupScreen = (props) => {
           style={styles.listItem}
           title="Sortir du groupe"
           titleStyle={{ color: '#6A8596' }}
-          rightView={
-            <Image
-              style={{ width: 18 * em, height: 20 * em, resizeMode: 'contain' }}
-              source={require('../../../assets/images/img_close.png')}
-            />
-          }
+          rightView={<SortirGroupe width={18 * em} height={20 * em} />}
+           
         />
         <CommonListItem
           style={styles.listItem}

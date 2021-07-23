@@ -29,7 +29,7 @@ const PremiumPurchasedScreen = (props) => {
         <Premium width={230 * hm} height={121 * hm} />
       </View>
       <View style={styles.containerTitle}>
-        <Text style={styles.title} >Labul</Text>
+        <Text style={styles.title} >Labul </Text>
         <Text style={styles.titleBleu} >Premium</Text>
       </View>
       <SmallText
@@ -69,8 +69,8 @@ const styles = {
   container: { flex: 1, alignItems: 'center' },
   backBtn: { zIndex: 1, position: 'absolute', left: 15 * em, top: 27 * hm },
   logo: { marginTop: 54.5 * hm, alignSelf: 'center', marginBottom: 15 * hm },
-  title: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#1E2D60' },
-  titleBleu: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#40CDDE' },
+  title: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
+  titleBleu: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
   containerTitle: { marginBottom: 0, flexDirection: 'row', justifyContent: 'center' },
   cancelBtn: { position: 'absolute', bottom: 24 * em },
 };

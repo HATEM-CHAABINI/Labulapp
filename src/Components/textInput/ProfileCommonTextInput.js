@@ -9,13 +9,13 @@ const ProfileCommonTextInput = (props) => {
   return (
     <View style={[onFocus ? styles.containerFocusOn : styles.containerFocusOff, props.style]}>
       <SmallText
-        style={onFocus ? styles.commentTextFocusOn : styles.commentTextFocusOff}
+        style={[onFocus ? styles.commentTextFocusOn : styles.commentTextFocusOff,props.placestyle]}
         text={props.text}
         color={'#A0AEB8'}
       />
       <TextInput
         autoFocus={true}
-        style={[styles.textInput, { marginBottom: onFocus ? 15 * hm : 7 * hm }]}
+        style={[styles.textInput, { marginBottom: onFocus ? 15 * hm : 7 * hm },props.styletxt]}
         onFocus={() => setOnFocus(true)}
         onBlur={() => setOnFocus(false)}
         multiline={true}
@@ -69,7 +69,7 @@ const styles = {
   textInput: {
     fontFamily: 'Lato-Bold',
     color: '#1E2D60',
-    lineHeight: 18 * hm,
+    lineHeight: 11 * hm,
     fontSize: 16 * hm,
     paddingHorizontal: 0,
     paddingVertical: 0,

@@ -177,7 +177,7 @@ const EditProfileScreen = (props) => {
           style: 'cancel',
         },
         {
-          text: 'OK', onPress: () => {
+          text: 'Supprimer', onPress: () => {
             setdeleteUseLoading(true)
             deleteUserData(profileData.uid).then(res => {
               if (res) {

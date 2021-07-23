@@ -15,6 +15,9 @@ import { updateUserProfile, getUserProfile } from '../../../services/firebase'
 import auth from '@react-native-firebase/auth'
 import { addProfile } from '../../../redux/actions/profile';
 import { useDispatch } from 'react-redux';
+import TitleText from '../../../text/TitleText';
+import { KeyboardAvoidingView } from 'react-native';
+import OkModalchange from '../../../Components/button/OkModalchange';
 const insertInformations = [
     { title: 'Mon email', inputTexts: [{ commentInput: 'Mon email', value: 'mathieu@labul.com' }] },
     {
@@ -135,14 +138,19 @@ export default (props) => {
                 }}
                 opacity={0.5}
             />
-            <ProfileModalHeader
-                title={props.heading}
-                style={styles.header}
-                loading={loading}
-                setloading={setloading}
-                onCancelPress={() => props.onPress()}
-                onFinishPress={formik.handleSubmit}
-            />
+                 <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          
+       
+          flex: 1,
+          justifyContent: 'flex-start',
+  
+        }}
+
+      >         
+        <TitleText text={"Modifier ma \nlocalisation"} textAlign={"left"} style={{marginTop:55*hm,marginBottom:5*hm}}/>
+
             <ProfileCommonTextInput
                 style={styles.input}
                 text={props.heading}
@@ -153,6 +161,14 @@ export default (props) => {
                 onChangeText={formik.handleChange('address')}
             />
             {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
+            </KeyboardAvoidingView>
+
+
+         
+<OkModalchange conceptColor={"#40CDDE"}txt={"Enregistrer"} closeModal={props.onPress} 
+okoModal={formik.handleSubmit}
+style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center',alignItems:'center'}}/>
+
         </Modal>
     );
 };

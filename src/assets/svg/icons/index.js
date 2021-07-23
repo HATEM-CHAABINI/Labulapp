@@ -163,6 +163,7 @@ import CheckOff from './navigation/CheckOff.svg';
 import CheckRed from './navigation/CheckRed.svg';
 
 import LocationBlue from './navigation/LocationBlue.svg';
+import LocationBlues from './navigation/LocationBlues.svg';
 import MabulGive from './navigation/MabulGive.svg';
 import MabulNeed from './navigation/MabulNeed.svg';
 import MabulSell from './navigation/MabulSell.svg';
@@ -305,6 +306,7 @@ import ProAddCover from './profile/ProAddCover.svg';
 import AvatarBg from './profile/AvatarBg.svg';
 import ProAvatarBg from './profile/ProAvatarBg.svg';
 import ProNeeds from './profile/ProNeeds.svg';
+import SortirGroupe from './profile/SortirGroupe.svg';
 
 import AddFamily from './profile/AddFamily.svg';
 import AddFriend from './profile/AddFriend.svg';
@@ -331,7 +333,7 @@ import Amis from './profile/Amis.svg';
 import Famille from './profile/Famille.svg';
 import Tous from './profile/Tous.svg';
 
-export {Voisins,Amis,Famille,Tous,AssociationInformation,EnterpriseInformation,InstitutionInformation,
+export {SortirGroupe,Voisins,Amis,Famille,Tous,AssociationInformation,EnterpriseInformation,InstitutionInformation,
   Promotion,
   Tips,
   Events,
@@ -377,6 +379,7 @@ export {
   Send,
   Option,
   LocationBlue,
+  LocationBlues,
   Delete,
   ReportProblem,
   CheckBlue,

@@ -22,7 +22,6 @@ const giveItems = [
 ];
 const MabulGiveScreen = (props) => {
   const dispatch = useDispatch() 
-
   const renderFlatList = ({ item }) => (
     <MabulCommonListItem
       text={item.itemName}

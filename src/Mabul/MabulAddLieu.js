@@ -12,8 +12,6 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Moment from 'moment';
 import Reinput from "reinput"
 import { Header } from 'react-native/Libraries/NewAppScreen';
-import { useSelector, useDispatch } from 'react-redux'
-import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import Geocoder from 'react-native-geocoding';
@@ -21,12 +19,17 @@ import Geolocation from 'react-native-geolocation-service';
 import GooglePlacesInput from '../Components/GooglePlacesInput'
 import { google_api } from '../constants/consts'
 import OkModal from '../Components/button/OkModal';
+import { useSelector, useDispatch } from 'react-redux'
+import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 /////////                 HERE GOES API KEY
 Geocoder.init(google_api);
 //////////
 const MabulAddLieu = (props) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const { demandData } = useSelector((state) => state.demandReducer);
+ const [data,setData]=useState()
   const conceptColor = props.conceptColor;
+
    const initialValues = {
     address: '',
     coordinate: {}
@@ -38,11 +41,14 @@ const MabulAddLieu = (props) => {
     ,
   });
 
-  const onSubmit = () => {
+  const onSubmit = values => {
+    // console.log('hello pritesh bijwa',data)
 
-    
+    dispatch(update_into_demand(data))
       props.setadresse(formik.values.address,formik.values.coordinate);
+      props.requiredLocation(),
       props.closeModal()
+      
 
   };
   const formik = useFormik({
@@ -50,16 +56,6 @@ const MabulAddLieu = (props) => {
     onSubmit,
     validationSchema,
   });
-
-
- 
-
-
-
-
-
-
-
 
 
   return (
@@ -71,10 +67,8 @@ const MabulAddLieu = (props) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
-
       >
-        
-  
+      
         <View style={styles.body}>
           <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
       
@@ -103,11 +97,12 @@ const MabulAddLieu = (props) => {
               myLocationColor={conceptColor}
               myLocationIconColor={conceptColor}
               formik={formik}
-
+              
               changedValue={(val) => {
+                setData(val)
                 // console.log(val.adresse);
-                formik.setFieldValue('address', val.address);
-                formik.setFieldValue('coordinate', val.coordinate);
+                // formik.setFieldValue('address', val.address);
+                // formik.setFieldValue('coordinate', val.coordinate);
               }}
             />
             {formik.errors.address && formik.touched.address && <Text style={{ color: 'red', top: '1%', bottom: "5%", }}>{formik.errors.address}</Text>}
@@ -116,7 +111,10 @@ const MabulAddLieu = (props) => {
     
         </View>
       </KeyboardAvoidingView>
-      <OkModal conceptColor={conceptColor} okoModal={()=>onSubmit()} closeModal={ () =>  props.closeModal()}/>
+      <OkModal conceptColor={conceptColor}
+          showDescription={() =>{}}
+          hideDescription={() =>{}}
+       okoModal={()=>onSubmit()} closeModal={ () => props.closeModal()}/>
 
     </View>
   );

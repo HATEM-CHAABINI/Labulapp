@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, Text,KeyboardAvoidingView ,Switch } from 'react-native';
+import { View, Image, Text, KeyboardAvoidingView, Switch } from 'react-native';
 import TitleText from '../text/TitleText';
 import { hexToRGB, em, mabulColors, hm } from '../constants/consts';
 import CommentText from '../text/CommentText';
@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../redux/actions/demand'
 import { useFormik } from 'formik';
 import RBSheet from "react-native-raw-bottom-sheet";
-import Cta from '../assets/svg/icons/navigation/Cta'
-import * as Yup from 'yup'
+import Cta from '../assets/svg/icons/navigation/Cta';
+import * as Yup from 'yup';
 import { TouchableOpacity } from 'react-native';
 import Fleche from '../Components/Fleche';
 import OkModal from '../Components/button/OkModal';
@@ -26,6 +26,8 @@ import MabulAddDate from './MabulAddDate';
 import MabulAddLieu from './MabulAddLieu';
 import MabulRechercheContact from './MabulRechercheContact';
 import { TextInput } from 'react-native';
+import { date } from 'yup/lib/locale';
+import moment from 'moment';
 const title = {
   organize: 'Donne un titre à ton apéro',
   sell: 'Donne un titre à ta vente',
@@ -35,39 +37,178 @@ const title = {
 const MabulCommonRequestDetailScreen = (props) => {
   const dispatch = useDispatch()
   const { demandData } = useSelector((state) => state.demandReducer);
+
+  console.log('redux  data', demandData)
+  const [prixOne, setPrixOne] = useState('')
+  const [prixTwo, setPrixTwo] = useState('')
+
+  const [prix, setPrix] = useState('')
+  const [allowPrix, setAllowPrix] = useState(false)
+
+  const [descriptionn, setDescriptionn] = useState('')
+  const [allowdescription, setAllowDescription] = useState(false)
+  const [photos, setPhotos] = useState(false)
+  const [prevoir, setPrevoir] = useState('')
+  const [allprevoir, setAllprevoir] = useState(false)
+  const [dates,setDates]=useState(false);
+  const [locations,setLocations]=useState(false);
+  const[error,setError]=useState('')
+
+  const[errortitle,setErrorTitle]=useState('')
+  const[errorDescription,setErrorDescription]=useState('')
+  const[errorDate,setErrorDate]=useState('')
+  const[errorPhoto,setErrorPhotos]=useState('')
+  const[erroraddress,setErrorAddress]=useState('')
+  const[errorPrevoir,setErrorPrevoir]=useState('')
+  const[errorPrix,setErrorPrix]=useState('')
+
+  const [title,setTitle]=useState('')
+   
   const [isDate, setDate] = useState(new Date());
   const [isEndDate, setisEndDate] = useState('');
-
+  const [addresss, setAddresss] = useState(demandData.address);
   const [Promo, setPromo] = useState(false);
+  const [Promooo, setPromooo] = useState(false);
+
+   const setPromos=(promo)=>{
+    setPromo(promo)
+    setPromooo(!Promooo)
+   }
+  const titles=(e)=>{
+    setErrorTitle('')
+    setTitle(e)
+  }
+const date=()=>{
+  setErrorDate('')
+  setDates(true)
+}
+const location=()=>{
+  setErrorAddress('')
+  setLocations(true)
+}
+  const photo=()=>{
+    setErrorPhotos('')
+    setPhotos(true)
+  }
+
+  // console.log('allprevoir',allprevoir)
+  const prexpreone = (e) => {
+    setErrorPrix('')
+    setPrixOne(e)
+    setAllowPrix(false)
+  }
+  const prexpretwo = (e) => {
+    setErrorPrix('')
+    setPrixTwo(e)
+    setAllowPrix(false)
+  }
+
+  const prexprecr = (e) => {
+    setErrorPrix('')
+    setPrix(e)
+    setAllowPrix(false)
+  }
+  const prexpre = () => {
+    setErrorPrix('')
+    setAllowPrix(true)
+  }
+  const hideprix=()=>{
+    setPrix('')
+    setAllowPrix(false)
+  }
+
+
+
+
+  const precr = (e) => {
+    setErrorPrevoir('')
+    setPrevoir(e)
+    setAllprevoir(false)
+  }
+  const pre = () => {
+    setErrorPrevoir('')
+    setAllprevoir(true)
+  }
+
+  const descr = (e) => {
+    setErrorDescription('')
+    setDescriptionn(e)
+    setAllowDescription(false)
+  }
+  const des = () => {
+    setErrorDescription('')
+    setAllowDescription(true)
+  }
+
+  const hide = () => {
+    setDescriptionn('')
+    setAllowDescription(false)
+  }
+const hidepriviour=()=>{
+  setPrevoir('')
+  setAllprevoir(false)
+}
+  // const[ date,setDate]=useState('')
+  // const[ address,setAddress]=useState('')
+  // var date = demandData.date;
+  // console.log(date)
   const initialValues = {
-    title: '',
-    description: '',
-    address: '',
-    coordinate: {},
-    prix:0,
-    promo:0,
-    prevoir:''
-    
+    // title: '',
+    // description: '',
+    // address: '',
+    // coordinate: {},
+    prix: 0,
+    promo: 0,
+    // prevoir:''    
   };
   const validationSchema = Yup.object({
     title: Yup.string()
       .required('Obligatoire')
-    ,
-    description: Yup.string()
-      .required('Obligatoire')
-    ,
   });
-
-  
-
+  // const changeDate=(date)=>{
+  //   setDate(date)
+  // }
   const onSubmit = values => {
-
-   
-    console.log('suiiivivvvvvvvvvv');
-    mabulService === 'sell'
-      ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 90 })
-      : this[RBSheet + 4].open()
-      
+    if(title==''){
+      setErrorTitle('Obligatoire')
+    }
+    else if (descriptionn==""){
+      setErrorDescription('Obligatoire')
+    }
+      else if (prevoir=="" && mabulService === 'organize'){
+        // else if (prevoir=="" ){
+          setErrorPrevoir('Obligatoire')
+        }
+    else if (dates==""){
+      setErrorDate('Obligatoire')
+    }
+    else if (allowPrix=="" &&  mabulService === 'sell'){
+      setErrorPrix('Obligatoire')
+    }
+    else if ( photos==""){
+      setErrorPhotos('Obligatoire')
+    }
+    else if (locations==""){
+      setErrorAddress('Obligatoire')
+    }
+  
+    else{
+     
+      console.log('suiiivivvvvvvvvvv',`${prixOne}-${prixTwo}` );
+      // dispatch(update_into_demand({ values,description:descriptionn }))
+      if(mabulService === 'organize'){
+        dispatch(update_into_demand({ description: descriptionn,title:title,prevoir:prevoir }))
+      }
+      else if(mabulService === 'sell'){
+        dispatch(update_into_demand({ description: descriptionn,title:title,prix:!Promooo?prix:`${prixOne}-${prixTwo}`}))
+      }
+      else{
+        dispatch(update_into_demand({ description: descriptionn,title:title }))
+      }
+      mabulService === 'sell'
+        ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 90 })
+        : this[RBSheet + 4].open()
+    }
   };
   const formik = useFormik({
     initialValues,
@@ -75,22 +216,17 @@ const MabulCommonRequestDetailScreen = (props) => {
     validationSchema,
   });
 
+  setdatea = (date) => {
+    setDate(date)
+  }
+  setdatee = (date) => {
+    setisEndDate(date)
+  }
+  setadresse = (add, coor) => {
 
-setdatea = (date) => {
-  setDate(date)
-}
-
-setdatee = (date) => {
-  setisEndDate(date)
-}
-setadresse=(add,coor)=>{
-
-  formik.setFieldValue('address',add )
-  formik.setFieldValue('coordinate',coor )
-}
-
-
-
+    formik.setFieldValue('address', add)
+    formik.setFieldValue('coordinate', coor)
+  }
 
   const conceptColor = mabulColors[props.mabulService];
   var iconEdit = Edit2(styles.icon);
@@ -109,19 +245,17 @@ setadresse=(add,coor)=>{
 
   return (
     <View style={{
-      flex: 1,     backgroundColor:'#F0F5F7', zIndex: 999,
+      flex: 1, backgroundColor: '#F0F5F7', zIndex: 999,
     }}>
-      <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]}      percent={props.process}
+      <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]} percent={props.process}
         isNoBackBtn={true}
         progressBarColor={conceptColor} />
-     
-    
-   
+
+
 
       <View style={styles.body}>
-       <ScrollView style={{  paddingBottom: 5 * hm }}>
-        
-          <Reinput style={{height:76*hm,paddingLeft:40*em, paddingTop: 20 * hm, marginTop:10*hm,backgroundColor:'#FFFFFF' }}
+        <ScrollView style={{ paddingBottom: 5 * hm }}>
+          <Reinput style={{ height: 76 * hm, paddingLeft: 40 * em, paddingTop: 20 * hm, marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
             label='Écrit un titre '
             autoFocus={true}
             // icon={iconEdit}
@@ -131,400 +265,428 @@ setadresse=(add,coor)=>{
             labelActiveColor="#6A8596"
             labelColor="#6A8596"
             paddingBottom={25 * em}
-         />
-          <Text style={{paddingLeft:40*em,color:'#6A8596',fontSize:11*em,fontFamily:'Lato-Italic',marginTop:5*hm,marginBottom:10*hm}}>(68 caractères maximum)</Text>
-   
-   
-   
+            // value={formik.values.title}
+            // onBlur={formik.handleBlur('title')}
+            // onChangeText={formik.handleChange('title')}
+            value={title}
+            onChangeText={(e) =>titles(e)}
+          />
+            <Text style={styles.descerrorText}>{errortitle}</Text>
+          {/* {formik.errors.title && formik.touched.title && <Text style={styles.descerrorText}>{formik.errors.title}</Text>} */}
+          <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic', marginTop: 5 * hm, marginBottom: 10 * hm }}>(68 caractères maximum)</Text>
+
+
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm }]}
             onPress={() => this[RBSheet + 1].open()}
           >
-        
             <Text style={styles.contentDesc}>Description</Text>
-            <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
-          </TouchableOpacity>
-   {
-     mabulService==='organize'?
-     <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
-            onPress={() => this[RBSheet + 6].open()}
-          >
-            <View style={{  flexDirection: "row" ,justifyContent:'space-between',marginRight:30*em }}>
-              <Text style={[styles.contentDesc,{paddingRight:180*em}]}>À prévoir</Text>
-              
-              <Flechedroite width={14 * em} height={14 * hm} />
-            </View>
-            <Text style={styles.contentDescSub} >Les participants doivent ramener</Text>
 
+            {!allowdescription ?
+              <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+              :
+              <Text style={styles.contentDescSubb} >{descriptionn}</Text>
+            } 
+          </TouchableOpacity>
+          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
+
+          {
+            mabulService === 'organize' ?
+            <>
+              <TouchableOpacity
+                style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+                onPress={() => this[RBSheet + 6].open()}
+              >
+                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                  <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>À prévoir</Text>
+                  <Flechedroite width={14 * em} height={14 * hm} />
+                </View>
+                {/* <Text style={styles.contentDescSub} >Les participants doivent ramener</Text> */}
+
+                {!allprevoir ?
+              <Text style={styles.contentDescSub} >Les participants doivent ramener</Text>
+              :
+              <Text style={styles.contentDescSubb} >{prevoir}</Text>
+            }
               </TouchableOpacity>
-     :
-     <></>
-   }
-   
+               <Text style={styles.descerrorText}>{errorPrevoir}</Text>
+               </>
+              :
+              <></>
+          }
+
           <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
+            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
             onPress={() => this[RBSheet + 2].open()}
           >
-            <View style={{  flexDirection: "row" ,justifyContent:'space-between',marginRight:30*em }}>
-              <Text style={[styles.contentDesc,{paddingRight:180*em}]}>Ajouter une date</Text>
+            <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+              <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
               <Flechedroite width={14 * em} height={14 * hm} />
             </View>
+            <Text style={styles.contentDescSubb} >{moment(demandData.date).format('Do MMM YYYY , h:mm:ss a')}</Text>
+            {/* <Text style={styles.contentDescSub} >{isDate.toString()}</Text>  */}
+          </TouchableOpacity>
+          <Text style={styles.descerrorText}>{errorDate}</Text>
+          {
+            mabulService === 'sell' ?
+            <>
+              <TouchableOpacity
+                style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+                onPress={() => this[RBSheet + 7].open()}
+              >
+                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                  <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajoute un prix</Text>
+
+                  <Flechedroite width={14 * em} height={14 * hm} />
+                </View>
+                {!allowPrix ?
+                <Text style={styles.contentDescSub} >Ex : 5,00 €</Text>
+                :
+                !Promooo ?<Text style={styles.contentDescSub} >{prix}</Text>:<Text style={styles.contentDescSub} >{prixOne}-{prixTwo}</Text>
+                }
               </TouchableOpacity>
-              {
-     mabulService==='sell'?
-     <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
-            onPress={() => this[RBSheet + 7].open()}
-          >
-            <View style={{  flexDirection: "row" ,justifyContent:'space-between',marginRight:30*em }}>
-              <Text style={[styles.contentDesc,{paddingRight:180*em}]}>Ajoute un prix</Text>
-              
-              <Flechedroite width={14 * em} height={14 * hm} />
+              <Text style={styles.descerrorText}>{errorPrix}</Text>
+              </>
+              :
+              <></>
+          } 
+
+          <View style={[styles.ActionButton, { height: 199 * hm, marginTop: 10 * hm, }]}>
+            <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
+              <Text style={styles.contentDesc}>Photos</Text>
+              <Text style={[styles.contentDesc, {color: '#A0AEB8', marginRight: 30 * em }]}>(3 max)</Text>
             </View>
-            <Text style={styles.contentDescSub} >Ex : 5,00 €</Text>
+            <Text style={[styles.contentDescSub, { marginTop: 10 * hm }]} >Les photos aident à mieux cerner ta demande.</Text>
 
+            <MabulAddPhoto requiredPhoto={()=>photo()} conceptColor={conceptColor} />
+          </View>
+          <Text style={styles.descerrorText}>{errorPhoto}</Text>
+
+          <View
+            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]} >
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
+              <TouchableOpacity onPress={() => this[RBSheet + 3].open()}>
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
               </TouchableOpacity>
-     :
-     <></>
-   }
+            </View>
+            {/* { addresss ===""?   */}
+            {/* <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>ABYMES 97139 Guadeloupe</Text>
+       :
+       <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>{addresss}</Text>
+     }  */}
+            {!demandData.address ?
+              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>ABYMES 97139 Guadeloupe</Text>
+              :
+              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
+            }
+          </View>
+          <Text style={styles.descerrorText}>{erroraddress}</Text>
+        </ScrollView>
 
-        <View style={[styles.ActionButton, { height: 199 * hm ,marginTop:10*hm,}]}>
-       <View style={{flexDirection:'row',marginTop:20*hm,justifyContent:'space-between'}}>
-       <Text style={styles.contentDesc}>Photos</Text>
-       <Text style={[styles.contentDesc,{color:'#A0AEB8',marginRight:30*em}]}>(3 max)</Text>
-        </View>
-            <Text style={[styles.contentDescSub,{marginTop:10*hm}]} >Les photos aident à mieux cerner ta demande.</Text>
-        
-<MabulAddPhoto  conceptColor={conceptColor}/>
-
-
-</View>
-<View
-            style={[styles.ActionButton, { height: 90 * hm ,marginTop:10*hm,}]}
-           
-          >
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-              
-
-              <Text style={[styles.contentDesc,{marginBottom:10*hm}]}>Lieu</Text>
-              <TouchableOpacity   onPress={() => this[RBSheet + 3].open()}>
-              <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:conceptColor,marginRight:30*em}}>Modifier</Text>
-</TouchableOpacity>
-              </View>
- <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>ABYMES 97139 Guadeloupe</Text>
-
-              </View>
-              </ScrollView>
-        
-       
       </View>
-    
+
       <View style={{ flex: 0.1 }}>
+        <RBSheet
+          ref={ref => {
+            this[RBSheet + 1] = ref;
+          }}
+          height={hm * 630}
 
-<RBSheet
-  ref={ref => {
-    this[RBSheet + 1] = ref;
-  }}
-  height={hm * 630}
+          openDuration={250}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'rgba(209,226,237,0.9)'
+            },
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
 
-  openDuration={250}
-  customStyles={{
-    wrapper:{
-      backgroundColor: 'rgba(209,226,237,0.9)'
-    },
-    container: {
-      borderTopLeftRadius: 28 * em,
-      borderTopRightRadius: 28 * em,
-    
-    }
-  }}
->
-  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+            }
+          }}
+        >
+          <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
+          </View>
 
-    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
-  </View>
+          <View style={styles.container}>
+            <Reinput style={{ paddingTop: 15 * em, marginRight: 30 * em, marginLeft: 30 * em }}
+              label={`Cela permet à ton entourage de mieux 
+             comprendre ta demande`}
+              underlineColor="#BFCDDB"
+              multiline={true}
+              activeColor={conceptColor}
+              labelActiveColor="#6A8596"
+              labelColor="#6A8596"
+              labelActiveTop={-38}
+              height={30 * hm}
+              paddingBottom={10 * em}
+              value={descriptionn}
+              onChangeText={(e) => descr(e)}
+            />
+          </View>
+          <OkModal conceptColor={conceptColor} showDescription={() =>des()} hideDescription={() =>hide()} okoModal={() => this[RBSheet + 1].close()} closeModal={() => this[RBSheet + 1].close()} />
+        </RBSheet>
 
-  <View style={styles.container}>
+        <RBSheet
+          ref={ref => {
+            this[RBSheet + 2] = ref;
+          }}
+          height={hm * 630}
+          openDuration={250}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'rgba(209,226,237,0.9)'
+            },
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
+            }
+          }}
+        >
+          <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
 
+            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Date</Text>
+          </View>
 
-  <Reinput style={{ paddingTop: 15 * em ,marginRight:30*em,marginLeft:30*em}}
-            label={`Cela permet à ton entourage de mieux 
-comprendre ta demande`}
-            underlineColor="#BFCDDB"
-            multiline={true}
-            activeColor={conceptColor}
-            labelActiveColor="#6A8596"
-            labelColor="#6A8596"
-            labelActiveTop={-38}
-            height={30*hm}
-            paddingBottom={10 * em}
-             value={formik.values.description}
-            onBlur={formik.handleBlur('description')}
-            onChangeText={formik.handleChange('description')}
-/>        
-  
-
-
-
-
-
-  </View>
-  <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 1].close()} closeModal={ () =>  this[RBSheet + 1].close()}/>
-</RBSheet>
-
-
-<RBSheet
-  ref={ref => {
-    this[RBSheet + 2] = ref;
-  }}
-  height={hm * 630}
-
-  openDuration={250}
-  customStyles={{
-    wrapper:{
-      backgroundColor: 'rgba(209,226,237,0.9)'
-    },
-    container: {
-      borderTopLeftRadius: 28 * em,
-      borderTopRightRadius: 28 * em,
-    
-    }
-  }}
->
-  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
-
-    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Date</Text>
-  </View>
-
-  <View style={styles.container}>
-<MabulAddDate Datea={isDate} setdatea={this.setdatea} setdatee={this.setdatee} conceptColor={conceptColor} closeModal={ () =>  this[RBSheet + 2].close()}/>
- </View>
-</RBSheet>
+          <View style={styles.container}>
+            <MabulAddDate
+              // callback={(date)=>changeDate(date)} 
+              // Datea={isDate} 
+              // setdatea={this.setdatea}
+              //  setdatee={this.setdatee}      
+              requiredDate={()=>date()}
+              conceptColor={conceptColor} closeModal={() => this[RBSheet + 2].close()}
+            // conceptColor={conceptColor} closeModal={ (date) => {setDate(date),this[RBSheet + 2].close()}}
+            />
+          </View>
+        </RBSheet>
 
 
+        <RBSheet
+          ref={ref => {
+            this[RBSheet + 3] = ref;
+          }}
+          height={hm * 630}
+
+          openDuration={250}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'rgba(209,226,237,0.9)'
+            },
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
+            }
+          }}
+        >
+          <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Lieu</Text>
+          </View>
+          <View style={styles.container}>
+            <MabulAddLieu
+             hideDescription={() =>{}}
+            requiredLocation={()=>location()}
+             conceptColor={conceptColor} setadresse={this.setadresse} closeModal={() => this[RBSheet + 3].close()} />
+          </View>
+        </RBSheet>
+
+        <RBSheet
+          ref={ref => {
+            this[RBSheet + 4] = ref;
+          }}
+          height={hm * 630}
+
+          openDuration={250}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'rgba(209,226,237,0.9)'
+            },
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
+
+            }
+          }}
+        >
+
+          <View style={{ marginLeft: em * 30, marginRight: em * 30, paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+              <Fleche />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+
+              <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
+            </TouchableOpacity>
+
+          </View>
+
+          <View style={{ paddingTop: 20 * hm, }}>
+
+            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
+          </View>
+
+          <MabulRechercheContact data={demandData} mabulService={mabulService} conceptColor={conceptColor} />
+          {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
+        </RBSheet>
 
 
-<RBSheet
-  ref={ref => {
-    this[RBSheet + 3] = ref;
-  }}
-  height={hm * 630}
+        <RBSheet
+          ref={ref => {
+            this[RBSheet + 6] = ref;
+          }}
+          height={hm * 630}
+          openDuration={250}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'rgba(209,226,237,0.9)'
+            },
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
 
-  openDuration={250}
-  customStyles={{
-    wrapper:{
-      backgroundColor: 'rgba(209,226,237,0.9)'
-    },
-    container: {
-      borderTopLeftRadius: 28 * em,
-      borderTopRightRadius: 28 * em,
-    
-    }
-  }}
->
-  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+            }
+          }}
+        >
+          <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>À prévoir</Text>
+          </View>
+          <View style={styles.container}>
+            <Reinput style={{ paddingTop: 15 * em, marginRight: 30 * em, marginLeft: 30 * em }}
+              label={`Écris ce que ton invité ramène …`}
+              underlineColor="#BFCDDB"
+              multiline={true}
+              activeColor={conceptColor}
+              labelActiveColor="#6A8596"
+              labelColor="#6A8596"
+              labelActiveTop={-38}
+              height={30 * hm}
+              paddingBottom={10 * em}
+              // value={formik.values.prevoir}
+              // onBlur={formik.handleBlur('prevoir')}
+              // onChangeText={formik.handleChange('prevoir')}
+            value={prevoir}
+            onChangeText={(e)=> precr(e)}       
+            />
+            {/* {formik.errors.prevoir && formik.touched.prevoir && <Text style={styles.descerrorText}>{formik.errors.prevoir}</Text>} */}
 
-    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Lieu</Text>
-  </View>
 
-  <View style={styles.container}>
-<MabulAddLieu conceptColor={conceptColor} setadresse={this.setadresse} closeModal={ () =>  this[RBSheet + 3].close()}/>
- </View>
-</RBSheet>
+            <Text style={{ marginLeft: 30 * em, bottom: 20 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8' }} >Sépare chaque mot avec des virgules</Text>
 
 
+            <View style={styles.SwitchbuttonWrapper}>
 
-<RBSheet
-  ref={ref => {
-    this[RBSheet + 4] = ref;
-  }}
-  height={hm * 630}
 
-  openDuration={250}
-  customStyles={{
-    wrapper:{
-      backgroundColor: 'rgba(209,226,237,0.9)'
-    },
-    container: {
-      borderTopLeftRadius: 28 * em,
-      borderTopRightRadius: 28 * em,
-    
-    }
-  }}
->
+              <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
+                <Text style={styles.SwitchTitle}>Obligatoire</Text>
+              </View>
 
-<View style={{  marginLeft: em * 30,marginRight: em * 30,paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
-                <Fleche />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
-
-                <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
-              </TouchableOpacity>
+              <Switch
+                trackColor={{ false: "white", true: conceptColor }}
+                thumbColor={true ? "white" : conceptColor}
+                value={true}
+              />
 
             </View>
+          </View>
+          <OkModal conceptColor={conceptColor}
+            //  onPress={formik.handleSubmit} 
+            hideDescription={() =>hidepriviour()}
+            showDescription={() =>pre()}
+            okoModal={() => this[RBSheet + 6].close()} closeModal={() => this[RBSheet + 6].close()} />
+        </RBSheet>
 
-  <View style={{ paddingTop: 20 * hm, }}>
+        <RBSheet
+          ref={ref => {
+            this[RBSheet + 7] = ref;
+          }}
+          height={hm * 630}
 
-    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
-  </View>
+          openDuration={250}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'rgba(209,226,237,0.9)'
+            },
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
+            }
+          }}
+        >
+          <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
 
-<MabulRechercheContact data={demandData} mabulService={mabulService} conceptColor={conceptColor}/>
-  {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
-</RBSheet>
+            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Prix</Text>
+          </View>
 
+          <View style={styles.container}>
 
-<RBSheet
-  ref={ref => {
-    this[RBSheet + 6] = ref;
-  }}
-  height={hm * 630}
+            {Promo ?
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TextInput placeholder="5€"
+                  style={[{ width: 148 * em, marginLeft: 30 * em }, styles.BoxPrice]}
+                  // value={formik.values.prix}
+                  // onBlur={formik.handleBlur('prix')}
+                  // onChangeText={formik.handleChange('prix')}
+                  value={prixOne}
+                  onChangeText={(e)=> prexpreone(e)}  
+                />
+                <TextInput placeholder="3,99€" style={[{ width: 148 * em, marginRight: 30 * em }, styles.BoxPrice]}
+                  // value={formik.values.promo}
+                  // onBlur={formik.handleBlur('promo')}
+                  // onChangeText={formik.handleChange('promo')}
+                  value={prixTwo}
+                  onChangeText={(e)=> prexpretwo(e)}  
+                   />
 
-  openDuration={250}
-  customStyles={{
-    wrapper:{
-      backgroundColor: 'rgba(209,226,237,0.9)'
-    },
-    container: {
-      borderTopLeftRadius: 28 * em,
-      borderTopRightRadius: 28 * em,
-    
-    }
-  }}
->
-  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+              </View>
+              :
+              <TextInput placeholder="5€" style={[{ width: 310 * em }, styles.BoxPrice]} value={formik.values.prix}
+                // onBlur={formik.handleBlur('prix')}
+                // onChangeText={formik.handleChange('prix')}
+                value={prix}
+                onChangeText={(e)=> prexprecr(e)}  
+              />
+            }
 
-    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>À prévoir</Text>
-  </View>
-
-  <View style={styles.container}>
-
-
-  <Reinput style={{ paddingTop: 15 * em ,marginRight:30*em,marginLeft:30*em}}
-            label={`Écris ce que ton invité ramène …`}
-            underlineColor="#BFCDDB"
-            multiline={true}
-            activeColor={conceptColor}
-            labelActiveColor="#6A8596"
-            labelColor="#6A8596"
-            labelActiveTop={-38}
-            height={30*hm}
-            paddingBottom={10 * em}
-            value={formik.values.prevoir}
-            onBlur={formik.handleBlur('prevoir')}
-            onChangeText={formik.handleChange('prevoir')}
-            
-/>        
-  
-
-<Text style={{ marginLeft:30*em,bottom:20*hm,fontFamily:'Lato-Italic',fontSize:12*em,color:'#A0AEB8'}} >Sépare chaque mot avec des virgules</Text>
-
-
-<View style={styles.SwitchbuttonWrapper}>
-
-
-<View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
-  <Text style={styles.SwitchTitle}>Obligatoire</Text>
-</View>
-
-<Switch
-  trackColor={{ false: "white", true: conceptColor }}
-  thumbColor={true ? "white" : conceptColor}
-  value={true}
-  />
-
-</View>
-  </View>
-  
-  <OkModal conceptColor={conceptColor} okoModal={() =>  this[RBSheet + 6].close()} closeModal={ () =>  this[RBSheet + 6].close()}/>
-</RBSheet>
-
-<RBSheet
-  ref={ref => {
-    this[RBSheet + 7] = ref;
-  }}
-  height={hm * 630}
-
-  openDuration={250}
-  customStyles={{
-    wrapper:{
-      backgroundColor: 'rgba(209,226,237,0.9)'
-    },
-    container: {
-      borderTopLeftRadius: 28 * em,
-      borderTopRightRadius: 28 * em,
-    
-    }
-  }}
->
-  <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
-
-    <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Prix</Text>
-  </View>
-
-  <View style={styles.container}>
-
-{Promo ?
-<View style={{flexDirection:'row',justifyContent:'space-between'}}>
-<TextInput placeholder="5€"
- style={[{width:148*em,marginLeft:30*em},styles.BoxPrice]}
- value={formik.values.prix}
- onBlur={formik.handleBlur('prix')}
- onChangeText={formik.handleChange('prix')}
- 
- />
-<TextInput placeholder="3,99€" style={[{width:148*em,marginRight:30*em},styles.BoxPrice]}
-value={formik.values.promo}
-onBlur={formik.handleBlur('promo')}
-onChangeText={formik.handleChange('promo')} />
-
-</View>
-
-:
-  <TextInput placeholder="5€" style={[{width:310*em},styles.BoxPrice]} value={formik.values.prix}
-  onBlur={formik.handleBlur('prix')}
-  onChangeText={formik.handleChange('prix')}/>
-
-}
-
-<View style={styles.SwitchbuttonWrapper}>
+            <View style={styles.SwitchbuttonWrapper}>
 
 
-<View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
-  <Text style={styles.SwitchTitle}>Activer promotion</Text>
-</View>
+              <View style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
+                <Text style={styles.SwitchTitle}>Activer promotion</Text>
+              </View>
 
-<Switch
-  trackColor={{ false: "white", true: conceptColor }}
-  thumbColor={Promo ? "white" : conceptColor}
-        value={Promo}
-        onValueChange={(Promo) => setPromo(Promo)} 
-  />
+              <Switch
+                trackColor={{ false: "white", true: conceptColor }}
+                thumbColor={Promo ? "white" : conceptColor}
+                value={Promo}
+                onValueChange={(Promo) => setPromos(Promo)}
+              />
 
-</View>
-<Text style={{bottom:50*hm,color:conceptColor,fontFamily:'Lato-Semibold',fontSize:18*em,marginLeft:30*em}}>Une promo sur ce prix ?</Text>
+            </View>
+            <Text style={{ bottom: 50 * hm, color: conceptColor, fontFamily: 'Lato-Semibold', fontSize: 18 * em, marginLeft: 30 * em }}>Une promo sur ce prix ?</Text>
 
-  </View>
-  <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 7].close()} closeModal={ () =>  this[RBSheet + 7].close()}/>
-</RBSheet>
+          </View>
+          <OkModal
+            hideDescription={() =>hideprix()}
+            showDescription={() =>prexpre()}
+          conceptColor={conceptColor} okoModal={() => this[RBSheet + 7].close()} closeModal={() => this[RBSheet + 7].close()} />
+        </RBSheet>
 
-<MabulPubButton
-        text={"Publier"}
+        <MabulPubButton
+          text={"Publier"}
           color={hexToRGB(conceptColor)}
           style={styles.nextBtn}
-          onPress={()=> onSubmit()
-            
-          }
+          onPress={()=> onSubmit()}
+          // onPress={formik.handleSubmit}
         />
-</View>
+      </View>
 
     </View>
   );
 };
 
 const styles = {
-  BoxPrice:{ backgroundColor:"#F0F5F7",height:80*hm,borderRadius:20*em,justifyContent:'center',alignSelf:'center',textAlign:'center',fontSize:25*em,fontFamily:"Lato-Regular"},
+  BoxPrice: { backgroundColor: "#F0F5F7", height: 80 * hm, borderRadius: 20 * em, justifyContent: 'center', alignSelf: 'center', textAlign: 'center', fontSize: 25 * em, fontFamily: "Lato-Regular" },
   SwitchTitle: {
     flex: 1,
     color: "#6A8596",
@@ -539,7 +701,7 @@ const styles = {
     alignItems: "center",
     paddingLeft: 30 * em,
     paddingRight: 30 * em,
-    paddingTop:90*hm
+    paddingTop: 90 * hm
   },
   ActionButton: {
     overflow: 'hidden',
@@ -583,9 +745,10 @@ const styles = {
     bottom: 30 * hm,
     left: 40 * hm,
     color: "red",
+    marginTop:15*hm
   },
   body: {
-    backgroundColor:'#F0F5F7',
+    backgroundColor: '#F0F5F7',
     flex: 1,
     justifyContent: 'space-between',
   },
@@ -606,15 +769,13 @@ const styles = {
   listCaption: { color: '#6A8596' },
   listComment: { fontSize: 13 * em, lineHeight: 17 * em, color: '#6A8596' },
   nextBtn: {
-    width:315*em,
+    width: 315 * em,
     alignSelf: 'center',
-   bottom:10*hm
+    bottom: 10 * hm
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
-  contentDesc:{fontFamily:'Lato-Regular',fontSize:16*em,color:'#6A8596',paddingLeft:40*em},
-  contentDescSub:{marginTop:3*hm,fontFamily:'Lato-Italic',fontSize:12*em,color:'#A0AEB8',paddingLeft:40*em}
-
+  contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },
+  contentDescSub: { marginTop: 3 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8', paddingLeft: 40 * em },
+  contentDescSubb: { marginTop: 3 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: "#1E2D60", paddingLeft: 40 * em }
 };
-
-
 export default MabulCommonRequestDetailScreen;

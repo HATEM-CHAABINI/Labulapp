@@ -25,7 +25,7 @@ Geocoder.init(google_api);
 //////////
 const MabulAddDate = (props) => {
   const dispatch = useDispatch()
-  // const { demandData } = useSelector((state) => state.demandReducer);
+  const { demandData } = useSelector((state) => state.demandReducer);
   const conceptColor = props.conceptColor;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isEndDatePickerVisible, setisEndDatePickerVisible] = useState(false);
@@ -34,6 +34,8 @@ const MabulAddDate = (props) => {
   const [isSwitch, setSwitch] = useState(false);
   const [showEndDataView, setshowEndDataView] = useState(false)
   const [loading, setloading] = useState(false)
+
+ 
   const initialValues = {
     address: '',
     coordinate: {}
@@ -83,6 +85,8 @@ const MabulAddDate = (props) => {
   const handleConfirm = (date) => {
     // let datee = toTimestamp(date)
     setDate(date)
+    // console.log('seldate .........',date)
+    // props.callback(date);
     hideDatePicker();
   };
   const hideendDatePicker = () => {
@@ -97,10 +101,16 @@ const MabulAddDate = (props) => {
     setisEndDatePickerVisible(true);
   };
   const okoModal=()=>{
-    props.setdatea(isDate);
-    props.setdatee(isEndDate)
-    props.closeModal()
+    // props.setdatea(isDate);
+    // props.setdatee(isEndDate);
+    // props.closeModal(isDate)
+    //  setTimeout(()=>{props.closeModal(isDate)},0)
+    dispatch(update_into_demand({date:isDate}))
+    props.requiredDate(),
+     props.closeModal(isDate)
+    console.log("okmodal date aa gai",isDate)
   }
+
   function toTimestamp(strDate) {
     var datum = Date.parse(strDate);
     return datum / 1000;
@@ -164,7 +174,20 @@ const MabulAddDate = (props) => {
         
         </View>
       </KeyboardAvoidingView>
-      <OkModal conceptColor={conceptColor} closeModal={ () =>  props.closeModal()} okoModal={()=>okoModal()}/>
+      {/* <OkModal conceptColor={conceptColor}
+      //  closeModal={ () => props.closeModal()} 
+      //  okoModal={()=>{props.closeModal(isDate)}}
+      okoModal={()=>{okoModal()}}
+       /> */}
+
+
+       {/* ruf work */}
+     <OkModal conceptColor={conceptColor}
+      hideDescription={() =>{}}
+      showDescription={() =>{}}
+      okoModal={()=>okoModal()} closeModal={ () => props.closeModal() }
+       />
+       {/* ruf work */}
 
     </View>
   );

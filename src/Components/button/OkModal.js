@@ -8,14 +8,15 @@ import { KeyboardAvoidingView } from 'react-native';
 import Cta from '../../assets/svg/icons/navigation/Cta';
 import { View } from 'react-native-animatable';
 const OkModal = (props) => {
+
   const resetModal= () => {
-  
-    props.closeModal()
+    props.closeModal(),
+    props.hideDescription()
   };
 
-  const presok=()=>{
-    
+  const presok=()=>{  
     props.okoModal(),
+    props.showDescription(),
     props.closeModal()
   }
   return (

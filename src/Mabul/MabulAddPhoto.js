@@ -14,10 +14,12 @@ import { CrossGray, EditAddPhoto, Family } from '../assets/svg/icons';
 // import ImagePicker from 'react-native-image-crop-picker';
 var ImagePicker = NativeModules.ImageCropPicker;
 let numColumns = 3;
+
 const MabulAddPhoto = (props) => {
-//   const dispatch = useDispatch()
+  // console.log('photos screens',props);
+  const dispatch = useDispatch()
 //   const conceptColor = mabulColors[mabulService];
-//   const { demandData } = useSelector((state) => state.demandReducer);
+  const { demandData } = useSelector((state) => state.demandReducer)
   const [images, setimages] = useState({ images: [] })
   const [loading, setloading] = useState(false)
   const [buttonloading, setbuttonloading] = useState(false)
@@ -37,7 +39,6 @@ const MabulAddPhoto = (props) => {
         const ref = storage().ref().child(`users/${auth().currentUser.uid}/demands/${Math.random().toString(36).substring(2, 12)}`)
         await ref.put(blob).then(async (result) => {
           await ref.getDownloadURL().then((result) => { imagesBlob.push({ uri: result, id: index }) })
-
         });
       }),
 
@@ -57,9 +58,20 @@ const MabulAddPhoto = (props) => {
       includeExif: true,
       forceJpg: true,
     }).then(images => {
+      var img= [];
+      img.push({img1:images[0].path})
+      img.push({img2:images[1].path})
+      img.push({img3:images[2].path})
       setimages({ images: images })
-
-
+      props.requiredPhoto(),
+      console.log('hello images',images.length)
+      console.log('hello images path',img)
+      if(images.length>=3){
+        dispatch(update_into_demand({ images:img }))
+      }
+      else{
+        alert("You can  choose min 3 photos !!") 
+      }
     }).catch(e => alert(e));
   }
 
@@ -71,9 +83,11 @@ const MabulAddPhoto = (props) => {
       setimages({ images: arr });
     }, 50);
   }
-
+  // console.log('photos screens for submit..',images);
   const submit = (images) => {
+ 
     // uploadeImage(images.images)
+ 
     setimages({ images: images })
     dispatch(update_into_demand({ images: images }))
 
@@ -166,9 +180,7 @@ const MabulAddPhoto = (props) => {
                   <CommentText text="Clique ici" color="#40CDDE" />
                 </TouchableOpacity> : null}
               </View>
-
             </SafeAreaView>
-         
           }
         </View>
      

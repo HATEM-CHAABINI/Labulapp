@@ -6,7 +6,7 @@ import ProfileCommonTextInput from '../../../Components/textInput/ProfileCommonT
 import CommonText from '../../../text/CommonText';
 import SearchBox from '../../../Components/other/SearchBox';
 import CommonCheckBox from '../../../Components/checkbox/CommonCheckBox';
-import { StatusBar, View, Text, Platform, Alert } from 'react-native';
+import { StatusBar, View, Text, Platform, Alert ,KeyboardAvoidingView} from 'react-native';
 import User from '../../../model/user/User';
 import { feedbackIcons } from '../../../constants/icons';
 import { useFormik } from 'formik';
@@ -15,6 +15,8 @@ import { updateUserProfile } from '../../../services/firebase'
 import auth from '@react-native-firebase/auth'
 import { addProfile, updateProfile } from '../../../redux/actions/profile';
 import { useDispatch } from 'react-redux';
+import TitleText from '../../../text/TitleText';
+import OkModalchange from '../../../Components/button/OkModalchange';
 const insertInformations = [
     { title: 'Mon email', inputTexts: [{ commentInput: 'Mon email', value: 'mathieu@labul.com' }] },
     {
@@ -145,6 +147,20 @@ export default (props) => {
         onSubmit,
         validationSchema,
     });
+    const okm =()=>{
+        Alert.alert(
+            "Changer l'e-mail",
+            `Voulez-vous vraiment changer votre adresse e-mail en ${formik.values.email}?`,
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "OK", onPress: formik.handleSubmit }
+            ]
+        )
+    }
     return (
         <Modal
             isVisible={props.visible}
@@ -153,6 +169,18 @@ export default (props) => {
             backdropColor={'#1E2D60'}
             swipeDirection={'up'}
             onBackButtonPress={() => props.onPress()}>
+
+<KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          
+       
+          flex: 1,
+          justifyContent: 'flex-start',
+  
+        }}
+
+      >
             <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
             <View
                 style={{
@@ -167,27 +195,19 @@ export default (props) => {
                 }}
                 opacity={0.5}
             />
-            <ProfileModalHeader
+            {/* <ProfileModalHeader
                 title={insertInfo.title}
                 style={styles.header}
                 loading={loading}
                 setloading={setloading}
                 onCancelPress={() => props.onPress()}
-                onFinishPress={() => Alert.alert(
-                    "Changer l'e-mail",
-                    `Voulez-vous vraiment changer votre adresse e-mail en ${formik.values.email}?`,
-                    [
-                        {
-                            text: "Cancel",
-                            onPress: () => console.log("Cancel Pressed"),
-                            style: "cancel"
-                        },
-                        { text: "OK", onPress: formik.handleSubmit }
-                    ]
-                )}
-            />
+                onFinishPress={() => }
+            /> */}
+                  <TitleText text={"Modifier mon email"} textAlign={"left"} style={{marginTop:55*hm,marginBottom:5*hm}}/>
+
             <ProfileCommonTextInput
                 style={styles.input}
+                styletxt={{fontFamily:'Lato-Regular'}}
                 text={"Mon email"}
                 value={formik.values.email}
                 onFocus={true}
@@ -196,6 +216,12 @@ export default (props) => {
                 onChangeText={formik.handleChange('email')}
             />
             {formik.errors.email && formik.touched.email && <Text style={styles.descerrorText}>{formik.errors.email}</Text>}
+            </KeyboardAvoidingView>
+
+            <OkModalchange conceptColor={"#40CDDE"}txt={"Enregistrer"} closeModal={props.onPress} 
+            okoModal={okm}
+            style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center',alignItems:'center'}}/>
+
         </Modal>
     );
 };
@@ -219,7 +245,7 @@ const styles = {
         color: "red",
     },
     header: { marginBottom: 10 * hm, marginTop: 27 * hm },
-    input: { marginTop: 25 * hm },
+    input: { marginTop: 25 * hm},
     forgotPsswd: { lineHeight: 18 * em, marginTop: 78 * hm, textAlign: 'center' },
     comment: { fontSize: 12 * em, lineHeight: 20 * em, marginTop: 15 * hm },
     listItem: { paddingHorizontal: 10 * em, marginBottom: 35 * hm },

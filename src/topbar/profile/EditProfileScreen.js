@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux';
 import { getUserProfile, getassest, deleteUser, deleteUserData } from '../../services/firebase'
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../../redux/actions/profile';
+import { Text } from 'react-native';
 
 require('firebase/firestore')
 require('firebase/firebase-storage')
@@ -176,7 +177,7 @@ const EditProfileScreen = (props) => {
           style: 'cancel',
         },
         {
-          text: 'OK', onPress: () => {
+          text: 'Supprimer', onPress: () => {
             setdeleteUseLoading(true)
             deleteUserData(profileData.uid).then(res => {
               if (res) {
@@ -200,12 +201,15 @@ const EditProfileScreen = (props) => {
 
   return (
     <ProfileCommonHeader
-      title="Modifier mon profil"
+      title="Editer mon profil"
       onCancel={() => Actions.pop()}
       onFinish={() => { saveProfile() }}
       loading={loadingSet}
     >
-      <View style={styles.listItem}>
+      <View style={{
+        width: '100%',
+    paddingHorizontal: 30 * em,
+    backgroundColor: '#ffffff'}}>
         {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : <ProfileCommonAvatar
           initialSize={36 * em}
           fullName={profileDataCurrent.firstName + ' ' + profileDataCurrent.lastName}
@@ -226,16 +230,7 @@ const EditProfileScreen = (props) => {
         }}
       />
 
-      <ProfileInformationListItem
-        caption={'Ma disponibilité'}
-        placeholder={!profileDataCurrent.availability ? true : false}
-        value={profileDataCurrent.availability || 'Ajoute ta disponiblité'}
-        style={styles.listItem}
-        onPress={() => {
-          setInputItemKey(6);
-          setavailabilityModal(!availabilityModal);
-        }}
-      />
+    
       <ProfileInformationListItem
         caption={'Ma présentation'}
         placeholder={!profileDataCurrent.presentation ? true : false}
@@ -243,13 +238,13 @@ const EditProfileScreen = (props) => {
           profileDataCurrent.presentation ||
           'Salut ! Je suis …\nPrésente toi ici. Ce texte sera affiché pour vous invitations et apparaitra sur ta page profil. Soit court, avent et efficace. Vivons ensemble !'
         }
-        commentText={profileDataCurrent.presentation ? null : 'Les 100 premiers caractères feront office de ta présentation.'}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(7);
           setpresentationModal(!presentationModal);
         }}
       />
+      <Text style={{marginTop:4*hm, paddingHorizontal: 30 * em,color:'#6A8596',fontSize:11*em,fontFamily:'Lato-Italic'}}>Les 100 premiers caractères feront office de ta présentation)</Text>
       <ProfileInformationListItem
         caption={'Mes atouts (3 max)'}
         placeholder

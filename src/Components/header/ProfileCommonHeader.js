@@ -5,6 +5,8 @@ import CommonText from '../../text/CommonText';
 import TitleText from '../../text/TitleText';
 import CommonHeader from './CommonHeader';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
+import { BackArrowBlack } from '../../assets/svg/icons';
+import { Actions } from 'react-native-router-flux';
 
 const ProfileCommonHeader = (props) => {
   return (
@@ -17,11 +19,20 @@ const ProfileCommonHeader = (props) => {
       backgroundSpeed={10}
       renderFixedHeader={() => (
         <CommonHeader
-          rightTxt={'Terminer'}
+          rightTxt={'Aperçu'}
           style={{ position: 'absolute', top: 40 * hm }}
           onRightPress={props.onFinish}
           onLeftPress={props.onCancel}
-          leftTxt={'Annuler'}
+          // leftTxt={'Annuler'}
+          leftView={
+          <TouchableOpacity
+          style={{
+            position: 'absolute',
+            paddingLeft: 15 * em,
+          }}
+          onPress={() => Actions.pop()}>
+          <BackArrowBlack width={20 * em} height={18 * hm} />
+        </TouchableOpacity>}
           rightTxtStyle={styles.rightTxt}
           loading={props.loading}
         />
@@ -51,7 +62,7 @@ const styles = {
     marginTop: 81 * hm,
     fontFamily: 'Lato-Black'
   },
-  rightTxt: { color: '#40CDDE', fontSize: 16 * em, marginRight: 12 * em },
+  rightTxt: { fontFamily:'Lato-Bold',fontSize:16*em,color: '#40CDDE',  marginRight: 12 * em },
 };
 
 export default ProfileCommonHeader;

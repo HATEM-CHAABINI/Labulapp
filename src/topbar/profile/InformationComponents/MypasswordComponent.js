@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity,KeyboardAvoidingView } from 'react-native'
 import { em, WIDTH, hm } from '../../../constants/consts';
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
@@ -17,6 +17,8 @@ import auth from '@react-native-firebase/auth'
 import { addProfile } from '../../../redux/actions/profile';
 import { useDispatch } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import TitleText from '../../../text/TitleText';
+import OkModalchange from '../../../Components/button/OkModalchange';
 export default (props) => {
     // console.log(insertInfo.inputTexts[0].toString())
     // const insertInfo = insertInformations[props.itemKey - 1];
@@ -95,6 +97,19 @@ export default (props) => {
             backdropColor={'#1E2D60'}
             swipeDirection={'up'}
             onBackButtonPress={() => props.onPress()}>
+           
+           <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          
+       
+          flex: 1,
+          justifyContent: 'flex-start',
+  
+        }}
+
+      >
+           
             <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
             <View
                 style={{
@@ -109,15 +124,12 @@ export default (props) => {
                 }}
                 opacity={0.5}
             />
-            <ProfileModalHeader
-                title={props.heading}
-                style={styles.header}
-                loading={loading}
-                setloading={setloading}
-                onCancelPress={() => props.onPress()}
-                onFinishPress={formik.handleSubmit}
-            />
+
+<TitleText text={"Modifier mot de passe"} textAlign={"left"} style={{marginTop:55*hm,marginBottom:5*hm}}/>
+
             <ProfileCommonTextInput
+                        placestyle={{fontSize:15*em}}
+
                 style={styles.input}
                 text={"Mot de passe actuel"}
                 value={formik.values.old_password}
@@ -128,6 +140,8 @@ export default (props) => {
             />
             {formik.errors.old_password && formik.touched.old_password && <Text style={styles.descerrorText}>{formik.errors.old_password}</Text>}
             <ProfileCommonTextInput
+                        placestyle={{fontSize:15*em}}
+
                 style={styles.input}
                 text={"Nouveau mot de passe"}
                 value={formik.values.new_passsword}
@@ -138,6 +152,8 @@ export default (props) => {
             />
             {formik.errors.new_passsword && formik.touched.new_passsword && <Text style={styles.descerrorText}>{formik.errors.new_passsword}</Text>}
             <ProfileCommonTextInput
+                        placestyle={{fontSize:15*em}}
+                        // styletxt={{fontFamily:'Lato-Regular',fontSize:10*em,color:'#6A8596'}}
                 style={styles.input}
                 text={"Confirmation de nouveau mot de passe"}
                 value={formik.values.confirm_password}
@@ -147,14 +163,26 @@ export default (props) => {
                 onChangeText={formik.handleChange('confirm_password')}
             />
             {formik.errors.confirm_password && formik.touched.confirm_password && <Text style={styles.descerrorText}>{formik.errors.confirm_password}</Text>}
-            <TouchableOpacity onPress={() => { props.onPress(), Actions.MotdePasseOublie() }}>
+            {/* <TouchableOpacity onPress={() => { props.onPress(), Actions.MotdePasseOublie() }}>
                 <CommonText
                     color={'#40CDDE'}
                     text={'Mot de passe oublié?'}
                     style={styles.forgotPsswd}
 
                 />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            </KeyboardAvoidingView>
+
+<OkModalchange conceptColor={"#40CDDE"} 
+
+// onFinishPress={formik.handleSubmit}
+closeModal={props.onPress} 
+
+style={{
+    paddingBottom:15*hm,alignContent:'center',alignItems:'center'
+    }}/>
+
+
         </Modal>
     );
 };

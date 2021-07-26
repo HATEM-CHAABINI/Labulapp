@@ -4,7 +4,7 @@ import { em, hm } from '../../constants/consts';
 import CommonHeader from '../../Components/header/CommonHeader';
 import Switch from '../../Components/other/Switch';
 import CommonListItem from '../../adapter/CommonListItem';
-import { Address, BackArrowBlack, BackArrowWhite, NotificationYellow } from '../../assets/svg/icons';
+import { Address, BackArrowBlack, BackArrowWhite, LocationBlues, NotificationYellow } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 import auth from "@react-native-firebase/auth";
 import { getUserProfile, updateUserProfile } from '../../services/firebase'
@@ -15,6 +15,7 @@ const MySettingScreen = () => {
   const { profileData } = useSelector((state) => state.profileReducer);
   const dispatch = useDispatch();
   const [state, setstate] = useState(profileData.activeNotification ? 1 : 2)
+  const [location, setlocation] = useState()
   // useEffect(() => {
   //   getUserProfile()
 
@@ -34,6 +35,35 @@ const MySettingScreen = () => {
       </TouchableOpacity>
 
       <View style={styles.line} />
+      <CommonListItem
+        style={styles.listItem}
+        icon={
+          <View style={[styles.icon, { backgroundColor: 'rgba(64, 205, 222,.15)' }]}>
+            <LocationBlues height={22.39 * em} width={18.76 * em} />
+          </View>
+        }
+        title="Localisation"
+        titleStyle={styles.listTitle}
+        subTitleStyle={styles.listComment}
+        rightView={
+          <Switch
+            switchWidth={49 * em}
+            switchHeight={27 * em}
+            switchdirection="ltr"
+            switchBorderColor="#ffffff"
+            switchBackgroundColor="#40CDDE"
+            btnBorderColor="red"
+            btnBackgroundColor="#FFFFFF"
+            initialValue={0}
+            value={state}
+            setstate={val => { setstate(val), updateUserProfile(profileData.uid, { activeNotification: val === 1 ? true : false }).then(res => { dispatch(updateProfile({ activeNotification: val === 1 ? true : false })) }) }}
+            style={styles.switch}
+          />
+        }
+        subTitle="Ma localisation est activé"
+      />
+            <View style={styles.line} />
+
       <CommonListItem
         style={styles.listItem}
         icon={
@@ -61,7 +91,6 @@ const MySettingScreen = () => {
         }
         subTitle="Activez la réception de notifications"
       />
-      <View style={styles.line} />
       <View style={styles.rectangle} />
       <TouchableOpacity
         onPress={() =>
@@ -141,6 +170,7 @@ const styles = {
     fontFamily: 'Lato-Medium',
     lineHeight: 14 * em,
     textAlign: 'left',
+    color:'#9093A3',
     width: 170 * em,
   },
   switch: {

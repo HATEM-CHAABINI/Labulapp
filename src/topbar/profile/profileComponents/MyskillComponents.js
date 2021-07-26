@@ -11,6 +11,9 @@ import User from '../../../model/user/User';
 import CheckBox from '@react-native-community/checkbox';
 // import CheckboxList from 'rn-checkbox-list';
 import _ from 'lodash'
+import OkModalchange from '../../../Components/button/OkModalchange';
+import TitleText from '../../../text/TitleText';
+import { ScrollView } from 'react-native';
 // import CheckBox from 'react-native-check-box'
 const ProfileNameComponent = (props) => {
 const [seleted, setseleted] = useState([])
@@ -142,27 +145,42 @@ const onSearch = (search) => {
          }}
         opacity={0.5}
       />
-      <ProfileModalHeader
-        title={props.title}
-        style={styles.header}
-        onCancelPress={() => {props.onPress()}}
-        onFinishPress={ ()=>{getselecteditem()}}
-      />
-      
+    
+   <View style={{flexDirection:'row',alignItems:'center'}}> 
+      <TitleText text={"Mes atouts"} textAlign={"left"} style={{marginTop:55*hm,marginBottom:10*hm}}/>
+         <Text style={{marginLeft:10*em,marginTop:55*hm,marginBottom:10*hm,color:'#6A8596',fontFamily:'Lato-Italic',fontSize:15*em}}>(3 max)</Text>
+   </View>
+<ScrollView>
         <SearchBox style={{ marginBottom: 15 * em, height: 44 * em, marginTop: 40 * em }} onSearch={onSearch} onClear={onClear} />
   {!loading && value.data.map((val) => {
 
           return (
         <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',padding:20}} onPress={()=>{onChecked(val.id)}}>
             <Text style={{fontSize:18,color:'#1E2D60',fontFamily: 'Lato-Bold', fontSize: 18 * em, lineHeight: 23 * hm, textAlign: 'left'}}>{val.name}</Text>
-            <CheckBox  value={val.checked} onValueChange={()=>{onChecked(val.id)}} style={{padding:20}}/>
+            <CheckBox 
+             value={val.checked} 
+             onValueChange={()=>{onChecked(val.id)}}
+              style={{padding:20}}
+        
+                  boxType={'square'}
+
+                  onFillColor={'#40CDDE'}
+                  onTintColor={'white'}
+                  onCheckColor={'white'}
+
+                />
           </TouchableOpacity>
   );
         })
     }
-        
-
-      
+          {/* <ProfileModalHeader
+        title={props.title}
+        style={styles.header}
+        onCancelPress={() => {props.onPress()}}
+        onFinishPress={ ()=>{getselecteditem()}}
+      /> */}
+        <OkModalchange txt={"Ok"} conceptColor={"#40CDDE"} okoModal={getselecteditem} closeModal={props.onPress} style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',marginRight:0*em,marginLeft:0*em,alignContent:'center',alignItems:'center'}}/>
+        </ScrollView>
      </Modal>
   );
 };

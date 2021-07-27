@@ -9,6 +9,8 @@ import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { EnterpriseInner } from '../../../assets/svg/icons';
 import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
+import Reinput from "reinput"
+import { Text } from 'react-native';
 
 const CreateProfessionalAccountScreen = (props) => {
   return (
@@ -18,12 +20,77 @@ const CreateProfessionalAccountScreen = (props) => {
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <EnterpriseInner width={33 * em} height={30 * em} />
-          <TitleText text={'Identité'} style={styles.titleText} />
-          <CommonTextInput
-            text={'Quel est le nom de ton activité ?'}
-            isPasswordInput={false}
-            style={styles.commonInput}
-          />
+          <TitleText text={'Complète le compte'} style={styles.titleText} />
+     <Text style={{fontFamily:'Lato-italic',fontSize:12*em,color:'#A0AEB8', marginBottom: 3 * hm }}>* champs obligatoires</Text>
+          
+
+        
+
+<Reinput
+  label='Quel est le nom de l’entreprise ? *'
+  autoCorrect={false}
+
+  underlineColor="#BFCDDB"
+  underlineActiveColor="#41D0E2"
+  labelActiveColor="#BFCDDB"
+  labelColor="#BFCDDB"
+  paddingBottom={12 * hm}
+  clearButtonMode="while-editing"
+  color='#1E2D60'
+  fontFamily='Lato-Bold'
+  fontSize={16 * em}
+  keyboardType="email-address"
+  selectionColor={'#41D0E2'}
+marginBottom={-7*hm}
+
+/>
+
+
+
+<Reinput
+  label='Quel est le secteur d’activité ? *'
+  autoCorrect={false}
+
+  underlineColor="#BFCDDB"
+  underlineActiveColor="#41D0E2"
+  labelActiveColor="#BFCDDB"
+  labelColor="#BFCDDB"
+  paddingBottom={12 * hm}
+  clearButtonMode="while-editing"
+  color='#1E2D60'
+  fontFamily='Lato-Bold'
+  fontSize={16 * em}
+  keyboardType="email-address"
+  selectionColor={'#41D0E2'}
+  marginBottom={-7*hm}
+
+
+/>
+
+
+<Reinput
+  label='Avez-vous un numéro Siret ?'
+  autoCorrect={false}
+
+  underlineColor="#BFCDDB"
+  underlineActiveColor="#41D0E2"
+  labelActiveColor="#BFCDDB"
+  labelColor="#BFCDDB"
+  paddingBottom={12 * hm}
+  clearButtonMode="while-editing"
+  color='#1E2D60'
+  fontFamily='Lato-Bold'
+  fontSize={16 * em}
+  keyboardType="email-address"
+  selectionColor={'#41D0E2'}
+  marginBottom={-7*hm}
+
+
+/>
+
+
+
+
         </View>
         </View>
 
@@ -46,7 +113,7 @@ const CreateProfessionalAccountScreen = (props) => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#7398FC'
+    backgroundColor: '#1E2D60'
   },
   header: {
     // marginTop: 27 * hm,
@@ -62,16 +129,16 @@ const styles = {
     borderTopRightRadius: 28 * em,
     justifyContent: 'space-between',
   },
-  popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
-  titleText: { fontFamily: 'Lato-Black', marginTop: 11 * em, marginBottom: 35 * em },
-  btnNext: { backgroundColor: '#7398FD' ,
+  popupTopView: { paddingTop: 20 * hm, alignItems: 'center', width: '80%' },
+  titleText: { fontFamily: 'Lato-Black', marginTop: 11 * hm, marginBottom: 3 * hm },
+  btnNext: { backgroundColor: '#9FE7F0' ,
   overflow: 'hidden',
   borderRadius: 18 * em,
   height: 59 * hm,
 
   width: 315 * em,
 
-  bottom: 30},
+  bottom: 14*hm},
   commonInput: {
     width: '100%',
     height: 52 * em,

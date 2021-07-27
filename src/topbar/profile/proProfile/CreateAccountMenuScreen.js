@@ -16,9 +16,11 @@ const CreateAccountMenuScreen = () => {
       <View style={styles.popupView}>
         <ProfileCommonListItem
           style={styles.listItem}
-          text="Professional"
+          text="Professionnel/ Entreprise"
           icon={Enterprise(iconSize)}
           iconColor={hexToRGB('#7398FD', 0.24)}
+          titleStyle={styles.titleStyle}
+
           onPress={() => Actions.createProfessionalAccount({ accountType: 'enterprise' })}
         />
         <View style={styles.line} />
@@ -28,6 +30,8 @@ const CreateAccountMenuScreen = () => {
           text="Association"
           icon={Association(iconSize)}
           iconColor={hexToRGB('#7398FD', 0.24)}
+          titleStyle={styles.titleStyle}
+
           onPress={() => Actions.createAssociationAccount({ accountType: 'association' })}
         />
         <View style={styles.line} />
@@ -37,6 +41,8 @@ const CreateAccountMenuScreen = () => {
           text="Collectivité/ institutionnel"
           icon={Institution(iconSize)}
           iconColor={hexToRGB('#7398FD', 0.24)}
+          titleStyle={styles.titleStyle}
+
           onPress={() => Actions.createCommunityAccount({ accountType: 'institution' })}
         />
         <View style={styles.line} />
@@ -48,7 +54,7 @@ const CreateAccountMenuScreen = () => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#7398FD',
+    backgroundColor: '#1E2D60',
   },
   header: {
     marginRight: 30 * em,
@@ -73,6 +79,11 @@ const styles = {
     height: 1 * em,
     backgroundColor: '#F0F5F7',
   },
+  titleStyle:{
+    fontFamily:'Lato-Regular',
+    fontSize:18*em,
+    color:'#1E2D60'
+  }
 };
 
 export default CreateAccountMenuScreen;

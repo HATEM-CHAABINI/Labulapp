@@ -16,6 +16,7 @@ import {
   AssociationInformation,
   EnterpriseInformation,
   InstitutionInformation,
+  Editprofile,
 } from '../../../assets/svg/icons';
 import { feedbackIcons } from '../../../constants/icons';
 import AccountType from '../../../model/user/AccountType';
@@ -113,9 +114,17 @@ const ProProfileHomeScreen = (props) => {
         <View style={styles.listBox}>
           <CommentText text={'Mon compte'} style={styles.caption} />
           <ProfileCommonListItem
+            text={'Editer mon profil'}
+            style={styles.listItem}
+            icon={Editprofile(iconSize)}
+            onPress={() => {
+              Actions.editProProfile({ userProfile: userProfile })            }}
+          />
+          <View style={styles.line1} />
+          <ProfileCommonListItem
             text={'Mes informations'}
             style={styles.listItem}
-            icon={informationIcon[props.route.params.accountType] || informationIcon.enterprise}
+            icon={Information(iconSize)}
             onPress={() => {
               Actions.proInformation();
             }}

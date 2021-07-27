@@ -9,21 +9,43 @@ import CommonText from '../../../text/CommonText';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { AddressBlue } from '../../../assets/svg/icons';
 import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
+import { Text } from 'react-native';
+import Reinput from "reinput";
 
 const ProRegisterAddressScreen = (props) => {
   console.log(props.accountType)
 
   return (
     <View style={styles.container}>
-      <AccountCommonHeaderpro style={styles.header} rightTxtStyle={{paddingBottom:19*hm}}rightTxt="Annuler"  />
+      <AccountCommonHeaderpro style={styles.header} />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <AddressBlue width={21 * em} height={25.5 * em} />
           <TitleText text={'Localisation'} style={styles.titleText} />
-          <CommonTextInput text={'Saisis ton adresse complète'} isPasswordInput={false} style={styles.commonInput} />
-          <View style={styles.viewText}>
-            <CommonText color={'#7398FD'} text={'Me géolocaliser'} />
-          </View>
+          <Text style={{fontFamily:'Lato-italic',fontSize:12*em,color:'#A0AEB8', marginBottom: 3 * hm }}>* champs obligatoires</Text>
+
+
+          <Reinput
+  label='Quel est le nom de l’entreprise ? *'
+  autoCorrect={false}
+
+  underlineColor="#BFCDDB"
+  underlineActiveColor="#41D0E2"
+  labelActiveColor="#BFCDDB"
+  labelColor="#BFCDDB"
+  paddingBottom={12 * hm}
+  clearButtonMode="while-editing"
+  color='#1E2D60'
+  fontFamily='Lato-Bold'
+  fontSize={16 * em}
+  keyboardType="email-address"
+  selectionColor={'#41D0E2'}
+marginBottom={-7*hm}
+
+/>        
+
+<Text style={{alignSelf:'flex-start',color:'#40CDDE',fontSize:16*em}}>Utiliser ma position</Text>
+
         </View>
         </View>
 
@@ -34,7 +56,7 @@ const ProRegisterAddressScreen = (props) => {
         <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
           <CommonButton
             text={'Contiuer'}
-            onPress={() => Actions.proRegisterEmail({ accountType: props.accountType })}
+            onPress={() => Actions.home({ tabNav: 'ProProfile', accountType: props.accountType })}
             style={styles.btnNext}
           />
         </View>
@@ -46,7 +68,7 @@ const ProRegisterAddressScreen = (props) => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#7398FD',
+    backgroundColor: '#1E2D60'
   },
   header: {
     // height: '12%',
@@ -67,15 +89,15 @@ const styles = {
     justifyContent: 'space-between',
   },
   popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
-  titleText: { fontFamily: 'Lato-Black', marginTop: 15.5 * em, marginBottom: 35 * em },
-  btnNext: { backgroundColor: '#7398FD' ,
+  titleText: { fontFamily: 'Lato-Black', marginTop: 11 * hm, marginBottom: 3 * hm },
+  btnNext: { backgroundColor: '#9FE7F0' ,
   overflow: 'hidden',
   borderRadius: 18 * em,
   height: 59 * hm,
 
   width: 315 * em,
 
-  bottom: 30},
+  bottom: 14*hm},
   viewText: {
     marginTop: 25 * em,
   },

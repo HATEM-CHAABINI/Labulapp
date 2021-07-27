@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, ImageBackground, StatusBar } from 'react-native';
-import { em, hexToRGB } from '../../../constants/consts';
+import { em, hexToRGB, hm } from '../../../constants/consts';
 import ProfileInformationListItem from '../../../adapter/ProfileInformationListItem';
 import ProfileCommonHeader from '../../../Components/header/ProfileCommonHeader';
 import CommonButton from '../../../Components/button/CommonButton';
@@ -10,6 +10,13 @@ import { Actions } from 'react-native-router-flux';
 import Modal from 'react-native-modal';
 import { ProAddCover } from '../../../assets/svg/icons';
 import { feedbackIcons } from '../../../constants/icons';
+import RBSheet from "react-native-raw-bottom-sheet";
+import OkModal from '../../../Components/button/OkModal';
+import Reinput from "reinput"
+import OkModalchange from '../../../Components/button/OkModalchange';
+import MyPresentationComponent from '../profileComponents/MyPresentationComponent'
+import ModalEdit from './ModalEdit/ModalEdit';
+
 const updateUserPrfile = {
   avatar: require('../../../assets/images/avatar_curology.png'),
   cover: require('../../../assets/images/img_curology.png'),
@@ -22,14 +29,25 @@ const updateUserPrfile = {
     'Des soins de la peau personnalisés pour les besoins uniques de votre peau. Maintenant disponible dans un ensemble avec nettoyant et hydratant!',
 };
 const EditProProfileScreen = (props) => {
-  const [, setInputItemKey] = useState(1);
+  const [inputItemKey, setInputItemKey] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  
+  const [profileDataCurrent, setprofileDataCurrent] = useState(
+    {
+     presentation: '',
+    })
+    const [EntrepriseModal, setEntrepriseModal] = useState(false)
+    const [LocalisationModal, setLocalisationModal] = useState(false)
+    const [HoraireModal, setHoraireModal] = useState(false)
+    const [ContactModal, setContactModal] = useState(false)
+    const [SiteModal, setSiteModal] = useState(false)
+    const [PresentationModal, setPresentationModal] = useState(false)
 
   const [userProfile, setUserProfileOnChanged] = useState(props.userProfile);
   return (
     <ProfileCommonHeader
-      title="Modifier mon profil"
+      title="Editer mon profil"
       onCancel={() => Actions.pop()}
       onFinish={() => Actions.proProfileOverview({ userProfile: updateUserPrfile })}>
       <ImageBackground style={styles.bgView} source={userProfile.cover} blurRadius={8}>
@@ -64,45 +82,163 @@ const EditProProfileScreen = (props) => {
         <CommentText text="Ajouter mon logo" style={styles.addPhotoBtn} color="#40CDDE" />
       </View>
       <ProfileInformationListItem
-        caption={'Mon identité'}
-        value={userProfile.name}
-        style={styles.listItem}
-        onPress={() => {
-          setInputItemKey(5);
-          setModalVisible(!modalVisible);
-        }}
-      />
-      <ProfileInformationListItem
-        caption={'Ma présentation'}
-        placeholder={!userProfile.presentation ? true : false}
+        caption={'Nom de l’entreprise'}
+        placeholder={!profileDataCurrent.presentation ? true : false}
         value={
-          !userProfile.presentation
-            ? 'Présente ton activité en quelques lignes. Les 100 premiers caractères feront office de la présentation de ton activité.'
-            : userProfile.presentation
-        }
+          'Le Bar à T-Shirt' }
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(7);
-          setModalVisible(!modalVisible);
+          setEntrepriseModal(!EntrepriseModal);
         }}
       />
+
+<ProfileInformationListItem
+        caption={'Localisation'}
+        placeholder={!profileDataCurrent.presentation ? true : false}
+        value={
+          'Impasse Sysiphe Immeuble Mahogany, Derriere Autour de Bébé Baie Mahault, 97122, Guadeloupe' }
+        style={styles.listItem}
+        onPress={() => {
+          setInputItemKey(7);
+          setLocalisationModal(!LocalisationModal);
+        }}
+      />
+
+<ProfileInformationListItem
+        caption={'Horaires'}
+        placeholder={!profileDataCurrent.presentation ? true : false}
+        value={
+          'Ouvert du lundi au vendredi \nDe 14h à 16h ' }
+        style={styles.listItem}
+        onPress={() => {
+          setInputItemKey(7);
+          setHoraireModal(!HoraireModal);
+        }}
+      />
+<ProfileInformationListItem
+        caption={'Contact'}
+        placeholder={!profileDataCurrent.presentation ? true : false}
+        value={
+          '+590 690 74 38 58' }
+        style={styles.listItem}
+        onPress={() => {
+          setInputItemKey(7);
+          setContactModal(!ContactModal);
+        }}
+      />
+<ProfileInformationListItem
+        caption={'Site web'}
+        placeholder={!profileDataCurrent.presentation ? true : false}
+        style={styles.listItem}
+        onPress={() => {
+          setInputItemKey(7);
+          setSiteModal(!SiteModal);
+        }}
+      />
+
+
+  
       <ProfileInformationListItem
-        caption={'Mes services'}
+        caption={'Présentation de l’entreprise'}
         placeholder
-        value={'Sélectionne le(s) service(s) de ton activité'}
+        value={'Le Bar à t-shirt est une entreprise spécialisée en impression textile personnalisée. Vous pouvez y imprimer tous vos textiles en un temps record. Laissez vous tenter par la créativité'}
         style={styles.listItem}
         options={userProfile.specs}
         onPress={() => {
           setInputItemKey(8);
-          setModalVisible(!modalVisible);
+          setPresentationModal(!PresentationModal);
         }}
       />
+      
       <CommonButton
         text={'Supprimer mon compte'}
         style={styles.deleteBtn}
         textStyle={{ color: '#F9547B' }}
         onPress={() => setDeleteModalVisible(true)}
       />
+
+<ModalEdit
+        visible={EntrepriseModal}
+        itemKey={inputItemKey}
+        title={'Nom de l’entreprise'}
+        text={'Nom de l’entreprise'}
+        value={profileDataCurrent.presentation}
+        profileDataCurrent={profileDataCurrent}
+        setprofileDataCurrent={setprofileDataCurrent}
+        onPress={() => {
+          setEntrepriseModal(false);
+        }}
+      />
+      <ModalEdit
+        visible={LocalisationModal}
+        itemKey={inputItemKey}
+        title={'Localisation'}
+        text={'Adresse complet'}
+        value={profileDataCurrent.presentation}
+        profileDataCurrent={profileDataCurrent}
+        setprofileDataCurrent={setprofileDataCurrent}
+        onPress={() => {
+          setLocalisationModal(false);
+        }}
+      />
+   
+  <ModalEdit
+        visible={HoraireModal}
+        itemKey={inputItemKey}
+        title={'Horaires'}
+        text={'Horaires d’ouverture'}
+        value={profileDataCurrent.presentation}
+        profileDataCurrent={profileDataCurrent}
+        setprofileDataCurrent={setprofileDataCurrent}
+        onPress={() => {
+          setHoraireModal(false);
+        }}
+      />
+
+<ModalEdit
+        visible={ContactModal}
+        itemKey={inputItemKey}
+        title={'Contact'}
+        keyboardType={"numeric"}
+        text={'Numéro de téléphone'}
+        value={profileDataCurrent.presentation}
+        profileDataCurrent={profileDataCurrent}
+        setprofileDataCurrent={setprofileDataCurrent}
+        onPress={() => {
+          setContactModal(false);
+        }}
+      />
+        <ModalEdit
+        visible={SiteModal}
+        itemKey={inputItemKey}
+        title={'Site web'}
+        text={'Site web'}
+        value={profileDataCurrent.presentation}
+        profileDataCurrent={profileDataCurrent}
+        setprofileDataCurrent={setprofileDataCurrent}
+        onPress={() => {
+          setSiteModal(false);
+        }}
+      />
+        <ModalEdit
+        visible={PresentationModal}
+        itemKey={inputItemKey}
+        title={'Présentation'}
+        text={'Présentation de l’entreprise'}
+        value={profileDataCurrent.presentation}
+        profileDataCurrent={profileDataCurrent}
+        setprofileDataCurrent={setprofileDataCurrent}
+        onPress={() => {
+          setPresentationModal(false);
+        }}
+      />
+
+
+
+
+
+
       <Modal
         isVisible={deleteModalVisible}
         backdropColor={'#04040F66'}
@@ -135,6 +271,7 @@ const EditProProfileScreen = (props) => {
             </TouchableOpacity>
           </View>
         </View>
+        
       </Modal>
       {/* <ProfileCommonModal
         visible={modalVisible}
@@ -144,6 +281,7 @@ const EditProProfileScreen = (props) => {
           setModalVisible(false);
         }}
       /> */}
+      
     </ProfileCommonHeader>
   );
 };

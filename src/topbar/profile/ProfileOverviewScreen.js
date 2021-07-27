@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView,Text } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, WIDTH, hm } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
@@ -48,8 +48,10 @@ const ProfileOverviewScreen = (props) => {
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <CommonHeader
-          rightTxt={'Modifier mon profil'}
-          rightTxtStyle={{ fontSize: 14 * em }}
+          rightTxt={  <View style={{backgroundColor:'white',height:25*hm,width:66*em,borderRadius:14*em,alignItems:'center',justifyContent: "center"}}>
+          <Text Style={{ fontSize: 14 * em,color:'#1E2D60',fontFamily:'Lato-Black' }}>Fermer</Text>
+          </View>}
+          rightTxtStyle={{ fontSize: 14 * em,color:'#1E2D60',fontFamily:'Lato-Black' }}
           style={styles.header}
           onLeftPress={() =>
             Actions.home({

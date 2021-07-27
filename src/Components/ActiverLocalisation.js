@@ -137,7 +137,7 @@ const getlocation=()=>{
         }}
         resizeMode={'contain'}
       />
-      <View style={{flex: 1}}>
+      <View style={{flex: 1}}> */}
         <View style={styles.ActionWrapper}>
           <Text
             style={{

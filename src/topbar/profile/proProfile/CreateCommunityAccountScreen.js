@@ -9,6 +9,8 @@ import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
 import { InstitutionInner } from '../../../assets/svg/icons';
 import AccountCommonHeaderpro from '../../../Components/header/AccountCommonHeaderpro';
+import Reinput from "reinput"
+import { Text } from 'react-native';
 const CreateCommunityAccountScreen = (props) => {
   console.log(props.type1)
   return (
@@ -17,12 +19,50 @@ const CreateCommunityAccountScreen = (props) => {
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <InstitutionInner width={35 * em} height={30 * em} />
-          {/* <TitleText text={'Identité'} style={styles.titleText} /> */}
-          <CommonTextInput
-            text={'Quel est le nom de ton collectivité/ institution ?'}
-            isPasswordInput={false}
-            style={styles.commonInput}
-          />
+          <TitleText text={'Complète le compte'} style={styles.titleText} />
+     <Text style={{fontFamily:'Lato-italic',fontSize:12*em,color:'#A0AEB8', marginBottom: 3 * hm }}>* champs obligatoires</Text>
+         
+<Reinput
+  label='Nom de l’institution ou collectivité *'
+  autoCorrect={false}
+
+  underlineColor="#BFCDDB"
+  underlineActiveColor="#41D0E2"
+  labelActiveColor="#BFCDDB"
+  labelColor="#BFCDDB"
+  paddingBottom={12 * hm}
+  clearButtonMode="while-editing"
+  color='#1E2D60'
+  fontFamily='Lato-Bold'
+  fontSize={16 * em}
+  keyboardType="email-address"
+  selectionColor={'#41D0E2'}
+marginBottom={-7*hm}
+
+/>
+
+
+
+<Reinput
+  label='Quel est le secteur d’activité ? *'
+  autoCorrect={false}
+
+  underlineColor="#BFCDDB"
+  underlineActiveColor="#41D0E2"
+  labelActiveColor="#BFCDDB"
+  labelColor="#BFCDDB"
+  paddingBottom={12 * hm}
+  clearButtonMode="while-editing"
+  color='#1E2D60'
+  fontFamily='Lato-Bold'
+  fontSize={16 * em}
+  keyboardType="email-address"
+  selectionColor={'#41D0E2'}
+  marginBottom={-7*hm}
+
+
+/>
+
         </View>
 
         </View>
@@ -42,10 +82,11 @@ const CreateCommunityAccountScreen = (props) => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#7398FC',
+    backgroundColor: '#1E2D60'
   },
   header: {
-    //height: '12%',
+    // marginTop: 27 * hm,
+
   },
   popupView: {
     flex: 1,
@@ -57,16 +98,19 @@ const styles = {
     borderTopRightRadius: 28 * em,
     justifyContent: 'space-between',
   },
-  popupTopView: { paddingTop: 39 * em, alignItems: 'center', width: '80%' },
-  titleText: { fontFamily: 'Lato-Black', marginTop: 11 * em, marginBottom: 35 * em },
-  btnNext: {
-    marginBottom: 30 * em,
-    backgroundColor: '#7398FC',
-  },
+  popupTopView: { paddingTop: 20 * hm, alignItems: 'center', width: '80%' },
+  titleText: { fontFamily: 'Lato-Black', marginTop: 11 * hm, marginBottom: 3 * hm },
+  btnNext: { backgroundColor: '#9FE7F0' ,
+  overflow: 'hidden',
+  borderRadius: 18 * em,
+  height: 59 * hm,
+
+  width: 315 * em,
+
+  bottom: 14*hm},
   commonInput: {
     width: '100%',
     height: 52 * em,
-    marginTop: 35 * em
   },
 };
 

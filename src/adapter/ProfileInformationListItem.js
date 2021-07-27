@@ -35,7 +35,7 @@ const ProfileInformationListItem = (props) => {
       subTitle={props.value}
       subTitleStyle={
         props.placeholder
-          ? { color: '#6A8596', lineHeight: 20 * em, marginRight: 30 * em }
+          ? { color: '#1E2D60',fontFamily:'Lato-Medium',fontSize:16*em, lineHeight: 20 * em, marginRight: 30 * em }
           : { color: '#1E2D60', fontSize: 16 * em, lineHeight: 19 * em, marginRight: 30 * em, fontFamily: 'Lato-Bold' }
       }
       comment={props.commentText}

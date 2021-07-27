@@ -23,7 +23,7 @@ const ProfileCommonListItem = (props) => {
       style={props.style}
       icon={props.icon && <View style={{ marginRight: 15 * em }}>{props.icon}</View>}
       title={props.text}
-      titleStyle={styles.textTitle}
+      titleStyle={[styles.textTitle,props.titleStyle]}
       subTitle={props.subText}
       rightView={
         <View style={{ justifyContent: 'center', flex: 1 }}>

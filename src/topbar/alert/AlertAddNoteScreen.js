@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Image, Text,KeyboardAvoidingView ,Switch } from 'react-native';
 import { hexToRGB, em, mabulColors, hm } from '../../constants/consts';
 import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
@@ -38,9 +38,14 @@ const AlertAddNoteScreen = (props) => {
       .required('Obligatoire')
     ,
   });
+  const Sheet1 = useRef(null)
+  const Sheet2 = useRef(null)
+  const Sheet3 = useRef(null)
+
+
   const onSubmit = values => {
 
-  this[RBSheet + 4].open()
+    Sheet3.current.open()
       
   };
   const formik = useFormik({
@@ -74,7 +79,7 @@ const AlertAddNoteScreen = (props) => {
     
            <TouchableOpacity
              style={[styles.ActionButton, { height: 90 * hm }]}
-             onPress={() => this[RBSheet + 1].open()}
+             onPress={() => Sheet1.current.open()}
            >
          
              <Text style={styles.contentDesc}>Description</Text>
@@ -89,7 +94,7 @@ const AlertAddNoteScreen = (props) => {
                
  
                <Text style={[styles.contentDesc,{marginBottom:10*hm}]}>Lieu</Text>
-               <TouchableOpacity   onPress={() => this[RBSheet + 3].open()}>
+               <TouchableOpacity   onPress={() => Sheet2.current.open()}>
                <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:conceptColor,marginRight:30*em}}>Modifier</Text>
  </TouchableOpacity>
                </View>
@@ -103,10 +108,7 @@ const AlertAddNoteScreen = (props) => {
      
        <View style={{ flex: 0.1 }}>
  
- <RBSheet
-   ref={ref => {
-     this[RBSheet + 1] = ref;
-   }}
+       <RBSheet ref={Sheet1} 
    height={hm * 630}
  
    openDuration={250}
@@ -151,7 +153,7 @@ const AlertAddNoteScreen = (props) => {
  
  
    </View>
-   <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 1].close()} closeModal={ () =>  this[RBSheet + 1].close()}/>
+   <OkModal conceptColor={conceptColor} okoModal={ () =>  Sheet1.current.close()} closeModal={ () =>  Sheet1.current.close()}/>
  </RBSheet>
  
  
@@ -159,10 +161,7 @@ const AlertAddNoteScreen = (props) => {
  
  
  
- <RBSheet
-   ref={ref => {
-     this[RBSheet + 3] = ref;
-   }}
+ <RBSheet ref={Sheet2} 
    height={hm * 630}
  
    openDuration={250}
@@ -183,17 +182,14 @@ const AlertAddNoteScreen = (props) => {
    </View>
  
    <View style={styles.container}>
-   <MabulAddLieu conceptColor={conceptColor} setadresse={this.setadresse} closeModal={ () =>  this[RBSheet + 3].close()}/>
+   <MabulAddLieu conceptColor={conceptColor} setadresse={this.setadresse} closeModal={ () =>  Sheet2.current.close()}/>
   </View>
  </RBSheet>
  
  
  
 
-<RBSheet
-  ref={ref => {
-    this[RBSheet + 4] = ref;
-  }}
+<RBSheet ref={Sheet3} 
   height={hm * 630}
 
   openDuration={250}
@@ -210,10 +206,10 @@ const AlertAddNoteScreen = (props) => {
 >
 
 <View style={{  marginLeft: em * 30,marginRight: em * 30,paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+              <TouchableOpacity onPress={() => Sheet3.current.close()}  >
                 <Fleche />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+              <TouchableOpacity onPress={() => Sheet3.current.close()}  >
 
                 <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
               </TouchableOpacity>

@@ -176,14 +176,20 @@ const AlertAddNoteScreen = (props) => {
      }
    }}
  >
-   <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
+     <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
  
-     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Lieu</Text>
-   </View>
- 
-   <View style={styles.container}>
-   <MabulAddLieu conceptColor={conceptColor} setadresse={this.setadresse} closeModal={ () =>  Sheet2.current.close()}/>
-  </View>
+ <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
+</View>
+
+<View style={styles.container}>
+
+
+   <MabulAddLieu conceptColor={conceptColor} setadresse={this.setadresse} />
+
+
+</View>
+<OkModal conceptColor={conceptColor} okoModal={ () =>  Sheet2.current.close()} closeModal={ () =>  Sheet2.current.close()}/>
+
  </RBSheet>
  
  

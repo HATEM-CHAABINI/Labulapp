@@ -24,7 +24,7 @@ const styles = {
     borderRadius: 20 * em,
     paddingVertical: 20 * em,
     width: "80%",
-    height:47*hm,
+    height:58*hm,
     backgroundColor: '#40CDDE',
     alignItems: 'center',
     justifyContent: 'center',

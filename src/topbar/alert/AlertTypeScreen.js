@@ -80,7 +80,7 @@ const styles = {
 
   width: 315 * em,
 
-  bottom: 30
+  bottom: 10*hm
 },
   textInput:{
     fontFamily:'Lato-Bold',

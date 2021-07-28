@@ -111,11 +111,7 @@ const MabulAddLieu = (props) => {
     
         </View>
       </KeyboardAvoidingView>
-      <OkModal conceptColor={conceptColor}
-          showDescription={() =>{}}
-          hideDescription={() =>{}}
-       okoModal={()=>onSubmit()} closeModal={ () => props.closeModal()}/>
-
+      
     </View>
   );
 };

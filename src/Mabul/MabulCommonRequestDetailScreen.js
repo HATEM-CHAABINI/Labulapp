@@ -487,8 +487,10 @@ const hidepriviour=()=>{
             <MabulAddLieu
              hideDescription={() =>{}}
             requiredLocation={()=>location()}
-             conceptColor={conceptColor} setadresse={this.setadresse} closeModal={() => this[RBSheet + 3].close()} />
+             conceptColor={conceptColor} setadresse={this.setadresse}  />
           </View>
+          <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 3].close()} closeModal={ () =>  this[RBSheet + 3].close()}/>
+
         </RBSheet>
 
         <RBSheet
@@ -771,7 +773,8 @@ const styles = {
   nextBtn: {
     width: 315 * em,
     alignSelf: 'center',
-    bottom: 10 * hm
+    bottom: 10 * hm,
+    height:58*hm
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },

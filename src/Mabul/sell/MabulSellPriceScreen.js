@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Platform,Text } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, mabulColors, hexToRGB, hm } from '../../constants/consts';
@@ -20,6 +20,7 @@ import MabulRechercheContact from '../MabulRechercheContact';
 
 const MabulSellPriceScreen = (props) => {
   const dispatch = useDispatch()
+  const Sheet1 = useRef(null)
   const [price, setprice] = useState('')
   const { demandData } = useSelector((state) => state.demandReducer);
 
@@ -60,7 +61,7 @@ const MabulSellPriceScreen = (props) => {
 
             disabled={price.length <= 0 ? true : false}
             onPress={() => {
-              this[RBSheet + 4].open()
+              Sheet1.current.open()
             }}
           />
  <CommonBigButton
@@ -76,10 +77,7 @@ const MabulSellPriceScreen = (props) => {
           />
 
       </View>
-      <RBSheet
-  ref={ref => {
-    this[RBSheet + 4] = ref;
-  }}
+      <RBSheet ref={Sheet1} 
   height={hm * 630}
 
   openDuration={250}
@@ -96,10 +94,10 @@ const MabulSellPriceScreen = (props) => {
 >
 
 <View style={{  marginLeft: em * 30,marginRight: em * 30,paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+              <TouchableOpacity onPress={() =>  Sheet1.current.close()}  >
                 <Fleche />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+              <TouchableOpacity onPress={() => Sheet1.current.close()}  >
 
                 <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
               </TouchableOpacity>
@@ -111,7 +109,7 @@ const MabulSellPriceScreen = (props) => {
     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
   </View>
 
-<MabulRechercheContact data={demandData} mabulService={"sell"} conceptColor={conceptColor}/>
+<MabulRechercheContact data={demandData} mabulService={"sell"} conceptColor={conceptColor} rb4={()=>Sheet1.current.close()}/>
   {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
 </RBSheet>
     </View>

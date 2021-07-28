@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Image, ImageBackground, FlatList } from 'react-native';
 import TitleText from '../text/TitleText';
 import { em, hm, mabulColors } from '../constants/consts';
@@ -119,7 +119,8 @@ const SelectedAvatarView = ({ avatar, userName }) => (
 );
 
 const MabulRechercheContact = (props) => {
-
+  const Sheet1 = useRef(null)
+  const Sheet2 = useRef(null)
   const [demandData, setdemandData] = useState(props.data)
 
   const mabulService = props.mabulService;
@@ -221,7 +222,8 @@ const MabulRechercheContact = (props) => {
         console.log(datas, "dhddbncnxcncncnncnc ", mabulService);
 
         setloadingSet(false);
-        this[RBSheet + 4].close()
+        // this[RBSheet + 4].close()
+        props.rb4()
         if (mabulService === 'Alerte') {
           // let data = {}
           firestore().collection('userAlerts').doc(auth().currentUser.uid)
@@ -297,7 +299,7 @@ const MabulRechercheContact = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" onSearch={() => this[RBSheet + 1].open()} onClear={onClear} />
+        <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" onSearch={() => Sheet1.current.open()} onClear={onClear} />
         <Text style={{ fontFamily: 'Lato-Italic', color: '#A0AEB8', fontSize: 13 * em, marginTop: 6 * hm }}>Choisis un ou plusieurs cercles, ou recherche un contact précis.</Text>
         <View style={{ height: 90 * em, marginTop: 25 * em, marginBottom: 25 * em }}>
           <FlatList horizontal={true} data={selectedList} renderItem={renderSelectedList} keyExtractor={(i) => i.id} />
@@ -378,10 +380,7 @@ const MabulRechercheContact = (props) => {
         }
       />
 
-      <RBSheet
-        ref={ref => {
-          this[RBSheet + 1] = ref;
-        }}
+<RBSheet ref={Sheet1} 
         height={hm * 630}
 
         openDuration={250}
@@ -413,7 +412,7 @@ const MabulRechercheContact = (props) => {
             keyExtractor={(i) => i.id}
             style={{ marginTop: 0 * hm }} />
         </View>
-        <OkModal closeModal={() => this[RBSheet + 1].close()} />
+        <OkModal closeModal={() => Sheet1.current.close()} />
       </RBSheet>
 
     </View>

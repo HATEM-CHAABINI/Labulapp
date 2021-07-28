@@ -227,7 +227,7 @@ const AlertAddNoteScreen = (props) => {
     <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
   </View>
 
-<MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor}/>
+<MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor} rb4={()=>Sheet3.current.close()}/>
   {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
 </RBSheet>
  

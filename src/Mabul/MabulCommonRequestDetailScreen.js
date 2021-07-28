@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Image, Text, KeyboardAvoidingView, Switch } from 'react-native';
 import TitleText from '../text/TitleText';
 import { hexToRGB, em, mabulColors, hm } from '../constants/consts';
@@ -35,6 +35,15 @@ const title = {
   need: 'Donne un titre à ta demande',
 };
 const MabulCommonRequestDetailScreen = (props) => {
+  const Sheet1 = useRef(null)
+  const Sheet2 = useRef(null)
+  const Sheet3 = useRef(null)
+  const Sheet4 = useRef(null)
+  const Sheet5 = useRef(null)
+  const Sheet6 = useRef(null)
+
+
+
   const dispatch = useDispatch()
   const { demandData } = useSelector((state) => state.demandReducer);
 
@@ -207,7 +216,7 @@ const hidepriviour=()=>{
       }
       mabulService === 'sell'
         ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 90 })
-        : this[RBSheet + 4].open()
+        : Sheet4.current.open()
     }
   };
   const formik = useFormik({
@@ -278,7 +287,7 @@ const hidepriviour=()=>{
 
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm }]}
-            onPress={() => this[RBSheet + 1].open()}
+            onPress={() => Sheet1.current.open()}
           >
             <Text style={styles.contentDesc}>Description</Text>
 
@@ -295,7 +304,7 @@ const hidepriviour=()=>{
             <>
               <TouchableOpacity
                 style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
-                onPress={() => this[RBSheet + 6].open()}
+                onPress={() => Sheet5.current.open()}
               >
                 <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
                   <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>À prévoir</Text>
@@ -317,7 +326,7 @@ const hidepriviour=()=>{
 
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
-            onPress={() => this[RBSheet + 2].open()}
+            onPress={() => Sheet2.current.open()}
           >
             <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
               <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
@@ -332,7 +341,7 @@ const hidepriviour=()=>{
             <>
               <TouchableOpacity
                 style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
-                onPress={() => this[RBSheet + 7].open()}
+                onPress={() => Sheet6.current.open()}
               >
                 <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
                   <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajoute un prix</Text>
@@ -366,7 +375,7 @@ const hidepriviour=()=>{
             style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]} >
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
-              <TouchableOpacity onPress={() => this[RBSheet + 3].open()}>
+              <TouchableOpacity onPress={() => Sheet3.current.open()}>
                 <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
               </TouchableOpacity>
             </View>
@@ -387,10 +396,8 @@ const hidepriviour=()=>{
       </View>
 
       <View style={{ flex: 0.1 }}>
-        <RBSheet
-          ref={ref => {
-            this[RBSheet + 1] = ref;
-          }}
+      <RBSheet ref={Sheet1} 
+
           height={hm * 630}
 
           openDuration={250}
@@ -425,13 +432,11 @@ const hidepriviour=()=>{
               onChangeText={(e) => descr(e)}
             />
           </View>
-          <OkModal conceptColor={conceptColor} showDescription={() =>des()} hideDescription={() =>hide()} okoModal={() => this[RBSheet + 1].close()} closeModal={() => this[RBSheet + 1].close()} />
+          <OkModal conceptColor={conceptColor} showDescription={() =>des()} hideDescription={() =>hide()} okoModal={() => Sheet1.current.close()} closeModal={() => Sheet1.current.close()} />
         </RBSheet>
 
-        <RBSheet
-          ref={ref => {
-            this[RBSheet + 2] = ref;
-          }}
+        <RBSheet ref={Sheet2} 
+
           height={hm * 630}
           openDuration={250}
           customStyles={{
@@ -456,17 +461,15 @@ const hidepriviour=()=>{
               // setdatea={this.setdatea}
               //  setdatee={this.setdatee}      
               requiredDate={()=>date()}
-              conceptColor={conceptColor} closeModal={() => this[RBSheet + 2].close()}
+              conceptColor={conceptColor} closeModal={() => Sheet2.current.close()}
             // conceptColor={conceptColor} closeModal={ (date) => {setDate(date),this[RBSheet + 2].close()}}
             />
           </View>
         </RBSheet>
 
 
-        <RBSheet
-          ref={ref => {
-            this[RBSheet + 3] = ref;
-          }}
+        <RBSheet ref={Sheet3} 
+
           height={hm * 630}
 
           openDuration={250}
@@ -489,14 +492,12 @@ const hidepriviour=()=>{
             requiredLocation={()=>location()}
              conceptColor={conceptColor} setadresse={this.setadresse}  />
           </View>
-          <OkModal conceptColor={conceptColor} okoModal={ () =>  this[RBSheet + 3].close()} closeModal={ () =>  this[RBSheet + 3].close()}/>
+          <OkModal conceptColor={conceptColor} okoModal={ () =>  Sheet3.current.close()} closeModal={ () =>  Sheet3.current.close()}/>
 
         </RBSheet>
 
-        <RBSheet
-          ref={ref => {
-            this[RBSheet + 4] = ref;
-          }}
+        <RBSheet ref={Sheet4} 
+
           height={hm * 630}
 
           openDuration={250}
@@ -513,10 +514,10 @@ const hidepriviour=()=>{
         >
 
           <View style={{ marginLeft: em * 30, marginRight: em * 30, paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+            <TouchableOpacity onPress={() => Sheet4.current.close()}  >
               <Fleche />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this[RBSheet + 4].close()}  >
+            <TouchableOpacity onPress={() => Sheet4.current.close()}  >
 
               <Text style={{ color: '#6A8596', fontSize: 14 * em, fontFamily: 'Lato-Medium' }} >Annuler</Text>
             </TouchableOpacity>
@@ -528,15 +529,13 @@ const hidepriviour=()=>{
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
           </View>
 
-          <MabulRechercheContact data={demandData} mabulService={mabulService} conceptColor={conceptColor} />
+          <MabulRechercheContact data={demandData} mabulService={mabulService} conceptColor={conceptColor} rb4={()=>Sheet4.current.close()} />
           {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
         </RBSheet>
 
 
-        <RBSheet
-          ref={ref => {
-            this[RBSheet + 6] = ref;
-          }}
+        <RBSheet ref={Sheet5} 
+
           height={hm * 630}
           openDuration={250}
           customStyles={{
@@ -595,13 +594,11 @@ const hidepriviour=()=>{
             //  onPress={formik.handleSubmit} 
             hideDescription={() =>hidepriviour()}
             showDescription={() =>pre()}
-            okoModal={() => this[RBSheet + 6].close()} closeModal={() => this[RBSheet + 6].close()} />
+            okoModal={() => Sheet5.current.close()} closeModal={() => Sheet5.current.close()} />
         </RBSheet>
 
-        <RBSheet
-          ref={ref => {
-            this[RBSheet + 7] = ref;
-          }}
+        <RBSheet ref={Sheet6} 
+
           height={hm * 630}
 
           openDuration={250}
@@ -671,7 +668,7 @@ const hidepriviour=()=>{
           <OkModal
             hideDescription={() =>hideprix()}
             showDescription={() =>prexpre()}
-          conceptColor={conceptColor} okoModal={() => this[RBSheet + 7].close()} closeModal={() => this[RBSheet + 7].close()} />
+          conceptColor={conceptColor} okoModal={() => Sheet6.current.close()} closeModal={() => Sheet6.current.close()} />
         </RBSheet>
 
         <MabulPubButton

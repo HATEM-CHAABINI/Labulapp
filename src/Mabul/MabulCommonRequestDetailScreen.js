@@ -59,48 +59,46 @@ const MabulCommonRequestDetailScreen = (props) => {
   const [photos, setPhotos] = useState(false)
   const [prevoir, setPrevoir] = useState('')
   const [allprevoir, setAllprevoir] = useState(false)
-  const [dates,setDates]=useState(false);
-  const [locations,setLocations]=useState(false);
-  const[error,setError]=useState('')
+  const [dates, setDates] = useState(false);
+  const [locations, setLocations] = useState(false);
+  const [error, setError] = useState('')
 
-  const[errortitle,setErrorTitle]=useState('')
-  const[errorDescription,setErrorDescription]=useState('')
-  const[errorDate,setErrorDate]=useState('')
-  const[errorPhoto,setErrorPhotos]=useState('')
-  const[erroraddress,setErrorAddress]=useState('')
-  const[errorPrevoir,setErrorPrevoir]=useState('')
-  const[errorPrix,setErrorPrix]=useState('')
+  const [errortitle, setErrorTitle] = useState('')
+  const [errorDescription, setErrorDescription] = useState('')
+  const [errorDate, setErrorDate] = useState('')
+  const [errorPhoto, setErrorPhotos] = useState('')
+  const [erroraddress, setErrorAddress] = useState('')
+  const [errorPrevoir, setErrorPrevoir] = useState('')
+  const [errorPrix, setErrorPrix] = useState('')
 
-  const [title,setTitle]=useState('')
-   
+  const [title, setTitle] = useState('')
+
   const [isDate, setDate] = useState(new Date());
   const [isEndDate, setisEndDate] = useState('');
   const [addresss, setAddresss] = useState(demandData.address);
   const [Promo, setPromo] = useState(false);
   const [Promooo, setPromooo] = useState(false);
 
-   const setPromos=(promo)=>{
+  const setPromos = (promo) => {
     setPromo(promo)
     setPromooo(!Promooo)
-   }
-  const titles=(e)=>{
+  }
+  const titles = (e) => {
     setErrorTitle('')
     setTitle(e)
   }
-const date=()=>{
-  setErrorDate('')
-  setDates(true)
-}
-const location=()=>{
-  setErrorAddress('')
-  setLocations(true)
-}
-  const photo=()=>{
+  const date = () => {
+    setErrorDate('')
+    setDates(true)
+  }
+  const location = () => {
+    setErrorAddress('')
+    setLocations(true)
+  }
+  const photo = () => {
     setErrorPhotos('')
     setPhotos(true)
   }
-
-  // console.log('allprevoir',allprevoir)
   const prexpreone = (e) => {
     setErrorPrix('')
     setPrixOne(e)
@@ -121,13 +119,10 @@ const location=()=>{
     setErrorPrix('')
     setAllowPrix(true)
   }
-  const hideprix=()=>{
+  const hideprix = () => {
     setPrix('')
     setAllowPrix(false)
   }
-
-
-
 
   const precr = (e) => {
     setErrorPrevoir('')
@@ -153,14 +148,11 @@ const location=()=>{
     setDescriptionn('')
     setAllowDescription(false)
   }
-const hidepriviour=()=>{
-  setPrevoir('')
-  setAllprevoir(false)
-}
-  // const[ date,setDate]=useState('')
-  // const[ address,setAddress]=useState('')
-  // var date = demandData.date;
-  // console.log(date)
+  const hidepriviour = () => {
+    setPrevoir('')
+    setAllprevoir(false)
+  }
+
   const initialValues = {
     // title: '',
     // description: '',
@@ -178,41 +170,41 @@ const hidepriviour=()=>{
   //   setDate(date)
   // }
   const onSubmit = values => {
-    if(title==''){
+    if (title == '') {
       setErrorTitle('Obligatoire')
     }
-    else if (descriptionn==""){
+    else if (descriptionn == "") {
       setErrorDescription('Obligatoire')
     }
-      else if (prevoir=="" && mabulService === 'organize'){
-        // else if (prevoir=="" ){
-          setErrorPrevoir('Obligatoire')
-        }
-    else if (dates==""){
+    else if (prevoir == "" && mabulService === 'organize') {
+      // else if (prevoir=="" ){
+      setErrorPrevoir('Obligatoire')
+    }
+    else if (dates == "") {
       setErrorDate('Obligatoire')
     }
-    else if (allowPrix=="" &&  mabulService === 'sell'){
+    else if (allowPrix == "" && mabulService === 'sell') {
       setErrorPrix('Obligatoire')
     }
-    else if ( photos==""){
+    else if (photos == "") {
       setErrorPhotos('Obligatoire')
     }
-    else if (locations==""){
+    else if (locations == "") {
       setErrorAddress('Obligatoire')
     }
-  
-    else{
-     
-      console.log('suiiivivvvvvvvvvv',`${prixOne}-${prixTwo}` );
+
+    else {
+
+      // console.log('suiiivivvvvvvvvvv',`${prixOne}-${prixTwo}` );
       // dispatch(update_into_demand({ values,description:descriptionn }))
-      if(mabulService === 'organize'){
-        dispatch(update_into_demand({ description: descriptionn,title:title,prevoir:prevoir }))
+      if (mabulService === 'organize') {
+        dispatch(update_into_demand({data:{description: descriptionn, title: title} , prevoir: prevoir }))
       }
-      else if(mabulService === 'sell'){
-        dispatch(update_into_demand({ description: descriptionn,title:title,prix:!Promooo?prix:`${prixOne}-${prixTwo}`}))
+      else if (mabulService === 'sell') {
+        dispatch(update_into_demand({ data:{description: descriptionn, title: title}, prix: !Promooo ? prix : `${prixOne}-${prixTwo}` }))
       }
-      else{
-        dispatch(update_into_demand({ description: descriptionn,title:title }))
+      else {
+        dispatch(update_into_demand({data:{description: descriptionn, title: title} }))
       }
       mabulService === 'sell'
         ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 90 })
@@ -259,29 +251,21 @@ const hidepriviour=()=>{
       <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]} percent={props.process}
         isNoBackBtn={true}
         progressBarColor={conceptColor} />
-
-
-
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
           <Reinput style={{ height: 76 * hm, paddingLeft: 40 * em, paddingTop: 20 * hm, marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
             label='Écrit un titre '
             autoFocus={true}
-            // icon={iconEdit}
             underlineActiveColor="#FFFFFF"
             underlineColor="#FFFFFF"
             activeColor={conceptColor}
             labelActiveColor="#6A8596"
             labelColor="#6A8596"
             paddingBottom={25 * em}
-            // value={formik.values.title}
-            // onBlur={formik.handleBlur('title')}
-            // onChangeText={formik.handleChange('title')}
             value={title}
-            onChangeText={(e) =>titles(e)}
+            onChangeText={(e) => titles(e)}
           />
-            <Text style={styles.descerrorText}>{errortitle}</Text>
-          {/* {formik.errors.title && formik.touched.title && <Text style={styles.descerrorText}>{formik.errors.title}</Text>} */}
+          <Text style={styles.descerrorText}>{errortitle}</Text>
           <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic', marginTop: 5 * hm, marginBottom: 10 * hm }}>(68 caractères maximum)</Text>
 
 
@@ -295,31 +279,30 @@ const hidepriviour=()=>{
               <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
               :
               <Text style={styles.contentDescSubb} >{descriptionn}</Text>
-            } 
+            }
           </TouchableOpacity>
           {<Text style={styles.descerrorText}>{errorDescription}</Text>}
 
           {
             mabulService === 'organize' ?
-            <>
-              <TouchableOpacity
-                style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
-                onPress={() => Sheet5.current.open()}
-              >
-                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-                  <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>À prévoir</Text>
-                  <Flechedroite width={14 * em} height={14 * hm} />
-                </View>
-                {/* <Text style={styles.contentDescSub} >Les participants doivent ramener</Text> */}
+              <>
+                <TouchableOpacity
+                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+                  onPress={() => Sheet5.current.open()}
+                >
+                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>À prévoir</Text>
+                    <Flechedroite width={14 * em} height={14 * hm} />
+                  </View>
 
-                {!allprevoir ?
-              <Text style={styles.contentDescSub} >Les participants doivent ramener</Text>
-              :
-              <Text style={styles.contentDescSubb} >{prevoir}</Text>
-            }
-              </TouchableOpacity>
-               <Text style={styles.descerrorText}>{errorPrevoir}</Text>
-               </>
+                  {!allprevoir ?
+                    <Text style={styles.contentDescSub} >Les participants doivent ramener</Text>
+                    :
+                    <Text style={styles.contentDescSubb} >{prevoir}</Text>
+                  }
+                </TouchableOpacity>
+                <Text style={styles.descerrorText}>{errorPrevoir}</Text>
+              </>
               :
               <></>
           }
@@ -332,42 +315,40 @@ const hidepriviour=()=>{
               <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
               <Flechedroite width={14 * em} height={14 * hm} />
             </View>
-            <Text style={styles.contentDescSubb} >{moment(demandData.date).format('Do MMM YYYY , h:mm:ss a')}</Text>
-            {/* <Text style={styles.contentDescSub} >{isDate.toString()}</Text>  */}
+            <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text>
           </TouchableOpacity>
           <Text style={styles.descerrorText}>{errorDate}</Text>
           {
             mabulService === 'sell' ?
-            <>
-              <TouchableOpacity
-                style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
-                onPress={() => Sheet6.current.open()}
-              >
-                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-                  <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajoute un prix</Text>
+              <>
+                <TouchableOpacity
+                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+                  onPress={() => Sheet6.current.open()}
+                >
+                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajoute un prix</Text>
 
-                  <Flechedroite width={14 * em} height={14 * hm} />
-                </View>
-                {!allowPrix ?
-                <Text style={styles.contentDescSub} >Ex : 5,00 €</Text>
-                :
-                !Promooo ?<Text style={styles.contentDescSub} >{prix}</Text>:<Text style={styles.contentDescSub} >{prixOne}-{prixTwo}</Text>
-                }
-              </TouchableOpacity>
-              <Text style={styles.descerrorText}>{errorPrix}</Text>
+                    <Flechedroite width={14 * em} height={14 * hm} />
+                  </View>
+                  {!allowPrix ?
+                    <Text style={styles.contentDescSub} >Ex : 5,00 €</Text>
+                    :
+                    !Promooo ? <Text style={styles.contentDescSubb} >{prix}</Text> : <Text style={styles.contentDescSubb} >{prixOne}-{prixTwo}</Text>
+                  }
+                </TouchableOpacity>
+                <Text style={styles.descerrorText}>{errorPrix}</Text>
               </>
               :
               <></>
-          } 
-
+          }
           <View style={[styles.ActionButton, { height: 199 * hm, marginTop: 10 * hm, }]}>
             <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
               <Text style={styles.contentDesc}>Photos</Text>
-              <Text style={[styles.contentDesc, {color: '#A0AEB8', marginRight: 30 * em }]}>(3 max)</Text>
+              <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em }]}>(3 max)</Text>
             </View>
             <Text style={[styles.contentDescSub, { marginTop: 10 * hm }]} >Les photos aident à mieux cerner ta demande.</Text>
 
-            <MabulAddPhoto requiredPhoto={()=>photo()} conceptColor={conceptColor} />
+            <MabulAddPhoto requiredPhoto={() => photo()} conceptColor={conceptColor} />
           </View>
           <Text style={styles.descerrorText}>{errorPhoto}</Text>
 
@@ -379,11 +360,6 @@ const hidepriviour=()=>{
                 <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
               </TouchableOpacity>
             </View>
-            {/* { addresss ===""?   */}
-            {/* <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>ABYMES 97139 Guadeloupe</Text>
-       :
-       <Text style={{color:"#1E2D60",fontFamily:"Lato-Regular",fontSize:16*em,marginLeft:40*em}}>{addresss}</Text>
-     }  */}
             {!demandData.address ?
               <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>ABYMES 97139 Guadeloupe</Text>
               :
@@ -392,14 +368,10 @@ const hidepriviour=()=>{
           </View>
           <Text style={styles.descerrorText}>{erroraddress}</Text>
         </ScrollView>
-
       </View>
-
       <View style={{ flex: 0.1 }}>
-      <RBSheet ref={Sheet1} 
-
+        <RBSheet ref={Sheet1}
           height={hm * 630}
-
           openDuration={250}
           customStyles={{
             wrapper: {
@@ -432,11 +404,10 @@ const hidepriviour=()=>{
               onChangeText={(e) => descr(e)}
             />
           </View>
-          <OkModal conceptColor={conceptColor} showDescription={() =>des()} hideDescription={() =>hide()} okoModal={() => Sheet1.current.close()} closeModal={() => Sheet1.current.close()} />
+          <OkModal conceptColor={conceptColor} showDescription={() => des()} hideDescription={() => hide()} okoModal={() => Sheet1.current.close()} closeModal={() => Sheet1.current.close()} />
         </RBSheet>
 
-        <RBSheet ref={Sheet2} 
-
+        <RBSheet ref={Sheet2}
           height={hm * 630}
           openDuration={250}
           customStyles={{
@@ -456,22 +427,15 @@ const hidepriviour=()=>{
 
           <View style={styles.container}>
             <MabulAddDate
-              // callback={(date)=>changeDate(date)} 
-              // Datea={isDate} 
-              // setdatea={this.setdatea}
-              //  setdatee={this.setdatee}      
-              requiredDate={()=>date()}
+              requiredDate={() => date()}
               conceptColor={conceptColor} closeModal={() => Sheet2.current.close()}
-            // conceptColor={conceptColor} closeModal={ (date) => {setDate(date),this[RBSheet + 2].close()}}
             />
           </View>
         </RBSheet>
 
 
-        <RBSheet ref={Sheet3} 
-
+        <RBSheet ref={Sheet3}
           height={hm * 630}
-
           openDuration={250}
           customStyles={{
             wrapper: {
@@ -488,15 +452,21 @@ const hidepriviour=()=>{
           </View>
           <View style={styles.container}>
             <MabulAddLieu
-             hideDescription={() =>{}}
-            requiredLocation={()=>location()}
-             conceptColor={conceptColor} setadresse={this.setadresse}  />
+              hideDescription={() => { }}
+              requiredLocation={() => location()}
+              conceptColor={conceptColor}
+              setadresse={setadresse}
+              closeModal={() => Sheet3.current.close()}
+            />
           </View>
-          <OkModal conceptColor={conceptColor} okoModal={ () =>  Sheet3.current.close()} closeModal={ () =>  Sheet3.current.close()}/>
-
+          {/* <OkModal conceptColor={conceptColor} 
+          // showDescription={() =>location()} 
+          // hideDescription={() =>location()}
+          // hideDescription={() =>hide()}
+          okoModal={ () =>Sheet3.current.close()} closeModal={ () =>  Sheet3.current.close()}/> */}
         </RBSheet>
 
-        <RBSheet ref={Sheet4} 
+        <RBSheet ref={Sheet4}
 
           height={hm * 630}
 
@@ -529,12 +499,12 @@ const hidepriviour=()=>{
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
           </View>
 
-          <MabulRechercheContact data={demandData} mabulService={mabulService} conceptColor={conceptColor} rb4={()=>Sheet4.current.close()} />
+          <MabulRechercheContact data={demandData} mabulService={mabulService} conceptColor={conceptColor} rb4={() => Sheet4.current.close()} />
           {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
         </RBSheet>
 
 
-        <RBSheet ref={Sheet5} 
+        <RBSheet ref={Sheet5}
 
           height={hm * 630}
           openDuration={250}
@@ -566,8 +536,8 @@ const hidepriviour=()=>{
               // value={formik.values.prevoir}
               // onBlur={formik.handleBlur('prevoir')}
               // onChangeText={formik.handleChange('prevoir')}
-            value={prevoir}
-            onChangeText={(e)=> precr(e)}       
+              value={prevoir}
+              onChangeText={(e) => precr(e)}
             />
             {/* {formik.errors.prevoir && formik.touched.prevoir && <Text style={styles.descerrorText}>{formik.errors.prevoir}</Text>} */}
 
@@ -592,12 +562,12 @@ const hidepriviour=()=>{
           </View>
           <OkModal conceptColor={conceptColor}
             //  onPress={formik.handleSubmit} 
-            hideDescription={() =>hidepriviour()}
-            showDescription={() =>pre()}
+            hideDescription={() => hidepriviour()}
+            showDescription={() => pre()}
             okoModal={() => Sheet5.current.close()} closeModal={() => Sheet5.current.close()} />
         </RBSheet>
 
-        <RBSheet ref={Sheet6} 
+        <RBSheet ref={Sheet6}
 
           height={hm * 630}
 
@@ -627,15 +597,15 @@ const hidepriviour=()=>{
                   // onBlur={formik.handleBlur('prix')}
                   // onChangeText={formik.handleChange('prix')}
                   value={prixOne}
-                  onChangeText={(e)=> prexpreone(e)}  
+                  onChangeText={(e) => prexpreone(e)}
                 />
                 <TextInput placeholder="3,99€" style={[{ width: 148 * em, marginRight: 30 * em }, styles.BoxPrice]}
                   // value={formik.values.promo}
                   // onBlur={formik.handleBlur('promo')}
                   // onChangeText={formik.handleChange('promo')}
                   value={prixTwo}
-                  onChangeText={(e)=> prexpretwo(e)}  
-                   />
+                  onChangeText={(e) => prexpretwo(e)}
+                />
 
               </View>
               :
@@ -643,7 +613,7 @@ const hidepriviour=()=>{
                 // onBlur={formik.handleBlur('prix')}
                 // onChangeText={formik.handleChange('prix')}
                 value={prix}
-                onChangeText={(e)=> prexprecr(e)}  
+                onChangeText={(e) => prexprecr(e)}
               />
             }
 
@@ -666,17 +636,17 @@ const hidepriviour=()=>{
 
           </View>
           <OkModal
-            hideDescription={() =>hideprix()}
-            showDescription={() =>prexpre()}
-          conceptColor={conceptColor} okoModal={() => Sheet6.current.close()} closeModal={() => Sheet6.current.close()} />
+            hideDescription={() => hideprix()}
+            showDescription={() => prexpre()}
+            conceptColor={conceptColor} okoModal={() => Sheet6.current.close()} closeModal={() => Sheet6.current.close()} />
         </RBSheet>
 
         <MabulPubButton
           text={"Publier"}
           color={hexToRGB(conceptColor)}
           style={styles.nextBtn}
-          onPress={()=> onSubmit()}
-          // onPress={formik.handleSubmit}
+          onPress={() => onSubmit()}
+        // onPress={formik.handleSubmit}
         />
       </View>
 
@@ -744,7 +714,7 @@ const styles = {
     bottom: 30 * hm,
     left: 40 * hm,
     color: "red",
-    marginTop:15*hm
+    marginTop: 15 * hm
   },
   body: {
     backgroundColor: '#F0F5F7',
@@ -771,7 +741,7 @@ const styles = {
     width: 315 * em,
     alignSelf: 'center',
     bottom: 10 * hm,
-    height:58*hm
+    height: 58 * hm
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },

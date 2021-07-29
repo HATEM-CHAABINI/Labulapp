@@ -39,17 +39,30 @@ const MabulAddPhoto = (props) => {
         const ref = storage().ref().child(`users/${auth().currentUser.uid}/demands/${Math.random().toString(36).substring(2, 12)}`)
         await ref.put(blob).then(async (result) => {
           await ref.getDownloadURL().then((result) => { imagesBlob.push({ uri: result, id: index }) })
+          console.log('photos aa rhe he',uri,id)
+          dispatch(update_into_demand({ uri: result, id: index  }))
         });
       }),
-
     );
-
-
     setbuttonloading(false)
-
     submit(imagesBlob)
   };
 
+
+
+  // const imageSelect = () => {
+  //   ImagePicker.openPicker({
+  //     multiple: true,
+  //     waitAnimationEnd: false,
+  //     includeExif: true,
+  //     forceJpg: true,
+  //   }).then(images => {
+  //     setimages({ images: images })
+  //     uploadeImage(images.images)
+  //     props.requiredPhoto()
+      
+  //   }).catch(e => alert(e));
+  // }
 
   const imageSelect = () => {
     ImagePicker.openPicker({
@@ -59,13 +72,13 @@ const MabulAddPhoto = (props) => {
       forceJpg: true,
     }).then(images => {
       var img= [];
-      img.push({img1:images[0].path})
-      img.push({img2:images[1].path})
-      img.push({img3:images[2].path})
+      img.push({id:1,uri:images[0].path})
+      img.push({id:2,uri:images[1].path})
+      img.push({id:3,uri:images[2].path})
       setimages({ images: images })
-      props.requiredPhoto(),
-      console.log('hello images',images.length)
-      console.log('hello images path',img)
+      props.requiredPhoto()
+      // console.log('hello images',images.length)
+      // console.log('hello images path',img)
       if(images.length>=3){
         dispatch(update_into_demand({ images:img }))
       }
@@ -74,6 +87,7 @@ const MabulAddPhoto = (props) => {
       }
     }).catch(e => alert(e));
   }
+
 
   const removeByAttr = (arr, attr, value) => {
 
@@ -144,11 +158,8 @@ const MabulAddPhoto = (props) => {
                       alignItems: 'center',
                       justifyContent: 'center',
                     }} onPress={() => { removeByAttr(images.images, 'id', item.id) }}>
-
                       <CrossGray width={12 * em} height={12 * em} />
-
                     </TouchableOpacity>
-
                   </ImageBackground>)
                 })}
 

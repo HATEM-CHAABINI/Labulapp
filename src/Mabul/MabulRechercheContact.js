@@ -122,7 +122,7 @@ const MabulRechercheContact = (props) => {
   const Sheet1 = useRef(null)
   const Sheet2 = useRef(null)
   const [demandData, setdemandData] = useState(props.data)
-
+  console.log('demandData', props.data)
   const mabulService = props.mabulService;
 
   const conceptColor = mabulColors[mabulService];
@@ -133,7 +133,7 @@ const MabulRechercheContact = (props) => {
   const [contactType, setcontactType] = useState()
   const [user, setuser] = useState()
   const [loadingSet, setloadingSet] = useState(false)
-    // console.log('sandeep',contactType)
+  // console.log('sandeep',contactType)
   const check = (id) => {
     setvChecked(false)
     setaChecked(false)
@@ -185,41 +185,14 @@ const MabulRechercheContact = (props) => {
 
 
   const saveData = async (data) => {
-
     var verif = true
-
-
-
-    // do{
-    // setdemandData({ ...demandData, title: "dddddd" })
-    // console.log(demandData);
-
-    //  console.log(data.coordinate.logitude,"30= ",data.coordinate.latitude) 
-    // let result = await fetchcoordinate(data.coordinate.latitude,data.coordinate.logitude)
-    // .then(async (item) => {
-
-    //         if(item== true)
-    //         {
-    //           console.log("trueeee");
-    //            data.coordinate.latitude = data.coordinate.latitude-0.002
-    //           console.log("2= ",data.coordinate.latitude)}
-    //           else{
-    //             console.log("falseeeee");
-    //             console.log("3= ",data.coordinate.latitude)
-    //             verif = false
-    //             return data.coordinate.latitude
-    //           }
-    //         })
-    // }while (verif==true) 
-    // console.log(verif,"resullllllttt====== ",data.coordinate.latitude);
+    console.log('hello how are you data ', data)
 
     firestore().collection('userDemands').doc(auth().currentUser.uid)
       .collection(data.serviceType.name).add(data).then(async (res) => {
-
         const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
-
         const datas = await responce.get();
-        console.log(datas, "dhddbncnxcncncnncnc ", mabulService);
+        console.log('hello all data is comming now', datas, "dhddbncnxcncncnncnc ", mabulService);
 
         setloadingSet(false);
         // this[RBSheet + 4].close()
@@ -244,6 +217,7 @@ const MabulRechercheContact = (props) => {
         }
       });
   }
+
   const onSubmit = () => {
     console.log(mabulService, "jjjsjsjsjsjsqqssseerrfvviiicceee");
     setloadingSet(true)
@@ -320,7 +294,7 @@ const MabulRechercheContact = (props) => {
                 // arr[index] = !arr[index];
                 // setChecked(arr);
               }}
-            />  
+            />
           } />
           <ShareButton text={"mes amis"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(255,244,217,0.62)' }} leftIcon={<Amis />} rightIcon={
             <CheckBox
@@ -345,7 +319,8 @@ const MabulRechercheContact = (props) => {
               pink={true}
               bgColor="#EF88B9"
               isChecked={fchecked}
-              onClick={() => {check(3)
+              onClick={() => {
+                check(3)
                 // const arr = [...checked];
                 // arr[index] = !arr[index];
                 // setChecked(arr);
@@ -380,7 +355,7 @@ const MabulRechercheContact = (props) => {
         }
       />
 
-<RBSheet ref={Sheet1} 
+      <RBSheet ref={Sheet1}
         height={hm * 630}
 
         openDuration={250}

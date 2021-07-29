@@ -27,10 +27,10 @@ Geocoder.init(google_api);
 const MabulAddLieu = (props) => {
   const dispatch = useDispatch()
   const { demandData } = useSelector((state) => state.demandReducer);
- const [data,setData]=useState()
+  const [data, setData] = useState()
   const conceptColor = props.conceptColor;
 
-   const initialValues = {
+  const initialValues = {
     address: '',
     coordinate: {}
   };
@@ -42,14 +42,10 @@ const MabulAddLieu = (props) => {
   });
 
   const onSubmit = values => {
-    // console.log('hello pritesh bijwa',data)
-
     dispatch(update_into_demand(data))
-      props.setadresse(formik.values.address,formik.values.coordinate);
-      props.requiredLocation(),
+    props.setadresse(formik.values.address, formik.values.coordinate);
+    props.requiredLocation(),
       props.closeModal()
-      
-
   };
   const formik = useFormik({
     initialValues,
@@ -59,7 +55,6 @@ const MabulAddLieu = (props) => {
 
 
   return (
-
     <View style={{
       flex: 1, backgroundColor: '#ffffff', zIndex: 999,
     }}>
@@ -68,11 +63,11 @@ const MabulAddLieu = (props) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
-      
+
         <View style={styles.body}>
           <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
-      
-                      <GooglePlacesInput
+
+            <GooglePlacesInput
               placeholder={"Rechercher une addresse"}
               containerStyle={{
                 backgroundColor: 'white',
@@ -91,13 +86,13 @@ const MabulAddLieu = (props) => {
               myLocationContainer={{
                 //  paddingTop: s50 * hm 
                 // top:550
-                }}
+              }}
               // autoFillOnNotFound={true}
               value={formik.values.address}
               myLocationColor={conceptColor}
               myLocationIconColor={conceptColor}
               formik={formik}
-              
+
               changedValue={(val) => {
                 setData(val)
                 // console.log(val.adresse);
@@ -106,12 +101,18 @@ const MabulAddLieu = (props) => {
               }}
             />
             {formik.errors.address && formik.touched.address && <Text style={{ color: 'red', top: '1%', bottom: "5%", }}>{formik.errors.address}</Text>}
-            
+
           </View>
-    
+
         </View>
       </KeyboardAvoidingView>
-      
+      <OkModal conceptColor={conceptColor}
+        showDescription={() => { }}
+        hideDescription={() => { }}
+        okoModal={() => onSubmit()}
+        closeModal={() => props.closeModal()}
+      />
+
     </View>
   );
 };
@@ -161,5 +162,12 @@ const styles = {
     marginBottom: 30 * hm,
   },
 };
-
 export default MabulAddLieu;
+
+
+
+
+
+
+
+

@@ -105,7 +105,7 @@ const MabulAddDate = (props) => {
     // props.setdatee(isEndDate);
     // props.closeModal(isDate)
     //  setTimeout(()=>{props.closeModal(isDate)},0)
-    dispatch(update_into_demand({date:isDate}))
+    dispatch(update_into_demand({demandStartDate:isDate,demandEndData: ''}))
     props.requiredDate(),
      props.closeModal(isDate)
     console.log("okmodal date aa gai",isDate)

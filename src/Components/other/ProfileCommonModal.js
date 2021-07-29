@@ -6,13 +6,15 @@ import ProfileCommonTextInput from '../textInput/ProfileCommonTextInput';
 import CommonText from '../../text/CommonText';
 import SearchBox from '../other/SearchBox';
 import CommonCheckBox from '../checkbox/CommonCheckBox';
-import { StatusBar, View, Text, Platform } from 'react-native';
+import { StatusBar, View, Text, Platform,KeyboardAvoidingView } from 'react-native';
 import User from '../../model/user/User';
 import { feedbackIcons } from '../../constants/icons';
+import OkModalchange from '../button/OkModalchange';
+import TitleText from '../../text/TitleText';
 const insertInformations = [
-  { title: 'Mon email', inputTexts: [{ commentInput: 'Mon email', value: 'mathieu@labul.com' }] },
+  { title: 'Modifier mon email', inputTexts: [{ commentInput: 'Mon email', value: 'mathieu@labul.com' }] },
   {
-    title: 'Mon mot de passe',
+    title: 'Modifier mot de passe',
     comment: 'Mot de passe oublié?',
     inputTexts: [
       { commentInput: 'Mot de passe actuel', value: '' },
@@ -20,7 +22,7 @@ const insertInformations = [
       { commentInput: 'Confirmation de nouveau mot de passe', value: '' },
     ],
   },
-  { title: 'Mon mobile', inputTexts: [{ commentInput: 'Mon mobile', value: '+590 6 90 874 258' }] },
+  { title: 'Modifier mon contact', inputTexts: [{ commentInput: 'Mon mobile', value: '+590 6 90 874 258' }] },
 
   { title: 'Ma localisation', inputTexts: [{ commentInput: 'Mon dresse', value: 'ABYMES 97139\nGuadeloupe' }] },
 
@@ -129,7 +131,20 @@ const ProfileCommonModal = (props) => {
       backdropColor={'#1E2D60'}
       swipeDirection={'up'}
       onBackButtonPress={() => props.onPress()}>
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          
+       
+          flex: 1,
+          justifyContent: 'flex-start',
+  
+        }}
+
+      >
       <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
+      <TitleText text={insertInfo.title} textAlign={"left"} style={{marginTop:55*hm,marginBottom:5*hm}}/>
+
       <View
         style={{
           width: 349 * em,
@@ -143,7 +158,7 @@ const ProfileCommonModal = (props) => {
         }}
         opacity={0.5}
       />
-      <ProfileModalHeader
+      {/* <ProfileModalHeader
         title={insertInfo.title}
         style={styles.header}
         onCancelPress={() => props.onPress()}
@@ -151,9 +166,15 @@ const ProfileCommonModal = (props) => {
           props.onPress();
           props.onChange(updatedMyProfile);
         }}
-      />
+      /> */}
       
       {modalBody}
+      </KeyboardAvoidingView>
+
+<OkModalchange conceptColor={"#40CDDE"}txt={"Enregistrer"} closeModal={props.onPress} 
+// okoModal={okm}
+style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center',alignItems:'center'}}/>
+
     </Modal>
   );
 };

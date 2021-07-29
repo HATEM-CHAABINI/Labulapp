@@ -7,10 +7,13 @@ import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand } from '../../redux/actions/demand'
+import { Main, MobileBlue, NeedFamily, Outil, Service } from '../../assets/svg/icons';
+const iconSize = { width: 38 * em, height: 38 * em };
+
 const needItems = [
-  { id: 0, itemName: 'Coup de main' },
-  { id: 1, itemName: 'Service' },
-  { id: 2, itemName: 'Outil' },
+  { id: 0, itemName: 'Coup de main', icon: Main(iconSize), },
+  { id: 1, itemName: 'Service',icon: Service(iconSize), },
+  { id: 2, itemName: 'Outil' ,icon: Outil(iconSize),},
 ];
 
 const MabulNeedScreen = (props) => {

@@ -12,9 +12,28 @@ const ProInformationScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <ProfileCommonHeader title="Mes informations" onCancel={() => Actions.pop()}>
+       <CommonText text="Connexion et sécurité" style={styles.itemTitle} />
+      <ProfileInformationListItem
+        caption={'Email entreprise'}
+        value={'contact@baratshirt.fr'}
+        style={styles.listItem}
+        onPress={() => {
+          setInputItemKey(1);
+          setModalVisible(!modalVisible);
+        }}
+      />
+      <ProfileInformationListItem
+        caption={'Modifier mot de passe'}
+        value={'••••••••••'}
+        style={styles.listItem}
+        onPress={() => {
+          setInputItemKey(2);
+          setModalVisible(!modalVisible);
+        }}
+      />
       <CommonText text="Contact" style={styles.itemTitle} />
       <ProfileInformationListItem
-        caption={'Mon téléphone'}
+        caption={'Mobile entreprise'}
         value={'+590 6 90 874 258'}
         style={styles.listItem}
         onPress={() => {
@@ -22,21 +41,9 @@ const ProInformationScreen = () => {
           setModalVisible(!modalVisible);
         }}
       />
-      <CommonText text="Localisation" style={styles.itemTitle} />
-      <ProfileInformationListItem
-        caption={'Mon adresse'}
-        value={'ABYMES 97139\nGuadeloupe'}
-        style={styles.listItem}
-        onPress={() => {
-          setInputItemKey(4);
-          setModalVisible(!modalVisible);
-        }}
-      />
+      
       <CommonText
-        text={
-          'Votre adresse postale est visible si activé dans vos réglage.'
-        }
-        style={styles.notice}
+    style={styles.notice}
       />
       <ProfileCommonModal
         visible={modalVisible}

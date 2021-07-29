@@ -28,6 +28,7 @@ import Meet from './category/Meet.svg';
 import Party from './category/Party.svg';
 import Show from './category/Show.svg';
 
+
 import AnimalSell from './category/AnimalSell.svg';
 import BeautyCareSell from './category/BeautyCareSell.svg';
 import DeliverySell from './category/DeliverySell.svg';
@@ -94,7 +95,12 @@ import Repasgive from './category/Repasgive.svg';
 import Alimentsgive from './category/Alimentsgive.svg';
 import Intero from './category/Intero.svg';
 
-export {Intero,
+import Service from './category/Service.svg';
+import Main from './category/Main.svg';
+import Outil from './category/Outil.svg';
+
+
+export {Outil,Main,Service,Intero,
   AnimalSell,
   BeautyCareSell,
   DeliverySell,
@@ -306,6 +312,8 @@ import ProAddCover from './profile/ProAddCover.svg';
 import AvatarBg from './profile/AvatarBg.svg';
 import ProAvatarBg from './profile/ProAvatarBg.svg';
 import ProNeeds from './profile/ProNeeds.svg';
+import MesOffresPro from './profile/MesOffresPro.svg';
+import MesAbonnesPro from './profile/MesAbonnesPro.svg';
 import SortirGroupe from './profile/SortirGroupe.svg';
 
 import AddFamily from './profile/AddFamily.svg';
@@ -333,7 +341,7 @@ import Amis from './profile/Amis.svg';
 import Famille from './profile/Famille.svg';
 import Tous from './profile/Tous.svg';
 
-export {SortirGroupe,Voisins,Amis,Famille,Tous,AssociationInformation,EnterpriseInformation,InstitutionInformation,
+export {MesOffresPro,MesAbonnesPro,SortirGroupe,Voisins,Amis,Famille,Tous,AssociationInformation,EnterpriseInformation,InstitutionInformation,
   Promotion,
   Tips,
   Events,

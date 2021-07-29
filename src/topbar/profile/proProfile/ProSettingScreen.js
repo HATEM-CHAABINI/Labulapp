@@ -4,7 +4,7 @@ import { em, hm } from '../../../constants/consts';
 import CommonHeader from '../../../Components/header/CommonHeader';
 import Switch from '../../../Components/other/Switch';
 import CommonListItem from '../../../adapter/CommonListItem';
-import { Address, BackArrowBlack, NotificationYellow } from '../../../assets/svg/icons';
+import { Address, BackArrowBlack, LocationBlues, NotificationYellow } from '../../../assets/svg/icons';
 import { useDispatch } from 'react-redux';
 import auth, { firebase } from "@react-native-firebase/auth";
 import { Actions } from 'react-native-router-flux';
@@ -52,6 +52,34 @@ const ProSettingScreen = () => {
         }
         subTitle="Ma localisation est activé"
       /> */}
+                  <View style={styles.line} />
+
+      <CommonListItem
+        style={styles.listItem}
+        icon={
+          <View style={[styles.icon, { backgroundColor: 'rgba(64, 205, 222,.15)' }]}>
+            <LocationBlues height={22.39 * em} width={18.76 * em} />
+          </View>
+        }
+        title="Localisation"
+        titleStyle={styles.listTitle}
+        subTitleStyle={styles.listComment}
+        rightView={
+          <Switch
+            switchWidth={49 * em}
+            switchHeight={27 * em}
+            switchdirection="ltr"
+            switchBorderColor="#ffffff"
+            switchBackgroundColor="#40CDDE"
+            btnBorderColor="red"
+            btnBackgroundColor="#FFFFFF"
+            initialValue={0}
+            style={styles.switch}
+          />
+        }
+        subTitle="Ma localisation est activé"
+      />
+
       <View style={styles.line} />
       <CommonListItem
         style={styles.listItem}
@@ -78,7 +106,6 @@ const ProSettingScreen = () => {
         }
         subTitle="Activez la réception de notifications"
       />
-      <View style={styles.line} />
       <View style={styles.rectangle} />
       <TouchableOpacity
         onPress={() =>

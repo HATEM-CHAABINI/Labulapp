@@ -17,6 +17,8 @@ import {
   EnterpriseInformation,
   InstitutionInformation,
   Editprofile,
+  MesOffresPro,
+  MesAbonnesPro,
 } from '../../../assets/svg/icons';
 import { feedbackIcons } from '../../../constants/icons';
 import AccountType from '../../../model/user/AccountType';
@@ -63,7 +65,7 @@ const ProProfileHomeScreen = (props) => {
         <ImageBackground style={styles.topView} source={userProfile.cover} blurRadius={8}>
           <View
             style={{
-              backgroundColor: userProfile.cover ? 'rgba(30, 45, 96, 0.64)' : '#7398FD',
+              backgroundColor: userProfile.cover ? 'rgba(30, 45, 96, 0.64)' : '#1E2D60',
               flex: 1,
               width: '100%',
               alignItems: 'center',
@@ -101,11 +103,19 @@ const ProProfileHomeScreen = (props) => {
         </View>
       )}>
       <View style={styles.bottomView}>
-        <View style={styles.cardContainer}>
+      <View style={styles.cardContainer}>
           <ProfileCommonCard
-            caption={'Mes demandes'}
+            caption={'Mes offres'}
             style={styles.cardStyle}
-            icon={ProNeeds(iconSize)}
+            icon={MesOffresPro(iconSize)}
+            onPress={() => {
+              Actions.proNeedsHome();
+            }}
+          />
+          <ProfileCommonCard
+            caption={'Mes abonnés'}
+            style={styles.cardStyle}
+            icon={MesAbonnesPro(iconSize)}
             onPress={() => {
               Actions.proNeedsHome();
             }}
@@ -214,23 +224,29 @@ const styles = {
     shadowRadius: 25 * em,
     paddingHorizontal: 30 * em,
   },
-  cardContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: -46 * em, marginBottom: 30 * hm },
-  cardStyle: {
-    ...Platform.select({
-      ios: {
-        shadowOffset: {
-          width: 0,
-          height: 12 * em,
-        }, shadowOpacity: 1,
-        shadowRadius: 25 * em,
+  cardContainer: {
+    // paddingHorizontal: 30 * em,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginTop: -46 * em,
+    marginBottom: 15 * hm,
+
+
+    //  flexDirection: 'row',
+    //   justifyContent: 'center',
+    //    marginTop: -46 * em,
+    //     marginBottom: 30 * hm
+     },
+     cardStyle: {
+      shadowColor: '#254D5612',
+      shadowOffset: {
+        width: 0,
+        height: 12 * hm,
       },
-      android: {
-        elevation: 10,
-      },
-    }),
-    width: 150 * em,
-    flexGrow: 1,
-  },
+      shadowRadius: 25 * em,
+      width: 150 * em,
+      elevation: 5,
+    },
   listBox: { marginTop: 15 * hm },
   caption: { width: '100%', textAlign: 'left', fontWeight: '300', marginBottom: 20 * em },
   listItem: {},

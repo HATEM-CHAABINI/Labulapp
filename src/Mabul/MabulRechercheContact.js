@@ -21,118 +21,25 @@ import ShareButton from '../Components/button/ShareButton';
 import { useSelector } from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { getUserProfile, fetchcoordinate } from '../services/firebase'
-const usersData = [
-  {
-    sort: 'families',
-    userName: 'Amandine Bernard',
-    relationship: 'Mon ami/ ma famille',
-    avatar: require('../assets/images/avatar.png'),
-  },
-
-  {
-    sort: 'families',
-    userName: 'Robert Richard',
-    relationship: 'Ma famille',
-    avatar: require('../assets/images/avatar.png'),
-  },
-  {
-    sort: 'friends',
-    userName: 'Amandine Bernard',
-    relationship: 'Mon ami/ ma famille',
-    avatar: require('../assets/images/avatar.png'),
-  },
-
-  {
-    sort: 'friends',
-    userName: 'Amélie Petit',
-    relationship: 'Mon voisin/ mon ami',
-    avatar: require('../assets/images/avatar.png'),
-  },
-  {
-    sort: 'friends',
-    userName: 'Amélie Petit',
-    relationship: 'Mon voisin/ mon ami',
-    avatar: require('../assets/images/avatar.png'),
-  },
-
-  {
-    sort: 'neighbours',
-    userName: 'Amélie',
-    relationship: 'Mon voisin/ mon ami',
-    avatar: require('../assets/images/avatar.png'),
-  },
-
-  {
-    sort: 'neighbours',
-    userName: 'Antoine Durand',
-    relationship: 'Mon voisin',
-    avatar: require('../assets/images/avatar.png'),
-  },
-];
-const selectedList = [
-  {
-    sort: 'friends',
-    userName: 'Amandine Bernard',
-    relationship: 'Mon ami/ ma famille',
-    avatar: require('../assets/images/avatar.png'),
-  },
-  {
-    sort: 'friends',
-    userName: 'Amandine Bernard',
-    relationship: 'Mon ami/ ma famille',
-    avatar: require('../assets/images/avatar.png'),
-  },
-  {
-    sort: 'friends',
-    userName: 'Amandine Bernard',
-    relationship: 'Mon ami/ ma famille',
-    avatar: require('../assets/images/avatar.png'),
-  },
-];
-
-const SelectedAvatarView = ({ avatar, userName }) => (
-  <View style={{ width: 60 * em, flexGrow: 1, alignSelf: 'baseline', marginRight: 10 * em }}>
-    <ImageBackground
-      source={avatar}
-      style={{
-        marginBottom: 5 * hm,
-        width: 54 * em,
-        height: 54 * em,
-        alignItems: 'flex-end',
-        justifyContent: 'flex-start',
-      }}>
-      <View
-        style={{
-          borderWidth: 2 * em,
-          width: 20 * em,
-          height: 20 * em,
-          borderRadius: 10 * em,
-          backgroundColor: '#ffffff',
-          borderColor: '#ffffff',
-        }}>
-        <Cancel width={16 * em} height={16 * em} />
-      </View>
-    </ImageBackground>
-    <CommentText text={userName} style={styles.selectedFullName} />
-  </View>
-);
+import { getUserProfile, fetchcoordinate, setUserData } from '../services/firebase'
 
 const MabulRechercheContact = (props) => {
-  const Sheet1 = useRef(null)
-  const Sheet2 = useRef(null)
-  const [demandData, setdemandData] = useState(props.data)
-  console.log('demandData', props.data)
-  const mabulService = props.mabulService;
 
+  const [demandData, setdemandData] = useState(props.data)
+  const { alertData } = useSelector(state => state.alertReducer)
+  const mabulService = props.mabulService;
+  console.log("FINAL ALERT DATA", alertData, demandData)
   const conceptColor = mabulColors[mabulService];
   const [vchecked, setvChecked] = useState(false);
   const [achecked, setaChecked] = useState(false);
   const [fchecked, setfChecked] = useState(false);
+
+  const searchedText = useRef('')
   const [tchecked, settChecked] = useState(false);
   const [contactType, setcontactType] = useState()
   const [user, setuser] = useState()
   const [loadingSet, setloadingSet] = useState(false)
+
   // console.log('sandeep',contactType)
   const check = (id) => {
     setvChecked(false)
@@ -162,94 +69,185 @@ const MabulRechercheContact = (props) => {
     getUserProfile(auth().currentUser.uid).then(async (item) => {
       setuser(() => item)
     })
+    if (searchedText.current.length > 0) {
+      onSearch(searchedText.current)
+    }
 
   }, [])
-  const [usersList, setusersList] = useState({ data: usersData })
+
+
+  const [usersList, setusersList] = useState([])
   const [allChecked, setallChecked] = useState(false)
-  const [checked, setChecked] = useState(new Array(usersData.length).fill(false));
-  const renderSelectedList = ({ item }) => <SelectedAvatarView avatar={item.avatar} userName={item.userName} />;
-  const onSearch = (search) => {
-    setusersList({
-      data:
-        usersData.filter((data) => {
-          return (
-            data.userName.toLowerCase().includes(search.toLowerCase())
-          );
-        })
+  const [checked, setChecked] = useState(new Array(usersList.length).fill(false));
+  const [selectedUser, setselectedUser] = useState([])
+  const [allUser, setallUser] = useState([])
+  const Sheet1 = useRef(null)
+
+  const SelectedAvatarView = ({ avatar, userName, id, Email }) => (
+    <View style={{ width: 60 * em, flexGrow: 1, alignSelf: 'baseline', marginRight: 10 * em }}>
+      <ImageBackground
+        source={avatar}
+        style={{
+          marginBottom: 5 * hm,
+          width: 54 * em,
+          height: 54 * em,
+          alignItems: 'flex-end',
+          justifyContent: 'flex-start',
+        }}>
+        <View
+          style={{
+            borderWidth: 2 * em,
+            width: 20 * em,
+            height: 20 * em,
+            borderRadius: 10 * em,
+            backgroundColor: '#ffffff',
+            borderColor: '#ffffff',
+          }}>
+          <Cancel width={16 * em} height={16 * em}
+            onPress={() => clearSingleUser(id, Email)}
+          />
+        </View>
+      </ImageBackground>
+      <CommentText text={userName} style={styles.selectedFullName} />
+    </View>
+  );
+  const renderSelectedList = ({ item }) => <SelectedAvatarView Email={item.data.email} avatar={item.data.profilePic !== undefined && item.data.profilePic !== " " ? { uri: item.data.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }} userName={item.data.firstName} id={item.data.uid} />;
+  const clearSingleUser = (id, Email) => {
+    const filteredUser = selectedUser.filter((user) => {
+      return user.data.uid !== id
+    })
+    setselectedUser(filteredUser)
+  }
+  useEffect(() => {
+    firestore().collection('users').get().then(querySnapshot => {
+      console.log(querySnapshot.docs)
+
+      setusersList(
+        querySnapshot.docs.map((doc) => ({ data: doc.data() }))
+      )
+      setallUser(querySnapshot.docs.map((doc) => ({ data: doc.data() })))
+    });
+  }, [])
+
+  console.log("GDHSJGSJDHSGKD", usersList)
+  const onSearch = async (search) => {
+    console.log("jdjdjdjdjdjdj", allUser[0])
+    let condition = new RegExp(search.toLocaleUpperCase())
+    var result = await Promise.all(
+      allUser.filter(function (item, i) {
+        if (item.data.firstName && item.data.lastName) {
+          return condition.test(item.data.firstName.toLocaleUpperCase()) || condition.test(item.data.lastName.toLocaleUpperCase())
+        }
+      })
+    )
+    searchedText.current = search
+    setusersList(result)
+    console.log("RESULTSSSSS", result)
+    if (search.length === 0) {
+      setusersList(allUser)
     }
-    );
+
   };
   const onClear = () => {
-    setusersList({ data: usersData });
+    setusersList(allUser);
   };
 
 
   const saveData = async (data) => {
+
     var verif = true
-    console.log('hello how are you data ', data)
 
-    firestore().collection('userDemands').doc(auth().currentUser.uid)
-      .collection(data.serviceType.name).add(data).then(async (res) => {
-        const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
-        const datas = await responce.get();
-        console.log('hello all data is comming now', datas, "dhddbncnxcncncnncnc ", mabulService);
 
-        setloadingSet(false);
-        // this[RBSheet + 4].close()
-        props.rb4()
-        if (mabulService === 'Alerte') {
-          // let data = {}
-          firestore().collection('userAlerts').doc(auth().currentUser.uid)
-            .collection(data.serviceType.name).add(data).then(async (res) => {
-              const responce = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
-              const datas = await responce.get(); setloadingSet(false);
-              Actions.myAlert({ alertData: datas.data(), data2: data, user: user, docId: res.id }), console.log("res ",);
-            });
-        }
-        if (mabulService === 'organize') {
-          Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
-        } else if (mabulService === 'give') {
-          Actions.myGive({ data: data, data2: datas.data(), user: user, docId: res.id, })
-        } else if (mabulService === 'sell') {
-          Actions.mySell({ data: data, data2: datas.data(), user: user, docId: res.id, })
-        } else if (mabulService === 'need') {
-          Actions.myNeed({ data: data, data2: datas.data(), user: user, docId: res.id, })
-        }
-      });
+    if (data.serviceType.name === "alerts" && mabulService === "Alerte") {
+      firestore().collection('userAlerts').doc(auth().currentUser.uid)
+        .collection(data.serviceType.name).add(data).then(async (res) => {
+          const responce = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+          const datas = await responce.get(); setloadingSet(false);
+          Actions.myAlert({ alertData: datas.data(), data2: data, user: user, docId: res.id }), console.log("res ",);
+        });
+    }
+    else {
+      firestore().collection('userDemands').doc(auth().currentUser.uid)
+        .collection(data.serviceType.name).add(data).then(async (res) => {
+
+          const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
+
+          const datas = await responce.get();
+          console.log(datas, "dhddbncnxcncncnncnc ", mabulService);
+
+          setloadingSet(false);
+          this[RBSheet + 4].close()
+          if (mabulService === 'organize') {
+            Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
+          } else if (mabulService === 'give') {
+            Actions.myGive({ data: data, data2: datas.data(), user: user, docId: res.id, })
+          } else if (mabulService === 'sell') {
+            Actions.mySell({ data: data, data2: datas.data(), user: user, docId: res.id, })
+          } else if (mabulService === 'need') {
+            Actions.myNeed({ data: data, data2: datas.data(), user: user, docId: res.id, })
+          }
+        });
+    }
+
+
   }
-
   const onSubmit = () => {
     console.log(mabulService, "jjjsjsjsjsjsqqssseerrfvviiicceee");
     setloadingSet(true)
     let data = {}
     if (mabulService === 'organize') {
-      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'organize', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+      data = Object.assign(demandData, { contactType: contactType, users: selectedUser, serviceType: { name: 'organize', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
 
     } else if (mabulService === 'give') {
-      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'give', code: 1, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+      data = Object.assign(demandData, { contactType: contactType, users: selectedUser, serviceType: { name: 'give', code: 1, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
 
     } else if (mabulService === 'sell') {
-      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'sell', code: 2, subCode: 40 }, status: { status: 'INPROGRESS', code: 102 } })
+      data = Object.assign(demandData, { contactType: contactType, users: selectedUser, serviceType: { name: 'sell', code: 2, subCode: 40 }, status: { status: 'INPROGRESS', code: 102 } })
 
     } else if (mabulService === 'need') {
 
-      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'need', code: 3, subCode: 11 }, status: { status: 'INPROGRESS', code: 102 } })
+      data = Object.assign(demandData, { contactType: contactType, users: selectedUser, serviceType: { name: 'need', code: 3, subCode: 11 }, status: { status: 'INPROGRESS', code: 102 } })
     }
 
     if (mabulService === 'Alerte') {
-      data = Object.assign(demandData, { contactType: contactType, serviceType: { name: 'alerts', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
+      data = Object.assign(alertData, { contactType: contactType, users: selectedUser, serviceType: { name: 'alerts', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
       console.log('data aa gra re', data)
 
     }
+    console.log("DATADATDADTAD", data)
     saveData(data);
   }
+
+
+  console.log("CHECKEDDDDDD", checked)
+
+
+
+  const handleRemove = (value) => {
+    let filteredUsers = selectedUser.filter((user) => {
+      return user.data.uid !== value.data.uid
+    })
+    setselectedUser(filteredUsers)
+  }
+  const handleChange = (value) => {
+    let newArray = [...selectedUser]
+    newArray.push(value)
+    setselectedUser(newArray)
+  }
+
+
   const renderCircleList = ({ item, index }) => {
+    const selectedIds = selectedUser.map(
+      (user) => user.data.uid
+    );
+
+    console.log("264", selectedIds)
     return (
       <CommonListItem
-        icon={<Image source={item.avatar}
+        icon={<Image source={item.data.profilePic !== undefined && item.data.profilePic !== " " ? { uri: item.data.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }}
           style={{ width: 40 * em, height: 40 * em, marginRight: 15 * em }}
         />}
-        title={item.userName}
+        title={item.data.firstName + ' ' + item.data.lastName}
         titleStyle={{ color: '#1E2D60', fontFamily: 'Lato-Black' }}
         rightView={
           <CheckBox
@@ -257,12 +255,10 @@ const MabulRechercheContact = (props) => {
             pink={props.sort === RelationshipType.FAMILIY ? true : false}
             blue={props.sort === RelationshipType.FRIEND ? true : false}
             bgColor="#EF88B9"
-            isChecked={checked[index]}
-            onClick={() => {
-              const arr = [...checked];
-              arr[index] = !arr[index];
-              setChecked(arr);
-            }}
+            isChecked={selectedIds.includes(item.data.uid)}
+            onClick={selectedIds.includes(item.data.uid)
+              ? () => handleRemove(item)
+              : () => handleChange(item)}
           />
         }
         style={styles.listItem}
@@ -276,7 +272,7 @@ const MabulRechercheContact = (props) => {
         <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" onSearch={() => Sheet1.current.open()} onClear={onClear} />
         <Text style={{ fontFamily: 'Lato-Italic', color: '#A0AEB8', fontSize: 13 * em, marginTop: 6 * hm }}>Choisis un ou plusieurs cercles, ou recherche un contact précis.</Text>
         <View style={{ height: 90 * em, marginTop: 25 * em, marginBottom: 25 * em }}>
-          <FlatList horizontal={true} data={selectedList} renderItem={renderSelectedList} keyExtractor={(i) => i.id} />
+          <FlatList horizontal={true} data={selectedUser} renderItem={renderSelectedList} keyExtractor={(i) => i.id} />
         </View>
         <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
 
@@ -355,7 +351,8 @@ const MabulRechercheContact = (props) => {
         }
       />
 
-      <RBSheet ref={Sheet1}
+      <RBSheet
+        ref={Sheet1}
         height={hm * 630}
 
         openDuration={250}
@@ -382,12 +379,12 @@ const MabulRechercheContact = (props) => {
           <Text style={{ fontFamily: 'Lato-Italic', color: '#A0AEB8', fontSize: 13 * em, marginTop: 6 * hm, marginBottom: 20 * hm }}>Choisis un ou plusieurs cercles, ou recherche un contact précis.</Text>
 
           <FlatList
-            data={usersList.data}
+            data={usersList}
             renderItem={renderCircleList}
             keyExtractor={(i) => i.id}
             style={{ marginTop: 0 * hm }} />
         </View>
-        <OkModal closeModal={() => Sheet1.current.close()} />
+        <OkModal hideDescription={() => { }} closeModal={() => Sheet1.current.close()} />
       </RBSheet>
 
     </View>

@@ -21,10 +21,12 @@ const OkModal = (props) => {
   }
   return (
     <KeyboardAvoidingView
-    behavior={Platform.OS === "ios" ? "padding" : "height"}
-    style={{}}
 
-  > 
+  keyboardVerticalOffset = {Platform.OS === "ios" ? 0: 30*hm} // adjust the value here if you need more padding
+  // style = {{ flex: 1 }}
+  behavior={"padding"}
+  >
+
 <View style={{paddingBottom:5*hm,flexDirection:'row', justifyContent:'space-between',marginRight:30*em,marginLeft:30*em,alignContent:'center',alignItems:'center'}}>
 <TouchableOpacity onPress={ () =>  resetModal()}  >
   <Cta width={50 * em} height={50 * hm} />

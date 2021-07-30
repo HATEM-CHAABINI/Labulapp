@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: EISDIR: illegal operation on a directory, read<br> &nbsp; &nbsp;at Object.readSync (node:fs:626:3)<br> &nbsp; &nbsp;at tryReadSync (node:fs:391:20)<br> &nbsp; &nbsp;at Object.readFileSync (node:fs:428:19)<br> &nbsp; &nbsp;at UnableToResolveError.buildCodeFrameMessage (/Users/hatemchaabini/Downloads/labull-App/Labulapp/node_modules/metro/src/node-haste/DependencyGraph/ModuleResolution.js:347:17)<br> &nbsp; &nbsp;at new UnableToResolveError (/Users/hatemchaabini/Downloads/labull-App/Labulapp/node_modules/metro/src/node-haste/DependencyGraph/ModuleResolution.js:333:35)<br> &nbsp; &nbsp;at ModuleResolver.resolveDependency (/Users/hatemchaabini/Downloads/labull-App/Labulapp/node_modules/metro/src/node-haste/DependencyGraph/ModuleResolution.js:211:15)<br> &nbsp; &nbsp;at DependencyGraph.resolveDependency (/Users/hatemchaabini/Downloads/labull-App/Labulapp/node_modules/metro/src/node-haste/DependencyGraph.js:413:43)<br> &nbsp; &nbsp;at /Users/hatemchaabini/Downloads/labull-App/Labulapp/node_modules/metro/src/lib/transformHelpers.js:317:42<br> &nbsp; &nbsp;at /Users/hatemchaabini/Downloads/labull-App/Labulapp/node_modules/metro/src/Server.js:1471:14<br> &nbsp; &nbsp;at Generator.next (&lt;anonymous&gt;)</pre>
+</body>
+</html>

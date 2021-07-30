@@ -59,10 +59,6 @@ const MabulAddLieu = (props) => {
       flex: 1, backgroundColor: '#ffffff', zIndex: 999,
     }}>
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
-      >
 
         <View style={styles.body}>
           <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
@@ -105,13 +101,20 @@ const MabulAddLieu = (props) => {
           </View>
 
         </View>
-      </KeyboardAvoidingView>
+      <KeyboardAvoidingView
+
+      keyboardVerticalOffset = {Platform.OS === "ios" ? 130*hm: 130*hm} // adjust the value here if you need more padding
+      style = {{ flex: 0.14 }}
+      behavior={"padding"}
+      >
+    
       <OkModal conceptColor={conceptColor}
         showDescription={() => { }}
         hideDescription={() => { }}
         okoModal={() => onSubmit()}
         closeModal={() => props.closeModal()}
       />
+      </KeyboardAvoidingView>
 
     </View>
   );

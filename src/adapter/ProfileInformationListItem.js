@@ -1,4 +1,4 @@
-import { View, Image } from 'react-native';
+import { View, Image,Text } from 'react-native';
 import React,{useState,useEffect} from 'react';
 import { em, hm } from '../constants/consts';
 import CommonListItem from './CommonListItem';
@@ -43,7 +43,7 @@ const ProfileInformationListItem = (props) => {
       rightView={
         !props.noClick && (
           <View style={styles.rightView}>
-            <RightArrow width={11 * em} height={18 * em} />
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: '#40CDDE' }}>Modifier</Text>
           </View>
         )
       }
@@ -63,6 +63,6 @@ const styles = {
     marginBottom: 10 * em,
     color: '#A0AEB8',
   },
-  rightView: { justifyContent: 'center', flex: 1 },
+  rightView: { justifyContent: 'center'},
   commentStyle: { textAlign: 'left', fontSize: 12 * em, color: '#A0AEB8', marginTop: 10 * em, marginRight: 30 * em },
 };

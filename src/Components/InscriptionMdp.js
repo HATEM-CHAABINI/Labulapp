@@ -122,7 +122,8 @@ export default ({ navigation }) => {
             />
             {formik.errors.firstName && formik.touched.firstName && <Text style={styles.descerrorText}>{formik.errors.firstName}</Text>}
             </View>
-            <View>
+            <View style={{ bottom: 20 * hm }}>
+
 
            
  <Reinput
@@ -176,7 +177,7 @@ export default ({ navigation }) => {
 
             width: 315 * em,
 
-            bottom: 25 * hm,
+            bottom: 18 * hm,
             // top:240*hm
           }}>
           <View

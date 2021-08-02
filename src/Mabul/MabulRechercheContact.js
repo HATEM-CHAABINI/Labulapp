@@ -57,7 +57,7 @@ const MabulRechercheContact = (props) => {
         break;
       case 3:
         setfChecked(true)
-        setcontactType({ type: 3, name: 'mes famille' })
+        setcontactType({ type: 3, name: 'ma famille' })
         break;
       case 4:
         settChecked(true)
@@ -157,13 +157,14 @@ const MabulRechercheContact = (props) => {
 
     var verif = true
 
-
     if (data.serviceType.name === "alerts" && mabulService === "Alerte") {
       firestore().collection('userAlerts').doc(auth().currentUser.uid)
         .collection(data.serviceType.name).add(data).then(async (res) => {
           const responce = firestore().collection('userAlerts').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
           const datas = await responce.get(); setloadingSet(false);
           Actions.myAlert({ alertData: datas.data(), data2: data, user: user, docId: res.id }), console.log("res ",);
+          props.rb4()
+
         });
     }
     else {
@@ -176,7 +177,9 @@ const MabulRechercheContact = (props) => {
           console.log(datas, "dhddbncnxcncncnncnc ", mabulService);
 
           setloadingSet(false);
-          this[RBSheet + 4].close()
+          props.rb4()
+
+          // this[RBSheet + 4].close()
           if (mabulService === 'organize') {
             Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
           } else if (mabulService === 'give') {

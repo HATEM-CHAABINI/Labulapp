@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, ImageBackground, TouchableOpacity, NativeModules, FlatList, ActivityIndicator, Alert } from 'react-native';
-import { em, hexToRGB } from '../../../constants/consts';
+import { em, hexToRGB, hm } from '../../../constants/consts';
 import ProfileInformationListItem from '../../../adapter/ProfileInformationListItem';
 import ProfileCommonHeader from '../../../Components/header/ProfileCommonHeader';
 import CommonButton from '../../../Components/button/CommonButton';
@@ -9,7 +9,10 @@ import CommonText from '../../../text/CommonText';
 import { Actions } from 'react-native-router-flux';
 import EditTitleComponent from '../myNeeds/EditTitleComponent'
 import EditDescriptionComponent from '../myNeeds/EditDescriptionComponent'
-import { CrossGray, EditAddPhoto, Family, Friend, Neighbor, All } from '../../../assets/svg/icons';
+import { CrossGray, EditAddPhoto, Family, Friend, Neighbor, All, BackArrowBlack } from '../../../assets/svg/icons';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
+import { Amis, Cancel, Famille, Tous, Voisins } from '../../../assets/svg/icons';
+
 const updateUserPrfile = {
   avatar: require('../../../assets/images/avatar_curology.png'),
   cover: require('../../../assets/images/img_curology.png'),
@@ -32,9 +35,12 @@ import auth from '@react-native-firebase/auth';
 import { deleteUserDemands } from "../../../services/firebase";
 var ImagePicker = NativeModules.ImageCropPicker;
 import { needTypeItems, needDailyItems, needFamilyItems, sellObjetItems, sellServiceItems, sellThemeData, givecategoryItems, organizeCategoryData } from '../../../constants/data'
+import EditAddressScreen from './EditAddressScreen';
+import CommonHeader from '../../../Components/header/CommonHeader';
+import TitleText from '../../../text/TitleText';
 
 const EditNeedScreen = (props) => {
-
+console.log('kdkdkdkdkdkddkdkkdkdkd',props.data2);
   const [userProfile] = useState(updateUserPrfile);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isEndDatePickerVisible, setisEndDatePickerVisible] = useState(false);
@@ -42,6 +48,7 @@ const EditNeedScreen = (props) => {
   const [images, setimages] = useState({ images: props.data2.images })
 
   const [demandType, setdemandType] = useState(props.data2.type)
+  const [demandLieu, setdemandLieu] = useState(props.data2.address)
   const [demandCategory, setdemandCategory] = useState(props.data2.category)
   const [demandData, setdemandData] = useState(props.data2.data)
 
@@ -49,6 +56,7 @@ const EditNeedScreen = (props) => {
 
   const [titleModelVisible, settitleModelVisible] = useState(false);
   const [descriptionModelVisible, setdescriptionModelVisible] = useState(false);
+  const [LieuModelVisible, setLieuModelVisible] = useState(false);
   const [endDate, setendDate] = useState(props.data2.demandEndDate)
   const [contactType, setcontactType] = useState(props.data2.contactType)
   const [editType, seteditType] = useState(false)
@@ -208,22 +216,160 @@ const EditNeedScreen = (props) => {
 
 
   return (
-    <ProfileCommonHeader title="Modifier demande" onCancel={() => Actions.pop()} loading={loading} onFinish={() => {
 
-      if (images.images.length > 0) {
-        setloading(true)
-        if (images.images === props.data2.images) {
-          SaveData(images.images)
-        } else {
-          uploadeImage(images.images)
-        }
-      }
-      else {
-        alert("Need to select one pic!!")
-      }
+    <ParallaxScrollView
+    contentContainerStyle={styles.container}
+    headerBackgroundColor="#333"
+    backgroundColor="#ffffff"
+    stickyHeaderHeight={81 * hm}
+    parallaxHeaderHeight={139 * hm}
+    backgroundSpeed={10}
+    renderFixedHeader={() => (
+      <CommonHeader
+    
+        onLeftPress={()=>Actions.pop()}
+        leftView={
+        <TouchableOpacity
+        style={{
+          position: 'absolute',
+          paddingLeft: 15 * em,
+          bottom:25*hm
+        }}
+        onPress={() => Actions.pop()}>
+        <BackArrowBlack width={20 * em} height={18 * hm} />
+      </TouchableOpacity>}
+        rightTxtStyle={styles.rightTxt}
+        loading={loading}
+      />
+    )}
+    renderForeground={() => <TitleText text="Modifier demande" style={styles.title} />}
+    renderStickyHeader={() => (
+      <View key="sticky-header" style={{ marginTop: 40 * hm, alignItems: 'center' }}>
+        <CommonText text="Modifier demande" color="#1E2D60" style={{ fontFamily: 'Lato-Bold' }} />
+      </View>
+    )}>
+   
 
-    }}>
-      <View style={styles.listItem}>
+
+     
+   {/* if (images.images.length > 0) {
+              setloading(true)
+              if (images.images === props.data2.images) {
+                SaveData(images.images)
+              } else {
+                uploadeImage(images.images)
+              }
+            }
+            else {
+              alert("Need to select one pic!!")
+            } */}
+
+
+      {/* /////////////////// */}
+      {props.data2.serviceType.name === 'sell' || props.data2.serviceType.name === 'give' || props.data2.serviceType.name === 'organize' ? null : <><ProfileInformationListItem
+        caption={'Type de demande'}
+        titleUpperCase
+        value={demandType.itemName}
+        style={styles.listItem}
+        onPress={() => {
+          seteditType(!editType);
+        }}
+      />
+        <EditTypeComponent
+          visible={editType}
+          title={"Type de demande"}
+          value={demandType}
+          onPress={() => {
+            seteditType(false);
+          }}
+          onChange={(item) => { setdemandType(item) }}
+          type={needTypeItems}
+        // data={profileDataCurrent}
+        />
+      </>
+      }
+      {/* ///////// */}
+
+      <ProfileInformationListItem
+        titleUpperCase
+        caption={'Titre'}
+        value={demandData.title}
+        onPress={() => {
+
+          settitleModelVisible(!titleModelVisible);
+        }}
+        style={styles.listItem}
+      />
+
+      {/* <EditTitleComponent
+        visible={titleModelVisible}
+        // itemKey={inputItemKey}
+        // heading={"Titre"}
+
+        value={demandData.title}
+        txt={'Titre'}
+        onPress={() => {
+          settitleModelVisible(false)
+        }}
+        onChange={(item) => { setdemandData({ ...demandData, title: item }), settitleModelVisible(false) }}
+      /> */}
+<EditAddressScreen
+        visible={titleModelVisible}
+        txt={'Titre'}
+        changeItem={'Titre'}
+        value={demandData.title}
+        onPress={() => {
+          settitleModelVisible(false)        }}
+          onChange={(item) => { setdemandData({ ...demandData, title: item }), settitleModelVisible(false) }}
+          />
+
+
+
+
+
+      <ProfileInformationListItem
+        titleUpperCase
+        caption={'Description'}
+        heading={"Description"}
+        title={'Description'}
+        onPress={() => {
+
+          setdescriptionModelVisible(!descriptionModelVisible);
+        }}
+
+        value={demandData.description}
+        style={styles.listItem}
+      />
+      {/* <EditDescriptionComponent
+        visible={descriptionModelVisible}
+
+        changeItem={'Description'}
+        value={demandData.description}
+        title={'Description'}
+        onPress={() => {
+          setdescriptionModelVisible(false)
+        }}
+        onChange={(item) => { setdemandData({ ...demandData, description: item }), setdescriptionModelVisible(false) }}
+      />
+      */}
+
+     <EditAddressScreen
+        visible={descriptionModelVisible}
+
+        txt={'Description'}
+        value={demandData.description}
+        title={'Description'}
+        onPress={() => {
+          setdescriptionModelVisible(false)
+        }}
+        onChange={(item) => { setdemandData({ ...demandData, description: item }), setdescriptionModelVisible(false) }}
+         />
+      {/* ///////////////// */}
+
+
+
+     
+<View style={styles.listItem}>
         <View style={{ flexDirection: 'row', marginBottom: 15 * em, justifyContent: 'space-between' }}>
           <CommentText text="Photos" color="#6A8596" />
           <CommentText text="3 maximum" color="#A0AEB8" />
@@ -268,127 +414,30 @@ const EditNeedScreen = (props) => {
         </View>
       </View>
 
-
-
-      {/* /////////////////// */}
-      {props.data2.serviceType.name === 'sell' || props.data2.serviceType.name === 'give' || props.data2.serviceType.name === 'organize' ? null : <><ProfileInformationListItem
-        caption={'Type de demande'}
-        titleUpperCase
-        value={demandType.itemName}
-        style={styles.listItem}
-        onPress={() => {
-          seteditType(!editType);
-        }}
-      />
-        <EditTypeComponent
-          visible={editType}
-          title={"Type de demande"}
-          value={demandType}
-          onPress={() => {
-            seteditType(false);
-          }}
-          onChange={(item) => { setdemandType(item) }}
-          type={needTypeItems}
-        // data={profileDataCurrent}
-        />
-      </>
-      }
-      {/* ///////// */}
-
-
-
-      {/* ////////////// */}
       <ProfileInformationListItem
         titleUpperCase
-        caption={'Catégorie'}
-        // value={'Bricolage/ jardinage'}
-        value={demandCategory.name}
-        style={styles.listItem}
-        onPress={() => {
-          seteditCategory(!editCategory);
-        }}
-      />
-      <EditCategoryScreen
-        visible={editCategory}
-        title={"Catégorie"}
-        value={demandCategory}
-        onPress={() => {
-          seteditCategory(false);
-        }}
-        onChange={(item) => { setdemandCategory(item) }}
-        category={props.data2.serviceType.name === 'need' ?
-          props.data2.belongsTo.id === 0 ? needFamilyItems : needDailyItems :
-          props.data2.serviceType.name === 'sell' ? props.data2.belongsTo.id === 1 ? sellObjetItems : props.data2.belongsTo.id === 2 ? sellThemeData : sellServiceItems
-            : props.data2.serviceType.name === 'give' ? givecategoryItems : props.data2.serviceType.name === 'organize' ? organizeCategoryData : []
-        }
-
-      />
-      {/* ///////////////// */}
-
-
-
-      <ProfileInformationListItem
-        titleUpperCase
-        caption={'Titre'}
-        // value={'Récolter des figues'}
-        value={demandData.title}
+        caption={'Lieu'}
+        heading={"Lieu"}
+        title={'Lieu'}
         onPress={() => {
 
-          settitleModelVisible(!titleModelVisible);
+          setLieuModelVisible(!LieuModelVisible);
         }}
+
+        value={demandLieu}
         style={styles.listItem}
       />
-
-      <EditTitleComponent
-        visible={titleModelVisible}
-        // itemKey={inputItemKey}
-        heading={"Titre"}
-
-        value={demandData.title}
-        title={'Titre'}
+      <EditAddressScreen
+        visible={LieuModelVisible}
+        txt={'Lieu'}
+        changeItem={'Lieu'}
+        value={demandLieu}
+        title={'Lieu'}
         onPress={() => {
-          settitleModelVisible(false)
-        }}
-        onChange={(item) => { setdemandData({ ...demandData, title: item }), settitleModelVisible(false) }}
+          setLieuModelVisible(false)        }}
+        onChange={(item) => { setdemandLieu( item ), setLieuModelVisible(false) }}
       />
-      <ProfileInformationListItem
-        titleUpperCase
-        caption={'Description'}
-        heading={"Description"}
-        title={'Description'}
-        onPress={() => {
-
-          setdescriptionModelVisible(!descriptionModelVisible);
-        }}
-
-        value={demandData.description}
-        style={styles.listItem}
-      />
-      <EditDescriptionComponent
-        visible={descriptionModelVisible}
-
-        changeItem={'Description'}
-        value={demandData.description}
-        title={'Description'}
-        onPress={() => {
-          setdescriptionModelVisible(false)
-        }}
-        onChange={(item) => { setdemandData({ ...demandData, description: item }), setdescriptionModelVisible(false) }}
-      />
-      <TouchableOpacity onPress={() => showDatePicker()}>
-
-
-        <ProfileInformationListItem
-          titleUpperCase
-          caption={'Start Date'}
-          noClick
-          // value={'29 Fév · 14h00'}
-          value={Moment(startDate).format('DD MMMM YYYY-hh:mm')}
-          style={styles.listItem}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => {
+  <TouchableOpacity onPress={() => {
         setshareModel(!shareModel);
       }}>
 
@@ -397,10 +446,11 @@ const EditNeedScreen = (props) => {
           caption={'Partagé avec'}
           circleText={
             <>
-              {contactType.type == 1 ? <Neighbor width={28 * em} height={28 * em} /> :
-                contactType.type == 2 ? <Friend width={28 * em} height={28 * em} /> :
-                  contactType.type == 3 ? <Family width={28 * em} height={28 * em} /> :
-                    <All width={28 * em} height={28 * em} />
+
+              {contactType.type == 1 ? <Voisins width={28 * em} height={28 * em} /> :
+                contactType.type == 2 ? <Amis width={28 * em} height={28 * em} /> :
+                  contactType.type == 3 ? <Famille width={28 * em} height={28 * em} /> :
+                    <Tous width={28 * em} height={28 * em} />
               }
               <CommonText text={contactType.name} color="#1E2D60" style={{ marginLeft: 10 * em, alignSelf: 'center' }} />
             </>
@@ -420,7 +470,82 @@ const EditNeedScreen = (props) => {
         }}
         onChange={(item) => { setcontactType(item), setshareModel(false) }}
       />
+       {/* ////////////// */}
 
+
+<ProfileInformationListItem
+        titleUpperCase
+        caption={'Type de demande'}
+        // value={'Bricolage/ jardinage'}
+        value={demandCategory.name}
+        style={styles.listItem}
+        onPress={() => {
+          seteditCategory(!editCategory);
+        }}
+      />
+      <EditCategoryScreen
+        visible={editCategory}
+        title={"Type de demande"}
+        value={demandCategory}
+        onPress={() => {
+          seteditCategory(false);
+        }}
+        onChange={(item) => { setdemandCategory(item) }}
+        category={props.data2.serviceType.name === 'need' ?
+          props.data2.belongsTo.id === 0 ? needFamilyItems : needDailyItems :
+          props.data2.serviceType.name === 'sell' ? props.data2.belongsTo.id === 1 ? sellObjetItems : props.data2.belongsTo.id === 2 ? sellThemeData : sellServiceItems
+            : props.data2.serviceType.name === 'give' ? givecategoryItems : props.data2.serviceType.name === 'organize' ? organizeCategoryData : []
+        }
+
+      />
+       {/* ////////////// */}
+
+       <ProfileInformationListItem
+        titleUpperCase
+        caption={'Catégorie'}
+        // value={'Bricolage/ jardinage'}
+        value={props.data2.belongsTo.name}
+        style={styles.listItem}
+        onPress={() => {
+          seteditCategory(!editCategory);
+        }}
+      />
+      <EditCategoryScreen
+        visible={editCategory}
+        title={"Catégorie"}
+        value={props.data2.belongsTo}
+        onPress={() => {
+          seteditCategory(false);
+        }}
+        onChange={(item) => { setdemandCategory(item) }}
+        category={props.data2.serviceType.name === 'need' ?
+          props.data2.belongsTo.id === 0 ? needFamilyItems : needDailyItems :
+          props.data2.serviceType.name === 'sell' ? props.data2.belongsTo.id === 1 ? sellObjetItems : props.data2.belongsTo.id === 2 ? sellThemeData : sellServiceItems
+            : props.data2.serviceType.name === 'give' ? givecategoryItems : props.data2.serviceType.name === 'organize' ? organizeCategoryData : []
+        }
+
+      />
+             {/* ////////////// */}
+
+      <TouchableOpacity onPress={() => showDatePicker()}>
+
+
+        <ProfileInformationListItem
+          titleUpperCase
+          caption={'Date'}
+          noClick
+          // value={'29 Fév · 14h00'}
+          value={Moment(startDate).format('DD MMMM YYYY-hh:mm')}
+          style={styles.listItem}
+        />
+      </TouchableOpacity>
+
+     
+{/* <FriendCancelParticipatePopupScreen
+        visible={cancelParticipatePopupVisible}
+        onPress={() => setcancelParticipatePopupVisible(false)}
+        onStatus={(v) => setStatus(v)}
+      /> */}
 
 
       <CommonButton
@@ -443,11 +568,22 @@ const EditNeedScreen = (props) => {
         onCancel={hideDatePicker}
       />
 
-    </ProfileCommonHeader>
+</ParallaxScrollView>
   );
 };
 
 const styles = {
+  commonHeader: { position: 'absolute', marginBottom: 23 * hm, marginTop: 40 * hm },
+  title: {
+    marginLeft: 30 * em,
+    lineHeight: 38 * hm,
+    backgroundColor: '#ffffff',
+    // marginBottom: 25 * hm,
+    textAlign: 'left',
+    marginTop: 81 * hm,
+    fontFamily: 'Lato-Black'
+  },
+  rightTxt: { fontFamily:'Lato-Bold',fontSize:16*em,color: '#40CDDE',  marginRight: 12 * em },
   container: { backgroundColor: '#F0F5F7' },
   bgView: { marginTop: 10 * em, height: 184 * em, backgroundColor: hexToRGB('#40CDDE10', 0.1) },
   photo: {

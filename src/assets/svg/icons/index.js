@@ -429,6 +429,7 @@ import Return2Point from './navigation/Return2Point.svg';
 export { Animals, HomeCare, Interview, Workshop, Path, Return2Point };
 
 import Edit from './post/Edit.svg';
+import Edit4 from './post/Edit4.svg';
 import Edit1 from './post/Edit1.svg';
 import Edit2 from './post/Edit2.svg';
 import Edit3 from './post/EditButton3.svg';
@@ -447,6 +448,7 @@ export {EditAddPhoto,Premium,
   Edit1,
   Edit2,
   Edit3,
+  Edit4,
   Document,
   Document1,
   Document2,

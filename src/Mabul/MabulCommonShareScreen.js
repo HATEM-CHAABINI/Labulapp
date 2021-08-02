@@ -40,7 +40,7 @@ const MabulCommonShareScreen = ({ mabulService, process }) => {
         break;
       case 3:
         setfChecked(true)
-        setcontactType({ type: 3, name: 'mes famille' })
+        setcontactType({ type: 3, name: 'ma famille' })
         break;
       case 4:
         settChecked(true)

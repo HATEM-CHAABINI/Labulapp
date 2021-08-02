@@ -111,6 +111,7 @@ import { useDispatch } from 'react-redux';
 import { addProfile } from '../redux/actions/profile';
 import { addLogin } from '../redux/actions/login';
 import AlertTypeScreen from '../topbar/alert/AlertTypeScreen';
+import WaitingScreen from '../ServiceScrenns/WaitingScreen';
 
 let data = {}
 
@@ -406,6 +407,11 @@ export default () => {
           key="friendGiveBadge"
           hideNavBar
           component={FriendGiveBadgeScreen}
+        />
+          <Scene
+          key="waitscreen"
+          hideNavBar
+          component={WaitingScreen}
         />
         <Scene
           key="activityMessage"

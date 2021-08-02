@@ -156,6 +156,7 @@ const MabulAddDate = (props) => {
               />
               <View style={styles.line} />
             </View>
+                      
             {showEndDataView ? <View style={{ paddingTop: 10 * hm }}>
               <CommonListItem
                 title="Date et heure de fin"
@@ -165,11 +166,11 @@ const MabulAddDate = (props) => {
                 onPress={showEndDatePicker}
               />
               <View style={styles.line} />
-            </View> : null}
+            </View> : <CommentText style={styles.addDateText} onPress={() => setshowEndDataView(true)} text="+ Date et heure de fin" color={conceptColor} />
+}
 
 
 
-          <CommentText style={styles.addDateText} onPress={() => setshowEndDataView(true)} text="+ Date et heure de fin" color={conceptColor} />
             </View>
         
         </View>
@@ -230,7 +231,7 @@ const styles = {
     marginTop: 10 * hm,
     textAlign: 'left',
     // marginLeft: 36 * em,
-    marginBottom: 20 * hm
+    marginBottom: 40 * hm
   },
   nextBtn: {
     alignSelf: 'flex-end',

@@ -4,7 +4,7 @@ import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
 import ProfileCommonTextInput from '../../../Components/textInput/ProfileCommonTextInput';
 
-import { StatusBar, View, Text, Platform, Alert } from 'react-native';
+import { StatusBar, View, Text, Platform, Alert ,KeyboardAvoidingView} from 'react-native';
 import User from '../../../model/user/User';
 import { feedbackIcons } from '../../../constants/icons';
 import { useFormik } from 'formik';
@@ -13,6 +13,8 @@ import { updateUserProfile } from '../../../services/firebase'
 import auth from '@react-native-firebase/auth'
 import { addProfile, updateProfile } from '../../../redux/actions/profile';
 import { useDispatch } from 'react-redux';
+import OkModalchange from '../../../Components/button/OkModalchange';
+import TitleText from '../../../text/TitleText';
 
 export default (props) => {
     // console.log(insertInfo.inputTexts[0].toString())
@@ -45,6 +47,18 @@ export default (props) => {
             backdropColor={'#1E2D60'}
             swipeDirection={'up'}
             onBackButtonPress={() => props.onPress()}>
+          
+<KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          
+       
+          flex: 1,
+          justifyContent: 'flex-start',
+  
+        }}
+
+      >
             <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
             <View
                 style={{
@@ -59,14 +73,8 @@ export default (props) => {
                 }}
                 opacity={0.5}
             />
-            <ProfileModalHeader
-                title={props.title}
-                style={styles.header}
-                loading={loading}
-                setloading={setloading}
-                onCancelPress={() => props.onPress()}
-                onFinishPress={formik.handleSubmit}
-            />
+        <TitleText text={props.txt} textAlign={"left"} style={{marginTop:55*hm,marginBottom:5*hm}}/>
+
             <ProfileCommonTextInput
                 style={styles.input}
                 text={props.title}
@@ -78,6 +86,14 @@ export default (props) => {
             />
             {
                 formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
+      
+      </KeyboardAvoidingView>
+
+      <OkModalchange conceptColor={"#40CDDE"}txt={"Enregistrer"} 
+      closeModal={()=>props.onPress()} 
+            okoModal={formik.handleSubmit}
+            style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center',alignItems:'center'}}/>
+
         </Modal>
     );
 };

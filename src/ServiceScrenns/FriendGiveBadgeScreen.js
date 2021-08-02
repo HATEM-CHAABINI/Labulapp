@@ -86,7 +86,7 @@ const FriendGiveBadgeScreen = () => {
         </View>
       </ScrollView>
       <View style={styles.btnBox}>
-        <CommonButton text={'Continuer'} onPress={() => setBadgeNoticeVisible(true)} />
+        <CommonButton text={'Attribuer'} onPress={() => Actions.userProfile()} />
       </View>
       <FriendBadgeNoticePopupScreen
         visible={badgeNoticeVisible}

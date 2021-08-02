@@ -92,7 +92,7 @@ marginBottom={-7*hm}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ alignItems: 'center' }}
       >
-        <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
+        <View style={{backgroundColor:'white',width:'100%',alignItems:'center',bottom:0.2*hm}}>
        <CommonButton
             color="#7398FC"
             text={'Suivant'}

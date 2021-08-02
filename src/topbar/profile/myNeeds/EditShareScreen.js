@@ -36,7 +36,7 @@ export default (props) => {
                 break;
             case 3:
                 setfChecked(true)
-                setcontactType({ id: 3, title: 'mes famille' })
+                setcontactType({ id: 3, title: 'ma famille' })
                 break;
             case 4:
                 settChecked(true)

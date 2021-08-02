@@ -145,7 +145,7 @@ export default ({ navigation }) => {
 
             width: 315 * em,
 
-            bottom: 25 * hm,
+            bottom: 18 * hm,
             // top:240*hm
           }}>
           <View

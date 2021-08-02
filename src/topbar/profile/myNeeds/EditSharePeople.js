@@ -5,10 +5,13 @@ import { em, hm, mabulColors } from '../../../constants/consts';
 import CommonText from '../../../text/CommonText';
 import Modal from 'react-native-modal';
 import CommonButton from '../../../Components/button/CommonButton';
-import { Family, Friend, Neighbor, All, CheckBlue } from '../../../assets/svg/icons';
+import { Family, Friend, Neighbor, All, CheckBlue, Voisins, Amis, Famille, Tous } from '../../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 import { useSelector, useDispatch } from 'react-redux'
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
+import ShareButton from '../../../Components/button/ShareButton';
+import CheckBox from '../../../Components/checkbox/CheckBox';
+import RelationshipType from '../../../model/user/RelationshipType';
 
 export default (props) => {
 
@@ -36,7 +39,7 @@ export default (props) => {
                 break;
             case 3:
                 setfChecked(true)
-                setcontactType({ type: 3, name: 'mes famille' })
+                setcontactType({ type: 3, name: 'Ma famille' })
                 break;
             case 4:
                 settChecked(true)
@@ -115,52 +118,71 @@ export default (props) => {
             {/* <View style={styles.container}> */}
 
             {/* <View style={styles.body}> */}
-            <View>
-                {/* <TitleText text={'Je partage avec'} style={styles.title} /> */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity activeOpacity={1}
-                        style={[
-                            vchecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(1)}>
-                        {vchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Neighbor width={48 * em} height={48 * em} />}
-                        <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            achecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(2)}>
-                        {achecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Friend width={48 * em} height={48 * em} />}
-                        <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            fchecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(3)}>
-                        {fchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Family width={48 * em} height={48 * em} />}
-                        <CommonText text="Ma famille" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            tchecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(4)}>
-                        {tchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <All width={48 * em} height={48 * em} />}
-                        <CommonText text="tous" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
+
+
+<ShareButton text={"mes voisins"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(215,243,255,0.7)' }} leftIcon={<Voisins />} rightIcon={
+  <CheckBox
+    oval
+    pink={props.sort === RelationshipType.FAMILIY ? true : false}
+    blue={props.sort === RelationshipType.FRIEND ? true : false}
+    bgColor="#EF88B9"
+    isChecked={vchecked}
+    onClick={() => {
+      check(1)
+      // const arr = [...checked];
+      // arr[index] = !arr[index];
+      // setChecked(arr);
+    }}
+  />
+} />
+<ShareButton text={"mes amis"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(255,244,217,0.62)' }} leftIcon={<Amis />} rightIcon={
+  <CheckBox
+    oval
+    orange={true}
+    bgColor="#FF9417"
+    isChecked={achecked}
+    onClick={() => {
+      check(2)
+      // const arr = [...checked];
+      // arr[index] = !arr[index];
+      // setChecked(arr);
+    }}
+  />
+} />
+
+
+
+<ShareButton text={"ma famille"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(255,23,103,0.11)' }} leftIcon={<Famille />} rightIcon={
+  <CheckBox
+    oval
+    pink={true}
+    bgColor="#EF88B9"
+    isChecked={fchecked}
+    onClick={() => {
+      check(3)
+      // const arr = [...checked];
+      // arr[index] = !arr[index];
+      // setChecked(arr);
+    }}
+  />
+} />
+<ShareButton text={"TOUS"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(240,245,247,0.62)' }} leftIcon={<Tous />} rightIcon={
+  <CheckBox
+    oval
+    gray={true}
+    bgColor="#EF88B9"
+    isChecked={tchecked}
+    onClick={() => {
+      check(4)
+      // const arr = [...checked];
+      // arr[index] = !arr[index];
+      // setChecked(arr);
+    }}
+  />
+} />
+</View>
+
 
             {/* </View> */}
             {/* </View> */}

@@ -149,9 +149,9 @@ export default ({ navigation }) => {
             <View style={styles.btnContainer}>
               <Googleicon width={18 * em} height={18 * hm} />
               {loadinggoogle ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 45 * em, }} /> : <Text style={[styles.btnText, {
-                marginLeft: 45 * em,
+                marginLeft: 10 * em,
               }]}>
-                Connexion avec Google
+                Inscris-toi avec Google
                 </Text>}
             </View>
           </TouchableOpacity>
@@ -201,8 +201,8 @@ export default ({ navigation }) => {
             <View style={styles.btnContainer}>
               <Facebookicon width={18 * em} height={18 * hm} />
               {loadingfacebook ? <ActivityIndicator size='small' color='#1E2D60' style={{ marginLeft: 36 * em, }} /> : <Text style={[styles.btnText, {
-                marginLeft: 36 * em,
-              }]}>Connexion avec Facebook </Text>
+                marginLeft: 10 * em,
+              }]}>Inscris-toi avec Facebook </Text>
             }
             </View>
           </TouchableOpacity>
@@ -233,7 +233,7 @@ export default ({ navigation }) => {
                   // marginLeft: 10*em,
                   // marginTop: 2*hm,
                   fontFamily: "Lato-Medium"
-                }}>Inscrit-toi avec ton email</Text>
+                }}>Inscris-toi avec ton email</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -278,8 +278,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingVertical: 20 * hm,
-    paddingLeft: 15 * em,
-    //justifyContent: 'center',
+    // paddingLeft: 15 * em,
+    justifyContent: 'center',
     // alignItems: 'center',
     // alignSelf: 'center',
     borderRadius: 10 * em,

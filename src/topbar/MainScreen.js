@@ -169,9 +169,11 @@ export default (props) => {
     <View style={styles.TabBarMainContainer}>
       <NavigationContainer ref={navigationRef}>
         <Tab.Navigator
+           unmountOnBlur={true}
           tabBar={(props) => <MainTabBar {...props} data={data} />}
           initialRouteName={props.tabNav ? props.tabNav : 'Friends'}>
           <Tab.Screen
+             unmountOnBlur={true}
             name="Friends"
             component={FriendsNavigator}
             initialParams={{ friendNav: props.friendNav || 'Carte' ,filtre: props.filtre,filtreD: props.filtreD}}

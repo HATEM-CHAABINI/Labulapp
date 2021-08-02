@@ -98,7 +98,7 @@ marginBottom={-7*hm}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ alignItems: 'center' }}
       >
-        <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
+        <View style={{backgroundColor:'white',width:'100%',alignItems:'center',bottom:0.2*hm}}>
           <CommonButton
             text={'Suivant'}
             onPress={() => Actions.proRegisterMobile({ accountType: props.accountType })}
@@ -131,7 +131,8 @@ const styles = {
   },
   popupTopView: { paddingTop: 20 * hm, alignItems: 'center', width: '80%' },
   titleText: { fontFamily: 'Lato-Black', marginTop: 11 * hm, marginBottom: 3 * hm },
-  btnNext: { backgroundColor: '#9FE7F0' ,
+  btnNext: { 
+    backgroundColor: '#9FE7F0' ,
   overflow: 'hidden',
   borderRadius: 18 * em,
   height: 59 * hm,

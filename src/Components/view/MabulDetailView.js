@@ -17,11 +17,13 @@ import ReadMore from 'react-native-read-more-text';
 import Moment from 'moment';
 import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../../constants/renderBange';
 import { Inviter } from '../../assets/svg/icons';
+import ModalModifierSupprimerDemande from '../../ServiceScrenns/ModalModifierSupprimerDemande';
 const MabulDetailView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(props.data);
   const [data2, setdata2] = useState(props.data2);
   const [user] = useState(props.user);
+  const [cancelUpdatePopupVisible, setcancelUpdatePopupVisible] = useState(false);
 
   const colorStyles = { button: { color: '#41D0E2' }, label: { color: '#A0AEB8' } };
 
@@ -44,7 +46,9 @@ const MabulDetailView = (props) => {
       style={styles.quizBtn}
       textStyle={{color:"#FFFFFF",fontFamily:'Lato-Medium',fontSize:16*em}}
       text="Modifier"
-      onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
+      onPress={() => setcancelUpdatePopupVisible(true)
+        // 
+      }
     />
   );
   const DeleteButton = (
@@ -53,7 +57,9 @@ const MabulDetailView = (props) => {
     }}
       textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
       text="Supprimer"
-      onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
+      onPress={() => setcancelUpdatePopupVisible(true)
+        // Actions.editNeed({ data2: data2, docId: props.docId })
+      }
     />
   );
   const AskButton = (
@@ -107,6 +113,14 @@ const MabulDetailView = (props) => {
           />
           <CommentText style={styles.comment} text={data2.type !== undefined ? data2.type.itemName : data.organName} color={'#1E2D60'} />
           <TitleText text={data2.data !== undefined ? data2.data.title : data.title} style={styles.title} />
+          <ModalModifierSupprimerDemande
+        visible={cancelUpdatePopupVisible}
+        onPressT={() => setcancelUpdatePopupVisible(false)}
+        onPressM={() => {setcancelUpdatePopupVisible(false)
+,          Actions.editNeed({ data2: data2, docId: props.docId })}}
+        onPressS={() => {setcancelUpdatePopupVisible(false)
+          ,          Actions.editNeed({ data2: data2, docId: props.docId })}}
+                 />
           <ReadMore
             numberOfLines={3}
           >
@@ -118,6 +132,7 @@ const MabulDetailView = (props) => {
           {data.status === NeedStatusType.CANCELED ? <></> : data.relationship ? AskButton : ModifyButton}
           {DeleteButton}
           {data.status !== NeedStatusType.CANCELED && InviteButton}
+        
           </View>
         </View>
       </ScrollView>

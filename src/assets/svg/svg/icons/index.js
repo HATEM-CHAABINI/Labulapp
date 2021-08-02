@@ -65,6 +65,7 @@ import Option from './navigation/Option.svg';
 import ReportProblem from './navigation/ReportProblem.svg';
 import Delete from './navigation/Delete.svg';
 import DeleteRed from './navigation/DeleteRed.svg';
+import CheckGreen from './navigation/CheckGreen.svg';
 
 import Ambianceur from './f/Ambianceur.svg';
 import Aperitif from './f/Aperitif.svg';
@@ -151,8 +152,10 @@ export {RightArrowBlue,
   NotificationYellow,
   CrossGray,
   CrossCircle,
+  Pouce
 };
 
+import Pouce from './profile/Pouce.svg';
 import Setting from './profile/Setting.svg';
 import MyNeeds from './profile/MyNeeds.svg';
 import Circles from './profile/Circles.svg';
@@ -266,7 +269,7 @@ export {AssociationInformation,EnterpriseInformation,InstitutionInformation,
   Institution,
 };
 
-export { ProAvatarBg, AvatarBg, Setting, MyNeeds, Circles, Information, ProNeeds, AddGroup, DeleteRed, ProAddCover };
+export { ProAvatarBg, AvatarBg, Setting, MyNeeds, Circles, Information, ProNeeds, AddGroup, DeleteRed,CheckGreen, ProAddCover };
 export { NextIcon, PrevIcon, LocationPink, Alert };
 export {
   ComputerIcon,

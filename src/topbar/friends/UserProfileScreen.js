@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView,Text } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm, WIDTH } from '../../constants/consts';
 import ProfileCommonLabel from '../../Components/other/ProfileCommonLabel';
@@ -11,6 +11,8 @@ import CommentText from '../../text/CommentText';
 import CommonButton from '../../Components/button/CommonButton';
 import { Family, Friend, Neighbor } from '../../assets/svg/icons';
 import { feedbackIcons } from '../../constants/icons';
+// import ReadMore from 'react-native-read-more-text';
+import ReadMore from '@fawazahmed/react-native-read-more';
 
 const sampleProfile = {
   avatar: require('../../assets/images/tab_profile_off.png'),
@@ -25,6 +27,41 @@ const sampleProfile = {
 };
 const UserProfileScreen = (props) => {
   const [userProfile] = useState(props.userProfile || sampleProfile);
+  const [Cercle,setCercle]=useState(false)
+
+  const ajoutcercle = (
+    <CommonButton
+    onPress={() => {setCercle(true)}}
+    text="Ajouter à mon cercle"
+    style={styles.addBtn}
+    textStyle={{ fontSize: 12 * em, fontFamily: 'Lato-Bold',height:14*hm,width:110*em }}
+  />
+    );
+
+
+const cercleamis=(
+  <CommonButton
+  text="Mon ami(e)/mon voisin(e) "
+  style={{paddingVertical: 10 * hm,
+    paddingHorizontal: 20 * em,
+    width: 'auto',
+    fontSize: 12 * em,
+    lineHeight: 15 * em,
+    borderRadius: 12 * em,
+    marginBottom:25*hm,backgroundColor:'transparent',borderColor:'#F0F5F7',borderWidth:1}}
+  textStyle={{color:'#6A8596', fontSize: 12 * em, fontFamily: 'Lato-Regular',height:14*hm,width:176*em }}
+/>
+)
+var mainButton;
+  switch (Cercle) {
+    case false:
+      mainButton = ajoutcercle;
+      break;
+    case true:
+      mainButton = cercleamis;
+      break;
+  }
+
   const badgeView = userProfile.badges && (
     <ScrollView horizontal={true} style={{ paddingTop: 20 * hm, paddingLeft: 30 * em, height: 80 * hm }}>
       {userProfile.badges.map((badge, index) => (
@@ -44,20 +81,21 @@ const UserProfileScreen = (props) => {
             logoVisible={false}
           />
           <TitleText text={userProfile.fullName} style={styles.fullNameText} />
-          <CommentText text={userProfile.availability} color="#1E2D60" style={{ marginBottom: 20 * hm }} />
-          <CommentText
-            text={'En plus d’être quelqu’un de sympa je suis un grand bricoleur, je suis passionné par le bricolage'}
-            color="#6A8596"
-            style={{ lineHeight: 24 * em }}
-          />
-          <View style={{ flexDirection: 'row' }}>
-            <CommentText text={'et dans tout le type de petits tr…'} color="#6A8596" style={{ lineHeight: 24 * em }} />
-            <CommentText
-              text={' Continuer à lire'}
-              color="#40CDDE"
-              style={{ lineHeight: 24 * em, fontFamily: 'Lato-Bold' }}
-            />
-          </View>
+          <CommentText text={userProfile.availability} color="#1E2D60" style={{ marginBottom: 15 * hm }} />
+        {mainButton}
+          
+         <ReadMore
+            numberOfLines={2}
+            seeMoreText={'Continuer à lire'}
+            seeLessText={'Lire Moins'}
+            seeLessStyle={styles.semo}
+            seeMoreStyle={styles.semo}
+        style={styles.content}
+        >
+            {
+            "En plus d’être quelqu’un de sympa je suis un grand bricoleur, je suis passionné par le bricolage et dans tout le type de petits "
+          } 
+          </ReadMore>
           {userProfile.specs && (
             <View style={{ flexDirection: 'row', marginTop: 15 * hm }}>
               {userProfile.specs.map((spec) => (
@@ -65,11 +103,7 @@ const UserProfileScreen = (props) => {
               ))}
             </View>
           )}
-          <CommonButton
-            text="Ajouter à mon cercle"
-            style={styles.addBtn}
-            textStyle={{ fontSize: 12 * em, fontFamily: 'Lato-Black' }}
-          />
+        
           <TitleText text={'Mes cercles'} style={styles.title} />
           <View style={styles.circlesView}>
             <View style={styles.labelView}>
@@ -117,6 +151,15 @@ const UserProfileScreen = (props) => {
 };
 
 const styles = {
+  semo:{color:'#40CDDE',fontSize:14*em,fontFamily:'Lato-Medium'},
+  content:{  
+    fontSize: 16 * em,
+    color: '#6A8596',
+    lineHeight: 25 * em,
+    // textAlign: 'left',
+    marginTop: 3 * hm,
+    // textAlign:'center'
+  },
   container: { flex: 1, backgroundColor: 'transparent' },
   backBtn: {
     shadowColor: '#B3C6CF33',
@@ -168,13 +211,13 @@ const styles = {
   },
   keywordTabView: { paddingVertical: 5 * em, paddingHorizontal: 10 * em },
   addBtn: {
-    marginTop: 20 * hm,
     paddingVertical: 10 * hm,
     paddingHorizontal: 20 * em,
     width: 'auto',
     fontSize: 12 * em,
     lineHeight: 15 * em,
     borderRadius: 12 * em,
+    marginBottom:25*hm
   },
   badgeIcon: {
     shadowColor: '#A7A7A733', shadowOpacity: 1,

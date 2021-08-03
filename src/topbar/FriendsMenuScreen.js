@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ImageBackground, Platform, Image, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, ImageBackground, Platform, Image, PermissionsAndroid, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
 import { em, hm } from '../constants/consts';
 import { Actions } from 'react-native-router-flux';
-import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps';
-
+import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE, } from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 import { fetchcoordinate, fetchallDemands, fetchallneed, fetchallorganize, fetchallsell, getUserProfile, fetchallgive, fetchallDemand } from '../services/firebase'
 import { ActivityIndicator } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
@@ -16,18 +16,51 @@ import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '
 
 const servicIconSize = { width: 18 * em, height: 18 * em };
 
-
-
-
 const FriendsMenuScreen = (props) => {
   const [loading, setLoading] = useState(props.loading)
   const [datas, setData] = useState(props.data);
- 
+  const [hasLocationAccess, setLocationAccess] = useState(false);
+  const [region, setRegion] = useState({
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
+  });
+  // get permission check
+  const initMap = async () => {
+    const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) setLocationAccess(true)
+    else setLocationAccess(false)
+  }
+  // get location corrdinate 
+  const CurrentPosition = () => {
+    Geolocation.getCurrentPosition(
+      position => {
+        setRegion({ ...region, latitude: position.coords.latitude, longitude: position.coords.longitude });
+      },
+      (error) => setLocationAccess(false),
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+    );
+  }
+  //calls when we have location permission
+  useEffect(() => {
+    if (hasLocationAccess) {
+      CurrentPosition();
+    }
+  }, [hasLocationAccess]);
+
+
 
   useEffect(() => {
+    //calls permission check function 
+    initMap()
+    //setting data from props for markers 
     setLoading(props.loading)
     setData(props.data)
   }, [props.loading])
+
+
+
 
   return (<>
 
@@ -40,13 +73,9 @@ const FriendsMenuScreen = (props) => {
         <MapView
           provider={PROVIDER_DEFAULT} // remove if not using Google Maps
           style={styles.map}
-          region={{
-
-            latitude: 48.857716,
-            longitude: 2.3367652,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }} loadingEnabled={true}
+          origin={region}
+          region={region}
+          loadingEnabled={true}
           loadingIndicatorColor="#666666"
           loadingBackgroundColor="#eeeeee"
           moveOnMarkerPress={false}
@@ -54,12 +83,14 @@ const FriendsMenuScreen = (props) => {
           showsCompass={true}
           showsPointsOfInterest={false}
         >
+          {/* for demands marking  */}
           {datas.map((location, i) =>
             PositionView(location, i))
           }
         </MapView>
 
-        <View
+        <TouchableOpacity
+          onPress={() => { CurrentPosition(); }}
           style={{
             position: 'absolute',
             top: 529 * hm,
@@ -89,10 +120,10 @@ const FriendsMenuScreen = (props) => {
 
           }}>
           {Return2Point(servicIconSize)}
-        </View>
+        </TouchableOpacity>
 
-      
-             
+
+
       </View >}</>);
 }
 

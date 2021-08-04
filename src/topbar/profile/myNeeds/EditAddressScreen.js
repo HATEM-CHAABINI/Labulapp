@@ -3,22 +3,14 @@ import { em, WIDTH, hm } from '../../../constants/consts';
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
 import ProfileCommonTextInput from '../../../Components/textInput/ProfileCommonTextInput';
-
-import { StatusBar, View, Text, Platform, Alert ,KeyboardAvoidingView} from 'react-native';
-import User from '../../../model/user/User';
-import { feedbackIcons } from '../../../constants/icons';
+import { StatusBar, View, Text, Platform, Alert, KeyboardAvoidingView } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { updateUserProfile } from '../../../services/firebase'
-import auth from '@react-native-firebase/auth'
-import { addProfile, updateProfile } from '../../../redux/actions/profile';
 import { useDispatch } from 'react-redux';
 import OkModalchange from '../../../Components/button/OkModalchange';
 import TitleText from '../../../text/TitleText';
 
 export default (props) => {
-    // console.log(insertInfo.inputTexts[0].toString())
-    // const insertInfo = insertInformations[props.title];
     const [value, setvalue] = useState(props.value)
     const dispatch = useDispatch();
     const [loading, setloading] = useState(false)
@@ -31,7 +23,6 @@ export default (props) => {
 
     });
     const onSubmit = async (values) => {
-        console.log("val ", values);
         props.onChange(values.address)
     };
     const formik = useFormik({
@@ -47,52 +38,43 @@ export default (props) => {
             backdropColor={'#1E2D60'}
             swipeDirection={'up'}
             onBackButtonPress={() => props.onPress()}>
-          
-<KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{
-          
-       
-          flex: 1,
-          justifyContent: 'flex-start',
-  
-        }}
-
-      >
-            <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
-            <View
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={{
-                    width: 349 * em,
-                    height: 20 * hm,
-                    marginTop: -10 * hm,
-                    alignSelf: 'center',
-                    position: 'absolute',
-                    backgroundColor: '#FFFFFF',
-                    borderTopLeftRadius: 20 * em,
-                    borderTopRightRadius: 20 * em,
-                }}
-                opacity={0.5}
-            />
-        <TitleText text={props.txt} textAlign={"left"} style={{marginTop:55*hm,marginBottom:5*hm}}/>
+                    flex: 1,
+                    justifyContent: 'flex-start',
+                }} >
+                <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
+                <View
+                    style={{
+                        width: 349 * em,
+                        height: 20 * hm,
+                        marginTop: -10 * hm,
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        backgroundColor: '#FFFFFF',
+                        borderTopLeftRadius: 20 * em,
+                        borderTopRightRadius: 20 * em,
+                    }}
+                    opacity={0.5}
+                />
+                <TitleText text={props.txt} textAlign={"left"} style={{ marginTop: 55 * hm, marginBottom: 5 * hm }} />
 
-            <ProfileCommonTextInput
-                style={styles.input}
-                text={props.title}
-                value={formik.values.address}
-                onFocus={true}
-                key={0}
-                kyeboardType={'default'}
-                onChangeText={formik.handleChange('address')}
-            />
-            {
-                formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
-      
-      </KeyboardAvoidingView>
-
-      <OkModalchange conceptColor={"#40CDDE"}txt={"Enregistrer"} 
-      closeModal={()=>props.onPress()} 
-            okoModal={formik.handleSubmit}
-            style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center',alignItems:'center'}}/>
+                <ProfileCommonTextInput
+                    style={styles.input}
+                    text={props.title}
+                    value={formik.values.address}
+                    onFocus={true}
+                    key={0}
+                    kyeboardType={'default'}
+                    onChangeText={formik.handleChange('address')}
+                />
+                {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
+            </KeyboardAvoidingView>
+            <OkModalchange conceptColor={"#40CDDE"} txt={"Enregistrer"}
+                closeModal={() => props.onPress()}
+                okoModal={formik.handleSubmit}
+                style={{ paddingBottom: 15 * hm, flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', alignItems: 'center' }} />
 
         </Modal>
     );

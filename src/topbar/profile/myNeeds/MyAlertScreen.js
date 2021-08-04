@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import TitleText from '../../../text/TitleText';
@@ -58,39 +57,38 @@ const MyAlertScreen = (props) => {
   }, [])
   const InviteButton = (
     <CommonButton
-      style={{paddingVertical: 0 * hm, width:50*em,height:50*em, marginTop: 25 * hm, backgroundColor: "white",borderColor:'#D2E2EC',    borderWidth: 1,borderRadius:100}}
-      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
-      
-      leftIcon={<InviterModif width={24* em} height={24 * hm} />}
-      iconStyle={{marginLeft:5*em}}
+      style={{ paddingVertical: 0 * hm, width: 50 * em, height: 50 * em, marginTop: 25 * hm, backgroundColor: "white", borderColor: '#D2E2EC', borderWidth: 1, borderRadius: 100 }}
+      textStyle={{ color: "#FC3867", fontFamily: 'Lato-Medium', fontSize: 16 * em }}
+
+      leftIcon={<InviterModif width={24 * em} height={24 * hm} />}
+      iconStyle={{ marginLeft: 5 * em }}
       onPress={() => Actions.alertShare({ process: 94 })}
     />
   );
   const ModifyButton = (
     <CommonButton
       style={styles.quizBtn}
-      textStyle={{color:"#FFFFFF",fontFamily:'Lato-Medium',fontSize:16*em}}
+      textStyle={{ color: "#FFFFFF", fontFamily: 'Lato-Medium', fontSize: 16 * em }}
       text="Modifier"
-      onPress={() => 
+      onPress={() =>
         Actions.editAlert({ alertData: alertData, user: user, docId: props.docId })
-      }    />
+      } />
   );
   const DeleteButton = (
     <CommonButton
-      style={{ paddingVertical: 0 * hm, width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "white",borderColor:'red',    borderWidth: 1,
-    }}
-      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
+      style={{
+        paddingVertical: 0 * hm, width: 112 * em, height: 45 * hm, marginTop: 25 * hm, backgroundColor: "white", borderColor: 'red', borderWidth: 1,
+      }}
+      textStyle={{ color: "#FC3867", fontFamily: 'Lato-Medium', fontSize: 16 * em }}
       text="Supprimer"
-      onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
+      // onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
+      onPress={() =>
+        Actions.editAlert({ alertData: alertData, user: user, docId: props.docId })
+      }
+
     />
   );
-
-
-
-  
- 
   const AskButton = <CommonButton textStyle={{ color: '#F9547B' }} style={styles.quizBtn} text="Poser une question" />;
-
   return (
     <View style={styles.container}>
       <View style={styles.cover}>
@@ -119,14 +117,14 @@ const MyAlertScreen = (props) => {
               <LocationPink width={16 * em} height={19 * em} />
             </View>
           }
-          title={alertData.address !== undefined ? alertData.address.address : 'Alert Address undefine'}
+          title={alertData.address !== undefined ? alertData.address : 'Alert Address undefine'}
           titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
         />
-          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           {ModifyButton}
           {DeleteButton}
           {InviteButton}
-          </View>
+        </View>
         <View style={{ height: 130 * em }} />
       </ScrollView>
       <CommonBackButton dark style={styles.backBtn} />
@@ -155,7 +153,7 @@ const styles = {
     justifyContent: 'center',
   },
   body: {
-    paddingTop:40,
+    paddingTop: 40,
     paddingHorizontal: 30 * em,
     marginTop: -41 * em,
     borderTopRightRadius: 28 * em,
@@ -173,8 +171,10 @@ const styles = {
     marginBottom: 14 * hm,
     fontFamily: 'Lato-Black',
   },
-  quizBtn: {    paddingVertical: 0 * hm,
-    width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "#40CDDE" },
+  quizBtn: {
+    paddingVertical: 0 * hm,
+    width: 112 * em, height: 45 * hm, marginTop: 25 * hm, backgroundColor: "#40CDDE"
+  },
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent' },
 };
 export default MyAlertScreen;

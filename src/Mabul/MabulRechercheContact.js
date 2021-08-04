@@ -24,7 +24,6 @@ import auth from '@react-native-firebase/auth';
 import { getUserProfile, fetchcoordinate, setUserData } from '../services/firebase'
 
 const MabulRechercheContact = (props) => {
-
   const [demandData, setdemandData] = useState(props.data)
   const { alertData } = useSelector(state => state.alertReducer)
   const mabulService = props.mabulService;
@@ -33,13 +32,11 @@ const MabulRechercheContact = (props) => {
   const [vchecked, setvChecked] = useState(false);
   const [achecked, setaChecked] = useState(false);
   const [fchecked, setfChecked] = useState(false);
-
   const searchedText = useRef('')
   const [tchecked, settChecked] = useState(false);
   const [contactType, setcontactType] = useState()
   const [user, setuser] = useState()
   const [loadingSet, setloadingSet] = useState(false)
-
   // console.log('sandeep',contactType)
   const check = (id) => {
     setvChecked(false)
@@ -49,6 +46,7 @@ const MabulRechercheContact = (props) => {
     switch (id) {
       case 1:
         setvChecked(true)
+        // setcontactType({ id: 1, type: 'mes voisins' })
         setcontactType({ type: 1, name: 'mes voisins' })
         break;
       case 2:
@@ -72,10 +70,7 @@ const MabulRechercheContact = (props) => {
     if (searchedText.current.length > 0) {
       onSearch(searchedText.current)
     }
-
   }, [])
-
-
   const [usersList, setusersList] = useState([])
   const [allChecked, setallChecked] = useState(false)
   const [checked, setChecked] = useState(new Array(usersList.length).fill(false));
@@ -146,17 +141,12 @@ const MabulRechercheContact = (props) => {
     if (search.length === 0) {
       setusersList(allUser)
     }
-
   };
   const onClear = () => {
     setusersList(allUser);
   };
-
-
   const saveData = async (data) => {
-
     var verif = true
-
     if (data.serviceType.name === "alerts" && mabulService === "Alerte") {
       firestore().collection('userAlerts').doc(auth().currentUser.uid)
         .collection(data.serviceType.name).add(data).then(async (res) => {
@@ -164,21 +154,16 @@ const MabulRechercheContact = (props) => {
           const datas = await responce.get(); setloadingSet(false);
           Actions.myAlert({ alertData: datas.data(), data2: data, user: user, docId: res.id }), console.log("res ",);
           props.rb4()
-
         });
     }
     else {
       firestore().collection('userDemands').doc(auth().currentUser.uid)
         .collection(data.serviceType.name).add(data).then(async (res) => {
-
           const responce = firestore().collection('userDemands').doc(auth().currentUser.uid).collection(data.serviceType.name).doc(res.id)
-
           const datas = await responce.get();
           console.log(datas, "dhddbncnxcncncnncnc ", mabulService);
-
           setloadingSet(false);
           props.rb4()
-
           // this[RBSheet + 4].close()
           if (mabulService === 'organize') {
             Actions.myOrganize({ data: data, data2: datas.data(), user: user, docId: res.id, });
@@ -191,11 +176,8 @@ const MabulRechercheContact = (props) => {
           }
         });
     }
-
-
   }
   const onSubmit = () => {
-    console.log(mabulService, "jjjsjsjsjsjsqqssseerrfvviiicceee");
     setloadingSet(true)
     let data = {}
     if (mabulService === 'organize') {
@@ -214,18 +196,13 @@ const MabulRechercheContact = (props) => {
 
     if (mabulService === 'Alerte') {
       data = Object.assign(alertData, { contactType: contactType, users: selectedUser, serviceType: { name: 'alerts', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
-      console.log('data aa gra re', data)
+      // console.log('data aa gra re', data)
 
     }
-    console.log("DATADATDADTAD", data)
+    // console.log("DATADATDADTAD", data)
     saveData(data);
   }
-
-
-  console.log("CHECKEDDDDDD", checked)
-
-
-
+  // console.log("CHECKEDDDDDD", checked)
   const handleRemove = (value) => {
     let filteredUsers = selectedUser.filter((user) => {
       return user.data.uid !== value.data.uid
@@ -238,13 +215,11 @@ const MabulRechercheContact = (props) => {
     setselectedUser(newArray)
   }
 
-
   const renderCircleList = ({ item, index }) => {
     const selectedIds = selectedUser.map(
       (user) => user.data.uid
     );
-
-    console.log("264", selectedIds)
+    // console.log("264", selectedIds)
     return (
       <CommonListItem
         icon={<Image source={item.data.profilePic !== undefined && item.data.profilePic !== " " ? { uri: item.data.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }}
@@ -278,8 +253,6 @@ const MabulRechercheContact = (props) => {
           <FlatList horizontal={true} data={selectedUser} renderItem={renderSelectedList} keyExtractor={(i) => i.id} />
         </View>
         <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
-
-
           <ShareButton text={"mes voisins"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(215,243,255,0.7)' }} leftIcon={<Voisins />} rightIcon={
             <CheckBox
               oval
@@ -309,9 +282,6 @@ const MabulRechercheContact = (props) => {
               }}
             />
           } />
-
-
-
           <ShareButton text={"ma famille"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(255,23,103,0.11)' }} leftIcon={<Famille />} rightIcon={
             <CheckBox
               oval
@@ -341,10 +311,7 @@ const MabulRechercheContact = (props) => {
             />
           } />
         </View>
-
       </ScrollView>
-
-
       <MabulPubButton
         text={"Partager dans Labul"}
         color={props.conceptColor}
@@ -353,11 +320,9 @@ const MabulRechercheContact = (props) => {
           onSubmit()
         }
       />
-
       <RBSheet
         ref={Sheet1}
         height={hm * 630}
-
         openDuration={250}
         customStyles={{
           wrapper: {
@@ -366,21 +331,15 @@ const MabulRechercheContact = (props) => {
           container: {
             borderTopLeftRadius: 28 * em,
             borderTopRightRadius: 28 * em,
-
           }
         }}
       >
         <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
-
           <Text style={{ alignSelf: 'center', color: '#1E2D60', fontSize: 16 * em, fontFamily: 'Lato-Medium' }}>Rechercher un contact</Text>
         </View>
-
         <View style={styles.container}>
-
-
           <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" onSearch={onSearch} onClear={onClear} />
           <Text style={{ fontFamily: 'Lato-Italic', color: '#A0AEB8', fontSize: 13 * em, marginTop: 6 * hm, marginBottom: 20 * hm }}>Choisis un ou plusieurs cercles, ou recherche un contact précis.</Text>
-
           <FlatList
             data={usersList}
             renderItem={renderCircleList}
@@ -389,14 +348,11 @@ const MabulRechercheContact = (props) => {
         </View>
         <OkModal hideDescription={() => { }} closeModal={() => Sheet1.current.close()} />
       </RBSheet>
-
     </View>
   );
 };
-
 const styles = {
   searchBox: { marginBottom: 5 * hm, height: 52 * hm },
-
   container: { flex: 1, backgroundColor: '#ffffff', paddingHorizontal: 20 * em },
   title: { textAlign: 'left', marginTop: 23 * em, marginBottom: 17 * em },
   header: { marginTop: 39 * hm, alignSelf: 'flex-end' },
@@ -408,5 +364,4 @@ const styles = {
     bottom: 17 * hm
   },
 };
-
 export default MabulRechercheContact;

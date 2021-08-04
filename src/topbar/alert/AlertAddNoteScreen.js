@@ -24,17 +24,24 @@ import { Alert } from 'react-native';
 import { update_into_alert } from '../../redux/actions/alert';
 const AlertAddNoteScreen = (props) => {
   const conceptColor = '#F9547B';
-
-  // const { demandData } = useSelector((state) => state.demandReducer);
+  const { demandData } = useSelector((state) => state.demandReducer);
+  const { alertData } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch()
   const [Promo, setPromo] = useState(false);
+  const [descriptionn, setDescriptionn] = useState('')
+  const [allowdescription, setAllowDescription] = useState(false)
+  const [errorDescription, setErrorDescription] = useState('')
+  const [locations, setLocations] = useState(false);
+  const [erroraddress, setErrorAddress] = useState('')
+
+  let address = alertData.address;
+
   const initialValues = {
     description: '',
     address: '',
     coordinate: {},
   };
   const validationSchema = Yup.object({
-
     description: Yup.string()
       .required('Obligatoire')
     ,
@@ -43,13 +50,38 @@ const AlertAddNoteScreen = (props) => {
   const Sheet2 = useRef(null)
   const Sheet3 = useRef(null)
 
+  const descr = (e) => {
+    setErrorDescription('')
+    setDescriptionn(e)
+    setAllowDescription(false)
+  }
+  const des = () => {
+    setErrorDescription('')
+    setAllowDescription(true)
+  }
+  const hide = () => {
+    setDescriptionn('')
+    setAllowDescription(false)
+  }
+
+  const location = () => {
+    setErrorAddress('')
+    setLocations(true)
+  }
 
   const onSubmit = values => {
-  console.log("SUBMIT",values)
-  dispatch(update_into_alert({ Location: values}))
-   Sheet3.current.open()
-
+    if (descriptionn == "") {
+      setErrorDescription('Obligatoire')
+    }
+    else if (locations == "") {
+      setErrorAddress('Obligatoire')
+    }
+    else {
+      dispatch(update_into_alert({ description: { description: descriptionn } }))
+      Sheet3.current.open()
+    }
   };
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -60,7 +92,7 @@ const AlertAddNoteScreen = (props) => {
     formik.setFieldValue('coordinate', coor)
   }
   const mabulService = "Alerte";
-  console.log("Final Values",formik.values)
+  // console.log("Final Values", formik.values)
   return (
     <View style={{
       flex: 1, backgroundColor: '#F0F5F7', zIndex: 999,
@@ -68,50 +100,42 @@ const AlertAddNoteScreen = (props) => {
       <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]} percent={props.process}
         isNoBackBtn={true}
         progressBarColor={conceptColor} />
-
-
-
-
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
-
-
-
-
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm }]}
             onPress={() => Sheet1.current.open()}
           >
-
             <Text style={styles.contentDesc}>Description</Text>
-            {formik.values.description.length > 0 ? <Text style={styles.contentDescSub}>{formik.values.description}</Text> : <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>}
+            {!allowdescription ?
+              <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+              :
+              <Text style={styles.contentDescSubb} >{descriptionn}</Text>
+            }
           </TouchableOpacity>
-
+          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
           <View
             style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
 
           >
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-
               <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
               <TouchableOpacity onPress={() => Sheet2.current.open()}>
                 <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
               </TouchableOpacity>
             </View>
-            
-          {formik.values.address?.length>0?<Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{formik.values.address}</Text>:<Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>ABYMES 97139 Guadeloupe</Text>}
+            {!address ?
+              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>ABYMES 97139 Guadeloupe</Text>
+              :
+              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{address}</Text>
+            }
           </View>
+          <Text style={styles.descerrorText}>{erroraddress}</Text>
         </ScrollView>
-
-
       </View>
-
       <View style={{ flex: 0.1 }}>
-
         <RBSheet ref={Sheet1}
           height={hm * 630}
-
           openDuration={250}
           customStyles={{
             wrapper: {
@@ -120,21 +144,16 @@ const AlertAddNoteScreen = (props) => {
             container: {
               borderTopLeftRadius: 28 * em,
               borderTopRightRadius: 28 * em,
-
             }
           }}
         >
           <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
-
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
           </View>
-
           <View style={styles.container}>
-
-
             <Reinput style={{ paddingTop: 15 * em, marginRight: 30 * em, marginLeft: 30 * em }}
               label={`Cela permet à ton entourage de mieux 
- comprendre ta demande`}
+             comprendre ta demande`}
               underlineColor="#BFCDDB"
               multiline={true}
               activeColor={conceptColor}
@@ -143,19 +162,15 @@ const AlertAddNoteScreen = (props) => {
               labelActiveTop={-38}
               height={30 * hm}
               paddingBottom={10 * em}
-              value={formik.values.description}
-              onBlur={formik.handleBlur('description')}
-              onChangeText={formik.handleChange('description')}
+              value={descriptionn}
+              onChangeText={(e) => descr(e)}
             />
           </View>
-          <OkModal conceptColor={conceptColor}
-            hideDescription={() => { }}
-            showDescription={() => { }}
+          <OkModal conceptColor={conceptColor} showDescription={() => des()} hideDescription={() => hide()}
             okoModal={() => Sheet1.current.close()} closeModal={() => Sheet1.current.close()} />
         </RBSheet>
         <RBSheet ref={Sheet2}
           height={hm * 630}
-
           openDuration={250}
           customStyles={{
             wrapper: {
@@ -164,37 +179,22 @@ const AlertAddNoteScreen = (props) => {
             container: {
               borderTopLeftRadius: 28 * em,
               borderTopRightRadius: 28 * em,
-
             }
           }}
         >
           <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
-
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
           </View>
-
           <View style={styles.container}>
-
-
-            <MabulAddLieu requiredLocation={() => { }} 
-            conceptColor={conceptColor} setadresse={setadresse}
-            closeModal={() => Sheet2.current.close()}
-
+            <MabulAddLieu
+              hideDescription={() => { }}
+              requiredLocation={() => location()}
+              conceptColor={conceptColor}
+              setadresse={setadresse}
+              closeModal={() => Sheet2.current.close()}
             />
-
-
           </View>
-          {/* <OkModal conceptColor={conceptColor}
-            okoModal={() => Sheet2.current.close()}
-            hideDescription={() => { }}
-            showDescription={() => { }}
-            closeModal={() => Sheet2.current.close()} /> */}
-
         </RBSheet>
-
-
-
-
         <RBSheet ref={Sheet3}
           height={hm * 630}
 
@@ -210,7 +210,6 @@ const AlertAddNoteScreen = (props) => {
             }
           }}
         >
-
           <View style={{ marginLeft: em * 30, marginRight: em * 30, paddingTop: 46 * hm, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
             <TouchableOpacity onPress={() => Sheet3.current.close()}  >
               <Fleche />
@@ -227,18 +226,14 @@ const AlertAddNoteScreen = (props) => {
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
           </View>
 
-          <MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor} rb4={()=>Sheet3.current.close()}/>
-          {/* <OkModal closeModal={ () =>  this[RBSheet + 4].close()}/> */}
+          <MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor} />
         </RBSheet>
 
         <MabulPubButton
           text={"Publier"}
           color={hexToRGB(conceptColor)}
           style={styles.nextBtn}
-          onPress={() =>
-            formik.handleSubmit()
-            // console.log(mabulService)
-          }
+          onPress={() => onSubmit()}
         />
       </View>
 
@@ -251,10 +246,7 @@ const styles = {
   SwitchTitle: {
     flex: 1,
     color: "#6A8596",
-    // fontFamily: 'Helvetica-Regular',
     fontSize: 14 * em,
-    // paddingLeft: 15 * em,
-    // paddingRight: 25 * em,
   },
   SwitchbuttonWrapper: {
     flexDirection: "row",
@@ -291,7 +283,6 @@ const styles = {
       paddingLeft: 15 * em,
       paddingRight: 15 * em,
     }
-
   },
   container: {
     flex: 1,
@@ -299,9 +290,9 @@ const styles = {
   },
   header: {
     height: '12.45%',
-
   },
   descerrorText: {
+    marginTop: 9 * em,
     fontSize: 12 * em,
     bottom: 30 * hm,
     left: 40 * hm,
@@ -335,8 +326,11 @@ const styles = {
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },
-  contentDescSub: { marginTop: 3 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8', paddingLeft: 40 * em }
-
+  contentDescSub: { marginTop: 3 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8', paddingLeft: 40 * em },
+  contentDescSubb: { marginTop: 3 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: "#1E2D60", paddingLeft: 40 * em }
 };
 export default AlertAddNoteScreen;
+
+
+
 

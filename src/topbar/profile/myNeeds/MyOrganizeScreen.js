@@ -24,7 +24,8 @@ const MyOrganizeScreen = (props) => {
   const [data] = useState(organizeData);
   const [data2, setdata2] = useState(props.data);
   const [user] = useState(props.user);
-  const usercon=user.uid==auth().currentUser.uid
+  const usercon = user.uid == auth().currentUser.uid
+
 
   useEffect(() => {
 
@@ -41,14 +42,14 @@ const MyOrganizeScreen = (props) => {
   }, [])
   return (
     <View style={styles.container}>
-        {usercon  ?
-                
-                <MabulDetailView data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
-               
-                  :
-                  <FriendDetailScreen servicetype={"organize"} data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
-                } 
-                   </View>
+      {usercon ?
+
+        <MabulDetailView data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
+
+        :
+        <FriendDetailScreen servicetype={"organize"} data={data} data2={data2} user={user} created={props.created} docId={props.docId} />
+      }
+    </View>
   );
 };
 

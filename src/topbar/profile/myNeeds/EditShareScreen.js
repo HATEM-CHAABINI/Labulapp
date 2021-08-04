@@ -11,10 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 
 export default (props) => {
-
-
     const [contactType, setcontactType] = useState(props.value)
-
     const [vchecked, setvChecked] = useState(false);
     const [achecked, setaChecked] = useState(false);
     const [fchecked, setfChecked] = useState(false);
@@ -27,26 +24,26 @@ export default (props) => {
         switch (id) {
             case 1:
                 setvChecked(true)
-                setcontactType({ id: 1, title: 'mes voisins' })
+                setcontactType({ type: 1, name: 'mes voisins' })
                 break;
             case 2:
 
                 setaChecked(true)
-                setcontactType({ id: 2, title: 'mes amis' })
+                setcontactType({ type: 2, name: 'mes amis' })
                 break;
             case 3:
                 setfChecked(true)
-                setcontactType({ id: 3, title: 'ma famille' })
+                setcontactType({ type: 3, name: 'ma famille' })
                 break;
             case 4:
                 settChecked(true)
-                setcontactType({ id: 4, title: 'tous' })
+                setcontactType({ type: 4, name: 'tous' })
                 break;
         }
     }
     useEffect(() => {
 
-        check(contactType.id)
+        check(contactType.type)
     }, [])
 
 
@@ -161,7 +158,6 @@ export default (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-
             {/* </View> */}
             {/* </View> */}
         </Modal>

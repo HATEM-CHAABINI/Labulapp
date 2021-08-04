@@ -18,6 +18,7 @@ import Moment from 'moment';
 import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../../constants/renderBange';
 import { Inviter } from '../../assets/svg/icons';
 import ModalModifierSupprimerDemande from '../../ServiceScrenns/ModalModifierSupprimerDemande';
+
 const MabulDetailView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(props.data);
@@ -26,25 +27,24 @@ const MabulDetailView = (props) => {
   const [cancelUpdatePopupVisible, setcancelUpdatePopupVisible] = useState(false);
 
   const colorStyles = { button: { color: '#41D0E2' }, label: { color: '#A0AEB8' } };
-
   useEffect(() => {
     setdata2(props.data2)
   }, [props.data2])
   const userBadge = getUserBadge(data2.serviceType.code, data2.serviceType.subCode);
   const InviteButton = (
     <CommonButton
-      style={{paddingVertical: 0 * hm, width:50*em,height:50*em, marginTop: 25 * hm, backgroundColor: "white",borderColor:'#D2E2EC',    borderWidth: 1,borderRadius:100}}
-      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
-      
-      leftIcon={<Inviter width={24* em} height={24 * hm} />}
-      iconStyle={{marginLeft:5*em}}
+      style={{ paddingVertical: 0 * hm, width: 50 * em, height: 50 * em, marginTop: 25 * hm, backgroundColor: "white", borderColor: '#D2E2EC', borderWidth: 1, borderRadius: 100 }}
+      textStyle={{ color: "#FC3867", fontFamily: 'Lato-Medium', fontSize: 16 * em }}
+
+      leftIcon={<Inviter width={24 * em} height={24 * hm} />}
+      iconStyle={{ marginLeft: 5 * em }}
       onPress={() => setInvitePopupVisible(true)}
     />
   );
   const ModifyButton = (
     <CommonButton
       style={styles.quizBtn}
-      textStyle={{color:"#FFFFFF",fontFamily:'Lato-Medium',fontSize:16*em}}
+      textStyle={{ color: "#FFFFFF", fontFamily: 'Lato-Medium', fontSize: 16 * em }}
       text="Modifier"
       onPress={() => setcancelUpdatePopupVisible(true)
         // 
@@ -53,9 +53,10 @@ const MabulDetailView = (props) => {
   );
   const DeleteButton = (
     <CommonButton
-      style={{ paddingVertical: 0 * hm, width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "white",borderColor:'red',    borderWidth: 1,
-    }}
-      textStyle={{color:"#FC3867",fontFamily:'Lato-Medium',fontSize:16*em}}
+      style={{
+        paddingVertical: 0 * hm, width: 112 * em, height: 45 * hm, marginTop: 25 * hm, backgroundColor: "white", borderColor: 'red', borderWidth: 1,
+      }}
+      textStyle={{ color: "#FC3867", fontFamily: 'Lato-Medium', fontSize: 16 * em }}
       text="Supprimer"
       onPress={() => setcancelUpdatePopupVisible(true)
         // Actions.editNeed({ data2: data2, docId: props.docId })
@@ -72,7 +73,7 @@ const MabulDetailView = (props) => {
   );
   return (
     <>
-      <ScrollView style={{backgroundColor:'white'}}>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         <Image
           source={data2.images !== undefined ? { uri: data2.images[0].uri } : require('../../assets/images/sample_cover_2.png')}
           style={styles.cover}
@@ -114,13 +115,17 @@ const MabulDetailView = (props) => {
           <CommentText style={styles.comment} text={data2.type !== undefined ? data2.type.itemName : data.organName} color={'#1E2D60'} />
           <TitleText text={data2.data !== undefined ? data2.data.title : data.title} style={styles.title} />
           <ModalModifierSupprimerDemande
-        visible={cancelUpdatePopupVisible}
-        onPressT={() => setcancelUpdatePopupVisible(false)}
-        onPressM={() => {setcancelUpdatePopupVisible(false)
-,          Actions.editNeed({ data2: data2, docId: props.docId })}}
-        onPressS={() => {setcancelUpdatePopupVisible(false)
-          ,          Actions.editNeed({ data2: data2, docId: props.docId })}}
-                 />
+            visible={cancelUpdatePopupVisible}
+            onPressT={() => setcancelUpdatePopupVisible(false)}
+            onPressM={() => {
+              setcancelUpdatePopupVisible(false)
+              , Actions.editNeed({ data2: data2, docId: props.docId })
+            }}
+            onPressS={() => {
+              setcancelUpdatePopupVisible(false)
+              , Actions.editNeed({ data2: data2, docId: props.docId })
+            }}
+          />
           <ReadMore
             numberOfLines={3}
           >
@@ -128,11 +133,11 @@ const MabulDetailView = (props) => {
               {data2.data !== undefined ? data2.data.description : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ssed diam voluptua. At vero eos dsfsdfwefwef"}
             </Text>
           </ReadMore>
-          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-          {data.status === NeedStatusType.CANCELED ? <></> : data.relationship ? AskButton : ModifyButton}
-          {DeleteButton}
-          {data.status !== NeedStatusType.CANCELED && InviteButton}
-        
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            {data.status === NeedStatusType.CANCELED ? <></> : data.relationship ? AskButton : ModifyButton}
+            {DeleteButton}
+            {data.status !== NeedStatusType.CANCELED && InviteButton}
+
           </View>
         </View>
       </ScrollView>
@@ -237,8 +242,10 @@ const styles = {
     marginTop: 3 * hm,
     fontFamily: 'Lato-Medium',
   },
-  quizBtn: {    paddingVertical: 0 * hm,
-    width:112*em,height:45*hm, marginTop: 25 * hm, backgroundColor: "#40CDDE" },
+  quizBtn: {
+    paddingVertical: 0 * hm,
+    width: 112 * em, height: 45 * hm, marginTop: 25 * hm, backgroundColor: "#40CDDE"
+  },
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent' },
 };
 

@@ -21,12 +21,10 @@ const options = [
   { id: 2, title: 'Travaux' },
   { id: 3, title: 'Autre type d’alerte' },
 ];
-
 const AlertCircleSelectionScreen = (props) => {
   const conceptColor = '#F9547B';
   const dispatch = useDispatch()
-  // const { demandData } = useSelector((state) => state.demandReducer);
-  // console.log("demand ", demandData);
+  const { alertData } = useSelector((state) => state.alertReducer);
   const [optionCheck, setOptionCheck] = useState();
   const [checked, setChecked] = useState();
 
@@ -40,9 +38,8 @@ const AlertCircleSelectionScreen = (props) => {
           activeOpacity={1}
           style={[
             styles.optionBox,
-
           ]}
-          onPress={() => {dispatch(add_into_alert({ alertType: { name: item.title, id: item.id } })),Actions.alertType({ item: item, process: 40 })}}>
+          onPress={() => { dispatch(add_into_alert({ type: { title: item.title, id: item.id } })), Actions.alertType({ item: item, process: 40 }) }}>
           <TitleText style={styles.optionCaption} text={item.title} />
           <View style={{ paddingRight: 30 }} >
             <Flechedroite width={14 * em} height={14 * hm} />
@@ -60,19 +57,10 @@ const AlertCircleSelectionScreen = (props) => {
         isNoBackBtn={true}
         progressBarColor={conceptColor}
       />
-
       <View style={styles.body}>
         <TitleText text={'J’alerte'} style={styles.title} />
-
         <FlatList data={options} renderItem={renderOptions} keyExtractor={(i) => i.id} />
       </View>
-      {/* <MabulNextButton
-          color={checked === undefined ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
-          style={[styles.btn, { backgroundColor: conceptColor }]}
-          text="Suivant"
-          disabled={checked === undefined ? true : false}
-          onPress={() =>}
-        /> */}
     </View>
   );
 };
@@ -84,7 +72,6 @@ const styles = {
   },
   header: {
     height: '12.45%',
-
   },
   body: {
     flex: 1,
@@ -102,7 +89,6 @@ const styles = {
     marginTop: 10 * em,
     marginBottom: 19 * em
   },
-
   btn: { position: 'absolute', alignSelf: 'flex-end', bottom: 30 * hm, right: 30 * em, backgroundColor: '#38C2FF' },
   optionBox: {
     flexDirection: 'row',
@@ -143,13 +129,8 @@ const styles = {
   },
   listDivider: {
     height: 1 * em,
-
-    // marginLeft: 30 * em,
     backgroundColor: "#eee"
   },
-
-
-
 };
 
 export default AlertCircleSelectionScreen;

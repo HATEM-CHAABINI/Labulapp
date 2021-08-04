@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, Alert } from 'react-native';
 import { em, hexToRGB } from '../../../constants/consts';
 import ProfileInformationListItem from '../../../adapter/ProfileInformationListItem';
@@ -25,9 +25,7 @@ const updateUserPrfile = {
   presentation:
     'Des soins de la peau personnalisés pour les besoins uniques de votre peau. Maintenant disponible dans un ensemble avec nettoyant et hydratant!',
 }
-
 const EditAlertScreen = (props) => {
-
   const [typeModalVisible, settypeModalVisible] = useState(false);
   const [addressModalVisible, setaddressModalVisible] = useState(false);
   const [descriptionModalVisible, setdescriptionModalVisible] = useState(false);
@@ -39,7 +37,7 @@ const EditAlertScreen = (props) => {
   const [address, setAddress] = useState(props.alertData.address)
   const [alertType, setAlertType] = useState(props.alertData.type)
   const [checked, setChecked] = useState(props.alertData.type);
-  const [contactType, setcontactType] = useState(props.alertData.belongsTo)
+  const [contactType, setcontactType] = useState(props.alertData.contactType)
   const [user, setUser] = useState(props.user)
 
   const updateUserDemands = (id, data) => {
@@ -61,18 +59,17 @@ const EditAlertScreen = (props) => {
       description: description,
       belongsTo: contactType,
     },
-
       updateUserDemands(auth().currentUser.uid, data)
     console.log()
   }
 
   const deletealert = () => {
     Alert.alert(
-      "Delete",
-      "Are you sure?",
+      "Supprimer",
+      "Es-tu sûr?",
       [
         {
-          text: "Cancel",
+          text: "Annuler",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
@@ -88,7 +85,6 @@ const EditAlertScreen = (props) => {
       ],
     );
   }
-
 
   return (
     <ProfileCommonHeader title="Modifier alerte" onCancel={() => Actions.pop()} loading={loading} onFinish={() => { setloading(true), saveData() }}>
@@ -113,12 +109,10 @@ const EditAlertScreen = (props) => {
         }}
         onChange={(item) => { setChecked({ ...checked, title: item }), settypeModalVisible(false) }}
       />
-
-
       <ProfileInformationListItem
         titleUpperCase
         caption={'Où'}
-        value={address.address}
+        value={address}
         style={styles.listItem}
         onPress={() => {
           // setInputItemKey(2);
@@ -128,15 +122,15 @@ const EditAlertScreen = (props) => {
       <EditAddressScreen
         visible={addressModalVisible}
         changeItem={'Où'}
-        value={address.address}
+        // value={address? address: props.alertData.address }
+        value={address}
         // coordinate={address}
         title={"Ma localisation"}
         onPress={() => {
           setaddressModalVisible(false)
         }}
-        onChange={(item) => { setAddress({ ...address, address: item }), setaddressModalVisible(false) }}
+        onChange={(item) => { setAddress(item), setaddressModalVisible(false) }}
       />
-
       <ProfileInformationListItem
         titleUpperCase
         caption={'Description'}
@@ -147,7 +141,6 @@ const EditAlertScreen = (props) => {
           setdescriptionModalVisible(!descriptionModalVisible);
         }}
       />
-
       <EditDescriptionScreen
         visible={descriptionModalVisible}
         changeItem={'Description'}
@@ -158,7 +151,6 @@ const EditAlertScreen = (props) => {
         }}
         onChange={(item) => { setDescription({ ...description, description: item }), setdescriptionModalVisible(false) }}
       />
-
       <TouchableOpacity
         onPress={() => {
           //  setInputItemKey(4);
@@ -169,18 +161,17 @@ const EditAlertScreen = (props) => {
           caption={'Partagé avec'}
           circleText={
             <>
-              {contactType.id == 1 ? <Neighbor width={28 * em} height={28 * em} /> :
-                contactType.id == 2 ? <Friend width={28 * em} height={28 * em} /> :
-                  contactType.id == 3 ? <Family width={28 * em} height={28 * em} /> :
+              {contactType.type == 1 ? <Neighbor width={28 * em} height={28 * em} /> :
+                contactType.type == 2 ? <Friend width={28 * em} height={28 * em} /> :
+                  contactType.type == 3 ? <Family width={28 * em} height={28 * em} /> :
                     <All width={28 * em} height={28 * em} />
               }
-              <CommonText text={contactType.title} color="#1E2D60" style={{ marginLeft: 10 * em, alignSelf: 'center' }} />
+              <CommonText text={contactType.name} color="#1E2D60" style={{ marginLeft: 10 * em, alignSelf: 'center' }} />
             </>
           }
           style={styles.listItem}
         />
       </TouchableOpacity>
-
       <EditShareScreen
         visible={belongsModalVisible}
         changeItem={'Partagé avec'}

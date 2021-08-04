@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image,ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { em, hm, WIDTH } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 // import CommonBackButton from '../button/CommonBackButton';

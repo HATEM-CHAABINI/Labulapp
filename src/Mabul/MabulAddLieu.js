@@ -21,6 +21,7 @@ import { google_api } from '../constants/consts'
 import OkModal from '../Components/button/OkModal';
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../redux/actions/demand'
+import { update_into_alert } from '../redux/actions/alert';
 /////////                 HERE GOES API KEY
 Geocoder.init(google_api);
 //////////
@@ -43,6 +44,7 @@ const MabulAddLieu = (props) => {
 
   const onSubmit = values => {
     dispatch(update_into_demand(data))
+    dispatch(update_into_alert(data))
     props.setadresse(formik.values.address, formik.values.coordinate);
     props.requiredLocation(),
       props.closeModal()
@@ -60,60 +62,60 @@ const MabulAddLieu = (props) => {
     }}>
 
 
-        <View style={styles.body}>
-          <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
+      <View style={styles.body}>
+        <View style={{ justifyContent: 'flex-end', paddingBottom: 5 * hm }}>
 
-            <GooglePlacesInput
-              placeholder={"Rechercher une addresse"}
-              containerStyle={{
-                backgroundColor: 'white',
-                width: "100%",
-              }}
-              TextBtn={"Utiliser ma position"}
-              borderBottomColor={conceptColor}
-              style={{ width: '100%', }}
-              show={false}
-              textInputStyle={{
-                // height: 40,
-                color: '#1E2D60',
-                fontSize: 12 * em,
-                fontFamily: 'Lato-Bold',
-              }}
-              myLocationContainer={{
-                //  paddingTop: s50 * hm 
-                // top:550
-              }}
-              // autoFillOnNotFound={true}
-              value={formik.values.address}
-              myLocationColor={conceptColor}
-              myLocationIconColor={conceptColor}
-              formik={formik}
+          <GooglePlacesInput
+            placeholder={"Rechercher une addresse"}
+            containerStyle={{
+              backgroundColor: 'white',
+              width: "100%",
+            }}
+            TextBtn={"Utiliser ma position"}
+            borderBottomColor={conceptColor}
+            style={{ width: '100%', }}
+            show={false}
+            textInputStyle={{
+              // height: 40,
+              color: '#1E2D60',
+              fontSize: 12 * em,
+              fontFamily: 'Lato-Bold',
+            }}
+            myLocationContainer={{
+              //  paddingTop: s50 * hm 
+              // top:550
+            }}
+            // autoFillOnNotFound={true}
+            value={formik.values.address}
+            myLocationColor={conceptColor}
+            myLocationIconColor={conceptColor}
+            formik={formik}
 
-              changedValue={(val) => {
-                setData(val)
-                // console.log(val.adresse);
-                // formik.setFieldValue('address', val.address);
-                // formik.setFieldValue('coordinate', val.coordinate);
-              }}
-            />
-            {formik.errors.address && formik.touched.address && <Text style={{ color: 'red', top: '1%', bottom: "5%", }}>{formik.errors.address}</Text>}
-
-          </View>
+            changedValue={(val) => {
+              setData(val)
+              // console.log(val.adresse);
+              // formik.setFieldValue('address', val.address);
+              // formik.setFieldValue('coordinate', val.coordinate);
+            }}
+          />
+          {formik.errors.address && formik.touched.address && <Text style={{ color: 'red', top: '1%', bottom: "5%", }}>{formik.errors.address}</Text>}
 
         </View>
+
+      </View>
       <KeyboardAvoidingView
 
-      keyboardVerticalOffset = {Platform.OS === "ios" ? 130*hm: 130*hm} // adjust the value here if you need more padding
-      style = {{ flex: 0.14 }}
-      behavior={"padding"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 130 * hm : 130 * hm} // adjust the value here if you need more padding
+        style={{ flex: 0.14 }}
+        behavior={"padding"}
       >
-    
-      <OkModal conceptColor={conceptColor}
-        showDescription={() => { }}
-        hideDescription={() => { }}
-        okoModal={() => onSubmit()}
-        closeModal={() => props.closeModal()}
-      />
+
+        <OkModal conceptColor={conceptColor}
+          showDescription={() => { }}
+          hideDescription={() => { }}
+          okoModal={() => onSubmit()}
+          closeModal={() => props.closeModal()}
+        />
       </KeyboardAvoidingView>
 
     </View>

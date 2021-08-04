@@ -11,13 +11,11 @@ import { Actions } from 'react-native-router-flux';
 import { LocationRed } from '../../assets/svg/icons';
 import { KeyboardAvoidingView } from 'react-native';
 import { Platform } from 'react-native';
-
 import { useSelector, useDispatch } from 'react-redux'
 import { update_into_demand } from '../../redux/actions/demand'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import Reinput from "reinput"
-
 import GooglePlacesInput from '../../Components/GooglePlacesInput'
 import { TextInput } from 'react-native';
 import CommonBigButton from '../../Components/button/CommonBigButton';
@@ -25,9 +23,8 @@ import { add_into_alert, update_into_alert } from '../../redux/actions/alert';
 
 const AlertTypeScreen = (props) => {
   const conceptColor = '#F9547B';
-const alertData = useSelector((state) => state.alertReducer);
-  console.log("demand ", alertData);
-const dispatch = useDispatch()  
+  const alertData = useSelector((state) => state.alertReducer);
+  const dispatch = useDispatch()
   const initialValues = {
     alertDescription: '',
   };
@@ -37,10 +34,8 @@ const dispatch = useDispatch()
       .max(48),
 
   });
-
   const onSubmit = (values) => {
-   
-    dispatch(update_into_alert({ description: values}))
+    dispatch(update_into_alert({ alertType: values }))
     Actions.alertAddNote({ item: props.item, process: 60 })
   }
   const formik = useFormik({
@@ -48,26 +43,21 @@ const dispatch = useDispatch()
     onSubmit,
     validationSchema,
   });
-  console.log(props.item)
-  
+  // console.log(props.item)
+
   return (
 
     <View style={styles.container}>
-
       <MabulCommonHeader style={styles.header} percent={props.process} progressBarColor={conceptColor} />
       <View style={styles.body}>
-
         <TitleText text={'J’alerte'} style={styles.title} />
-
         <View style={{
           flexDirection: 'row', marginTop: 50 * hm, marginBottom: 10 * hm, paddingLeft: 30 * em
         }}>
           <Text style={{ fontFamily: 'Lato-Regular', fontSize: 12 * em, color: '#6A8596' }}>Quel type d’alerte </Text>
           <Text style={{ fontFamily: 'Lato-Regular', fontSize: 12 * em, color: '#FC3867' }}>*</Text>
         </View>
-
         <TextInput
-
           autoFocus={true}
           value={formik.values.alertDescription}
           onBlur={formik.handleBlur('alertDescription')}
@@ -75,7 +65,6 @@ const dispatch = useDispatch()
           selectionColor="#40CDDE"
           style={styles.textInput}
         />
- 
         <Text style={{ fontFamily: 'Lato-Italic', fontSize: 11 * em, color: '#6A8596', marginTop: 20 * hm, paddingLeft: 30 * em }}>(48 caractères maximum)</Text>
         {formik.errors.alertDescription && formik.touched.alertDescription && <Text style={styles.descerrorText}>{formik.errors.alertDescription}</Text>}
       </View>
@@ -94,16 +83,13 @@ const dispatch = useDispatch()
     </View>
   );
 };
-
 const styles = {
   btnNext: {
     backgroundColor: '#FEC3D1',
     overflow: 'hidden',
     borderRadius: 18 * em,
     height: 59 * hm,
-
     width: 315 * em,
-
     bottom: 30
   },
   textInput: {
@@ -132,8 +118,7 @@ const styles = {
   },
   commonHeader: { marginTop: 27 * hm },
   title: {
-    paddingLeft: 30 * em
-    ,
+    paddingLeft: 30 * em,
     width: 315 * em,
     textAlign: 'left',
     marginTop: 35 * em,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Text, ActivityIndicator } from 'react-native';
 import { em, hm } from '../constants/consts';
-
 import OrganizeService from '../model/service/OrganizeService';
 import User from '../model/user/User';
 import OrganizeServiceType from '../model/service/OrganizeServiceType';
@@ -179,7 +178,7 @@ const FriendsListScreen = (props) => {
 
   const [loading, setLoading] = useState(props.loading)
   const [datas, setData] = useState(props.data);
-
+  //  console.log('props.data...............',props.data)
   useEffect(() => {
     setLoading(props.loading)
     setData(props.data)

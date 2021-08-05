@@ -40,7 +40,7 @@ import CommonHeader from '../../../Components/header/CommonHeader';
 import TitleText from '../../../text/TitleText';
 
 const EditNeedScreen = (props) => {
-console.log('kdkdkdkdkdkddkdkkdkdkd',props.data2);
+// console.log('kdkdkdkdkdkddkdkkdkdkd',props.data2);
   const [userProfile] = useState(updateUserPrfile);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isEndDatePickerVisible, setisEndDatePickerVisible] = useState(false);

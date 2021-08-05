@@ -20,10 +20,9 @@ export default function FriendsNavigator(props) {
 if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=0 )|| (props.route.params.filtreD !="Toutes" && props.route.params.filtreD !==undefined && props.route.params.filtreD.length!=0)){
   console.log("filtrageeee");
   fetchDemandFiltre(props.route.params.filtre,props.route.params.filtreD).then((item) => {
-    
-
+  
     if (item !== undefined) {
-      // console.log("filtrrreeee=== ", item);
+      console.log("filtrrreeee=== ", item);
       setData(() => item)
     }
   })

@@ -37,25 +37,21 @@ const organizeData = Object.assign(
   ),
   { relationship: 'Mon ami/ma famille' }
 );
-const FriendDetailScreen = (props) => {
-  const [cancelParticipatePopupVisible, setcancelParticipatePopupVisible] = useState(false);
 
+const FriendDetailScreen = (props) => {
+
+  const [cancelParticipatePopupVisible, setcancelParticipatePopupVisible] = useState(false);
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [participatePopupVisible, setParticipatePopupVisible] = useState(false);
   const [data] = useState(props.data);
   const [data2, setdata2] = useState(props.data2);
   const [status, setStatus] = useState();
   const [user] = useState(props.user);
-
   const colorStyles = { button: { color: '#41D0E2' }, label: { color: '#A0AEB8' } };
   const RequestButton = (
     <CommonButton leftIcon={<Up width={20* em} height={18 * hm} />} text={'Participer'} onPress={() => props.servicetype=="organize"? setParticipatePopupVisible(true):participer()
   } style={{width:185*em,height:50*hm,paddingVertical: 0 * hm}} 
   textStyle={{marginLeft:10*em}} />
-
-
-  
-
 
   //   <CommonButton text={'Participer'} style={styles.partBtn} 
   //  onPress={() => setStatus(NeedStatusType.WAITING)}
@@ -100,7 +96,7 @@ const FriendDetailScreen = (props) => {
   switch (status) {
     case NeedStatusType.INPROGRESS:
       mainButton = ParticipationButton;
-      break;
+      break;  
     case NeedStatusType.CANCELED:
       mainButton = OpinionButton;
       break;

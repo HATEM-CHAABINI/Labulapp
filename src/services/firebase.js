@@ -58,26 +58,21 @@ export const regleCoordinate = (latitude, longitude) => {
 
 
 export const fetchcoordinate = async (latitude, longitude) => {
-
-
     let RefNeed = firestore().collectionGroup("need").where("coordinate.latitude", "==", latitude).where("coordinate.logitude", "==", longitude);
     let allNeeds = await RefNeed.get();
     if (!allNeeds.empty) {
         return true
     }
-
     let Reforganize = firestore().collectionGroup("organize").where("coordinate.latitude", "==", latitude).where("coordinate.logitude", "==", longitude);
     let allorganize = await Reforganize.get();
     if (!allorganize.empty) {
         return true
     }
-
     let Refgive = firestore().collectionGroup("give").where("coordinate.latitude", "==", latitude).where("coordinate.logitude", "==", longitude);
     let allgive = await Refgive.get();
     if (!allgive.empty) {
         return true
     }
-
     let Refsell = firestore().collectionGroup("sell").where("coordinate.latitude", "==", latitude).where("coordinate.logitude", "==", longitude);
     let allsell = await Refsell.get();
     if (!allsell.empty) {
@@ -85,30 +80,26 @@ export const fetchcoordinate = async (latitude, longitude) => {
     }
     return false
 }
+export const fetchAlertFiltre = async (filtre,filtreD) => {
+
+    
+}
 
 export const fetchDemandFiltre = async (filtre,filtreD) => {
     console.log("waaaaaaaaa",(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined));
     if(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined){
     var d1 = filtreD[0].d1;
-
-
     var d2 = filtreD[0].d2;
-   
-
     }
-
     const data = [];
     for(const elem of filtre){
         if (elem =="vends"){
-
             let RefSell ;
             if(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined){
                 RefSell = firestore().collectionGroup("sell").where("demandStartDate", ">", d1).where("demandStartDate", "<", d2);
             }
             else{
      RefSell = firestore().collectionGroup("sell");}
-
-
     let allSell = await RefSell.get();
     for (const doc of allSell.docs) {
         if ((doc.data().coordinate.latitude !== undefined)) {
@@ -158,7 +149,6 @@ RefSell = firestore().collectionGroup("organize");}
     let allSell = await RefSell.get();
     for (const doc of allSell.docs) {
         if ((doc.data().coordinate.latitude !== undefined)) {
-
             let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
             let res = await cc.get();
             if (res.data() !== undefined) {
@@ -204,7 +194,6 @@ return data
 
 export const fetchallDemand = async () => {
     const data = [];
-
     let RefNeed = firestore().collectionGroup("need").get();
     let RefSell = firestore().collectionGroup("sell").get();
     let RefOrganize = firestore().collectionGroup("organize").get();

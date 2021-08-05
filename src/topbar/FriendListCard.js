@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { View, Image, Text, TouchableOpacity ,Alert} from 'react-native';
 import { em, hm, WIDTH } from '../constants/consts';
 import CommentText from '../text/CommentText';
 import SmallText from '../text/SmallText';
@@ -8,22 +8,56 @@ import { getUserBadge } from '../constants/icons';
 import CommonListItem from '../adapter/CommonListItem';
 import AvatarWithBadge from './AvatarWithBadge';
 import { CrossGray, LocationRed } from '../assets/svg/icons';
+import firestore from '@react-native-firebase/firestore';
+import { deleteUserDemands } from "../services/firebase";
+import auth from '@react-native-firebase/auth';
+import { Actions } from 'react-native-router-flux';
 const padding = 15 * em;
 import Moment from 'moment';
 const textBoxMargin = 52 * em;
 const userPhotoSize = 36 * em;
 import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../constants/renderBange'
 const FriendListCard = (props) => {
+  //  console.log('........friendListCard data.........',props)
   const { data } = props;
   const userBadge = getUserBadge(data.type, data.subType);
+  const [selectedUser, setselectedUser] = useState([])
+
+ 
+  const deleteDemand = () => {
+    Alert.alert(
+      "Supprimer",
+      "Es-tu sûr?",
+      [
+        {
+          text: "Annuler",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK", onPress: () => {
+            deleteUserDemands(auth().currentUser.uid, props.data.serviceType.name, props.data.key).then((item) => {
+             console.log(auth().currentUser.uid)
+             console.log(props.data.serviceType.name)
+             console.log(props.data.key)
+              Actions.home()
+            }).catch((error) => {
+              console.log(error);
+            })
+          }
+        }
+      ]
+    );
+  }
 
   return (
-   
-
     <TouchableOpacity onPress={props.onPress}>
       <View style={[styles.container, props.style]}>
         <View style={styles.containerIcon}>
+        <TouchableOpacity   onPress={() => { deleteDemand() }}>
+          {/* cross icon */}
           <CrossGray width={12 * em} height={12 * em} />
+         </TouchableOpacity>
         </View>
         {typeof data.coverImage === 'number' ? (
           <Image source={{ uri: data.images[0].uri }} style={styles.coverImage} />

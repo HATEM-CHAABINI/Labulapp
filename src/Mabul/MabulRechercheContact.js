@@ -27,7 +27,7 @@ const MabulRechercheContact = (props) => {
   const [demandData, setdemandData] = useState(props.data)
   const { alertData } = useSelector(state => state.alertReducer)
   const mabulService = props.mabulService;
-  console.log("FINAL ALERT DATA", alertData, demandData)
+  // console.log("FINAL ALERT DATA", alertData, demandData)
   const conceptColor = mabulColors[mabulService];
   const [vchecked, setvChecked] = useState(false);
   const [achecked, setaChecked] = useState(false);
@@ -37,7 +37,7 @@ const MabulRechercheContact = (props) => {
   const [contactType, setcontactType] = useState()
   const [user, setuser] = useState()
   const [loadingSet, setloadingSet] = useState(false)
-  // console.log('sandeep',contactType)
+
   const check = (id) => {
     setvChecked(false)
     setaChecked(false)
@@ -124,7 +124,7 @@ const MabulRechercheContact = (props) => {
     });
   }, [])
 
-  console.log("GDHSJGSJDHSGKD", usersList)
+  // console.log("GDHSJGSJDHSGKD", usersList)
   const onSearch = async (search) => {
     console.log("jdjdjdjdjdjdj", allUser[0])
     let condition = new RegExp(search.toLocaleUpperCase())
@@ -137,7 +137,7 @@ const MabulRechercheContact = (props) => {
     )
     searchedText.current = search
     setusersList(result)
-    console.log("RESULTSSSSS", result)
+    // console.log("RESULTSSSSS", result)
     if (search.length === 0) {
       setusersList(allUser)
     }

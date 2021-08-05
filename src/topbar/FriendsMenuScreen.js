@@ -19,6 +19,7 @@ const servicIconSize = { width: 18 * em, height: 18 * em };
 const FriendsMenuScreen = (props) => {
   const [loading, setLoading] = useState(props.loading)
   const [datas, setData] = useState(props.data);
+  console.log('.........props.data.........',props.data)
   const [hasLocationAccess, setLocationAccess] = useState(false);
   const [region, setRegion] = useState({
     latitude: 37.78825,
@@ -174,8 +175,8 @@ const PositionView = (location, i) => (
           <Path width={76 * em} height={48 * hm} />
         </View>
         <View style={getTextStyle(location.serviceType.code)}>
-          <Image source={require('../assets/images/sample_user_2.png')} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} />
-
+          {/* <Image source={require('../assets/images/sample_user_2.png')} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} /> */}
+          <Image source={{uri:`${location.user.profilePic?location.user.profilePic:'https://www.seekpng.com/png/detail/428-4287240_no-avatar-user-circle-icon-png.png'}`}} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em , borderRadius:25}} />
 
           <View style={{ marginRight: 8.83 * em }}>
             {/* { this.renderSwitch(location.category.id)} */}
@@ -194,9 +195,7 @@ const PositionView = (location, i) => (
                   : location.serviceType.code === 2 ?
                     renderimgSell(location.belongsTo.id, location.category.id) :
                     renderimgneed(location.belongsTo.id, location.category.id)
-
             }
-
           </View>
         </View>
       </View>

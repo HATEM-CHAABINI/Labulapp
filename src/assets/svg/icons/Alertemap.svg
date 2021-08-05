@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65" height="73" viewBox="0 0 65 73">
+  <defs>
+    <filter id="Union_2" x="0" y="0" width="65" height="73" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feFlood flood-color="#242f57" flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Alerte" transform="translate(-281.525 -204.815)">
+    <g id="Groupe_594" data-name="Groupe 594" transform="translate(333.847 214.309) rotate(90)" opacity="0.894">
+      <g transform="matrix(0, -1, 1, 0, -9.49, 52.32)" filter="url(#Union_2)">
+        <path id="Union_2-2" data-name="Union 2" d="M0,18.78A18.891,18.891,0,0,1,19,0h0A18.891,18.891,0,0,1,38,18.78h0v.4A18.76,18.76,0,0,1,27.859,35.8a8.765,8.765,0,0,0-3.566,3.436l-3.308,5.813A1.816,1.816,0,0,1,19.325,46a1.731,1.731,0,0,1-1.4-.867l-3.021-5.307a8.859,8.859,0,0,0-3.987-3.642A18.776,18.776,0,0,1,0,19.177Z" transform="translate(13.5 8.5)" fill="#fff"/>
+      </g>
+      <g id="Groupe_828" data-name="Groupe 828" transform="translate(3.25 34.294) rotate(-90)">
+        <g id="Groupe_46" data-name="Groupe 46" transform="translate(3.472 3.756)">
+          <path id="Fill_5" data-name="Fill 5" d="M3,20H2.952A3.112,3.112,0,0,1,.229,15.716L8.282,1.6a3.111,3.111,0,0,1,5.441.01l8,14.013A3.164,3.164,0,0,1,22,16.727,3.114,3.114,0,0,1,19.047,20H3Z" transform="translate(0 0)" fill="#fc3867"/>
+          <path id="Combined_Shape" data-name="Combined Shape" d="M0,7.46a.924.924,0,1,1,.924.916A.925.925,0,0,1,0,7.46ZM0,3.877V.916a.924.924,0,0,1,1.849,0V3.877A.924.924,0,0,1,0,3.877Z" transform="translate(10.075 7.026)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

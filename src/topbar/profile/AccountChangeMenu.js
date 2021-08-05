@@ -147,7 +147,7 @@ const DropDownButton = (props) => (
         backgroundColor: props.modal
           ? 'transparent'
           : props.type !== 'my'
-            ? 'rgba(96,131,231,0.5)'
+            ? 'rgba(30, 45, 96, 0.64)'
             : 'rgba(47,188,205,0.5)',
       },
     ]}

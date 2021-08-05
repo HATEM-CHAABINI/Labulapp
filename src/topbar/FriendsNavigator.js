@@ -30,7 +30,7 @@ if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=
 }else
 {
     fetchallDemand().then((item) => {
-      console.log("ncncncncnc",item[0].demandStartDate.seconds);
+      console.log("ncncncncnc",item[0]);
 
       if (item !== undefined) {
         setData(() => item)

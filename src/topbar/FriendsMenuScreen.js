@@ -11,7 +11,7 @@ import {
   Path, Return2Point, Alert
 
 } from '../assets/svg/icons';
-import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../constants/renderBange'
+import { renderimgSell, renderimgneed, renderimgorganize, renderimggive, renderimgalert } from '../constants/renderBange'
 
 
 const servicIconSize = { width: 18 * em, height: 18 * em };
@@ -138,7 +138,11 @@ const PositionView = (location, i) => (
     }}
 
     onPress={() => {
-      if (location.serviceType.code == 0) {
+      if (location.serviceType.name==="alerts"){
+        Actions.myAlert({ alertData: location, data2: location, user: location.user, docId: location.key })
+
+      }
+else if (location.serviceType.code == 0) {
         Actions.myOrganize({ data: location, user: location.user, docId: location.key });
 
       }
@@ -158,8 +162,8 @@ const PositionView = (location, i) => (
     }}
 
   >
-
-    {
+{ location.serviceType.name!=="alerts"? 
+    (
       <View style={{ padding: 10, width: 76 * em, height: 48 * hm }}>
         <View
           style={{
@@ -179,26 +183,51 @@ const PositionView = (location, i) => (
           <Image source={{uri:`${location.user.profilePic?location.user.profilePic:'https://www.seekpng.com/png/detail/428-4287240_no-avatar-user-circle-icon-png.png'}`}} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em , borderRadius:25}} />
 
           <View style={{ marginRight: 8.83 * em }}>
-            {/* { this.renderSwitch(location.category.id)} */}
-            {/* {
-      {
-         0: Animals(servicIconSize),
-        1: Interview(servicIconSize)
-      }[location.category.id]
-    } */}
-            {
-              // console.log(location.belongsTo),
-              location.serviceType.code === 0 ?
+           
+    {location.serviceType.code === 0 ?
                 renderimgorganize(location.category.id) :
                 location.serviceType.code === 1 ?
                   renderimggive(location.category.id)
                   : location.serviceType.code === 2 ?
                     renderimgSell(location.belongsTo.id, location.category.id) :
                     renderimgneed(location.belongsTo.id, location.category.id)
-            }
+           }
+    
+
+   
+      
+            
           </View>
         </View>
       </View>
+      ):
+      
+      <View style={{ padding: 10, width: 76 * em, height: 92 * hm }}>
+   
+        {/* <Image source={require('../assets/images/sample_user_2.png')} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} /> */}
+
+        <View style={{   
+          zIndex: 1,
+        position: 'absolute',
+       
+        // marginBottom: 100 * hm,
+        width: 72 * em,
+        height: 30 * hm,
+        borderRadius: 18 * em,
+        alignItems: 'center',
+
+        }}>
+         
+  {renderimgalert()
+         }
+  
+
+ 
+    
+          
+      </View>
+    </View>
+      
     }
   </Marker>
 

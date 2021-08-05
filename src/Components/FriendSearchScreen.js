@@ -158,13 +158,13 @@ const FriendsSearchScreen = (props) => {
     <>
       <View style={styles.container}>
         <View style={{ backgroundColor: 'white' }}>
-          <View style={{ paddingTop: hm * 40, paddingLeft: em * 30 }}>
+          <View style={{ paddingTop: hm * 50, paddingLeft: em * 30 }}>
             <TouchableOpacity
               onPress={() => Actions.pop()}>
               <Fleche />
             </TouchableOpacity>
           </View>
-          <Text style={{ paddingTop: hm * 22, paddingLeft: em * 30, color: '#1E2D60', fontSize: 34 * em, fontFamily: 'lato-black' }}>Rechercher</Text>
+          <Text style={{ paddingTop: hm * 22, paddingLeft: em * 30, color: '#1E2D60', fontSize: 30 * em, fontFamily: 'lato-black' }}>Rechercher un contact</Text>
         </View>
         <SearchBox
           style={styles.searchbox}
@@ -201,7 +201,7 @@ const styles = {
     height: 48 * hm,
     marginTop: 25 * hm,
     paddingHorizontal: 30 * em,
-    width: 325 * em,
+    width: 370 * em,
   },
 
 

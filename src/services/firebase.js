@@ -198,19 +198,21 @@ export const fetchallDemand = async () => {
     let RefSell = firestore().collectionGroup("sell").get();
     let RefOrganize = firestore().collectionGroup("organize").get();
     let RefGive = firestore().collectionGroup("give").get();
-    const [allNeedssnap, allSellsnap,allOrganizesnap,allGivesnap] = await Promise.all([
+    let RefAlert = firestore().collectionGroup("alerts").get();
+    const [allNeedssnap, allSellsnap,allOrganizesnap,allGivesnap,allAlertsnap] = await Promise.all([
         RefNeed,
         RefSell,
         RefOrganize,
-        RefGive
+        RefGive,
+        RefAlert
       ]);
 
       const allNeed = allNeedssnap.docs;
       const allSell = allSellsnap.docs;
       const allOrganize = allOrganizesnap.docs;
       const allGive = allGivesnap.docs;
-
-      const citiesArray = allNeed.concat(allSell).concat(allOrganize).concat(allGive);
+      const allAlert= allAlertsnap.docs;
+      const citiesArray = allNeed.concat(allSell).concat(allOrganize).concat(allGive).concat(allAlert);
     for (const doc of citiesArray) {
         if ((doc.data().coordinate.latitude !== undefined)) {
 

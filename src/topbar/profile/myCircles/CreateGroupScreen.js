@@ -121,9 +121,9 @@ const CreateGroupScreen = (props) => {
         rightView={
           <CheckBox
             oval
-            pink={props.sort === RelationshipType.FAMILIY ? true : false}
-            blue={props.sort === RelationshipType.FRIEND ? true : false}
-            bgColor="#EF88B9"
+            red={props.sort === RelationshipType.FAMILIY ? true : false}
+            orange={props.sort === RelationshipType.FRIEND ? true : false}
+            bgColor={props.themeColor}
             isChecked={checked[index]}
             onClick={() => {
               const arr = [...checked];

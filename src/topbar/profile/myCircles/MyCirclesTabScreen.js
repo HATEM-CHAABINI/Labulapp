@@ -60,8 +60,8 @@ export { myContacts };
 
 const addIconSize = { width: 59 * em, height: 59 * em };
 const themeButtons = [
-  { id: RelationshipType.FAMILIY, icon: AddFamily(addIconSize), color: '#EF88B9' },
-  { id: RelationshipType.FRIEND, icon: AddFriend(addIconSize), color: '#6784DA' },
+  { id: RelationshipType.FAMILIY, icon: AddFamily(addIconSize), color: '#FA5890' },
+  { id: RelationshipType.FRIEND, icon: AddFriend(addIconSize), color: '#FF9417' },
   { id: RelationshipType.NEIGHBOR, icon: AddNeighbor(addIconSize), color: '#40CDDE' },
 ];
 const MyCirclesTabScreen = (props) => {

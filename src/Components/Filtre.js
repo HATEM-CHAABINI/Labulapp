@@ -179,13 +179,21 @@ await this.setState({ filtre });
 
   }
    renderT = (arr)=> {
-     var left=-200;
      var te="";
    arr.map((obj,i) => {
-    //  left=left+25*i
-      te= te+"/"+obj
+     if (obj == "besoin"){
+       avo = "j'ai " 
+     }
+    else if (obj == "donne" || obj == "cherche" || obj == "vends"){
+      avo = "je " 
+    }
+    else
+    avo = "j'"
+
+      te= te+" / "+avo+obj
     });
     te = te.substring(1);
+    te = te.substring(2);
     return <Text style={styles.contentDescdem} >{te}</Text>;
   }
 

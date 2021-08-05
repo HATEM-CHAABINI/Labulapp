@@ -48,11 +48,11 @@ const InputLocationScreen = () => {
               show={true}
               textInputStyle={{
                 // height: 40,
-                color: '#1E2D60',
+                color: '#6A8596',
                 fontSize: 16 * em,
-                fontFamily: 'Lato-Bold',
+                fontFamily: 'Lato-Regular',
               }}
-              myLocationStyle={{ marginTop: '30%' }}
+              myLocationStyle={{ marginTop:25*hm,right:150*em }}
               myLocationIconColor={{color:'#40CDDE'}}
               myLocationColor={'#40CDDE'}
               // autoFillOnNotFound={true}

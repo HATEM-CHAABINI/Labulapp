@@ -4,7 +4,7 @@ import React from 'react';
 import { em, hm } from '../constants/consts';
 import CommonListItem from './CommonListItem';
 import UserType from '../model/user/UserType';
-import { Friend, Family, Neighbor, OptionGray } from '../assets/svg/icons';
+import { Friend, Family, Neighbor, OptionGray, Famille, Amis, Voisins } from '../assets/svg/icons';
 import RelationshipType from '../model/user/RelationshipType';
 const CirclesCommonListItem = (props) => {
   var optionBtn = (
@@ -24,21 +24,21 @@ const CirclesCommonListItem = (props) => {
       case RelationshipType.FRIEND:
         groupIcon = (
           <View style={{ marginRight: 15 * em }}>
-            <Friend width={40 * em} height={40 * em} />
+            <Amis width={40 * em} height={40 * em} />
           </View>
         );
         break;
       case RelationshipType.FAMILIY:
         groupIcon = (
           <View style={{ marginRight: 15 * em }}>
-            <Family width={40 * em} height={40 * em} />
+            <Famille width={40 * em} height={40 * em} />
           </View>
         );
         break;
       default:
         groupIcon = (
           <View style={{ marginRight: 15 * em }}>
-            <Neighbor width={40 * em} height={40 * em} />
+            <Voisins width={40 * em} height={40 * em} />
           </View>
         );
         break;

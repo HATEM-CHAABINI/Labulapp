@@ -130,7 +130,7 @@ export default ({ navigation }) => {
           </View>
 
           <Text style={{ color: '#1E2D60', fontSize: 28 * em, paddingTop: 45 * hm, fontFamily: 'Lato-Black' }}>
-          Connecte toi
+          Connecte-toi
                       </Text>
 
           <View style={styles.contentWrapper}>
@@ -139,6 +139,7 @@ export default ({ navigation }) => {
               label='Saisis ton email'
               autoCorrect={false}
               underlineColor="#BFCDDB"
+              textContentType="oneTimeCode"
               underlineActiveColor="#41D0E2"
               labelActiveColor="#BFCDDB"
               labelColor="#BFCDDB"
@@ -212,7 +213,7 @@ export default ({ navigation }) => {
                     marginTop: 2 * hm,
                     fontFamily: 'Lato-Medium'
                   }}>
-                  Connecter
+                  Se connecter
                 </Text>}
               </View>
             </TouchableOpacity>

@@ -87,10 +87,14 @@ const EditAlertScreen = (props) => {
   }
 
   return (
-    <ProfileCommonHeader title="Modifier alerte" onCancel={() => Actions.pop()} loading={loading} onFinish={() => { setloading(true), saveData() }}>
+    <ProfileCommonHeader rightTxt={'e'} title="Modifier alerte" onCancel={() => Actions.pop()} loading={loading} 
+    // onFinish={() => { setloading(true), saveData() }}
+    >
       <ProfileInformationListItem
-        caption={'Type d’alerte'}
+        caption={'Titre'}
+
         titleUpperCase
+        color={{color: '#FC3867'}}
         value={checked.title}
         style={styles.listItem}
         onPress={() => {
@@ -100,40 +104,20 @@ const EditAlertScreen = (props) => {
       />
       <EditJAlertScreen
         visible={typeModalVisible}
-        changeItem={'Type d’alerte'}
+        changeItem={'Titre'}
         value={alertType.title}
         // text={checked.title}
-        title={'Type d’alerte'}
+        title={'Titre'}
         onPress={() => {
           settypeModalVisible(false)
         }}
         onChange={(item) => { setChecked({ ...checked, title: item }), settypeModalVisible(false) }}
       />
-      <ProfileInformationListItem
-        titleUpperCase
-        caption={'Où'}
-        value={address}
-        style={styles.listItem}
-        onPress={() => {
-          // setInputItemKey(2);
-          setaddressModalVisible(!addressModalVisible);
-        }}
-      />
-      <EditAddressScreen
-        visible={addressModalVisible}
-        changeItem={'Où'}
-        // value={address? address: props.alertData.address }
-        value={address}
-        // coordinate={address}
-        title={"Ma localisation"}
-        onPress={() => {
-          setaddressModalVisible(false)
-        }}
-        onChange={(item) => { setAddress(item), setaddressModalVisible(false) }}
-      />
-      <ProfileInformationListItem
+        <ProfileInformationListItem
         titleUpperCase
         caption={'Description'}
+        color={{color: '#FC3867'}}
+
         value={description.description}
         style={styles.listItem}
         onPress={() => {
@@ -151,6 +135,31 @@ const EditAlertScreen = (props) => {
         }}
         onChange={(item) => { setDescription({ ...description, description: item }), setdescriptionModalVisible(false) }}
       />
+      <ProfileInformationListItem
+        titleUpperCase
+        caption={'Lieu'}
+        color={{color: '#FC3867'}}
+
+        value={address}
+        style={styles.listItem}
+        onPress={() => {
+          // setInputItemKey(2);
+          setaddressModalVisible(!addressModalVisible);
+        }}
+      />
+      <EditAddressScreen
+        visible={addressModalVisible}
+        changeItem={'Lieu'}
+        // value={address? address: props.alertData.address }
+        value={address}
+        // coordinate={address}
+        title={"Ma localisation"}
+        onPress={() => {
+          setaddressModalVisible(false)
+        }}
+        onChange={(item) => { setAddress(item), setaddressModalVisible(false) }}
+      />
+    
       <TouchableOpacity
         onPress={() => {
           //  setInputItemKey(4);
@@ -159,6 +168,8 @@ const EditAlertScreen = (props) => {
         <ProfileInformationListItem
           titleUpperCase
           caption={'Partagé avec'}
+          color={{color: '#FC3867'}}
+
           circleText={
             <>
               {contactType.type == 1 ? <Neighbor width={28 * em} height={28 * em} /> :

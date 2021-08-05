@@ -228,7 +228,7 @@ const styles = {
   TapImage: { width: 22 * em, height: 22 * hm },
   photoWrapper: {
     width: 24 * em,
-    height: 24 * hm,
+    height: 24 * em,
     borderWidth: 2 * em,
     borderRadius: 14 * em,
     justifyContent: 'center',

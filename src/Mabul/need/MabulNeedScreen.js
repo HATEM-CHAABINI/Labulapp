@@ -11,9 +11,9 @@ import { Main, MobileBlue, NeedFamily, Outil, Service } from '../../assets/svg/i
 const iconSize = { width: 38 * em, height: 38 * em };
 
 const needItems = [
-  { id: 0, itemName: 'Coup de main', icon: Main(iconSize), },
-  { id: 1, itemName: 'Service',icon: Service(iconSize), },
-  { id: 2, itemName: 'Outil' ,icon: Outil(iconSize),},
+  { id: 0, itemName: 'D’un coup de main', icon: Main(iconSize), },
+  { id: 1, itemName: 'D’un service',icon: Service(iconSize), },
+  { id: 2, itemName: 'D’un outil' ,icon: Outil(iconSize),},
 ];
 
 const MabulNeedScreen = (props) => {

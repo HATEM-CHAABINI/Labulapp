@@ -82,7 +82,8 @@ const styles = {
     textAlignVertical: 'center',
     fontWeight: '200',
     color: '#1E2D60',
-    lineHeight: 19 * em,
+    lineHeight: 20 * hm,
+    bottom:10*hm
   },
   subTextTitle: { color: '#A0AEB8', fontSize: 16 * em, lineHeight: 18 * em },
   arrowIcon: { backgroundColor: '#ffffff', width: 11 * em, height: 18 * em },

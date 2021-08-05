@@ -17,17 +17,17 @@ const ProNeedsHomeScreen = () => {
     <NavigationContainer>
       <View style={styles.container}>
         <CommonBackButton dark style={styles.backButton} />
-        <TitleText text={'Mes demandes'} style={styles.title} />
+        <TitleText text={'Mes offres'} style={styles.title} />
         <Tab.Navigator tabBar={(props) => <CommonTabBar {...props} />} swipeEnabled={false} initialRouteName="tips">
-          <Tab.Screen name="tips" options={{ title: 'Bons plans', tabColor: '#40CDDE' }} component={ProTipsTabScreen} />
+          <Tab.Screen name="tips" options={{ title: 'En cours', tabColor: '#40CDDE' }} component={ProTipsTabScreen} />
           <Tab.Screen
             name="promotions"
-            options={{ title: 'Promotions', tabColor: '#40CDDE' }}
+            options={{ title: 'Enregistrés ', tabColor: '#40CDDE' }}
             component={ProPromotionsTabScreen}
           />
           <Tab.Screen
             name="events"
-            options={{ title: 'Évènements', tabColor: '#40CDDE' }}
+            options={{ title: 'Alertes', tabColor: '#40CDDE' }}
             component={ProEventsTabScreen}
           />
         </Tab.Navigator>

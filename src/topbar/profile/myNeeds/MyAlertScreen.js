@@ -14,8 +14,11 @@ import CommonListItem from '../../../adapter/CommonListItem';
 import CommonBackButton from '../../../Components/button/CommonBackButton';
 import firestore from '@react-native-firebase/firestore';
 import auth from "@react-native-firebase/auth";
-import { fetchAlerts, getUserProfile } from '../../../services/firebase'
+import { deleteUserAlerts, fetchAlerts, getUserProfile } from '../../../services/firebase'
 import { DateSchema } from 'yup';
+import SmallText from '../../../text/SmallText';
+import Moment from 'moment';
+import ModalSupprimerAlerte from '../../../ServiceScrenns/ModalSupprimerAlerte';
 
 const needData = new NeedService(
   new User('Mathieu Torin', require('../../../assets/images/tab_profile_off.png'), 'anton@gmail.com'),
@@ -33,6 +36,7 @@ const MyAlertScreen = (props) => {
   const [alertData, setAlertData] = useState(props.alertData);
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(needData);
+  const [cancelUpdatePopupVisible, setcancelUpdatePopupVisible] = useState(false);
 
   useEffect(() => {
     setAlertData(props.alertData)
@@ -82,8 +86,7 @@ const MyAlertScreen = (props) => {
       textStyle={{ color: "#FC3867", fontFamily: 'Lato-Medium', fontSize: 16 * em }}
       text="Supprimer"
       // onPress={() => Actions.editNeed({ data2: data2, docId: props.docId })}
-      onPress={() =>
-        Actions.editAlert({ alertData: alertData, user: user, docId: props.docId })
+      onPress={() => setcancelUpdatePopupVisible(true)
       }
 
     />
@@ -93,6 +96,21 @@ const MyAlertScreen = (props) => {
     <View style={styles.container}>
       <View style={styles.cover}>
         <Alert width={160 * em} height={140.25 * hm} />
+      </View>
+      <View style={{
+     marginTop:253 * hm,
+     marginLeft:30*em,
+zIndex:999
+     ,justifyContent:'center',
+     alignContent:'center',alignItems:'center',
+    position:'absolute',backgroundColor:'white',borderRadius:21*em,width:113*em,height:33*hm}}>
+       <SmallText
+
+text={Moment(alertData.demandStartDate.seconds * 1000).format('DD MMMM YYYY') }
+color="#6A8596"
+style={{fontSize:14*em,fontFamily:'Lato-Medium'}}
+/>
+        {console.log(alertData)}
       </View>
       <ScrollView style={styles.body}>
         <CommonListItem
@@ -109,7 +127,9 @@ const MyAlertScreen = (props) => {
           title={user.firstName + " " + user.lastName}
           titleStyle={{ color: '#1E2D60', marginLeft: 21 * em, fontFamily: 'Lato-Black', fontSize: 16 * em }}
         />
-        <TitleText text={alertData.type !== undefined ? alertData.type.title : 'Alert Title'} style={styles.title} />
+        <TitleText text={alertData.type.id != 3 ?
+         alertData.type.title : alertData.alertType.alertDescription} 
+        style={styles.title} />
 
         <CommonListItem
           icon={
@@ -120,6 +140,23 @@ const MyAlertScreen = (props) => {
           title={alertData.address !== undefined ? alertData.address : 'Alert Address undefine'}
           titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
         />
+          <ModalSupprimerAlerte
+            visible={cancelUpdatePopupVisible}
+           
+            onPressS={() => {
+              setcancelUpdatePopupVisible(false)
+              deleteUserAlerts(auth().currentUser.uid, alertData.serviceType.name, props.docId).then((item) => {
+                Actions.home()
+              }).catch((error) => {
+                console.log(error);
+              })
+              // , Actions.editNeed({ data2: data2, docId: props.docId })
+            }}
+            onPressT={() => {
+              setcancelUpdatePopupVisible(false)
+              // , Actions.editNeed({ data2: data2, docId: props.docId })
+            }}
+          />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           {ModifyButton}
           {DeleteButton}

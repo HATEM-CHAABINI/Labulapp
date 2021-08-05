@@ -7,7 +7,7 @@ import ServiceType from '../model/service/ServiceType';
 import { getUserBadge } from '../constants/icons';
 import CommonListItem from '../adapter/CommonListItem';
 import AvatarWithBadge from './AvatarWithBadge';
-import { CrossGray, LocationRed } from '../assets/svg/icons';
+import { CrossGray, LocationGray, LocationRed } from '../assets/svg/icons';
 import firestore from '@react-native-firebase/firestore';
 import { deleteUserDemands } from "../services/firebase";
 import auth from '@react-native-firebase/auth';
@@ -16,7 +16,7 @@ const padding = 15 * em;
 import Moment from 'moment';
 const textBoxMargin = 52 * em;
 const userPhotoSize = 36 * em;
-import { renderimgSell, renderimgneed, renderimgorganize, renderimggive } from '../constants/renderBange'
+import { renderimgSell, renderimgneed, renderimgorganize, renderimggive, renderimgalert, renderimgalertliste } from '../constants/renderBange'
 const FriendListCard = (props) => {
   //  console.log('........friendListCard data.........',props)
   const { data } = props;
@@ -52,6 +52,9 @@ const FriendListCard = (props) => {
 
   return (
     <TouchableOpacity onPress={props.onPress}>
+     {
+       data.serviceType.name!=="alerts" ?
+
       <View style={[styles.container, props.style]}>
         <View style={styles.containerIcon}>
         <TouchableOpacity   onPress={() => { deleteDemand() }}>
@@ -112,7 +115,55 @@ const FriendListCard = (props) => {
           )}
           {data.price && <CommentText align="left" color="#1E2D60" style={styles.priceText} text={data.price} />}
         </View>
-      </View>
+      </View>:
+     
+     <View style={[styles.container, props.style]}>
+     <View style={styles.containerIcon}>
+     <TouchableOpacity   onPress={() => { deleteDemand() }}>
+       {/* cross icon */}
+       <CrossGray width={12 * em} height={12 * em} />
+      </TouchableOpacity>
+     </View>
+  
+   
+     <View style={styles.textBox}>
+       {data.date && (
+         <View style={styles.dateText}>
+           <SmallText
+
+             text={data.type === ServiceType.ORGANIZE ? Moment(data.demandStartDate.seconds * 1000).format('DD MMMM YYYY-HH:MM') : Moment(data.demandStartDate.seconds * 1000).format('DD MMMM YYYY-HH:MM')}
+             color="#6A8596"
+           /></View>
+       )}
+       <CommonListItem
+         style={{width: '100%' }}
+         icon={
+           <AvatarWithBadge
+        
+             avatarDiameter={35 * em}
+             badgeDiameter={21 * em}
+            //  style={{ marginRight: 16 * em }}
+             onPress={() => props.onAvatarPress()}
+           />
+         }
+         title={"Alerte "+data.type.title}
+         titleStyle={{ fontSize: 20 * em, color: '#1E2D60', fontFamily: 'Lato-Bold'}}
+        //  subTitle={data.address}
+         subTitleStyle={styles.userDescTexts}
+       />
+  
+  <CommonListItem
+   
+              style={{marginLeft: 10*em, marginTop: 8 * hm}}
+              icon={<LocationGray width={16 * em} height={19 * em} />}
+              titleStyle={styles.locationText}
+              title={data.address}
+            />
+         </View>
+         <View style={{position:'absolute', marginLeft: 260 * em ,marginTop:"25%" }}>
+  {  renderimgalertliste()}
+     </View>
+   </View>}
     </TouchableOpacity>
   );
 };

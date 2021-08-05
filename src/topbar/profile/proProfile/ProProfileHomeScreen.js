@@ -58,7 +58,7 @@ const ProProfileHomeScreen = (props) => {
       // onScroll={onScroll}
       headerBackgroundColor="#333"
       backgroundColor="#ffffff"
-      stickyHeaderHeight={85 * hm}
+      stickyHeaderHeight={95 * hm}
       parallaxHeaderHeight={HEIGHT * 0.45}
       backgroundSpeed={10}
       renderForeground={() => (
@@ -67,8 +67,7 @@ const ProProfileHomeScreen = (props) => {
             style={{
               backgroundColor: userProfile.cover ? 'rgba(30, 45, 96, 0.64)' : '#1E2D60',
               flex: 1,
-              width: '100%',
-              alignItems: 'center',
+              
             }}>
             <ProfileCommonAvatar
               style={styles.avatar}
@@ -77,7 +76,7 @@ const ProProfileHomeScreen = (props) => {
               icon={userProfile.avatar}
               pro
             />
-            <TouchableOpacity onPress={() => Actions.proProfileOverview({ userProfile: originalProProfile })}>
+            <TouchableOpacity style={{bottom:70*hm,marginLeft:141*em}} onPress={() => Actions.proProfileOverview({ userProfile: originalProProfile })}>
               <Text style={styles.txtFullName}>{userProfile.name}</Text>
               <Text style={styles.txtGoToProfile}>Aller sur mon profil</Text>
             </TouchableOpacity>
@@ -90,7 +89,7 @@ const ProProfileHomeScreen = (props) => {
         </View>
       )}
       renderStickyHeader={() => (
-        <View key="sticky-header" style={{ marginTop: 18 * em, alignItems: 'center' }}>
+        <View key="sticky-header" style={{ marginTop: 38 * hm, alignItems: 'center' }}>
           <ProfileCommonAvatar
             style={{ width: 30 * em, height: 30 * em }}
             fullName={userProfile.name}
@@ -101,7 +100,8 @@ const ProProfileHomeScreen = (props) => {
 
           <SmallText text={userProfile.name} color="#1E2D60" />
         </View>
-      )}>
+      )}
+      >
       <View style={styles.bottomView}>
       <View style={styles.cardContainer}>
           <ProfileCommonCard
@@ -125,6 +125,7 @@ const ProProfileHomeScreen = (props) => {
           <CommentText text={'Mon compte'} style={styles.caption} />
           <ProfileCommonListItem
             text={'Editer mon profil'}
+            titleStyle={{fontFamily:'Lato-Medium'}}
             style={styles.listItem}
             icon={Editprofile(iconSize)}
             onPress={() => {
@@ -133,6 +134,7 @@ const ProProfileHomeScreen = (props) => {
           <View style={styles.line1} />
           <ProfileCommonListItem
             text={'Mes informations'}
+            titleStyle={{fontFamily:'Lato-Medium'}}
             style={styles.listItem}
             icon={Information(iconSize)}
             onPress={() => {
@@ -142,6 +144,7 @@ const ProProfileHomeScreen = (props) => {
           <View style={styles.line1} />
           <ProfileCommonListItem
             text={'Mes réglages'}
+            titleStyle={{fontFamily:'Lato-Medium'}}
             style={styles.listItem}
             icon={Setting(iconSize)}
             onPress={() => {
@@ -170,6 +173,7 @@ const ProProfileHomeScreen = (props) => {
         <View style={styles.listBox}>
           <CommentText text={'À propos'} style={styles.caption} />
           <ProfileCommonListItem
+            titleStyle={{fontFamily:'Lato-Medium'}}
             text={'Politique de confidentialité'}
             style={styles.listItem}
             onPress={() => {
@@ -178,6 +182,7 @@ const ProProfileHomeScreen = (props) => {
           />
           <View style={styles.line3} />
           <ProfileCommonListItem
+            titleStyle={{fontFamily:'Lato-Medium'}}
             text={'Conditions générales d’utilisation'}
             style={styles.listItem}
             onPress={() => {
@@ -186,21 +191,11 @@ const ProProfileHomeScreen = (props) => {
           />
         </View>
 
-        {props.route.params.purchased === AccountType.PRO ? (
-          <View style={{ alignSelf: 'center', marginTop: 50 * hm, marginBottom: 15 * hm }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <Image source={require('../../../assets/images/img_logo.png')} style={styles.imgLogo} />
-              <Image source={require('../../../assets/images/txt_logo.png')} style={styles.txtLogo} />
-            </View>
-            <SmallText style={{ alignSelf: 'flex-end' }} text="PRO" color={'#7398FD'} />
-          </View>
-        ) : (
-          <View style={styles.imgContainer}>
-            <Image source={require('../../../assets/images/img_logo.png')} style={styles.imgLogo} />
-            <Image source={require('../../../assets/images/txt_logo.png')} style={styles.txtLogo} />
-            <SmallText style={styles.proText} text="Pro" color={'#7398FD'} />
-          </View>
-        )}
+        <View style={styles.imgContainer}>
+          <Image source={require('../../../assets/images/img_logo.png')} style={styles.imgLogo} />
+
+          {/* <Image source={require('../../assets/images/txt_logo.png')} style={styles.txtLogo} /> */}
+        </View>
 
         <CommentText text={'Version 1.0'} style={styles.txtVersion} color={'#BFCDDB'} />
         <View style={styles.emptyView} />
@@ -211,10 +206,13 @@ const ProProfileHomeScreen = (props) => {
 
 const styles = {
   rowContainer: { flexDirection: 'row' },
-  topView: { height: 300 * hm, alignItems: 'center' },
-  avatar: { marginTop: 89 * hm, height: 70 * hm, width: 70 * hm },
-  txtFullName: { marginTop: 15 * hm, fontSize: 20 * em, color: '#FFFFFF', fontWeight: 'bold', textAlign: 'center' },
-  txtGoToProfile: { marginTop: 5 * hm, fontSize: 14 * em, color: '#FFFFFF', textAlign: 'center' },
+  topView: { 
+    flexDirection:'row',
+    height: 275*hm, 
+    backgroundColor: '#40CDDE' },  
+    avatar: { marginTop: 89 * hm, height: 70 * hm, width: 70 * hm ,marginLeft:30*em},
+    txtFullName: { marginTop: 15 * hm, fontSize: 20 * em, color: '#FFFFFF', fontWeight: 'bold'},
+  txtGoToProfile: { marginTop: 5 * hm, fontSize: 14 * em, color: '#FFFFFF' },
   scrollView: { width: WIDTH, backgroundColor: '#ffffff' },
   dropDown: { right: 30 * em, top: 33 * hm, position: 'absolute', zIndex: 1 },
   bottomView: {
@@ -228,7 +226,7 @@ const styles = {
     // paddingHorizontal: 30 * em,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginTop: -46 * em,
+    marginTop: -66 * hm,
     marginBottom: 15 * hm,
 
 
@@ -289,7 +287,7 @@ const styles = {
     marginTop: 50 * hm,
     marginBottom: 15 * hm,
   },
-  imgLogo: { height: 26 * em, width: 20 * em, resizeMode: 'contain', marginRight: 10 * em, tintColor: '#7398FD' },
+  imgLogo: { height: 58 * hm, width: 80 * em, resizeMode: 'contain', marginLeft: 7 * em },
   txtLogo: { height: 23 * em, width: 80 * em, resizeMode: 'contain', tintColor: '#7398FD' },
   proText: { lineHeight: 15 * em, alignSelf: 'flex-start', color: '#7398FD' },
   txtVersion: { marginBottom: 110 * hm },

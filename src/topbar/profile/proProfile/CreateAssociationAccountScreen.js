@@ -95,7 +95,7 @@ marginBottom={-7*hm}
         <View style={{backgroundColor:'white',width:'100%',alignItems:'center',bottom:0.2*hm}}>
        <CommonButton
             color="#7398FC"
-            text={'Suivant'}
+            text={'Continuer'}
             onPress={() => Actions.proRegisterMobile({ accountType: props.accountType })}
             style={styles.btnNext}
           />

@@ -19,7 +19,7 @@ const ProfileCommonHeader = (props) => {
       backgroundSpeed={10}
       renderFixedHeader={() => (
         <CommonHeader
-          rightTxt={'Aperçu'}
+          rightTxt={props.rightTxt ==null ?'Aperçu':''}
           style={{ position: 'absolute', top: 40 * hm }}
           onRightPress={props.onFinish}
           onLeftPress={props.onCancel}

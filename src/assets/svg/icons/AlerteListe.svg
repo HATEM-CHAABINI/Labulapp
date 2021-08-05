@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41">
+  <g id="Groupe_2029" data-name="Groupe 2029" transform="translate(444.918 4204.918)">
+    <g id="Groupe_2028" data-name="Groupe 2028">
+      <circle id="Ellipse_438" data-name="Ellipse 438" cx="20.5" cy="20.5" r="20.5" transform="translate(-444.918 -4204.918)" fill="#fc3867"/>
+      <g id="alert" transform="translate(-435.965 -4195.688)" opacity="0.997">
+        <g id="Group_46" data-name="Group 46" transform="translate(0 0)">
+          <path id="Soustraction_6" data-name="Soustraction 6" d="M19.993,20.54H3.1a3.294,3.294,0,0,1-1.06-.228A3.2,3.2,0,0,1,.26,18.594a3.14,3.14,0,0,1-.029-2.432l.01-.021L8.693,1.64A3.208,3.208,0,0,1,9.964.4a3.31,3.31,0,0,1,4.441,1.25l8.4,14.389a3.226,3.226,0,0,1,.286,1.141,3.162,3.162,0,0,1-.837,2.309,3.293,3.293,0,0,1-2.259,1.051Zm-8.457-6.545a1,1,0,0,0,.01,2h.008a1,1,0,0,0,.989-1.007,1,1,0,0,0-1-.99Zm.01-7.056a1,1,0,0,0-1,1v3.2a1,1,0,0,0,2,0v-3.2A1,1,0,0,0,11.547,6.938Z" transform="translate(0)" fill="#fff" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

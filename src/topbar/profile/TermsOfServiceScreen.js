@@ -33,7 +33,7 @@ const TermsOfServiceScreen = () => {
       </View>
     );
     return (
-      <View style={styles.header}>
+      <View style={[styles.header,{backgroundColor: (isActive ? '#F0F5F7' : 'white')}]}>
         <Text style={styles.headerText}>{section.title}</Text>
         {Arrow}
       </View>
@@ -41,7 +41,7 @@ const TermsOfServiceScreen = () => {
   };
   const _renderContent = section => {
     return (
-      <View style={styles.content}>
+      <View style={{backgroundColor: '#F0F5F7'}}>
         <CommentText style={styles.contentText} text={section.content} />
       </View>
     );
@@ -101,35 +101,30 @@ const TermsOfServiceScreen = () => {
 };
 
 const styles = {
-  container: {backgroundColor: '#FFFFFF'},
+  container: { backgroundColor: '#FFFFFF' },
   title: {
+
     lineHeight: 38 * em,
     textAlign: 'left',
     marginLeft: 30 * em,
     marginBottom: 35 * em,
     marginTop: 81 * em,
   },
-  line: {height: 10 * em, backgroundColor: '#F0F5F7'},
+  line: { height: 10 * em, backgroundColor: '#F0F5F7' },
   sectionStyle: {
-    paddingVertical: 10 * hm,
+    // paddingVertical: 10 * hm,
     borderBottomWidth: 10 * em,
     borderBottomColor: '#F0F5F7',
-    paddingHorizontal: 30 * em,
+    // paddingHorizontal: 30 * em,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
-  headerText: {
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingHorizontal: 30 * em,paddingVertical: 10 * hm},
+  headerText: { fontFamily: 'Lato-Medium', width: 260 * em, fontSize: 16 * em, marginBottom: 5 * hm, lineHeight: 29 * em, textAlign: 'left', color: '#1E2D60' },
+  contentText: {paddingHorizontal: 30 * em, textAlign: 'left', lineHeight: 25 * em, marginBottom: 10 * hm },
+  common: {
     fontFamily: 'Lato-Bold',
     fontSize: 24 * em,
-    marginBottom: 5 * hm,
-    lineHeight: 29 * em,
-    textAlign: 'left',
-    color: '#1E2D60',
-  },
-  contentText: {textAlign: 'left', lineHeight: 25 * em, marginBottom: 10 * hm},
+    color: '#1E2D60'
+  }
 };
 
 export default TermsOfServiceScreen;

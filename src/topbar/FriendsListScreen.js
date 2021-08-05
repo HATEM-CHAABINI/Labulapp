@@ -190,7 +190,11 @@ const FriendsListScreen = (props) => {
       style={[styles.card, { marginBottom: index === datas.length - 1 ? 120 * hm : 15 * hm }]}
       data={item}
       onPress={() => {
-        if (item.serviceType.code == 0) {
+        if (item.serviceType.name==="alerts"){
+          Actions.myAlert({ alertData: item, data2: item, user: item.user, docId: item.key })
+  
+        }
+        else if (item.serviceType.code == 0) {
           Actions.myOrganize({ data: item, user: item.user, docId: item.key });
   
         }

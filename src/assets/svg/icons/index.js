@@ -3,6 +3,8 @@ import PrevIcon from './PrevIcon.svg';
 import LocationPink from './LocationPink.svg';
 import Alert from './Alert.svg';
 import Alerte from './Alerte.svg';
+import AlerteListe from './AlerteListe.svg';
+import Alertemap from './Alertemap.svg';
 import Animal from './category/Animal.svg';
 import BricologeIcon from './category/BricologeIcon.svg';
 import ComputerIcon from './category/ComputerIcon.svg';
@@ -100,7 +102,7 @@ import Main from './category/Main.svg';
 import Outil from './category/Outil.svg';
 
 
-export {Outil,Main,Service,Intero,
+export {AlerteListe,Alertemap,Outil,Main,Service,Intero,
   AnimalSell,
   BeautyCareSell,
   DeliverySell,

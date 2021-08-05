@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View ,Text} from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, hm, WIDTH } from '../../constants/consts';
 import { FlatList } from 'react-native';
@@ -9,6 +9,8 @@ import { Actions } from 'react-native-router-flux';
 import { Aliments, Education, HighTech, Mebule, ObjetDrivers, Repas, Vetements } from '../../assets/svg/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
+import CommentText from '../../text/CommentText';
+import CommonText from '../../text/CommonText';
 
 const iconSize = { width: 38 * em, height: 38 * em };
 const giveItems = [
@@ -35,19 +37,21 @@ const MabulGiveScreen = (props) => {
   );
   return (
     <View style={styles.container}>
-      <MabulCommonHeader
-        style={styles.header}
-        percent={props.process}
-        noBackButton={true}
-        progressBarColor={'#34D9B8'}
-      /> 
-      <View style={styles.body}>
-        <TitleText text={'Je donne'} style={styles.title} />
-        <View style={styles.popView}>
-          <FlatList data={giveItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
-        </View>
-      </View>
+    <MabulCommonHeader
+      style={styles.header}
+      percent={props.process}
+      noBackButton={true}
+      progressBarColor={'#34D9B8'}
+      />
+    <View style={styles.body}>
+    <TitleText text={'Je donne'} style={styles.title} />
+    <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:'#6A8596'}}> Choisis dans quelle catégorie se trouve ton don </Text>
+      <FlatList data={giveItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
     </View>
+  </View>
+
+
+
   );
 };
 
@@ -61,24 +65,18 @@ const styles = {
     height: '12.45%',
 
   },
-  popView: {
-    paddingLeft: WIDTH * 0.08,
-    borderTopLeftRadius: 28 * em,
-    borderTopRightRadius: 28 * em,
-    backgroundColor: '#ffffff',
-    paddingBottom: 163 * em,
-  },
   body: {
     flex: 1,
+    paddingLeft: WIDTH * 0.08,
     alignItems: 'flex-start',
-    backgroundColor: '#F0F5F7',
   },
   title: {
-    paddingLeft: WIDTH * 0.08,
-    marginTop: 35 * em,
-    marginBottom: 73 * hm,
+    marginTop: 35 * hm,
+    marginBottom: 10 * hm,
   },
-  listItem: { width: 345 * em, marginTop: 25 * hm },
+  listItem: {
+    width: WIDTH * 0.92,
+    marginTop: 25 * em,
+  },
 };
-
 export default MabulGiveScreen;

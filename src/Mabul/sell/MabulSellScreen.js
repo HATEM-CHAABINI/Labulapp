@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View,Text } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, HEIGHT, hm, WIDTH } from '../../constants/consts';
 import { FlatList } from 'react-native';
@@ -8,28 +8,38 @@ import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
+import { Event } from '../../assets/svg/svg/icons';
+const iconSize = { width: 38 * em, height: 38 * em };
+
 const sellItems = [
+ 
   {
     id: 0,
+    itemName: 'Un événement',
+    icon: Event(iconSize) ,
+
+    onPress: () => {
+      Actions.mabulSellEnvironment({ process: 46 });
+    },
+  },
+  {
+    id: 1,
     itemName: 'Service',
+    // Event,Promo,Bonplan
+    // icon: ObjetDrivers(iconSize) ,
     onPress: () => {
       Actions.mabulSellService({ process: 46 });
     },
   },
   {
-    id: 1,
+    id: 2,
     itemName: 'Objet',
+
     onPress: () => {
       Actions.mabulSellObject({ process: 46 });
     },
   },
-  {
-    id: 2,
-    itemName: 'Évènement',
-    onPress: () => {
-      Actions.mabulSellEnvironment({ process: 46 });
-    },
-  },
+  
 ];
 const MabulSellScreen = (props) => {
   const dispatch = useDispatch()
@@ -54,13 +64,16 @@ const MabulSellScreen = (props) => {
   return (
     <View style={styles.container}>
       <MabulCommonHeader
+      isNoBackBtn={true} 
         style={styles.header}
         percent={props.process}
-        noBackButton={true}
+        // noBackButton={true}
         progressBarColor={'#AA87E5'}
       />
       <View style={styles.body}>
         <TitleText text={'Je vends'} style={styles.title} />
+        <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:'#6A8596'}}>Choisis dans quelle catégorie se trouve ton don</Text>
+
         <FlatList data={sellItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
       </View>
     </View>
@@ -83,13 +96,12 @@ const styles = {
     alignItems: 'flex-start',
   },
   title: {
-    marginTop: 35 * em,
-    marginBottom: 18 * em,
+    marginTop: 35 * hm,
+    marginBottom: 10 * hm,
   },
   listItem: {
     width: WIDTH * 0.92,
     marginTop: 25 * em,
   },
 };
-
 export default MabulSellScreen;

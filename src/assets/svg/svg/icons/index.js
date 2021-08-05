@@ -128,7 +128,11 @@ import TabCalendarOff from './navigation/TabCalendarOff.svg';
 import TabPlus from './navigation/TabPlus.svg';
 import PurchasedPremium from './navigation/PurchasedPremium.svg';
 
-export {PurchasedPremium, TabPlus, TabCalendarOff, TabCalendarOn, TabCardOff, TabCardOn, TabMessageOff, TabMessageOn };
+import Event from './navigation/Event.svg';
+import Promo from './navigation/Promo.svg';
+import Bonplan from './navigation/Bonplan.svg';
+
+export {Event,Promo,Bonplan,PurchasedPremium, TabPlus, TabCalendarOff, TabCalendarOn, TabCardOff, TabCardOn, TabMessageOff, TabMessageOn };
 
 export {RightArrowBlue,
   EmailBlue,

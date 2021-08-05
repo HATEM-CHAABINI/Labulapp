@@ -28,8 +28,8 @@ export default class WaitingScreen extends Component {
        alignItems: 'center', //Centered vertically
        flex:1}}>
          <CheckGreen/>
-         <Text style={{fontFamily:'Lato-Bold',fontSize:24*em,color:'white',marginTop:10*hm}}>Demande envoyé</Text>
-         <Text style={{fontFamily:'Lato-Medium',fontSize:16*em,color:'white',marginTop:10*hm,textAlign:'center'}}>{'Votre demande de participation \n a bien été envoyé.'}</Text>
+         <Text style={{fontFamily:'Lato-Bold',fontSize:24*em,color:'white',marginTop:10*hm}}>Demande envoyée</Text>
+         <Text style={{fontFamily:'Lato-Medium',fontSize:16*em,color:'white',marginTop:10*hm,textAlign:'center'}}>{'Votre demande de participation \n a bien été envoyée.'}</Text>
 
          </View>
          </View>

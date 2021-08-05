@@ -45,7 +45,7 @@ const PremiumSubscriptionScreen = (props) => {
               name="Light"
               price="0,90€"
               commentRadius="Rayon de 1Km autour."
-              comment="Idéal pour vendre juste autour de soi"
+              comment="Idéal pour vendre juste autour de soi et pour les associations"
             />
             <PurchaseMenuCard
               style={styles.card}

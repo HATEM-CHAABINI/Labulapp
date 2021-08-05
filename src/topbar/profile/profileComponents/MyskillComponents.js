@@ -155,7 +155,9 @@ const onSearch = (search) => {
   {!loading && value.data.map((val) => {
 
           return (
-        <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',padding:20}} onPress={()=>{onChecked(val.id)}}>
+        <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',padding:20}} 
+        // onPress={()=>{onChecked(val.id)}}
+        >
             <Text style={{fontSize:18,color:'#1E2D60',fontFamily: 'Lato-Bold', fontSize: 18 * em, lineHeight: 23 * hm, textAlign: 'left'}}>{val.name}</Text>
             <CheckBox 
              value={val.checked} 

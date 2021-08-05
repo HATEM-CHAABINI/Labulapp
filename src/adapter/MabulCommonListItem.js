@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, Image, Text } from 'react-native';
 import React from 'react';
-import { em } from '../constants/consts';
+import { em, hm } from '../constants/consts';
 import CommonListItem from './CommonListItem';
 import { RightArrow } from '../assets/svg/icons';
 const MabulCommonListItem = (props) => {
@@ -38,11 +38,11 @@ const styles = {
   },
   textTitle: {
     marginRight: 20 * em,
-    fontFamily: 'Lato-Bold',
+    fontFamily: 'Lato-Regular',
     fontSize: 18 * em,
     lineHeight: 23 * em,
     color: '#1E2D60',
   },
-  textSubTitle: { marginRight: 50 * em, color: '#A0AEB8', lineHeight: 16 * em, width: 205 * em },
+  textSubTitle: { marginRight: 50 * em, color: '#A0AEB8', lineHeight: 16 * em, width: 205 * em ,marginTop:7*hm},
   line: { marginTop: 25 * em, marginLeft: 53 * em, backgroundColor: '#B3C6CF33', height: 1 * em },
 };

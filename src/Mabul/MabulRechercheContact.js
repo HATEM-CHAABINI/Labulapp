@@ -249,10 +249,12 @@ const MabulRechercheContact = (props) => {
       <ScrollView>
         <SearchBox style={styles.searchBox} comment="Rechercher un contact" smallText="Rechercher un contact" onSearch={() => Sheet1.current.open()} onClear={onClear} />
         <Text style={{ fontFamily: 'Lato-Italic', color: '#A0AEB8', fontSize: 13 * em, marginTop: 6 * hm }}>Choisis un ou plusieurs cercles, ou recherche un contact précis.</Text>
-        <View style={{ height: 90 * em, marginTop: 25 * em, marginBottom: 25 * em }}>
-          <FlatList horizontal={true} data={selectedUser} renderItem={renderSelectedList} keyExtractor={(i) => i.id} />
-        </View>
-        <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
+        {selectedUser.length !=0?
+       <View style={{ height: 90 * em, marginTop: 25 * em, marginBottom: 25 * em }}>
+       <FlatList horizontal={true} data={selectedUser} renderItem={renderSelectedList} keyExtractor={(i) => i.id} />
+       </View>:
+      <View style={{marginBottom:20*hm}}/>}
+      <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
           <ShareButton text={"mes voisins"} style={{ marginBottom: 10 * hm, backgroundColor: 'rgba(215,243,255,0.7)' }} leftIcon={<Voisins />} rightIcon={
             <CheckBox
               oval

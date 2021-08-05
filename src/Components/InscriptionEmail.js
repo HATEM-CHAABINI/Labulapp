@@ -87,6 +87,7 @@ export default ({ navigation }) => {
             <Reinput
               label='Saisis ton email *'
               autoCorrect={false}
+              textContentType="oneTimeCode"
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"
               labelActiveColor="#BFCDDB"

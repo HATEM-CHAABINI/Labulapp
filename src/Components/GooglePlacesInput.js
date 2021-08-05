@@ -96,27 +96,37 @@ const GooglePlacesInput = (props) => {
             </View>
 
             {props.show || props.show == undefined ?
-             <KeyboardAvoidingView style={[{ position: 'absolute', alignSelf: 'center', }, props.myLocationContainer]} >
-                <View style={[{ alignSelf: 'center', alignItems: 'center', flexDirection: 'row', marginBottom: '-30%', }, props.myLocationStyle]}>
+                <View style={[{ flexDirection: 'row'}, props.myLocationStyle]}>
                     {props.myLocationIconColor === undefined ? <LocationRed width={16 * em} height={19 * hm} /> : <View style={{ top: 15 * hm }} />}
                     
                     {/* <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} /> */}
-                    <TouchableOpacity style={{ position: 'relative',}} onPress={() => {  ref.current?.setAddressText(address); }}>
+                    <TouchableOpacity style={{ position: 'absolute',}} onPress={() => {  ref.current?.setAddressText(address); }}>
                     <View style={{flexDirection:'row'}}>
                     <Flecheposition/>
                     <View style={{flexDirection:'column', marginLeft:13*em}}>
                         <Text style={{color:'#1E2D60', fontFamily:'Lato-Bold', fontSize:16*em}}>
                         Position actuelle
                         </Text>
-                        <Text style={{color:'#A0AEB8', fontFamily:'Lato-Regular', fontSize:16*em, marginTop:5*hm}}>
+                        <View style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                            }}>
+                    <Text
+                     numberOfLines={2} style={{
+                        width: 250*em,
+                        flexGrow: 1,
+                        flex: 1,
+                        color:'#A0AEB8', fontFamily:'Lato-Regular', fontSize:16*em, marginTop:5*hm
+                }}>
                       {  address}
                         </Text>
+                        </View>
                     </View>
                     </View>
 {                 console.log("ooouuuuuuuhhh", address)}
                     </TouchableOpacity>
                 </View>
-            </KeyboardAvoidingView> : null}
+   : null}
         </>
     );
 };

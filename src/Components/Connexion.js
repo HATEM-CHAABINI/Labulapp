@@ -105,7 +105,7 @@ export default ({navigation}) => {
           <View style={{position: 'absolute', top: 39 * hm}}>
             <Usercreat width={20 * em} height={25 * em} />
           </View>
-          <TitleText text="Connecte toi" style={{marginTop: 79 * hm}} />
+          <TitleText text="Connecte-toi" style={{marginTop: 79 * hm}} />
           <CommonText
             text="Ravis de te revoir :)"
             style={{color: '#6A8596', marginTop: 7 * hm}}
@@ -172,7 +172,7 @@ export default ({navigation}) => {
                         marginLeft: 45 * em,
                       },
                     ]}>
-                   Connexion avec Google
+                   Connecte-toi avec Google
                   </Text>
                 )}
               </View>
@@ -244,7 +244,7 @@ export default ({navigation}) => {
                         marginLeft: 36 * em,
                       },
                     ]}>
-Connexion avec Facebook</Text>
+Connecte-toi avec Facebook</Text>
                 )}
               </View>
             </TouchableOpacity>
@@ -278,7 +278,7 @@ Connexion avec Facebook</Text>
                     // marginTop: 2*hm,
                     fontFamily: 'lato-Medium',
                   }}>
-                  Connecte toi avec ton email
+                  Connecte-toi avec ton email
                 </Text>
               </View>
             </TouchableOpacity>

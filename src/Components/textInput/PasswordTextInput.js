@@ -38,6 +38,8 @@ const PasswordTextInput = ({
         label={label}
         paddingBottom={12 * hm}
         color='#1E2D60'
+        textContentType="oneTimeCode"
+
         underlineColor="#BFCDDB"
         underlineActiveColor="#41D0E2"
         labelActiveColor="#BFCDDB"

@@ -9,12 +9,15 @@ import {
     Feteorg, Aperoorg, Spectacleorg, Rencontreorg, Repasorg, Atelierorg,
 
     Objetdiversgive, Meublegive, Hightechgive, Educationgive, Vetementsgive, Repasgive, Alimentsgive
-
+,Alertemap,
+AlerteListe
 } from '../assets/svg/icons';
 import { em, hm } from '../constants/consts';
 
 
 const servicIconSize = { width: 18 * em, height: 18 * em };
+const servicIconalertSize = { width: 100 * em, height: 100 * em };
+const servicIconalertlSize = { width: 41 * em, height: 41 * em };
 
 export const renderimgSell = (belongto, catrgory) => {
     if (belongto == 0) {
@@ -176,4 +179,11 @@ export const renderimggive = (catrgory) => {
         case 6:
             return Alimentsgive(servicIconSize);
     }
+}
+
+export const renderimgalert= ()=>{
+    return Alertemap(servicIconalertSize);
+}
+export const renderimgalertliste= ()=>{
+    return AlerteListe(servicIconalertlSize);
 }

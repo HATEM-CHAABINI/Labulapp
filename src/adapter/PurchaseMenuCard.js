@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { em } from '../constants/consts';
+import { em, hm } from '../constants/consts';
 import TitleText from '../text/TitleText';
 import SmallText from '../text/SmallText';
 
@@ -82,7 +82,7 @@ const styles = {
     borderColor: 'transparent',
   },
   price: { fontFamily: 'Lato-Black', marginTop: 25 * em, fontSize: 25 * em, lineHeight: 30 * em },
-  containerTxt: { width: 120 * em, height: 30 * em },
+  containerTxt: { width: 120 * em, height: 60 * hm },
   comment: { fontFamily: 'Lato-SemiBold', fontSize: 12 * em, lineHeight: 14 * em, textAlign: 'center', color: '#1E2D60' },
   addTxt: { fontFamily: 'Lato-Medium', position: 'absolute', fontSize: 12 * em, lineHeight: 14 * em },
 };

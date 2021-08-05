@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import TitleText from '../../../text/TitleText';
-import { em, hexToRGB } from '../../../constants/consts';
+import { em, hexToRGB, hm } from '../../../constants/consts';
 import ProfileCommonListItem from '../../../adapter/ProfileCommonListItem';
 import { Actions } from 'react-native-router-flux';
 import CommonText from '../../../text/CommonText';
@@ -75,7 +75,7 @@ const styles = {
   },
   line: {
     marginLeft: 83 * em,
-    marginTop: 25 * em,
+    marginTop: 30 * hm,
     height: 1 * em,
     backgroundColor: '#F0F5F7',
   },

@@ -37,13 +37,13 @@ const MyCirclesHomeScreen = () => {
         <Tab.Navigator tabBar={(props) => <CommonTabBar {...props} />} swipeEnabled={false} initialRouteName="families">
           <Tab.Screen
             name={RelationshipType.FAMILIY}
-            options={{ title: 'Ma famille', tabColor: '#EF88B9' }}
+            options={{ title: 'Ma famille', tabColor: '#FA5890' }}
             component={MyCirclesTabScreen}
             initialParams={{ sort: RelationshipType.FAMILIY }}
           />
           <Tab.Screen
             name={RelationshipType.FRIEND}
-            options={{ title: 'Mes amis', tabColor: '#6784DA' }}
+            options={{ title: 'Mes amis', tabColor: '#FF9417' }}
             component={MyCirclesTabScreen}
             initialParams={{ sort: RelationshipType.FRIEND }}
           />

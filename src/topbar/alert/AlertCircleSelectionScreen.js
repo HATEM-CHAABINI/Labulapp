@@ -39,7 +39,18 @@ const AlertCircleSelectionScreen = (props) => {
           style={[
             styles.optionBox,
           ]}
-          onPress={() => { dispatch(add_into_alert({ type: { title: item.title, id: item.id } })), Actions.alertType({ item: item, process: 40 }) }}>
+          onPress={() => { 
+        dispatch(add_into_alert({ type: { title: item.title, id: item.id } })), 
+        console.log("iitttzemmmmmmmmm ",item.id)
+        if (item.id== 3){
+        Actions.alertType({ item: item, process: 40 }) 
+      }
+      else{
+        Actions.alertAddNote({ item: props.item, process: 60 })
+
+      }
+          
+          }}>
           <TitleText style={styles.optionCaption} text={item.title} />
           <View style={{ paddingRight: 30 }} >
             <Flechedroite width={14 * em} height={14 * hm} />

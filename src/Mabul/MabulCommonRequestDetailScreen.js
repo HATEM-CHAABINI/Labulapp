@@ -253,8 +253,8 @@ const MabulCommonRequestDetailScreen = (props) => {
         progressBarColor={conceptColor} />
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
-          <Reinput style={{ height: 76 * hm, paddingLeft: 40 * em, paddingTop: 20 * hm, marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
-            label='Écrit un titre '
+          <Reinput style={{ height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
+            label='Écrit un titre *'
             autoFocus={true}
             underlineActiveColor="#FFFFFF"
             underlineColor="#FFFFFF"
@@ -265,8 +265,9 @@ const MabulCommonRequestDetailScreen = (props) => {
             value={title}
             onChangeText={(e) => titles(e)}
           />
+         
           <Text style={styles.descerrorText}>{errortitle}</Text>
-          <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic', marginTop: 5 * hm, marginBottom: 10 * hm }}>(68 caractères maximum)</Text>
+          <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic',  marginBottom: 10 * hm }}>(68 caractères maximum)</Text>
 
 
           <TouchableOpacity
@@ -306,7 +307,10 @@ const MabulCommonRequestDetailScreen = (props) => {
               :
               <></>
           }
-
+  
+  {
+            mabulService !== 'give' ?
+            <>
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
             onPress={() => Sheet2.current.open()}
@@ -317,7 +321,12 @@ const MabulCommonRequestDetailScreen = (props) => {
             </View>
             <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text>
           </TouchableOpacity>
-          <Text style={styles.descerrorText}>{errorDate}</Text>
+          <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>}
+
+
+
+
+
           {
             mabulService === 'sell' ?
               <>
@@ -341,7 +350,7 @@ const MabulCommonRequestDetailScreen = (props) => {
               :
               <></>
           }
-          <View style={[styles.ActionButton, { height: 199 * hm, marginTop: 10 * hm, }]}>
+          <View style={[styles.ActionButton, {  marginTop: 10 * hm, paddingBottom:20*hm}]}>
             <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
               <Text style={styles.contentDesc}>Photos</Text>
               <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em }]}>(3 max)</Text>
@@ -367,6 +376,27 @@ const MabulCommonRequestDetailScreen = (props) => {
             }
           </View>
           <Text style={styles.descerrorText}>{erroraddress}</Text>
+
+
+
+          {
+            mabulService === 'give' ?
+            <>
+          <TouchableOpacity
+            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+            onPress={() => Sheet2.current.open()}
+          >
+            <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+              <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+              <Flechedroite width={14 * em} height={14 * hm} />
+            </View>
+            <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text>
+          </TouchableOpacity>
+          <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>}
+
+
+
+
         </ScrollView>
       </View>
       <View style={{ flex: 0.1 }}>
@@ -390,9 +420,10 @@ const MabulCommonRequestDetailScreen = (props) => {
 
           <View style={styles.container}>
             <Reinput style={{ paddingTop: 15 * em, marginRight: 30 * em, marginLeft: 30 * em }}
-              label={`Cela permet à ton entourage de mieux 
-             comprendre ta demande`}
+              label={`Cela permet à ton entourage de mieux comprendre
+ta demande`}
               underlineColor="#BFCDDB"
+              textAlign={"left"}
               multiline={true}
               activeColor={conceptColor}
               labelActiveColor="#6A8596"
@@ -711,10 +742,10 @@ const styles = {
   },
   descerrorText: {
     fontSize: 12 * em,
-    bottom: 30 * hm,
+    bottom: 20 * hm,
     left: 40 * hm,
     color: "red",
-    marginTop: 15 * hm
+    // marginTop: 15 * hm,
   },
   body: {
     backgroundColor: '#F0F5F7',

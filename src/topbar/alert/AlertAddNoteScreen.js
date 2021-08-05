@@ -77,6 +77,8 @@ const AlertAddNoteScreen = (props) => {
       setErrorAddress('Obligatoire')
     }
     else {
+      dispatch(update_into_alert({demandStartDate:new Date()}))
+
       dispatch(update_into_alert({ description: { description: descriptionn } }))
       Sheet3.current.open()
     }
@@ -102,20 +104,8 @@ const AlertAddNoteScreen = (props) => {
         progressBarColor={conceptColor} />
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
-          <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm }]}
-            onPress={() => Sheet1.current.open()}
-          >
-            <Text style={styles.contentDesc}>Description</Text>
-            {!allowdescription ?
-              <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
-              :
-              <Text style={styles.contentDescSubb} >{descriptionn}</Text>
-            }
-          </TouchableOpacity>
-          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
-          <View
-            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+        <View
+            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm }]}
 
           >
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -131,6 +121,22 @@ const AlertAddNoteScreen = (props) => {
             }
           </View>
           <Text style={styles.descerrorText}>{erroraddress}</Text>
+
+
+
+          <TouchableOpacity
+            style={[styles.ActionButton, { height: 90 * hm ,bottom:8*hm}]}
+            onPress={() => Sheet1.current.open()}
+          >
+            <Text style={styles.contentDesc}>Description</Text>
+            {!allowdescription ?
+              <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+              :
+              <Text style={styles.contentDescSubb} >{descriptionn}</Text>
+            }
+          </TouchableOpacity>
+          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
+         
         </ScrollView>
       </View>
       <View style={{ flex: 0.1 }}>
@@ -153,7 +159,7 @@ const AlertAddNoteScreen = (props) => {
           <View style={styles.container}>
             <Reinput style={{ paddingTop: 15 * em, marginRight: 30 * em, marginLeft: 30 * em }}
               label={`Cela permet à ton entourage de mieux 
-             comprendre ta demande`}
+comprendre ta demande`}
               underlineColor="#BFCDDB"
               multiline={true}
               activeColor={conceptColor}
@@ -226,7 +232,7 @@ const AlertAddNoteScreen = (props) => {
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Je partage avec</Text>
           </View>
 
-          <MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor} />
+          <MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor} rb4={()=>Sheet3.current.close()}/>
         </RBSheet>
 
         <MabulPubButton
@@ -263,7 +269,8 @@ const styles = {
     shadowOffset: {
       width: 0,
       height: 0,
-    }, ButtonWrapper: {
+    }, 
+    ButtonWrapper: {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
@@ -322,7 +329,7 @@ const styles = {
   nextBtn: {
     width: 315 * em,
     alignSelf: 'center',
-    bottom: 10 * hm
+    bottom: 20 * hm
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },

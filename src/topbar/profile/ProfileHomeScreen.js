@@ -88,11 +88,13 @@ const ProfileHomeScreen = (props) => {
     <ParallaxScrollView
       // onScroll={onScroll}
       backgroundColor="#ffffff"
-      stickyHeaderHeight={85 * hm}
+      stickyHeaderHeight={95 * hm}
       parallaxHeaderHeight={HEIGHT * 0.45}
       backgroundSpeed={10}
       renderForeground={() => (
-        <View style={styles.topView}>
+        <View style={
+        styles.topView
+        }>
           {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : <ProfileCommonAvatar
             style={styles.avatar}
             fullName={profileData.firstName + " " + profileData.lastName}
@@ -100,7 +102,8 @@ const ProfileHomeScreen = (props) => {
             borderWidth={3 * em}
           />}
           <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
-            {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : <TitleText style={styles.txtFullName} text={profileData.firstName + " " + profileData.lastName} />}
+            {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : 
+            <TitleText style={styles.txtFullName} text={profileData.firstName + " " + profileData.lastName} />}
             <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" />
           </TouchableOpacity>
         </View>
@@ -115,7 +118,7 @@ const ProfileHomeScreen = (props) => {
         </View>
       )}
       renderStickyHeader={() => (
-        <View key="sticky-header" style={{ marginTop: 18 * em, alignItems: 'center' }}>
+        <View key="sticky-header" style={{ marginTop: 38 * hm, alignItems: 'center' }}>
           <ProfileCommonAvatar
             style={{ width: 30 * em, height: 30 * em }}
             icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
@@ -124,7 +127,8 @@ const ProfileHomeScreen = (props) => {
           />
           <SmallText text={profileData.firstName + " " + profileData.lastName} color="#1E2D60" style={{}} />
         </View>
-      )}>
+      )}
+      >
       <View style={styles.bottomView}>
         <View style={styles.cardContainer}>
           <ProfileCommonCard
@@ -147,6 +151,7 @@ const ProfileHomeScreen = (props) => {
         <View style={styles.listBox}>
           <CommentText text={'Mon compte'} style={styles.caption} color={'#A0AEB8'} />
           <ProfileCommonListItem
+          titleStyle={{fontFamily:'Lato-Medium'}}
             text={'Editer mon profil'}
             style={styles.listItem}
             icon={Editprofile(iconSize)}
@@ -156,6 +161,8 @@ const ProfileHomeScreen = (props) => {
                     <View style={styles.line1} />
 
            <ProfileCommonListItem
+                     titleStyle={{fontFamily:'Lato-Medium'}}
+
             text={'Mes informations'}
             style={styles.listItem}
             icon={Information(iconSize)}
@@ -165,6 +172,8 @@ const ProfileHomeScreen = (props) => {
           />
           <View style={styles.line1} />
           <ProfileCommonListItem
+                    titleStyle={{fontFamily:'Lato-Medium'}}
+
             text={'Mes réglages'}
             style={styles.listItem}
             icon={Setting(iconSize)}
@@ -196,7 +205,7 @@ const ProfileHomeScreen = (props) => {
               <CommonButton
                 style={styles.proBtn}
                 textStyle={{ fontSize: 12 * em }}
-                text={'Créer maintenant'}
+                text={'C’est gratuit, créer maintenant'}
                 onPress={() => Actions.createAccountMenu()}
               />
             </View>
@@ -229,7 +238,7 @@ const ProfileHomeScreen = (props) => {
         <View style={styles.imgContainer}>
           <Image source={require('../../assets/images/img_logo.png')} style={styles.imgLogo} />
 
-          <Image source={require('../../assets/images/txt_logo.png')} style={styles.txtLogo} />
+          {/* <Image source={require('../../assets/images/txt_logo.png')} style={styles.txtLogo} /> */}
         </View>
         <CommentText text={'Version 1.0'} style={styles.txtVersion} color={'#BFCDDB'} />
         <View style={styles.emptyView} />
@@ -242,10 +251,14 @@ const styles = {
   rowContainer: { flexDirection: 'row' },
   dropDown: { right: 30 * em, top: 33 * hm, position: 'absolute', zIndex: 1 },
 
-  topView: { height: HEIGHT * 0.45, backgroundColor: '#40CDDE', alignItems: 'center' },
-  avatar: { marginTop: 89 * hm, height: 70 * hm, width: 70 * hm },
+  topView: { 
+    flexDirection:'row',
+    height: 275*hm, 
+    backgroundColor: '#40CDDE' },
+  avatar: { marginTop: 89 * hm, height: 70 * hm, width: 70 * hm ,marginLeft:30*em},
   txtFullName: {
-    marginTop: 15 * em,
+    marginTop:100 * hm,
+    marginLeft:25*em,
     fontSize: 20 * em,
     color: '#FFFFFF',
     textAlign: 'center',
@@ -269,7 +282,7 @@ const styles = {
     paddingHorizontal: 30 * em,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginTop: -46 * em,
+    marginTop: -66 * hm,
     marginBottom: 15 * hm,
   },
   cardStyle: {
@@ -324,7 +337,7 @@ const styles = {
     marginBottom: 10 * hm,
   },
   proBtn: {
-    borderRadius: 9 * em, width: 126 * em, paddingVertical: 9 * hm,
+    borderRadius: 9 * em, width: 190 * em, paddingVertical: 9 * hm,
     marginLeft: 15 * em,
   },
   line3: {
@@ -341,7 +354,7 @@ const styles = {
     marginTop: 50 * hm,
     marginBottom: 15 * hm,
   },
-  imgLogo: { height: 26 * em, width: 20 * em, resizeMode: 'contain', marginRight: 10 * em },
+  imgLogo: { height: 58 * hm, width: 80 * em, resizeMode: 'contain', marginLeft: 7 * em },
   txtLogo: { height: 23 * em, width: 80 * em, resizeMode: 'contain' },
   txtVersion: { marginBottom: 110 * hm },
 };

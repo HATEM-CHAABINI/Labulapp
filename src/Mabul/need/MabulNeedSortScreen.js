@@ -12,7 +12,7 @@ const iconSize = { width: 38 * em, height: 38 * em };
 const needItems = [
   {
     id: 0,
-    itemName: 'Besoin de la famille',
+    itemName: 'De la famille',
     subName: 'Enfants/ Soutien scolaire/Aide aux personnes âgées/ Animaux de compagnie/ Informatique…',
     icon: NeedFamily(iconSize),
     onPress: () => {
@@ -21,7 +21,7 @@ const needItems = [
   },
   {
     id: 1,
-    itemName: 'Besoin de vie quotidienne',
+    itemName: 'De vie quotidienne',
     subName: 'Maison/ Livraison/ Repas/ Repassage/ Achats de Courses/ Transport/ Co-voiturage/ Soins…',
     icon: NeedDaily(iconSize),
     onPress: () => {
@@ -47,7 +47,7 @@ const MabulNeedSortScreen = (props) => {
         progressBarColor={'#38C2FF'} />
 
       <View style={styles.body}>
-        <TitleText text={'J’ai besoin\n' + props.title} style={styles.title} />
+        <TitleText text={'Type de besoin'} style={styles.title} />
         <View style={styles.popView}>
           <FlatList data={needItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
         </View>

@@ -43,7 +43,13 @@ const ProfileInformationListItem = (props) => {
       rightView={
         !props.noClick && (
           <View style={styles.rightView}>
-                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: '#40CDDE' }}>Modifier</Text>
+                <Text style={[{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: '#40CDDE' },props.color]}>
+                
+                  
+                  {props.value ==null ? '+ Ajouter': 'Modifier'}
+                  
+
+                  </Text>
           </View>
         )
       }

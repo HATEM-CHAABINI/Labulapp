@@ -30,18 +30,27 @@ const MabulHomeScreen = (props) => {
             }}
           />
         {/* </View> */}
-      
         <CircularButton
-            type="sell"
+            type="need"
             onPress={() => {
               props.onClosePress();
-              Actions.mabulSell({ process: 26 });
+              Actions.mabulNeed({ process: 7 });
             }}
           />
+       
         {/* <View style={styles.buttonFirstRow}> */}
          
         </View>
+        
         <View style={styles.buttonSecondRow}>
+        <CircularButton
+            type="organize"
+            onPress={() => {
+              props.onClosePress();
+              // navigation.navigate('MabulOrganizeScreen',{ process: 20 })
+              Actions.mabulOrganize({ process: 20 });
+            }}
+          />
           <CircularButton
             type="give"
             onPress={() => {
@@ -50,19 +59,13 @@ const MabulHomeScreen = (props) => {
             }}
           />
         
-          <CircularButton
-            type="need"
-            onPress={() => {
-              props.onClosePress();
-              Actions.mabulNeed({ process: 7 });
-            }}
-          />
+        
+          
            <CircularButton
-            type="organize"
+            type="sell"
             onPress={() => {
               props.onClosePress();
-              // navigation.navigate('MabulOrganizeScreen',{ process: 20 })
-              Actions.mabulOrganize({ process: 20 });
+              Actions.mabulSell({ process: 26 });
             }}
           />
         </View>

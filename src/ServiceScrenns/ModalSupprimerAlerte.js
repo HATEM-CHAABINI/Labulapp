@@ -9,7 +9,7 @@ import { CrossCircle, Delete, DeleteRed, Edit4} from '../assets/svg/icons';
 import EditNeedScreen from '../topbar/profile/myNeeds/EditNeedScreen';
 // import NeedStatusType from 'model/service/NeedStatusType';
 
-const ModalModifierSupprimerDemande = (props) => {
+const ModalSupprimerAlerte = (props) => {
   return (
     <Modal
       isVisible={props.visible}
@@ -20,24 +20,12 @@ const ModalModifierSupprimerDemande = (props) => {
       onBackButtonPress={() => props.onPress()}>
       <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
       <View style={styles.body}>
-         <CommonListItem
+      <CommonListItem
           style={styles.listItem}
-          title="Terminer"
-          titleStyle={{ color: '#6A8596' }}
-          rightView={<CrossCircle width={22 * em} height={22 * em} />}
-          onPress={() => {
-            props.onPressT();
-           
-          }} /> 
-          <CommonListItem
-          style={styles.listItem}
-          title="Modifier"
-          titleStyle={{ color: '#1E2D60' }}
-          rightView={<Edit4 width={22 * em} height={22 * em} />}
-          onPress={() => {
-            props.onPressM();
-          }}
-        />
+          title={"Tu souhaites  supprimer cette \nalerte ?"}
+          titleStyle={{textAlign:'center', color: '#1E2D60' ,fontFamily:'Lato-Bold',fontSize:16*em}}
+         
+       />
         <CommonListItem
           style={styles.listItem}
           title="Supprimer demande"
@@ -91,4 +79,4 @@ const styles = {
     marginBottom: 23 * hm,
   },
 };
-export default ModalModifierSupprimerDemande;
+export default ModalSupprimerAlerte;

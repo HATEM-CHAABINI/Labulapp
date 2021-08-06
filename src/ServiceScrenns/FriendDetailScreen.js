@@ -352,6 +352,7 @@ const styles = {
   price: { fontSize: 18 * em, lineHeight: 21 * em, height: 21 * em, textAlign: 'left', textAlignVertical: 'center' },
   contentBox: { flexDirection: 'row', justifyContent: 'flex-start' },
   content: {
+    fontFamily: 'HelveticaNeue',
     fontSize: 16 * em,
     color: '#6A8596',
     lineHeight: 25 * em,

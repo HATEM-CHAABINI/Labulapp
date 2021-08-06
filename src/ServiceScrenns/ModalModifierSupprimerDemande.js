@@ -23,7 +23,7 @@ const ModalModifierSupprimerDemande = (props) => {
          <CommonListItem
           style={styles.listItem}
           title="Terminer"
-          titleStyle={{ color: '#6A8596' }}
+          titleStyle={{ color: '#6A8596',fontFamily: 'HelveticaNeue' }}
           rightView={<CrossCircle width={22 * em} height={22 * em} />}
           onPress={() => {
             props.onPressT();
@@ -32,7 +32,7 @@ const ModalModifierSupprimerDemande = (props) => {
           <CommonListItem
           style={styles.listItem}
           title="Modifier"
-          titleStyle={{ color: '#1E2D60' }}
+          titleStyle={{ color: '#1E2D60' ,fontFamily: 'HelveticaNeue'}}
           rightView={<Edit4 width={22 * em} height={22 * em} />}
           onPress={() => {
             props.onPressM();

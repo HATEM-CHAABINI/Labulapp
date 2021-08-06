@@ -93,5 +93,10 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "rnpm":{
+    "assets":[
+        "./assests/fonts/"
+    ]
+}
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View,Text} from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, HEIGHT, WIDTH, hm } from '../../constants/consts';
 import { FlatList } from 'react-native';
@@ -21,31 +21,20 @@ import {
   ComputerSell,
   AdministrativeSell,
   HelpOlderSell,
+  Objet,
+  Services,
+  ProduitAl,
+  BienEtre,
+  Divers,
 } from '../../assets/svg/icons';
 const iconSize = { width: 38 * em, height: 38 * em };
 const giveItems = [
-  { id: 0, itemName: 'Garde d’enfants/ Baby Sitting', icon: ChildCareSell(iconSize) },
-  { id: 1, itemName: 'Soutien scolaire/ cours', icon: SchoolSupportSell(iconSize) },
-  {
-    id: 2,
-    itemName: 'Accompagnement des enfants',
-    icon: SupportChildrenSell(iconSize),
-  },
-  {
-    id: 21,
-    itemName: 'Aide aux personnes âgées',
-    comment: '(promenades, transports, actes de la vie courante)',
-    icon: HelpOlderSell(iconSize),
-  },
-  { id: 3, itemName: 'Animaux de compagnie', comment: 'Soins et promenades', icon: AnimalSell(iconSize) },
-  { id: 4, itemName: 'Informatique/ Internet', icon: ComputerSell(iconSize) },
-  { id: 5, itemName: 'Administrative', icon: AdministrativeSell(iconSize) },
-  { id: 6, itemName: 'Entretien de la maison/ travaux ménagers', icon: HouseWorkSell(iconSize) },
-  { id: 7, itemName: 'Jardinage/ élagage', icon: GardeningSell(iconSize) },
-  { id: 8, itemName: 'Repassage', icon: IroningSell(iconSize) },
-  { id: 9, itemName: 'Transport/ Co-voiturage', icon: TransportSell(iconSize) },
-  { id: 20, itemName: 'Soins d’esthétique à domicile', icon: BeautyCareSell(iconSize) },
-];
+  { id: 0, itemName: 'Un objet', icon: Objet(iconSize) },
+  { id: 1, itemName: 'Un Service', icon: Services(iconSize) },
+  { id: 2, itemName: 'Des Produits alimentaires', icon: ProduitAl(iconSize) },
+  { id: 3, itemName: 'Du Bien-être', icon: BienEtre(iconSize) },
+  { id: 4, itemName: 'Divers', icon: Divers(iconSize) },
+  ];
 const MabulSellServiceScreen = (props) => {
   const dispatch = useDispatch()
 
@@ -68,7 +57,9 @@ const MabulSellServiceScreen = (props) => {
         progressBarColor={'#AA87E5'}
       />
       <View style={styles.body}>
-        <TitleText text={'Je vends\nService'} style={styles.title} />
+        <TitleText text={'Je vends'} style={styles.title} />
+        <Text style={{fontFamily:'Lato-Regular',fontSize:14*em,color:'#6A8596'}}>Choisis dans quelle catégorie se trouve ton don</Text>
+
         <View style={styles.popView}>
           <FlatList data={giveItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
         </View>
@@ -87,16 +78,18 @@ const styles = {
     height: '12.45%',
 
   },
-  popView: {
-    paddingLeft: 30 * em,
-    borderTopLeftRadius: 28 * em,
-    borderTopRightRadius: 28 * em,
-    backgroundColor: '#ffffff',
+  body: {
     flex: 1,
+    paddingLeft: WIDTH * 0.08,
+    alignItems: 'flex-start',
   },
-  body: { flex: 1, alignItems: 'flex-start', backgroundColor: '#F0F5F7' },
-  title: { lineHeight: 38 * em, paddingLeft: 30 * em, marginVertical: 35 * em, textAlign: 'left' },
-  listItem: { width: 345 * em, marginTop: 25 * hm },
+  title: {
+    marginTop: 35 * hm,
+    marginBottom: 10 * hm,
+  },
+  listItem: {
+    width: WIDTH * 0.92,
+    marginTop: 25 * em,
+  },
 };
-
 export default MabulSellServiceScreen;

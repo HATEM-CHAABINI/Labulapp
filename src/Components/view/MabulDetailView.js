@@ -112,7 +112,13 @@ const MabulDetailView = (props) => {
             subTitle={data.relationship || data2.category !== undefined ? data2.category.name : ' '}
             subTitleStyle={colorStyles.label}
           />
-          <CommentText style={styles.comment} text={data2.type !== undefined ? data2.type.itemName : data.organName} color={'#1E2D60'} />
+          <CommentText style={styles.comment}
+           text={
+            data2.type !== undefined ? 
+          data2.type.itemName :
+             data.organName
+            } 
+             color={'#1E2D60'} />
           <TitleText text={data2.data !== undefined ? data2.data.title : data.title} style={styles.title} />
           <ModalModifierSupprimerDemande
             visible={cancelUpdatePopupVisible}

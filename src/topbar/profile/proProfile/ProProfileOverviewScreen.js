@@ -100,7 +100,7 @@ const ProProfileOverviewScreen = (props) => {
           {servicesView}
         </View>
         <View style={styles.secondPopView}>
-          <TitleText text={'Mes badges'} style={[styles.title, { marginBottom: 20 * hm }]} />
+          <TitleText text={'Mes badges'} style={[styles.title, { marginBottom: 20 * hm , fontFamily: 'HelveticaNeue'}]} />
           {badgesView}
         </View>
       </ScrollView>

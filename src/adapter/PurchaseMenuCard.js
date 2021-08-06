@@ -10,8 +10,8 @@ const PurchaseMenuCard = (props) => {
     bgColor: '#BFCDDB',
   };
   if (props.selected) {
-    psStyle.borderColor = props.name === 'Pro' ? '#7398FD' : '#41D0E2';
-    psStyle.bgColor = props.name === 'Pro' ? '#7398FD' : '#41D0E2';
+    psStyle.borderColor = props.name === 'Pro' ? '#1E2D60' : '#41D0E2';
+    psStyle.bgColor = props.name === 'Pro' ? '#1E2D60' : '#41D0E2';
   }
   const shadow = {
     elevation: 2,
@@ -36,7 +36,7 @@ const PurchaseMenuCard = (props) => {
       ]}>
         <Text
           style={{
-            fontFamily: 'Lato-Bold',
+            fontFamily: 'HelveticaNeue',
             color: '#FFFFFF',
             fontSize: 18 * em,
             lineHeight: 22 * em,
@@ -83,7 +83,7 @@ const styles = {
   },
   price: { fontFamily: 'Lato-Black', marginTop: 25 * em, fontSize: 25 * em, lineHeight: 30 * em },
   containerTxt: { width: 120 * em, height: 60 * hm },
-  comment: { fontFamily: 'Lato-SemiBold', fontSize: 12 * em, lineHeight: 14 * em, textAlign: 'center', color: '#1E2D60' },
+  comment: { fontFamily: 'HelveticaNeue', fontSize: 12 * em, lineHeight: 14 * em, textAlign: 'center', color: '#1E2D60' },
   addTxt: { fontFamily: 'Lato-Medium', position: 'absolute', fontSize: 12 * em, lineHeight: 14 * em },
 };
 

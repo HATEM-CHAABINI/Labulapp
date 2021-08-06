@@ -14,7 +14,7 @@ import CommonBackButtonAccount from '../../Components/button/CommonBackButtonAcc
 
 const PremiumPurchasedScreen = (props) => {
   return (
-    <View style={[styles.container, { backgroundColor: props.profileType === 'my' ? '#40CDDE' : '#7398FC' }]}>
+    <View style={[styles.container, { backgroundColor: props.profileType === 'my' ? '#40CDDE' : '#1E2D60' }]}>
       <CommonBackButtonAccount
         dark={false}
         style={styles.backBtn}
@@ -35,7 +35,7 @@ const PremiumPurchasedScreen = (props) => {
       <SmallText
         text="Vous êtes abonné à Labul Premium Light"
         color="#ffffff"
-        style={{ fontSize: 13 * em, lineHeight: 17 * em }}
+        style={{ fontFamily: 'HelveticaNeue',fontSize: 13 * em, lineHeight: 17 * em }}
       />
       {props.profileType === 'my' ? (
         <PurchaseMenuCard
@@ -52,9 +52,9 @@ const PremiumPurchasedScreen = (props) => {
           selected
           noMore
           borderColor={'#ffffff'}
-          name="Pro"
+          name="Preminum"
           price="1,90€"
-          commentRadius="Rayon de 500m."
+          commentRadius="Rayon de 1 à 3Km."
           comment="Idéal pour vendre juste autour de soi"
           style={{ width: 315 * em, height: 150 * em, marginTop: 65 * hm }}
         />
@@ -68,11 +68,11 @@ const PremiumPurchasedScreen = (props) => {
 const styles = {
   container: { flex: 1, alignItems: 'center' },
   backBtn: { zIndex: 1, position: 'absolute', left: 15 * em, top: 27 * hm },
-  logo: { marginTop: 54.5 * hm, alignSelf: 'center', marginBottom: 15 * hm },
-  title: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
-  titleBleu: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
+  logo: { marginTop: 72 * hm, alignSelf: 'center', marginBottom: 15 * hm },
+  title: { fontFamily: 'Cocon-Regular', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
+  titleBleu: { fontFamily: 'Cocon-Regular', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
   containerTitle: { marginBottom: 0, flexDirection: 'row', justifyContent: 'center' },
-  cancelBtn: { position: 'absolute', bottom: 24 * em },
+  cancelBtn: { position: 'absolute', bottom: 24 * em,fontSize:13*em,fontFamily: 'HelveticaNeue' },
 };
 
 export default PremiumPurchasedScreen;

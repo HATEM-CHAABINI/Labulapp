@@ -8,7 +8,7 @@ import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
-import { Event } from '../../assets/svg/svg/icons';
+import { Bonplan, Event, Promo } from '../../assets/svg/svg/icons';
 const iconSize = { width: 38 * em, height: 38 * em };
 
 const sellItems = [
@@ -19,24 +19,26 @@ const sellItems = [
     icon: Event(iconSize) ,
 
     onPress: () => {
-      Actions.mabulSellEnvironment({ process: 46 });
+
+  Actions.mabulCommonRequestDetail({ mabulService: 'sell', process: 67 }) 
     },
   },
   {
     id: 1,
-    itemName: 'Service',
-    // Event,Promo,Bonplan
-    // icon: ObjetDrivers(iconSize) ,
+    itemName: 'Une promo',
+    // itemName: 'Service',
+    icon: Promo(iconSize) ,
     onPress: () => {
       Actions.mabulSellService({ process: 46 });
     },
   },
   {
     id: 2,
-    itemName: 'Objet',
-
+    itemName: 'Un Bon plan',
+    // itemName: 'Objet',
+    icon: Bonplan(iconSize) ,
     onPress: () => {
-      Actions.mabulSellObject({ process: 46 });
+      Actions.mabulSellService({ process: 46 });
     },
   },
   
@@ -54,9 +56,12 @@ const MabulSellScreen = (props) => {
       // onPress={() =>dispatch(add_into_demand({ type: item }))}
       onPress={() => {
 
-        item.id === 0 ? dispatch(add_into_demand({ belongsTo: { name: "Service", id: item.id } }))
-          : item.id === 1 ? dispatch(add_into_demand({ belongsTo: { name: "Objet", id: item.id } }))
-            : dispatch(update_into_demand({ belongsTo: { name: "Évènement", id: item.id } }));
+        item.id === 0 ? 
+        (
+        dispatch(add_into_demand({ belongsTo: { name: "Évènement", id: item.id } })),
+        dispatch(update_into_demand({ category: { name: item.itemName, id: item.id } })))
+          : item.id === 1 ? dispatch(add_into_demand({ belongsTo: { name: "Promo", id: item.id } }))
+            : dispatch(update_into_demand({ belongsTo: { name: "Bon plan", id: item.id } }));
         item.onPress()
       }}
     />

@@ -22,7 +22,7 @@ const AccountCommonHeaderpro = (props) => {
         style={{ marginBottom: 0 * hm, }}
         rightView={<View style={{ width: 44 * em, height: 44 * em }} />}
         rightTxt={props.rightTxt}
-        rightTxtStyle={props.rightTxtStyle}
+        rightTxtStyle={[props.rightTxtStyle,{fontFamily: 'HelveticaNeue'}]}
         centerView={
           <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
             <Image source={centerIcon} style={styles.icon} />

@@ -75,6 +75,7 @@ const MabulAddLieu = (props) => {
             borderBottomColor={conceptColor}
             style={{ width: '100%', }}
             show={false}
+            showadd={true}
             textInputStyle={{
               // height: 40,
               color: '#1E2D60',

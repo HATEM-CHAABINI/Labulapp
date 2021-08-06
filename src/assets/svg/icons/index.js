@@ -42,6 +42,14 @@ import MealPreparationSell from './category/MealPreparationSell.svg';
 import SchoolSupportSell from './category/SchoolSupportSell.svg';
 import SupportChildrenSell from './category/SupportChildrenSell.svg';
 import ChildCareSell from './category/ChildCareSell.svg';
+
+import Objet from './category/Objet.svg';
+import Services from './category/Services.svg';
+import ProduitAl from './category/ProduitAl.svg';
+import BienEtre from './category/BienEtre.svg';
+import Divers from './category/Divers.svg';
+
+
 import TransportSell from './category/TransportSell.svg';
 import AdministrativeSell from './category/AdministrativeSell.svg';
 import ComputerSell from './category/ComputerSell.svg';
@@ -102,7 +110,7 @@ import Main from './category/Main.svg';
 import Outil from './category/Outil.svg';
 
 
-export {AlerteListe,Alertemap,Outil,Main,Service,Intero,
+export {Objet,Services,ProduitAl,BienEtre,Divers,AlerteListe,Alertemap,Outil,Main,Service,Intero,
   AnimalSell,
   BeautyCareSell,
   DeliverySell,

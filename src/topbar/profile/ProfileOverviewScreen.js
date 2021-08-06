@@ -32,7 +32,7 @@ const ProfileOverviewScreen = (props) => {
   ) : (
     <>
       <CommonText text={'Tu n’as pas de badges'} style={styles.noticeText} />
-      <CommonText text={'Crée des demandes pour avoir des badges'} style={styles.requestText} />
+      <CommonText text={'Ne t’inquiète pas, crée des demandes à ton entourage pour recevoir des badges'} style={styles.requestText} />
     </>
   );
   useEffect(() => {
@@ -96,25 +96,11 @@ const ProfileOverviewScreen = (props) => {
               ))}
             </View>
           )}
-          <TitleText text={'Mes cercles'} style={styles.title} />
-          <View style={styles.circlesView}>
-            <View style={styles.labelView}>
-              <ProfileCommonLabel
-                icon={Neighbor(iconSize)}
-                number={userProfile.circles.neighbors}
-                name={'Mes voisins'}
-              />
-            </View>
-            <View style={styles.labelView}>
-              <ProfileCommonLabel icon={Friend(iconSize)} number={userProfile.circles.friends} name={'Mes amis'} />
-            </View>
-            <View style={styles.labelView}>
-              <ProfileCommonLabel icon={Family(iconSize)} number={userProfile.circles.families} name={'Ma famille'} />
-            </View>
-          </View>
+    <TitleText text={'Mes badges'} style={[styles.title]} />
+          {badgesView}
         </View>
         <View style={styles.secondPopView}>
-          <TitleText text={'Mes demandes'} style={styles.title} />
+          <TitleText text={'Activité dans Labul'} style={styles.title} />
           <View style={styles.circlesView}>
             <View style={styles.labelView}>
               <ProfileCommonLabel number={userProfile.needs.helps} name={'Coup de main'} />
@@ -126,8 +112,7 @@ const ProfileOverviewScreen = (props) => {
               <ProfileCommonLabel number={userProfile.needs.events} name={'Évènements'} />
             </View>
           </View>
-          <TitleText text={'Mes badges'} style={[styles.title]} />
-          {badgesView}
+         <Text style={{fontFamily: 'HelveticaNeue',fontSize:12*em,color:'#6A8596',marginTop:50*hm}}>Actif dans Labul depuis 10 jours</Text>
         </View>
       </ScrollView>
     </View>
@@ -158,7 +143,7 @@ const styles = {
     marginTop: 35 * hm,
     marginBottom: 20 * hm,
     fontSize: 21 * em,
-    fontFamily: 'Lato-Black'
+    fontFamily: 'HelveticaNeue'
   },
   circlesView: { flexDirection: 'row', marginLeft: 0.072 * WIDTH, marginRight: 0.072 * WIDTH },
   labelView: { width: WIDTH * 0.285 },
@@ -169,9 +154,11 @@ const styles = {
     borderTopRightRadius: 20 * em,
     marginTop: 15 * hm,
     paddingBottom: 54 * hm,
+    height:'100%'
+    
   },
   noticeText: { fontFamily: 'Lato-Black', marginBottom: 10 * hm },
-  requestText: { fontFamily: 'Lato-Regular', fontSize: 14 * em },
+  requestText: {textAlign:'center', fontFamily: 'Lato-Regular', fontSize: 14 * em },
   badgeIcon: {
     width: 60 * em,
     height: 60 * em,

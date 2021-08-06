@@ -66,16 +66,19 @@ const styles = {
     height: '12.45%',
 
   },
-  popView: {
-    paddingLeft: 30 * em,
-    borderTopLeftRadius: 28 * em,
-    borderTopRightRadius: 28 * em,
-    backgroundColor: '#ffffff',
+  body: {
     flex: 1,
+    paddingLeft: WIDTH * 0.08,
+    alignItems: 'flex-start',
   },
-  body: { flex: 1, alignItems: 'flex-start', backgroundColor: '#F0F5F7' },
-  title: { lineHeight: 38 * em, paddingLeft: 30 * em, marginVertical: 35 * em, textAlign: 'left' },
-  listItem: { width: 345 * em, marginTop: 25 * hm },
+  title: {
+    marginTop: 35 * hm,
+    marginBottom: 10 * hm,
+  },
+  listItem: {
+    width: WIDTH * 0.92,
+    marginTop: 25 * em,
+  },
 };
 
 export default MabulNeedSortScreen;

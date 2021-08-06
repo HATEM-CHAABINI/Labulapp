@@ -99,7 +99,7 @@ const GooglePlacesInput = (props) => {
                 <View style={[{ flexDirection: 'row'}, props.myLocationStyle]}>
                     {props.myLocationIconColor === undefined ? <LocationRed width={16 * em} height={19 * hm} /> : <View style={{ top: 15 * hm }} />}
                     
-                    {/* <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} /> */}
+                    <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} />
                     <TouchableOpacity style={{ position: 'absolute',}} onPress={() => {  ref.current?.setAddressText(address); }}>
                     <View style={{flexDirection:'row'}}>
                     <Flecheposition/>
@@ -125,6 +125,15 @@ const GooglePlacesInput = (props) => {
                     </View>
 {                 console.log("ooouuuuuuuhhh", address)}
                     </TouchableOpacity>
+                </View>
+   : null}
+
+
+{props.showadd || props.showadd == undefined ?
+                <View style={[{ flexDirection: 'row'}, props.myLocationStyle]}>
+                                    
+                    <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em,fontFamily: 'HelveticaNeue',marginTop:10*hm }} onPress={() => { ref.current?.setAddressText(address); }} />
+                   
                 </View>
    : null}
         </>

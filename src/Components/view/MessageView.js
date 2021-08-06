@@ -62,6 +62,6 @@ const styles = {
     marginLeft: 40 * em,
     marginBottom: 2 * hm,
   },
-  dateTxt: { marginTop: 3 * hm, },
+  dateTxt: { fontFamily: 'HelveticaNeue',marginTop: 3 * hm, },
 };
 export default MessageView;

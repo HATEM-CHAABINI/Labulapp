@@ -29,7 +29,7 @@ const PremiumSubscriptionScreen = (props) => {
           source={
             props.profileType === 'my'
               ? require('../../assets/images/img_logo_subscription.png')
-              : require('../../assets/images/img_logo_subscription_blue.png')
+              : require('../../assets/images/img_logo_subscription.png')
           }
         />
         <View style={styles.containerTitle}>
@@ -45,7 +45,7 @@ const PremiumSubscriptionScreen = (props) => {
               name="Light"
               price="0,90€"
               commentRadius="Rayon de 1Km autour."
-              comment="Idéal pour vendre juste autour de soi et pour les associations"
+              comment="Idéal pour vendre juste autour de soi"
             />
             <PurchaseMenuCard
               style={styles.card}
@@ -120,10 +120,10 @@ const PremiumSubscriptionScreen = (props) => {
         style={[
           styles.purchaseBtn,
           {
-            backgroundColor: props.profileType === 'my' ? '#40CDDE' : '#7398FD',
+            backgroundColor: props.profileType === 'my' ? '#40CDDE' : '#1E2D60',
           },
         ]}
-        text="M’abonner Labul Light - 0,90€"
+        text="M’abonner Labul Pro - 1,90€/mois"
         rightIcon={<TinyText text="/mois" style={{ fontSize: 8 * em }} color="#ffffff" />}
         onPress={() => setModalVisible(true)}
       />
@@ -191,15 +191,15 @@ const styles = {
   backBtn: { position: 'absolute', left: 15 * em, paddingTop: 48 * hm },
 
   logo: {
-    marginTop: 54.5 * hm,
+    marginTop: 72 * hm,
     width: 230 * em,
     height: 121 * em,
     resizeMode: 'contain',
     alignSelf: 'center',
     marginBottom: 15 * hm,
   },
-  title: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#1E2D60' },
-  titleBleu: { fontFamily: 'Cocon-RegularTR', fontSize: 27 * em, lineHeight: 30 * em, color: '#40CDDE' },
+  title: { fontFamily: 'Cocon-Regular', fontSize: 27 * em, lineHeight: 30 * em, color: '#1E2D60' },
+  titleBleu: { fontFamily: 'Cocon-Regular', fontSize: 27 * em, lineHeight: 30 * em, color: '#40CDDE' },
   containerTitle: { marginBottom: 0, flexDirection: 'row', justifyContent: 'center' },
   subTitle: {
     fontFamily: 'Lato-SemiBold',

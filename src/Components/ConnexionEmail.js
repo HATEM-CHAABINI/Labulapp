@@ -236,7 +236,7 @@ export default ({ navigation }) => {
                }>
               Tu n’as pas de compte ?
               <Text
-                style={{ color: '#40CDDE', fontSize: 16 * em, fontFamily: 'Lato-SemiBold' }}
+                style={{fontFamily: 'HelveticaNeue',color: '#40CDDE', fontSize: 16 * em, fontFamily: 'Lato-SemiBold' }}
                 onPress={() => {
                   Actions.signupMenu();
                 }}>

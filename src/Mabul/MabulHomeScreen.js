@@ -101,7 +101,7 @@ const styles = {
     justifyContent: 'space-between',
     padding: 16 * em,
   },
-  buttonFirstRowA:{ width: '40%', flexDirection: 'row', justifyContent: 'center' ,justifyContent: 'space-between' },
+  buttonFirstRowA:{ bottom:10*hm,width: '40%', flexDirection: 'row', justifyContent: 'center' ,justifyContent: 'space-between' },
   buttonFirstRow: { width: '100%', flexDirection: 'row', justifyContent: 'center' },
   buttonSecondRow: { width: '80%', flexDirection: 'row', justifyContent: 'space-between' },
   closeButton: { width: 48 * em, resizeMode: 'contain', marginTop: 18 * em },

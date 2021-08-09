@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Alert, ActivityIndicator } from 'react-native';
+import { View, ScrollView, Alert, ActivityIndicator,TouchableOpacity } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import ProfileInformationListItem from '../../adapter/ProfileInformationListItem';
 import ProfileCommonHeader from '../../Components/header/ProfileCommonHeader';
@@ -24,6 +24,8 @@ import { getUserProfile, getassest, deleteUser, deleteUserData } from '../../ser
 import { useDispatch } from 'react-redux';
 import { addProfile } from '../../redux/actions/profile';
 import { Text } from 'react-native';
+import OkModal from '../../Components/button/OkModal';
+import OkModalchange from '../../Components/button/OkModalchange';
 
 require('firebase/firestore')
 require('firebase/firebase-storage')
@@ -245,7 +247,8 @@ const EditProfileScreen = (props) => {
         }}
       />
       <Text style={{marginTop:4*hm, paddingHorizontal: 30 * em,color:'#6A8596',fontSize:11*em,fontFamily:'Lato-Italic'}}>Les 100 premiers caractères feront office de ta présentation)</Text>
-      <ProfileInformationListItem
+    
+  <ProfileInformationListItem
         caption={'Mes atouts (3 max)'}
         placeholder
         value={'Sélectionne les compétences où tu es plus l’aise'}
@@ -256,6 +259,24 @@ const EditProfileScreen = (props) => {
           setmyskillModal(!myskillModal);
         }}
       />
+       
+       
+       
+       
+<View style={{bottom:10*hm,flexDirection:'row', justifyContent:'center'}}>
+<TouchableOpacity onPress={() => "" }
+style={styles.okstyle}
+>
+<View
+  style={styles.textView}>
+  <Text style={styles.textstyle}>Enregistrer modifications</Text>
+</View>
+</TouchableOpacity>
+
+</View>
+
+
+
       {deleteUseLoading ? <ActivityIndicator size='small' color='#F9547B' style={styles.deleteBtn} /> : <CommonButton
         text={'Supprimer mon compte'}
         textStyle={{ color: '#F9547B' }}
@@ -334,14 +355,36 @@ const styles = {
     backgroundColor: '#ffffff',
   },
   avatar: { width: 92 * em, height: 92 * em, marginTop: 25 * hm, marginBottom: 10 * hm, alignSelf: 'center', },
-  addPhotoBtn: { marginBottom: 25 * hm, lineHeight: 21 * em },
+  addPhotoBtn: { fontFamily: 'HelveticaNeue' ,marginBottom: 25 * hm, lineHeight: 21 * em },
   deleteBtn: {
-    marginTop: 25 * hm,
+    marginTop: 5 * hm,
     marginBottom: 25 * hm,
     lineHeight: 19 * em,
     alignSelf: 'center',
     backgroundColor: 'transparent',
-  },
+  },textstyle:{  
+    fontSize: 16 * em,
+    color: '#FFFFFF',
+    marginLeft: 10 * em,
+    marginTop: 2 * hm, 
+    fontFamily: 'Lato-Medium'},
+  textView:{ flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 10 * em,},
+  okstyle:{
+    overflow: 'hidden',
+    borderRadius: 18 * em,
+    height: 50 * hm,
+    width: 315 * em,
+    alignItems: 'center',
+    justifyContent:'center'
+    ,
+    backgroundColor: "#40CDDE",
+    "opacity": 1,
+    marginBottom: 10 * hm},
 };
 
 export default EditProfileScreen;

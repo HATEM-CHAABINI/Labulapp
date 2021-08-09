@@ -89,12 +89,12 @@ const styles = {
   comment: { textAlign: 'center', lineHeight: 23 * em, width: 285 * em, marginTop: 5 * hm },
   listItem: { marginTop: 42 * hm },
   itemCheckedText: {
+    
     textDecorationLine: 'line-through',
     textDecorationStyle: 'solid',
     width: 260 * em,
     textAlign: 'left',
-    fontFamily: 'Lato-Bold',
-  },
+    fontFamily: 'HelveticaNeue'  },
   itemText: { width: 260 * em, textAlign: 'left', fontFamily: 'Lato-Bold' },
 };
 export default FriendParticipatePopupScreen;

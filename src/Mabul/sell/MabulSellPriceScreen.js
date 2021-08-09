@@ -137,7 +137,7 @@ const styles = {
     marginTop: 35 * em,
     lineHeight: 38 * em,
   },
-  comment: {fontSize:10*em, width: 315 * em, textAlign: 'left', lineHeight: 15 * em, textAlignVertical: 'center', marginTop: 10 * hm },
+  comment: {fontFamily: 'HelveticaNeue',fontSize:10*em, width: 315 * em, textAlign: 'left', lineHeight: 15 * em, textAlignVertical: 'center', marginTop: 10 * hm },
   photoZone: {
     width: 315 * em,
     height: 121 * em,

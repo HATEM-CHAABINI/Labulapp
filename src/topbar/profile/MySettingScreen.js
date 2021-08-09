@@ -55,8 +55,10 @@ const MySettingScreen = () => {
             btnBorderColor="red"
             btnBackgroundColor="#FFFFFF"
             initialValue={0}
-            value={state}
-            setstate={val => { setstate(val), updateUserProfile(profileData.uid, { activeNotification: val === 1 ? true : false }).then(res => { dispatch(updateProfile({ activeNotification: val === 1 ? true : false })) }) }}
+            value={location}
+            setstate={val => { setlocation(!val)}}
+              // ,
+              //  updateUserProfile(profileData.uid, { activeNotification: val === 1 ? true : false }).then(res => { dispatch(updateProfile({ activeNotification: val === 1 ? true : false })) }) }}
             style={styles.switch}
           />
         }
@@ -167,7 +169,7 @@ const styles = {
     color: '#1E2D60',
   },
   listComment: {
-    fontFamily: 'Lato-Medium',
+    fontFamily: 'HelveticaNeue',
     lineHeight: 14 * em,
     textAlign: 'left',
     color:'#9093A3',

@@ -106,7 +106,12 @@ const MabulRechercheContact = (props) => {
       <CommentText text={userName} style={styles.selectedFullName} />
     </View>
   );
-  const renderSelectedList = ({ item }) => <SelectedAvatarView Email={item.data.email} avatar={item.data.profilePic !== undefined && item.data.profilePic !== " " ? { uri: item.data.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }} userName={item.data.firstName} id={item.data.uid} />;
+  const renderSelectedList = ({ item }) => <SelectedAvatarView 
+  Email={item.data.email} 
+  avatar={item.data.profilePic !== undefined && item.data.profilePic !== " " ?
+   { uri: item.data.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }} 
+   userName={item.data.firstName}
+    id={item.data.uid} />;
   const clearSingleUser = (id, Email) => {
     const filteredUser = selectedUser.filter((user) => {
       return user.data.uid !== id
@@ -358,7 +363,7 @@ const styles = {
   container: { flex: 1, backgroundColor: '#ffffff', paddingHorizontal: 20 * em },
   title: { textAlign: 'left', marginTop: 23 * em, marginBottom: 17 * em },
   header: { marginTop: 39 * hm, alignSelf: 'flex-end' },
-  selectedFullName: { fontSize: 12 * em, height: 30 * em, color: '#1E2D60', marginBottom: 0, fontFamily: 'Lato-Bold' },
+  selectedFullName: { fontSize: 12 * em, height: 30 * em, color: '#1E2D60', marginBottom: 0, fontFamily: 'HelveticaNeue' },
   listItem: { marginBottom: 35 * em, marginTop: 2 * hm },
   nextBtn: {
     width: 315 * em,

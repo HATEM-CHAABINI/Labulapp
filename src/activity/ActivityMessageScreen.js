@@ -63,7 +63,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       style={styles.popupHeader}
       icon={<Image source={message.service.coverImage} style={styles.titleIcon} />}
       title={message.service.title}
-      titleStyle={{ fontFamily: 'Lato-Bold', color: '#1E2D60', fontSize: 14 * em }}
+      titleStyle={{ fontFamily: 'HelveticaNeue', color: '#1E2D60', fontSize: 14 * em }}
       rightView={isAccepted && <Count width={65 * em} height={28 * em} />}
     />
   );
@@ -190,7 +190,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
             style={{ flex: 1 }}
             icon={<Image source={message.user.photo} style={styles.avatarIcon} />}
             title={message.user.name}
-            titleStyle={{ fontFamily: 'Lato-Bold', color: '#ffffff', fontSize: 16 * em }}
+            titleStyle={{ fontFamily: 'HelveticaNeue', color: '#ffffff', fontSize: 16 * em }}
           />
         }
       />

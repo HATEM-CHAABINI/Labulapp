@@ -290,7 +290,7 @@ const styles = {
   imgLogo: { height: 58 * hm, width: 80 * em, resizeMode: 'contain', marginLeft: 7 * em },
   txtLogo: { height: 23 * em, width: 80 * em, resizeMode: 'contain', tintColor: '#7398FD' },
   proText: { lineHeight: 15 * em, alignSelf: 'flex-start', color: '#7398FD' },
-  txtVersion: { marginBottom: 110 * hm },
+  txtVersion: { marginBottom: 110 * hm,fontFamily: 'HelveticaNeue' },
 };
 
 export default ProProfileHomeScreen;

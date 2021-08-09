@@ -143,6 +143,7 @@
 		<string>Montserrat-Thin.ttf</string>
 		<string>Montserrat-ThinItalic.ttf</string>
 		<string>Cocon-RegularTR.ttf</string>
+		<string>HelveticaNeue.ttc</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

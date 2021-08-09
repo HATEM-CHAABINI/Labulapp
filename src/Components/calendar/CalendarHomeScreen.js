@@ -158,7 +158,6 @@ const CalendarHomeScreen = () => {
               dayComponentHeight={100}
               scrollable
 
-
               locale={locale}
               calendarHeaderStyle={styles.calendarHeaderStyle}
               calendarHeaderContainerStyle={styles.calendarHeaderContainerStyle}
@@ -283,7 +282,7 @@ const styles = {
     color: '#1E2D60',
     width: 30 * em,
     fontSize: 18 * em,
-    fontFamily: 'Lato-Bold',
+    fontFamily: 'HelveticaNeue',
   },
   highlightDateNameStyle: {
     color: '#fff',

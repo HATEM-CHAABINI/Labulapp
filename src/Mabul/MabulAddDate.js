@@ -230,6 +230,7 @@ const styles = {
   addDateText: {
     marginTop: 10 * hm,
     textAlign: 'left',
+    fontFamily: 'HelveticaNeue',
     // marginLeft: 36 * em,
     marginBottom: 40 * hm
   },

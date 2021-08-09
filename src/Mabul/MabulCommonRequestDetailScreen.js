@@ -558,6 +558,7 @@ ta demande`}
               label={`Écris ce que ton invité ramène …`}
               underlineColor="#BFCDDB"
               multiline={true}
+              fontFamily={'HelveticaNeue'}
               activeColor={conceptColor}
               labelActiveColor="#6A8596"
               labelColor="#6A8596"
@@ -573,7 +574,7 @@ ta demande`}
             {/* {formik.errors.prevoir && formik.touched.prevoir && <Text style={styles.descerrorText}>{formik.errors.prevoir}</Text>} */}
 
 
-            <Text style={{ marginLeft: 30 * em, bottom: 20 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8' }} >Sépare chaque mot avec des virgules</Text>
+            <Text style={{ marginLeft: 30 * em, bottom: 20 * hm,fontFamily: 'HelveticaNeue', fontSize: 12 * em, color: '#A0AEB8' }} >Sépare chaque mot avec des virgules</Text>
 
 
             <View style={styles.SwitchbuttonWrapper}>
@@ -689,6 +690,7 @@ const styles = {
   BoxPrice: { backgroundColor: "#F0F5F7", height: 80 * hm, borderRadius: 20 * em, justifyContent: 'center', alignSelf: 'center', textAlign: 'center', fontSize: 25 * em, fontFamily: "Lato-Regular" },
   SwitchTitle: {
     flex: 1,
+    fontFamily: 'HelveticaNeue',
     color: "#6A8596",
     // fontFamily: 'Helvetica-Regular',
     fontSize: 14 * em,

@@ -83,6 +83,7 @@ const styles = {
     position: 'absolute',
     textAlign: 'center',
     textAlignVertical: 'center',
+    fontFamily: 'HelveticaNeue'
   },
   imgWrapper: {
     justifyContent: 'center',

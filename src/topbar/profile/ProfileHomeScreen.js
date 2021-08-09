@@ -324,13 +324,14 @@ const styles = {
     flexDirection: 'column',
   },
   imageTextMain: {
+    fontFamily: 'HelveticaNeue' ,
     marginTop: 25 * hm,
     fontSize: 20 * em,
     marginLeft: 18 * em,
     //fontFamily: 'Lato-Bold'
   },
   imageTextSub: {
-    fontFamily: 'Lato-Medium',
+    fontFamily: 'HelveticaNeue' ,
     fontSize: 15 * em,
     marginLeft: 18 * em,
     marginRight: -58 * em,
@@ -356,7 +357,7 @@ const styles = {
   },
   imgLogo: { height: 58 * hm, width: 80 * em, resizeMode: 'contain', marginLeft: 7 * em },
   txtLogo: { height: 23 * em, width: 80 * em, resizeMode: 'contain' },
-  txtVersion: { marginBottom: 110 * hm },
+  txtVersion: { marginBottom: 110 * hm,fontFamily: 'HelveticaNeue' },
 };
 
 export default ProfileHomeScreen;

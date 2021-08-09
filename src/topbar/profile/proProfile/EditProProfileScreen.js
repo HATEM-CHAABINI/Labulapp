@@ -65,7 +65,8 @@ const EditProProfileScreen = (props) => {
           <View style={[styles.addCoverBtn, { tintColor: userProfile.cover ? '#FFFFFF' : '#40CDDE' }]}>
             <ProAddCover width={27.79 * em} height={28 * em} />
           </View>
-          <CommentText
+          <CommentText 
+          style={{fontFamily: 'HelveticaNeue'}}
             text={!userProfile.cover ? 'Ajouter une photo de couverture' : 'Changer photo de couverture'}
             color={userProfile.cover ? '#FFFFFF' : '#40CDDE'}
           />
@@ -150,7 +151,18 @@ const EditProProfileScreen = (props) => {
           setPresentationModal(!PresentationModal);
         }}
       />
-      
+            
+<View style={{bottom:10*hm,flexDirection:'row', justifyContent:'center'}}>
+<TouchableOpacity onPress={() => "" }
+style={styles.okstyle}
+>
+<View
+  style={styles.textView}>
+  <Text style={styles.textstyle}>Enregistrer modifications</Text>
+</View>
+</TouchableOpacity>
+
+</View>
       <CommonButton
         text={'Supprimer mon compte'}
         style={styles.deleteBtn}
@@ -317,10 +329,10 @@ const styles = {
     backgroundColor: '#ffffff',
   },
   avatar: { width: 92 * em, height: 92 * em, marginBottom: 10 * em, alignSelf: 'center', marginTop: -46 * em },
-  addPhotoBtn: { marginBottom: 25 * em, lineHeight: 21 * em },
+  addPhotoBtn: {fontFamily: 'HelveticaNeue', marginBottom: 25 * em, lineHeight: 21 * em },
   deleteBtn: {
-    marginTop: 25 * em,
-    marginBottom: 25 * em,
+    marginTop: 5 * hm,
+    marginBottom: 25 * hm,
     lineHeight: 19 * em,
     alignSelf: 'center',
     backgroundColor: 'transparent',
@@ -352,6 +364,28 @@ const styles = {
   },
   modalBtnTxt: { color: '#007AFF', fontSize: 17 * em, lineHeight: 22 * em },
   modalLine: { backgroundColor: '#3F3F3F', width: 0.5 * em, flexGrow: 1 },
-};
+textstyle:{  
+    fontSize: 16 * em,
+    color: '#FFFFFF',
+    marginLeft: 10 * em,
+    marginTop: 2 * hm, 
+    fontFamily: 'Lato-Medium'},
+  textView:{ flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 10 * em,},
+  okstyle:{
+    overflow: 'hidden',
+    borderRadius: 18 * em,
+    height: 50 * hm,
+    width: 315 * em,
+    alignItems: 'center',
+    justifyContent:'center'
+    ,
+    backgroundColor: "#40CDDE",
+    "opacity": 1,
+    marginBottom: 10 * hm},};
 
 export default EditProProfileScreen;

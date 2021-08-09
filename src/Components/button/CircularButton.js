@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
-import { em } from '../../constants/consts';
+import { em, hm } from '../../constants/consts';
 import { TouchableOpacity } from 'react-native';
 import { MabulGive, MabulNeed, MabulSell, MabulOrganize ,Alerte} from '../../assets/svg/icons';
 
@@ -36,9 +36,10 @@ const styles = {
   buttonText: {
     fontSize: 13 * em,
     color: '#FFFFFF',
-    marginTop: 4 * em,
+    fontFamily: 'HelveticaNeue',
+    marginTop: 5 * hm,
   },
-  buttonImage: { width: 50 * em, height: 50 * em },
+  buttonImage: { width: 50 * em, height: 50 * hm },
 };
 
 export default CircularButton;

@@ -124,14 +124,16 @@ const onSearch = (search) => {
   }
 
   return (
+
     <Modal
       isVisible={props.visible}
       backdropOpacity={0.8}
       style={styles.container}
       backdropColor={'#1E2D60'}
-      swipeDirection={'up'}
+      // swipeDirection={'up'}
       onBackButtonPress={() => {setvalue(()=>props.value),props.onPress()}}>
-      <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
+  
+ <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
       <View
         style={{
           width: 349 * em,
@@ -150,8 +152,9 @@ const onSearch = (search) => {
       <TitleText text={"Mes atouts"} textAlign={"left"} style={{marginTop:55*hm,marginBottom:10*hm}}/>
          <Text style={{marginLeft:10*em,marginTop:55*hm,marginBottom:10*hm,color:'#6A8596',fontFamily:'Lato-Italic',fontSize:15*em}}>(3 max)</Text>
    </View>
-<ScrollView>
         <SearchBox style={{ marginBottom: 15 * em, height: 44 * em, marginTop: 40 * em }} onSearch={onSearch} onClear={onClear} />
+        <ScrollView>
+
   {!loading && value.data.map((val) => {
 
           return (
@@ -181,8 +184,9 @@ const onSearch = (search) => {
         onCancelPress={() => {props.onPress()}}
         onFinishPress={ ()=>{getselecteditem()}}
       /> */}
-        <OkModalchange txt={"Ok"} conceptColor={"#40CDDE"} okoModal={getselecteditem} closeModal={props.onPress} style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',marginRight:0*em,marginLeft:0*em,alignContent:'center',alignItems:'center'}}/>
-        </ScrollView>
+              </ScrollView>
+
+        <OkModalchange txt={"Ok"} conceptColor={"#40CDDE"} okoModal={getselecteditem} closeModal={props.onPress} style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',marginRight:0*em,marginLeft:0*em,alignContent:'center'}}/>
      </Modal>
   );
 };

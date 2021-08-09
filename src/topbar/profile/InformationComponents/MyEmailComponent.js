@@ -220,7 +220,7 @@ export default (props) => {
 
             <OkModalchange conceptColor={"#40CDDE"}txt={"Enregistrer"} closeModal={props.onPress} 
             okoModal={okm}
-            style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center',alignItems:'center'}}/>
+            style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',alignContent:'center'}}/>
 
         </Modal>
     );

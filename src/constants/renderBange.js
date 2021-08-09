@@ -12,6 +12,7 @@ import {
 ,Alertemap,
 AlerteListe
 } from '../assets/svg/icons';
+import { Event } from '../assets/svg/svg/icons';
 import { em, hm } from '../constants/consts';
 
 
@@ -23,33 +24,33 @@ export const renderimgSell = (belongto, catrgory) => {
     if (belongto == 0) {
         switch (catrgory) {
             case 0:
-                return GardeenfantSell(servicIconSize);
-            case 1:
-                return SoutienscolaireSell(servicIconSize);
-            case 2:
-                return AccompagnementenfantsSell(servicIconSize);
-            case 3:
-                return PersonnesageesSell(servicIconSize);
-            case 4:
-                return AnimalsSell(servicIconSize);
-            case 5:
-                return InformatiqueSell(servicIconSize);
-            case 6:
-                return AministrativeSell(servicIconSize);
-            case 7:
-                return EntretienSell(servicIconSize);
-            case 8:
-                return JardinageSell(servicIconSize);
-            case 9:
-                return PreparationrepasSell(servicIconSize);
-            case 10:
-                return RepassageSell(servicIconSize);
-            case 11:
-                return LivraisonachatsSell(servicIconSize);
-            case 12:
-                return TransportSells(servicIconSize);
-            case 13:
-                return SoinsdomicileSell(servicIconSize);
+                return Event(servicIconSize);
+            // case 1:
+            //     return SoutienscolaireSell(servicIconSize);
+            // case 2:
+            //     return AccompagnementenfantsSell(servicIconSize);
+            // case 3:
+            //     return PersonnesageesSell(servicIconSize);
+            // case 4:
+            //     return AnimalsSell(servicIconSize);
+            // case 5:
+            //     return InformatiqueSell(servicIconSize);
+            // case 6:
+            //     return AministrativeSell(servicIconSize);
+            // case 7:
+            //     return EntretienSell(servicIconSize);
+            // case 8:
+            //     return JardinageSell(servicIconSize);
+            // case 9:
+            //     return PreparationrepasSell(servicIconSize);
+            // case 10:
+            //     return RepassageSell(servicIconSize);
+            // case 11:
+            //     return LivraisonachatsSell(servicIconSize);
+            // case 12:
+            //     return TransportSells(servicIconSize);
+            // case 13:
+            //     return SoinsdomicileSell(servicIconSize);
         }
     }
     else if (belongto == 1) {

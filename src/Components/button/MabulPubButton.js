@@ -1,11 +1,18 @@
 import React from 'react';
-import { Text, Image } from 'react-native';
+import { Text, Image,KeyboardAvoidingView } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import { TouchableOpacity } from 'react-native';
 import CommonBigButton from './CommonBigButton';
 import { ArrowRightWhite } from '../../assets/svg/icons';
 const MabulPubButton = (props) => {
   return (
+    <KeyboardAvoidingView
+
+    keyboardVerticalOffset = {Platform.OS === "ios" ? 0: 30*hm} // adjust the value here if you need more padding
+    // style = {{ flex: 1 }}
+    behavior={"padding"}
+    >
+  
     <CommonBigButton
     //   rightIcon={<ArrowRightWhite width={10 * em} height={17 * em} />}
       textStyle={styles.txt}
@@ -15,6 +22,7 @@ const MabulPubButton = (props) => {
       onPress={props.onPress}
       style={[styles.container, { backgroundColor: props.color }, props.style]}
     />
+    </KeyboardAvoidingView>
   );
 };
 

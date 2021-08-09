@@ -11,16 +11,19 @@ const renderService = (data, onPressSee) => {
   }
   return (
     <View style={styles.serviceContainer}>
-      <Image source={data.service.user.photo} style={{ width: 32 * em, height: 32 * em, marginTop: 30 * hm }} />
+      <Image source={data.service.user.photo} style={{ width: 32 * em, height: 32 * em }} />
       <View style={styles.serviceSubContainer}>
-        <TinyText fontSize={12} text={data.service.date} style={styles.largeTopPadding} />
         <SmallText text={data.service.user.name} style={{ color: "#1E2D60", fontSize: 14 * em, fontFamily: "Lato-Bold" }} />
+        <SmallText text={data.service.organName} style={styles.smallTopPadding} />
 
         <View style={styles.serviceInfoContainer}>
-          <View>
+          <View 
+          style={{flexDirection:'column'}}
+          >
 
-            <SmallText text={data.service.organName} style={styles.smallTopPadding} />
-            <TinyText text={data.service.title} fontSize={14} style={styles.smallTopPaddings} />
+            <TinyText fontSize={12} text={data.service.date} style={styles.smai} />
+
+             <TinyText text={data.service.title} fontSize={14} style={styles.smallTopPaddings} />
           </View>
           <TouchableOpacity onPress={()=>{}} style={styles.colReverse}>
             <TinyText text="Voir>" fontSize={14} color="#40CDDE" style={styles.largeTopPaddings} />
@@ -67,13 +70,14 @@ const styles = {
   serviceInfoContainer: { flex: 1, flexDirection: 'row', justifyContent: 'space-between' },
   colReverse: { flexDirection: 'column-reverse', marginRight: 9 * em },
   smallTopPadding: { fontSize: 12, marginTop: 4 * hm, color: "#6A8596", fontFamily: 'Lato-Regular' },
-  smallTopPaddings: { marginTop: 13 * hm, color: "#1E2D60", fontFamily: 'Lato-Bold' },
+  smallTopPaddings: { marginTop: 5 * hm, color: "#1E2D60", fontFamily: 'Lato-Bold' },
   largeTopPaddings: { marginTop: 13 * hm, fontFamily: 'Lato-SemiBold' },
+  smai: { marginTop: 24 * hm, color: "#1E2D60", fontFamily: 'Lato-Regular' },
 
   largeTopPadding: { marginTop: 2 * hm, fontFamily: 'Lato-Regular', marginBottom: 20 * hm },
   serviceSubContainer: { flex: 1, paddingLeft: 10 * em },
   itemMargin: { marginLeft: 10 * em },
-  separator: { flex: 1, height: hm, backgroundColor: '#A0A4B7', alignSelf: 'center', marginLeft: 10 * em },
+  separator: { flex: 1, height: hm, backgroundColor: '#A0A4B7',opacity:0.2, alignSelf: 'center', marginLeft: 10 * em },
 };
 
 export default ScheduleCard;

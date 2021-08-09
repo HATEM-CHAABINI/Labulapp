@@ -372,12 +372,13 @@ this.state.filtre.length == 0?
             ref={ref => {
               this[RBSheet + 1] = ref;
             }}
+            closeOnDragDown={true}
             height={hm * 500}
 
             openDuration={250}
             customStyles={{
               wrapper:{
-                backgroundColor: 'rgba(209,226,237,0.9)'
+                backgroundColor: 'rgba(30,45,96,0.9)'
               },
               container: {
                
@@ -389,7 +390,7 @@ this.state.filtre.length == 0?
               }
             }}
           >
-            <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ paddingTop: 20 * hm, paddingBottom: hm * 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity onPress={this._onPressGet.bind(this)}  >
                 <Fleche />
               </TouchableOpacity>
@@ -556,11 +557,12 @@ this.state.filtre.length == 0?
               this[RBSheet + 2] = ref;
             }}
             height={hm * 457}
+            closeOnDragDown={true}
 
             openDuration={250}
             customStyles={{
               wrapper:{
-                backgroundColor: 'rgba(209,226,237,0.9)'
+                backgroundColor: 'rgba(30,45,96,0.9)'
               },
               container: {
                 borderTopLeftRadius: 28 * em,
@@ -571,7 +573,7 @@ this.state.filtre.length == 0?
               }
             }}
           >
-            <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 60, right: em * 85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ paddingTop: 20 * hm, paddingBottom: hm * 60, right: em * 85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity onPress={() => this.handleDateClick()}  >
                 <Fleche />
               </TouchableOpacity>

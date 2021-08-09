@@ -39,7 +39,7 @@ const PremiumPurchasedScreen = (props) => {
       />
       {props.profileType === 'my' ? (
         <PurchaseMenuCard
-          style={{ width: 315 * em, height: 150 * em, marginTop: 65 * hm }}
+          style={{ width: 315 * em, height: 135 * hm, marginTop: 65 * hm }}
           selected={props.profileType === 'my'}
           name="Light"
           price="0,90€"

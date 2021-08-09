@@ -201,6 +201,7 @@ const CalendarHomeScreen = () => {
         )}
         {!showCalendarStrip && (
           <CalendarListView
+          disab={()=> setShowCalendarStrip(true)}
             onDayPress={(day) => {
               setSelectedDate(day);
               setShowCalendarStrip(true);
@@ -241,10 +242,10 @@ const styles = {
     shadowRadius: 25 * em,
   },
   calendarStripStyle: { width: WIDTH - 32 * em, height: 140 * hm },
-  calendarHeaderStyle: { color: '#1E2D60', fontSize: 20 * em, fontFamily: 'Lato-Regular' },
+  calendarHeaderStyle: { color: '#1E2D60', fontSize: 20 * em, fontFamily: 'Montserrat-Bold' },
   calendarIconStyle: {
     width: 20 * em,
-    height: 20 * hm,
+    height: 20 * em,
     backgroundColor: '#A0AEB8',
     borderRadius: 10 * em,
     justifyContent: 'center',
@@ -265,8 +266,9 @@ const styles = {
   },
   highlightDateNumberContainerStyle: {
     backgroundColor: '#fff',
+    
     width: 30 * em,
-    height: 30 * hm,
+    height: 30 * em,
     borderRadius: 15 * em,
     paddingTop: 2 * em,
     marginTop: -2 * em,
@@ -297,7 +299,7 @@ const styles = {
     width: 55 * em,
     height: 5 * hm,
     borderRadius: 2.5 * em,
-    backgroundColor: '#BFCDDB24',
+    backgroundColor: '#BFCDDB36',
     alignSelf: 'center',
   },
 };

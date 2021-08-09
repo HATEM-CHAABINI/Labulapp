@@ -10,13 +10,14 @@ import ProfileCommonCard from '../../adapter/ProfileCommonCard';
 import ProfileCommonListItem from '../../adapter/ProfileCommonListItem';
 import CommonButton from '../../Components/button/CommonButton';
 import AccountChangeMenu from './AccountChangeMenu';
-import {Editprofile, MyNeeds, Circles, Information, Setting, PurchasedPremium } from '../../assets/svg/icons';
+import {Editprofile, MyNeeds, Circles, Information, Setting, PurchasedPremium, Alert, Labullogo } from '../../assets/svg/icons';
 import User from '../../model/user/User';
 import firestore from '@react-native-firebase/firestore';
 import AccountType from '../../model/user/AccountType';
 import { feedbackIcons } from '../../constants/icons';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { useSelector } from 'react-redux';
+import { LogoLabul } from '../../assets/svg/svg/icons';
 const originalMyProfile = new User(
   'Mathieu Torin',
   null,
@@ -210,7 +211,7 @@ const ProfileHomeScreen = (props) => {
               />
             </View>
             <View>
-              <Image style={styles.imgBg} source={require('../../assets/images/profie_banner.png')} />
+              <Image style={styles.imgBga} source={require('../../assets/images/profie_banner.png')} />
             </View>
           </View>
         )}
@@ -236,8 +237,8 @@ const ProfileHomeScreen = (props) => {
           />
         </View>
         <View style={styles.imgContainer}>
-          <Image source={require('../../assets/images/img_logo.png')} style={styles.imgLogo} />
-
+          {/* <Image source={require('../../assets/svg/icons/Alert.svg')} /> */}
+<LogoLabul style={styles.imgLogo}/>
           {/* <Image source={require('../../assets/images/txt_logo.png')} style={styles.txtLogo} /> */}
         </View>
         <CommentText text={'Version 1.0'} style={styles.txtVersion} color={'#BFCDDB'} />
@@ -323,18 +324,31 @@ const styles = {
     alignItems: 'flex-start',
     flexDirection: 'column',
   },
+  imgBga: {
+    height: 138 * hm,
+    width:230*em,
+    flex: 1,
+    backgroundColor: '#40CDDE0C',
+    marginTop: 35 * hm,
+    marginBottom: 20 * hm,
+    // right:10*em,
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+  },
   imageTextMain: {
-    fontFamily: 'HelveticaNeue' ,
-    marginTop: 25 * hm,
+    fontFamily: 'Montserrat-Bold' ,
     fontSize: 20 * em,
+    marginTop: 29 * hm,
     marginLeft: 18 * em,
-    //fontFamily: 'Lato-Bold'
+    marginRight: -58 * em,
+    marginBottom: 10 * hm,
   },
   imageTextSub: {
     fontFamily: 'HelveticaNeue' ,
     fontSize: 15 * em,
+    marginTop:2*hm,
     marginLeft: 18 * em,
-    marginRight: -58 * em,
+    marginRight: -100 * em,
     marginBottom: 10 * hm,
   },
   proBtn: {
@@ -355,7 +369,7 @@ const styles = {
     marginTop: 50 * hm,
     marginBottom: 15 * hm,
   },
-  imgLogo: { height: 58 * hm, width: 80 * em, resizeMode: 'contain', marginLeft: 7 * em },
+  imgLogo: { marginLeft: 7 * em , resizeMode: 'stretch'},
   txtLogo: { height: 23 * em, width: 80 * em, resizeMode: 'contain' },
   txtVersion: { marginBottom: 110 * hm,fontFamily: 'HelveticaNeue' },
 };

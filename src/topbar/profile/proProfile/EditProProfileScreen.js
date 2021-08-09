@@ -8,7 +8,7 @@ import ProfileCommonAvatar from '../../../Components/view/ProfileCommonAvatar';
 import CommentText from '../../../text/CommentText';
 import { Actions } from 'react-native-router-flux';
 import Modal from 'react-native-modal';
-import { ProAddCover } from '../../../assets/svg/icons';
+import { DeleteRed, ProAddCover } from '../../../assets/svg/icons';
 import { feedbackIcons } from '../../../constants/icons';
 import RBSheet from "react-native-raw-bottom-sheet";
 import OkModal from '../../../Components/button/OkModal';
@@ -16,6 +16,7 @@ import Reinput from "reinput"
 import OkModalchange from '../../../Components/button/OkModalchange';
 import MyPresentationComponent from '../profileComponents/MyPresentationComponent'
 import ModalEdit from './ModalEdit/ModalEdit';
+import CommonListItem from '../../../adapter/CommonListItem';
 
 const updateUserPrfile = {
   avatar: require('../../../assets/images/avatar_curology.png'),
@@ -164,6 +165,7 @@ style={styles.okstyle}
 
 </View>
       <CommonButton
+      //text1
         text={'Supprimer mon compte'}
         style={styles.deleteBtn}
         textStyle={{ color: '#F9547B' }}
@@ -250,8 +252,65 @@ style={styles.okstyle}
 
 
 
+<Modal
+      isVisible={deleteModalVisible}
+      backdropOpacity={0.8}
+      style={{margin: 0, flex: 1, justifyContent: 'flex-end'}}
+      backdropColor={'#1E2D60'}
+      swipeDirection={'up'}
+      onBackButtonPress={() => setDeleteModalVisible(false)}>
+      <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
+      <View style={{alignItems: 'center',
+    marginRight: 30 * em,
+    marginLeft: 30 * em,
+    marginBottom: 0,
+    backgroundColor: '#ffffff',
+    borderRadius: 20 * em,
+    paddingBottom: 12 * em,}}>
+      <CommonListItem
+          style={{  height: 70 * hm,
+            paddingHorizontal: 25 * em,
+            justifyContent: 'center',
+            borderTopWidth: 1 * hm,
+            borderColor: '#B3C6CF33',
+            width: '100%',}}
+          title={"Supprimer mon compte"}
+          subTitle={"Tu est sûr de vouloir supprimer ton compte ? Cette action est irréversible."}
+          subTitleStyle={{textAlign:'center', color: '#1E2D60' ,fontFamily:'Lato-Regular',fontSize:14*em}}
+          titleStyle={{textAlign:'center', color: '#1E2D60' ,fontFamily:'Lato-Bold',fontSize:16*em}}
+         
+       />
+        <CommonListItem
+   style={{  height: 70 * hm,
+    paddingHorizontal: 25 * em,
+    justifyContent: 'center',
+    borderTopWidth: 1 * hm,
+    borderColor: '#B3C6CF33',
+    width: '100%',}}
+          title="Supprimer mon compte Pro"
+          titleStyle={{ textAlign:'center',color: '#FC3867' ,fontFamily:'Lato-Regular'}}
+          // rightView={<DeleteRed width={22 * em} height={22 * em} />}
+          onPress={() => {
+            setDeleteModalVisible(false);
+            Actions.home();}}
+       />
+      </View>
+      <CommonButton
+        text="Annuler"
+        style={{  marginTop: 16 * hm,
+          backgroundColor: '#ffffff',
+          alignSelf: 'center',
+          width: 315 * em,
+          marginBottom: 23 * hm,}}
+        textStyle={{ color: '#1E2D60' }}
+        onPress={() => {
+          setUserProfileOnChanged(updateUserPrfile);
+          setDeleteModalVisible(false);}
+        }
+      />
+    </Modal>
 
-      <Modal
+      {/* <Modal
         isVisible={deleteModalVisible}
         backdropColor={'#04040F66'}
         backdropOpacity={1}
@@ -284,7 +343,7 @@ style={styles.okstyle}
           </View>
         </View>
         
-      </Modal>
+      </Modal> */}
       {/* <ProfileCommonModal
         visible={modalVisible}
         itemKey={inputItemKey}

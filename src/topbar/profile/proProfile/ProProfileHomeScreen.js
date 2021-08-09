@@ -23,6 +23,7 @@ import {
 import { feedbackIcons } from '../../../constants/icons';
 import AccountType from '../../../model/user/AccountType';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
+import { LogoLabul } from '../../../assets/svg/svg/icons';
 
 const iconSize = { width: 38 * em, height: 38 * em };
 
@@ -74,6 +75,7 @@ const ProProfileHomeScreen = (props) => {
               borderWidth={3 * em}
               fullName={userProfile.name}
               icon={userProfile.avatar}
+              txtInitial={{fontFamily:'Montserrat-Bold',fontSize:24*em}}
               pro
             />
             <TouchableOpacity style={{bottom:70*hm,marginLeft:141*em}} onPress={() => Actions.proProfileOverview({ userProfile: originalProProfile })}>
@@ -158,7 +160,8 @@ const ProProfileHomeScreen = (props) => {
           <CommentText text={'Mon abonnement'} style={styles.caption} />
           <ProfileCommonListItem
             text={'Abonnement Premim'}
-            subText={'En savoir plus'}
+            subText={'Activé'}
+            subTitleStyle={{color:'#40CDDE'}}
             icon={PurchasedPremium(iconSize)}
             style={styles.listItem}
             onPress={() => {
@@ -192,7 +195,7 @@ const ProProfileHomeScreen = (props) => {
         </View>
 
         <View style={styles.imgContainer}>
-          <Image source={require('../../../assets/images/img_logo.png')} style={styles.imgLogo} />
+          <LogoLabul style={styles.imgLogo} />
 
           {/* <Image source={require('../../assets/images/txt_logo.png')} style={styles.txtLogo} /> */}
         </View>
@@ -246,7 +249,7 @@ const styles = {
       elevation: 5,
     },
   listBox: { marginTop: 15 * hm },
-  caption: { width: '100%', textAlign: 'left', fontWeight: '300', marginBottom: 20 * em },
+  caption: {fontFamily:'Lato-Medium',fontSize:14*em, width: '100%', textAlign: 'left', fontWeight: '300', marginBottom: 20 * em },
   listItem: {},
   line1: { marginLeft: 53 * em, marginBottom: 25 * hm, marginTop: 15 * hm, height: 1 * em, backgroundColor: '#F0F5F7' },
   line2: {

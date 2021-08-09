@@ -25,6 +25,8 @@ const ProfileCommonListItem = (props) => {
       title={props.text}
       titleStyle={[styles.textTitle,props.titleStyle]}
       subTitle={props.subText}
+      subTitleStyle={props.subTitleStyle}
+
       rightView={
         <View style={{ justifyContent: 'center', flex: 1 }}>
           <RightArrow width={11 * em} height={18 * em} />
@@ -62,7 +64,7 @@ const styles = {
     alignItems: 'flex-start',
   },
   textTitle: {
-    fontFamily: 'Lato-Black',
+    fontFamily: 'Lato-Medium',
     textAlignVertical: 'center',
     lineHeight: 19 * em,
     color: '#1E2D60'

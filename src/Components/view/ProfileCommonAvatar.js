@@ -41,7 +41,7 @@ const ProfileCommonAvatar = (props) => {
           style={[
             styles.txtInitial,
             { color: !props.pro ? '#40CDDE' : '#6784DA', fontSize: (props.style.width / 5) * 2 || 28 * hm },
-          ]}
+            props.txtInitial  ]}
           text={getInitials(props.fullName)}
         />
       </View>

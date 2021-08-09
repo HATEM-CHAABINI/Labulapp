@@ -19,18 +19,15 @@ import Economie from '../../assets/svg/icons/devenirpro/Economie';
 import Evenement from '../../assets/svg/icons/devenirpro/Evenement';
 import Contact from '../../assets/svg/icons/devenirpro/Contact';
 import Commerce from '../../assets/svg/icons/devenirpro/Commerce';
+import { Labulpremium } from '../../assets/svg/svg/icons';
 const PremiumSubscriptionScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <Image
+        <Labulpremium
           style={styles.logo}
-          source={
-            props.profileType === 'my'
-              ? require('../../assets/images/img_logo_subscription.png')
-              : require('../../assets/images/img_logo_subscription.png')
-          }
+         
         />
         <View style={styles.containerTitle}>
           <Text style={styles.title} >Labul </Text>

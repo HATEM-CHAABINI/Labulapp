@@ -164,7 +164,7 @@ const FriendsSearchScreen = (props) => {
               <Fleche />
             </TouchableOpacity>
           </View>
-          <Text style={{ paddingTop: hm * 22, paddingLeft: em * 30, color: '#1E2D60', fontSize: 30 * em, fontFamily: 'lato-black' }}>Rechercher un contact</Text>
+          <Text style={{ paddingTop: hm * 22, paddingLeft: em * 30, color: '#1E2D60', fontSize: 30 * em, fontFamily: 'lato-black' }}>Rechercher </Text>
         </View>
         <SearchBox
           style={styles.searchbox}

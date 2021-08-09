@@ -28,7 +28,7 @@ const SearchBox = (props) => {
             <Magnifier width={20 * em} height={20 * em} />
           </View>
         )}
-        {onFocus && <SmallText text="Saisissez un contact" color="rgba(160, 174, 184, 1)" />}
+        {onFocus && <SmallText text="Rechercher un contact" color="rgba(160, 174, 184, 1)" />}
         <TextInput
           value={value}
           onChangeText={_handleText}

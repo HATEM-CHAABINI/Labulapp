@@ -185,6 +185,7 @@ const MabulRechercheContact = (props) => {
   const onSubmit = () => {
     setloadingSet(true)
     let data = {}
+    console.log("mabulService  ",mabulService," demandData  ",demandData);
     if (mabulService === 'organize') {
       data = Object.assign(demandData, { contactType: contactType, users: selectedUser, serviceType: { name: 'organize', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
 

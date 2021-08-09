@@ -254,7 +254,7 @@ const MabulCommonRequestDetailScreen = (props) => {
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
           <Reinput style={{ height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
-            label='Écrit un titre *'
+            label={mabulService=="sell"?'Écris le nom de ce que tu vends *':'Écrit un titre *'}
             autoFocus={true}
             underlineActiveColor="#FFFFFF"
             underlineColor="#FFFFFF"
@@ -308,7 +308,7 @@ const MabulCommonRequestDetailScreen = (props) => {
               <></>
           }
   
-  {
+            {
             mabulService !== 'give' ?
             <>
           <TouchableOpacity
@@ -319,7 +319,7 @@ const MabulCommonRequestDetailScreen = (props) => {
               <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
               <Flechedroite width={14 * em} height={14 * hm} />
             </View>
-            <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text>
+            {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
           </TouchableOpacity>
           <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>}
 
@@ -353,7 +353,7 @@ const MabulCommonRequestDetailScreen = (props) => {
           <View style={[styles.ActionButton, {  marginTop: 10 * hm, paddingBottom:20*hm}]}>
             <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
               <Text style={styles.contentDesc}>Photos</Text>
-              <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em }]}>(3 max)</Text>
+              <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em,fontSize:12*em }]}>(3 max)</Text>
             </View>
             <Text style={[styles.contentDescSub, { marginTop: 10 * hm }]} >Les photos aident à mieux cerner ta demande.</Text>
 
@@ -390,7 +390,7 @@ const MabulCommonRequestDetailScreen = (props) => {
               <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
               <Flechedroite width={14 * em} height={14 * hm} />
             </View>
-            <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text>
+            {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
           </TouchableOpacity>
           <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>}
 
@@ -400,6 +400,7 @@ const MabulCommonRequestDetailScreen = (props) => {
         </ScrollView>
       </View>
       <View style={{ flex: 0.1 }}>
+    
         <RBSheet ref={Sheet1}
           height={hm * 630}
           openDuration={250}
@@ -414,6 +415,7 @@ const MabulCommonRequestDetailScreen = (props) => {
             }
           }}
         >
+          
           <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
           </View>
@@ -672,16 +674,17 @@ ta demande`}
             showDescription={() => prexpre()}
             conceptColor={conceptColor} okoModal={() => Sheet6.current.close()} closeModal={() => Sheet6.current.close()} />
         </RBSheet>
-
-        <MabulPubButton
+       
+      
+      </View>
+      
+      <MabulPubButton
           text={"Publier"}
-          color={hexToRGB(conceptColor)}
+          color={title.length==0 ?hexToRGB(conceptColor,0.5):hexToRGB(conceptColor)}
           style={styles.nextBtn}
           onPress={() => onSubmit()}
         // onPress={formik.handleSubmit}
         />
-      </View>
-
     </View>
   );
 };
@@ -774,7 +777,20 @@ const styles = {
     width: 315 * em,
     alignSelf: 'center',
     bottom: 10 * hm,
-    height: 58 * hm
+    marginTop:-50*hm,
+    height: 58 * hm,
+    opacity: 1,
+
+
+  },
+  nextBtna: {
+    width: 315 * em,
+    alignSelf: 'center',
+    bottom: 10 * hm,
+    marginTop:-50*hm,
+    height: 58 * hm, 
+     opacity: 0.5,
+
   },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },

@@ -46,6 +46,8 @@ const InputLocationScreen = () => {
               borderBottomColor={'#41D0E2'}
               style={{ width: '80%', }}
               show={true}
+              showadd={false}
+              
               textInputStyle={{
                 // height: 40,
                 color: '#6A8596',

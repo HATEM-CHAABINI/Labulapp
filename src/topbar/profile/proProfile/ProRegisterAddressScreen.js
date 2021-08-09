@@ -26,7 +26,7 @@ const ProRegisterAddressScreen = (props) => {
 
 
           <Reinput
-  label='Quel est le nom de l’entreprise ? *'
+  label='Quel est la localisation de l’association ? *'
   autoCorrect={false}
 
   underlineColor="#BFCDDB"
@@ -40,11 +40,11 @@ const ProRegisterAddressScreen = (props) => {
   fontSize={16 * em}
   keyboardType="email-address"
   selectionColor={'#41D0E2'}
-marginBottom={-7*hm}
+marginBottom={-17*hm}
 
 />        
 
-<Text style={{alignSelf:'flex-start',color:'#40CDDE',fontSize:16*em}}>Utiliser ma position</Text>
+<Text style={{alignSelf:'flex-start',color:'#40CDDE',fontSize:14*em,fontFamily:'lato-Regular'}}>Utiliser ma position</Text>
 
         </View>
         </View>

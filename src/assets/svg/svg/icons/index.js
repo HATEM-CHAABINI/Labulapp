@@ -2,6 +2,8 @@ import NextIcon from './NextIcon.svg';
 import PrevIcon from './PrevIcon.svg';
 import LocationPink from './LocationPink.svg';
 import Alert from './Alert.svg';
+import LogoLabul from './LogoLabul.svg';
+import Labulpremium from './Labulpremium.svg';
 
 import Animal from './category/Animal.svg';
 import BricologeIcon from './category/BricologeIcon.svg';
@@ -43,7 +45,7 @@ import TransportSell from './category/TransportSell.svg';
 import AdministrativeSell from './category/AdministrativeSell.svg';
 import ComputerSell from './category/ComputerSell.svg';
 
-export {
+export {LogoLabul,Labulpremium,
   AnimalSell,
   BeautyCareSell,
   DeliverySell,

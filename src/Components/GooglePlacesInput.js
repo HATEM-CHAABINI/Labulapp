@@ -99,7 +99,7 @@ const GooglePlacesInput = (props) => {
                 <View style={[{ flexDirection: 'row'}, props.myLocationStyle]}>
                     {props.myLocationIconColor === undefined ? <LocationRed width={16 * em} height={19 * hm} /> : <View style={{ top: 15 * hm }} />}
                     
-                    <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} />
+                    {/* <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} /> */}
                     <TouchableOpacity style={{ position: 'absolute',}} onPress={() => {  ref.current?.setAddressText(address); }}>
                     <View style={{flexDirection:'row'}}>
                     <Flecheposition/>

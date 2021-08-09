@@ -18,19 +18,19 @@ export default function FriendsNavigator(props) {
   useEffect(() => {
     // console.log(props.route.params.filtre," ===========> ",props.route.params.filtreD);
 if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=0 )|| (props.route.params.filtreD !="Toutes" && props.route.params.filtreD !==undefined && props.route.params.filtreD.length!=0)){
-  console.log("filtrageeee");
+  // console.log("filtrageeee");
   fetchDemandFiltre(props.route.params.filtre,props.route.params.filtreD).then((item) => {
   
     if (item !== undefined) {
-      console.log("filtrrreeee=== ", item);
+      // console.log("filtrrreeee=== ", item);
       setData(() => item)
     }
   })
-  console.log("jdjdjdjdjdjddjdjdjncirnricnircirni",props.route.params.filtre);
+  // console.log("jdjdjdjdjdjddjdjdjncirnricnircirni",props.route.params.filtre);
 }else
 {
     fetchallDemand().then((item) => {
-      console.log("ncncncncnc",item[0]);
+      // console.log("ncncncncnc",item[0]);
 
       if (item !== undefined) {
         setData(() => item)
@@ -42,7 +42,7 @@ if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=
   useEffect(() => {
 
     if (Data.length > 0) {
-      console.log("leennnnghhhththt");
+      // console.log("leennnnghhhththt");
       setLoading(false)
 
     }

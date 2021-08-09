@@ -23,9 +23,13 @@ const needData = Object.assign(
   { status: null, relationship: 'Mon ami/ma famille' }
 );
 const FriendNeedScreen = (props) => {
+ 
+  
   const [cancelParticipatePopupVisible, setcancelParticipatePopupVisible] = useState(false);
   const [data] = useState(props.detail ? props.detail : needData);
+  console.log('hello data....',data)
   const [status, setStatus] = useState(props.status || data.status);
+  console.log('hello status',status)
   const RequestButton = (
     <CommonButton text={'Participer'} style={styles.partBtn} 
    onPress={() => setStatus(NeedStatusType.WAITING)}
@@ -73,7 +77,8 @@ const FriendNeedScreen = (props) => {
   // console.log(data.relationship);
   return (
     <View style={styles.container}>
-      <MabulDetailView data={Object.assign(data, { status: status, relationship: needData.relationship })} />
+      <MabulDetailView
+      data={Object.assign(data, { status: status, relationship: needData.relationship })} />
       <View style={styles.btnBox}>{mainButton}</View>
       <FriendCancelParticipatePopupScreen
         visible={cancelParticipatePopupVisible}

@@ -178,8 +178,6 @@ height:'100%',
  </View>
  </View>
       :
-  
-  
 <View>
 <Image
           source={data2.images !== undefined ? { uri: data2.images[0].uri } : require('../assets/images/sample_cover_2.png')}
@@ -192,7 +190,6 @@ height:'100%',
           {/* <CommentText style={styles.comment} text="Je vends Objet Entretien de la maison" color={'#1E2D60'} /> */}
           {/* <TitleText text={'Spray cuisine 100% Bio'} style={styles.title} /> */}
           <CommonListItem
-          
             style={styles.userInfo}
             icon={
               <AvatarWithBadge
@@ -220,10 +217,7 @@ height:'100%',
           />
           <CommentText style={styles.comment} text={data2.type !== undefined ? data2.type.itemName :""} color={'#1E2D60'} />
           <TitleText text={data2.data !== undefined ? data2.data.title : data.title} style={styles.title} />
-          
-         
           <View style={styles.btnBox}>
-       
           <View style={{flexDirection:'row', justifyContent:'space-between',alignItems:'center'}}>
           {/*
            */}

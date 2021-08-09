@@ -37,9 +37,9 @@ const FriendListCard = (props) => {
         {
           text: "OK", onPress: () => {
             deleteUserDemands(auth().currentUser.uid, props.data.serviceType.name, props.data.key).then((item) => {
-             console.log(auth().currentUser.uid)
-             console.log(props.data.serviceType.name)
-             console.log(props.data.key)
+            //  console.log(auth().currentUser.uid)
+            //  console.log(props.data.serviceType.name)
+            //  console.log(props.data.key)
               Actions.home()
             }).catch((error) => {
               console.log(error);

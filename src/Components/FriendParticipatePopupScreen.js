@@ -44,7 +44,6 @@ const FriendParticipatePopupScreen = (props) => {
           color="#40CDDE"
           textStyle={styles.itemCheckedText}
           isChecked={true}
-
         />
         <CommonCheckBox
           style={styles.listItem}

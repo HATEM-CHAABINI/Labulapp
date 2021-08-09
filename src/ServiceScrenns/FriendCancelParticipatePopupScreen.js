@@ -23,7 +23,7 @@ const FriendCancelParticipatePopupScreen = (props) => {
         <CommonText text="Mathieu Torin" style={styles.userName} />
         <CommonListItem
           style={styles.listItem}
-          title="Annuler ma participation"
+          title="Annuler ma participation"   
           titleStyle={{ color: '#6A8596' }}
           rightView={<Delete width={18 * em} height={20 * em} />}
           onPress={() => {

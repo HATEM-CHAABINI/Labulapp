@@ -20,6 +20,7 @@ import { Inviter } from '../../assets/svg/icons';
 import ModalModifierSupprimerDemande from '../../ServiceScrenns/ModalModifierSupprimerDemande';
 
 const MabulDetailView = (props) => {
+  console.log('props data......'.props)
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(props.data);
   const [data2, setdata2] = useState(props.data2);
@@ -30,6 +31,7 @@ const MabulDetailView = (props) => {
   useEffect(() => {
     setdata2(props.data2)
   }, [props.data2])
+
   const userBadge = getUserBadge(data2.serviceType.code, data2.serviceType.subCode);
   const InviteButton = (
     <CommonButton

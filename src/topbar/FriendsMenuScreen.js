@@ -19,7 +19,7 @@ const servicIconSize = { width: 18 * em, height: 18 * em };
 const FriendsMenuScreen = (props) => {
   const [loading, setLoading] = useState(props.loading)
   const [datas, setData] = useState(props.data);
-  console.log('.........props.data.........',props.data)
+  // console.log('.........props.data.........', props.data)
   const [hasLocationAccess, setLocationAccess] = useState(false);
   const [region, setRegion] = useState({
     latitude: 37.78825,
@@ -136,98 +136,85 @@ const PositionView = (location, i) => (
       latitude: location.coordinate.latitude,
       longitude: location.coordinate.logitude
     }}
-
     onPress={() => {
-      if (location.serviceType.name==="alerts"){
+      if (location.serviceType.name === "alerts") {
+
+        console.log('hello locatioon',location)
+
         Actions.myAlert({ alertData: location, data2: location, user: location.user, docId: location.key })
-
       }
-else if (location.serviceType.code == 0) {
+      else if (location.serviceType.code == 0) {
         Actions.myOrganize({ data: location, user: location.user, docId: location.key });
-
       }
       else if (location.serviceType.code == 1) {
         Actions.myGive({ data: location, user: location.user, docId: location.key });
       } else if (location.serviceType.code == 2) {
         Actions.mySell({ data: location, user: location.user, docId: location.key });
-
       }
-
       else if (location.serviceType.code == 3) {
         Actions.myNeed({ data: location, user: location.user, docId: location.key });
-
       }
       // console.log("kfkfkfkfk,riv,ototototot",location.key);
       // }
     }}
-
   >
-{ location.serviceType.name!=="alerts"? 
-    (
-      <View style={{ padding: 10, width: 76 * em, height: 48 * hm }}>
-        <View
-          style={{
-            shadowColor: '#254D5621',
-            shadowOffset: {
-              width: 0,
-              height: 10 * hm,
-            },
-            shadowRadius: 12 * em,
-            shadowOpacity: 1,
-            position: 'absolute',
-          }}>
-          <Path width={76 * em} height={48 * hm} />
-        </View>
-        <View style={getTextStyle(location.serviceType.code)}>
-          {/* <Image source={require('../assets/images/sample_user_2.png')} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} /> */}
-          <Image source={{uri:`${location.user.profilePic?location.user.profilePic:'https://www.seekpng.com/png/detail/428-4287240_no-avatar-user-circle-icon-png.png'}`}} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em , borderRadius:25}} />
 
-          <View style={{ marginRight: 8.83 * em }}>
-           
-    {location.serviceType.code === 0 ?
+    {location.serviceType.name !== "alerts" ?
+      (
+        <View style={{ padding: 10, width: 76 * em, height: 48 * hm }}>
+          <View
+            style={{
+              shadowColor: '#254D5621',
+              shadowOffset: {
+                width: 0,
+                height: 10 * hm,
+              },
+              shadowRadius: 12 * em,
+              shadowOpacity: 1,
+              position: 'absolute',
+            }}>
+            <Path width={76 * em} height={48 * hm} />
+          </View>
+          <View style={getTextStyle(location.serviceType.code)}>
+            {/* <Image source={require('../assets/images/sample_user_2.png')} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} /> */}
+            <Image source={{ uri: `${location.user.profilePic ? location.user.profilePic : 'https://www.seekpng.com/png/detail/428-4287240_no-avatar-user-circle-icon-png.png'}` }} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em, borderRadius: 25 }} />
+
+            <View style={{ marginRight: 8.83 * em }}>
+
+              {location.serviceType.code === 0 ?
                 renderimgorganize(location.category.id) :
                 location.serviceType.code === 1 ?
                   renderimggive(location.category.id)
                   : location.serviceType.code === 2 ?
                     renderimgSell(location.belongsTo.id, location.category.id) :
                     renderimgneed(location.belongsTo.id, location.category.id)
-           }
-    
-
-   
-      
-            
+              }
+            </View>
           </View>
         </View>
-      </View>
-      ):
-      
+      ) :
+
       <View style={{ padding: 10, width: 76 * em, height: 92 * hm }}>
-   
+
         {/* <Image source={require('../assets/images/sample_user_2.png')} style={{ marginLeft: 2 * em, width: 36 * em, height: 36 * em }} /> */}
 
-        <View style={{   
+        <View style={{
           zIndex: 1,
-        position: 'absolute',
-       
-        // marginBottom: 100 * hm,
-        width: 72 * em,
-        height: 30 * hm,
-        borderRadius: 18 * em,
-        alignItems: 'center',
+          position: 'absolute',
+
+          // marginBottom: 100 * hm,
+          width: 72 * em,
+          height: 30 * hm,
+          borderRadius: 18 * em,
+          alignItems: 'center',
 
         }}>
-         
-  {renderimgalert()
-         }
-  
 
- 
-    
-          
+          {renderimgalert()
+          }
+        </View>
       </View>
-    </View>
-      
+
     }
   </Marker>
 

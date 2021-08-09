@@ -49,18 +49,20 @@ const paricipationLists = [
     { status: NeedStatusType.REFUSED }
   ),
 ];
-const MyParticipationsScreen = () => {
 
+const MyParticipationsScreen = (props) => {
   const renderFlatList = ({ item, index }) => (
+    console.log("hello item",item),
     <ProfileCommonNeedCard
       data={item}
-      style={[styles.listItem, { marginBottom: paricipationLists.length === index + 1 ? 50 * hm : 15 * hm }]}
+      style={[styles.listItem,{marginBottom: paricipationLists.length === index + 1 ? 50 * hm : 15 * hm }]}
       onPress={() => {
         Actions.friendNeed({ detail: item });
       }}
     />
   );
-  const listView = (
+
+  const listView =(
     <FlatList
       data={paricipationLists}
       renderItem={renderFlatList}
@@ -78,7 +80,6 @@ const styles = {
     backgroundColor: '#F0F5F7',
     paddingTop: 10 * hm,
   },
-
   emptyView: { marginTop: 74 * hm, width: 315 * em, height: 148.15 * hm, alignSelf: 'center' },
   listItem: { marginBottom: 15 * em },
 };

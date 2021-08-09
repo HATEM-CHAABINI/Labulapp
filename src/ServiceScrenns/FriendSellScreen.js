@@ -12,6 +12,7 @@ import NeedStatusType from '../model/service/NeedStatusType';
 import ReadMore from 'react-native-read-more-text';
 import { Text } from 'react-native';
 
+
 const FriendSellScreen = () => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
 

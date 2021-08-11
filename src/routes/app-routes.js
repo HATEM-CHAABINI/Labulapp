@@ -112,6 +112,7 @@ import { addProfile } from '../redux/actions/profile';
 import { addLogin } from '../redux/actions/login';
 import AlertTypeScreen from '../topbar/alert/AlertTypeScreen';
 import WaitingScreen from '../ServiceScrenns/WaitingScreen';
+import MesAbonneesHomeScreen from '../topbar/profile/proProfile/MesAbonneesHomeScreen';
 
 let data = {}
 
@@ -301,6 +302,11 @@ export default () => {
           key="proProfileOverview"
           hideNavBar
           component={ProProfileOverviewScreen}
+        />
+             <Scene
+          key="mesAboonespro"
+          hideNavBar
+          component={MesAbonneesHomeScreen}
         />
         <Scene
           key="mabulCommonShare"

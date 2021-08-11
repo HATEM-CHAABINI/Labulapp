@@ -150,6 +150,7 @@ const CalendarHomeScreen = () => {
       <View style={styles.titleContainer}>
       </View>
       <View style={styles.calendarContainer}>
+        {console.log(selectedDate)}
         {showCalendarStrip && (
           <View>
             <TitleText text="Mon calendrier" textAlign="left" style={styles.titleText} />
@@ -167,10 +168,12 @@ const CalendarHomeScreen = () => {
               dateNameStyle={styles.dateNameStyle}
               selectedDate={selectedDate}
               onDateSelected={(date) => {
+                
                 if (moment().isSame(date, 'day')) {
                   setSelectedSchedules(schedules);
                   return;
                 }
+                setSelectedDate(date)
                 setSelectedSchedules(blankSchedules);
               }}
               leftSelector={
@@ -201,6 +204,8 @@ const CalendarHomeScreen = () => {
         )}
         {!showCalendarStrip && (
           <CalendarListView
+          
+          thed= {selectedDate.format("YYYY-MM-DD").toString()}
           disab={()=> setShowCalendarStrip(true)}
             onDayPress={(day) => {
               setSelectedDate(day);
@@ -260,7 +265,7 @@ const styles = {
     shadowColor: '#84848442',
     shadowOffset: {
       width: 0,
-      height: 9 * hm,
+      height: 4 * hm,
     }, shadowOpacity: 1,
     shadowRadius: 16 * em,
   },

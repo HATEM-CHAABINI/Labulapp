@@ -5,21 +5,25 @@ import CommonText from '../../../text/CommonText';
 import Modal from 'react-native-modal';
 import CommonListItem from '../../../adapter/CommonListItem';
 import CommonButton from '../../../Components/button/CommonButton';
-import { DeleteRed, SortirGroupe } from '../../../assets/svg/icons';
+import { Amis, DeleteRed, Famille, ProGroupe, SortirGroupe, Voisins } from '../../../assets/svg/icons';
 import { Friend, Family, Neighbor } from '../../../assets/svg/icons';
 import RelationshipType from '../../../model/user/RelationshipType';
 
 const GroupOptionPopupScreen = (props) => {
   let groupIcon;
   switch (props.data && props.data.relationship) {
-    case RelationshipType.Friend:
-      groupIcon = <Friend width={40 * em} height={40 * em} />;
-      break;
+
     case RelationshipType.FAMILIY:
-      groupIcon = <Family width={40 * em} height={40 * em} />;
+      groupIcon = <Famille width={40 * em} height={40 * em} />;
       break;
+      case RelationshipType.Friend:
+        groupIcon = <Amis width={40 * em} height={40 * em} />;
+        break;
+      case RelationshipType.PRO:
+        groupIcon = <ProGroupe width={40 * em} height={40 * em} />;
+        break;
     default:
-      groupIcon = <Neighbor width={40 * em} height={40 * em} />;
+      groupIcon = <Voisins width={40 * em} height={40 * em} />;
       break;
   }
   return (
@@ -33,7 +37,7 @@ const GroupOptionPopupScreen = (props) => {
       <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
       <View style={styles.body}>
         <View style={styles.avatar}>{groupIcon}</View>
-        <CommonText text="Cousins" style={styles.userName} />
+        <CommonText text={props.data!=null?props.data.name:"Groupe"} style={styles.userName} />
         <CommonText text={props.data && props.data.number} style={{ marginBottom: 25 * hm }} color="#A0AEB8" />
 
         <CommonListItem

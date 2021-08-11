@@ -4,7 +4,7 @@ import React from 'react';
 import { em, hm } from '../constants/consts';
 import CommonListItem from './CommonListItem';
 import UserType from '../model/user/UserType';
-import { Friend, Family, Neighbor, OptionGray, Famille, Amis, Voisins } from '../assets/svg/icons';
+import { Friend, Family, Neighbor, OptionGray, Famille, Amis, Voisins, ProGroupe } from '../assets/svg/icons';
 import RelationshipType from '../model/user/RelationshipType';
 const CirclesCommonListItem = (props) => {
   var optionBtn = (
@@ -35,7 +35,14 @@ const CirclesCommonListItem = (props) => {
           </View>
         );
         break;
-      default:
+        case RelationshipType.PRO:
+          groupIcon = (
+            <View style={{ marginRight: 15 * em }}>
+              <ProGroupe width={40 * em} height={40 * em} />
+            </View>
+          );
+          break;
+        default:
         groupIcon = (
           <View style={{ marginRight: 15 * em }}>
             <Voisins width={40 * em} height={40 * em} />
@@ -47,7 +54,7 @@ const CirclesCommonListItem = (props) => {
       <View style={[styles.container, props.style]}>
         <CommonListItem
           title={props.name}
-          subTitle={props.subName}
+          subTitle={props.members+' abonnés'}
           titleStyle={styles.userNameStyle}
           icon={groupIcon}
           subTitleStyle={styles.number}
@@ -60,6 +67,7 @@ const CirclesCommonListItem = (props) => {
   }
   return (
     <CommonListItem
+    
       title={props.name}
       subTitle={props.subName}
       titleStyle={styles.userNameStyle}
@@ -73,6 +81,11 @@ const CirclesCommonListItem = (props) => {
 };
 export default CirclesCommonListItem;
 const styles = {
+  number:{
+fontFamily:'Lato-Regular'
+,fontSize:16*em,
+color:'#A0AEB8',
+  },
   icon: {
     width: 40 * em,
     height: 40 * em,

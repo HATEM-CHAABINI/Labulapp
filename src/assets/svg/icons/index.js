@@ -246,6 +246,7 @@ import Information from './profile/Information.svg';
 import LocationRed from './navigation/LocationRed.svg';
 import LocationGray from './navigation/LocationGray.svg';
 import CreateGroupNeighbor from './profile/CreateGroupNeighbor.svg';
+import CreateGroupPro from './profile/CreateGroupPro.svg';
 import CreateGroupFriend from './profile/CreateGroupFriend.svg';
 import CreateGroupFamily from './profile/CreateGroupFamily.svg';
 import Trace from './navigation/Trace.svg';
@@ -286,7 +287,7 @@ import Bluecircle from './category/Bluecircle.svg';
 import Inviter from './category/Inviter.svg';
 import InviterModif from './category/InviterModif.svg';
 
-export {Editprofile,InviterModif,Inviter,CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
+export {CreateGroupPro,Editprofile,InviterModif,Inviter,CheckOrange,CheckGray,Flecheposition,Bluecircle,ArrowUpWhite,ArrowDownBlack,CreateGroupFamily,CreateGroupFriend,CreateGroupNeighbor,AlertRed,Computer,AperoSell,MealSell,MeetSell,PartySell,ShowSell,WorkshopSell,
   AddressBlue,CheckDarkBlue,CheckPink,
   OptionGray,
   LocationRed,
@@ -327,6 +328,7 @@ import MesAbonnesPro from './profile/MesAbonnesPro.svg';
 import SortirGroupe from './profile/SortirGroupe.svg';
 
 import AddFamily from './profile/AddFamily.svg';
+import AddProAbonne from './profile/AddProAbonne.svg';
 import AddFriend from './profile/AddFriend.svg';
 import FamilyGroup from './profile/FamilyGroup.svg';
 import AddNeighbor from './profile/AddNeighbor.svg';
@@ -349,9 +351,11 @@ import InstitutionInformation from './profile/InstitutionInformation.svg';
 import Voisins from './profile/Voisins.svg';
 import Amis from './profile/Amis.svg';
 import Famille from './profile/Famille.svg';
+import ProGroupe from './profile/ProGroupe.svg';
+
 import Tous from './profile/Tous.svg';
 
-export {MesOffresPro,MesAbonnesPro,SortirGroupe,Voisins,Amis,Famille,Tous,AssociationInformation,EnterpriseInformation,InstitutionInformation,
+export {ProGroupe,AddProAbonne,MesOffresPro,MesAbonnesPro,SortirGroupe,Voisins,Amis,Famille,Tous,AssociationInformation,EnterpriseInformation,InstitutionInformation,
   Promotion,
   Tips,
   Events,

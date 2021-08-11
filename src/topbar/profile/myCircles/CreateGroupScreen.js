@@ -145,9 +145,11 @@ const CreateGroupScreen = (props) => {
         <FlatList horizontal={true} data={selectedList} renderItem={renderSelectedList} keyExtractor={(i) => i.id} />
       </View>
       <FlatList data={myContacts} renderItem={renderCircleList} keyExtractor={(i) => i.id} />
+  {  console.log(props.themeColor," njfjfjfjfjfjfjfj ",props.sort)}
       <CommonButton
         text="Continuer"
         style={{ backgroundColor: props.themeColor, bottom: 30 * hm, position: 'absolute', alignSelf: 'center' }}
+       
         onPress={() => Actions.nameGroup({ themeColor: props.themeColor, sort: props.sort })}
       />
     </View>

@@ -6,7 +6,7 @@ import CommonTextInput from '../../../Components/textInput/CommonTextInput';
 import CommonButton from '../../../Components/button/CommonButton';
 import { Actions } from 'react-native-router-flux';
 import AccountCommonHeader from '../../../Components/header/AccountCommonHeader';
-import { CreateGroupNeighbor, CreateGroupFamily, CreateGroupFriend } from '../../../assets/svg/icons';
+import { CreateGroupNeighbor, CreateGroupFamily, CreateGroupFriend, CreateGroupPro } from '../../../assets/svg/icons';
 import CommonHeader from '../../../Components/header/CommonHeader';
 import RelationshipType from '../../../model/user/RelationshipType';
 const addIconSize = { width: 42 * em, height: 30 * em };
@@ -15,18 +15,19 @@ const themeButtons = [
   { id: RelationshipType.FAMILIY, icon: CreateGroupFamily(addIconSize), color: '#EF88B9' },
   { id: RelationshipType.FRIEND, icon: CreateGroupFriend(addIconSize), color: '#6784DA' },
   { id: RelationshipType.NEIGHBOR, icon: CreateGroupNeighbor(addIconSize), color: '#40CDDE' },
+  { id: RelationshipType.PRO, icon: CreateGroupPro(addIconSize), color: '#1E2D60' },
 ];
 const NameGroupScreen = (props) => {
   const themeBtn = themeButtons.find((item) => item.id === props.sort);
-  // console.log(themeBtn)
+ 
   return (
     <View style={[styles.container, { backgroundColor: props.themeColor }]}>
       <CommonHeader
         dark={false}
         rightTxt={'Annuler'}
         style={styles.header}
-        onRightPress={() => Actions.myCirclesHome()}
-      />
+        onRightPress={() =>props.sort==="Professionnel"?Actions.mesAboonespro(): Actions.myCirclesHome()}
+        />
       <View style={styles.popupView}>
         <View style={styles.popupTopView}>
           <View style={styles.icon}>{themeBtn.icon}</View>
@@ -37,7 +38,7 @@ const NameGroupScreen = (props) => {
           <CommonButton
             text={'Créer groupe'}
             style={[styles.btnNext, { backgroundColor: hexToRGB(props.themeColor, 0.5) }]}
-            onPress={() => Actions.myCirclesHome()}
+            onPress={() =>props.sort==="Professionnel"?Actions.mesAboonespro(): Actions.myCirclesHome()}
           />
         </View>
       </View>

@@ -119,7 +119,7 @@ const ProProfileHomeScreen = (props) => {
             style={styles.cardStyle}
             icon={MesAbonnesPro(iconSize)}
             onPress={() => {
-              Actions.proNeedsHome();
+              Actions.mesAboonespro();
             }}
           />
         </View>

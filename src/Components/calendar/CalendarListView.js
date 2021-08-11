@@ -1,7 +1,8 @@
 import React from 'react';
-import { View,TouchableOpacity } from 'react-native';
+import { View,TouchableOpacity,Text } from 'react-native';
 import { em, HEIGHT, hm } from '../../constants/consts';
 import { LocaleConfig, CalendarList } from 'react-native-calendars';
+import moment from 'moment';
 
 LocaleConfig.locales.fr = {
   monthNames: [
@@ -27,20 +28,61 @@ LocaleConfig.defaultLocale = 'fr';
 
 const CalendarListView = (props) => {
   const [] = React.useState({});
+  const nextDate = [
+    props.thed,
+  ];
+  
+  let mark = {};
+  
+  nextDate.forEach(day => {
+    mark[day] = {
+      marked: true,
+      customStyles: {
+        text: {
+          color: '#40CDDE',
+          fontSize:18*em,
+          fontWeight: 'bold',
+          fontFamily:'Lato-Black'
+        },
+      },
+    };
+  });
 
   return (
     <View style={styles.container}>
       <CalendarList
-        onVisibleMonthsChange={(months) => {
-          console.log('now these months are visible', months);
-        }}
-       
+  
+        markingType={'custom'}
+        markedDates={mark}
+        // onVisibleMonthsChange={(months) => {
+        //   console.log('now these months are visible', months);
+        // }}
+      
         scrollEnabled={true}
         showScrollIndicator={true}
         onDayPress={(day) => {
-          props.onDayPress(day);
+          day= moment(day).subtract(1, 'months')
+          // day =moment(day).add(1, 'day')
+      props.onDayPress(moment(day));
         }}
-       
+        theme={{
+          
+        
+          todayTextColor: '#1E2D60',
+          dayTextColor: '#1E2D60',
+          dotColor: '#40CDDE',
+      
+          monthTextColor: '#1E2D60',
+        
+        
+          textMonthFontWeight: 'bold',
+        
+          textMonthFontFamily:'Montserrat-Bold',
+          textMonthFontSize: 20*em,
+          textDayFontFamily:'Lato-Medium',
+          textDayFontSize: 18*em,
+
+        }}
       />
       <TouchableOpacity
             onPress={() => {

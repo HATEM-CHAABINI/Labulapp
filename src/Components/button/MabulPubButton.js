@@ -8,13 +8,12 @@ const MabulPubButton = (props) => {
   return (
     <KeyboardAvoidingView
 
-    keyboardVerticalOffset = {Platform.OS === "ios" ? 0: 30*hm} // adjust the value here if you need more padding
+    keyboardVerticalOffset = {Platform.OS === "ios" ? 0:0} // adjust the value here if you need more padding
     // style = {{ flex: 1 }}
-    behavior={"padding"}
+    behavior={Platform.OS === "ios" ?"padding":null}
     >
   
     <CommonBigButton
-    //   rightIcon={<ArrowRightWhite width={10 * em} height={17 * em} />}
       textStyle={styles.txt}
       text={props.text?props.text:"Suivant"}
       loading={props.loading}

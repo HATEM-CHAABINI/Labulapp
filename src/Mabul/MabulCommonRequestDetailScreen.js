@@ -246,6 +246,7 @@ const MabulCommonRequestDetailScreen = (props) => {
 
   return (
     <View style={{
+      // marginBottom:-50,
       flex: 1, backgroundColor: '#F0F5F7', zIndex: 999,
     }}>
       <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]} percent={props.process}
@@ -674,17 +675,24 @@ ta demande`}
             showDescription={() => prexpre()}
             conceptColor={conceptColor} okoModal={() => Sheet6.current.close()} closeModal={() => Sheet6.current.close()} />
         </RBSheet>
-       
-      
-      </View>
-      
+       { Platform.OS !== "ios" ?  
       <MabulPubButton
           text={"Publier"}
           color={title.length==0 ?hexToRGB(conceptColor,0.5):hexToRGB(conceptColor)}
           style={styles.nextBtn}
           onPress={() => onSubmit()}
         // onPress={formik.handleSubmit}
-        />
+        />:<></>}
+      </View>
+      { Platform.OS === "ios" ?  
+      <MabulPubButton
+          text={"Publier"}
+          color={title.length==0 ?hexToRGB(conceptColor,0.5):hexToRGB(conceptColor)}
+          style={[styles.nextBtn,{marginTop:-50*hm}]}
+          onPress={() => onSubmit()}
+        // onPress={formik.handleSubmit}
+        />:<></>}
+      
     </View>
   );
 };
@@ -776,8 +784,8 @@ const styles = {
   nextBtn: {
     width: 315 * em,
     alignSelf: 'center',
-    bottom: 10 * hm,
-    marginTop:-50*hm,
+    bottom: 30 * hm,
+    // marginTop:-50*hm,
     height: 58 * hm,
     opacity: 1,
 

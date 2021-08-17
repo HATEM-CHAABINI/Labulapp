@@ -41,6 +41,7 @@ import TitleText from '../../../text/TitleText';
 
 const EditNeedScreen = (props) => {
 // console.log('kdkdkdkdkdkddkdkkdkdkd',props.data2);
+// console.log( "props.data2.belongsTo", props.data2)
   const [userProfile] = useState(updateUserPrfile);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isEndDatePickerVisible, setisEndDatePickerVisible] = useState(false);
@@ -504,13 +505,14 @@ const EditNeedScreen = (props) => {
         titleUpperCase
         caption={'Catégorie'}
         // value={'Bricolage/ jardinage'}
-        value={props.data2.belongsTo.name}
+        // value={props.data2.belongsTo.name}
         style={styles.listItem}
-        onPress={() => {
-          seteditCategory(!editCategory);
-        }}
+        // onPress={() => {
+        //   seteditCategory(!editCategory);
+        // }}
       />
-      <EditCategoryScreen
+
+      {/* <EditCategoryScreen
         visible={editCategory}
         title={"Catégorie"}
         value={props.data2.belongsTo}
@@ -523,8 +525,7 @@ const EditNeedScreen = (props) => {
           props.data2.serviceType.name === 'sell' ? props.data2.belongsTo.id === 1 ? sellObjetItems : props.data2.belongsTo.id === 2 ? sellThemeData : sellServiceItems
             : props.data2.serviceType.name === 'give' ? givecategoryItems : props.data2.serviceType.name === 'organize' ? organizeCategoryData : []
         }
-
-      />
+      /> */}
              {/* ////////////// */}
 
       <TouchableOpacity onPress={() => showDatePicker()}>

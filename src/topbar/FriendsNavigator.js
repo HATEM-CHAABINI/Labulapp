@@ -41,7 +41,7 @@ if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=
 
   useEffect(() => {
 
-    if (Data.length > 0) {
+    if (Data.length >= 0) {
       // console.log("leennnnghhhththt");
       setLoading(false)
 
@@ -71,13 +71,8 @@ if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=
             shadowColor='black'
             shadowOpacity={0.5}
             onPress={() => {
-
               // props.navigation.navigate('FriendsSearchScreen')    
-
               Actions.friendsSearch();
-
-
-
             }}>
             <MagnifierBlue width={20 * em} height={20 * em} />
           </TouchableOpacity>

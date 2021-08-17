@@ -175,38 +175,35 @@ const MabulCommonRequestDetailScreen = (props) => {
     if (title == '') {
       setErrorTitle('Obligatoire')
     }
-    else if (descriptionn == "") {
-      setErrorDescription('Obligatoire')
-    }
-    else if (prevoir == "" && mabulService === 'organize') {
-      // else if (prevoir=="" ){
-      setErrorPrevoir('Obligatoire')
-    }
-    else if (dates == "") {
-      setErrorDate('Obligatoire')
-    }
-    else if (allowPrix == "" && mabulService === 'sell') {
-      setErrorPrix('Obligatoire')
-    }
-    else if (photos == "") {
-      setErrorPhotos('Obligatoire')
-    }
-    else if (locations == "") {
-      setErrorAddress('Obligatoire')
-    }
+    // else if (descriptionn == "") {
+    //   setErrorDescription('Obligatoire')
+    // }
+    // else if (prevoir == "" && mabulService === 'organize') {
+    //   // else if (prevoir=="" ){
+    //   setErrorPrevoir('Obligatoire')
+    // }
+    // else if (dates == "") {
+    //   setErrorDate('Obligatoire')
+    // }
+    // else if (allowPrix == "" && mabulService === 'sell') {
+    //   setErrorPrix('Obligatoire')
+    // }
+    // else if (photos == "") {
+    //   setErrorPhotos('Obligatoire')
+    // }
+    // else if (locations == "") {
+    //   setErrorAddress('Obligatoire')
+    // }
 
     else {
-
-      // console.log('suiiivivvvvvvvvvv',`${prixOne}-${prixTwo}` );
-      // dispatch(update_into_demand({ values,description:descriptionn }))
       if (mabulService === 'organize') {
-        dispatch(update_into_demand({data:{description: descriptionn, title: title} , prevoir: prevoir }))
+        dispatch(update_into_demand({ data: { description: descriptionn, title: title }, prevoir: prevoir }))
       }
       else if (mabulService === 'sell') {
-        dispatch(update_into_demand({ data:{description: descriptionn, title: title}, prix: !Promooo ? prix : `${prixOne}-${prixTwo}` }))
+        dispatch(update_into_demand({ data: { description: descriptionn, title: title }, prix: !Promooo ? prix : `${prixOne}-${prixTwo}` }))
       }
       else {
-        dispatch(update_into_demand({data:{description: descriptionn, title: title} }))
+        dispatch(update_into_demand({ data: { description: descriptionn, title: title } }))
       }
       mabulService === 'sell'
         ? Actions.mabulSellPrice({ mabulService: props.mabulService, process: 90 })
@@ -258,63 +255,36 @@ const MabulCommonRequestDetailScreen = (props) => {
         progressBarColor={conceptColor} />
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
-     
-          {/* <Reinput 
-          style={{ height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
-            label={mabulService=="sell"?'Écris le nom de ce que tu vends ':'Écrit un titre '}
-            autoFocus={true}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
 
-            underlineActiveColor="#FFFFFF"
-            underlineColor="#FFFFFF"
-            activeColor={conceptColor}
-            labelActiveColor="#6A8596"
-            labelColor="#6A8596"
-            paddingBottom={25 * em}
+          <TextInput
+            style={{ fontSize: 17 * em, height: 76 * hm, paddingLeft: 40 * em, marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
+            label={
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 16 * em, color: "#6A8596" }}>{mabulService == "sell" ? 'Écris le nom de ce que tu vends ' : 'Écrit un titre '}</Text>
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 16 * em, color: conceptColor }}>*</Text>
+              </View>
+            }
+            underlineColor='#fff'
+            theme={{
+              fonts: {
+                regular: {
+                  fontFamily: 'Montserrat-Bold'
+                }
+              }, colors: { text: '#1E2D60', primary: 'white' }
+            }}
+            selectionColor="#49CDDD"
+            underlineColor='white'
+            autoFocus={true}
             value={title}
             onChangeText={(e) => titles(e)}
+
           />
-          */}
-
-
-
-
-  
-      <TextInput 
-   style={{  fontSize: 17*em, height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
-   label={  
-  <View style={{flexDirection: 'row'}}>
-    <Text style={{fontFamily:'Lato-Regular',fontSize:16*em,color:"#6A8596"}}>{mabulService=="sell"?'Écris le nom de ce que tu vends ':'Écrit un titre '}</Text>
-    <Text style={{fontFamily:'Lato-Regular',fontSize:16*em,color: conceptColor}}>*</Text>
-  </View>
-}
-
-
-underlineColor='#fff'
-
-theme={{   fonts: {
-  regular: {
-    fontFamily: 'Montserrat-Bold'
-  }
-},colors: {text: '#1E2D60', primary: 'white'}}}
-
-
-
-selectionColor="#49CDDD"
-underlineColor='white'
-   autoFocus={true}
-   value={title}
-   onChangeText={(e) => titles(e)}
-
-   />
           {/* <TextInput
                     style={{ height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
                     label={mabulService=="sell"?'Écris le nom de ce que tu vends ':'Écrit un titre '}
                     autoFocus={true}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
-        
                     underlineActiveColor="#FFFFFF"
                     underlineColor="#FFFFFF"
                     activeColor={conceptColor}
@@ -325,26 +295,26 @@ underlineColor='white'
                     onChangeText={(e) => titles(e)}
      /> */}
           <Text style={styles.descerrorText}>{errortitle}</Text>
-          <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic',  marginBottom: 10 * hm }}>(68 caractères maximum)</Text>
+          <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic', marginBottom: 10 * hm }}>(68 caractères maximum)</Text>
 
 
 
           {
             mabulService === 'need' || mabulService === 'give' ?
-            <>
-          <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm }]}
-            onPress={() => Sheet1.current.open()}
-          >
-            <Text style={styles.contentDesc}>Description</Text>
+              <>
+                <TouchableOpacity
+                  style={[styles.ActionButton, { height: 90 * hm }]}
+                  onPress={() => Sheet1.current.open()}
+                >
+                  <Text style={styles.contentDesc}>Description</Text>
 
-            {!allowdescription ?
-              <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
-              :
-              <Text style={styles.contentDescSubb} >{descriptionn}</Text>
-            }
-          </TouchableOpacity>
-          <Text style={styles.descerrorText}>{errorDescription}</Text></>:<></>}
+                  {!allowdescription ?
+                    <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+                    :
+                    <Text style={styles.contentDescSubb} >{descriptionn}</Text>
+                  }
+                </TouchableOpacity>
+                <Text style={styles.descerrorText}>{errorDescription}</Text></> : <></>}
 
 
           {
@@ -370,20 +340,21 @@ underlineColor='white'
               :
               <></>
           }
+
           {
             mabulService !== 'give' ?
-            <>
-          <TouchableOpacity
-            style={[styles.ActionButton, { height: 70 * hm }]}
-            onPress={() => Sheet2.current.open()}
-          >
-            <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-              <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
-              <Flechedroite width={14 * em} height={14 * hm} />
-            </View>
-            {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
-          </TouchableOpacity>
-          <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>
+              <>
+                <TouchableOpacity
+                  style={[styles.ActionButton, { height: 70 * hm }]}
+                  onPress={() => Sheet2.current.open()}
+                >
+                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+                    <Flechedroite width={14 * em} height={14 * hm} />
+                  </View>
+                  <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text>
+                </TouchableOpacity>
+                <Text style={styles.descerrorText}>{errorDate}</Text></> : <></>
           }
 
 
@@ -412,39 +383,39 @@ underlineColor='white'
 
 
 
-              
-          <View
-            style={[styles.ActionButton, { height: 90 * hm, marginTop: 0 * hm, }]} >
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
-              <TouchableOpacity onPress={() => Sheet3.current.open()}>
-                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
-              </TouchableOpacity>
-            </View>
-            {!demandData.address ?
-              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{"ABYMES 97139 \nGuadeloupe"}</Text>
-              :
-              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
-            }
-          </View>
-          <Text style={styles.descerrorText}>{erroraddress}</Text>
-     
+
+                <View
+                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 0 * hm, }]} >
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
+                    <TouchableOpacity onPress={() => Sheet3.current.open()}>
+                      <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
+                    </TouchableOpacity>
+                  </View>
+                  {!demandData.address ?
+                    <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{"ABYMES 97139 \nGuadeloupe"}</Text>
+                    :
+                    <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
+                  }
+                </View>
+                <Text style={styles.descerrorText}>{erroraddress}</Text>
 
 
 
-          <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm }]}
-            onPress={() => Sheet1.current.open()}
-          >
-            <Text style={styles.contentDesc}>Description</Text>
 
-            {!allowdescription ?
-              <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
-              :
-              <Text style={styles.contentDescSubb} >{descriptionn}</Text>
-            }
-          </TouchableOpacity>
-          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
+                <TouchableOpacity
+                  style={[styles.ActionButton, { height: 90 * hm }]}
+                  onPress={() => Sheet1.current.open()}
+                >
+                  <Text style={styles.contentDesc}>Description</Text>
+
+                  {!allowdescription ?
+                    <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+                    :
+                    <Text style={styles.contentDescSubb} >{descriptionn}</Text>
+                  }
+                </TouchableOpacity>
+                {<Text style={styles.descerrorText}>{errorDescription}</Text>}
 
 
               </>
@@ -452,19 +423,19 @@ underlineColor='white'
               <></>
           }
 
-          
-
-       
-  
-           
 
 
 
 
-          <View style={[styles.ActionButton, {  paddingBottom:20*hm}]}>
+
+
+
+
+
+          <View style={[styles.ActionButton, { paddingBottom: 20 * hm }]}>
             <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
               <Text style={styles.contentDesc}>Photos</Text>
-              <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em,fontSize:12*em }]}>(3 max)</Text>
+              <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em, fontSize: 12 * em }]}>(3 max)</Text>
             </View>
             <Text style={[styles.contentDescSub, { marginTop: 10 * hm }]} >Les photos aident à mieux cerner ta demande.</Text>
 
@@ -479,39 +450,39 @@ underlineColor='white'
               <></>
               :
               <>
-          <View
-            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]} >
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
-              <TouchableOpacity onPress={() => Sheet3.current.open()}>
-                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
-              </TouchableOpacity>
-            </View>
-            {!demandData.address ?
-              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{"ABYMES 97139 \nGuadeloupe"}</Text>
-              :
-              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
-            }
-          </View>
-          <Text style={styles.descerrorText}>{erroraddress}</Text>
-          </>}
-                          
+                <View
+                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]} >
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
+                    <TouchableOpacity onPress={() => Sheet3.current.open()}>
+                      <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
+                    </TouchableOpacity>
+                  </View>
+                  {!demandData.address ?
+                    <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{"ABYMES 97139 \nGuadeloupe"}</Text>
+                    :
+                    <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
+                  }
+                </View>
+                <Text style={styles.descerrorText}>{erroraddress}</Text>
+              </>}
+
 
 
           {
             mabulService === 'give' ?
-            <>
-          <TouchableOpacity
-            style={[styles.ActionButton, { height: 70 * hm, marginTop: 10 * hm, }]}
-            onPress={() => Sheet2.current.open()}
-          >
-            <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-              <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
-              <Flechedroite width={14 * em} height={14 * hm} />
-            </View>
-            {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
-          </TouchableOpacity>
-          <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>}
+              <>
+                <TouchableOpacity
+                  style={[styles.ActionButton, { height: 70 * hm, marginTop: 10 * hm, }]}
+                  onPress={() => Sheet2.current.open()}
+                >
+                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+                    <Flechedroite width={14 * em} height={14 * hm} />
+                  </View>
+                  {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
+                </TouchableOpacity>
+                <Text style={styles.descerrorText}>{errorDate}</Text></> : <></>}
 
 
 
@@ -519,7 +490,7 @@ underlineColor='white'
         </ScrollView>
       </View>
       <View style={{ flex: 0.1 }}>
-    
+
         <RBSheet ref={Sheet1}
           height={hm * 630}
           openDuration={250}
@@ -534,7 +505,7 @@ underlineColor='white'
             }
           }}
         >
-          
+
           <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
           </View>
@@ -695,7 +666,7 @@ ta demande`}
             {/* {formik.errors.prevoir && formik.touched.prevoir && <Text style={styles.descerrorText}>{formik.errors.prevoir}</Text>} */}
 
 
-            <Text style={{ marginLeft: 30 * em, bottom: 20 * hm,fontFamily: 'HelveticaNeue', fontSize: 12 * em, color: '#A0AEB8' }} >Sépare chaque mot avec des virgules</Text>
+            <Text style={{ marginLeft: 30 * em, bottom: 20 * hm, fontFamily: 'HelveticaNeue', fontSize: 12 * em, color: '#A0AEB8' }} >Sépare chaque mot avec des virgules</Text>
 
 
             <View style={styles.SwitchbuttonWrapper}>
@@ -710,7 +681,7 @@ ta demande`}
                 thumbColor={true ? "white" : conceptColor}
 
                 value={SwitchOblig}
-                onValueChange={()=>{setSwitchOblig(!SwitchOblig)}}
+                onValueChange={() => { setSwitchOblig(!SwitchOblig) }}
 
               />
 
@@ -748,58 +719,61 @@ ta demande`}
             {Promo ?
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View>
-                <Text style={{ marginLeft: 30 * em,textAlign:'center',fontSize:14*em,fontFamily:'Lato-Regular',color:"#6A8596",marginBottom:10*hm}}>Ajoutez un prix </Text>
-       
-                <TextInput placeholder="5€"
-                  style={[{ width: 148 * em, marginLeft: 30 * em }, styles.BoxPrice]}
-                  theme={{   
-                    colors: {text: '#A0AEB8', primary: 'white'}}}
+                  <Text style={{ marginLeft: 30 * em, textAlign: 'center', fontSize: 14 * em, fontFamily: 'Lato-Regular', color: "#6A8596", marginBottom: 10 * hm }}>Ajoutez un prix </Text>
+
+                  <TextInput placeholder="5€"
+                    style={[{ width: 148 * em, marginLeft: 30 * em }, styles.BoxPrice]}
+                    theme={{
+                      colors: { text: '#A0AEB8', primary: 'white' }
+                    }}
                     selectionColor="#49CDDD"
                     underlineColor='white'
-                  // value={formik.values.prix}
-                  // onBlur={formik.handleBlur('prix')}
-                  // onChangeText={formik.handleChange('prix')}
-                  value={prixOne}
-                  onChangeText={(e) => prexpreone(e)}
-                />
+                    // value={formik.values.prix}
+                    // onBlur={formik.handleBlur('prix')}
+                    // onChangeText={formik.handleChange('prix')}
+                    value={prixOne}
+                    onChangeText={(e) => prexpreone(e)}
+                  />
                 </View>
 
                 <View>
-                <Text style={{marginRight: 30 * em ,textAlign:'center',fontSize:14*em,fontFamily:'Lato-Regular',color:"#6A8596",marginBottom:10*hm}}>Ajoutez un prix </Text>
-       
-                <TextInput placeholder="3,99€" style={[{ width: 148 * em, marginRight: 30 * em }, styles.BoxPrice]}
-                  theme={{   
-                    colors: {text: '#A0AEB8', primary: 'white'}}}
+                  <Text style={{ marginRight: 30 * em, textAlign: 'center', fontSize: 14 * em, fontFamily: 'Lato-Regular', color: "#6A8596", marginBottom: 10 * hm }}>Ajoutez un prix </Text>
+
+                  <TextInput placeholder="3,99€" style={[{ width: 148 * em, marginRight: 30 * em }, styles.BoxPrice]}
+                    theme={{
+                      colors: { text: '#A0AEB8', primary: 'white' }
+                    }}
                     selectionColor="#49CDDD"
                     underlineColor='white'
-                  // value={formik.values.promo}
-                  // onBlur={formik.handleBlur('promo')}
-                  // onChangeText={formik.handleChange('promo')}
-                  value={prixTwo}
-                  onChangeText={(e) => prexpretwo(e)}
-                />
-</View>
+                    // value={formik.values.promo}
+                    // onBlur={formik.handleBlur('promo')}
+                    // onChangeText={formik.handleChange('promo')}
+                    value={prixTwo}
+                    onChangeText={(e) => prexpretwo(e)}
+                  />
+                </View>
               </View>
               :
               <View>
-                <Text style={{textAlign:'center',fontSize:14*em,fontFamily:'Lato-Regular',color:"#6A8596",marginBottom:10*hm}}>Ajoutez un prix </Text>
-              <TextInput placeholder="5€"
+                <Text style={{ textAlign: 'center', fontSize: 14 * em, fontFamily: 'Lato-Regular', color: "#6A8596", marginBottom: 10 * hm }}>Ajoutez un prix </Text>
+                <TextInput placeholder="5€"
 
-// underlineColor='red'
+                  // underlineColor='red'
 
-theme={{   
-colors: {text: '#A0AEB8', primary: 'white'}}}
-selectionColor="#49CDDD"
-underlineColor='white'
+                  theme={{
+                    colors: { text: '#A0AEB8', primary: 'white' }
+                  }}
+                  selectionColor="#49CDDD"
+                  underlineColor='white'
 
-               style={[{ width: 310 * em },
-                 styles.BoxPrice]}
+                  style={[{ width: 310 * em },
+                  styles.BoxPrice]}
                   value={formik.values.prix}
-                // onBlur={formik.handleBlur('prix')}
-                // onChangeText={formik.handleChange('prix')}
-                value={prix}
-                onChangeText={(e) => prexprecr(e)}
-              />
+                  // onBlur={formik.handleBlur('prix')}
+                  // onChangeText={formik.handleChange('prix')}
+                  value={prix}
+                  onChangeText={(e) => prexprecr(e)}
+                />
               </View>
             }
 
@@ -826,30 +800,30 @@ underlineColor='white'
             showDescription={() => prexpre()}
             conceptColor={conceptColor} okoModal={() => Sheet6.current.close()} closeModal={() => Sheet6.current.close()} />
         </RBSheet>
-       { Platform.OS !== "ios" ?  
-      <MabulPubButton
-          text={"Publier"}
-          color={title.length==0 ?hexToRGB(conceptColor,0.5):hexToRGB(conceptColor)}
-          style={styles.nextBtn}
-          onPress={() => onSubmit()}
-        // onPress={formik.handleSubmit}
-        />:<></>}
+        {Platform.OS !== "ios" ?
+          <MabulPubButton
+            text={"Publier"}
+            color={title.length == 0 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
+            style={styles.nextBtn}
+            onPress={() => onSubmit()}
+          // onPress={formik.handleSubmit}
+          /> : <></>}
       </View>
-      { Platform.OS === "ios" ?  
-      <MabulPubButton
+      {Platform.OS === "ios" ?
+        <MabulPubButton
           text={"Publier"}
-          color={title.length==0 ?hexToRGB(conceptColor,0.5):hexToRGB(conceptColor)}
-          style={[styles.nextBtn,{marginTop:-50*hm}]}
+          color={title.length == 0 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
+          style={[styles.nextBtn, { marginTop: -50 * hm }]}
           onPress={() => onSubmit()}
         // onPress={formik.handleSubmit}
-        />:<></>}
-      
+        /> : <></>}
+
     </View>
   );
 };
 
 const styles = {
-  BoxPrice: {borderTopLeftRadius: 20 * em,borderTopRightRadius: 20 * em, backgroundColor: "#F0F5F7", height: 80 * hm, borderRadius: 20 * em, justifyContent: 'center', alignSelf: 'center', textAlign: 'center', fontSize: 25 * em, fontFamily: "Lato-Regular" },
+  BoxPrice: { borderTopLeftRadius: 20 * em, borderTopRightRadius: 20 * em, backgroundColor: "#F0F5F7", height: 80 * hm, borderRadius: 20 * em, justifyContent: 'center', alignSelf: 'center', textAlign: 'center', fontSize: 25 * em, fontFamily: "Lato-Regular" },
   SwitchTitle: {
     flex: 1,
     fontFamily: 'HelveticaNeue',
@@ -946,15 +920,15 @@ const styles = {
     width: 315 * em,
     alignSelf: 'center',
     bottom: 10 * hm,
-    marginTop:-50*hm,
-    height: 58 * hm, 
-     opacity: 0.5,
+    marginTop: -50 * hm,
+    height: 58 * hm,
+    opacity: 0.5,
 
   },
   input: {
-  
-},
-  etoile:{position:'absolute',paddingLeft: 210 * em,  zIndex:9949},
+
+  },
+  etoile: { position: 'absolute', paddingLeft: 210 * em, zIndex: 9949 },
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },
   contentDescSub: { marginTop: 3 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8', paddingLeft: 40 * em },

@@ -64,7 +64,7 @@ const MabulAddPhoto = (props) => {
   //   }).catch(e => alert(e));
   // }
 
-  const imageSelect = () => {
+  const imageSelect = (values) => {
     ImagePicker.openPicker({
       multiple: true,
       waitAnimationEnd: false,
@@ -72,18 +72,19 @@ const MabulAddPhoto = (props) => {
       forceJpg: true,
     }).then(images => {
       var img= [];
-      img.push({id:1,uri:images[0].path})
-      img.push({id:2,uri:images[1].path})
-      img.push({id:3,uri:images[2].path})
-      setimages({ images: images })
-      props.requiredPhoto()
-      // console.log('hello images',images.length)
-      // console.log('hello images path',img)
-      if(images.length>=3){
+      values==1? img.push({id:1,uri:images[0].path}):""
+      values==2?img.push({id:2,uri:images[1].path}):""
+      values==3?img.push({id:3,uri:images[2].path}):""
+    
+      console.log('hello images',images.length)
+      console.log('hello images path',img)
+      if(images.length<=3){
+        setimages({ images: images })
+        props.requiredPhoto()
         dispatch(update_into_demand({ images:img }))
       }
       else{
-        alert("You can  choose min 3 photos !!") 
+        alert("Vous ne pouvez choisir que 3 photos !!") 
       }
     }).catch(e => alert(e));
   }
@@ -120,7 +121,7 @@ const MabulAddPhoto = (props) => {
            <ActivityIndicator style={styles.photoZone} color={conceptColor} size={'small'} /> :
           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                     <View style={styles.photoZone}>
-            <TouchableOpacity onPress={() => { imageSelect() }} >
+            <TouchableOpacity onPress={() => { imageSelect(1) }} >
               <Image
                 source={require('../assets/images/ic_addphotos_green.png')}
                 style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
@@ -129,7 +130,7 @@ const MabulAddPhoto = (props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.photoZone}>
-            <TouchableOpacity onPress={() => { imageSelect() }} >
+            <TouchableOpacity onPress={() => { imageSelect(2) }} >
               <Image
                 source={require('../assets/images/ic_addphotos_green.png')}
                 style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
@@ -138,7 +139,7 @@ const MabulAddPhoto = (props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.photoZone}>
-            <TouchableOpacity onPress={() => { imageSelect() }} >
+            <TouchableOpacity onPress={() => { imageSelect(3) }} >
               <Image
                 source={require('../assets/images/ic_addphotos_green.png')}
                 style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
@@ -182,7 +183,7 @@ const MabulAddPhoto = (props) => {
                   </ImageBackground>)
                 })}
 
-                {images.images.length < 3 ? <TouchableOpacity
+                {/* {images.images.length < 3 ? <TouchableOpacity
                   imageStyle={{ borderRadius: 15 * em }}
                   style={
                     {
@@ -208,7 +209,7 @@ const MabulAddPhoto = (props) => {
                     <EditAddPhoto width={32.86 * em} height={23 * em} />
                   </View>
                   <CommentText text="Clique ici" color="#40CDDE" />
-                </TouchableOpacity> : null}
+                </TouchableOpacity> : null} */}
               </View>
             </SafeAreaView>
           }

@@ -101,8 +101,8 @@ export default (props) => {
 
     };
     const validationSchema = Yup.object({
-        address: Yup.string()
-            .required('L\'adresse est requise'),
+        // address: Yup.string()
+            // .required('L\'adresse est requise'),
 
     });
     const onSubmit = async values => {

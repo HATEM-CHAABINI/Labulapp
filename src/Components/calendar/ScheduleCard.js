@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { em, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 import SmallText from '../../text/SmallText';
 import TinyText from '../../text/TinyText';
 
 const renderService = (data, onPressSee) => {
+
   if (data.service == null) {
     return <View style={styles.separator} />;
   }
@@ -13,7 +15,7 @@ const renderService = (data, onPressSee) => {
     <View style={styles.serviceContainer}>
       <Image source={data.service.user.photo} style={{ width: 32 * em, height: 32 * em }} />
       <View style={styles.serviceSubContainer}>
-        <SmallText text={data.service.user.name} style={{ color: "#1E2D60", fontSize: 14 * em, fontFamily: "Lato-Bold" }} />
+        <SmallText text={data.service.user.name} style={{ color: "#1E2D60", fontSize: 14 * em, fontFamily: "Montserrat-Bold" }} />
         <SmallText text={data.service.organName} style={styles.smallTopPadding} />
 
         <View style={styles.serviceInfoContainer}>
@@ -25,8 +27,14 @@ const renderService = (data, onPressSee) => {
 
              <TinyText text={data.service.title} fontSize={14} style={styles.smallTopPaddings} />
           </View>
-          <TouchableOpacity onPress={()=>{}} style={styles.colReverse}>
-            <TinyText text="Voir>" fontSize={14} color="#40CDDE" style={styles.largeTopPaddings} />
+          <TouchableOpacity 
+          onPress={()=>{
+  console.log("dataaaaaa", data);
+
+//             Actions.myNeed({ created:undefined,data: data, user: data.service.user, docId: data.key });
+}} 
+style={styles.colReverse}>
+            <TinyText text="Voir ›" fontSize={14} color="#40CDDE" style={styles.largeTopPaddings} />
           </TouchableOpacity>
         </View>
       </View>
@@ -69,10 +77,10 @@ const styles = {
   },
   serviceInfoContainer: { flex: 1, flexDirection: 'row', justifyContent: 'space-between' },
   colReverse: { flexDirection: 'column-reverse', marginRight: 9 * em },
-  smallTopPadding: { fontSize: 12, marginTop: 4 * hm, color: "#6A8596", fontFamily: 'Lato-Regular' },
-  smallTopPaddings: { marginTop: 5 * hm, color: "#1E2D60", fontFamily: 'Lato-Bold' },
-  largeTopPaddings: { marginTop: 13 * hm, fontFamily: 'Lato-SemiBold' },
-  smai: { marginTop: 24 * hm, color: "#1E2D60", fontFamily: 'Lato-Regular' },
+  smallTopPadding: { fontSize: 12*em, marginTop: 4 * hm, color: "#6A8596", fontFamily: 'Lato-Regular' },
+  smallTopPaddings: { marginTop: 5 * hm, color: "#1E2D60", fontFamily: 'Montserrat-Bold',fontSize:14*em },
+  largeTopPaddings: {color:'#40CDDE',fontSize:14*em, marginTop: 13 * hm, fontFamily: 'Lato-SemiBold' },
+  smai: { marginTop: 24 * hm, color: "#6A8596", fontFamily: 'Lato-Regular' ,fontSize:12*em},
 
   largeTopPadding: { marginTop: 2 * hm, fontFamily: 'Lato-Regular', marginBottom: 20 * hm },
   serviceSubContainer: { flex: 1, paddingLeft: 10 * em },

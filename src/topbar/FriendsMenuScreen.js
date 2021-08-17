@@ -45,20 +45,22 @@ const FriendsMenuScreen = (props) => {
   }
   //calls when we have location permission
   useEffect(() => {
-    if (hasLocationAccess) {
-      CurrentPosition();
-    }
-  }, [hasLocationAccess]);
-
-
-
-  useEffect(() => {
     //calls permission check function 
     initMap()
     //setting data from props for markers 
     setLoading(props.loading)
     setData(props.data)
-  }, [props.loading])
+    CurrentPosition();
+
+  }, [props.loading,hasLocationAccess])
+
+  useEffect(() => {
+   
+  }, [hasLocationAccess]);
+
+
+
+ 
 
 
 

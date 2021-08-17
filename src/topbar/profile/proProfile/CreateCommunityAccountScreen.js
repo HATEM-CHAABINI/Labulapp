@@ -20,7 +20,7 @@ const CreateCommunityAccountScreen = (props) => {
         <View style={styles.popupTopView}>
           <InstitutionInner width={35 * em} height={30 * em} />
           <TitleText text={'Complète le compte'} style={styles.titleText} />
-     <Text style={{fontFamily:'Lato-italic',fontSize:12*em,color:'#A0AEB8', marginBottom: 3 * hm }}>* champs obligatoires</Text>
+     <Text style={{fontFamily:'Lato-italic',fontSize:12*em,color:'#A0AEB8', marginBottom: 35 * hm }}>* champs obligatoires</Text>
          
 <Reinput
   label='Nom de l’institution ou collectivité *'
@@ -35,7 +35,7 @@ const CreateCommunityAccountScreen = (props) => {
   color='#1E2D60'
   fontFamily='Lato-Bold'
   fontSize={16 * em}
-  keyboardType="email-address"
+  keyboardType="ascii-capable"
   selectionColor={'#41D0E2'}
 marginBottom={-7*hm}
 
@@ -56,7 +56,7 @@ marginBottom={-7*hm}
   color='#1E2D60'
   fontFamily='Lato-Bold'
   fontSize={16 * em}
-  keyboardType="email-address"
+  keyboardType="ascii-capable"
   selectionColor={'#41D0E2'}
   marginBottom={-7*hm}
 
@@ -67,14 +67,14 @@ marginBottom={-7*hm}
 
         </View>
 
-        <KeyboardAvoidingView
+        {/* <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ alignItems: 'center' }}
-      >
+      > */}
         <View style={{backgroundColor:'white',width:'100%',alignItems:'center',bottom:0.2*hm}}>
           <CommonButton text={'Continuer'} onPress={() => Actions.proRegisterMobile({ accountType: props.accountType })} style={styles.btnNext} />
         </View>
-        </KeyboardAvoidingView>
+        {/* </KeyboardAvoidingView> */}
     </View>
   );
 };
@@ -107,7 +107,7 @@ const styles = {
 
   width: 315 * em,
 
-  bottom: 14*hm},
+  bottom: 30*hm},
   commonInput: {
     width: '100%',
     height: 52 * em,

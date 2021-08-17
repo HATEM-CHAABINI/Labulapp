@@ -171,7 +171,12 @@ const FriendsSearchScreen = (props) => {
           value={searched}
           onChangeText={(text) => serchFilter(text)}
         />
-        <ScrollView showsVerticalScrollIndicator={false}><View style={styles.container}>{listView2}</View></ScrollView>
+        {searched!==''?
+                <ScrollView showsVerticalScrollIndicator={false}><View style={styles.container}>{listView2}</View></ScrollView>
+
+        :
+        <></>
+        }
         <Image source={require('../assets/img/robotlupe.png')} style={styles.avatar} />
       </View>
     </>

@@ -3,7 +3,7 @@ import { View, Image, Text, KeyboardAvoidingView, Switch } from 'react-native';
 import { hexToRGB, em, mabulColors, hm } from '../../constants/consts';
 import MabulCommonHeader from '../../Mabul/MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
-import { Edit, Edit1, Edit2, Edit3, Document, Document1, Document2, Document3 } from '../../assets/svg/icons';
+import { Edit, Edit1, Edit2, Edit3, Document, Document1, Document2, Document3, RightArrow } from '../../assets/svg/icons';
 import Reinput from "reinput"
 import { useSelector, useDispatch } from 'react-redux'
 import { add_into_demand, update_into_demand } from '../../redux/actions/demand'
@@ -22,6 +22,7 @@ import MabulRechercheContact from '../../Mabul/MabulRechercheContact';
 import { TextInput } from 'react-native';
 import { Alert } from 'react-native';
 import { update_into_alert } from '../../redux/actions/alert';
+import MabulAddLieuDemands from '../../Mabul/MabulAddLieuDemands';
 const AlertAddNoteScreen = (props) => {
   const conceptColor = '#F9547B';
   const { demandData } = useSelector((state) => state.demandReducer);
@@ -104,22 +105,31 @@ const AlertAddNoteScreen = (props) => {
         progressBarColor={conceptColor} />
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
+        <TouchableOpacity onPress={() => Sheet2.current.open()}>
+
         <View
             style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm }]}
 
           >
+
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
-              <TouchableOpacity onPress={() => Sheet2.current.open()}>
-                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
-              </TouchableOpacity>
+              {/* <TouchableOpacity style={{ marginRight: 30 * em }} onPress={() => Sheet2.current.open()}> */}
+              <RightArrow style={{ marginRight: 30 * em }} width={11 * em} height={18 * em} />
+
+                {/* <Text >Modifier</Text> */}
+              {/* </TouchableOpacity> */}
             </View>
             {!address ?
-              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>ABYMES 97139 Guadeloupe</Text>
+                       <TouchableOpacity  onPress={() => ""}>
+
+              <Text style={{ color: conceptColor, fontFamily: "Lato-Regular", fontSize: 14 * em, marginLeft: 40 * em }}>+ Utiliser ma position</Text>
+          </TouchableOpacity>
               :
               <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{address}</Text>
             }
           </View>
+          </TouchableOpacity> 
           <Text style={styles.descerrorText}>{erroraddress}</Text>
 
 
@@ -189,10 +199,10 @@ comprendre ta demande`}
           }}
         >
           <View style={{ paddingTop: 46 * hm, paddingBottom: hm * 25 }}>
-            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Description</Text>
+            <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Lieu</Text>
           </View>
           <View style={styles.container}>
-            <MabulAddLieu
+            <MabulAddLieuDemands
               hideDescription={() => { }}
               requiredLocation={() => location()}
               conceptColor={conceptColor}

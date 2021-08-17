@@ -99,8 +99,8 @@ export default (props) => {
 
     };
     const validationSchema = Yup.object({
-        mobile: Yup.number("Doit être un type de nombre")
-            .required('Le numéro de portable est requis'),
+        // mobile: Yup.number("Doit être un type de nombre")
+            // .required('Le numéro de portable est requis'),
 
     });
     const onSubmit = async values => {

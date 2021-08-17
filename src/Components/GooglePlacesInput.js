@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, KeyboardAvoidingView,TouchableOpacity } from 'react-native'
+import { View, Text, KeyboardAvoidingView,TouchableOpacity,ScrollView } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { google_api, em, hm } from '../constants/consts'
-import { Magnifier, CrossCircle, LocationRed, Flecheposition } from '../assets/svg/icons';
+import { Magnifier, CrossCircle, LocationRed, Flecheposition,Locate } from '../assets/svg/icons';
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
 import CommentText from '../text/CommentText';
 Geocoder.init(google_api);
 const GooglePlacesInput = (props) => {
     const ref = useRef();
+    const [Location,setLocation]=useState('');
     const [address, setaddress] = useState(props.value)
     useEffect(() => {
         // ref.current?.setAddressText(address);
@@ -41,16 +42,20 @@ const GooglePlacesInput = (props) => {
         );
     }
     ///41D0E2
+
     return (
         <>
-            <View style={[{ width: '100%', flexDirection: 'row', borderBottomWidth: 2, borderBottomColor: props.borderBottomColor ? props.borderBottomColor : 'grey', zIndex: 1 , }, props.style]}>
+{console.log(Location)}
+      <View style={[{ width: '100%', flexDirection: 'row', 
+             zIndex: 1 , }, props.style]}>
                 <View style={{ marginRight: 15 * em, top: '3%', }}>
                     <Magnifier width={20 * em} height={20 * em} />
                 </View>
+           
                 <GooglePlacesAutocomplete
                     ref={ref}
                     placeholder={props.placeholder}
-                    minLength={2}
+                    minLength={1}
                     onPress={(data, details = null) => {
                         console.log("sdsdffsdf ", {
                             "address": data.description,
@@ -69,9 +74,25 @@ const GooglePlacesInput = (props) => {
                             })
 
                     }}
+                    fetchDetails={true}
 
                     styles={{
-                        
+                       
+                        listView:{
+                                // backgroundColor:'red',
+                                right:50*em,
+                                width:'100%',
+                                height:250*hm
+                        },
+                        row: {
+                            height: 40*hm,
+                            width: '100%',
+                            marginBottom:25*hm,
+ 
+                           },
+                           separator:{
+                                backgroundColor:'white'
+                           },
                         textInputContainer: props.containerStyle,
                         textInput: props.textInputStyle,
                         predefinedPlacesDescription: {
@@ -79,25 +100,57 @@ const GooglePlacesInput = (props) => {
                             zIndex: 2001,
 
                         },
+                        textInput: {
+                            // width:400*em,
+                            borderBottomWidth: 2,
+                            borderBottomColor: 
+                            Location?
+                            props.borderBottomColor  :'#BFCDDB', 
+                          },
                     }}
-
-                    fetchDetails={true}
-                    predefinedPlacesAlwaysVisible={true}
+                    textInputProps={{
+                        autoCorrect: false,
+                        
+                    onChangeText: (text) => { setLocation(text) }
+                     
+                      }}
+                    // listViewDisplayed="auto"
+                    returnKeyType={'search'}
+                  
+                    disableScroll={false}
+                    
+                    // predefinedPlacesAlwaysVisible={true}
                     filterReverseGeocodingByTypes={['locality', 'administrative_area_level_4']}
                     query={{
                         key: `${google_api}`,
                         language: 'fr',
                         types: '(regions)'
                     }}
-                    
+                    renderRow={(rowData,details) => {
+                        const title = rowData.structured_formatting.main_text;
+                        return (
+                         <View 
+                         style={{ flexDirection:'row',alignItems:'center'}}
+                         >
+                             <View style={{marginRight:15*em}}>
+                             <Locate />
+                             </View>
+                          <Text style={{color:'#1E2D60', fontFamily:'Lato-Regular',fontSize: 16*em }}>{title}</Text>
+                          {/* <Text style={{ fontSize: 14 }}>{address}</Text> */}
+                         </View>
+                         );
+                        }}
 
                 />
-
             </View>
 
             {props.show || props.show == undefined ?
-                <View style={[{ flexDirection: 'row'}, props.myLocationStyle]}>
-                    {props.myLocationIconColor === undefined ? <LocationRed width={16 * em} height={19 * hm} /> : <View style={{ top: 15 * hm }} />}
+                <View style={[{ flexDirection: 'row'},
+                 props.myLocationStyle
+                 ]}>
+                    {props.myLocationIconColor === undefined ? 
+                    <LocationRed width={16 * em} height={19 * hm} /> : 
+                    <View style={{ top: 15 * hm }} />}
                     
                     {/* <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em }} onPress={() => { getlocation() }} /> */}
                     <TouchableOpacity style={{ position: 'absolute',}} onPress={() => {  ref.current?.setAddressText(address); }}>

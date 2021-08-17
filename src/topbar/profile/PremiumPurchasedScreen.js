@@ -56,7 +56,7 @@ const PremiumPurchasedScreen = (props) => {
           price="1,90€"
           commentRadius="Rayon de 1 à 3Km."
           comment="Idéal pour vendre juste autour de soi"
-          style={{ width: 315 * em, height: 150 * em, marginTop: 65 * hm }}
+          style={{ width: 315 * em, height: 140 * hm, marginTop: 65 * hm }}
         />
       )}
 

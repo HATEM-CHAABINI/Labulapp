@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Text, Image, ActionSheetIOS, StatusBar, ActivityIndicator, ImageBackground } from 'react-native';
 import { em, WIDTH, HEIGHT, hm } from '../../constants/consts';
 import TitleText from '../../text/TitleText';
 import CommentText from '../../text/CommentText';
@@ -88,9 +88,9 @@ const ProfileHomeScreen = (props) => {
   return (
     <ParallaxScrollView
       // onScroll={onScroll}
-      backgroundColor="#ffffff"
+      backgroundColor="white"
       stickyHeaderHeight={95 * hm}
-      parallaxHeaderHeight={HEIGHT * 0.45}
+      parallaxHeaderHeight={HEIGHT * 0.50}
       backgroundSpeed={10}
       renderForeground={() => (
         <View style={
@@ -102,39 +102,19 @@ const ProfileHomeScreen = (props) => {
             icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
             borderWidth={3 * em}
           />}
-          <TouchableOpacity onPress={() => Actions.profileOverview({ userProfile: userProfile })}>
+          <View >
             {loading ? <ActivityIndicator size='small' color='#1E2D60' style={styles.avatar} /> : 
             <TitleText style={styles.txtFullName} text={profileData.firstName + " " + profileData.lastName} />}
-            <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" />
-          </TouchableOpacity>
-        </View>
-      )}
-      renderFixedHeader={() => (
-        <View key="fixed-header" style={styles.dropDown}>
-          <AccountChangeMenu
-            // style={styles.dropDown}
-            type="my"
-            visible={props.route.params.purchased || props.userProfile ? true : false}
-          />
-        </View>
-      )}
-      renderStickyHeader={() => (
-        <View key="sticky-header" style={{ marginTop: 38 * hm, alignItems: 'center' }}>
-          <ProfileCommonAvatar
-            style={{ width: 30 * em, height: 30 * em }}
-            icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
-            fullName={profileData.firstName + ' ' + profileData.lastName}
-            borderWidth={3 * em}
-          />
-          <SmallText text={profileData.firstName + " " + profileData.lastName} color="#1E2D60" style={{}} />
-        </View>
-      )}
-      >
-      <View style={styles.bottomView}>
-        <View style={styles.cardContainer}>
+            <CommentText style={styles.txtGoToProfile} text="Aller sur mon profil" onPress={()=>Actions.profileOverview({ userProfile: userProfile })}/>
+          </View>
+
+
+
+
+      <View style={styles.cardContainer}>
           <ProfileCommonCard
             caption={'Mes demandes'}
-            style={styles.cardStyle}
+            style={[styles.cardStyle,{marginRight:15*em}]}
             icon={MyNeeds(iconSize)}
             onPress={() => {
               Actions.myNeedsHome();
@@ -149,6 +129,37 @@ const ProfileHomeScreen = (props) => {
             }}
           />
         </View>
+        
+      
+
+
+        </View>
+      )}
+      renderFixedHeader={() => (
+        <View key="fixed-header" style={styles.dropDown}>
+          <AccountChangeMenu
+            // style={styles.dropDown}
+            type="my"
+            visible={props.route.params.purchased || props.userProfile ? true : false}
+          />
+          
+        </View>
+      )}
+      renderStickyHeader={() => (
+        <View key="sticky-header" style={{ marginTop: 38 * hm, alignItems: 'center' }}>
+          <ProfileCommonAvatar
+            style={{ width: 30 * em, height: 30 * em }}
+            icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
+            fullName={profileData.firstName + ' ' + profileData.lastName}
+            borderWidth={3 * em}
+          />
+          <SmallText text={profileData.firstName + " " + profileData.lastName} color="#1E2D60" style={{}} />
+        </View>
+      )}
+      >
+        
+      <View style={styles.bottomView}>
+       
         <View style={styles.listBox}>
           <CommentText text={'Mon compte'} style={styles.caption} color={'#A0AEB8'} />
           <ProfileCommonListItem
@@ -200,12 +211,13 @@ const ProfileHomeScreen = (props) => {
         </View>
         {!props.route.params.purchased && (
           <View style={styles.rowContainer}>
+              
             <View style={styles.imgBg}>
               <TitleText text={'Créer un compte'} style={styles.imageTextMain} />
               <TitleText text={'Pro/ Association/ institutionnel'} style={styles.imageTextSub} />
               <CommonButton
                 style={styles.proBtn}
-                textStyle={{ fontSize: 12 * em }}
+                textStyle={{ fontSize: 12 * em ,fontFamily:'Lato-Medium'}}
                 text={'C’est gratuit, créer maintenant'}
                 onPress={() => Actions.createAccountMenu()}
               />
@@ -255,7 +267,8 @@ const styles = {
   topView: { 
     flexDirection:'row',
     height: 275*hm, 
-    backgroundColor: '#40CDDE' },
+    backgroundColor: '#40CDDE'
+   },
   avatar: { marginTop: 89 * hm, height: 70 * hm, width: 70 * hm ,marginLeft:30*em},
   txtFullName: {
     marginTop:100 * hm,
@@ -274,6 +287,8 @@ const styles = {
   },
   scrollView: { width: WIDTH, backgroundColor: '#ffffff', marginTop: 0 * em },
   bottomView: {
+        // marginTop:20*hm,
+
     backgroundColor: '#FFFFFF',
     shadowColor: '#254D5612',
     shadowOffset: { width: 0, height: 12 * hm },
@@ -281,10 +296,17 @@ const styles = {
   },
   cardContainer: {
     paddingHorizontal: 30 * em,
-    justifyContent: 'space-between',
+    // right:250*em,
+    // left:40*em,
+    // alignItems:'center',
+    // justifyContent: 'space-between',
+    
     flexDirection: 'row',
-    marginTop: -66 * hm,
-    marginBottom: 15 * hm,
+    // marginTop: -66 * hm,
+    // marginBottom: 15 * hm,
+    marginTop:240*hm,
+    position:'absolute',
+    zIndex:999,
   },
   cardStyle: {
     shadowColor: '#254D5612',
@@ -326,14 +348,14 @@ const styles = {
   },
   imgBga: {
     height: 138 * hm,
-    width:230*em,
-    flex: 1,
-    backgroundColor: '#40CDDE0C',
+    width:197*em,
+    resizeMode: 'contain', 
+     flex: 1,
     marginTop: 35 * hm,
     marginBottom: 20 * hm,
     // right:10*em,
-    alignItems: 'flex-start',
-    flexDirection: 'column',
+    alignItems: 'flex-end',
+    // flexDirection: 'column',
   },
   imageTextMain: {
     fontFamily: 'Montserrat-Bold' ,
@@ -344,8 +366,8 @@ const styles = {
     marginBottom: 10 * hm,
   },
   imageTextSub: {
-    fontFamily: 'HelveticaNeue' ,
-    fontSize: 15 * em,
+    fontFamily: 'Montserrat-Medium' ,
+    fontSize: 13 * em,
     marginTop:2*hm,
     marginLeft: 18 * em,
     marginRight: -100 * em,

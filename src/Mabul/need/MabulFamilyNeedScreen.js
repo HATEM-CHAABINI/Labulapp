@@ -19,9 +19,9 @@ import {
 } from '../../assets/svg/icons';
 const iconSize = { width: 38 * em, height: 38 * em };
 const needItems = [
-  { id: 0, itemName: 'Garde d’enfants/ Baby Sitting', icon: ChildCare(iconSize) },
-  { id: 1, itemName: 'Soutien scolaire/ cours', icon: SchoolSupport(iconSize) },
-  { id: 2, itemName: 'Accompagnement des enfants', icon: SupportChildren(iconSize) },
+  { id: 0, itemName: 'Baby Sitting', icon: ChildCare(iconSize) },
+  { id: 1, itemName: 'Soutien scolaire', icon: SchoolSupport(iconSize) },
+  { id: 2, itemName: 'Accompagnement des \nenfants', icon: SupportChildren(iconSize) },
   {
     id: 3,
     itemName: 'Aide aux personnes âgées',
@@ -55,7 +55,7 @@ const MabulFamilyNeedScreen = (props) => {
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={24} isNoBackBtn={false} progressBarColor={'#38C2FF'} />
       <View style={styles.body}>
-        <TitleText text={'Besoin de'} style={styles.title} />
+        <TitleText text={'Besoin de la famille'} style={styles.title} />
         <View style={styles.popView}>
           <FlatList data={needItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
         </View>
@@ -80,12 +80,20 @@ const styles = {
     alignItems: 'flex-start',
   },
   title: {
+    fontFamily:'Montserrat-Bold',
+    fontSize:25*em,
     marginTop: 35 * hm,
     marginBottom: 10 * hm,
   },
   listItem: {
     width: WIDTH * 0.92,
     marginTop: 25 * em,
+  },
+  popView: {
+    borderTopLeftRadius: 28 * em,
+    borderTopRightRadius: 28 * em,
+    backgroundColor: '#ffffff',
+    paddingBottom: 163 * em,
   },
 };
 

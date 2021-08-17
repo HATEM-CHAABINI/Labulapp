@@ -13,6 +13,7 @@ import MyAddressComponent from '../profile/InformationComponents/MyAddressCompon
 import { updateUserProfile, getUserProfile } from '../../services/firebase'
 import { useDispatch } from 'react-redux'
 import { addProfile, updateProfile } from '../../redux/actions/profile';
+import { color } from 'react-native-elements/dist/helpers';
 const MyInformationScreen = (props) => {
   const dispatch = useDispatch()
   const [inputItemKey, setInputItemKey] = useState(1);
@@ -42,6 +43,7 @@ const MyInformationScreen = (props) => {
       })
     })
   }
+  console.log('fjjfjfjfjfjjfj ',currentData.mobile==" ")
 
   return (
     <ProfileCommonHeader title="Mes informations" onCancel={() => Actions.pop()} onFinish={() => updateDate()} loading={loading}>
@@ -68,7 +70,7 @@ const MyInformationScreen = (props) => {
       <Text style={styles.itemTitle} >Contact</Text>
       <ProfileInformationListItem
         caption={'Mon mobile'}
-        value={currentData.mobile && currentData.mobile !== undefined ? currentData.mobile : ''}
+        value={currentData.mobile!=" " ? currentData.mobile : null}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(3);
@@ -78,7 +80,8 @@ const MyInformationScreen = (props) => {
       <Text style={styles.itemTitle} >Localisation</Text>
       <ProfileInformationListItem
         caption={'Mon adresse'}
-        value={currentData.address && currentData.address !== undefined ? currentData.address : ''}
+        value={currentData.address!=" " ? currentData.address : null}
+
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(4);
@@ -165,6 +168,8 @@ const styles = {
     marginLeft: 30 * em,
     marginRight: 30 * em,
     marginBottom: 65 * hm,
+    fontFamily:'Lato-Italic',
+    color:'#A0AEB8'
   },
 };
 

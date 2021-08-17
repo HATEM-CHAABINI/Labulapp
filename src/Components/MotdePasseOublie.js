@@ -97,7 +97,7 @@ export default ({ navigation }) => {
           <Text style={{ color: '#6A8596', fontSize: 14 * em, paddingTop: 10 * hm, textAlign: 'center', fontFamily: "lato-Regular" }}>Rentre ton adresse e-mail pour réinitialiser ton mot {"\n"} de passe</Text>
           <View style={styles.contentWrapper}>
             <Reinput
-              label='Saisie ton email'
+              label='Saisis ton email'
               autoCorrect={false}
               underlineColor="#BFCDDB"
               underlineActiveColor="#41D0E2"

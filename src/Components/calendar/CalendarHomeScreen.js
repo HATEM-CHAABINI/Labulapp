@@ -258,8 +258,8 @@ const styles = {
   },
   calendarHeaderContainerStyle: { marginBottom: 8 * hm },
   dayContainerStyle: {
-    width: 40 * em,
-    height: 74 * hm,
+    width: 44 * em,
+    height: 75 * hm,
     backgroundColor: '#40CDDE',
     elevation: 3,
     shadowColor: '#84848442',
@@ -272,11 +272,13 @@ const styles = {
   highlightDateNumberContainerStyle: {
     backgroundColor: '#fff',
     
-    width: 30 * em,
-    height: 30 * em,
-    borderRadius: 15 * em,
-    paddingTop: 2 * em,
-    marginTop: -2 * em,
+    width: 34 * em,
+    height: 34 * em,
+    borderRadius: 20 * em,
+    // paddingTop: 2 * em,
+    // marginTop: -2 * em,
+    justifyContent:'center',
+    alignItems:'center'
   },
   dateNumberStyle: { color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Regular' },
   dateNameStyle: {

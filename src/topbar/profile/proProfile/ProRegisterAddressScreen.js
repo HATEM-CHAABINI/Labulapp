@@ -22,7 +22,7 @@ const ProRegisterAddressScreen = (props) => {
         <View style={styles.popupTopView}>
           <AddressBlue width={21 * em} height={25.5 * em} />
           <TitleText text={'Localisation'} style={styles.titleText} />
-          <Text style={{fontFamily:'Lato-italic',fontSize:12*em,color:'#A0AEB8', marginBottom: 3 * hm }}>* champs obligatoires</Text>
+          <Text style={{fontFamily:'Lato-italic',fontSize:12*em,color:'#A0AEB8', marginBottom: 35 * hm }}>* champs obligatoires</Text>
 
 
           <Reinput
@@ -38,7 +38,7 @@ const ProRegisterAddressScreen = (props) => {
   color='#1E2D60'
   fontFamily='Lato-Bold'
   fontSize={16 * em}
-  keyboardType="email-address"
+  keyboardType="ascii-capable"
   selectionColor={'#41D0E2'}
 marginBottom={-17*hm}
 
@@ -49,10 +49,10 @@ marginBottom={-17*hm}
         </View>
         </View>
 
-        <KeyboardAvoidingView
+        {/* <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ alignItems: 'center' }}
-      >
+      > */}
         <View style={{backgroundColor:'white',width:'100%',alignItems:'center',bottom:0.2*hm}}>
           <CommonButton
             text={'Contiuer'}
@@ -60,7 +60,7 @@ marginBottom={-17*hm}
             style={styles.btnNext}
           />
         </View>
-        </KeyboardAvoidingView>
+        {/* </KeyboardAvoidingView> */}
     </View>
   );
 };
@@ -97,7 +97,8 @@ const styles = {
 
   width: 315 * em,
 
-  bottom: 14*hm},
+  bottom: 30*hm},
+
   viewText: {
     marginTop: 25 * em,
   },

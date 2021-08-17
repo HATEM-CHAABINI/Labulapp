@@ -22,10 +22,10 @@ const ProRegisterEmailScreen = (props) => {
         </View>
         </View>
 
-        <KeyboardAvoidingView
+        {/* <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ alignItems: 'center' }}
-      >
+      > */}
         <View style={{backgroundColor:'white',width:'100%',alignItems:'center'}}>
        <CommonButton
             text={'Suivant'}
@@ -33,7 +33,7 @@ const ProRegisterEmailScreen = (props) => {
             onPress={() => Actions.home({ tabNav: 'ProProfile', accountType: props.accountType })}
           />
       </View>
-      </KeyboardAvoidingView>
+      {/* </KeyboardAvoidingView> */}
 
     </View>
   );

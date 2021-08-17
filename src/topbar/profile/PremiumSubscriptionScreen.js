@@ -22,6 +22,7 @@ import Commerce from '../../assets/svg/icons/devenirpro/Commerce';
 import { Labulpremium } from '../../assets/svg/svg/icons';
 const PremiumSubscriptionScreen = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [ProfileType,setProfileType]=useState(props.profileType)
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -36,22 +37,28 @@ const PremiumSubscriptionScreen = (props) => {
         <Text style={styles.subTitle} >Commence à vendre</Text>
         <View style={styles.popView}>
           <View style={styles.cardContainer}>
+            <TouchableOpacity onPress={()=>setProfileType('my')}>
             <PurchaseMenuCard
               style={styles.card}
-              selected={props.profileType === 'my'}
+              selected={ProfileType === 'my'}
               name="Light"
               price="0,90€"
               commentRadius="Rayon de 1Km autour."
               comment="Idéal pour vendre juste autour de soi"
             />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>setProfileType('pro')}>
+
             <PurchaseMenuCard
               style={styles.card}
-              selected={props.profileType === 'pro'}
+              selected={ProfileType === 'pro'}
               name="Pro"
               price="1,90€"
               commentRadius="Rayon de 1 à 3Km. "
               comment="Idéal pour un professionnel qui veut faire grimper son chiffre d’affaire"
             />
+                        </TouchableOpacity>
+
           </View>
           <Text style={styles.comment}>Abonnement <Text style={styles.commentBold}>sans engagement</Text> et <Text style={styles.commentBold}>résiliable</Text> depuis le store.</Text>
           <Text style={styles.guideline}>
@@ -117,10 +124,10 @@ const PremiumSubscriptionScreen = (props) => {
         style={[
           styles.purchaseBtn,
           {
-            backgroundColor: props.profileType === 'my' ? '#40CDDE' : '#1E2D60',
+            backgroundColor: ProfileType === 'my' ? '#40CDDE' : '#1E2D60',
           },
         ]}
-        text="M’abonner Labul Pro - 1,90€/mois"
+        text= { ProfileType === 'my' ?"M’abonner Labul Pro - 0,90€/mois":"M’abonner Labul Pro - 1,90€/mois"}
         rightIcon={<TinyText text="/mois" style={{ fontSize: 8 * em }} color="#ffffff" />}
         onPress={() => setModalVisible(true)}
       />
@@ -172,7 +179,7 @@ const PremiumSubscriptionScreen = (props) => {
           text="Payer"
           style={styles.modalPayBtn}
           onPress={() => {
-            Actions.premiumPurchased({ profileType: props.profileType });
+            Actions.premiumPurchased({ profileType: ProfileType});
             setModalVisible(false);
           }}
         />

@@ -74,17 +74,16 @@ const SearchCommonListItem = (props) => {
 };
 export default SearchCommonListItem;
 const styles = {
-  icon: { width: 40 * em, height: 40 * em, resizeMode: 'contain', marginRight: 15 * em },
+  icon: {borderRadius:20*em, width: 40 * em, height: 40 * em, resizeMode: 'contain', marginRight: 15 * em },
 
   textTitle: {
     fontFamily: 'Lato-Black',
     fontSize: 16 * em,
     textAlignVertical: 'center',
-    fontWeight: '200',
     color: '#1E2D60',
     lineHeight: 20 * hm,
-    bottom:10*hm
+    bottom:4*hm
   },
-  subTextTitle: { color: '#A0AEB8', fontSize: 16 * em, lineHeight: 18 * em },
+  subTextTitle: {fontFamily:'Lato-Regular', color: '#A0AEB8', fontSize: 16 * em, lineHeight: 18 * em },
   arrowIcon: { backgroundColor: '#ffffff', width: 11 * em, height: 18 * em },
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import TitleText from '../../text/TitleText';
-import { em, HEIGHT, WIDTH } from '../../constants/consts';
+import { em, HEIGHT, hm, WIDTH } from '../../constants/consts';
 import MabulCommonListItem from '../../adapter/MabulCommonListItem';
 import MabulCommonHeader from '../MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
@@ -48,7 +48,7 @@ const MabulDailyNeedScreen = () => {
     <View style={styles.container}>
       <MabulCommonHeader style={styles.header} percent={24} isNoBackBtn={false} progressBarColor={'#38C2FF'} />
       <View style={styles.body}>
-        <TitleText text={'J’ai besoin coup de main pour'} style={styles.title} />
+        <TitleText text={'Besoin de vie \nquotidienne'}textAlign={"left"} style={styles.title} />
         <View style={styles.popView}>
           <FlatList data={needItems} renderItem={renderFlatList} keyExtractor={(i) => i.id} />
         </View>
@@ -61,40 +61,32 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    marginTop: 16 * em,
+    PaddingTop: 16 * hm,
   },
   header: {
     height: '12.45%',
 
   },
-  popView: {
+  body: {
+    flex: 1,
     paddingLeft: WIDTH * 0.08,
+    alignItems: 'flex-start',
+  },
+  title: {
+    fontFamily:'Montserrat-Bold',
+    fontSize:25*em,
+    marginTop: 35 * hm,
+    marginBottom: 10 * hm,
+  },
+  listItem: {
+    width: WIDTH * 0.92,
+    marginTop: 25 * em,
+  },
+  popView: {
     borderTopLeftRadius: 28 * em,
     borderTopRightRadius: 28 * em,
     backgroundColor: '#ffffff',
     paddingBottom: 163 * em,
-  },
-  body: {
-    flex: 1,
-
-    alignItems: 'flex-start',
-    backgroundColor: '#F0F5F7',
-  },
-  title: {
-    marginLeft: 30 * em,
-    marginTop: 35 * em,
-    marginBottom: 35 * em,
-    lineHeight: 35 * em,
-    width: 186 * em,
-    height: 71 * em,
-    fontWeight: 'bold',
-    textAlign: 'left',
-    textAlignVertical: 'center',
-  },
-  listItem: {
-    height: HEIGHT * 0.09,
-    width: WIDTH * 0.92,
-    marginTop: 25 * em,
   },
 };
 

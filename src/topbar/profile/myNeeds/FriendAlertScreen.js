@@ -118,7 +118,7 @@ style={{fontSize:14*em,fontFamily:'Lato-Medium'}}
           icon={
             <AvatarWithBadge
               // avatar={user.profilePic !== undefined && user.profilePic !== null ? { uri: user.profilePic } : require('../../../assets/images/tab_profile_off.png')}
-              avatar={user.profilePic !== undefined ? { uri: user.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }}
+              avatar={user.profilePic !== undefined ? { uri: user.profilePic } : require('../../../assets/images/tab_profile_off.png')}
               // badge={require('../../../assets/images/ic_sample_5.png')}
               // badge={userBadge}
               avatarDiameter={35 * em}

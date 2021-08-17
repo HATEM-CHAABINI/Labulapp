@@ -1,5 +1,6 @@
 import NextIcon from './NextIcon.svg';
 import PrevIcon from './PrevIcon.svg';
+import Locate from './Locate.svg';
 import LocationPink from './LocationPink.svg';
 import Alert from './Alert.svg';
 import Alerte from './Alerte.svg';
@@ -110,7 +111,7 @@ import Main from './category/Main.svg';
 import Outil from './category/Outil.svg';
 
 
-export {Objet,Services,ProduitAl,BienEtre,Divers,AlerteListe,Alertemap,Outil,Main,Service,Intero,
+export {Locate,Objet,Services,ProduitAl,BienEtre,Divers,AlerteListe,Alertemap,Outil,Main,Service,Intero,
   AnimalSell,
   BeautyCareSell,
   DeliverySell,

@@ -25,8 +25,9 @@ import MabulCommonDateSettingScreen from './MabulCommonDateSettingScreen';
 import MabulAddDate from './MabulAddDate';
 import MabulAddLieu from './MabulAddLieu';
 import MabulRechercheContact from './MabulRechercheContact';
-import { TextInput } from 'react-native';
+// import { TextInput } from 'react-native';
 import { date } from 'yup/lib/locale';
+import { TextInput } from 'react-native-paper';
 import moment from 'moment';
 const title = {
   organize: 'Donne un titre à ton apéro',
@@ -78,6 +79,7 @@ const MabulCommonRequestDetailScreen = (props) => {
   const [addresss, setAddresss] = useState(demandData.address);
   const [Promo, setPromo] = useState(false);
   const [Promooo, setPromooo] = useState(false);
+  const [SwitchOblig, setSwitchOblig] = useState(true)
 
   const setPromos = (promo) => {
     setPromo(promo)
@@ -243,6 +245,8 @@ const MabulCommonRequestDetailScreen = (props) => {
     iconDocument = Document(styles.icon);
   }
   const mabulService = props.mabulService;
+  const [isFocused, setFocused] = useState(false);
+  const [text, setText] = React.useState('');
 
   return (
     <View style={{
@@ -254,9 +258,14 @@ const MabulCommonRequestDetailScreen = (props) => {
         progressBarColor={conceptColor} />
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
-          <Reinput style={{ height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
-            label={mabulService=="sell"?'Écris le nom de ce que tu vends *':'Écrit un titre *'}
+     
+          {/* <Reinput 
+          style={{ height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
+            label={mabulService=="sell"?'Écris le nom de ce que tu vends ':'Écrit un titre '}
             autoFocus={true}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+
             underlineActiveColor="#FFFFFF"
             underlineColor="#FFFFFF"
             activeColor={conceptColor}
@@ -266,11 +275,63 @@ const MabulCommonRequestDetailScreen = (props) => {
             value={title}
             onChangeText={(e) => titles(e)}
           />
-         
+          */}
+
+
+
+
+  
+      <TextInput 
+   style={{  fontSize: 17*em, height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
+   label={  
+  <View style={{flexDirection: 'row'}}>
+    <Text style={{fontFamily:'Lato-Regular',fontSize:16*em,color:"#6A8596"}}>{mabulService=="sell"?'Écris le nom de ce que tu vends ':'Écrit un titre '}</Text>
+    <Text style={{fontFamily:'Lato-Regular',fontSize:16*em,color: conceptColor}}>*</Text>
+  </View>
+}
+
+
+underlineColor='#fff'
+
+theme={{   fonts: {
+  regular: {
+    fontFamily: 'Montserrat-Bold'
+  }
+},colors: {text: '#1E2D60', primary: 'white'}}}
+
+
+
+selectionColor="#49CDDD"
+underlineColor='white'
+   autoFocus={true}
+   value={title}
+   onChangeText={(e) => titles(e)}
+
+   />
+          {/* <TextInput
+                    style={{ height: 76 * hm, paddingLeft: 40 * em,  marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
+                    label={mabulService=="sell"?'Écris le nom de ce que tu vends ':'Écrit un titre '}
+                    autoFocus={true}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+        
+                    underlineActiveColor="#FFFFFF"
+                    underlineColor="#FFFFFF"
+                    activeColor={conceptColor}
+                    labelActiveColor="#6A8596"
+                    labelColor="#6A8596"
+                    paddingBottom={25 * em}
+                    value={title}
+                    onChangeText={(e) => titles(e)}
+     /> */}
           <Text style={styles.descerrorText}>{errortitle}</Text>
           <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic',  marginBottom: 10 * hm }}>(68 caractères maximum)</Text>
 
 
+
+          {
+            mabulService === 'need' || mabulService === 'give' ?
+            <>
           <TouchableOpacity
             style={[styles.ActionButton, { height: 90 * hm }]}
             onPress={() => Sheet1.current.open()}
@@ -283,49 +344,7 @@ const MabulCommonRequestDetailScreen = (props) => {
               <Text style={styles.contentDescSubb} >{descriptionn}</Text>
             }
           </TouchableOpacity>
-          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
-
-          {
-            mabulService === 'organize' ?
-              <>
-                <TouchableOpacity
-                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
-                  onPress={() => Sheet5.current.open()}
-                >
-                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>À prévoir</Text>
-                    <Flechedroite width={14 * em} height={14 * hm} />
-                  </View>
-
-                  {!allprevoir ?
-                    <Text style={styles.contentDescSub} >Les participants doivent ramener</Text>
-                    :
-                    <Text style={styles.contentDescSubb} >{prevoir}</Text>
-                  }
-                </TouchableOpacity>
-                <Text style={styles.descerrorText}>{errorPrevoir}</Text>
-              </>
-              :
-              <></>
-          }
-  
-            {
-            mabulService !== 'give' ?
-            <>
-          <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
-            onPress={() => Sheet2.current.open()}
-          >
-            <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-              <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
-              <Flechedroite width={14 * em} height={14 * hm} />
-            </View>
-            {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
-          </TouchableOpacity>
-          <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>}
-
-
-
+          <Text style={styles.descerrorText}>{errorDescription}</Text></>:<></>}
 
 
           {
@@ -343,7 +362,7 @@ const MabulCommonRequestDetailScreen = (props) => {
                   {!allowPrix ?
                     <Text style={styles.contentDescSub} >Ex : 5,00 €</Text>
                     :
-                    !Promooo ? <Text style={styles.contentDescSubb} >{prix}</Text> : <Text style={styles.contentDescSubb} >{prixOne}-{prixTwo}</Text>
+                    !Promooo ? <Text style={styles.contentDescSubb} >{prix} €</Text> : <Text style={styles.contentDescSubb} >{prixOne}-{prixTwo}</Text>
                   }
                 </TouchableOpacity>
                 <Text style={styles.descerrorText}>{errorPrix}</Text>
@@ -351,7 +370,98 @@ const MabulCommonRequestDetailScreen = (props) => {
               :
               <></>
           }
-          <View style={[styles.ActionButton, {  marginTop: 10 * hm, paddingBottom:20*hm}]}>
+          {
+            mabulService !== 'give' ?
+            <>
+          <TouchableOpacity
+            style={[styles.ActionButton, { height: 70 * hm }]}
+            onPress={() => Sheet2.current.open()}
+          >
+            <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+              <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+              <Flechedroite width={14 * em} height={14 * hm} />
+            </View>
+            {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
+          </TouchableOpacity>
+          <Text style={styles.descerrorText}>{errorDate}</Text></>:<></>
+          }
+
+
+          {
+            mabulService === 'organize' ?
+              <>
+                <TouchableOpacity
+                  style={[styles.ActionButton, { height: 90 * hm, }]}
+                  onPress={() => Sheet5.current.open()}
+                >
+                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>À prévoir</Text>
+                    <Flechedroite width={14 * em} height={14 * hm} />
+                  </View>
+
+                  {!allprevoir ?
+                    <Text style={styles.contentDescSub} >Les participants doivent ramener</Text>
+                    :
+                    <Text style={styles.contentDescSubb} >{prevoir}</Text>
+                  }
+                </TouchableOpacity>
+                <Text style={styles.descerrorText}>{errorPrevoir}</Text>
+
+
+
+
+
+
+              
+          <View
+            style={[styles.ActionButton, { height: 90 * hm, marginTop: 0 * hm, }]} >
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
+              <TouchableOpacity onPress={() => Sheet3.current.open()}>
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
+              </TouchableOpacity>
+            </View>
+            {!demandData.address ?
+              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{"ABYMES 97139 \nGuadeloupe"}</Text>
+              :
+              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
+            }
+          </View>
+          <Text style={styles.descerrorText}>{erroraddress}</Text>
+     
+
+
+
+          <TouchableOpacity
+            style={[styles.ActionButton, { height: 90 * hm }]}
+            onPress={() => Sheet1.current.open()}
+          >
+            <Text style={styles.contentDesc}>Description</Text>
+
+            {!allowdescription ?
+              <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+              :
+              <Text style={styles.contentDescSubb} >{descriptionn}</Text>
+            }
+          </TouchableOpacity>
+          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
+
+
+              </>
+              :
+              <></>
+          }
+
+          
+
+       
+  
+           
+
+
+
+
+          <View style={[styles.ActionButton, {  paddingBottom:20*hm}]}>
             <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
               <Text style={styles.contentDesc}>Photos</Text>
               <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em,fontSize:12*em }]}>(3 max)</Text>
@@ -362,6 +472,13 @@ const MabulCommonRequestDetailScreen = (props) => {
           </View>
           <Text style={styles.descerrorText}>{errorPhoto}</Text>
 
+
+
+          {
+            mabulService === 'organize' ?
+              <></>
+              :
+              <>
           <View
             style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]} >
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -371,20 +488,21 @@ const MabulCommonRequestDetailScreen = (props) => {
               </TouchableOpacity>
             </View>
             {!demandData.address ?
-              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>ABYMES 97139 Guadeloupe</Text>
+              <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{"ABYMES 97139 \nGuadeloupe"}</Text>
               :
               <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
             }
           </View>
           <Text style={styles.descerrorText}>{erroraddress}</Text>
-
+          </>}
+                          
 
 
           {
             mabulService === 'give' ?
             <>
           <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+            style={[styles.ActionButton, { height: 70 * hm, marginTop: 10 * hm, }]}
             onPress={() => Sheet2.current.open()}
           >
             <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
@@ -590,7 +708,10 @@ ta demande`}
               <Switch
                 trackColor={{ false: "white", true: conceptColor }}
                 thumbColor={true ? "white" : conceptColor}
-                value={true}
+
+                value={SwitchOblig}
+                onValueChange={()=>{setSwitchOblig(!SwitchOblig)}}
+
               />
 
             </View>
@@ -626,30 +747,60 @@ ta demande`}
 
             {Promo ?
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View>
+                <Text style={{ marginLeft: 30 * em,textAlign:'center',fontSize:14*em,fontFamily:'Lato-Regular',color:"#6A8596",marginBottom:10*hm}}>Ajoutez un prix </Text>
+       
                 <TextInput placeholder="5€"
                   style={[{ width: 148 * em, marginLeft: 30 * em }, styles.BoxPrice]}
+                  theme={{   
+                    colors: {text: '#A0AEB8', primary: 'white'}}}
+                    selectionColor="#49CDDD"
+                    underlineColor='white'
                   // value={formik.values.prix}
                   // onBlur={formik.handleBlur('prix')}
                   // onChangeText={formik.handleChange('prix')}
                   value={prixOne}
                   onChangeText={(e) => prexpreone(e)}
                 />
+                </View>
+
+                <View>
+                <Text style={{marginRight: 30 * em ,textAlign:'center',fontSize:14*em,fontFamily:'Lato-Regular',color:"#6A8596",marginBottom:10*hm}}>Ajoutez un prix </Text>
+       
                 <TextInput placeholder="3,99€" style={[{ width: 148 * em, marginRight: 30 * em }, styles.BoxPrice]}
+                  theme={{   
+                    colors: {text: '#A0AEB8', primary: 'white'}}}
+                    selectionColor="#49CDDD"
+                    underlineColor='white'
                   // value={formik.values.promo}
                   // onBlur={formik.handleBlur('promo')}
                   // onChangeText={formik.handleChange('promo')}
                   value={prixTwo}
                   onChangeText={(e) => prexpretwo(e)}
                 />
-
+</View>
               </View>
               :
-              <TextInput placeholder="5€" style={[{ width: 310 * em }, styles.BoxPrice]} value={formik.values.prix}
+              <View>
+                <Text style={{textAlign:'center',fontSize:14*em,fontFamily:'Lato-Regular',color:"#6A8596",marginBottom:10*hm}}>Ajoutez un prix </Text>
+              <TextInput placeholder="5€"
+
+// underlineColor='red'
+
+theme={{   
+colors: {text: '#A0AEB8', primary: 'white'}}}
+selectionColor="#49CDDD"
+underlineColor='white'
+
+               style={[{ width: 310 * em },
+                 styles.BoxPrice]}
+                  value={formik.values.prix}
                 // onBlur={formik.handleBlur('prix')}
                 // onChangeText={formik.handleChange('prix')}
                 value={prix}
                 onChangeText={(e) => prexprecr(e)}
               />
+              </View>
             }
 
             <View style={styles.SwitchbuttonWrapper}>
@@ -661,7 +812,7 @@ ta demande`}
 
               <Switch
                 trackColor={{ false: "white", true: conceptColor }}
-                thumbColor={Promo ? "white" : conceptColor}
+                thumbColor={Promo ? "white" : "white"}
                 value={Promo}
                 onValueChange={(Promo) => setPromos(Promo)}
               />
@@ -698,7 +849,7 @@ ta demande`}
 };
 
 const styles = {
-  BoxPrice: { backgroundColor: "#F0F5F7", height: 80 * hm, borderRadius: 20 * em, justifyContent: 'center', alignSelf: 'center', textAlign: 'center', fontSize: 25 * em, fontFamily: "Lato-Regular" },
+  BoxPrice: {borderTopLeftRadius: 20 * em,borderTopRightRadius: 20 * em, backgroundColor: "#F0F5F7", height: 80 * hm, borderRadius: 20 * em, justifyContent: 'center', alignSelf: 'center', textAlign: 'center', fontSize: 25 * em, fontFamily: "Lato-Regular" },
   SwitchTitle: {
     flex: 1,
     fontFamily: 'HelveticaNeue',
@@ -784,7 +935,7 @@ const styles = {
   nextBtn: {
     width: 315 * em,
     alignSelf: 'center',
-    bottom: 30 * hm,
+    bottom: 15 * hm,
     // marginTop:-50*hm,
     height: 58 * hm,
     opacity: 1,
@@ -800,6 +951,10 @@ const styles = {
      opacity: 0.5,
 
   },
+  input: {
+  
+},
+  etoile:{position:'absolute',paddingLeft: 210 * em,  zIndex:9949},
   line: { backgroundColor: '#BFCDDB', height: 1 * em, marginLeft: 39 * em },
   contentDesc: { fontFamily: 'Lato-Regular', fontSize: 16 * em, color: '#6A8596', paddingLeft: 40 * em },
   contentDescSub: { marginTop: 3 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8', paddingLeft: 40 * em },

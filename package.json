@@ -51,6 +51,7 @@
     "react-native-maps": "0.28.0",
     "react-native-modal": "^11.10.0",
     "react-native-modal-datetime-picker": "^9.2.1",
+    "react-native-paper": "^4.9.2",
     "react-native-parallax-scroll-view": "^0.21.3",
     "react-native-radio-button-group": "^1.0.3",
     "react-native-raw-bottom-sheet": "^2.2.0",
@@ -94,9 +95,9 @@
   "jest": {
     "preset": "react-native"
   },
-  "rnpm":{
-    "assets":[
-        "./assests/fonts/"
+  "rnpm": {
+    "assets": [
+      "./assests/fonts/"
     ]
-}
+  }
 }

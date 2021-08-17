@@ -15,7 +15,7 @@ const ProfileCommonTextInput = (props) => {
       />
       <TextInput
         autoFocus={true}
-        style={[styles.textInput, { marginBottom: onFocus ? 15 * hm : 7 * hm },props.styletxt]}
+        style={[styles.textInput, { marginBottom: onFocus ? 7 * hm : 7 * hm },props.styletxt]}
         onFocus={() => setOnFocus(true)}
         onBlur={() => setOnFocus(false)}
         multiline={true}
@@ -69,7 +69,7 @@ const styles = {
   textInput: {
     fontFamily: 'Lato-Bold',
     color: '#1E2D60',
-    lineHeight: 11 * hm,
+    // lineHeight: 11 * hm,
     fontSize: 16 * hm,
     paddingHorizontal: 0,
     paddingVertical: 0,

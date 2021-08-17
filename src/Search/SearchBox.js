@@ -32,7 +32,7 @@ const SearchBox = (props) => {
         <TextInput
           value={value}
           onChangeText={_handleText}
-        autoFocus={true}
+        autoFocus={false}
           onFocus={() => {
             setOnFocus(true);
             // props.onFocus(true);

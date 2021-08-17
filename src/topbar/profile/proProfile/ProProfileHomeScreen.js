@@ -60,9 +60,11 @@ const ProProfileHomeScreen = (props) => {
       headerBackgroundColor="#333"
       backgroundColor="#ffffff"
       stickyHeaderHeight={95 * hm}
-      parallaxHeaderHeight={HEIGHT * 0.45}
+      parallaxHeaderHeight={HEIGHT * 0.50}
       backgroundSpeed={10}
       renderForeground={() => (
+        <View 
+          >
         <ImageBackground style={styles.topView} source={userProfile.cover} blurRadius={8}>
           <View
             style={{
@@ -84,6 +86,25 @@ const ProProfileHomeScreen = (props) => {
             </TouchableOpacity>
           </View>
         </ImageBackground>
+        <View style={styles.cardContainer}>
+          <ProfileCommonCard
+            caption={'Mes offres'}
+            style={[styles.cardStyle,{marginRight:15*em}]}
+            icon={MesOffresPro(iconSize)}
+            onPress={() => {
+              Actions.proNeedsHome();
+            }}
+          />
+          <ProfileCommonCard
+            caption={'Mes abonnés'}
+            style={styles.cardStyle}
+            icon={MesAbonnesPro(iconSize)}
+            onPress={() => {
+              Actions.mesAboonespro();
+            }}
+          />
+        </View>
+        </View>
       )}
       renderFixedHeader={() => (
         <View key="fixed-header" style={styles.dropDown}>
@@ -105,24 +126,7 @@ const ProProfileHomeScreen = (props) => {
       )}
       >
       <View style={styles.bottomView}>
-      <View style={styles.cardContainer}>
-          <ProfileCommonCard
-            caption={'Mes offres'}
-            style={styles.cardStyle}
-            icon={MesOffresPro(iconSize)}
-            onPress={() => {
-              Actions.proNeedsHome();
-            }}
-          />
-          <ProfileCommonCard
-            caption={'Mes abonnés'}
-            style={styles.cardStyle}
-            icon={MesAbonnesPro(iconSize)}
-            onPress={() => {
-              Actions.mesAboonespro();
-            }}
-          />
-        </View>
+     
         <View style={styles.listBox}>
           <CommentText text={'Mon compte'} style={styles.caption} />
           <ProfileCommonListItem
@@ -219,6 +223,7 @@ const styles = {
   scrollView: { width: WIDTH, backgroundColor: '#ffffff' },
   dropDown: { right: 30 * em, top: 33 * hm, position: 'absolute', zIndex: 1 },
   bottomView: {
+    // marginTop:20*hm,
     backgroundColor: '#FFFFFF',
     shadowColor: '#254D5612',
     shadowOffset: { width: 0, height: 12 * hm },
@@ -226,17 +231,18 @@ const styles = {
     paddingHorizontal: 30 * em,
   },
   cardContainer: {
-    // paddingHorizontal: 30 * em,
-    justifyContent: 'space-between',
+    paddingHorizontal: 30 * em,
+    // right:250*em,
+    // left:40*em,
+    // alignItems:'center',
+    // justifyContent: 'space-between',
+    
     flexDirection: 'row',
-    marginTop: -66 * hm,
-    marginBottom: 15 * hm,
-
-
-    //  flexDirection: 'row',
-    //   justifyContent: 'center',
-    //    marginTop: -46 * em,
-    //     marginBottom: 30 * hm
+    // marginTop: -66 * hm,
+    // marginBottom: 15 * hm,
+    marginTop:240*hm,
+    position:'absolute',
+    zIndex:999,
      },
      cardStyle: {
       shadowColor: '#254D5612',

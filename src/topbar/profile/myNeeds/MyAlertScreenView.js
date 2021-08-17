@@ -127,7 +127,7 @@ style={{fontSize:14*em,fontFamily:'Lato-Medium'}}
           }
           title={user.firstName + " " + user.lastName}
           titleStyle={{ color: '#1E2D60', marginLeft: 21 * em, fontFamily: 'Lato-Black', fontSize: 16 * em }}
-          subTitle={alertData.contactType.name}
+          subTitle={"Moi même"}
           subTitleStyle={{ marginTop:2*hm,color: '#A0AEB8', marginLeft: 21 * em, fontFamily: 'Lato-Regular', fontSize: 14 * em }}
         />
         <TitleText text={alertData.type.id != 3 ?

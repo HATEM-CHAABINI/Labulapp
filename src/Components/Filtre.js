@@ -373,7 +373,7 @@ this.state.filtre.length == 0?
               this[RBSheet + 1] = ref;
             }}
             closeOnDragDown={true}
-            height={hm * 500}
+            height={hm * 450}
 
             openDuration={250}
             customStyles={{
@@ -387,10 +387,14 @@ this.state.filtre.length == 0?
                 justifyContent: "center",
                 alignItems: "center",
                 paddingTop: hm * 180,
-              }
+              },
+              draggableIcon:{
+                backgroundColor: 'rgba(191, 205, 219, 0.36)',
+                width:55*em
+                            }
             }}
           >
-            <View style={{ paddingTop: 20 * hm, paddingBottom: hm * 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ paddingTop: 15 * hm, paddingBottom: hm * 35, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity onPress={this._onPressGet.bind(this)}  >
                 <Fleche />
               </TouchableOpacity>
@@ -556,7 +560,7 @@ this.state.filtre.length == 0?
             ref={ref => {
               this[RBSheet + 2] = ref;
             }}
-            height={hm * 457}
+            height={hm * 390}
             closeOnDragDown={true}
 
             openDuration={250}
@@ -570,10 +574,15 @@ this.state.filtre.length == 0?
                 justifyContent: "center",
                 alignItems: "center",
                 paddingTop: hm * 180
-              }
+              },
+              draggableIcon:{
+                backgroundColor: 'rgba(191, 205, 219, 0.36)',
+                width:55*em
+
+                            }
             }}
           >
-            <View style={{ paddingTop: 20 * hm, paddingBottom: hm * 60, right: em * 85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ paddingTop: 20 * hm, paddingBottom: hm * 30, right: em * 85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity onPress={() => this.handleDateClick()}  >
                 <Fleche />
               </TouchableOpacity>

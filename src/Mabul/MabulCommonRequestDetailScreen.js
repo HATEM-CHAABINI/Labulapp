@@ -463,6 +463,7 @@ const MabulCommonRequestDetailScreen = (props) => {
                     :
                     <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
                   }
+                  
                 </View>
                 <Text style={styles.descerrorText}>{erroraddress}</Text>
               </>}

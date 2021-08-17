@@ -90,7 +90,7 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
         <View>
           <TitleText text={'Ajoute des photos'} style={styles.title} />
           <CommentText
-            text="Les photos aident les utilisateurs à avoir une idée de ce que tu vends."
+            text="Les photos aidentf les utilisateurs à avoir une idée de ce que tu vends."
             style={styles.comment}
           />
           {/* {images.images.length > 0 ? <View style={styles.addButton}>

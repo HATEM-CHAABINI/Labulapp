@@ -115,20 +115,39 @@ const MabulAddPhoto = (props) => {
       <View style={styles.body}>
         <View>
          
-          {/* {images.images.length > 0 ? <View style={styles.addButton}>
-            <TouchableOpacity onPress={() => { imageSelect() }} >
-              <CommentText text="add another set" style={[styles.commentAdd, { color: conceptColor }]} />
-            </TouchableOpacity>
-          </View> : null} */}
-          {images.images.length < 1 ? loading ? <ActivityIndicator style={styles.photoZone} color={conceptColor} size={'small'} /> : <View style={styles.photoZone}>
+         
+          {images.images.length < 1 ? loading ?
+           <ActivityIndicator style={styles.photoZone} color={conceptColor} size={'small'} /> :
+          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                    <View style={styles.photoZone}>
             <TouchableOpacity onPress={() => { imageSelect() }} >
               <Image
                 source={require('../assets/images/ic_addphotos_green.png')}
                 style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
               />
-              <CommentText text="3 maximum" style={styles.commentPhoto} />
+              <CommentText text="Clique ici" style={styles.commentPhoto} />
             </TouchableOpacity>
-          </View> :
+          </View>
+          <View style={styles.photoZone}>
+            <TouchableOpacity onPress={() => { imageSelect() }} >
+              <Image
+                source={require('../assets/images/ic_addphotos_green.png')}
+                style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
+              />
+              <CommentText text="Clique ici" style={styles.commentPhoto} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.photoZone}>
+            <TouchableOpacity onPress={() => { imageSelect() }} >
+              <Image
+                source={require('../assets/images/ic_addphotos_green.png')}
+                style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
+              />
+              <CommentText text="Clique ici" style={styles.commentPhoto} />
+            </TouchableOpacity>
+          </View>
+          </View>
+           :
             <SafeAreaView style={styles.photoZone2}>
 
 
@@ -236,8 +255,8 @@ const styles = {
   },
   comment: { textAlign: 'left', lineHeight: 20 * em, textAlignVertical: 'center', marginTop: 10 * em },
   photoZone: {
-    width: 315 * em,
-    height: 121 * em,
+    width: 95 * em,
+    height: 95 * em,
     alignItems: 'center',
     justifyContent: 'center',
     borderStyle: 'dashed',

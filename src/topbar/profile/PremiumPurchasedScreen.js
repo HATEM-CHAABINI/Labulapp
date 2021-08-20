@@ -35,7 +35,7 @@ const PremiumPurchasedScreen = (props) => {
       <SmallText
         text="Vous êtes abonné à Labul Premium Light"
         color="#ffffff"
-        style={{ fontFamily: 'HelveticaNeue',fontSize: 13 * em, lineHeight: 17 * em }}
+        style={{ fontFamily: 'Lato-Medium',fontSize: 13 * em, lineHeight: 17 * em }}
       />
       {props.profileType === 'my' ? (
         <PurchaseMenuCard
@@ -72,7 +72,7 @@ const styles = {
   title: { fontFamily: 'Cocon-Regular', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
   titleBleu: { fontFamily: 'Cocon-Regular', fontSize: 27 * em, lineHeight: 30 * em, color: 'white' },
   containerTitle: { marginBottom: 0, flexDirection: 'row', justifyContent: 'center' },
-  cancelBtn: { position: 'absolute', bottom: 24 * em,fontSize:13*em,fontFamily: 'HelveticaNeue' },
+  cancelBtn: { position: 'absolute', bottom: 24 * em,fontSize:13*em,fontFamily: 'Lato-Regular' },
 };
 
 export default PremiumPurchasedScreen;

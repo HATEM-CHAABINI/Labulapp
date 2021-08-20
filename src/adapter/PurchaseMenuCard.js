@@ -36,7 +36,7 @@ const PurchaseMenuCard = (props) => {
       ]}>
         <Text
           style={{
-            fontFamily: 'Helvetica-Bold',
+            fontFamily: 'Montserrat-Bold',
             color: '#FFFFFF',
             fontSize: 18 * em,
             lineHeight: 22 * em,
@@ -47,7 +47,7 @@ const PurchaseMenuCard = (props) => {
       <TitleText text={'par mois'} style={{ fontFamily: 'Lato-Medium', marginBottom: 17 * em, fontSize: 12 * em, lineHeight: 14 * em }} />
       <View style={[styles.containerTxt, { width: props.txtWidth }]}>
         <Text style={styles.comment}>{props.commentRadius}</Text>
-        <Text style={[styles.comment, { color: '#6A8596' }]}>{props.comment}</Text>
+        <Text style={[styles.comment, { color: '#6A8596',fontFamily: 'Lato-Medium', }]}>{props.comment}</Text>
       </View>
       {/* {!props.noMore && (
         <SmallText
@@ -83,7 +83,7 @@ const styles = {
   },
   price: { fontFamily: 'Lato-Black', marginTop: 25 * em, fontSize: 25 * em, lineHeight: 30 * em },
   containerTxt: { width: 120 * em, height: 60 * hm },
-  comment: { fontFamily: 'HelveticaNeue', fontSize: 12 * em, lineHeight: 14 * em, textAlign: 'center', color: '#1E2D60',marginBottom:5*hm },
+  comment: { fontFamily: 'Lato-Semibold', fontSize: 12 * em, lineHeight: 14 * em, textAlign: 'center', color: '#1E2D60',marginBottom:5*hm },
   addTxt: { fontFamily: 'Lato-Medium', position: 'absolute', fontSize: 12 * em, lineHeight: 14 * em },
 };
 

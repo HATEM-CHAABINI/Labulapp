@@ -141,7 +141,7 @@ style={{fontSize:14*em,fontFamily:'Lato-Medium'}}
             </View>
           }
           title={alertData.address !== undefined ? alertData.address : 'Alert Address undefine'}
-          titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'HelveticaNeue', fontSize: 16 * em }}
+          titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
         />
           <ModalSupprimerAlerte
             visible={cancelUpdatePopupVisible}

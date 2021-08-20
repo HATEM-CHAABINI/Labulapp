@@ -26,7 +26,7 @@ const MabulCommonHeader = (props) => {
       leftView={props.noBackButton ? emptyBack : null}
       rightTxt="Annuler"
       rightTxtStyle={styles.rightTxt}
-      onRightPress={() => Actions.home()}
+      onRightPress={ props.onRightPress ? props.onRightPress :() => Actions.home()}
     />
   );
 

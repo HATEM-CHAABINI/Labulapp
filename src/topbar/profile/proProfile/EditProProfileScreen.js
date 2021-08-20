@@ -67,7 +67,7 @@ const EditProProfileScreen = (props) => {
             <ProAddCover width={27.79 * em} height={28 * em} />
           </View>
           <CommentText 
-          style={{fontFamily: 'HelveticaNeue'}}
+          style={{fontFamily: 'Lato-Regular'}}
             text={!userProfile.cover ? 'Ajouter une photo de couverture' : 'Changer photo de couverture'}
             color={userProfile.cover ? '#FFFFFF' : '#40CDDE'}
           />
@@ -198,6 +198,7 @@ style={styles.okstyle}
       />
    
   <ModalEdit
+    hor={true}
         visible={HoraireModal}
         itemKey={inputItemKey}
         title={'Horaires'}
@@ -211,6 +212,7 @@ style={styles.okstyle}
       />
 
 <ModalEdit
+contact={true}
         visible={ContactModal}
         itemKey={inputItemKey}
         title={'Contact'}
@@ -388,7 +390,7 @@ const styles = {
     backgroundColor: '#ffffff',
   },
   avatar: { width: 92 * em, height: 92 * em, marginBottom: 10 * em, alignSelf: 'center', marginTop: -46 * em },
-  addPhotoBtn: {fontFamily: 'HelveticaNeue', marginBottom: 25 * em, lineHeight: 21 * em },
+  addPhotoBtn: {fontFamily: 'Lato-Regular', marginBottom: 25 * em, lineHeight: 21 * em },
   deleteBtn: {
     marginTop: 5 * hm,
     marginBottom: 25 * hm,

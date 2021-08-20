@@ -24,19 +24,20 @@ import { feedbackIcons } from '../../../constants/icons';
 import AccountType from '../../../model/user/AccountType';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { LogoLabul } from '../../../assets/svg/svg/icons';
+import ModalEdit from './ModalEdit/ModalEdit';
 
 const iconSize = { width: 38 * em, height: 38 * em };
 
 const originalProProfile = {
   avatar: '',
-  name: 'Curology',
+  name: 'Le Bar à T-Shirt',
   type: 'Professional',
   publications: { tips: 0, promotions: 0, events: 0 },
 };
 const updateProPrfile = {
   avatar: require('../../../assets/images/avatar_curology.png'),
   cover: require('../../../assets/images/img_curology.png'),
-  name: 'Curology',
+  name: 'Le Bar à T-Shirt',
   type: 'Professional',
   publications: { tips: 3, promotions: 2, events: 1 },
   services: ['Beauté', 'Soins'],
@@ -54,6 +55,12 @@ const ProProfileHomeScreen = (props) => {
   const [userProfile] = useState(
     props.route.params.purchased !== AccountType.PRO ? originalProProfile : updateProPrfile
   );
+  const [HoraireModal, setHoraireModal] = useState(false)
+  const [inputItemKey, setInputItemKey] = useState(1);
+  const [profileDataCurrent, setprofileDataCurrent] = useState(
+    {
+     presentation: '',
+    })
   return (
     <ParallaxScrollView
       // onScroll={onScroll}
@@ -77,13 +84,36 @@ const ProProfileHomeScreen = (props) => {
               borderWidth={3 * em}
               fullName={userProfile.name}
               icon={userProfile.avatar}
-              txtInitial={{fontFamily:'Montserrat-Bold',fontSize:24*em}}
+              txtInitial={{fontFamily:'Montserrat-Bold',fontSize:30*em,color:"#1E2D60"}}
               pro
             />
-            <TouchableOpacity style={{bottom:70*hm,marginLeft:141*em}} onPress={() => Actions.proProfileOverview({ userProfile: originalProProfile })}>
+            <View style={{bottom:70*hm,marginLeft:141*em}}>
+            <TouchableOpacity onPress={() => Actions.proProfileOverview({ userProfile: originalProProfile })}>
               <Text style={styles.txtFullName}>{userProfile.name}</Text>
-              <Text style={styles.txtGoToProfile}>Aller sur mon profil</Text>
             </TouchableOpacity>
+            <TouchableOpacity 
+                onPress={() => {
+                  setInputItemKey(7);
+                  setHoraireModal(!HoraireModal);
+                }}            >
+
+              <Text style={styles.txtGoToProfile}>+ Ajouter horaires d’ouverture</Text>
+              </TouchableOpacity>
+
+              </View>
+             <ModalEdit
+           
+        visible={HoraireModal}
+        itemKey={inputItemKey}
+        title={'Horaires'}
+        text={'Horaires d’ouverture'}
+        value={profileDataCurrent.presentation}
+        profileDataCurrent={profileDataCurrent}
+        setprofileDataCurrent={setprofileDataCurrent}
+        onPress={() => {
+          setHoraireModal(false);
+        }}
+      />
           </View>
         </ImageBackground>
         <View style={styles.cardContainer}>
@@ -218,8 +248,8 @@ const styles = {
     height: 275*hm, 
     backgroundColor: '#40CDDE' },  
     avatar: { marginTop: 89 * hm, height: 70 * hm, width: 70 * hm ,marginLeft:30*em},
-    txtFullName: { marginTop: 15 * hm, fontSize: 20 * em, color: '#FFFFFF', fontWeight: 'bold'},
-  txtGoToProfile: { marginTop: 5 * hm, fontSize: 14 * em, color: '#FFFFFF' },
+    txtFullName: {fontFamily:'Montserrat-Bold', marginTop: 15 * hm, fontSize: 20 * em, color: '#FFFFFF', fontWeight: 'bold'},
+  txtGoToProfile: { fontFamily:'Lato-Regular',fontSize:14*em,marginTop: 5 * hm, fontSize: 14 * em, color: '#FFFFFF' },
   scrollView: { width: WIDTH, backgroundColor: '#ffffff' },
   dropDown: { right: 30 * em, top: 33 * hm, position: 'absolute', zIndex: 1 },
   bottomView: {
@@ -255,7 +285,7 @@ const styles = {
       elevation: 5,
     },
   listBox: { marginTop: 15 * hm },
-  caption: {fontFamily:'Lato-Medium',fontSize:14*em, width: '100%', textAlign: 'left', fontWeight: '300', marginBottom: 20 * em },
+  caption: {color:'#A0AEB8',fontFamily:'Lato-Medium',fontSize:14*em, width: '100%', textAlign: 'left', marginBottom: 20 * em },
   listItem: {},
   line1: { marginLeft: 53 * em, marginBottom: 25 * hm, marginTop: 15 * hm, height: 1 * em, backgroundColor: '#F0F5F7' },
   line2: {
@@ -299,7 +329,7 @@ const styles = {
   imgLogo: { height: 58 * hm, width: 80 * em, resizeMode: 'contain', marginLeft: 7 * em },
   txtLogo: { height: 23 * em, width: 80 * em, resizeMode: 'contain', tintColor: '#7398FD' },
   proText: { lineHeight: 15 * em, alignSelf: 'flex-start', color: '#7398FD' },
-  txtVersion: { marginBottom: 110 * hm,fontFamily: 'HelveticaNeue' },
+  txtVersion: { marginBottom: 110 * hm,fontFamily: 'Lato-Regular',fontSize:14*em ,color:'#BFCDDB'},
 };
 
 export default ProProfileHomeScreen;

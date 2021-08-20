@@ -202,6 +202,7 @@ const EditProfileScreen = (props) => {
 
 
   return (
+    <>
     <ProfileCommonHeader
       title="Editer mon profil"
       onCancel={() => Actions.pop()}
@@ -240,6 +241,8 @@ const EditProfileScreen = (props) => {
           profileDataCurrent.presentation ||
           'Salut ! Je suis …\nPrésente toi ici. Ce texte sera affiché pour vous invitations et apparaitra sur ta page profil. Soit court, avent et efficace. Vivons ensemble !'
         }
+        noClick={true}
+        flech={true}
         style={styles.listItem}
         onPress={() => {
           setInputItemKey(7);
@@ -251,6 +254,8 @@ const EditProfileScreen = (props) => {
   <ProfileInformationListItem
         caption={'Mes atouts (3 max)'}
         placeholder
+        noClick={true}
+        flech={true}
         value={'Sélectionne les compétences où tu es plus l’aise'}
         style={styles.listItem}
         options={profileDataCurrent.skill !== null ? profileDataCurrent.skill : []}
@@ -262,18 +267,7 @@ const EditProfileScreen = (props) => {
        
        
        
-       
-<View style={{bottom:10*hm,flexDirection:'row', justifyContent:'center'}}>
-<TouchableOpacity onPress={() => "" }
-style={styles.okstyle}
->
-<View
-  style={styles.textView}>
-  <Text style={styles.textstyle}>Enregistrer modifications</Text>
-</View>
-</TouchableOpacity>
-
-</View>
+ 
 
 
 
@@ -334,6 +328,19 @@ style={styles.okstyle}
 
 
     </ProfileCommonHeader>
+          
+<View style={{bottom:10*hm,flexDirection:'row', justifyContent:'center'}}>
+<TouchableOpacity onPress={() => Actions.pop() }
+style={styles.okstyle}
+>
+<View
+  style={styles.textView}>
+  <Text style={styles.textstyle}>Enregistrer modifications</Text>
+</View>
+</TouchableOpacity>
+
+</View>
+</>
   );
 };
 
@@ -355,7 +362,7 @@ const styles = {
     backgroundColor: '#ffffff',
   },
   avatar: { width: 92 * em, height: 92 * em, marginTop: 25 * hm, marginBottom: 10 * hm, alignSelf: 'center', },
-  addPhotoBtn: { fontFamily: 'HelveticaNeue' ,marginBottom: 25 * hm, lineHeight: 21 * em },
+  addPhotoBtn: { fontFamily: 'Lato-Regular' ,marginBottom: 25 * hm, lineHeight: 21 * em },
   deleteBtn: {
     marginTop: 5 * hm,
     marginBottom: 25 * hm,

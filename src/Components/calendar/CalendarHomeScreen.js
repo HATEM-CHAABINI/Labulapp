@@ -291,7 +291,7 @@ const styles = {
     color: '#1E2D60',
     width: 30 * em,
     fontSize: 18 * em,
-    fontFamily: 'HelveticaNeue',
+    fontFamily: 'Lato-Bold',
   },
   highlightDateNameStyle: {
     color: '#fff',

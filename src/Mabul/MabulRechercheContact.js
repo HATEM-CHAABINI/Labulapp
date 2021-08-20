@@ -185,7 +185,12 @@ const MabulRechercheContact = (props) => {
   const onSubmit = () => {
     setloadingSet(true)
     let data = {}
-    console.log("mabulService  ",mabulService," demandData  ",demandData);
+
+    if (props.shareEdit==true){
+      props.rb4()
+
+    }
+    else{
     if (mabulService === 'organize') {
       data = Object.assign(demandData, { contactType: contactType, users: selectedUser, serviceType: { name: 'organize', code: 0, subCode: 0 }, status: { status: 'INPROGRESS', code: 102 } })
 
@@ -207,6 +212,7 @@ const MabulRechercheContact = (props) => {
     }
     // console.log("DATADATDADTAD", data)
     saveData(data);
+  }
   }
   // console.log("CHECKEDDDDDD", checked)
   const handleRemove = (value) => {
@@ -321,7 +327,7 @@ const MabulRechercheContact = (props) => {
         </View>
       </ScrollView>
       <MabulPubButton
-        text={"Partager dans Labul"}
+        text={props.txt? props.txt: "Partager dans Labul"}
         color={props.conceptColor}
         style={styles.nextBtn}
         onPress={() =>
@@ -364,7 +370,7 @@ const styles = {
   container: { flex: 1, backgroundColor: '#ffffff', paddingHorizontal: 20 * em },
   title: { textAlign: 'left', marginTop: 23 * em, marginBottom: 17 * em },
   header: { marginTop: 39 * hm, alignSelf: 'flex-end' },
-  selectedFullName: { fontSize: 12 * em, height: 30 * em, color: '#1E2D60', marginBottom: 0, fontFamily: 'HelveticaNeue' },
+  selectedFullName: {right:4*em,fontSize: 12 * em, height: 30 * em, color: '#1E2D60', marginBottom: 0, fontFamily: 'Montserrat-Bold' },
   listItem: { marginBottom: 35 * em, marginTop: 2 * hm },
   nextBtn: {
     width: 315 * em,

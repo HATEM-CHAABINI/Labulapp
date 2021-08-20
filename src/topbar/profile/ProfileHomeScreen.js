@@ -195,11 +195,16 @@ const ProfileHomeScreen = (props) => {
           />
         </View>
         {!props.route.params.purchased && <View style={styles.line2} />}
+   {props.route.params.purchased?     <View style={{backgroundColor:'#F0F5F7',width:"100%",height:10*hm,marginTop:10*hm}}/>:<></>}
+
         <View style={styles.listBox}>
           <CommentText text={'Mon abonnement'} style={styles.caption} color={'#A0AEB8'} />
           <ProfileCommonListItem
             text={'Abonnement Premim'}
-            subText={'En savoir plus'}
+            subText={props.route.params.purchased?"Activé":'En savoir plus'}
+            subTitleStyle={props.route.params.purchased?{color:'#40CDDE'}:{color:'#6A8596'},{fontFamily:'Lato-Regular'}}
+          
+            subTitleStyle={[(props.route.params.purchased) ? {color:'#40CDDE'}: {color:'#6A8596'}]}
             icon={PurchasedPremium(iconSize)}
             style={styles.listItem}
             onPress={() => {
@@ -209,6 +214,8 @@ const ProfileHomeScreen = (props) => {
             }}
           />
         </View>
+        {props.route.params.purchased?     <View style={{backgroundColor:'#F0F5F7',width:"100%",height:10*hm,marginTop:20*hm}}/>:<></>}
+
         {!props.route.params.purchased && (
           <View style={styles.rowContainer}>
               
@@ -393,7 +400,7 @@ const styles = {
   },
   imgLogo: { marginLeft: 7 * em , resizeMode: 'stretch'},
   txtLogo: { height: 23 * em, width: 80 * em, resizeMode: 'contain' },
-  txtVersion: { marginBottom: 110 * hm,fontFamily: 'HelveticaNeue' },
+  txtVersion: { marginBottom: 110 * hm,fontFamily: 'Lato-Regular' },
 };
 
 export default ProfileHomeScreen;

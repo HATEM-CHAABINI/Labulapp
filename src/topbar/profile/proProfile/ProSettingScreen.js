@@ -182,7 +182,7 @@ const styles = {
     color: '#1E2D60',
   },
   listComment: {
-    fontFamily: 'HelveticaNeue',
+    fontFamily: 'Lato-Regular',
     lineHeight: 14 * em,
     textAlign: 'left',
     width: 170 * em,

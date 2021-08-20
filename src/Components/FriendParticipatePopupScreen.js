@@ -94,7 +94,7 @@ const styles = {
     textDecorationStyle: 'solid',
     width: 260 * em,
     textAlign: 'left',
-    fontFamily: 'HelveticaNeue'  },
+    fontFamily: 'Lato-Bold'  },
   itemText: { width: 260 * em, textAlign: 'left', fontFamily: 'Lato-Bold' },
 };
 export default FriendParticipatePopupScreen;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import TitleText from '../../../text/TitleText';
 import { em, hm } from '../../../constants/consts';
@@ -9,7 +9,7 @@ import NeedServiceType from '../../../model/service/NeedServiceType';
 import User from '../../../model/user/User';
 import AvatarWithBadge from '../../../Components/view/AvatarWithBadge';
 import FriendInvitePopupScreen from '../../friends/popup/FriendInvitePopupScreen';
-import { LocationPink, Alert, InviterModif } from '../../../assets/svg/icons/index.js';
+import { LocationPink, Alert, InviterModif, LocationGray } from '../../../assets/svg/icons/index.js';
 import CommonListItem from '../../../adapter/CommonListItem';
 import CommonBackButton from '../../../Components/button/CommonBackButton';
 import firestore from '@react-native-firebase/firestore';
@@ -20,6 +20,8 @@ import SmallText from '../../../text/SmallText';
 import Moment from 'moment';
 import 'moment/locale/fr'; 
 import ModalSupprimerAlerte from '../../../ServiceScrenns/ModalSupprimerAlerte';
+import AlertShareScreen from '../../alert/AlertShareScreen';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 const needData = new NeedService(
   new User('Mathieu Torin', require('../../../assets/images/tab_profile_off.png'), 'anton@gmail.com'),
@@ -38,6 +40,9 @@ const MyAlertScreenView = (props) => {
   const [invitePopupVisible, setInvitePopupVisible] = useState(false);
   const [data] = useState(needData);
   const [cancelUpdatePopupVisible, setcancelUpdatePopupVisible] = useState(false);
+const Sheet3 = useRef(null)
+const mabulService = "Alerte";
+const conceptColor = '#F9547B';
 
   useEffect(() => {
     setAlertData(props.alertData)
@@ -67,7 +72,9 @@ const MyAlertScreenView = (props) => {
 
       leftIcon={<InviterModif width={24 * em} height={24 * hm} />}
       iconStyle={{ marginLeft: 5 * em }}
-      onPress={() => Actions.alertShare({ process: 94 })}
+      onPress={() => 
+   Sheet3.current.open()
+          }
     />
   );
   const ModifyButton = (
@@ -93,6 +100,8 @@ const MyAlertScreenView = (props) => {
     />
   );
   const AskButton = <CommonButton textStyle={{ color: '#F9547B' }} style={styles.quizBtn} text="Poser une question" />;
+  
+  console.log("alertyyjtiigtijti ",props.alertData);
   return (
     <View style={styles.container}>
       <View style={styles.cover}>
@@ -130,19 +139,34 @@ style={{fontSize:14*em,fontFamily:'Lato-Medium'}}
           subTitle={"Moi même"}
           subTitleStyle={{ marginTop:2*hm,color: '#A0AEB8', marginLeft: 21 * em, fontFamily: 'Lato-Regular', fontSize: 14 * em }}
         />
+
+
+
         <TitleText text={alertData.type.id != 3 ?
-         alertData.type.title : alertData.alertType.alertDescription} 
+        "J’alerte "+ alertData.type.title 
+         : alertData.alertType.alertDescription} 
         style={styles.title} />
-    <Text style={{marginBottom:14*hm,textAlign: 'left',fontFamily:'Lato-Regular',color:'#6A8596',fontSize:14*em}}>{alertData.description.description}</Text>
-        <CommonListItem
+
+
+<TitleText text={alertData.description.title} 
+        style={styles.description} />
+
+<View style={{ flexDirection: 'row', justifyContent: 'space-between' ,marginBottom:25*hm}}>
+          {ModifyButton}
+          {DeleteButton}
+          {InviteButton}
+        </View>
+
+    <Text style={{marginBottom:18*hm,textAlign: 'left',fontFamily:'Lato-Regular',color:'#6A8596',fontSize:14*em}}>{alertData.description.description}</Text>
+      {alertData.address !== undefined ?  <CommonListItem
           icon={
             <View style={{ marginRight: 10 * em }}>
-              <LocationPink width={16 * em} height={19 * em} />
+              <LocationGray width={16 * em} height={19 * em} />
             </View>
           }
           title={alertData.address !== undefined ? alertData.address : 'Alert Address undefine'}
-          titleStyle={{ color: '#6A8596', textAlignVertical: 'top', fontFamily: 'HelveticaNeue', fontSize: 16 * em }}
-        />
+          titleStyle={{ color: '#1E2D60', textAlignVertical: 'top', fontFamily: 'Lato-Regular', fontSize: 16 * em }}
+        />:<></>}
           <ModalSupprimerAlerte
             visible={cancelUpdatePopupVisible}
            
@@ -160,15 +184,30 @@ style={{fontSize:14*em,fontFamily:'Lato-Medium'}}
               // , Actions.editNeed({ data2: data2, docId: props.docId })
             }}
           />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          {ModifyButton}
-          {DeleteButton}
-          {InviteButton}
-        </View>
+     
         <View style={{ height: 130 * em }} />
       </ScrollView>
       <CommonBackButton dark style={styles.backBtn} />
       <FriendInvitePopupScreen visible={invitePopupVisible} onPress={() => setInvitePopupVisible(false)} />
+  
+      <RBSheet ref={Sheet3}
+          height={hm * 630}
+
+          openDuration={250}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'rgba(209,226,237,0.9)'
+            },
+            container: {
+              borderTopLeftRadius: 28 * em,
+              borderTopRightRadius: 28 * em,
+
+            }
+          }}
+        >
+{/* { console.log("jdjdjdjddjdjdj item",alertData)} */}
+<AlertShareScreen shareEdit={true} items={alertData} mabulService={mabulService} conceptColor={conceptColor} close={()=>Sheet3.current.close()}/>
+          </RBSheet>
     </View>
   );
 };
@@ -205,17 +244,21 @@ const styles = {
   title: {
     height: 28 * em,
     lineHeight: 30 * em,
-    fontSize: 24 * em,
+    fontSize: 13 * em,
     textAlign: 'left',
-    marginTop: 24 * hm,
-    marginBottom: 14 * hm,
-    fontFamily: 'Lato-Black',
+    marginTop: 10 * hm,
+    fontFamily: 'Lato-Regular',
+    color:'#1E2D60'
   },
   quizBtn: {
     paddingVertical: 0 * hm,
     width: 112 * em, height: 45 * hm, marginTop: 25 * hm, backgroundColor: "#40CDDE"
   },
   inviteBtn: { marginTop: 15 * hm, backgroundColor: 'transparent' },
+
+  description:{textAlign:'left',color:'#1E2D60',fontFamily:'Montserrat-Bold',fontSize:25*em,
+  // marginBottom:25*hm
+},
 };
 export default MyAlertScreenView;
 

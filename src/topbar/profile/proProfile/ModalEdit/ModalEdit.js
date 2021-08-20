@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { em, WIDTH, hm } from '../../../../constants/consts';
 import ProfileModalHeader from '../../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
-import ProfileCommonTextInput from '../../../../textInput/ProfileCommonTextInput';
+import ProfileCommonTextInput from '../../../../Components/textInput/ProfileCommonTextInput';
+
 import CommonText from '../../../../text/CommonText';
 import SearchBox from '../../../../Components/other/SearchBox';
 import CommonCheckBox from '../../../../Components/checkbox/CommonCheckBox';
-import { StatusBar, View, Text, Platform ,KeyboardAvoidingView} from 'react-native';
+import { StatusBar, View, Text, Platform ,KeyboardAvoidingView,Switch} from 'react-native';
 import User from '../../../../model/user/User';
 import { feedbackIcons } from '../../../../constants/icons';
 import { useFormik } from 'formik';
@@ -15,10 +16,19 @@ import { useDispatch } from 'react-redux';
 import { updateProfile } from '../../../../redux/actions/profile';
 import OkModalchange from '../../../../Components/button/OkModalchange';
 import TitleText from '../../../../text/TitleText';
+import CommonListItem from '../../../../adapter/CommonListItem';
 const ModalEdit = (props) => {
   const [value, setvalue] = useState(props.value)
+  const toggleSwitch = () => setSwitch(previousState => !previousState);
+  const [isSwitch, setSwitch] = useState(false);
 
-
+  var switchView = (
+    <Switch
+      trackColor={{ true: '#9FE7F0', false: '#A0AEB8' }}
+      onValueChange={toggleSwitch}
+      value={isSwitch}
+    />
+  );
   const initialValues = {
     presentation: value,
 
@@ -103,7 +113,18 @@ const ModalEdit = (props) => {
         keyboardType={props.keyboardType}
         onChangeText={formik.handleChange('presentation')}
       />
-  
+  {props.hor==true?  <View style={{flexDirection:'row'}}>
+      <Text style={{fontFamily:'Lato-Italic',fontSize:11*em,color:'#6A8596',marginTop:10*hm}}>
+   ( </Text>
+  <Text style={{fontWeight:'bold',fontFamily:'Lato-Italic',fontSize:11*em,color:'#1E2D60',marginTop:10*hm}}>
+   {formik.values.presentation.length}</Text>
+   <Text style={{fontFamily:'Lato-Italic',fontSize:11*em,color:'#6A8596',marginTop:10*hm}}>
+    /80 caractères maximum)</Text>
+    </View>:<></>}
+
+    {props.contact==true? 
+    <CommonListItem title="Ne pas afficher le télephone" rightView={switchView} style={styles.addDateText} />
+                :<></>}
 </KeyboardAvoidingView>
 {/* <View> */}
 <OkModalchange txt={"Enregistrer"} conceptColor={"#40CDDE"} okoModal={formik.handleSubmit} closeModal={props.onPress} style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',marginRight:30*em,marginLeft:30*em,alignContent:'center',alignItems:'center'}}/>
@@ -129,5 +150,11 @@ const styles = {
   forgotPsswd: { lineHeight: 18 * em, marginTop: 78 * hm, textAlign: 'center' },
   comment: { fontSize: 12 * em, lineHeight: 20 * em, marginTop: 15 * hm },
   listItem: { paddingHorizontal: 10 * em, marginBottom: 35 * hm },
+  addDateText: {
+    marginTop: 30 * hm,
+    textAlign: 'left',
+    // marginLeft: 36 * em,
+    marginBottom: 20 * hm
+  },
 };
 export default ModalEdit;

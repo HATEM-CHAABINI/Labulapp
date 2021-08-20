@@ -49,7 +49,6 @@ const InputLocationScreen = () => {
               showadd={false}
               
               textInputStyle={{
-                // height: 40,
                 color: '#6A8596',
                 fontSize: 16 * em,
                 fontFamily: 'Lato-Regular',
@@ -57,49 +56,16 @@ const InputLocationScreen = () => {
               myLocationStyle={{ marginTop:25*hm,right:150*em }}
               myLocationIconColor={{color:'#40CDDE'}}
               myLocationColor={'#40CDDE'}
-              // autoFillOnNotFound={true}
               value={text}
-              // formik={formik}
 
               changedValue={(val) => {
                 console.log(val.adresse);
                 setText(val)
-                // formik.setFieldValue('adresse', val.address);
-                // formik.setFieldValue('coordinate', val.coordinate)
+               
               }}
             />
 </View>
-      {/* <SearchBoxLieu
-        style={styles.searchBox}
-        comment="Rechercher par ville"
-        smallText="Rechercher par ville"
-        value={text}
-        onChangeText={(text) => {
-          setText(text)
-          if (text) {
-            getSearchResult([
-              { id: 0, location: 'Le Gosier' },
-              { id: 1, location: 'Gosier Guadeloupe' },
-              { id: 2, location: 'Beaumanoir, Le Gosier', comment: 'Route de Beaumanoir, Le Gosier' },
-            ]);
-            setlocationViewVisible('none');
-          } else {
-            getSearchResult([]);
-            setlocationViewVisible('flex');
-          }
-        }}
-      /> */}
-      {/* <View style={[styles.location, { display: locationViewVisible }]}>
-        <CommentText text={'Utiliser ma position'} color="#40CDDE" style={{ marginTop: 5 * em }} />
-      </View> */}
-
-      {/* <FlatList
-        data={searchedUsers}
-        renderItem={renderFlatList}
-        keyExtractor={(i) => i.id}
-        style={{ marginTop: 25 * hm }}
-      /> */}
-    </View>
+     </View>
   );
 };
 

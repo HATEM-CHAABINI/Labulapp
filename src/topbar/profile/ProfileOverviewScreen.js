@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView,Text } from 'react-native';
+import { View, ScrollView,Text ,TouchableOpacity } from 'react-native';
 import TitleText from '../../text/TitleText';
 import { em, WIDTH, hm } from '../../constants/consts';
 import CommonText from '../../text/CommonText';
@@ -24,7 +24,8 @@ const ProfileOverviewScreen = (props) => {
   const { profileData } = useSelector((state) => state.profileReducer);
   console.log("asdasd ", profileData)
   const badgesView = userProfile.feedback ? (
-    <ScrollView horizontal={true} style={{ paddingTop: 20 * hm, paddingBottom: 20 * hm, paddingLeft: 30 * em }}>
+    <ScrollView horizontal={true} 
+  style={{width:"105%", paddingTop: 20 * hm, paddingBottom: 20 * hm, paddingLeft: 0 * em }}>
       {userProfile.feedback.map((badge, index) => (
         <View style={styles.badgeIcon}>{badge.icon}</View>
       ))}
@@ -47,20 +48,12 @@ const ProfileOverviewScreen = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <CommonHeader
-          rightTxt={  <View style={{backgroundColor:'white',height:25*hm,width:66*em,borderRadius:14*em,alignItems:'center',justifyContent: "center"}}>
-          <Text Style={{ fontSize: 14 * em,color:'#1E2D60',fontFamily:'Lato-Black' }}>Fermer</Text>
-          </View>}
-          rightTxtStyle={{ fontSize: 14 * em,color:'#1E2D60',fontFamily:'Lato-Black' }}
-          style={styles.header}
-          onLeftPress={() =>
-            Actions.home({
-              tabNav: 'Profile',
-              purchased: userProfile.photo ? AccountType.LIGHT : null,
-            })
-          }
-          onRightPress={() => Actions.editProfile({ assest: assets })}
-        />
+      <TouchableOpacity onPress={()=>Actions.pop()}>
+  <View style={{marginTop:37*hm,marginLeft:273*em,backgroundColor:'white',height:25*hm,width:66*em,borderRadius:14*em,alignItems:'center',justifyContent: "center"}}>
+  <Text Style={{ fontSize: 14 * em,color:'#1E2D60',fontFamily:'Lato-Black' }}>Fermer</Text>
+  
+  </View>
+  </TouchableOpacity>
         <View style={styles.firstPopView}>
           <ProfileCommonAvatar
             icon={profileData.profilePic === undefined || profileData.profilePic === null ? '' : { uri: profileData.profilePic }}
@@ -112,7 +105,7 @@ const ProfileOverviewScreen = (props) => {
               <ProfileCommonLabel number={userProfile.needs.events} name={'Évènements'} />
             </View>
           </View>
-         <Text style={{fontFamily: 'HelveticaNeue',fontSize:12*em,color:'#6A8596',marginTop:50*hm}}>Actif dans Labul depuis 10 jours</Text>
+         <Text style={{fontFamily: 'Lato-Italic',fontSize:12*em,color:'#6A8596',marginTop:50*hm}}>Actif dans Labul depuis 10 jours</Text>
         </View>
       </ScrollView>
     </View>
@@ -143,7 +136,7 @@ const styles = {
     marginTop: 35 * hm,
     marginBottom: 20 * hm,
     fontSize: 21 * em,
-    fontFamily: 'HelveticaNeue'
+    fontFamily: 'Montserrat-Bold'
   },
   circlesView: { flexDirection: 'row', marginLeft: 0.072 * WIDTH, marginRight: 0.072 * WIDTH },
   labelView: { width: WIDTH * 0.285 },

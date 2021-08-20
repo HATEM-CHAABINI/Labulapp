@@ -8,8 +8,16 @@ const CommonListItem = (props) => {
   var textView;
   if (props.title) {
     textView = (
+      // require
       <View style={styles.txtView}>
+        <View style={{flexDirection:'row'}}>
         <CommonText text={props.title} style={[styles.title, props.titleStyle]} />
+        {props.require ==true ?
+          <Text style={{fontFamily:'Lato-Regular',fontSize:16*em},[props.conceptcolor]}>{' *'}</Text>
+          :
+          <></>
+      }       
+        </View>
         {props.subTitle && <CommentText text={props.subTitle} style={[styles.subTitle, props.subTitleStyle]} />}
       </View>
     );

@@ -84,10 +84,16 @@ const MabulAddDate = (props) => {
 
   const handleConfirm = (date) => {
     // let datee = toTimestamp(date)
+
     setDate(date)
     // console.log('seldate .........',date)
     // props.callback(date);
-    hideDatePicker();
+    setTimeout(function(){
+                
+      hideDatePicker();
+    
+    }, 500);
+  
   };
   const hideendDatePicker = () => {
     setisEndDatePickerVisible(false);
@@ -105,8 +111,16 @@ const MabulAddDate = (props) => {
     // props.setdatee(isEndDate);
     // props.closeModal(isDate)
     //  setTimeout(()=>{props.closeModal(isDate)},0)
+if (isDate==null){
+
+  dispatch(update_into_demand({demandStartDate:new Date(),demandEndData: ''}))
+
+
+}else{
+
+
     dispatch(update_into_demand({demandStartDate:isDate,demandEndData: ''}))
-    props.requiredDate(),
+  }  props.requiredDate(),
      props.closeModal(isDate)
     console.log("okmodal date aa gai",isDate)
   }
@@ -125,11 +139,7 @@ const MabulAddDate = (props) => {
     }}>
       {/* <MabulCommonHeader style={[styles.header, { zIndex: 999, backgroundColor: '#ffffff', }]} percent={process} isNoBackBtn={true} progressBarColor={conceptColor} /> */}
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
-
-      >
+     
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="datetime"
@@ -157,16 +167,41 @@ const MabulAddDate = (props) => {
               <View style={styles.line} />
             </View>
                       
-            {showEndDataView ? <View style={{ paddingTop: 10 * hm }}>
+            {showEndDataView ? 
+            <View style={{ paddingTop: 20 * hm }}>
+              <TouchableOpacity onPress={()=>showEndDatePicker()}>
               <CommonListItem
                 title="Date et heure de fin"
-                subTitle={isEndDate === '' ? ' ' : Moment(isEndDate).format('DD MMMM YYYY-HH:MM')}
+                subTitle={isEndDate === '' ? 'Ajouter la date de fin ' : Moment(isEndDate).format('DD MMMM YYYY-HH:MM')}
                 subTitleStyle={styles.listComment}
                 titleStyle={styles.listCaption} 
-                onPress={showEndDatePicker}
+  
+                // onPress={showEndDatePicker}
               />
+                            </TouchableOpacity>
               <View style={styles.line} />
-            </View> : <CommentText style={styles.addDateText} onPress={() => setshowEndDataView(true)} text="+ Date et heure de fin" color={conceptColor} />
+            </View> :
+            <View style={{  
+              padding: 0,
+              paddingTop:10*hm,
+              borderRadius: 50,
+              borderWidth: 0,
+              borderColor: 'black',
+              // height: 35,
+              marginBottom: 10,
+              // alignItems: 'left',
+              // backgroundColor:'red'
+              }}>
+               <TouchableOpacity onPress={() => setshowEndDataView(true)}>
+        <Text
+          style={[
+            { fontSize: 14 * em, color:conceptColor },
+            styles.addDateText,
+          ]}>
+         + Date et heure de fin
+        </Text>
+      </TouchableOpacity>
+</View>
 }
 
 
@@ -174,7 +209,6 @@ const MabulAddDate = (props) => {
             </View>
         
         </View>
-      </KeyboardAvoidingView>
       {/* <OkModal conceptColor={conceptColor}
       //  closeModal={ () => props.closeModal()} 
       //  okoModal={()=>{props.closeModal(isDate)}}
@@ -226,13 +260,14 @@ const styles = {
   listCaption: { color: '#A0AEB8', fontSize: 12 * em, lineHeight: 24 * em },
   listComment: { fontSize: 16 * em, lineHeight: 18 * em, color: '#1E2D60' },
   listAddLocation: { marginLeft: 37 * em, marginTop: 15 * em },
-  line: { backgroundColor: '#BFCDDB', height: 1 * em,  marginTop: 25 * em },
+  line: { backgroundColor: '#BFCDDB', height: 1 * em,  marginTop: 13 * hm },
   addDateText: {
-    marginTop: 10 * hm,
+    // marginTop: 10 * hm,
     textAlign: 'left',
-    fontFamily: 'HelveticaNeue',
+    fontFamily: 'Lato-Regular',
+    fontSize:12*em,
     // marginLeft: 36 * em,
-    marginBottom: 40 * hm
+    // marginBottom: 40 * hm
   },
   nextBtn: {
     alignSelf: 'flex-end',

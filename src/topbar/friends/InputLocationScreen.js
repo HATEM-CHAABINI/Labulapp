@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import { View, FlatList, TouchableOpacity, Dimensions, } from 'react-native';
-import { em, hm } from '../../constants/consts';
-import SearchBox from '../../Components/other/SearchBox';
-import CommentText from '../../text/CommentText';
-import SearchCommonListItem from '../../adapter/SearchCommonListItem';
-import FriendCommonHeader from '../../Components/header/FriendCommonHeader';
-import SearchBoxLieu from '../../Components/other/SearchBoxLieu';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
-import Geolocation from 'react-native-geolocation-service';
-import GooglePlacesInput from '../../Components/GooglePlacesInput'
-import { google_api } from '../../constants/consts'
+import SearchCommonListItem from '../../adapter/SearchCommonListItem';
+import GooglePlacesInput from '../../Components/GooglePlacesInput';
+import FriendCommonHeader from '../../Components/header/FriendCommonHeader';
+import { em, google_api, hm } from '../../constants/consts';
 Geocoder.init(google_api);
 
 const InputLocationScreen = () => {
@@ -22,7 +17,6 @@ const InputLocationScreen = () => {
      
     }} >
     <SearchCommonListItem
-  
       location
       text={item.location}
       subText={item.comment}
@@ -36,11 +30,11 @@ const InputLocationScreen = () => {
       <FriendCommonHeader upperTitle="Filtrer" title="Lieu" />
       <View style={styles.ActionWrapper}>
       <GooglePlacesInput
-              placeholder={"Rechercher par ville"}
+              placeholder="Rechercher par ville"
               containerStyle={{
-                backgroundColor: 'white',
+                // backgroundColor: 'black',
                 width: "100%",
-
+color:"black"
               }}
               TextBtn={"Utiliser ma position"}
               borderBottomColor={'#41D0E2'}
@@ -50,7 +44,8 @@ const InputLocationScreen = () => {
               
               textInputStyle={{
                 // height: 40,
-                color: '#6A8596',
+                backgroundColor:"red",
+                color: 'black',
                 fontSize: 16 * em,
                 fontFamily: 'Lato-Regular',
               }}

@@ -1,23 +1,29 @@
-import React from 'react';
-import { View, FlatList, TouchableOpacity } from 'react-native';
-import TitleText from '../../text/TitleText';
-import { em, WIDTH, hm } from '../../constants/consts';
-import CalendarStrip from './CalendarStrip';
-import { NextIcon, PrevIcon } from '../../assets/svg/icons';
-import NeedService from '../../model/service/NeedService';
-import NeedServiceType from '../../model/service/NeedServiceType';
-import User from '../../model/user/User';
-import ScheduleCard from './ScheduleCard';
-import CalendarListView from './CalendarListView';
+<script src="http://localhost:8097"></script>;
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import moment from 'moment';
 import 'moment/min/locales';
+import React, { useEffect } from 'react';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
+import { NextIcon, PrevIcon } from '../../assets/svg/icons';
+import { em, hm, WIDTH } from '../../constants/consts';
+import NeedService from '../../model/service/NeedService';
+import User from '../../model/user/User';
+import TitleText from '../../text/TitleText';
+import CalendarListView from './CalendarListView';
+import CalendarStrip from './CalendarStrip';
+import ScheduleCard from './ScheduleCard';
 const locale = {
   name: 'fr',
   config: {
-    months: 'Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre'.split('_'),
-    monthsShort: 'Janv_Févr_Mars_Avr_Mai_Juin_Juil_Août_Sept_Oct_Nov_Déc'.split('_'),
+    months:
+      'Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre'.split(
+        '_',
+      ),
+    monthsShort: 'Janv_Févr_Mars_Avr_Mai_Juin_Juil_Août_Sept_Oct_Nov_Déc'.split(
+      '_',
+    ),
     weekdays: 'Dimanche_Lundi_Mardi_Mercredi_Jeudi_Vendredi_Samedi'.split('_'),
     weekdaysShort: 'Dim_Lun_Mar_Mer_Jeu_Ven_Sam'.split('_'),
     weekdaysMin: 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
@@ -71,68 +77,166 @@ const locale = {
 };
 
 const blankSchedules = [
-  { id: '1', time: 8 },
+  {id: '1', time: 8},
   {
     id: '2',
     time: 9,
   },
-  { id: '3', time: 10 },
-  { id: '4', time: 11 },
+  {id: '3', time: 10},
+  {id: '4', time: 11},
   {
     id: '5',
     time: 12,
   },
-  { id: '6', time: 13 },
-  { id: '7', time: 14 },
-  { id: '8', time: 15 },
-  { id: '9', time: 16 },
-  { id: '10', time: 17 },
-  { id: '11', time: 18 },
+  {id: '6', time: 13},
+  {id: '7', time: 14},
+  {id: '8', time: 15},
+  {id: '9', time: 16},
+  {id: '10', time: 17},
+  {id: '11', time: 18},
 ];
 
-const schedules = [
-  { id: '1', time: 8 },
-  {
-    id: '2',
-    time: 9,
-    service: new NeedService(
-      new User('Amandine Bernard', require('../../assets/images/sample_user_1.png'), 'anton@gmail.com'),
-      'J’ai besoin Coup de main Bricolage',
-      'Réparer une chaise',
-      '06 Fév · 14h00',
-      require('../../assets/images/sample_cover_2.png'),
-      3,
-      NeedServiceType.REPAIR
-    ),
-  },
-  { id: '3', time: 10 },
-  { id: '4', time: 11 },
-  {
-    id: '5',
-    time: 12,
-    service: new NeedService(
-      new User('Amandine Bernard', require('../../assets/images/sample_user_1.png'), 'anton@gmail.com'),
-      'J’ai besoin Coup de main Bricolage',
-      'Réparer une chaise',
-      '06 Fév · 14h00',
-      require('../../assets/images/sample_cover_2.png'),
-      3,
-      NeedServiceType.REPAIR
-    ),
-  },
-  { id: '6', time: 13 },
-  { id: '7', time: 14 },
-  { id: '8', time: 15 },
-  { id: '9', time: 16 },
-  { id: '10', time: 17 },
-  { id: '11', time: 18 },
-];
+// const schedules = [
+//   {id: '1', time: 8},
+//   {
+//     id: '2',
+//     time: 9,
+//     service: new NeedService(
+//       new User(
+//         'Amandine Bernards',
+//         require('../../assets/images/sample_user_1.png'),
+//         'anton@gmail.com',
+//       ),
+//       'J’ai besoin Coup de main Bricolage',
+//       'Réparer une chaise',
+//       '06 Fév · 14h00',
+//       require('../../assets/images/sample_cover_2.png'),
+//       3,
+//       NeedServiceType.REPAIR,
+//     ),
+//   },
+//   {
+//     id: '3',
+//     time: 10,
+//     service: new NeedService(
+//       new User(
+//         'Amandine Bernards',
+//         require('../../assets/images/sample_user_1.png'),
+//         'anton@gmail.com',
+//       ),
+//       'J’ai besoin Coup de main Bricolage',
+//       'Réparer une chaise',
+//       '06 Fév · 14h00',
+//       require('../../assets/images/sample_cover_2.png'),
+//       3,
+//       NeedServiceType.REPAIR,
+//     ),
+//   },
+//   {id: '4', time: 11},
+//   {
+//     id: '5',
+//     time: 12,
+//     service: new NeedService(
+//       new User(
+//         'Amandine Bernard',
+//         require('../../assets/images/sample_user_1.png'),
+//         'anton@gmail.com',
+//       ),
+//       'J’ai besoin Coup de main Bricolage',
+//       'Réparer une chaise',
+//       '06 Fév · 14h00',
+//       require('../../assets/images/sample_cover_2.png'),
+//       3,
+//       NeedServiceType.REPAIR,
+//     ),
+//   },
+//   {id: '6', time: 13},
+//   {id: '7', time: 14},
+//   {id: '8', time: 15},
+//   {id: '9', time: 16},
+//   {id: '10', time: 17},
+//   {id: '11', time: 18},
+// ];
 
-const CalendarHomeScreen = () => {
-  const [selectedSchedules, setSelectedSchedules] = React.useState(blankSchedules);
+const CalendarHomeScreen = props => {
+  const [scheduler, setscheduler] = React.useState([]);
+  const [selectedSchedules, setSelectedSchedules] =
+    React.useState(blankSchedules);
   const [showCalendarStrip, setShowCalendarStrip] = React.useState(true);
   const [selectedDate, setSelectedDate] = React.useState(moment());
-  const renderFlatList = ({ item }) => (
+  const [user, setUser] = React.useState({});
+  const [AlertData, setAlertData] = React.useState([]);
+  const getUser = async () => {
+    return firestore()
+      .collection('users')
+      .doc(auth().currentUser.uid)
+      .onSnapshot({
+        next: querySnapshot => {
+          const snapData = {
+            name: `${querySnapshot.data().firstName}  ${
+              querySnapshot.data().lastName
+            }`,
+            image: querySnapshot.data().profilePic,
+            email: querySnapshot.data().email,
+          };
+          setUser(snapData);
+          return snapData;
+        },
+        error: error => {
+          console.log(error);
+        },
+      });
+  };
+
+  const createSchedules = date => {
+   
+    var filter = [];
+    firestore()
+      .collection('userDemands')
+      .doc(auth().currentUser.uid)
+      .collection('organize')
+      .onSnapshot({
+        next: querySnapshot => {
+          const snapData = querySnapshot.docs.map((docsSnap, index) => ({
+            time: moment(docsSnap.data().demandStartDate).format('h'),
+            date: new Date(
+              docsSnap.data().demandStartDate.toDate(),
+            ).toDateString(),
+            service: new NeedService(
+              new User(user.name, user.image, user.email),
+              docsSnap.data().data.description,
+              docsSnap.data().data.title,
+              moment(new Date(docsSnap.data().demandStartDate.toDate())).format(
+                'Do MMM YYYY',
+              ),
+            ),
+          }));
+          snapData.map(e => {
+            if (
+              moment(e.date).format('Do MMM YYYY') ===
+              moment(date).format('Do MMM YYYY')
+            ) {
+              filter.push(e);
+            }
+          });
+          if (filter.length > 0) {
+            setSelectedSchedules(filter);
+          } else {
+            setSelectedSchedules(blankSchedules);
+          }
+        },
+        error: error => {
+          console.log(error);
+        },
+      });
+  };
+  
+  useEffect(() => {
+    
+    getUser();
+    createSchedules();
+  }, [props]);
+  const renderFlatList = ({item}) => (
     <ScheduleCard
       data={item}
       onPressSee={() => {
@@ -141,40 +245,44 @@ const CalendarHomeScreen = () => {
     />
   );
 
-  React.useEffect(() => {
-    setSelectedSchedules(schedules);
-  }, []);
+  // useEffect(() => {
+  //   setSelectedSchedules(schedules);
+  // }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-      </View>
+      <View style={styles.titleContainer}></View>
       <View style={styles.calendarContainer}>
-        {console.log(selectedDate)}
         {showCalendarStrip && (
           <View>
-            <TitleText text="Mon calendrier" textAlign="left" style={styles.titleText} />
+            <TitleText
+              text="Mon calendrier"
+              textAlign="left"
+              style={styles.titleText}
+            />
             <CalendarStrip
               style={styles.calendarStripStyle}
               dayComponentHeight={100}
               scrollable
-
               locale={locale}
               calendarHeaderStyle={styles.calendarHeaderStyle}
               calendarHeaderContainerStyle={styles.calendarHeaderContainerStyle}
               dayContainerStyle={styles.dayContainerStyle}
-              highlightDateNumberContainerStyle={styles.highlightDateNumberContainerStyle}
+              highlightDateNumberContainerStyle={
+                styles.highlightDateNumberContainerStyle
+              }
               dateNumberStyle={styles.dateNumberStyle}
               dateNameStyle={styles.dateNameStyle}
               selectedDate={selectedDate}
-              onDateSelected={(date) => {
-                
-                if (moment().isSame(date, 'day')) {
-                  setSelectedSchedules(schedules);
-                  return;
-                }
-                setSelectedDate(date)
-                setSelectedSchedules(blankSchedules);
+              onDateSelected={date => {
+                createSchedules(date);
+                // if (moment().isSame(date, 'day')) {
+                //   createSchedules(date);
+                //   return;
+                // }
+                // createSchedules(date);
+                setSelectedDate(date);
+                // setSelectedSchedules(blankSchedules);
               }}
               leftSelector={
                 <View style={styles.calendarIconStyle}>
@@ -204,10 +312,9 @@ const CalendarHomeScreen = () => {
         )}
         {!showCalendarStrip && (
           <CalendarListView
-          
-          thed= {selectedDate.format("YYYY-MM-DD").toString()}
-          disab={()=> setShowCalendarStrip(true)}
-            onDayPress={(day) => {
+            thed={selectedDate.format('YYYY-MM-DD').toString()}
+            disab={() => setShowCalendarStrip(true)}
+            onDayPress={day => {
               setSelectedDate(day);
               setShowCalendarStrip(true);
             }}
@@ -218,7 +325,7 @@ const CalendarHomeScreen = () => {
         <FlatList
           data={selectedSchedules}
           renderItem={renderFlatList}
-          keyExtractor={(i) => i.id}
+          keyExtractor={i => i.id}
           style={styles.container}
         />
       )}
@@ -229,10 +336,21 @@ const CalendarHomeScreen = () => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#F0F5F7'
+    backgroundColor: '#F0F5F7',
   },
-  titleContainer: { paddingLeft: 30 * em, paddingTop: 30 * hm, paddingBottom: 36 * hm, backgroundColor: '#fff' },
-  titleText: { marginTop: 12 * hm, marginLeft: 15 * em, marginBottom: 25 * hm, fontFamily: 'Lato-Black', fontSize: 34 * em },
+  titleContainer: {
+    paddingLeft: 30 * em,
+    paddingTop: 30 * hm,
+    paddingBottom: 36 * hm,
+    backgroundColor: '#fff',
+  },
+  titleText: {
+    marginTop: 12 * hm,
+    marginLeft: 15 * em,
+    marginBottom: 25 * hm,
+    fontFamily: 'Lato-Black',
+    fontSize: 34 * em,
+  },
   calendarContainer: {
     alignItems: 'center',
     backgroundColor: '#ffffff',
@@ -246,8 +364,12 @@ const styles = {
     },
     shadowRadius: 25 * em,
   },
-  calendarStripStyle: { width: WIDTH - 32 * em, height: 140 * hm },
-  calendarHeaderStyle: { color: '#1E2D60', fontSize: 20 * em, fontFamily: 'Montserrat-Bold' },
+  calendarStripStyle: {width: WIDTH - 32 * em, height: 140 * hm},
+  calendarHeaderStyle: {
+    color: '#1E2D60',
+    fontSize: 20 * em,
+    fontFamily: 'Montserrat-Bold',
+  },
   calendarIconStyle: {
     width: 20 * em,
     height: 20 * em,
@@ -256,7 +378,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  calendarHeaderContainerStyle: { marginBottom: 8 * hm },
+  calendarHeaderContainerStyle: {marginBottom: 8 * hm},
   dayContainerStyle: {
     width: 44 * em,
     height: 75 * hm,
@@ -266,21 +388,26 @@ const styles = {
     shadowOffset: {
       width: 0,
       height: 4 * hm,
-    }, shadowOpacity: 1,
+    },
+    shadowOpacity: 1,
     shadowRadius: 16 * em,
   },
   highlightDateNumberContainerStyle: {
     backgroundColor: '#fff',
-    
+
     width: 34 * em,
     height: 34 * em,
     borderRadius: 20 * em,
     // paddingTop: 2 * em,
     // marginTop: -2 * em,
-    justifyContent:'center',
-    alignItems:'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  dateNumberStyle: { color: '#1E2D60', fontSize: 18 * em, fontFamily: 'Lato-Regular' },
+  dateNumberStyle: {
+    color: '#1E2D60',
+    fontSize: 18 * em,
+    fontFamily: 'Lato-Regular',
+  },
   dateNameStyle: {
     color: '#BFCDDB',
     marginBottom: 16 * hm,
@@ -291,7 +418,7 @@ const styles = {
     color: '#1E2D60',
     width: 30 * em,
     fontSize: 18 * em,
-    fontFamily: 'HelveticaNeue',
+    fontFamily: 'Lato-Bold',
   },
   highlightDateNameStyle: {
     color: '#fff',

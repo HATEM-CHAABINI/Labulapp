@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { em, hm } from '../../constants/consts';
 import CommentText from '../../text/CommentText';
 import SmallText from '../../text/SmallText';
@@ -13,7 +12,7 @@ const renderService = (data, onPressSee) => {
   }
   return (
     <View style={styles.serviceContainer}>
-      <Image source={data.service.user.photo} style={{ width: 32 * em, height: 32 * em }} />
+      <Image source={{uri:data.service.user.photo}} style={{ width: 32 * em, height: 32 * em }} />
       <View style={styles.serviceSubContainer}>
         <SmallText text={data.service.user.name} style={{ color: "#1E2D60", fontSize: 14 * em, fontFamily: "Montserrat-Bold" }} />
         <SmallText text={data.service.organName} style={styles.smallTopPadding} />

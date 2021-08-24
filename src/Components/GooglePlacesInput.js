@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, KeyboardAvoidingView,TouchableOpacity,ScrollView } from 'react-native'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { google_api, em, hm } from '../constants/consts'
-import { Magnifier, CrossCircle, LocationRed, Flecheposition,Locate } from '../assets/svg/icons';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { Flecheposition, Locate, LocationRed, Magnifier } from '../assets/svg/icons';
+import { em, google_api, hm } from '../constants/consts';
 import CommentText from '../text/CommentText';
 Geocoder.init(google_api);
 const GooglePlacesInput = (props) => {
@@ -103,6 +103,7 @@ const GooglePlacesInput = (props) => {
                         textInput: {
                             color:'#1E2D60',
                             // width:400*em,
+                            color:"#6A8596",
                             borderBottomWidth: 2,
                             borderBottomColor: 
                             Location?

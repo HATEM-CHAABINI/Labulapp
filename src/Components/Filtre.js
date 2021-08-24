@@ -1,15 +1,15 @@
+import CheckBox from '@react-native-community/checkbox';
 import React, { Component } from 'react';
-import { View, Text, FlatList, StatusBar, TouchableOpacity, Switch, Linking, Platform, Image } from 'react-native';
+import { Switch, Text, TouchableOpacity, View } from 'react-native';
+import RBSheet from "react-native-raw-bottom-sheet";
+import { Actions } from 'react-native-router-flux';
 import Calendar from '../assets/icons/navigation-app/Calendar';
 import Flechedroite from '../assets/icons/navigation-app/Flechedroite';
 import Lieu from '../assets/icons/navigation-app/Lieu';
 import Typedemande from '../assets/icons/navigation-app/Typedemande';
-import { em, WIDTH, hm } from '../constants';
-import RBSheet from "react-native-raw-bottom-sheet";
-import CheckBox from '@react-native-community/checkbox';
-import RadioButton from './RadioButton';
+import { em, hm } from '../constants';
 import Fleche from './Fleche';
-import { Actions } from 'react-native-router-flux';
+import RadioButton from './RadioButton';
 
 class Filtre extends Component {
   constructor(props) {
@@ -281,6 +281,7 @@ this.state.filtre.length == 0?
             style={[styles.ActionButton, { height: 90 * hm }]}
             onPress={() => {
               Actions.inputLocation();
+             console.log("action",Actions,"action")
             }}          >
             <View style={styles.ButtonWrapper}>
               <View style={[styles.circleIconOverlay]}>

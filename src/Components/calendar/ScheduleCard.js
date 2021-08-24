@@ -45,7 +45,7 @@ const ScheduleCard = (props) => {
   const { data } = props;
   return (
     <View style={styles.container}>
-      <CommentText style={{fontFamily: 'HelveticaNeue'}} text={data.time < 10 ? '0' + data.time + 'h' : data.time + 'h'} />
+      <CommentText style={{fontFamily: 'Lato-Regular'}} text={data.time < 10 ? '0' + data.time + 'h' : data.time + 'h'} />
       {renderService(data, props.onPressSee)}
     </View>
   );

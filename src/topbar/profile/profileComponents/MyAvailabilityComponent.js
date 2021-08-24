@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { em, WIDTH, hm } from '../../../constants/consts';
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
-import ProfileCommonTextInput from '../../../textInput/ProfileCommonTextInput';
+import ProfileCommonTextInput from '../../../Components/textInput/ProfileCommonTextInput';
 import CommonText from '../../../text/CommonText';
 import SearchBox from '../../../Components/other/SearchBox';
 import CommonCheckBox from '../../../Components/checkbox/CommonCheckBox';

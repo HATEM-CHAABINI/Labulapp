@@ -36,7 +36,7 @@ const styles = {
   buttonText: {
     fontSize: 13 * em,
     color: '#FFFFFF',
-    fontFamily: 'HelveticaNeue',
+    fontFamily: 'Lato-Regular',
     marginTop: 5 * hm,
   },
   buttonImage: { width: 50 * em, height: 50 * hm },

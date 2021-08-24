@@ -60,7 +60,7 @@ const styles = {
     marginRight: 30 * em,
     marginTop: 39 * em,
     alignSelf: 'flex-end',
-    fontFamily: 'HelveticaNeue',
+    fontFamily: 'Lato-Regular',
   },
   title: { textAlign: 'left', marginLeft: 30 * em, marginBottom: 35 * em, marginTop: 59 * em },
   popupView: {

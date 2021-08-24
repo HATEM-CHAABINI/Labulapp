@@ -61,7 +61,7 @@ style={{
     marginLeft: 10 * em,
     marginTop: 2 * hm, 
     fontFamily: 'Lato-Bold'
-  }}>OK</Text>
+  }}>{props.txt?props.txt:"OK"}</Text>
 </View>
 </TouchableOpacity>
 

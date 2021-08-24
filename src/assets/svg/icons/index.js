@@ -3,6 +3,7 @@ import PrevIcon from './PrevIcon.svg';
 import Locate from './Locate.svg';
 import LocationPink from './LocationPink.svg';
 import Alert from './Alert.svg';
+import AlertMesDemandes from './AlertMesDemandes.svg';
 import Alerte from './Alerte.svg';
 import AlerteListe from './AlerteListe.svg';
 import Alertemap from './Alertemap.svg';
@@ -30,8 +31,6 @@ import Meal from './category/Meal.svg';
 import Meet from './category/Meet.svg';
 import Party from './category/Party.svg';
 import Show from './category/Show.svg';
-
-
 import AnimalSell from './category/AnimalSell.svg';
 import BeautyCareSell from './category/BeautyCareSell.svg';
 import DeliverySell from './category/DeliverySell.svg';
@@ -111,7 +110,7 @@ import Main from './category/Main.svg';
 import Outil from './category/Outil.svg';
 
 
-export {Locate,Objet,Services,ProduitAl,BienEtre,Divers,AlerteListe,Alertemap,Outil,Main,Service,Intero,
+export {AlertMesDemandes,Locate,Objet,Services,ProduitAl,BienEtre,Divers,AlerteListe,Alertemap,Outil,Main,Service,Intero,
   AnimalSell,
   BeautyCareSell,
   DeliverySell,
@@ -145,6 +144,7 @@ export {Locate,Objet,Services,ProduitAl,BienEtre,Divers,AlerteListe,Alertemap,Ou
 
 };
 import Dansmabul from './navigation/Dansmabul.svg';
+import TroisPoint from './navigation/TroisPoint.svg';
 import Send from './navigation/Send.svg';
 import Option from './navigation/Option.svg';
 import ReportProblem from './navigation/ReportProblem.svg';
@@ -213,7 +213,7 @@ import TabCalendarOff from './navigation/TabCalendarOff.svg';
 import TabPlus from './navigation/TabPlus.svg';
 import PurchasedPremium from './navigation/PurchasedPremium.svg';
 
-export {Dansmabul,PurchasedPremium, TabPlus, TabCalendarOff, TabCalendarOn, TabCardOff, TabCardOn, TabMessageOff, TabMessageOn };
+export {TroisPoint,Dansmabul,PurchasedPremium, TabPlus, TabCalendarOff, TabCalendarOn, TabCardOff, TabCardOn, TabMessageOff, TabMessageOn };
 
 export {RightArrowBlue,
   EmailBlue,

@@ -47,8 +47,9 @@ const MabulSellPriceScreen = (props) => {
 " style={styles.comment} />
  
        
- <TitleText text={'Semaine 32 : il vous reste 2 /3 zones'} style={{    textAlign: 'left',fontSize:12*em}} />
- <Image source={require('../../assets/images/mapsell.png')}  style={{borderRadius:17*em,textAlign: 'center',marginTop:25*hm,height:270*hm,width:318*em}} />
+ <TitleText text={'Pour avoir plus de zones change ton abonnement par'} style={{ fontFamily:'Montserrat-Bold',   textAlign: 'left',fontSize:10*em}} />
+ <TitleText text={'Premium'} style={{ fontFamily:'Montserrat-Italic', fontWeight:'bold',color:'#AA87E5', textAlign: 'left',fontSize:10*em,marginTop:4*hm}} />
+ <Image source={require('../../assets/images/mapsell.png')}  style={{borderRadius:17*em,textAlign: 'center',marginTop:20*hm,height:250*hm,width:318*em}} />
 
         </View>
    
@@ -137,7 +138,7 @@ const styles = {
     marginTop: 35 * em,
     lineHeight: 38 * em,
   },
-  comment: {fontFamily: 'HelveticaNeue',fontSize:10*em, width: 315 * em, textAlign: 'left', lineHeight: 15 * em, textAlignVertical: 'center', marginTop: 10 * hm },
+  comment: {fontFamily: 'Lato-Italic',fontSize:11*em, width: 315 * em, textAlign: 'left', lineHeight: 15 * em, textAlignVertical: 'center', marginTop: 10 * hm },
   photoZone: {
     width: 315 * em,
     height: 121 * em,

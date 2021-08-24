@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { View, Image, Text, KeyboardAvoidingView, Switch } from 'react-native';
 import TitleText from '../text/TitleText';
-import { hexToRGB, em, mabulColors, hm } from '../constants/consts';
+import { hexToRGB, em, mabulColors, hm, mabulColorsEmpty } from '../constants/consts';
 import CommentText from '../text/CommentText';
 import MabulCommonHeader from './MabulCommonHeader';
 import { Actions } from 'react-native-router-flux';
@@ -29,6 +29,7 @@ import MabulRechercheContact from './MabulRechercheContact';
 import { date } from 'yup/lib/locale';
 import { TextInput } from 'react-native-paper';
 import moment from 'moment';
+import MabulAddLieuDemands from './MabulAddLieuDemands';
 const title = {
   organize: 'Donne un titre à ton apéro',
   sell: 'Donne un titre à ta vente',
@@ -229,6 +230,7 @@ const MabulCommonRequestDetailScreen = (props) => {
   }
 
   const conceptColor = mabulColors[props.mabulService];
+  const conceptColorEmpty=mabulColorsEmpty[props.mabulService];
   var iconEdit = Edit2(styles.icon);
   var iconDocument = Document2(styles.icon);
   if (props.mabulService === 'give') {
@@ -244,7 +246,6 @@ const MabulCommonRequestDetailScreen = (props) => {
   const mabulService = props.mabulService;
   const [isFocused, setFocused] = useState(false);
   const [text, setText] = React.useState('');
-
   return (
     <View style={{
       // marginBottom:-50,
@@ -257,12 +258,13 @@ const MabulCommonRequestDetailScreen = (props) => {
         <ScrollView style={{ paddingBottom: 5 * hm }}>
 
           <TextInput
-            style={{ fontSize: 17 * em, height: 76 * hm, paddingLeft: 40 * em, marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
+            style={{ fontSize: 17 * em, height: 76 * hm, paddingLeft: 40 * em, marginTop: 10 * hm,
+               backgroundColor: '#FFFFFF' }}
             label={
-              <View style={{ flexDirection: 'row' }}>
+              <>
                 <Text style={{ fontFamily: 'Lato-Regular', fontSize: 16 * em, color: "#6A8596" }}>{mabulService == "sell" ? 'Écris le nom de ce que tu vends ' : 'Écrit un titre '}</Text>
                 <Text style={{ fontFamily: 'Lato-Regular', fontSize: 16 * em, color: conceptColor }}>*</Text>
-              </View>
+              </>
             }
             underlineColor='#fff'
             theme={{
@@ -316,12 +318,36 @@ const MabulCommonRequestDetailScreen = (props) => {
                 </TouchableOpacity>
                 <Text style={styles.descerrorText}>{errorDescription}</Text></> : <></>}
 
-
+                {
+            mabulService !== 'give' ?
+            <>
+            <TouchableOpacity
+              style={[styles.ActionButton, { height: 70 * hm }]}
+              onPress={() => Sheet2.current.open()}
+            >
+            {demandData.demandStartDate != null ?
+            <>
+              <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+                <Flechedroite width={14 * em} height={14 * hm} />
+              </View>
+              <Text style={styles.contentDescSubb} >
+                {moment(demandData.demandStartDate).format('DD MMM YYYY , h:mm:ss a')}
+                </Text>
+                </>:
+                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+                <Flechedroite width={14 * em} height={14 * hm} />
+              </View>
+              }
+            </TouchableOpacity>
+            <Text style={styles.descerrorText}>{errorDate}</Text></> : <></>}
+          
           {
             mabulService === 'sell' ?
               <>
                 <TouchableOpacity
-                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 10 * hm, }]}
+                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 0 * hm, }]}
                   onPress={() => Sheet6.current.open()}
                 >
                   <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
@@ -341,21 +367,7 @@ const MabulCommonRequestDetailScreen = (props) => {
               <></>
           }
 
-          {
-            mabulService !== 'give' ?
-              <>
-                <TouchableOpacity
-                  style={[styles.ActionButton, { height: 70 * hm }]}
-                  onPress={() => Sheet2.current.open()}
-                >
-                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
-                    <Flechedroite width={14 * em} height={14 * hm} />
-                  </View>
-                  <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text>
-                </TouchableOpacity>
-                <Text style={styles.descerrorText}>{errorDate}</Text></> : <></>
-          }
+      
 
 
           {
@@ -428,25 +440,8 @@ const MabulCommonRequestDetailScreen = (props) => {
 
 
 
-
-
-
-
-          <View style={[styles.ActionButton, { paddingBottom: 20 * hm }]}>
-            <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
-              <Text style={styles.contentDesc}>Photos</Text>
-              <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em, fontSize: 12 * em }]}>(3 max)</Text>
-            </View>
-            <Text style={[styles.contentDescSub, { marginTop: 10 * hm }]} >Les photos aident à mieux cerner ta demande.</Text>
-
-            <MabulAddPhoto requiredPhoto={() => photo()} conceptColor={conceptColor} />
-          </View>
-          <Text style={styles.descerrorText}>{errorPhoto}</Text>
-
-
-
-          {
-            mabulService === 'organize' ?
+{
+             mabulService !== 'sell'?
               <></>
               :
               <>
@@ -470,22 +465,85 @@ const MabulCommonRequestDetailScreen = (props) => {
 
 
 
+          <View style={[styles.ActionButton, { paddingBottom: 20 * hm }]}>
+            <View style={{ flexDirection: 'row', marginTop: 20 * hm, justifyContent: 'space-between' }}>
+              <Text style={styles.contentDesc}>Photos</Text>
+              <Text style={[styles.contentDesc, { color: '#A0AEB8', marginRight: 30 * em, fontSize: 12 * em }]}>(3 max)</Text>
+            </View>
+            <Text style={[styles.contentDescSub, { marginTop: 10 * hm }]} >Les photos aident à mieux cerner ta demande.</Text>
+
+            <MabulAddPhoto requiredPhoto={() => photo()} conceptColor={conceptColor} />
+          </View>
+          <Text style={styles.descerrorText}>{errorPhoto}</Text>
+
+
+
+          {
+            mabulService === 'organize' ||  mabulService === 'sell'?
+              <></>
+              :
+              <>
+                <View
+                  style={[styles.ActionButton, { height: 90 * hm, marginTop: 0 * hm, }]} >
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={[styles.contentDesc, { marginBottom: 10 * hm }]}>Lieu</Text>
+                    <TouchableOpacity onPress={() => Sheet3.current.open()}>
+                      <Text style={{ fontFamily: 'Lato-Regular', fontSize: 14 * em, color: conceptColor, marginRight: 30 * em }}>Modifier</Text>
+                    </TouchableOpacity>
+                  </View>
+                  {!demandData.address ?
+                    <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{"ABYMES 97139 \nGuadeloupe"}</Text>
+                    :
+                    <Text style={{ color: "#1E2D60", fontFamily: "Lato-Regular", fontSize: 16 * em, marginLeft: 40 * em }}>{demandData.address}</Text>
+                  }
+                  
+                </View>
+                <Text style={styles.descerrorText}>{erroraddress}</Text>
+              </>}
+
+
+
           {
             mabulService === 'give' ?
+            <>
+            <TouchableOpacity
+              style={[styles.ActionButton, { height: 70 * hm }]}
+              onPress={() => Sheet2.current.open()}
+            >
+            {demandData.demandStartDate != null ?
+            <>
+              <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+                <Flechedroite width={14 * em} height={14 * hm} />
+              </View>
+              <Text style={styles.contentDescSubb} >
+                {moment(demandData.demandStartDate).format('DD MMM YYYY , h:mm:ss a')}
+                </Text>
+                </>:
+                <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
+                <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
+                <Flechedroite width={14 * em} height={14 * hm} />
+              </View>
+              }
+            </TouchableOpacity>
+            <Text style={styles.descerrorText}>{errorDate}</Text></> : <></>}
+                {
+            mabulService === 'sell' ?
               <>
                 <TouchableOpacity
-                  style={[styles.ActionButton, { height: 70 * hm, marginTop: 10 * hm, }]}
-                  onPress={() => Sheet2.current.open()}
+                  style={[styles.ActionButton, { height: 90 * hm }]}
+                  onPress={() => Sheet1.current.open()}
                 >
-                  <View style={{ flexDirection: "row", justifyContent: 'space-between', marginRight: 30 * em }}>
-                    <Text style={[styles.contentDesc, { paddingRight: 180 * em }]}>Ajouter une date</Text>
-                    <Flechedroite width={14 * em} height={14 * hm} />
-                  </View>
-                  {/* <Text style={styles.contentDescSubb} >{moment(demandData.demandStartDate).format('Do MMM YYYY , h:mm:ss a')}</Text> */}
+                  <Text style={styles.contentDesc}>Description</Text>
+
+                  {!allowdescription ?
+                    <Text style={styles.contentDescSub} >Cela permet à ton entourage de mieux comprendre ta demande</Text>
+                    :
+                    <Text style={styles.contentDescSubb} >{descriptionn}</Text>
+                  }
                 </TouchableOpacity>
-                <Text style={styles.descerrorText}>{errorDate}</Text></> : <></>}
-
-
+                <Text style={styles.descerrorText}>{errorDescription}</Text></> : 
+                <></>}
 
 
         </ScrollView>
@@ -575,7 +633,7 @@ ta demande`}
             <Text style={{ marginLeft: em * 30, marginRight: em * 40, color: '#1E2D60', fontSize: 25 * em, fontFamily: 'Montserrat-Bold' }}>Lieu</Text>
           </View>
           <View style={styles.container}>
-            <MabulAddLieu
+            <MabulAddLieuDemands
               hideDescription={() => { }}
               requiredLocation={() => location()}
               conceptColor={conceptColor}
@@ -651,13 +709,13 @@ ta demande`}
               label={`Écris ce que ton invité ramène …`}
               underlineColor="#BFCDDB"
               multiline={true}
-              fontFamily={'HelveticaNeue'}
+              fontFamily={'Lato-Regular'}
               activeColor={conceptColor}
               labelActiveColor="#6A8596"
               labelColor="#6A8596"
               labelActiveTop={-38}
               height={30 * hm}
-              paddingBottom={10 * em}
+              // paddingBottom={10 * em}
               // value={formik.values.prevoir}
               // onBlur={formik.handleBlur('prevoir')}
               // onChangeText={formik.handleChange('prevoir')}
@@ -667,7 +725,7 @@ ta demande`}
             {/* {formik.errors.prevoir && formik.touched.prevoir && <Text style={styles.descerrorText}>{formik.errors.prevoir}</Text>} */}
 
 
-            <Text style={{ marginLeft: 30 * em, bottom: 20 * hm, fontFamily: 'HelveticaNeue', fontSize: 12 * em, color: '#A0AEB8' }} >Sépare chaque mot avec des virgules</Text>
+            <Text style={{ marginLeft: 30 * em, bottom: 20 * hm, fontFamily: 'Lato-Italic', fontSize: 12 * em, color: '#A0AEB8' }} >Sépare chaque mot avec des virgules</Text>
 
 
             <View style={styles.SwitchbuttonWrapper}>
@@ -804,7 +862,7 @@ ta demande`}
         {Platform.OS !== "ios" ?
           <MabulPubButton
             text={"Publier"}
-            color={title.length == 0 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
+            color={title.length == 0 ? hexToRGB(conceptColorEmpty) : hexToRGB(conceptColor)}
             style={styles.nextBtn}
             onPress={() => onSubmit()}
           // onPress={formik.handleSubmit}
@@ -813,7 +871,7 @@ ta demande`}
       {Platform.OS === "ios" ?
         <MabulPubButton
           text={"Publier"}
-          color={title.length == 0 ? hexToRGB(conceptColor, 0.5) : hexToRGB(conceptColor)}
+          color={title.length == 0 ? hexToRGB(conceptColorEmpty) : hexToRGB(conceptColor)}
           style={[styles.nextBtn, { marginTop: -50 * hm }]}
           onPress={() => onSubmit()}
         // onPress={formik.handleSubmit}
@@ -827,9 +885,8 @@ const styles = {
   BoxPrice: { borderTopLeftRadius: 20 * em, borderTopRightRadius: 20 * em, backgroundColor: "#F0F5F7", height: 80 * hm, borderRadius: 20 * em, justifyContent: 'center', alignSelf: 'center', textAlign: 'center', fontSize: 25 * em, fontFamily: "Lato-Regular" },
   SwitchTitle: {
     flex: 1,
-    fontFamily: 'HelveticaNeue',
+    fontFamily: 'Lato-Regular',
     color: "#6A8596",
-    // fontFamily: 'Helvetica-Regular',
     fontSize: 14 * em,
     // paddingLeft: 15 * em,
     // paddingRight: 25 * em,

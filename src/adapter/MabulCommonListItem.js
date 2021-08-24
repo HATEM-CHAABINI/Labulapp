@@ -43,6 +43,6 @@ const styles = {
     lineHeight: 23 * em,
     color: '#1E2D60',
   },
-  textSubTitle: { fontFamily: 'HelveticaNeue',marginRight: 50 * em, color: '#A0AEB8', lineHeight: 16 * em, width: 205 * em ,marginTop:7*hm},
+  textSubTitle: { fontFamily: 'Lato-Regular',marginRight: 50 * em, color: '#A0AEB8', lineHeight: 16 * em, width: 205 * em ,marginTop:7*hm},
   line: { marginTop: 25 * em, marginLeft: 53 * em, backgroundColor: '#B3C6CF33', height: 1 * em },
 };

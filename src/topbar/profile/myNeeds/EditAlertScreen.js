@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, Alert } from 'react-native';
-import { em, hexToRGB } from '../../../constants/consts';
+import { em, hexToRGB, hm } from '../../../constants/consts';
 import ProfileInformationListItem from '../../../adapter/ProfileInformationListItem';
 import ProfileCommonHeader from '../../../Components/header/ProfileCommonHeader';
 import CommonButton from '../../../Components/button/CommonButton';
@@ -14,6 +14,9 @@ import EditJAlertScreen from './EditJAlertScreen';
 import EditShareScreen from './EditShareScreen';
 import EditDescriptionScreen from './EditDescriptionScreen';
 import EditAddressScreen from './EditAddressScreen';
+import OkModalchange from '../../../Components/button/OkModalchange';
+import OkModal from '../../../Components/button/OkModal';
+import { View } from 'react-native';
 const updateUserPrfile = {
   avatar: require('../../../assets/images/avatar_curology.png'),
   cover: require('../../../assets/images/img_curology.png'),
@@ -85,23 +88,38 @@ const EditAlertScreen = (props) => {
       ],
     );
   }
-
+console.log();
   return (
+    <>
     <ProfileCommonHeader rightTxt={'e'} title="Modifier alerte" onCancel={() => Actions.pop()} loading={loading} 
     // onFinish={() => { setloading(true), saveData() }}
     >
       <ProfileInformationListItem
-        caption={'Titre'}
-
+        caption={'J’alerte'}
+        require={true}
         titleUpperCase
         color={{color: '#FC3867'}}
         value={checked.title}
         style={styles.listItem}
         onPress={() => {
-          // setInputItemKey(1);
-          settypeModalVisible(!typeModalVisible);
+          Actions.alertTypeUpdate({ item: props.alertData, process: 40 }) 
+
+          
         }}
       />
+      <ProfileInformationListItem
+      caption={'Titre'}
+      require={true}
+      titleUpperCase
+      color={{color: '#FC3867'}}
+      value={description.title}
+      style={styles.listItem}
+      onPress={() => {
+        Actions.alertTypeUpdate({ item: props.alertData, process: 40 }) 
+
+        
+      }}
+    />
       <EditJAlertScreen
         visible={typeModalVisible}
         changeItem={'Titre'}
@@ -113,11 +131,49 @@ const EditAlertScreen = (props) => {
         }}
         onChange={(item) => { setChecked({ ...checked, title: item }), settypeModalVisible(false) }}
       />
+
+
+<TouchableOpacity
+        onPress={() => {
+          //  setInputItemKey(4);
+          setbelongsModalVisible(!belongsModalVisible);
+        }}>
+        <ProfileInformationListItem
+          titleUpperCase
+          caption={'Partagé avec'}
+          color={{color: '#FC3867'}}
+
+          circleText={
+            <>
+              {/* {contactType.type == 1 ? <Neighbor width={28 * em} height={28 * em} /> :
+                contactType.type == 2 ? <Friend width={28 * em} height={28 * em} /> :
+                  contactType.type == 3 ? <Family width={28 * em} height={28 * em} /> :
+                    <All width={28 * em} height={28 * em} />
+              } */}
+              <CommonText text={contactType.name} color="#1E2D60" style={{fontFamily:'Lato-Medium',fontSize:16*em, marginLeft: 0 * em, alignSelf: 'center' }} />
+            </>
+          }
+          style={styles.listItem}
+        />
+      </TouchableOpacity>
+      <ProfileInformationListItem
+        titleUpperCase
+        caption={'Lieu'}
+        color={{color: '#FC3867'}}
+        noClick={true}
+        flech={true}
+        value={address}
+        style={styles.listItem}
+        onPress={() => {
+          // setInputItemKey(2);
+          setaddressModalVisible(!addressModalVisible);
+        }}
+      />
         <ProfileInformationListItem
         titleUpperCase
         caption={'Description'}
         color={{color: '#FC3867'}}
-
+        noClick={true}
         value={description.description}
         style={styles.listItem}
         onPress={() => {
@@ -135,18 +191,7 @@ const EditAlertScreen = (props) => {
         }}
         onChange={(item) => { setDescription({ ...description, description: item }), setdescriptionModalVisible(false) }}
       />
-      <ProfileInformationListItem
-        titleUpperCase
-        caption={'Lieu'}
-        color={{color: '#FC3867'}}
-
-        value={address}
-        style={styles.listItem}
-        onPress={() => {
-          // setInputItemKey(2);
-          setaddressModalVisible(!addressModalVisible);
-        }}
-      />
+   
       <EditAddressScreen
         visible={addressModalVisible}
         changeItem={'Lieu'}
@@ -160,29 +205,7 @@ const EditAlertScreen = (props) => {
         onChange={(item) => { setAddress(item), setaddressModalVisible(false) }}
       />
     
-      <TouchableOpacity
-        onPress={() => {
-          //  setInputItemKey(4);
-          setbelongsModalVisible(!belongsModalVisible);
-        }}>
-        <ProfileInformationListItem
-          titleUpperCase
-          caption={'Partagé avec'}
-          color={{color: '#FC3867'}}
-
-          circleText={
-            <>
-              {contactType.type == 1 ? <Neighbor width={28 * em} height={28 * em} /> :
-                contactType.type == 2 ? <Friend width={28 * em} height={28 * em} /> :
-                  contactType.type == 3 ? <Family width={28 * em} height={28 * em} /> :
-                    <All width={28 * em} height={28 * em} />
-              }
-              <CommonText text={contactType.name} color="#1E2D60" style={{ marginLeft: 10 * em, alignSelf: 'center' }} />
-            </>
-          }
-          style={styles.listItem}
-        />
-      </TouchableOpacity>
+  
       <EditShareScreen
         visible={belongsModalVisible}
         changeItem={'Partagé avec'}
@@ -193,13 +216,25 @@ const EditAlertScreen = (props) => {
         }}
         onChange={(item) => { setcontactType(item), setbelongsModalVisible(false) }}
       />
+   
       <CommonButton
-        text={'Supprimer mon alerte'}
+        // text={'Supprimer mon alerte'}
         style={styles.deleteBtn}
         textStyle={{ color: '#F9547B' }}
-        onPress={() => { deletealert() }}
+        // onPress={() => { deletealert() }}
       />
     </ProfileCommonHeader>
+       <View style={{marginBottom:10*hm,backgroundColor:'white',paddingTop:10*hm}}>
+       <OkModal
+       
+       txt={"Enregistrer modifications"}
+        conceptColor={"#FC3867"}
+        hideDescription={() =>{}}
+        showDescription={() =>{}}
+        okoModal={()=>''} closeModal={ () => Actions.pop()}
+          />
+         </View>
+    </>
   );
 };
 
@@ -241,6 +276,7 @@ const styles = {
     marginBottom: 25 * em,
     lineHeight: 19 * em,
     alignSelf: 'center',
+    height:"90%",
     backgroundColor: 'transparent',
   },
   modalView: {

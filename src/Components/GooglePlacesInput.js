@@ -101,6 +101,7 @@ const GooglePlacesInput = (props) => {
 
                         },
                         textInput: {
+                            color:'#1E2D60',
                             // width:400*em,
                             color:"#6A8596",
                             borderBottomWidth: 2,
@@ -110,6 +111,7 @@ const GooglePlacesInput = (props) => {
                           },
                     }}
                     textInputProps={{
+                        placeholderTextColor:'#6A8596',
                         autoCorrect: false,
                         
                     onChangeText: (text) => { setLocation(text) }
@@ -186,7 +188,7 @@ const GooglePlacesInput = (props) => {
 {props.showadd || props.showadd == undefined ?
                 <View style={[{ flexDirection: 'row'}, props.myLocationStyle]}>
                                     
-                    <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em,fontFamily: 'HelveticaNeue',marginTop:10*hm }} onPress={() => { ref.current?.setAddressText(address); }} />
+                    <CommentText text={props.TextBtn} color={props.myLocationColor === undefined ? "#F9547B" : props.myLocationColor} style={{ marginLeft: 10 * em,fontFamily: 'Lato-Regular',marginTop:10*hm }} onPress={() => { ref.current?.setAddressText(address); }} />
                    
                 </View>
    : null}

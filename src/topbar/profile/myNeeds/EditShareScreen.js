@@ -9,44 +9,16 @@ import { Family, Friend, Neighbor, All, CheckBlue } from '../../../assets/svg/ic
 import { Actions } from 'react-native-router-flux';
 import { useSelector, useDispatch } from 'react-redux'
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
+import AlertShareScreen from '../../alert/AlertShareScreen';
 
 export default (props) => {
     const [contactType, setcontactType] = useState(props.value)
-    const [vchecked, setvChecked] = useState(false);
-    const [achecked, setaChecked] = useState(false);
-    const [fchecked, setfChecked] = useState(false);
-    const [tchecked, settChecked] = useState(false);
-    const check = (id) => {
-        setvChecked(false)
-        setaChecked(false)
-        setfChecked(false)
-        settChecked(false)
-        switch (id) {
-            case 1:
-                setvChecked(true)
-                setcontactType({ type: 1, name: 'mes voisins' })
-                break;
-            case 2:
-
-                setaChecked(true)
-                setcontactType({ type: 2, name: 'mes amis' })
-                break;
-            case 3:
-                setfChecked(true)
-                setcontactType({ type: 3, name: 'ma famille' })
-                break;
-            case 4:
-                settChecked(true)
-                setcontactType({ type: 4, name: 'tous' })
-                break;
-        }
-    }
-    useEffect(() => {
-
-        check(contactType.type)
-    }, [])
 
 
+    const mabulService = "Alerte";
+const conceptColor = '#F9547B';
+
+   
 
     const onSubmit = () => {
 
@@ -70,6 +42,7 @@ export default (props) => {
 
         // saveData(data);
     }
+    console.log(",djdjdjdjddjdj ", props.alertData);
     return (
         <Modal
             isVisible={props.visible}
@@ -80,7 +53,7 @@ export default (props) => {
                 marginRight: 0,
                 marginLeft: 0,
                 marginBottom: 0,
-                paddingHorizontal: 30 * em,
+                // paddingHorizontal: 30 * em,
                 borderTopRightRadius: 20 * em,
                 borderTopLeftRadius: 20 * em,
                 flex: 1,
@@ -90,76 +63,8 @@ export default (props) => {
             swipeDirection={'up'}
             onBackButtonPress={() => props.onPress()}>
             <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
-            <View
-                style={{
-                    width: 349 * em,
-                    height: 20 * hm,
-                    marginTop: -10 * hm,
-                    alignSelf: 'center',
-                    position: 'absolute',
-                    backgroundColor: '#FFFFFF',
-                    borderTopLeftRadius: 20 * em,
-                    borderTopRightRadius: 20 * em,
-                }}
-                opacity={0.5}
-            />
-            <ProfileModalHeader
-                title={props.title}
-                style={styles.header}
-                onCancelPress={() => { props.onPress() }}
-                onFinishPress={() => { onSubmit() }}
-            />
-            {/* <View style={styles.container}> */}
+            <AlertShareScreen txt={"Ok"} shareEdit={true} item={props.alertData} mabulService={mabulService} conceptColor={conceptColor} close={()=>props.onPress()}/>
 
-            {/* <View style={styles.body}> */}
-            <View>
-                {/* <TitleText text={'Je partage avec'} style={styles.title} /> */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity activeOpacity={1}
-                        style={[
-                            vchecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(1)}>
-                        {vchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Neighbor width={48 * em} height={48 * em} />}
-                        <CommonText text="mes voisins" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            achecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(2)}>
-                        {achecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Friend width={48 * em} height={48 * em} />}
-                        <CommonText text="mes amis" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            fchecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(3)}>
-                        {fchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <Family width={48 * em} height={48 * em} />}
-                        <CommonText text="Ma famille" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={[
-                            tchecked ? styles.iconViewClicked : styles.iconView,
-                            // { marginBottom: index === 2 ? 40 * em : 0 },
-                        ]}
-                        onPress={() => check(4)}>
-                        {tchecked ? <CheckBlue width={48 * em} height={48 * em} /> : <All width={48 * em} height={48 * em} />}
-                        <CommonText text="tous" color="#6A8596" style={{ marginTop: 15 * em }} />
-                    </TouchableOpacity>
-                </View>
-            </View>
-            {/* </View> */}
-            {/* </View> */}
         </Modal>
     );
 };

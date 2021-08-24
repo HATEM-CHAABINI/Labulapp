@@ -16,3 +16,5 @@ export function hexToRGB(hex, alpha) {
   }
 }
 export const mabulColors = { organize: '#FDC641', sell: '#AA87E5', need: '#38C2FF', give: '#34D9B8' };
+
+export const mabulColorsEmpty = { organize: '#FFEEC5', sell: '#EEE7FA', need: '#AFE7FE', give: '#C1F4EA' };

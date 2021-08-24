@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { em, WIDTH, hm } from '../../../constants/consts';
 import ProfileModalHeader from '../../../Components/header/ProfileModalHeader';
 import Modal from 'react-native-modal';
-import ProfileCommonTextInput from '../../../textInput/ProfileCommonTextInput';
+import ProfileCommonTextInput from '../../../Components/textInput/ProfileCommonTextInput';
 import CommonText from '../../../text/CommonText';
 import SearchBox from '../../../Components/other/SearchBox';
 import CommonCheckBox from '../../../Components/checkbox/CommonCheckBox';
@@ -103,7 +103,14 @@ const ProfileNameComponent = (props) => {
         kyeboardType={'default'}
         onChangeText={formik.handleChange('presentation')}
       />
-  
+      <View style={{flexDirection:'row'}}>
+      <Text style={{fontFamily:'Lato-Italic',fontSize:11*em,color:'#6A8596',marginTop:10*hm}}>
+   (les </Text>
+  <Text style={{fontWeight:'bold',fontFamily:'Lato-Italic',fontSize:11*em,color:'#1E2D60',marginTop:10*hm}}>
+   {formik.values.presentation.length}</Text>
+   <Text style={{fontFamily:'Lato-Italic',fontSize:11*em,color:'#6A8596',marginTop:10*hm}}>
+    /150 premiers caractères dans les lignes plus visibles)</Text>
+    </View>
 </KeyboardAvoidingView>
 {/* <View> */}
 <OkModalchange txt={"Enregistrer"} conceptColor={"#40CDDE"} okoModal={formik.handleSubmit} closeModal={props.onPress} style={{paddingBottom:15*hm,flexDirection:'row', justifyContent:'space-between',marginRight:30*em,marginLeft:30*em,alignContent:'center',alignItems:'center'}}/>

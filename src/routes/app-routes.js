@@ -111,6 +111,7 @@ import { useDispatch } from 'react-redux';
 import { addProfile } from '../redux/actions/profile';
 import { addLogin } from '../redux/actions/login';
 import AlertTypeScreen from '../topbar/alert/AlertTypeScreen';
+import AlertTypeScreenUpdate from '../topbar/alert/AlertTypeScreenUpdate';
 import WaitingScreen from '../ServiceScrenns/WaitingScreen';
 import MesAbonneesHomeScreen from '../topbar/profile/proProfile/MesAbonneesHomeScreen';
 
@@ -221,6 +222,7 @@ export default () => {
         />
         <Scene key="alertAddress" hideNavBar component={AlertAddressScreen} />
         <Scene key="alertType" hideNavBar component={AlertTypeScreen} />
+        <Scene key="alertTypeUpdate" hideNavBar component={AlertTypeScreenUpdate} />
         <Scene key="alertAddNote" hideNavBar component={AlertAddNoteScreen} />
         <Scene key="alertShare" hideNavBar component={AlertShareScreen} />
 

@@ -9,11 +9,16 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import OkModalchange from '../../../Components/button/OkModalchange';
 import TitleText from '../../../text/TitleText';
+import MabulAddLieuDemands from '../../../Mabul/MabulAddLieuDemands';
 
 export default (props) => {
+    const conceptColor = '#F9547B';
+
     const [value, setvalue] = useState(props.value)
     const dispatch = useDispatch();
     const [loading, setloading] = useState(false)
+    const [erroraddress, setErrorAddress] = useState('')
+    const [locations, setLocations] = useState(false);
 
     const initialValues = {
         address: value,
@@ -30,6 +35,15 @@ export default (props) => {
         onSubmit,
         validationSchema,
     });
+    const location = () => {
+        setErrorAddress('')
+        setLocations(true)
+      }
+    const setadresse = (add, coor) => {
+        formik.setFieldValue('address', add)
+        formik.setFieldValue('coordinate', coor)
+    
+      }
     return (
         <Modal
             isVisible={props.visible}
@@ -38,55 +52,37 @@ export default (props) => {
             backdropColor={'#1E2D60'}
             swipeDirection={'up'}
             onBackButtonPress={() => props.onPress()}>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={{
-                    flex: 1,
-                    justifyContent: 'flex-start',
-                }} >
-                <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
-                <View
-                    style={{
-                        width: 349 * em,
-                        height: 20 * hm,
-                        marginTop: -10 * hm,
-                        alignSelf: 'center',
-                        position: 'absolute',
-                        backgroundColor: '#FFFFFF',
-                        borderTopLeftRadius: 20 * em,
-                        borderTopRightRadius: 20 * em,
-                    }}
-                    opacity={0.5}
-                />
-                <TitleText text={props.txt} textAlign={"left"} style={{ marginTop: 55 * hm, marginBottom: 5 * hm }} />
+            
+           
+                <TitleText text={"Lieu"} textAlign={"left"} style={{ marginLeft:30*em, marginTop: 55 * hm, marginBottom: 5 * hm }} />
+                <View style={{ flex: 1,
+    backgroundColor: '#ffffff',}}>
 
-                <ProfileCommonTextInput
-                    style={styles.input}
-                    text={props.title}
-                    value={formik.values.address}
-                    onFocus={true}
-                    key={0}
-                    kyeboardType={'default'}
-                    onChangeText={formik.handleChange('address')}
-                />
-                {formik.errors.address && formik.touched.address && <Text style={styles.descerrorText}>{formik.errors.address}</Text>}
-            </KeyboardAvoidingView>
-            <OkModalchange conceptColor={"#40CDDE"} txt={"Enregistrer"}
-                closeModal={() => props.onPress()}
-                okoModal={formik.handleSubmit}
-                style={{ paddingBottom: 15 * hm, flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', alignItems: 'center' }} />
+                <MabulAddLieuDemands
+              hideDescription={() => { }}
+              requiredLocation={() => location()}
+              conceptColor={conceptColor}
+              setadresse={
+                  setadresse
+                }
+              closeModal={() => props.onPress()
+            }
+            />
+                    
+                      </View>
 
+           
         </Modal>
     );
 };
 const styles = {
     container: {
         backgroundColor: 'white',
-        marginTop: 20.5 * hm,
+        marginTop: 40.5 * hm,
         marginRight: 0,
         marginLeft: 0,
         marginBottom: 0,
-        paddingHorizontal: 30 * em,
+       
         borderTopRightRadius: 20 * em,
         borderTopLeftRadius: 20 * em,
         flex: 1,

@@ -106,7 +106,7 @@ const styles = {
   },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingHorizontal: 30 * em,paddingVertical: 10 * hm},
   headerText: { fontFamily: 'Lato-Medium', width: 260 * em, fontSize: 16 * em, marginBottom: 5 * hm, lineHeight: 29 * em, textAlign: 'left', color: '#1E2D60' },
-  contentText: {fontFamily: 'HelveticaNeue',paddingHorizontal: 30 * em, textAlign: 'left', lineHeight: 25 * em, marginBottom: 10 * hm },
+  contentText: {fontFamily: 'Lato-Regular',paddingHorizontal: 30 * em, textAlign: 'left', lineHeight: 25 * em, marginBottom: 10 * hm },
   common: {
     fontFamily: 'Lato-Bold',
     fontSize: 24 * em,

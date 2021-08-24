@@ -19,12 +19,14 @@ import MabulPubButton from '../../Components/button/MabulPubButton';
 import MabulAddDate from '../../Mabul/MabulAddDate';
 import MabulAddLieu from '../../Mabul/MabulAddLieu';
 import MabulRechercheContact from '../../Mabul/MabulRechercheContact';
-import { TextInput } from 'react-native';
 import { Alert } from 'react-native';
 import { update_into_alert } from '../../redux/actions/alert';
 import MabulAddLieuDemands from '../../Mabul/MabulAddLieuDemands';
+import { TextInput } from 'react-native-paper';
+
 const AlertAddNoteScreen = (props) => {
   const conceptColor = '#F9547B';
+  const conceptColorEmpty="#FEC3D1"
   const { demandData } = useSelector((state) => state.demandReducer);
   const { alertData } = useSelector((state) => state.alertReducer);
   const dispatch = useDispatch()
@@ -34,16 +36,19 @@ const AlertAddNoteScreen = (props) => {
   const [errorDescription, setErrorDescription] = useState('')
   const [locations, setLocations] = useState(false);
   const [erroraddress, setErrorAddress] = useState('')
+  const [titlee, setTitle] = useState('')
+  const [errortitle, setErrorTitle] = useState('')
 
   let address = alertData.address;
 
   const initialValues = {
+    title: '',
     description: '',
     address: '',
     coordinate: {},
   };
   const validationSchema = Yup.object({
-    description: Yup.string()
+    title: Yup.string()
       .required('Obligatoire')
     ,
   });
@@ -69,18 +74,18 @@ const AlertAddNoteScreen = (props) => {
     setErrorAddress('')
     setLocations(true)
   }
-
+  const titles = (e) => {
+    setErrorTitle('')
+    setTitle(e)
+  }
   const onSubmit = values => {
-    if (descriptionn == "") {
+    if (titlee == "") {
       setErrorDescription('Obligatoire')
-    }
-    else if (locations == "") {
-      setErrorAddress('Obligatoire')
     }
     else {
       dispatch(update_into_alert({demandStartDate:new Date()}))
+      dispatch(update_into_alert({ description: { description: descriptionn, title: titlee }}))
 
-      dispatch(update_into_alert({ description: { description: descriptionn } }))
       Sheet3.current.open()
     }
   };
@@ -93,6 +98,7 @@ const AlertAddNoteScreen = (props) => {
   const setadresse = (add, coor) => {
     formik.setFieldValue('address', add)
     formik.setFieldValue('coordinate', coor)
+
   }
   const mabulService = "Alerte";
   // console.log("Final Values", formik.values)
@@ -105,6 +111,38 @@ const AlertAddNoteScreen = (props) => {
         progressBarColor={conceptColor} />
       <View style={styles.body}>
         <ScrollView style={{ paddingBottom: 5 * hm }}>
+        <TextInput
+            style={{  flex: 1,
+              height: 71*hm,
+              justifyContent:"center" ,fontSize: 16 * em,  paddingLeft: 40 * em, marginTop: 10 * hm, backgroundColor: '#FFFFFF' }}
+            label={
+              <>
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 16 * em, color: "#6A8596" }}>{'Écrit un titre '}</Text>
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 16 * em, color: conceptColor }}>*</Text>
+              </>
+            }
+            underlineColor='#fff'
+            theme={{
+              fonts: {
+                regular: {
+                  fontFamily: 'Montserrat-Bold',
+                  
+                }
+              }, colors: { text: '#1E2D60', primary: 'white' }
+            }}
+            selectionColor="#49CDDD"
+            underlineColor='white'
+            autoFocus={true}
+            value={titlee}
+            onChangeText={(e) => titles(e)}
+
+          />
+         
+         {<Text style={styles.descerrorText}>{errortitle}</Text>}
+          <Text style={{ paddingLeft: 40 * em, color: '#6A8596', fontSize: 11 * em, fontFamily: 'Lato-Italic',marginTop:5*hm}}>(68 caractères maximum)</Text>
+
+
+        
         <TouchableOpacity onPress={() => Sheet2.current.open()}>
 
         <View
@@ -130,12 +168,11 @@ const AlertAddNoteScreen = (props) => {
             }
           </View>
           </TouchableOpacity> 
-          <Text style={styles.descerrorText}>{erroraddress}</Text>
 
 
 
           <TouchableOpacity
-            style={[styles.ActionButton, { height: 90 * hm ,bottom:8*hm}]}
+            style={[styles.ActionButton, {marginTop:16*hm, height: 90 * hm ,bottom:8*hm}]}
             onPress={() => Sheet1.current.open()}
           >
             <Text style={styles.contentDesc}>Description</Text>
@@ -145,7 +182,6 @@ const AlertAddNoteScreen = (props) => {
               <Text style={styles.contentDescSubb} >{descriptionn}</Text>
             }
           </TouchableOpacity>
-          {<Text style={styles.descerrorText}>{errorDescription}</Text>}
          
         </ScrollView>
       </View>
@@ -245,14 +281,25 @@ comprendre ta demande`}
           <MabulRechercheContact data={props.item} mabulService={mabulService} conceptColor={conceptColor} rb4={()=>Sheet3.current.close()}/>
         </RBSheet>
 
+      
+      </View>
+      {Platform.OS !== "ios" ?
+          <MabulPubButton
+            text={"Publier"}
+            color={titlee.length == 0 ? hexToRGB(conceptColorEmpty) : hexToRGB(conceptColor)}
+            style={styles.nextBtn}
+            onPress={() => onSubmit()}
+          // onPress={formik.handleSubmit}
+          /> : <></>}
+  
+      {Platform.OS === "ios" ?
         <MabulPubButton
           text={"Publier"}
-          color={hexToRGB(conceptColor)}
-          style={styles.nextBtn}
+          color={titlee.length == 0 ? hexToRGB(conceptColorEmpty) : hexToRGB(conceptColor)}
+          style={[styles.nextBtn, { marginTop: -50 * hm }]}
           onPress={() => onSubmit()}
-        />
-      </View>
-
+        // onPress={formik.handleSubmit}
+        /> : <></>}
     </View>
   );
 };
@@ -309,9 +356,10 @@ const styles = {
     height: '12.45%',
   },
   descerrorText: {
-    marginTop: 9 * em,
+    // marginTop: 9 * em,
     fontSize: 12 * em,
-    bottom: 30 * hm,
+    top: 70 * hm,
+    position:'absolute',
     left: 40 * hm,
     color: "red",
   },

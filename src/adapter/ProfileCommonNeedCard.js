@@ -38,11 +38,15 @@ const ProfileCommonNeedCard = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress}>
       <View style={[styles.container, props.style]}>
-        <Image source={data.coverImage} style={styles.cover} />
+        {/* <Image source={data.coverImage} style={styles.cover} /> */}
+        <Image source={data.data2.images[0].uri} style={styles.cover} />
         <View style={styles.textView}>
-          <SmallText text={'06 Fév · 14H00'} style={styles.date} color="#6A8596" />
+        <SmallText text={ moment(data.data2.demandStartDate).format('DD MMMM YYYY-HH:MM')} style={styles.date} color="#6A8596" />
+        <SmallText text={data.data2.data.description} style={styles.title} color={'#1E2D60'} />
+          <CommentText text={data.data2.data.title} style={styles.organName} color={'#1E2D60'} />
+          {/* <SmallText text={'06 Fév · 14H00'} style={styles.date} color="#6A8596" />
           <SmallText text={data.organName} style={styles.title} color={'#1E2D60'} />
-          <CommentText text={data.title} style={styles.organName} color={'#1E2D60'} />
+          <CommentText text={data.title} style={styles.organName} color={'#1E2D60'} /> */}
           <StatusView text={data.status} style={styles.status} />
         </View>
       </View>

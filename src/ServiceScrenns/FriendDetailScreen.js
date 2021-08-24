@@ -57,23 +57,60 @@ const FriendDetailScreen = (props) => {
   //  onPress={() => setStatus(NeedStatusType.WAITING)}
   //    />
   );
+
+
+  const participants =()=>{
+    firestore().collection('userParticipants').doc(auth().currentUser.uid).collection('participate').add(data2).then(async(res)=>{
+      console.log('hello9 response',res)
+   })
+
+
+  }
+  const deleteparticipants=()=>{
+    Alert.alert(
+      "Delete",
+      "Are you sure?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK", onPress: () => {
+          //   firestore().collection('userParticipants').doc(auth().currentUser.uid).collection('participate').add(data2).then(async(res)=>{
+          //     console.log('hello9 response',res)
+          //  })
+           console.log('hello9 response',res)
+            // deleteUserDemands(auth().currentUser.uid, props.data2.serviceType.name, props.docId).then((item) => {
+            //   Actions.home()
+            // })
+            // .catch((error) => {
+            //   console.log(error);
+            // })
+          }
+        }
+      ]
+    );
+  }
+
+
   const ParticipationButton = (
 
-
-
 <View>   
+<TouchableOpacity   onPress={() => { participants() }}>
     <CommonButton
       leftIcon={<CheckedBlue width={20* em} height={18 * hm} />} 
       text={'Je participe'}
       // rightIcon={Option({ width: 4 * em, height: 18 * em })}
       style={{width:185*em,height:50*hm,paddingVertical: 0 * hm,backgroundColor:'rgba(197, 240, 245, 0.36)'}} 
-     
       textStyle={{marginLeft:10*em, color: '#40CDDE',fontFamily:'Lato-Medium',fontSize:16*em }}
       // style={[styles.partBtn, { backgroundColor: '#D0F5EA', justifyContent: 'space-between' }]}
     />
+    </TouchableOpacity>
         <TouchableOpacity
             // style={[styles.controlBtn, { backgroundColor: '#F83D39' }]}
-            onPress={() =>  setStatus(NeedStatusType.PARTICIPATED)}>
+            onPress={() =>  setStatus(NeedStatusType.PARTICIPATED)}   onPress={() =>{deleteparticipants() }}>
             <Text style={{fontFamily:'Lato-Medium',fontSize:12*em,color:'#FC3867',marginTop:4*hm,alignSelf:'center'}}>Annuler ma participation</Text>
           </TouchableOpacity>
     </View> 

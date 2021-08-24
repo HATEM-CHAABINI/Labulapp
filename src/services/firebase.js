@@ -80,10 +80,10 @@ export const fetchcoordinate = async (latitude, longitude) => {
     }
     return false
 }
-export const fetchAlertFiltre = async (filtre,filtreD) => {
+// export const fetchAlertFiltre = async (filtre,filtreD) => {
 
     
-}
+// }
 
 export const fetchDemandFiltre = async (filtre,filtreD) => {
     console.log("waaaaaaaaa",(filtreD!="Toutes" && filtreD.length!=0 && filtreD !==undefined));
@@ -213,13 +213,15 @@ export const fetchallDemand = async () => {
       const allGive = allGivesnap.docs;
       const allAlert= allAlertsnap.docs;
       const citiesArray = allNeed.concat(allSell).concat(allOrganize).concat(allGive).concat(allAlert);
-    for (const doc of citiesArray) {
-        if ((doc.data().coordinate.latitude !== undefined)) {
 
+    
+
+    for (const doc of citiesArray) {
+
+        if ((doc.data().coordinate.latitude !== undefined)) {
             let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
             let res = await cc.get();
             if (res.data() !== undefined) {
-
                 data.push({
                     ...doc.data(),
                     key: doc.id,
@@ -227,9 +229,9 @@ export const fetchallDemand = async () => {
                 });
             }
         }
-
     }
 
+console.log(res.data() )
     // let RefSell = firestore().collectionGroup("sell");
     // let allSell = await RefSell.get();
     // for (const doc of allSell.docs) {

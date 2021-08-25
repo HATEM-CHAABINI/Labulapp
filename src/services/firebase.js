@@ -1,9 +1,5 @@
-import firestore from '@react-native-firebase/firestore';
 import auth from "@react-native-firebase/auth";
-import User from '../model/user/User';
-import NeedService from '../model/service/NeedService';
-import NeedServiceType from '../model/service/NeedServiceType';
-import NeedStatusType from '../model/service/NeedStatusType';
+import firestore from '@react-native-firebase/firestore';
 
 let fireKey = firestore().collection("users");
 
@@ -11,7 +7,7 @@ export const getUserProfile = (id) => {
     // const dispatch = useDispatch()
 
     return firestore().collection('users').doc(id).get().then((snapshot) => {
-        console.log("snapshot ", snapshot.data());
+        // console.log("snapshot ", snapshot.data());
         return snapshot.data()
     });
 

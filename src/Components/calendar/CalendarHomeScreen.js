@@ -6,6 +6,7 @@ import 'moment/min/locales';
 import React, { useEffect } from 'react';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { getUserProfile } from '../..//services/firebase';
 import { NextIcon, PrevIcon } from '../../assets/svg/icons';
 import { em, hm, WIDTH } from '../../constants/consts';
 import NeedService from '../../model/service/NeedService';
@@ -159,6 +160,10 @@ const blankSchedules = [
 // ];
 
 const CalendarHomeScreen = props => {
+  const userDemands = firestore()
+    .collection('userDemands')
+    .doc(auth().currentUser.uid);
+  const [Data, setData] = React.useState([]);
   const [scheduler, setscheduler] = React.useState([]);
   const [selectedSchedules, setSelectedSchedules] =
     React.useState(blankSchedules);
@@ -166,76 +171,120 @@ const CalendarHomeScreen = props => {
   const [selectedDate, setSelectedDate] = React.useState(moment());
   const [user, setUser] = React.useState({});
   const [AlertData, setAlertData] = React.useState([]);
-  const getUser = async () => {
-    return firestore()
-      .collection('users')
-      .doc(auth().currentUser.uid)
-      .onSnapshot({
-        next: querySnapshot => {
-          const snapData = {
-            name: `${querySnapshot.data().firstName}  ${
-              querySnapshot.data().lastName
-            }`,
-            image: querySnapshot.data().profilePic,
-            email: querySnapshot.data().email,
-          };
-          setUser(snapData);
-          return snapData;
+
+  const demands = async date => {
+    const filter = [];
+    const final = [];
+    const Type = [{name: 'organize'}, {name: 'give'}, {name: 'sell'}];
+    const give = [];
+    const sell = [];
+    const organize = [];
+    Type.map(async (item, index) => {
+      await userDemands.collection(item.name).onSnapshot({
+        next:  querySnapshot => {
+          var data = querySnapshot.docs.map((docsSnap, index) =>
+          {
+            
+            final.push({
+              time: moment(
+                new Date(docsSnap.data().demandStartDate.toDate())
+              ).format('h:mm'),
+              date: new Date(
+                docsSnap.data().demandStartDate.toDate(),
+           ).toDateString(),
+             seconds:moment(
+              new Date(docsSnap.data().demandStartDate.toDate())
+            ).format('x'),
+              service: new NeedService(
+                new User(`${user.firstName} ${user.lastName}`, user.profilePic, user.email),
+                docsSnap.data().data.description,
+                docsSnap.data().data.title,
+                moment(
+                  new Date(docsSnap.data().demandStartDate.toDate()),
+                ).format('Do MMM YYYY'),
+              ),
+            })
+            
+          }
+          );
+
+         var d= final.filter((e)=>moment(e.date).format('Do MMM YYYY') ===
+           moment(date).format('Do MMM YYYY'))
+          var newArray = blankSchedules.concat(d)
+          newArray = newArray.sort((a, b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
+          console.log(final)
+          if (d.length > 0) setSelectedSchedules(newArray)
+          else setSelectedSchedules(blankSchedules)
         },
         error: error => {
           console.log(error);
         },
       });
+    });
+
+    await setData(final);
   };
 
   const createSchedules = date => {
-   
     var filter = [];
-    firestore()
-      .collection('userDemands')
-      .doc(auth().currentUser.uid)
-      .collection('organize')
-      .onSnapshot({
-        next: querySnapshot => {
-          const snapData = querySnapshot.docs.map((docsSnap, index) => ({
-            time: moment(docsSnap.data().demandStartDate).format('h'),
-            date: new Date(
-              docsSnap.data().demandStartDate.toDate(),
-            ).toDateString(),
-            service: new NeedService(
-              new User(user.name, user.image, user.email),
-              docsSnap.data().data.description,
-              docsSnap.data().data.title,
-              moment(new Date(docsSnap.data().demandStartDate.toDate())).format(
-                'Do MMM YYYY',
-              ),
+    userDemands.collection('organize').onSnapshot({
+      next: querySnapshot => {
+        const snapData = querySnapshot.docs.map((docsSnap, index) => ({
+          time: moment(docsSnap.data().demandStartDate).format('h'),
+          date: new Date(
+            docsSnap.data().demandStartDate.toDate(),
+          ).toDateString(),
+          service: new NeedService(
+            new User(
+              `${user.firstName} ${user.lastName}`,
+              user.profilePic,
+              user.email,
             ),
-          }));
-          snapData.map(e => {
-            if (
-              moment(e.date).format('Do MMM YYYY') ===
-              moment(date).format('Do MMM YYYY')
-            ) {
-              filter.push(e);
-            }
-          });
-          if (filter.length > 0) {
-            setSelectedSchedules(filter);
-          } else {
-            setSelectedSchedules(blankSchedules);
+            docsSnap.data().data.description,
+            docsSnap.data().data.title,
+            moment(new Date(docsSnap.data().demandStartDate.toDate())).format(
+              'Do MMM YYYY',
+            ),
+          ),
+        }));
+        snapData.map(e => {
+          if (
+            moment(e.date).format('Do MMM YYYY') ===
+            moment(date).format('Do MMM YYYY')
+          ) {
+            filter.push(e);
           }
-        },
-        error: error => {
-          console.log(error);
-        },
-      });
+        });
+        if (filter.length > 0) {
+          setSelectedSchedules(filter);
+        } else {
+          setSelectedSchedules(blankSchedules);
+        }
+      },
+      error: error => {
+        console.log(error);
+      },
+    });
   };
-  
   useEffect(() => {
+    getUserProfile(auth().currentUser.uid).then(async item => {
+      setUser(() => item);
+    });
+    demands();
+  }, []);
+  useEffect(async () => {
+    var newProjects=[]
+    selectedSchedules.map((d) => {
+     blankSchedules.map(p =>
+     { p.id === d.id
+        ? newProjects.push({ ...p, ...d })
+        : null}
+    );
+    })
     
-    getUser();
-    createSchedules();
-  }, [props]);
+    // setSelectedSchedules(newProjects)
+    // console.log(newProjects)
+  }, [selectedDate]);
   const renderFlatList = ({item}) => (
     <ScheduleCard
       data={item}
@@ -244,10 +293,6 @@ const CalendarHomeScreen = props => {
       }}
     />
   );
-
-  // useEffect(() => {
-  //   setSelectedSchedules(schedules);
-  // }, []);
 
   return (
     <View style={styles.container}>
@@ -275,7 +320,8 @@ const CalendarHomeScreen = props => {
               dateNameStyle={styles.dateNameStyle}
               selectedDate={selectedDate}
               onDateSelected={date => {
-                createSchedules(date);
+                // createSchedules(date);
+                demands(date);
                 // if (moment().isSame(date, 'day')) {
                 //   createSchedules(date);
                 //   return;

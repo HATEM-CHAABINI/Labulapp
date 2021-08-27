@@ -1,22 +1,23 @@
+import auth from "@react-native-firebase/auth";
 import React from 'react';
-import { View, Image, StatusBar } from 'react-native';
-import { em, hm } from '../../../constants/consts';
-import CommonText from '../../../text/CommonText';
+import { Alert, StatusBar, View } from 'react-native';
 import Modal from 'react-native-modal';
 import CommonListItem from '../../../adapter/CommonListItem';
-import CommonButton from '../../../Components/button/CommonButton';
 import { Amis, DeleteRed, Famille, ProGroupe, SortirGroupe, Voisins } from '../../../assets/svg/icons';
-import { Friend, Family, Neighbor } from '../../../assets/svg/icons';
+import CommonButton from '../../../Components/button/CommonButton';
+import { em, hm } from '../../../constants/consts';
 import RelationshipType from '../../../model/user/RelationshipType';
-
+import { deleteUserGroup } from '../../../services/firebase';
+import CommonText from '../../../text/CommonText';
 const GroupOptionPopupScreen = (props) => {
+
   let groupIcon;
-  switch (props.data && props.data.relationship) {
+  switch (props.data && props.data.RelationshipType) {
 
     case RelationshipType.FAMILIY:
       groupIcon = <Famille width={40 * em} height={40 * em} />;
       break;
-      case RelationshipType.Friend:
+      case RelationshipType.FRIEND:
         groupIcon = <Amis width={40 * em} height={40 * em} />;
         break;
       case RelationshipType.PRO:
@@ -26,6 +27,34 @@ const GroupOptionPopupScreen = (props) => {
       groupIcon = <Voisins width={40 * em} height={40 * em} />;
       break;
   }
+  const deleteGroup = () => {
+    
+    Alert.alert(
+      "Supprimer",
+      "Es-tu sûr?",
+      [
+        {
+          text: "Annuler",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK", onPress: () => {
+            deleteUserGroup(auth().currentUser.uid,props.data.RelationshipType, props.data.groupId).then((item) => {
+            props.onPress()
+            }).catch((error) => {
+              console.log(error);
+            })
+          }
+        }
+      ],
+    );
+  }
+
+
+
+
+
   return (
     <Modal
       isVisible={props.data ? true : false}
@@ -37,8 +66,8 @@ const GroupOptionPopupScreen = (props) => {
       <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
       <View style={styles.body}>
         <View style={styles.avatar}>{groupIcon}</View>
-        <CommonText text={props.data!=null?props.data.name:"Groupe"} style={styles.userName} />
-        <CommonText text={props.data && props.data.number} style={{ marginBottom: 25 * hm }} color="#A0AEB8" />
+        <CommonText text={props.data!=null?props.data.groupName:"Groupe"} style={styles.userName} />
+        <CommonText text={props.data && props.data.users.length} style={{ marginBottom: 25 * hm }} color="#A0AEB8" />
 
         <CommonListItem
           style={styles.listItem}
@@ -47,7 +76,9 @@ const GroupOptionPopupScreen = (props) => {
           rightView={<SortirGroupe width={18 * em} height={20 * em} />}
            
         />
+  
         <CommonListItem
+           onPress={()=>{deleteGroup()}}
           style={styles.listItem}
           title="Supprimer groupe"
           titleStyle={{ color: '#F9547B' }}

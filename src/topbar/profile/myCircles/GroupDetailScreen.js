@@ -1,35 +1,37 @@
-import { View } from 'react-native';
 import React, { useState } from 'react';
-import { em, hm } from '../../../constants/consts';
-import CirclesCommonListItem from '../../../adapter/CirclesCommonListItem';
+import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import UserOptionPopupScreen from './UserOptionPopupScreen';
+import CirclesCommonListItem from '../../../adapter/CirclesCommonListItem';
 import CommonBackButton from '../../../Components/button/CommonBackButton';
+import { em, hm } from '../../../constants/consts';
 import CommonText from '../../../text/CommonText';
 import { myContacts } from './MyCirclesTabScreen';
+import UserOptionPopupScreen from './UserOptionPopupScreen';
 
 const GroupDetailScreen = (props) => {
+ 
   const [userOptionVisible, setUserOptionVisible] = useState(null);
   const renderFlatList = ({ item, index }) => {
-    if (item.groupID && item.groupID.includes(props.data.id)) {
+    // if (item.groupID && item.groupID.includes(props.data.id)) {
       return (
         <CirclesCommonListItem
-          name={item.name}
-          subName={item.relationship.join('/')}
-          icon={item.photo}
+          name={`${item.data.firstName} ${item.data.lastName}`}
+          subName={item.data.RelationshipType}
+          icon={item.data.profilePic !== undefined && item.data.profilePic !== " " ?
+          { uri: item.data.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }} 
           style={[styles.listItem, { marginBottom: index === myContacts.length - 1 ? 100 * hm : 35 * hm }]}
-          onPress={() => setUserOptionVisible(item)}
+          onPress={() => setUserOptionVisible(item.data)}
         />
       );
-    }
+    // }
   };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <CommonBackButton dark />
-        <CommonText text={props.data.name} style={styles.headerTitle} />
+        <CommonText text={props.data.groupName} style={styles.headerTitle} />
       </View>
-      <FlatList data={myContacts} renderItem={renderFlatList} keyExtractor={(i) => i.id} style={styles.body} />
+      <FlatList data={props.data.users} renderItem={renderFlatList} keyExtractor={(i) => i.id} style={styles.body} />
       <UserOptionPopupScreen data={userOptionVisible} onPress={() => setUserOptionVisible(null)} />
     </View>
   );

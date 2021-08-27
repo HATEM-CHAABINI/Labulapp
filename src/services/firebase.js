@@ -463,7 +463,13 @@ export const deleteUserDemands = async (id, demandType, demandId) => {
         return true
     });
 }
-
+export const deleteUserGroup = async (id, groupType, groupId) => {
+    console.log(id, groupType, groupId)
+    return firestore().collection('myGroups').doc(id).collection(groupType).doc(groupId).delete().then((snapshot) => {
+        console.log(snapshot)
+        return true
+    }).catch((e)=>{console.log(e)})
+}
 export const verifyUserEmail = async (email) => {
 
     return auth().sendEmailVerification()

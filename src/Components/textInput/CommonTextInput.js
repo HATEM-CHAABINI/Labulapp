@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { TextInput, TouchableOpacity, View } from 'react-native';
+import { CrossCircle, Invisible } from '../../assets/svg/icons';
 import { em, hm } from '../../constants/consts';
-import { Invisible, CrossCircle } from '../../assets/svg/icons';
 import SmallText from '../../text/SmallText';
 const CommonTextInput = (props) => {
   const [value, setValue] = useState('');
@@ -47,7 +47,10 @@ const CommonTextInput = (props) => {
 
           secureTextEntry={passwd}
           value={value}
-          onChangeText={(t) => setValue(t)}
+          onChangeText={(t) => {
+            setValue(t)
+            props.onChangeText(t)
+          }}
           style={styles.textInput}
           onFocus={() => setOnFocus(true)}
           onBlur={() => setOnFocus(false)}

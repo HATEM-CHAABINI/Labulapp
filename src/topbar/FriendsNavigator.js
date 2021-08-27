@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Filter, MagnifierBlue } from '../assets/svg/icons';
 import { em, hm } from '../constants/consts';
+import { fetchallDemand, fetchDemandFiltre } from '../services/firebase';
+import CommonBlueHeader from './CommonBlueHeader';
 import FriendsListScreen from './FriendsListScreen';
 import FriendsMenuScreen from './FriendsMenuScreen';
-import CommonBlueHeader from './CommonBlueHeader';
 import SwitchButton from './SwitchButton';
-import { Actions } from 'react-native-router-flux';
-import { MagnifierBlue, Filter } from '../assets/svg/icons';
 const Tab = createMaterialTopTabNavigator();
-import { fetchallDemand ,fetchDemandFiltre} from '../services/firebase'
 export default function FriendsNavigator(props) {
   const [activeTab, setActiveTab] = useState(1);
   const [Data, setData] = useState([])
@@ -43,7 +43,7 @@ if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=
 
   useEffect(() => {
 
-    if (Data.length > 0) {
+    if (Data.length >= 0) {
       // console.log("leennnnghhhththt");
       setLoading(false)
     }

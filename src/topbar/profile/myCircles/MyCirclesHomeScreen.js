@@ -1,57 +1,66 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import TitleText from '../../../text/TitleText';
-import { em, hm } from '../../../constants/consts';
-import CommonTabBar from '../../../Components/other/CommonTabBar';
+
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import MyCirclesTabScreen from './MyCirclesTabScreen';
-import CommonBackButton from '../../../Components/button/CommonBackButton';
+import React, { useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { MagnifierBlue } from '../../../assets/svg/icons';
-import RelationshipType from '../../../model/user/RelationshipType';
+import CommonBackButton from '../../../Components/button/CommonBackButton';
+import CommonTabBar from '../../../Components/other/CommonTabBar';
 import SearchContact from '../../../Components/SearchContact';
-
-
-const MyCirclesHomeScreen = () => {
+import { em, hm } from '../../../constants/consts';
+import RelationshipType from '../../../model/user/RelationshipType';
+import TitleText from '../../../text/TitleText';
+import MyCirclesTabScreen from './MyCirclesTabScreen';
+const MyCirclesHomeScreen = props => {
   const Tab = createMaterialTopTabNavigator();
   const [SearchContactVisible, setSearchContactVisible] = useState(false);
-
+  const [groups, setGroups] = useState({});
+  
   return (
     <NavigationContainer>
       <View style={styles.container}>
         <CommonBackButton
           dark
-          style={{ marginLeft: 15 * em, marginTop: 27 * hm }}
+          style={{marginLeft: 15 * em, marginTop: 27 * hm}}
           onPress={() => Actions.pop()}
         />
         <TouchableOpacity
           style={{
-            position: 'absolute', top: 39 * hm, right: 30 * em
+            position: 'absolute',
+            top: 39 * hm,
+            right: 30 * em,
           }}
-          onPress={() => setSearchContactVisible(true)}
-        >
+          onPress={() => setSearchContactVisible(true)}>
           <MagnifierBlue width={20 * em} height={20 * em} />
         </TouchableOpacity>
         <TitleText text={'Mes cercles'} style={styles.title} />
-        <Tab.Navigator tabBar={(props) => <CommonTabBar {...props} />} swipeEnabled={false} initialRouteName="families">
+        <Tab.Navigator
+          tabBar={props => <CommonTabBar {...props} />}
+          swipeEnabled={false}
+          initialRouteName="families">
           <Tab.Screen
             name={RelationshipType.FAMILIY}
-            options={{ title: 'Ma famille', tabColor: '#FA5890' }}
+            options={{title: 'Ma famille', tabColor: '#FA5890'}}
             component={MyCirclesTabScreen}
-            initialParams={{ sort: RelationshipType.FAMILIY }}
+            initialParams={{
+              sort: RelationshipType.FAMILIY,
+             
+            }}
           />
           <Tab.Screen
             name={RelationshipType.FRIEND}
-            options={{ title: 'Mes amis', tabColor: '#FF9417' }}
+            options={{title: 'Mes amis', tabColor: '#FF9417'}}
             component={MyCirclesTabScreen}
-            initialParams={{ sort: RelationshipType.FRIEND }}
+            initialParams={{sort: RelationshipType.FRIEND}}
           />
           <Tab.Screen
             name={RelationshipType.NEIGHBOR}
-            options={{ title: 'Mes voisins', tabColor: '#40CDDE' }}
+            options={{title: 'Mes voisins', tabColor: '#40CDDE'}}
             component={MyCirclesTabScreen}
-            initialParams={{ sort: RelationshipType.NEIGHBOR }}
+            initialParams={{
+              sort: RelationshipType.NEIGHBOR
+            }}
           />
         </Tab.Navigator>
         <SearchContact

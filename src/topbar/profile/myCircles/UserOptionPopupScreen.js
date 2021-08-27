@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Image, StatusBar } from 'react-native';
-import { em } from '../../../constants/consts';
-import CommonText from '../../../text/CommonText';
+import { Image, StatusBar, View } from 'react-native';
 import Modal from 'react-native-modal';
 import CommonListItem from '../../../adapter/CommonListItem';
-import CommonButton from '../../../Components/button/CommonButton';
 import { AddGroup, CrossCircle } from '../../../assets/svg/icons';
+import CommonButton from '../../../Components/button/CommonButton';
+import { em } from '../../../constants/consts';
+import CommonText from '../../../text/CommonText';
 const UserOptionPopupScreen = (props) => {
+ 
   return (
     <Modal
       isVisible={props.data ? true : false}
@@ -17,8 +18,9 @@ const UserOptionPopupScreen = (props) => {
       onBackButtonPress={() => props.onPress()}>
       <StatusBar backgroundColor="rgba(30, 45, 96, 0.8)" barStyle="light-content" />
       <View style={styles.body}>
-        <Image source={require('../../../assets/images/avatar.png')} style={styles.avatar} />
-        <CommonText text={props.data && props.data.name} style={styles.userName} />
+      <Image source={props.data?.profilePic !== undefined && props.data?.profilePic !== " " ?
+          { uri: props.data?.profilePic } : { uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg' }} style={styles.avatar} />
+        <CommonText text={`${props.data?.firstName} ${props.data?.lastName}`} style={styles.userName} />
         <CommonListItem
           style={styles.listItem}
           title="Ajouter à ma famille"

@@ -67,7 +67,7 @@ const NameGroupScreen = props => {
         await firestore().collection('myGroups')
           .doc(auth().currentUser.uid).collection(RelationshipType.FAMILIY)
           .doc(res.id).update({'groupId':res.id})
-          props.navigation.navigate({ name: RelationshipType.FAMILIY, merge: true })
+         Actions.myCirclesHome()
 
       })
   };
@@ -89,7 +89,7 @@ const NameGroupScreen = props => {
         await firestore().collection('myGroups')
           .doc(auth().currentUser.uid).collection(RelationshipType.FRIEND)
           .doc(res.id).update({'groupId':res.id})
-          props.navigation.navigate({ name: RelationshipType.FRIEND, merge: true })
+          Actions.myCirclesHome()
       })
   };
   const updateGroupMonVoisin = () => {
@@ -110,7 +110,7 @@ const NameGroupScreen = props => {
         await firestore().collection('myGroups')
           .doc(auth().currentUser.uid).collection(RelationshipType.NEIGHBOR)
           .doc(res.id).update({'groupId':res.id})
-          props.navigation.navigate({ name: RelationshipType.NEIGHBOR, merge: true })
+          Actions.myCirclesHome()
       })
   };
   const updateGroupProfessionnel = () => {

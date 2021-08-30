@@ -12,6 +12,8 @@ import RelationshipType from '../../../model/user/RelationshipType';
 import CommentText from '../../../text/CommentText';
 import CommonText from '../../../text/CommonText';
 import TitleText from '../../../text/TitleText';
+import auth from '@react-native-firebase/auth'
+import {getUserProfile} from "../../../services/firebase"
 const usersData = [
   {
     sort: 'families',
@@ -91,7 +93,11 @@ const CreateGroupScreen = props => {
   const searchedText = useRef('');
   useEffect(() => {
     userArray.splice(0, userArray.length);
-    // setSelectedUser([]);
+    var user =[]
+    getUserProfile(auth().currentUser.uid).then(async item => {
+      user.push({data:item})
+      setSelectedUser(user)
+    });
     firestore()
       .collection('users')
       .get()
@@ -99,22 +105,21 @@ const CreateGroupScreen = props => {
         var data = querySnapshot.docs.map(doc => ({data: doc.data()}));
         setusersList(querySnapshot.docs.map(doc => ({data: doc.data()})));
         setallUser(querySnapshot.docs.map(doc => ({data: doc.data()})));
-
         setChecked(new Array(data.length).fill(false));
       });
   }, [props]);
   const renderSelectedList = ({item}) => (
     <SelectedAvatarView
       avatar={
-        item.data.profilePic !== undefined && item.data.profilePic !== ' '
-          ? {uri: item.data.profilePic}
+        item.data?.profilePic !== undefined && item.data?.profilePic !== ' '
+          ? {uri: item.data?.profilePic}
           : {
               uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg',
             }
       }
-      userName={`${item.data.firstName} ${item.data.lastName}`}
-      Email={item.data.email}
-      id={item.data.uid}
+      userName={`${item.data?.firstName} ${item.data?.lastName}`}
+      Email={item.data?.email}
+      id={item.data?.uid}
     />
   );
   const clearSingleUser = (id, Email) => {
@@ -190,6 +195,7 @@ const CreateGroupScreen = props => {
     setSelectedUser(filteredUsers);
   };
   const handleChange = value => {
+   
     let newArray = [...selectedUser];
     newArray.push(value);
     setSelectedUser(newArray);

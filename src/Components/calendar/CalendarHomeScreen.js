@@ -78,23 +78,24 @@ const locale = {
 };
 
 const blankSchedules = [
-  {id: '1', time: 8},
+  {id: '1', time: 8, seconds:28800},
   {
     id: '2',
     time: 9,
+    seconds:32400
   },
-  {id: '3', time: 10},
-  {id: '4', time: 11},
+  {id: '3', time: 10,seconds:36000},
+  {id: '4', time: 11,seconds:39600},
   {
     id: '5',
-    time: 12,
+    time: 12,seconds:43200
   },
-  {id: '6', time: 13},
-  {id: '7', time: 14},
-  {id: '8', time: 15},
-  {id: '9', time: 16},
-  {id: '10', time: 17},
-  {id: '11', time: 18},
+  {id: '6', time: 13,seconds:46800},
+  {id: '7', time: 14,seconds:50400},
+  {id: '8', time: 15,seconds:54000},
+  {id: '9', time: 16,seconds:57600},
+  {id: '10', time: 17,seconds:61200},
+  {id: '11', time: 18,seconds:64800},
 ];
 
 // const schedules = [
@@ -184,17 +185,18 @@ const CalendarHomeScreen = props => {
         next:  querySnapshot => {
           var data = querySnapshot.docs.map((docsSnap, index) =>
           {
-            
+            var hrs=moment(
+              new Date(docsSnap.data().demandStartDate.toDate())
+            ).format('H:mm')
+
             final.push({
               time: moment(
                 new Date(docsSnap.data().demandStartDate.toDate())
-              ).format('h:mm'),
+              ).format('HH:mm'),
               date: new Date(
                 docsSnap.data().demandStartDate.toDate(),
            ).toDateString(),
-             seconds:moment(
-              new Date(docsSnap.data().demandStartDate.toDate())
-            ).format('x'),
+             seconds:moment.duration(hrs).asSeconds(),
               service: new NeedService(
                 new User(`${user.firstName} ${user.lastName}`, user.profilePic, user.email),
                 docsSnap.data().data.description,
@@ -211,8 +213,8 @@ const CalendarHomeScreen = props => {
          var d= final.filter((e)=>moment(e.date).format('Do MMM YYYY') ===
            moment(date).format('Do MMM YYYY'))
           var newArray = blankSchedules.concat(d)
-          newArray = newArray.sort((a, b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
-          console.log(final)
+          newArray = newArray.sort((a, b) => (a.seconds > b.seconds) ? 1 : ((b.seconds > a.seconds) ? -1 : 0))
+          console.log(newArray)
           if (d.length > 0) setSelectedSchedules(newArray)
           else setSelectedSchedules(blankSchedules)
         },

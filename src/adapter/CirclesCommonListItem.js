@@ -7,6 +7,7 @@ import UserType from '../model/user/UserType';
 import { Friend, Family, Neighbor, OptionGray, Famille, Amis, Voisins, ProGroupe } from '../assets/svg/icons';
 import RelationshipType from '../model/user/RelationshipType';
 const CirclesCommonListItem = (props) => {
+ 
   var optionBtn = (
     <View style={styles.optionBtn}>
       <OptionGray width={30 * em} height={30 * em} />
@@ -54,7 +55,7 @@ const CirclesCommonListItem = (props) => {
       <View style={[styles.container, props.style]}>
         <CommonListItem
           title={props.name}
-          subTitle={props.members+' abonnés'}
+          subTitle={props.subName +' abonnés'}
           titleStyle={styles.userNameStyle}
           icon={groupIcon}
           subTitleStyle={styles.number}
@@ -67,7 +68,6 @@ const CirclesCommonListItem = (props) => {
   }
   return (
     <CommonListItem
-    
       title={props.name}
       subTitle={props.subName}
       titleStyle={styles.userNameStyle}

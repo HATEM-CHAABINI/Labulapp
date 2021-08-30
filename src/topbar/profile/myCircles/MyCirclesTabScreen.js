@@ -130,6 +130,7 @@ const MyCirclesTabScreen = props => {
   useEffect(async () => {
     setloadingData(true);
     const groupType = {
+      users:null,
       FAMILIY: null,
       FAMILIYUSERS: null,
       FRIEND: null,
@@ -139,6 +140,15 @@ const MyCirclesTabScreen = props => {
       PRO: null,
       PROUSERS: null,
     };
+    await firestore()
+    .collection('myGroups')
+    .doc(auth().currentUser.uid)
+    .collection('MyGroupUsers')
+      .get().then((e) => {
+        var data=[]
+        e.docs.map((item)=>data.push(item.data()))
+        groupType.users=data
+    }).catch((e)=>console.log(e))
     await firestore()
       .collection('myGroups')
       .doc(auth().currentUser.uid)
@@ -156,7 +166,7 @@ const MyCirclesTabScreen = props => {
           });
         });
         let uniqueChars = getUniqueListBy(userData, 'uid');
-  
+        
         groupType.FAMILIY = data;
         groupType.FAMILIYUSERS = uniqueChars;
         // await setGroups(data)
@@ -181,7 +191,7 @@ const MyCirclesTabScreen = props => {
           });
         });
         let uniqueChars = getUniqueListBy(userData, 'uid');
-  
+
         groupType.FRIEND = data;
         groupType.FRIENDUSERS = uniqueChars;
         // await setGroups(data)
@@ -206,7 +216,7 @@ const MyCirclesTabScreen = props => {
           });
         });
         let uniqueChars = getUniqueListBy(userData, 'uid');
-        
+
         groupType.NEIGHBOR = data;
         groupType.NEIGHBORUSERS = uniqueChars;
         // await setGroups(data)
@@ -240,7 +250,7 @@ const MyCirclesTabScreen = props => {
       });
     await setGroups(groupType);
     setloadingData(false);
-  }, [props, groupOptionVisible]);
+  }, [props, groupOptionVisible,userOptionVisible]);
   const RenderEmptyContainer = () => {
     return (
       <View
@@ -264,12 +274,13 @@ const MyCirclesTabScreen = props => {
   const renderFlatList = ({item}) => {
     if (item.RelationshipType === sort) {
       if (item.type === UserType.GROUP) {
+       
         return (
           <CirclesCommonListItem
             sort={item.RelationshipType}
             type={item.type}
             name={item.groupName}
-            subName={item.groupName}
+            subName={item.users.length}
             style={styles.listItem}
             onLeftPress={() => {
               Actions.groupDetail({data: item});
@@ -280,28 +291,26 @@ const MyCirclesTabScreen = props => {
       }
     } else {
       if (item.type !== UserType.GROUP) {
-        console.log(item)
-        return (
+        if (item.RelationshipType.includes(sort)) {
         
-          <CirclesCommonListItem
-            name={`${item.firstName} ${item.lastName}`}
-            subName={item.email}
-            icon={
-              item.profilePic !== undefined && item.profilePic !== ' '
-                ? {uri: item.profilePic}
-                : {
+          return (
+            <CirclesCommonListItem
+              name={`${item.data.firstName} ${item.data.lastName}`}
+              subName={item.RelationshipType.join('/')}
+              icon={
+                item.data.profilePic !== undefined && item.data.profilePic !== ' '
+                  ? { uri: item.data.profilePic }
+                  : {
                     uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg',
                   }
-            }
-            style={styles.listItem}
-            onPress={() => setUserOptionVisible(item)}
-          />
-        );
+              }
+              style={styles.listItem}
+              onPress={() => setUserOptionVisible(item.data)}
+            />
+          );
+        }
       }
-      
     }
-
- 
 
     if (item.RelationshipType === sort) {
       // const group = groups.filter((g) => g.RelationshipType === sort).map((g) => g.id);
@@ -341,13 +350,13 @@ const MyCirclesTabScreen = props => {
           // data={myGroups.concat(myContacts)}
           data={
             sort === RelationshipType.FAMILIY
-              ? groups.FAMILIY.concat(groups.FAMILIYUSERS)
+              ? groups.FAMILIY.concat(groups.users)
               : sort === RelationshipType.FRIEND
-              ? groups.FRIEND.concat(groups.FRIENDUSERS)
+              ? groups.FRIEND.concat(groups.users)
               : sort === RelationshipType.NEIGHBOR
-              ? groups.NEIGHBOR.concat(groups.NEIGHBORUSERS)
+              ? groups.NEIGHBOR.concat(groups.users)
               : sort === RelationshipType.PRO
-              ? groups.PRO.concat(groups.PROUSERS)
+              ? groups.PRO.concat(groups.users)
               : null
           }
           renderItem={renderFlatList}

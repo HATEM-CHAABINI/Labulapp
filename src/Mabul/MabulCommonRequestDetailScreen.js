@@ -217,13 +217,13 @@ const MabulCommonRequestDetailScreen = (props) => {
     validationSchema,
   });
 
-  setdatea = (date) => {
+  const setdatea = (date) => {
     setDate(date)
   }
-  setdatee = (date) => {
+  const setdatee = (date) => {
     setisEndDate(date)
   }
-  setadresse = (add, coor) => {
+  const setadresse = (add, coor) => {
 
     formik.setFieldValue('address', add)
     formik.setFieldValue('coordinate', coor)

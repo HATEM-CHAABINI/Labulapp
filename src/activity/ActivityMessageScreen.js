@@ -1,29 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image } from 'react-native';
-import { em, hm } from '../constants';
+import React, {useState, useEffect} from 'react';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {View, Image} from 'react-native';
+import {em, hm} from '../constants';
 // import CommonText from '../text/CommonText';
 import CommentText from '../text/CommentText';
-import { FlatList, TouchableOpacity, TextInput } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import {FlatList, TouchableOpacity, TextInput} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 // import CommonBackButton from '../Components/button/CommonBackButton';
 import CommonButton from '../Components/button/CommonButton';
 import MessageCounterDownPopupScreen from './MessageCounterDownPopupScreen';
 import MessageProfilePopupScreen from './MessageProfilePopupScreen';
-import { BackArrowWhite, TelephoneWhite } from '../assets/svg/icons';
+import {BackArrowWhite, TelephoneWhite} from '../assets/svg/icons';
 import MessageView from '../Components/view/MessageView';
-import { CheckedBlue, } from '../assets/svg/icons';
+import {CheckedBlue} from '../assets/svg/icons';
 import CommonHeader from '../Components/header/CommonHeader';
 import CommonListItem from '../adapter/CommonListItem';
 import FlecheM1 from '../assets/icons/message/FlecheM1';
 import Up from '../assets/icons/message/Up';
 import Down from '../assets/icons/message/Down';
 import Count from '../assets/icons/message/Count';
-
+import moment from 'moment';
 const OTHERSIDE = 1;
 const OURSIDE = 2;
 
 const messageLists = [
-  { id: 1, date: '22:00', side: OURSIDE, messages: ['Bien sur, voici :\n ABYMES 97139\n Guadeloupe'] },
+  {
+    id: 1,
+    date: '22:00',
+    side: OURSIDE,
+    messages: ['Bien sur, voici :\n ABYMES 97139\n Guadeloupe'],
+  },
   {
     id: 0,
     date: '21:59',
@@ -39,32 +46,109 @@ var requestMessage = [
     id: 0,
     date: '21:59',
     side: OTHERSIDE,
-    messages: ['Bonjour Mathieu, je souhaite participer pour Récolter des figues.'],
+    messages: [
+      'Bonjour Mathieu, je souhaite participer pour Récolter des figues.',
+    ],
   },
 ];
 
-const ActivityMessageScreen = ({ message, activityType }) => {
+const ActivityMessageScreen = ({message, activityType}) => {
+  var uid = 'Dohg7XzxkxaBu8eWVt1IhoZ2Lvk2';
+  const [MsgList, setMsgList] = useState([]);
   const [messageCounterVisible, setMessageCounterVisible] = useState(false);
   const [messageProfileVisible, setMessageProfileVisible] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [refused, setRefused] = useState(false);
-
+  const [minutes, setMinutes] = useState(0);
   const [isAccepted, setIsAccepted] = useState();
-  const [seconds, setSeconds] = useState(20);
+  const [seconds, setSeconds] = useState(30);
+  const [Msg, setMsg] = useState('');
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     //assign interval to a variable to clear it.
+  //     setSeconds(seconds - 1);
+  //   }, 1000);
+  // }, []);
+  useEffect(() => {
+    let myInterval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(myInterval);
+        } else {
+          setMinutes(minutes - 1);
+          setSeconds(30);
+          Actions.pop();
+        }
+      }
+    }, 1000);
+    return () => {
+      clearInterval(myInterval);
+    };
+  });
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      //assign interval to a variable to clear it.
-      setSeconds(seconds - 1);
-    }, 1000);
+    var uid = 'Dohg7XzxkxaBu8eWVt1IhoZ2Lvk2';
+
+    const docid =
+      uid > auth().currentUser.uid
+        ? auth().currentUser.uid + '-' + uid
+        : uid + '-' + auth().currentUser.uid;
+    const unsubscribe = firestore()
+      .collection('chatRoom')
+      .doc(docid)
+      .collection('messages')
+      .onSnapshot(snap => {
+        const data = snap.docs.map(doc => doc.data());
+        var newData = data.sort((a, b) =>
+          a.date > b.date ? 1 : b.date > a.date ? -1 : 0,
+        );
+        console.log(newData);
+        setMsgList(newData.reverse());
+      });
+
+    //remember to unsubscribe from your realtime listener on unmount or you will create a memory leak
+    return () => unsubscribe();
   }, []);
+
+  const sendMsg = async () => {
+    var msgList = [];
+    var uid = 'Dohg7XzxkxaBu8eWVt1IhoZ2Lvk2';
+    const docid =
+      uid > auth().currentUser.uid
+        ? auth().currentUser.uid + '-' + uid
+        : uid + '-' + auth().currentUser.uid;
+    await firestore()
+      .collection('chatRoom')
+      .doc(docid)
+      .collection('messages')
+      .add({
+        id: Date.now(),
+        date: Date.now(),
+        side: OURSIDE,
+        messages: [Msg],
+        senderId: auth().currentUser.uid,
+      });
+
+    setMsg('');
+  };
   const popupHeader = (
     <CommonListItem
       style={styles.popupHeader}
-      icon={<Image source={message.service.coverImage} style={styles.titleIcon} />}
+      icon={
+        <Image source={message.service.coverImage} style={styles.titleIcon} />
+      }
       title={message.service.title}
-      titleStyle={{ fontFamily: 'Lato-Bold', color: '#1E2D60', fontSize: 14 * em }}
-      rightView={isAccepted && <Count width={65 * em} height={28 * em} />}
+      titleStyle={{
+        fontFamily: 'Lato-Bold',
+        color: '#1E2D60',
+        fontSize: 14 * em,
+      }}
+      rightView={
+        isAccepted && <Count width={65 * em} height={28 * em} count={seconds} />
+      }
     />
   );
   const AcceptButton = accepted ? (
@@ -72,14 +156,14 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       style={styles.optionBtnClicked}
       //leftIcon={<Like width={12 * em} height={8.79 * em} />}
       text="Accepter"
-      textStyle={{ fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em }}
+      textStyle={{fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em}}
     />
   ) : (
     <CommonButton
       style={styles.optionBtn}
       leftIcon={<Up width={14 * em} height={13 * em} />}
       text="   Accepter"
-      textStyle={{ fontSize: 14 * em }}
+      textStyle={{fontSize: 14 * em}}
       onPress={() => {
         setMessageCounterVisible(true);
       }}
@@ -90,16 +174,16 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       style={styles.optionBtnClicked}
       leftIcon={<CheckedBlue width={12 * em} height={8.79 * em} />}
       text="Accepter"
-      textStyle={{ fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em }}
+      textStyle={{fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em}}
     />
   ) : (
     <CommonButton
       style={styles.optionBtn}
       leftIcon={<Up width={14 * em} height={13 * em} />}
       text="   Accepter"
-      textStyle={{ fontSize: 14 * em }}
+      textStyle={{fontSize: 14 * em}}
       onPress={() => {
-        setAccepted(true)
+        setAccepted(true);
       }}
     />
   );
@@ -108,14 +192,14 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       style={styles.optionBtnClicked}
       leftIcon={<CheckedBlue width={12 * em} height={8.79 * em} />}
       text="Je participe"
-      textStyle={{ fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em }}
+      textStyle={{fontSize: 12 * em, color: '#40CDDE', marginLeft: 5 * em}}
     />
   ) : (
     <CommonButton
-      style={[styles.optionBtn, { backgroundColor: '#F9547B' }]}
+      style={[styles.optionBtn, {backgroundColor: '#F9547B'}]}
       leftIcon={<Down width={14 * em} height={13 * em} />}
       text="   Refuser"
-      textStyle={{ fontSize: 14 * em }}
+      textStyle={{fontSize: 14 * em}}
       onPress={() => {
         setRefused(true);
       }}
@@ -123,16 +207,18 @@ const ActivityMessageScreen = ({ message, activityType }) => {
   );
   const optionView = (
     <View style={styles.optionView}>
-      {(activityType == 'invitation') && AcceptInvitationButton}
-      {(!(activityType == 'invitation')) && AcceptButton}
+      {activityType == 'invitation' && AcceptInvitationButton}
+      {!(activityType == 'invitation') && AcceptButton}
       {RefuseButton}
-
     </View>
   );
   const SuccessToast = (
     <View style={styles.toast}>
-      <View style={{ flexDirection: 'row', marginBottom: 15 * hm }}>
-        <Image source={require('../assets/images/avatar.png')} style={styles.toastAvatar} />
+      <View style={{flexDirection: 'row', marginBottom: 15 * hm}}>
+        <Image
+          source={require('../assets/images/avatar.png')}
+          style={styles.toastAvatar}
+        />
         <View style={styles.avatarCheck}>
           <CheckedBlue wdith={16.67 * em} height={12.2 * em} />
         </View>
@@ -140,25 +226,33 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       <CommentText
         text="Mathieu viens d’accepter la participation d’Amandine"
         color="#1E2D60"
-        style={{ fontFamily: 'Lato-Bold' }}
+        style={{fontFamily: 'Lato-Bold'}}
       />
     </View>
   );
-  const renderMessageList = ({ item, index }) => {
-    const { date, messages, side } = item;
-    return <MessageView date={date} messages={messages} side={side} />;
+  const renderMessageList = ({item, index}) => {
+    const {date, messages, side, senderId} = item;
+    return (
+      <MessageView
+        date={moment(date).format('HH:mm')}
+        messages={messages}
+        side={side}
+        senderId={senderId}
+        sender={auth().currentUser.uid}
+        reciver={uid}
+      />
+    );
   };
 
-
-
   if (activityType === 'invitation') {
-
     requestMessage = [
       {
         id: 0,
         date: '21:59',
         side: OTHERSIDE,
-        messages: ['Bonjour Mathieu, je souhaite participer pour Récolter des figues.'],
+        messages: [
+          'Bonjour Mathieu, je souhaite participer pour Récolter des figues.',
+        ],
       },
     ];
   }
@@ -167,30 +261,39 @@ const ActivityMessageScreen = ({ message, activityType }) => {
       <CommonHeader
         style={styles.header}
         rightView={
-          <TouchableOpacity style={styles.dialIcon}
-          //  onPress={() => Actions.activityDial()}
+          <TouchableOpacity
+            style={styles.dialIcon}
+            //  onPress={() => Actions.activityDial()}
           >
             <TelephoneWhite width={20 * em} height={20 * em} />
           </TouchableOpacity>
         }
-
         leftView={
           // <View style={{ paddingTop: 40 * hm, paddingLeft: 159 * em }}>
           <TouchableOpacity
-            style={{ position: 'relative',marginTop:8*em, paddingLeft: 14 * em ,paddingRight:27*em}}
+            style={{
+              position: 'relative',
+              marginTop: 8 * em,
+              paddingLeft: 14 * em,
+              paddingRight: 27 * em,
+            }}
             onPress={() => Actions.pop()}>
             <BackArrowWhite width={25 * em} height={23 * hm} />
           </TouchableOpacity>
-          
         }
-
         centerView={
           <CommonListItem
             onPress={() => setMessageProfileVisible(!messageProfileVisible)}
-            style={{ flex: 1 }}
-            icon={<Image source={message.user.photo} style={styles.avatarIcon} />}
+            style={{flex: 1}}
+            icon={
+              <Image source={message.user.photo} style={styles.avatarIcon} />
+            }
             title={message.user.name}
-            titleStyle={{ fontFamily: 'Lato-Semibold', color: '#ffffff', fontSize: 16 * em }}
+            titleStyle={{
+              fontFamily: 'Lato-Semibold',
+              color: '#ffffff',
+              fontSize: 16 * em,
+            }}
           />
         }
       />
@@ -216,24 +319,34 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         {isAccepted && SuccessToast}
         <View style={styles.popupBody}>
           <View style={styles.popupFooter}>
-            <Image source={require('../assets/images/ic_image.png')} style={styles.imageIcon} />
+            <Image
+              source={require('../assets/images/ic_image.png')}
+              style={styles.imageIcon}
+            />
             <View style={styles.inputView}>
-              <TextInput placeholder="Écrit ici ton message …" style={styles.inputText} />
+              <TextInput
+                placeholder="Écrit ici ton message …"
+                value={Msg}
+                style={styles.inputText}
+                onChangeText={e => {
+                  setMsg(e);
+                }}
+              />
             </View>
             <TouchableOpacity
-              style={{ right: 15 * em, position: 'absolute' }}
-              onPress={() => console.log("ddjdjdjdjdjdj")}>
+              style={{right: 15 * em, position: 'absolute'}}
+              onPress={() => sendMsg()}>
               <FlecheM1 width={20 * em} height={20 * hm} />
             </TouchableOpacity>
           </View>
           {!isAccepted && optionView}
-          { }
-          <View style={{ flex: 1 }}>
+          {}
+          <View style={{flex: 1}}>
             <FlatList
-              data={isAccepted ? messageLists : requestMessage}
+              data={isAccepted ? MsgList : requestMessage}
               inverted={1}
               renderItem={renderMessageList}
-              keyExtractor={(i) => i.id}
+              keyExtractor={i => i.id}
               showsVerticalScrollIndicator={false}
             />
           </View>
@@ -245,7 +358,7 @@ const ActivityMessageScreen = ({ message, activityType }) => {
         onPress={() => setMessageCounterVisible(false)}
       />
       <MessageProfilePopupScreen
-        onAccept={(val) => setIsAccepted(val)}
+        onAccept={val => setIsAccepted(val)}
         visible={messageProfileVisible}
         onPress={() => setMessageProfileVisible(false)}
       />
@@ -254,10 +367,12 @@ const ActivityMessageScreen = ({ message, activityType }) => {
 };
 
 const styles = {
-  container: { flex: 1, alignItems: 'flex-start', backgroundColor: '#40CDDE' },
+  container: {flex: 1, alignItems: 'flex-start', backgroundColor: '#40CDDE'},
   header: {
-     marginBottom: 20 * hm, marginTop: 32 * hm, alignSelf: 'center' 
-    },
+    marginBottom: 20 * hm,
+    marginTop: 32 * hm,
+    alignSelf: 'center',
+  },
   toast: {
     alignItems: 'center',
     marginLeft: -30 * em,
@@ -276,8 +391,8 @@ const styles = {
     marginLeft: -32 * em,
     marginTop: -10 * hm,
   },
-  avatarIcon: { width: 28 * em, height: 28 * em, marginRight: 10 * em },
-  dialIcon: { marginRight: 15 * em, alignSelf: 'center' },
+  avatarIcon: {width: 28 * em, height: 28 * em, marginRight: 10 * em},
+  dialIcon: {marginRight: 15 * em, alignSelf: 'center'},
   popup: {
     width: '100%',
     flex: 1,
@@ -287,13 +402,26 @@ const styles = {
     paddingHorizontal: 29 * em,
     justifyContent: 'space-between',
     flexDirection: 'column',
-
   },
-  popupHeader: { paddingVertical: 15 * hm },
-  titleView: { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' },
-  titleIcon: { width: 28 * em, height: 28 * em, borderRadius: 14 * em, marginRight: 10 * em },
-  popupBody: { flexDirection: 'column-reverse', alignItems: 'center', flex: 1 },
-  popupFooter: { flexDirection: 'row', alignItems: 'center', marginTop: 25 * hm, marginBottom: 15 * hm },
+  popupHeader: {paddingVertical: 15 * hm},
+  titleView: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  titleIcon: {
+    width: 28 * em,
+    height: 28 * em,
+    borderRadius: 14 * em,
+    marginRight: 10 * em,
+  },
+  popupBody: {flexDirection: 'column-reverse', alignItems: 'center', flex: 1},
+  popupFooter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 25 * hm,
+    marginBottom: 15 * hm,
+  },
   inputView: {
     flex: 1,
     backgroundColor: '#F0F5F7',
@@ -301,17 +429,21 @@ const styles = {
     paddingVertical: 17 * em,
     paddingHorizontal: 17 * em,
   },
-  inputText: { fontFamily: 'Lato-Medium', fontSize: 14 * em, lineHeight: 16 * em, color: '#9093A3', padding: 0 },
-  imageIcon: { width: 40 * em, height: 40 * em, marginRight: 15 * em },
+  inputText: {
+    fontFamily: 'Lato-Medium',
+    fontSize: 14 * em,
+    lineHeight: 16 * em,
+    color: '#9093A3',
+    padding: 0,
+  },
+  imageIcon: {width: 40 * em, height: 40 * em, marginRight: 15 * em},
   optionBtn: {
-
     paddingVertical: 12 * em,
     paddingHorizontal: 22 * em,
     backgroundColor: '#40CDDE',
     borderRadius: 21 * em,
     width: 125 * em,
-    height: 41 * hm
-
+    height: 41 * hm,
   },
   optionBtnClicked: {
     paddingVertical: 9 * em,
@@ -319,7 +451,7 @@ const styles = {
     backgroundColor: 'rgba(64, 205, 222, 0.2) ',
     borderRadius: 21 * em,
     width: 125 * em,
-    height: 41 * hm
+    height: 41 * hm,
   },
   optionView: {
     alignItems: 'center',

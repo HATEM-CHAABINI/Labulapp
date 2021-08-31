@@ -38,7 +38,7 @@ const MyCirclesHomeScreen = props => {
         <Tab.Navigator
           tabBar={props => <CommonTabBar {...props} />}
           swipeEnabled={false}
-          initialRouteName="families">
+          initialRouteName="famille">
           <Tab.Screen
             name={RelationshipType.FAMILIY}
             options={{title: 'Ma famille', tabColor: '#FA5890'}}

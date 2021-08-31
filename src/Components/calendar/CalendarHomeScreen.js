@@ -6,6 +6,7 @@ import 'moment/min/locales';
 import React, { useEffect } from 'react';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { useSelector } from 'react-redux';
 import { getUserProfile } from '../..//services/firebase';
 import { NextIcon, PrevIcon } from '../../assets/svg/icons';
 import { em, hm, WIDTH } from '../../constants/consts';
@@ -161,6 +162,8 @@ const blankSchedules = [
 // ];
 
 const CalendarHomeScreen = props => {
+  const { profileData } = useSelector((state) => state.profileReducer);
+
   const userDemands = firestore()
     .collection('userDemands')
     .doc(auth().currentUser.uid);
@@ -198,7 +201,7 @@ const CalendarHomeScreen = props => {
            ).toDateString(),
              seconds:moment.duration(hrs).asSeconds(),
               service: new NeedService(
-                new User(`${user.firstName} ${user.lastName}`, user.profilePic, user.email),
+                new User(`${profileData.firstName} ${profileData.lastName}`, profileData.profilePic, profileData.email),
                 docsSnap.data().data.description,
                 docsSnap.data().data.title,
                 moment(
@@ -214,7 +217,7 @@ const CalendarHomeScreen = props => {
            moment(date).format('Do MMM YYYY'))
           var newArray = blankSchedules.concat(d)
           newArray = newArray.sort((a, b) => (a.seconds > b.seconds) ? 1 : ((b.seconds > a.seconds) ? -1 : 0))
-          console.log(newArray)
+
           if (d.length > 0) setSelectedSchedules(newArray)
           else setSelectedSchedules(blankSchedules)
         },
@@ -227,47 +230,47 @@ const CalendarHomeScreen = props => {
     await setData(final);
   };
 
-  const createSchedules = date => {
-    var filter = [];
-    userDemands.collection('organize').onSnapshot({
-      next: querySnapshot => {
-        const snapData = querySnapshot.docs.map((docsSnap, index) => ({
-          time: moment(docsSnap.data().demandStartDate).format('h'),
-          date: new Date(
-            docsSnap.data().demandStartDate.toDate(),
-          ).toDateString(),
-          service: new NeedService(
-            new User(
-              `${user.firstName} ${user.lastName}`,
-              user.profilePic,
-              user.email,
-            ),
-            docsSnap.data().data.description,
-            docsSnap.data().data.title,
-            moment(new Date(docsSnap.data().demandStartDate.toDate())).format(
-              'Do MMM YYYY',
-            ),
-          ),
-        }));
-        snapData.map(e => {
-          if (
-            moment(e.date).format('Do MMM YYYY') ===
-            moment(date).format('Do MMM YYYY')
-          ) {
-            filter.push(e);
-          }
-        });
-        if (filter.length > 0) {
-          setSelectedSchedules(filter);
-        } else {
-          setSelectedSchedules(blankSchedules);
-        }
-      },
-      error: error => {
-        console.log(error);
-      },
-    });
-  };
+  // const createSchedules = date => {
+  //   var filter = [];
+  //   userDemands.collection('organize').onSnapshot({
+  //     next: querySnapshot => {
+  //       const snapData = querySnapshot.docs.map((docsSnap, index) => ({
+  //         time: moment(docsSnap.data().demandStartDate).format('h'),
+  //         date: new Date(
+  //           docsSnap.data().demandStartDate.toDate(),
+  //         ).toDateString(),
+  //         service: new NeedService(
+  //           new User(
+  //             `${user.firstName} ${user.lastName}`,
+  //             user.profilePic,
+  //             user.email,
+  //           ),
+  //           docsSnap.data().data.description,
+  //           docsSnap.data().data.title,
+  //           moment(new Date(docsSnap.data().demandStartDate.toDate())).format(
+  //             'Do MMM YYYY',
+  //           ),
+  //         ),
+  //       }));
+  //       snapData.map(e => {
+  //         if (
+  //           moment(e.date).format('Do MMM YYYY') ===
+  //           moment(date).format('Do MMM YYYY')
+  //         ) {
+  //           filter.push(e);
+  //         }
+  //       });
+  //       if (filter.length > 0) {
+  //         setSelectedSchedules(filter);
+  //       } else {
+  //         setSelectedSchedules(blankSchedules);
+  //       }
+  //     },
+  //     error: error => {
+  //       console.log(error);
+  //     },
+  //   });
+  // };
   useEffect(() => {
     getUserProfile(auth().currentUser.uid).then(async item => {
       setUser(() => item);

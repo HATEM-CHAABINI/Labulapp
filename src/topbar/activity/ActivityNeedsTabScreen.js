@@ -39,6 +39,7 @@ const needMessages = [
 ];
 
 const ActivityNeedsTabScreen = (props) => {
+  console.log(props)
   const [isEmpty, setIsEmpty] = useState(!props.route.params.selected);
   const emptyView = (
     <TouchableOpacity style={styles.emptyView} onPress={() => setIsEmpty(!isEmpty)}>

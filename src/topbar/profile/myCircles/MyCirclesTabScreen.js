@@ -251,8 +251,12 @@ const MyCirclesTabScreen = props => {
     await setGroups(groupType);
     setloadingData(false);
   }, [props, groupOptionVisible,userOptionVisible]);
+  
   const RenderEmptyContainer = () => {
+    setloadingData(false);
     return (
+      <>
+     { console.log("hello")}
       <View
         style={{
           flex: 1,
@@ -269,6 +273,7 @@ const MyCirclesTabScreen = props => {
           No Data Found
         </Text>
       </View>
+      </>
     );
   };
   const renderFlatList = ({item}) => {
@@ -343,9 +348,13 @@ const MyCirclesTabScreen = props => {
             backgroundColor: '#F0F5F7',
           }}
         />
-      ) : groups.length < 1 ? (
-        <RenderEmptyContainer />
-      ) : (
+      ) :
+      // console.log(" groups",  groups),
+       groups.length < 1 ? (
+        <RenderEmptyContainer />,
+        console.log('hello user data ios not comming')
+      ): 
+      (
         <FlatList
           // data={myGroups.concat(myContacts)}
           data={

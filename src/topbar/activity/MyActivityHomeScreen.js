@@ -11,6 +11,7 @@ import CommonTabBar from '../../Components/other/CommonTabBar';
 const Tab = createMaterialTopTabNavigator();
 
 const MyActivityHomeScreen = (prop) => {
+  // console.log('hello props',prop)
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigationRef.current.navigate('MyNotifictions')}>
@@ -27,7 +28,8 @@ const MyActivityHomeScreen = (prop) => {
           name="needs"
           options={{ title: 'Mes demandes', tabColor: '#40CDDE' }}
           component={ActivityNeedsTabScreen}
-          initialParams={{ selected: prop.route.params.noEmpty }}
+          // initialParams={{ selected: prop.route.params.noEmpty }}
+          initialParams={{ selected: prop.route.params.activityType }}
         />
         <Tab.Screen
           name="invitations"

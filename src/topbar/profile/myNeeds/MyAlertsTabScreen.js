@@ -45,9 +45,9 @@ const MyAlertsTabScreen = () => {
   }, [alerts])
 
  
- opendelete = () => {
+//  opendelete = () => {
   
-  }
+//   }
   const RenderEmptyContainer = () => {
     return (<View style={{
       flex: 1,
@@ -175,7 +175,9 @@ style={{ paddingTop:25*hm,paddingLeft:35*em
       flex: 1,
       alignItems: 'center',
       backgroundColor: '#F0F5F7',
-    }} /> : alerts.length < 1 ? < RenderEmptyContainer /> : <ScrollView style={{ flex: 1, width: '100%', paddingTop: 10 * hm, backgroundColor: '#F0F5F7' }}><View style={styles.container}>{listView2}</View></ScrollView>}
+    }} /> :
+    console.log(" groups",  alerts  ),
+    alerts.length < 1 ? < RenderEmptyContainer /> : <ScrollView style={{ flex: 1, width: '100%', paddingTop: 10 * hm, backgroundColor: '#F0F5F7' }}><View style={styles.container}>{listView2}</View></ScrollView>}
   </>
   );
 

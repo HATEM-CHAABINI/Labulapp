@@ -85,7 +85,7 @@ const ActivityNeedsTabScreen = (props) => {
         ) : (
           <View>
             <CommentText text={item.date} style={styles.listItemDate} />
-            <Image source={require('../../assets/images/ic_circle_pink.png')} style={styles.alertIcon} />
+            {/* <Image source={require('../../assets/images/ic_circle_pink.png')} style={styles.alertIcon} /> */}
           </View>
         )
       }
@@ -93,7 +93,10 @@ const ActivityNeedsTabScreen = (props) => {
     />
   );
   const listView =
-   <FlatList key={(i) => i.id} data={needMessages} renderItem={renderFlatList} keyExtractor={(i) => i.id} />;
+   <FlatList key={(i) => i.id} 
+   data={needMessages} 
+   renderItem={renderFlatList}
+    keyExtractor={(i) => i.id} />;
   return (
     <View style={styles.container}>
       <View style={styles.view}>{isEmpty ? emptyView : listView}</View>

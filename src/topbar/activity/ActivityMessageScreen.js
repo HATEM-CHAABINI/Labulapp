@@ -2,24 +2,24 @@ import React, {useState, useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {View, Image} from 'react-native';
-import {em, hm} from '../constants';
+import {em, hm} from '../../constants/consts';
 // import CommonText from '../text/CommonText';
-import CommentText from '../text/CommentText';
+import CommentText from '../../text/CommentText';
 import {FlatList, TouchableOpacity, TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 // import CommonBackButton from '../Components/button/CommonBackButton';
-import CommonButton from '../Components/button/CommonButton';
-import MessageCounterDownPopupScreen from './MessageCounterDownPopupScreen';
-import MessageProfilePopupScreen from './MessageProfilePopupScreen';
-import {BackArrowWhite, TelephoneWhite} from '../assets/svg/icons';
-import MessageView from '../Components/view/MessageView';
-import {CheckedBlue} from '../assets/svg/icons';
-import CommonHeader from '../Components/header/CommonHeader';
-import CommonListItem from '../adapter/CommonListItem';
-import FlecheM1 from '../assets/icons/message/FlecheM1';
-import Up from '../assets/icons/message/Up';
-import Down from '../assets/icons/message/Down';
-import Count from '../assets/icons/message/Count';
+import CommonButton from '../../Components/button/CommonButton';
+import MessageCounterDownPopupScreen from '../../topbar/activity/MessageCounterDownPopupScreen';
+import MessageProfilePopupScreen from '../../topbar/activity/MessageProfilePopupScreen';
+import {BackArrowWhite, TelephoneWhite} from '../../assets/svg/icons';
+import MessageView from '../../Components/view/MessageView';
+import {CheckedBlue} from '../../assets/svg/icons';
+import CommonHeader from '../../Components/header/CommonHeader';
+import CommonListItem from '../../adapter/CommonListItem';
+import FlecheM1 from '../../assets/icons/message/FlecheM1';
+import Up from '../../assets/icons/message/Up';
+import Down from '../../assets/icons/message/Down';
+import Count from '../../assets/icons/message/Count';
 import moment from 'moment';
 const OTHERSIDE = 1;
 const OURSIDE = 2;
@@ -53,9 +53,6 @@ var requestMessage = [
 ];
 
 const ActivityMessageScreen = ({message, activityType}) => {
-
-console.log('hello')
-
   var uid = 'Q9Famyu4riQjgPHurqqHE45y4tT2';
   const [MsgList, setMsgList] = useState([]);
   const [messageCounterVisible, setMessageCounterVisible] = useState(false);
@@ -219,7 +216,7 @@ console.log('hello')
     <View style={styles.toast}>
       <View style={{flexDirection: 'row', marginBottom: 15 * hm}}>
         <Image
-          source={require('../assets/images/avatar.png')}
+          source={require('../../assets/images/avatar.png')}
           style={styles.toastAvatar}
         />
         <View style={styles.avatarCheck}>
@@ -323,7 +320,7 @@ console.log('hello')
         <View style={styles.popupBody}>
           <View style={styles.popupFooter}>
             <Image
-              source={require('../assets/images/ic_image.png')}
+              source={require('../../assets/images/ic_image.png')}
               style={styles.imageIcon}
             />
             <View style={styles.inputView}>

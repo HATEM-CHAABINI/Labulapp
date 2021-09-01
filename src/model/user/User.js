@@ -2,6 +2,7 @@ export default class User {
   constructor(
     name,
     photo,
+    userData,
     relationship,
     groupID,
     email,
@@ -23,6 +24,7 @@ export default class User {
     this.photo = photo;
     this.email = email;
     this.groupID = groupID;
+    this.userData = userData;
     this.relationship = relationship;
     this.availability = availability;
     this.presentation = presentation;

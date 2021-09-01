@@ -53,7 +53,7 @@ var requestMessage = [
 ];
 
 const ActivityMessageScreen = ({message, activityType}) => {
-  var uid = 'Q9Famyu4riQjgPHurqqHE45y4tT2';
+  var uid = message.user.userData.uid;
   const [MsgList, setMsgList] = useState([]);
   const [messageCounterVisible, setMessageCounterVisible] = useState(false);
   const [messageProfileVisible, setMessageProfileVisible] = useState(false);
@@ -82,6 +82,7 @@ const ActivityMessageScreen = ({message, activityType}) => {
           setSeconds(30);
           Actions.pop();
         }
+        Actions.pop()
       }
     }, 1000);
     return () => {
@@ -90,8 +91,7 @@ const ActivityMessageScreen = ({message, activityType}) => {
   });
 
   useEffect(() => {
-    var uid = 'Q9Famyu4riQjgPHurqqHE45y4tT2';
-
+console.log({message, activityType},"bjbjhjhjhjhj")
     const docid =
       uid > auth().currentUser.uid
         ? auth().currentUser.uid + '-' + uid
@@ -115,7 +115,7 @@ const ActivityMessageScreen = ({message, activityType}) => {
 
   const sendMsg = async () => {
     var msgList = [];
-    var uid = 'Q9Famyu4riQjgPHurqqHE45y4tT2';
+    
     const docid =
       uid > auth().currentUser.uid
         ? auth().currentUser.uid + '-' + uid

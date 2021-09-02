@@ -28,17 +28,9 @@ if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=
   // console.log("jdjdjdjdjdjddjdjdjncirnricnircirni",props.route.params.filtre);
 }else
 { 
-<<<<<<< HEAD
-  //  console.log("filtrageeee");
-    fetchallDemand().then((item) => {
-      console.log("ncncncncnc",item[0]);
-      // console.log('userdata aa gya.....',item)
-=======
-  
    fetchallDemand("data")
     .then(async (item) => {
       
->>>>>>> 657879c4f7d782f8ba72dab291f99bee59f86d72
       if (item !== undefined) {
         await setData(item, ()=>console.log("object"))
       }

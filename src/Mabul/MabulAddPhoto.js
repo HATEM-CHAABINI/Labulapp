@@ -1,54 +1,81 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, TouchableOpacity, NativeModules, StyleSheet, ScrollView, SafeAreaView, FlatList, Dimensions, ActivityIndicator, ImageBackground } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  NativeModules,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  FlatList,
+  Dimensions,
+  ActivityIndicator,
+  ImageBackground,
+} from 'react-native';
 import TitleText from '../text/TitleText';
-import { em, hm, mabulColors, hexToRGB } from '../constants/consts';
+import {em, hm, mabulColors, hexToRGB} from '../constants/consts';
 import CommentText from '../text/CommentText';
 import MabulCommonHeader from './MabulCommonHeader';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 import MabulNextButton from '../Components/button/MabulNextButton';
-import { useSelector, useDispatch } from 'react-redux'
-import { add_into_demand, update_into_demand } from '../redux/actions/demand'
+import {useSelector, useDispatch} from 'react-redux';
+import {add_into_demand, update_into_demand} from '../redux/actions/demand';
 import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
-import { CrossGray, EditAddPhoto, Family } from '../assets/svg/icons';
+import {CrossGray, EditAddPhoto, Family} from '../assets/svg/icons';
 // import ImagePicker from 'react-native-image-crop-picker';
 var ImagePicker = NativeModules.ImageCropPicker;
 let numColumns = 3;
 
-const MabulAddPhoto = (props) => {
+const MabulAddPhoto = props => {
   // console.log('photos screens',props);
-  const dispatch = useDispatch()
-//   const conceptColor = mabulColors[mabulService];
-  const { demandData } = useSelector((state) => state.demandReducer)
-  const [images, setimages] = useState({ images: [] })
-  const [loading, setloading] = useState(false)
-  const [buttonloading, setbuttonloading] = useState(false)
+  const dispatch = useDispatch();
+  //   const conceptColor = mabulColors[mabulService];
+  const {demandData} = useSelector(state => state.demandReducer);
+  const [images, setimages] = useState({images: []});
+  const [loading, setloading] = useState(false);
+  const [buttonloading, setbuttonloading] = useState(false);
+  const uploadeImage2 = async imageArray => {
+    console.log(imageArray)
+    const reference = storage().ref('black-t-shirt-sm.png');
 
-  const uploadeImage = async (imageArray) => {
+   }
+  const uploadeImage = async imageArray => {
     const imagesBlob = [];
 
     if (imageArray.length > 3) {
-      alert("You can only choose 3 max photos !!")
-      return
+      alert('You can only choose 3 max photos !!');
+      return;
     }
-    setbuttonloading(true)
+    setbuttonloading(true);
     await Promise.all(
       imageArray.map(async (image, index) => {
         const response = await fetch(image.path);
         const blob = await response.blob();
-        const ref = storage().ref().child(`users/${auth().currentUser.uid}/demands/${Math.random().toString(36).substring(2, 12)}`)
-        await ref.put(blob).then(async (result) => {
-          await ref.getDownloadURL().then((result) => { imagesBlob.push({ uri: result, id: index }) })
-          console.log('photos aa rhe he',uri,id)
-          dispatch(update_into_demand({ uri: result, id: index  }))
+        const ref = storage()
+          .ref()
+          .child(
+            `users/${auth().currentUser.uid}/demands/${Math.random()
+              .toString(36)
+              .substring(2, 12)}`,
+          );
+        await ref.put(blob).then(async result => {
+          await ref.getDownloadURL().then(result => {
+            imagesBlob.push({uri: result, id: index});
+            ref.putFile(result).then(e => {
+              console.log('bbvcbmnbcmbnmzbnmzcbbzcbz', e);
+            });
+          });
+          console.log('photos aa rhe he', uri, id);
+
+          dispatch(update_into_demand({uri: result, id: index}));
         });
       }),
     );
-    setbuttonloading(false)
-    submit(imagesBlob)
+    setbuttonloading(false);
+    submit(imagesBlob);
   };
-
-
 
   // const imageSelect = () => {
   //   ImagePicker.openPicker({
@@ -60,104 +87,132 @@ const MabulAddPhoto = (props) => {
   //     setimages({ images: images })
   //     uploadeImage(images.images)
   //     props.requiredPhoto()
-      
+
   //   }).catch(e => alert(e));
   // }
 
-  const imageSelect = (values) => {
+  const imageSelect = values => {
     ImagePicker.openPicker({
       multiple: true,
       waitAnimationEnd: false,
       includeExif: true,
       forceJpg: true,
-    }).then(images => {
-      var img= [];
-      values==1? img.push({id:1,uri:images[0].path}):""
-      values==2?img.push({id:2,uri:images[1].path}):""
-      values==3?img.push({id:3,uri:images[2].path}):""
-    
-      console.log('hello images',images.length)
-      console.log('hello images path',img)
-      if(images.length<=3){
-        setimages({ images: images })
-        props.requiredPhoto()
-        dispatch(update_into_demand({ images:img }))
-      }
-      else{
-        alert("Vous ne pouvez choisir que 3 photos !!") 
-      }
-    }).catch(e => alert(e));
-  }
+    })
+      .then(images => {
+        var img = [];
+        values == 1 ? img.push({id: 1, uri: images[0].path}) : '';
+        values == 2 ? img.push({id: 2, uri: images[1].path}) : '';
+        values == 3 ? img.push({id: 3, uri: images[2].path}) : '';
 
+        console.log('hello images', images);
+        console.log('hello images path', img);
+        if (images.length <= 3) {
+          setimages({images: images});
+          props.requiredPhoto();
+          dispatch(update_into_demand({images: img}));
+        } else {
+          alert('Vous ne pouvez choisir que 3 photos !!');
+        }
+      })
+      .catch(e => alert(e));
+  };
 
   const removeByAttr = (arr, attr, value) => {
-
-    const findIndex = arr.findIndex(a => a.id === value)
-    findIndex !== -1 && arr.splice(findIndex, 1)
+    const findIndex = arr.findIndex(a => a.id === value);
+    findIndex !== -1 && arr.splice(findIndex, 1);
     setTimeout(() => {
-      setimages({ images: arr });
+      setimages({images: arr});
     }, 50);
-  }
+  };
   // console.log('photos screens for submit..',images);
-  const submit = (images) => {
- 
-    // uploadeImage(images.images)
- 
-    setimages({ images: images })
-    dispatch(update_into_demand({ images: images }))
+  const submit = images => {
+    uploadeImage2(images.images)
+
+    setimages({images: images});
+    dispatch(update_into_demand({images: images}));
 
     Actions.mabulCommonDateSetting({
       mabulService: mabulService,
-      process: mabulService === 'need' ? 67 : mabulService === 'organize' ? 60 : 79,
-    })
-  }
+      process:
+        mabulService === 'need' ? 67 : mabulService === 'organize' ? 60 : 79,
+    });
+  };
 
   return (
-      <View style={styles.body}>
-        <View>
-         
-         
-          {images.images.length < 1 ? loading ?
-           <ActivityIndicator style={styles.photoZone} color={conceptColor} size={'small'} /> :
-          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                    <View style={styles.photoZone}>
-            <TouchableOpacity onPress={() => { imageSelect(1) }} >
-              <Image
-                source={require('../assets/images/ic_addphotos_green.png')}
-                style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
-              />
-              <CommentText text="Clique ici" style={styles.commentPhoto} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.photoZone}>
-            <TouchableOpacity onPress={() => { imageSelect(2) }} >
-              <Image
-                source={require('../assets/images/ic_addphotos_green.png')}
-                style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
-              />
-              <CommentText text="Clique ici" style={styles.commentPhoto} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.photoZone}>
-            <TouchableOpacity onPress={() => { imageSelect(3) }} >
-              <Image
-                source={require('../assets/images/ic_addphotos_green.png')}
-                style={[styles.icon, { tintColor: props.conceptColor, left: "5%" }]}
-              />
-              <CommentText text="Clique ici" style={styles.commentPhoto} />
-            </TouchableOpacity>
-          </View>
-          </View>
-           :
-            <SafeAreaView style={styles.photoZone2}>
-
-
-              <View style={{ flexDirection: 'row', justifyContent: 'flex-start', width: '100%' }}>
-
-                {images.images.map((item) => {
-                  return (<ImageBackground
-                    imageStyle={{ borderRadius: 15 * em }}
-                    source={{ uri: item.path === undefined ? item.uri : item.path }}
+    <View style={styles.body}>
+      <View>
+        {images.images.length < 1 ? (
+          loading ? (
+            <ActivityIndicator
+              style={styles.photoZone}
+              color={conceptColor}
+              size={'small'}
+            />
+          ) : (
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <View style={styles.photoZone}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageSelect(1);
+                  }}>
+                  <Image
+                    source={require('../assets/images/ic_addphotos_green.png')}
+                    style={[
+                      styles.icon,
+                      {tintColor: props.conceptColor, left: '5%'},
+                    ]}
+                  />
+                  <CommentText text="Clique ici" style={styles.commentPhoto} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.photoZone}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageSelect(2);
+                  }}>
+                  <Image
+                    source={require('../assets/images/ic_addphotos_green.png')}
+                    style={[
+                      styles.icon,
+                      {tintColor: props.conceptColor, left: '5%'},
+                    ]}
+                  />
+                  <CommentText text="Clique ici" style={styles.commentPhoto} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.photoZone}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageSelect(3);
+                  }}>
+                  <Image
+                    source={require('../assets/images/ic_addphotos_green.png')}
+                    style={[
+                      styles.icon,
+                      {tintColor: props.conceptColor, left: '5%'},
+                    ]}
+                  />
+                  <CommentText text="Clique ici" style={styles.commentPhoto} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          )
+        ) : (
+          <SafeAreaView style={styles.photoZone2}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                width: '100%',
+              }}>
+              {images.images.map(item => {
+                return (
+                  <ImageBackground
+                    imageStyle={{borderRadius: 15 * em}}
+                    source={{
+                      uri: item.path === undefined ? item.uri : item.path,
+                    }}
                     style={{
                       width: 95 * em,
                       height: 95 * em,
@@ -166,24 +221,29 @@ const MabulAddPhoto = (props) => {
                       flexDirection: 'row-reverse',
                       alignItems: 'flex-end',
                       marginLeft: '3%',
-                      marginTop: '1%'
+                      marginTop: '1%',
                     }}>
-                    <TouchableOpacity style={{
-                      width: 26 * em,
-                      height: 26 * em,
-                      borderRadius: 13 * em,
-                      marginBottom: 4 * em,
-                      marginRight: 4 * em,
-                      backgroundColor: '#ffffff',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }} onPress={() => { removeByAttr(images.images, 'id', item.id) }}>
+                    <TouchableOpacity
+                      style={{
+                        width: 26 * em,
+                        height: 26 * em,
+                        borderRadius: 13 * em,
+                        marginBottom: 4 * em,
+                        marginRight: 4 * em,
+                        backgroundColor: '#ffffff',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      onPress={() => {
+                        removeByAttr(images.images, 'id', item.id);
+                      }}>
                       <CrossGray width={12 * em} height={12 * em} />
                     </TouchableOpacity>
-                  </ImageBackground>)
-                })}
+                  </ImageBackground>
+                );
+              })}
 
-                {/* {images.images.length < 3 ? <TouchableOpacity
+              {/* {images.images.length < 3 ? <TouchableOpacity
                   imageStyle={{ borderRadius: 15 * em }}
                   style={
                     {
@@ -210,36 +270,38 @@ const MabulAddPhoto = (props) => {
                   </View>
                   <CommentText text="Clique ici" color="#40CDDE" />
                 </TouchableOpacity> : null} */}
-              </View>
-            </SafeAreaView>
-          }
-        </View>
-     
+            </View>
+          </SafeAreaView>
+        )}
       </View>
+    </View>
   );
 };
 
 const styles = {
-
   imageThumbnail: {
-
-    width: 100, height: 100, resizeMode: 'contain'
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
   },
-  addPhoto: { left: 10 * em, width: 33 * em, height: 23 * em, marginBottom: 5.5 * em },
+  addPhoto: {
+    left: 10 * em,
+    width: 33 * em,
+    height: 23 * em,
+    marginBottom: 5.5 * em,
+  },
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
     PaddingTop: 16 * hm,
   },
   imgContainer: {
-    marginVertical: 20
+    marginVertical: 20,
   },
   header: {
     height: '12.45%',
-
   },
   imgView: {
-
     width: '50%',
     marginVertical: 10,
   },
@@ -254,7 +316,12 @@ const styles = {
     marginTop: 35 * em,
     lineHeight: 38 * em,
   },
-  comment: { textAlign: 'left', lineHeight: 20 * em, textAlignVertical: 'center', marginTop: 10 * em },
+  comment: {
+    textAlign: 'left',
+    lineHeight: 20 * em,
+    textAlignVertical: 'center',
+    marginTop: 10 * em,
+  },
   photoZone: {
     width: 95 * em,
     height: 95 * em,
@@ -277,7 +344,8 @@ const styles = {
     borderColor: '#BFCDDB',
     borderRadius: 20 * em,
     marginTop: 10 * em,
-  }, button: {
+  },
+  button: {
     backgroundColor: 'blue',
     marginBottom: 10,
   },

@@ -35,9 +35,13 @@ const FriendsMenuScreen = (props) => {
   }
   // get location corrdinate 
   const CurrentPosition = () => {
+    setLoading(true)
+    console.log("object")
     Geolocation.getCurrentPosition(
       position => {
+        console.log("object",position)
         setRegion({ ...region, latitude: position.coords.latitude, longitude: position.coords.longitude });
+        setLoading(false)
       },
       (error) => setLocationAccess(false),
       { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
@@ -52,7 +56,7 @@ const FriendsMenuScreen = (props) => {
     setData(props.data)
     CurrentPosition();
 
-  }, [props.loading,hasLocationAccess])
+  }, [props.loading,props,hasLocationAccess])
 
   useEffect(() => {
    
@@ -87,8 +91,10 @@ const FriendsMenuScreen = (props) => {
           showsPointsOfInterest={false}
         >
           {/* for demands marking  */}
-          {datas.map((location, i) =>
-            PositionView(location, i))
+          {datas.map((location, i) => {
+            PositionView(location, i)
+          })
+            
           }
         </MapView>
 

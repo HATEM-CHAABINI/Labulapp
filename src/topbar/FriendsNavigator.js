@@ -30,8 +30,8 @@ if ((props.route.params.filtre!==undefined && props.route.params.filtre.length!=
 { 
   //  console.log("filtrageeee");
     fetchallDemand().then((item) => {
-      // console.log("ncncncncnc",item[0]);
-      // console.log('userdata aa gya re.....')
+      console.log("ncncncncnc",item[0]);
+      // console.log('userdata aa gya.....',item)
       if (item !== undefined) {
         setData(() => item)
       }

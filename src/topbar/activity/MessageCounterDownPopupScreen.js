@@ -8,10 +8,14 @@ import ClockDraw from '../../Components/view/ClockDraw';
 import { Clock } from '../../assets/svg/icons';
 import { Actions } from 'react-native-router-flux';
 const MessageCounterDownPopupScreen = (props) => {
+
+
   const [seconds, setSeconds] = useState(30);
 
   useEffect(() => {
+  
     if (props.visible) {
+    
       if (seconds < 0) {
         clearInterval(intervalId);
       }
@@ -27,6 +31,7 @@ const MessageCounterDownPopupScreen = (props) => {
       setSeconds(30);
     }
   }, [props.visible, seconds, setSeconds]);
+
   return (
     <Modal
       isVisible={props.visible}

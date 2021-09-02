@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { View, ActivityIndicator, Image, Text, ScrollView ,TouchableOpacity} from 'react-native';
+import { View, ActivityIndicator, Image, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { em, hm, WIDTH, HEIGHT } from '../../../constants/consts';
 import { FlatList } from 'react-native';
 import CommonListItem from '../../../adapter/CommonListItem';
@@ -18,14 +18,15 @@ import { deleteUserAlerts, fetchAlerts, getUserProfile } from '../../../services
 import auth from "@react-native-firebase/auth";
 import ModalSupprimerAlerte from '../../../ServiceScrenns/ModalSupprimerAlerte';
 
-const MyAlertsTabScreen = () => {
+const MyAlertsTabScreen = (props) => {
+
   const [alerts, setalerts] = useState([])
   const [user, setuser] = useState()
   const [loadingData, setloadingData] = useState(true)
   const [cancelUpdatePopupVisible, setcancelUpdatePopupVisible] = useState(false);
   const [DeletePopupVisible, setDeletePopupVisible] = useState(false);
-  
-  
+
+
   useEffect(() => {
     firestore().collection('userAlerts').doc(auth().currentUser.uid).collection('alerts').onSnapshot(snapshot => {
       setalerts(
@@ -44,10 +45,10 @@ const MyAlertsTabScreen = () => {
     }
   }, [alerts])
 
- 
-//  opendelete = () => {
-  
-//   }
+
+  //  opendelete = () => {
+
+  //   }
   const RenderEmptyContainer = () => {
     return (<View style={{
       flex: 1,
@@ -61,89 +62,91 @@ const MyAlertsTabScreen = () => {
         marginTop: '3%'
       }}>
         No Data Found
-</Text>
+      </Text>
     </View>)
   }
 
   const RenderFlatList2 = ({ item }) => {
-    startDate= item.data.demandStartDate.seconds * 1000
-    value=Moment(startDate).format('DD MMMM YYYY')
+    startDate = item.data.demandStartDate.seconds * 1000
+    value = Moment(startDate).format('DD MMMM YYYY')
     console.log(item.data.description.description);
 
     return (
-      
-<View style={{flexDirection:'row'}}>
-<ModalModifierSupprimerDemande
-            visible={cancelUpdatePopupVisible}
-            onPressT={() => setcancelUpdatePopupVisible(false)}
-            onPressM={() => {
-              setcancelUpdatePopupVisible(false)
-                  Actions.editAlert({ alertData: item.data, user: user, docId: item.docId })
 
-            }}
-            onPressS={() => {
-              setcancelUpdatePopupVisible(false)
+      <View style={{ flexDirection: 'row' }}>
+        <ModalModifierSupprimerDemande
+          visible={cancelUpdatePopupVisible}
+          onPressT={() => setcancelUpdatePopupVisible(false)}
+          onPressM={() => {
+            setcancelUpdatePopupVisible(false)
+            Actions.editAlert({ alertData: item.data, user: user, docId: item.docId })
 
-           
-              setTimeout(function(){
-                
-                setDeletePopupVisible(true)
-              
-              }, 500);
-              // , Actions.editNeed({ data2: data2, docId: props.docId })
-            }}
+          }}
+          onPressS={() => {
+            setcancelUpdatePopupVisible(false)
 
-           
-          />
-                
-                 <ModalSupprimerAlerte
-            visible={DeletePopupVisible}
-           
-            onPressS={() => {
-              
-              deleteUserAlerts(auth().currentUser.uid, item.data.serviceType.name, item.docId).then((item) => {
-                setDeletePopupVisible(false)
-              }).catch((error) => {
-                console.log(error);
-              })
-              // , Actions.editNeed({ data2: data2, docId: props.docId })
-            }}
-            onPressT={() => {
-              setDeletePopupVisible(false)              // , Actions.editNeed({ data2: data2, docId: props.docId })
-            }}
-          />
-  <View>
-      <TouchableOpacity onPress={() => 
-      Actions.myAlert({ 
-        alertData: item.data, user: user, docId: item.docId })}
-       style={[styles.containerList, styles.listItem]}>
-      <View style={styles.topView}>
-      <View style={styles.alertIconContainer}>
-             <AlertMesDemandes width={94 * em} height={154 * hm} />
-     </View>
-     <View style={{flexDirection:'column',bottom:10*hm}}>
-     <Text style={{fontFamily:'Lato-Medium',fontStyle: 'italic',fontSize:12*em,color:'#6A8596',marginBottom:8*hm}}>Publié le {value}</Text>
-     <Text style={{fontFamily:'Montserrat-Bold',fontSize:13*em,color:'#1E2D60',marginBottom:2*hm}}>{item.data.type.title}</Text>
-     <Text numberOfLines={1} style={{fontFamily:'Lato-Regular',fontSize:13*em,color:'#1E2D60',marginBottom:20*hm,width:165*em}}>{item.data.description.description}</Text>
-     <Text style={{fontFamily:'Lato-Regular',fontSize:13*em,color:'#1E2D60',width:165*em}}>{item.data.address}</Text>
-     </View>
-        {/* {textView} */}
-      
-      </View>
-      <View style={styles.bottomView}>
-        {/* {props.comment && <CommentText text={props.comment} style={props.commentStyle} />}
+
+            setTimeout(function () {
+
+              setDeletePopupVisible(true)
+
+            }, 500);
+            // , Actions.editNeed({ data2: data2, docId: props.docId })
+          }}
+
+
+        />
+
+        <ModalSupprimerAlerte
+          visible={DeletePopupVisible}
+
+          onPressS={() => {
+
+            deleteUserAlerts(auth().currentUser.uid, item.data.serviceType.name, item.docId).then((item) => {
+              setDeletePopupVisible(false)
+            }).catch((error) => {
+              console.log(error);
+            })
+            // , Actions.editNeed({ data2: data2, docId: props.docId })
+          }}
+          onPressT={() => {
+            setDeletePopupVisible(false)              // , Actions.editNeed({ data2: data2, docId: props.docId })
+          }}
+        />
+        <View>
+          <TouchableOpacity onPress={() =>
+            Actions.myAlert({
+              alertData: item.data, user: user, docId: item.docId
+            })}
+            style={[styles.containerList, styles.listItem]}>
+            <View style={styles.topView}>
+              <View style={styles.alertIconContainer}>
+                <AlertMesDemandes width={94 * em} height={154 * hm} />
+              </View>
+              <View style={{ flexDirection: 'column', bottom: 10 * hm }}>
+                <Text style={{ fontFamily: 'Lato-Medium', fontStyle: 'italic', fontSize: 12 * em, color: '#6A8596', marginBottom: 8 * hm }}>Publié le {value}</Text>
+                <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 13 * em, color: '#1E2D60', marginBottom: 2 * hm }}>{item.data.type.title}</Text>
+                <Text numberOfLines={1} style={{ fontFamily: 'Lato-Regular', fontSize: 13 * em, color: '#1E2D60', marginBottom: 20 * hm, width: 165 * em }}>{item.data.description.description}</Text>
+                <Text style={{ fontFamily: 'Lato-Regular', fontSize: 13 * em, color: '#1E2D60', width: 165 * em }}>{item.data.address}</Text>
+              </View>
+              {/* {textView} */}
+
+            </View>
+            <View style={styles.bottomView}>
+              {/* {props.comment && <CommentText text={props.comment} style={props.commentStyle} />}
         {props.commentView} */}
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity
+          onPress={() => setcancelUpdatePopupVisible(true)}
+          style={{
+            paddingTop: 25 * hm, paddingLeft: 35 * em
+          }}>
+          <TroisPoint />
+        </TouchableOpacity>
       </View>
-    </TouchableOpacity>
-    </View>
- 
-  <TouchableOpacity 
- onPress={() => setcancelUpdatePopupVisible(true)}
-style={{ paddingTop:25*hm,paddingLeft:35*em
-  }}>
-    <TroisPoint />
-     </TouchableOpacity>
-    </View>
 
 
       // <CommonListItem
@@ -171,13 +174,14 @@ style={{ paddingTop:25*hm,paddingLeft:35*em
   );
 
   return (<>
+
     {loadingData ? <ActivityIndicator size={'large'} color={'#41D0E2'} style={{
       flex: 1,
       alignItems: 'center',
       backgroundColor: '#F0F5F7',
     }} /> :
-    console.log(" groups",  alerts  ),
-    alerts.length < 1 ? < RenderEmptyContainer /> : <ScrollView style={{ flex: 1, width: '100%', paddingTop: 10 * hm, backgroundColor: '#F0F5F7' }}><View style={styles.container}>{listView2}</View></ScrollView>}
+   
+      alerts.length < 1 ? < RenderEmptyContainer /> : <ScrollView style={{ flex: 1, width: '100%', paddingTop: 10 * hm, backgroundColor: '#F0F5F7' }}><View style={styles.container}>{listView2}</View></ScrollView>}
   </>
   );
 
@@ -186,7 +190,7 @@ style={{ paddingTop:25*hm,paddingLeft:35*em
 const styles = {
   bottomView: { flexDirection: 'row' },
 
-  rightView: {right:5*em},
+  rightView: { right: 5 * em },
   container: {
     flex: 1,
     alignItems: 'flex-start',
@@ -197,7 +201,7 @@ const styles = {
   subTitleStyle: { color: '#A0AEB8', lineHeight: 16 * em, marginBottom: 21 * em, fontFamily: 'Lato-Medium', fontSize: 14 * em },
 
   emptyView: { marginTop: 74 * hm, width: 315 * em, height: 148.15 * hm, alignSelf: 'center' },
-  listItem: {paddingLeft:30*em,paddingTop:30*hm, marginBottom: 30 * hm, width: '100%' },
+  listItem: { paddingLeft: 30 * em, paddingTop: 30 * hm, marginBottom: 30 * hm, width: '100%' },
   containerList: { flexDirection: 'column', justifyContent: 'space-between' },
 
   alertIconContainer: {

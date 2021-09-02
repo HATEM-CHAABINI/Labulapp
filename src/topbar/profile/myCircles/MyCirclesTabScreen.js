@@ -111,7 +111,8 @@ const themeButtons = [
     color: '#40CDDE',
   },
 ];
-const MyCirclesTabScreen = props => {
+const MyCirclesTabScreen = (props) => {
+
   const sort = props.route.params.sort;
   const [groups, setGroups] = useState([]);
   const [groupOptionVisible, setGroupOptionVisible] = useState();
@@ -119,11 +120,11 @@ const MyCirclesTabScreen = props => {
   const [loadingData, setloadingData] = useState(true);
   const themeBtn = themeButtons.find(item => item.id === sort);
 
-  useEffect(() => {
-    if (groups.length > 0) {
-      setloadingData(false);
-    }
-  }, [groups]);
+  // useEffect(() => {
+  //   if (groups.length > 0) {
+  //     setloadingData(false);
+  //   }
+  // }, [groups]);
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map(item => [item[key], item])).values()];
   }
@@ -349,10 +350,20 @@ const MyCirclesTabScreen = props => {
           }}
         />
       ) :
-      // console.log(" groups",  groups),
-       groups.length < 1 ? (
-        <RenderEmptyContainer />,
-        console.log('hello user data ios not comming')
+    
+      // sort === RelationshipType.FAMILIY
+      // ? groups.FAMILIY.concat(groups.users).length
+      // : sort === RelationshipType.FRIEND
+      // ? groups.FRIEND.concat(groups.users).length
+      // : sort === RelationshipType.NEIGHBOR
+      // ? groups.NEIGHBOR.concat(groups.users).length
+      // : sort === RelationshipType.PRO
+      // ? groups.PRO.concat(groups.users).length
+      // : null
+      groups < 1 ? (
+      console.log('hello',groups.FAMILIY.concat(groups.users).length),
+        <RenderEmptyContainer />
+       
       ): 
       (
         <FlatList

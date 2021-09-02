@@ -5,7 +5,7 @@ import {View, Image} from 'react-native';
 import {em, hm} from '../../constants/consts';
 // import CommonText from '../text/CommonText';
 import CommentText from '../../text/CommentText';
-import {FlatList, TouchableOpacity, TextInput} from 'react-native';
+import {FlatList, TouchableOpacity,  NativeModules,TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 // import CommonBackButton from '../Components/button/CommonBackButton';
 import CommonButton from '../../Components/button/CommonButton';
@@ -21,9 +21,12 @@ import Up from '../../assets/icons/message/Up';
 import Down from '../../assets/icons/message/Down';
 import Count from '../../assets/icons/message/Count';
 import moment from 'moment';
+import storage from '@react-native-firebase/storage';
+
 const OTHERSIDE = 1;
 const OURSIDE = 2;
 
+var ImagePicker = NativeModules.ImageCropPicker;
 const messageLists = [
   {
     id: 1,
@@ -63,6 +66,8 @@ const ActivityMessageScreen = ({message, activityType}) => {
   const [isAccepted, setIsAccepted] = useState();
   const [seconds, setSeconds] = useState(30);
   const [Msg, setMsg] = useState('');
+
+  const [images, setimages] = useState({ images: [] })
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
   //     //assign interval to a variable to clear it.
@@ -113,6 +118,50 @@ console.log({message, activityType},"bjbjhjhjhjhj")
     return () => unsubscribe();
   }, []);
 
+
+  const imageSelect = (values) => {
+    ImagePicker.openPicker({
+      multiple: true,
+      waitAnimationEnd: false,
+      includeExif: true,
+      forceJpg: true,
+    }).then(images => {
+      var img= [];
+      values ? img.push({id:1,uri:images[0].path}):""
+      console.log('hello images',images.length)
+      console.log('hello images path',img)
+        setimages({ images: images })
+        // alert("Vous ne pouvez choisir que 3 photos !!") 
+    }).catch(e => alert(e));
+  }
+
+  const [buttonloading, setbuttonloading] = useState(false)
+
+
+  // const uploadeImage = async (imageArray) => {
+  //   const imagesBlob = [];
+  //   if (imageArray.length > 3) {
+  //     alert("You can only choose 3 max photos !!")
+  //     return
+  //   }
+  //   setbuttonloading(true)
+  //   await Promise.all(
+  //     imageArray.map(async (image, index) => {
+  //       const response = await fetch(image.path);
+  //       const blob = await response.blob();
+  //       const ref = storage().ref().child(`users/${auth().currentUser.uid}/demands/${Math.random().toString(36).substring(2, 12)}`)
+  //       await ref.put(blob).then(async (result) => {
+  //         await ref.getDownloadURL().then((result) => { imagesBlob.push({ uri: result, id: index }) })
+  //         console.log('photos aa rhe he',uri,id)
+  //         // dispatch(update_into_demand({ uri: result, id: index  }))
+  //       });
+  //     }),
+  //   );
+  //   setbuttonloading(false)
+  //   submit(imagesBlob)
+  // };
+
+
   const sendMsg = async () => {
     var msgList = [];
     
@@ -151,6 +200,7 @@ console.log({message, activityType},"bjbjhjhjhjhj")
       }
     />
   );
+
   const AcceptButton = accepted ? (
     <CommonButton
       style={styles.optionBtnClicked}
@@ -162,13 +212,14 @@ console.log({message, activityType},"bjbjhjhjhjhj")
     <CommonButton
       style={styles.optionBtn}
       leftIcon={<Up width={14 * em} height={13 * em} />}
-      text="   Accepter"
+      text="Accepter"
       textStyle={{fontSize: 14 * em}}
       onPress={() => {
         setMessageCounterVisible(true);
       }}
     />
   );
+
   const AcceptInvitationButton = accepted ? (
     <CommonButton
       style={styles.optionBtnClicked}
@@ -212,7 +263,7 @@ console.log({message, activityType},"bjbjhjhjhjhj")
       {RefuseButton}
     </View>
   );
-  const SuccessToast = (
+  const SuccessToast = ( 
     <View style={styles.toast}>
       <View style={{flexDirection: 'row', marginBottom: 15 * hm}}>
         <Image
@@ -319,10 +370,12 @@ console.log({message, activityType},"bjbjhjhjhjhj")
         {isAccepted && SuccessToast}
         <View style={styles.popupBody}>
           <View style={styles.popupFooter}>
+          <TouchableOpacity onPress={() => { imageSelect() }}>
             <Image
               source={require('../../assets/images/ic_image.png')}
               style={styles.imageIcon}
             />
+          </TouchableOpacity>
             <View style={styles.inputView}>
               <TextInput
                 placeholder="Écrit ici ton message …"

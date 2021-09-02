@@ -226,8 +226,6 @@ export const fetchallDemand = async () => {
             }
         }
     }
-
-console.log(res.data() )
     // let RefSell = firestore().collectionGroup("sell");
     // let allSell = await RefSell.get();
     // for (const doc of allSell.docs) {
@@ -283,6 +281,46 @@ console.log(res.data() )
     return data
 }
 
+
+// export const fetchallDemand = async dataa => {
+//     const data = [];
+//     let RefNeed = firestore().collectionGroup('need').get();
+//     let RefSell = firestore().collectionGroup('sell').get();
+//     let RefOrganize = firestore().collectionGroup('organize').get();
+//     let RefGive = firestore().collectionGroup('give').get();
+//     let RefAlert = firestore().collectionGroup('alerts').get();
+//     const [
+//       allNeedssnap,
+//       allSellsnap,
+//       allOrganizesnap,
+//       allGivesnap,
+//       allAlertsnap,
+//     ] = await Promise.all([RefNeed, RefSell, RefOrganize, RefGive, RefAlert]);
+//     const allNeed = allNeedssnap.docs;
+//     const allSell = allSellsnap.docs;
+//     const allOrganize = allOrganizesnap.docs;
+//     const allGive = allGivesnap.docs;
+//     const allAlert = allAlertsnap.docs;
+//     const citiesArray = allNeed
+//       .concat(allSell)
+//       .concat(allOrganize)
+//       .concat(allGive)
+//       .concat(allAlert);
+//     for (const doc of citiesArray) {
+//       if (doc.data().coordinate !== undefined) {
+//         let cc = firestore().collection('users').doc(doc.ref.parent.parent.id);
+//         let res = await cc.get();
+//         if (res.data() !== undefined) {
+//           await data.push({
+//             ...doc.data(),
+//             key: doc.id,
+//             user: res.data(),
+//           });
+//         }
+//       }
+//     }
+//     return data;
+//   };
 
 
 

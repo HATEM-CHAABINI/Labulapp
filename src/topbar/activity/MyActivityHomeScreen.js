@@ -28,8 +28,8 @@ const MyActivityHomeScreen = (prop) => {
           name="needs"
           options={{ title: 'Mes demandes', tabColor: '#40CDDE' }}
           component={ActivityNeedsTabScreen}
-          // initialParams={{ selected: prop.route.params.noEmpty }}
-          initialParams={{ selected: prop.route.params.activityType }}
+          initialParams={{ selected: prop.route.params.noEmpty }}
+          // initialParams={{ selected: prop.route.params.activityType }}
         />
         <Tab.Screen
           name="invitations"

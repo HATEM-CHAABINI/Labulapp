@@ -115,7 +115,7 @@ const MabulCommonAddPhotoScreen = ({ mabulService, process }) => {
                 {images.images.map((item) => {
                   return (<ImageBackground
                     imageStyle={{ borderRadius: 15 * em }}
-                    source={{ uri: item.path === undefined ? item.uri : item.path }}
+                    source={{ uri: item?.path === undefined ? item?.uri : item?.path }}
                     style={{
                       width: 95 * em,
                       height: 95 * em,

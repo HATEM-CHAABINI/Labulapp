@@ -54,6 +54,10 @@ var requestMessage = [
 
 const ActivityMessageScreen = ({message, activityType}) => {
   var uid = message.user.userData.uid;
+  const docid =
+      uid > auth().currentUser.uid
+        ? auth().currentUser.uid + '-' + uid
+        : uid + '-' + auth().currentUser.uid;
   const [MsgList, setMsgList] = useState([]);
   const [messageCounterVisible, setMessageCounterVisible] = useState(false);
   const [messageProfileVisible, setMessageProfileVisible] = useState(false);
@@ -70,7 +74,7 @@ const ActivityMessageScreen = ({message, activityType}) => {
   //   }, 1000);
   // }, []);
   useEffect(() => {
-    let myInterval = setInterval(() => {
+    let myInterval = setInterval(async() => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
@@ -80,9 +84,9 @@ const ActivityMessageScreen = ({message, activityType}) => {
         } else {
           setMinutes(minutes - 1);
           setSeconds(30);
-          Actions.pop();
         }
-        Actions.pop()
+      
+        Actions.pop();
       }
     }, 1000);
     return () => {
@@ -91,11 +95,7 @@ const ActivityMessageScreen = ({message, activityType}) => {
   });
 
   useEffect(() => {
-console.log({message, activityType},"bjbjhjhjhjhj")
-    const docid =
-      uid > auth().currentUser.uid
-        ? auth().currentUser.uid + '-' + uid
-        : uid + '-' + auth().currentUser.uid;
+    
     const unsubscribe = firestore()
       .collection('chatRoom')
       .doc(docid)
@@ -105,7 +105,23 @@ console.log({message, activityType},"bjbjhjhjhjhj")
         var newData = data.sort((a, b) =>
           a.date > b.date ? 1 : b.date > a.date ? -1 : 0,
         );
-        console.log(newData);
+        snap.docs.map(msg => {
+          if (msg.data().senderId === uid && msg.data().seen === false) {
+            firestore()
+              .collection('chatRoom')
+              .doc(docid)
+              .collection('messages')
+              .doc(msg.id)
+              .update({seen: true})
+              .then(e => {
+                console.log(e, 'Noerror');
+              })
+              .catch(e => {
+                console.log('error', e);
+              });
+          }
+        });
+
         setMsgList(newData.reverse());
       });
 
@@ -115,11 +131,8 @@ console.log({message, activityType},"bjbjhjhjhjhj")
 
   const sendMsg = async () => {
     var msgList = [];
-    
-    const docid =
-      uid > auth().currentUser.uid
-        ? auth().currentUser.uid + '-' + uid
-        : uid + '-' + auth().currentUser.uid;
+
+
     await firestore()
       .collection('chatRoom')
       .doc(docid)
@@ -130,6 +143,7 @@ console.log({message, activityType},"bjbjhjhjhjhj")
         side: OURSIDE,
         messages: [Msg],
         senderId: auth().currentUser.uid,
+        seen: false,
       });
 
     setMsg('');
@@ -286,7 +300,13 @@ console.log({message, activityType},"bjbjhjhjhjhj")
             onPress={() => setMessageProfileVisible(!messageProfileVisible)}
             style={{flex: 1}}
             icon={
-              <Image source={message.user.photo} style={styles.avatarIcon} />
+              <Image source={
+                message.user.photo !== undefined && message.user.photo !== ' '
+                  ? { uri: message.user.photo }
+                  : {
+                    uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg',
+                  }
+              }style={styles.avatarIcon} />
             }
             title={message.user.name}
             titleStyle={{
@@ -360,6 +380,7 @@ console.log({message, activityType},"bjbjhjhjhjhj")
       <MessageProfilePopupScreen
         onAccept={val => setIsAccepted(val)}
         visible={messageProfileVisible}
+        message={message}
         onPress={() => setMessageProfileVisible(false)}
       />
     </View>

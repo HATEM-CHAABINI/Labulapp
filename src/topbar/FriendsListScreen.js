@@ -16,6 +16,7 @@ import NeedStatusType from '../model/service/NeedStatusType';
 import RelationshipType from '../model/user/RelationshipType';
 import { AlertRed, Computer } from '../assets/svg/icons';
 
+<<<<<<< HEAD
 // const friends = [
 //   Object.assign(
 //     new NeedService(
@@ -172,6 +173,9 @@ import { AlertRed, Computer } from '../assets/svg/icons';
 //     { status: NeedStatusType.WAITING }
 //   ),
 // ];
+=======
+
+>>>>>>> 657879c4f7d782f8ba72dab291f99bee59f86d72
 
 const FriendsListScreen = (props) => {
   const navigation = props.navigation;

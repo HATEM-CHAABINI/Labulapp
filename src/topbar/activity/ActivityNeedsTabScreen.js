@@ -12,7 +12,7 @@ import Message from '../../model/message/Message';
 import User from '../../model/user/User';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import {getUserProfile} from '../../services/firebase';
+import {getUserProfile, fetchDemands} from '../../services/firebase';
 const needMessages = [
   new Message(
     new User('akshay Bernard', require('../../assets/images/avatar.png')),
@@ -42,8 +42,61 @@ const needMessages = [
 
 const ActivityNeedsTabScreen = props => {
   const [allUser, setAllUser] = useState([]);
-  useEffect(() => {
+  const [isEmpty, setIsEmpty] = useState(true);
+
+  function getUniqueListBy(arr, key) {
+    var uniqueUsers=[]
+    var users = [...new Map(arr.map(item => [item[key], item])).values()]
+    users.map(async users =>
+      uniqueUsers.push(
+        new Message(
+          new User(
+            `${users.firstName} ${users.lastName}`,
+            users.profilePic,
+            users,
+          ),
+          users.title,
+          users.image[0].uri,
+          'Bonjour Mathieu, je souhaite participer...',
+          false,
+          '21:59',
+        ),
+      ),
+    );
+    return uniqueUsers
+  }
+  useEffect(async () => {
     var user = [];
+    var uniqueUsers = [];
+    await fetchDemands()
+      .then(e => {
+        var userD = [];
+        e.map(async demands => {
+          if (demands.data.users.length > 0) {
+            demands.data.users.map(e => {
+              userD.push({...e.data,...demands.data.data,image:demands.data.images});
+            });
+          }
+        
+          var newUser = []
+          newUser = getUniqueListBy(userD, 'uid')
+          console.log(newUser)
+         
+          if (newUser.length > 0) {
+            await setIsEmpty(false);
+            await setAllUser(
+              newUser.filter(
+                user => user.user.userData.uid !== auth().currentUser.uid,
+              ),
+            );
+          }
+         
+        });
+      })
+      .catch(e => {
+        console.log('err', e);
+      });
+
     getUserProfile(auth().currentUser.uid).then(async item => {
       user.push({data: item});
       setSelectedUser(user);
@@ -52,28 +105,34 @@ const ActivityNeedsTabScreen = props => {
       .collection('users')
       .get()
       .then(async querySnapshot => {
-        var data = querySnapshot.docs.map(doc => ({data: doc.data()}));
-        await setAllUser(
-          querySnapshot.docs.map(
-            doc =>
-              new Message(
-                new User(
-                  `${doc.data().firstName} ${doc.data().lastName}`,
-                  doc.data().profilePic,
-                  doc.data()
-                ),
-                'Récolter des figues',
-                require('../../assets/images/sample_cover_9.png'),
-                'Bonjour Mathieu, je souhaite participer...',
-                false,
-                '21:59',
+        var data = [];
+        querySnapshot.docs.map(doc =>
+          data.push(
+            new Message(
+              new User(
+                `${doc.data().firstName} ${doc.data().lastName}`,
+                doc.data().profilePic,
+                doc.data(),
               ),
+              'Récolter des figues',
+              require('../../assets/images/sample_cover_9.png'),
+              'Bonjour Mathieu, je souhaite participer...',
+              false,
+              '21:59',
+            ),
           ),
         );
-        console.log('users', data);
+        // if (data.length > 0) {
+        //   await setIsEmpty(false);
+        //   await setAllUser(
+        //     data.filter(
+        //       user => user.user.userData.uid !== auth().currentUser.uid,
+        //     ),
+        //   );
+        // }
       });
   }, [props]);
-  const [isEmpty, setIsEmpty] = useState(!props.route.params.selected);
+
   const emptyView = (
     <TouchableOpacity
       style={styles.emptyView}
@@ -123,12 +182,18 @@ const ActivityNeedsTabScreen = props => {
         <AvatarWithBadge
           avatar={
             item.user.photo !== undefined && item.user.photo !== ' '
-              ? { uri: item.user.photo }
+              ? {uri: item.user.photo}
               : {
-                uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg',
-              }
+                  uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg',
+                }
           }
-          badge={item.service.coverImage}
+          badge={
+            item.service.coverImage !== undefined && item.service.coverImage !== ' '
+              ? {uri: item.service.coverImage}
+              : {
+                  uri: 'https://thumbs.dreamstime.com/z/default-avatar-profile-icon-default-avatar-profile-icon-grey-photo-placeholder-illustrations-vectors-105356015.jpg',
+                }
+          }
           avatarDiameter={40 * em}
           badgeDiameter={22 * em}
           style={{marginRight: 15 * em}}

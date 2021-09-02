@@ -4,7 +4,7 @@ import { em } from '../../constants/consts';
 
 const AvatarWithBadge = (props) => {
   const BadgeIcon =
-    typeof props.badge === 'number' ? (
+    typeof props.badge !== 'number' ? (
       <Image
         source={props.badge}
         style={{
